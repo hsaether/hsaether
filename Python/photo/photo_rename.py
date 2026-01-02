@@ -3,9 +3,11 @@ import numpy as np
 #from PIL.ExifTags import TAGS
 import os
 from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 import exifread
 from tinytag import TinyTag
-from zoneinfo import ZoneInfo
+
+from support_functions import string_to_array
 
 if not __name__ == "__main__":
     exit()
@@ -48,32 +50,51 @@ for dirpath, dirnames, filenames in os.walk(path):
         model = "Unknown"
         ext_tag = 'ooo'
         dt_str = ''
+        tz_str = ''
+        tz = None
+        dt = None
         dt = datetime(1970,1,1,0,0,0)
+
         file = os.path.abspath(os.path.join(dirpath, filename))
         _, file_name = os.path.split(file)
         file_n, file_ext = os.path.splitext(file_name)
 
+        # Get file stats to get dates if not found in meta data
+        stats = os.stat(file)
+        created = datetime.fromtimestamp(stats.st_birthtime)
+        last_modified = datetime.fromtimestamp(stats.st_mtime)        
+        last_accessed = datetime.fromtimestamp(stats.st_atime)        
+        file_dt = min([last_modified, created, last_accessed])
+        file_dt = file_dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
+
         # Video file
-        if file_ext == '.mp4':
+        if str.lower(file_ext) == '.mp4':
             tag = TinyTag.get(file)
-            print(f'{filename}: Title: {tag.title}, Artist: {tag.artist}, Year: {tag.year}')
+            # print(f'{filename}: Title: {tag.title}, Artist: {tag.artist}, Year: {tag.year}')
+            if tag.year != None:
+                print(f'{filename}: Title: {tag.title}, Artist: {tag.artist}, Year: {tag.year}')
+                raise ValueError('TODO Year is found')
             # Extracting from filename
             if file_n[0:3] == 'PXL':
                 dt_str = file_n[4:22]
                 camera = 'Google'
                 dt = datetime.strptime(dt_str, "%Y%m%d_%H%M%S%f")
+                dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
             elif file_n[0:5] == 'video':
                 dt_str = file_n[6:22]
-                camera = 'Unknown'
+                camera = 'Olympus'
                 dt = datetime.strptime(dt_str, "%Y%m%d%H%M%S")
-                pass
+                dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
             elif file_n[-3:] == 'iOS':
-                raise NotImplementedError('iOS mp4 not implemented')
-                dt_str = file_n[4:22]
-                camera = 'Google'
+                dt_str = file_n[0:18]
+                camera = 'Apple'
                 dt = datetime.strptime(dt_str, "%Y%m%d_%H%M%S%f")
+                dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
+            elif file_n[0:9] == 'Messenger':
+                camera = 'Messenger'
+                dt = file_dt
             else:
-                pass
+                dt = file_dt
         else:            
             with open(file, "rb") as file_:
                 # Extract metadata
@@ -83,18 +104,26 @@ for dirpath, dirnames, filenames in os.walk(path):
                         #tag = TAGS.get(tag_id, tag_id)
                         #print(f"{tag}: {value}")
                     if 'Image Make' in exif_data:
-                        camera = str(exif_data['Image Make'])
+                        try:
+                            camera = ''.join(chr(i) for i in exif_data['Image Make'].values)
+                        except (ValueError, TypeError) as e:
+                            camera = exif_data['Image Make'].values
+                        camera = camera.replace(' Soft Imaging Solutions', '')   
                     if 'Image Model' in exif_data:
-                        model = str(exif_data['Image Model'])
+                        try:
+                            model = ''.join(chr(i) for i in exif_data['Image Model'].values)
+                        except (ValueError, TypeError) as e:
+                            model = exif_data['Image Model'].values
                         model = model.replace('Canon ', '')
+                        model = model.replace('Olympus ', '')
 
                     # Time ms
                     if 'EXIF SubSecTime' in exif_data:
-                        ms_str = "." + str(exif_data['EXIF SubSecTime'])
+                        ms_str = "." + exif_data['EXIF SubSecTime'].values
                     elif 'EXIF SubSecTimeOriginal' in exif_data:
-                        ms_str = "." + str(exif_data['EXIF SubSecTimeOriginal'])
+                        ms_str = "." + exif_data['EXIF SubSecTimeOriginal'].values
                     elif 'EXIF SubSecTimeDigitized' in exif_data:
-                        ms_str = "." + str(exif_data['EXIF SubSecTimeOriginal'])
+                        ms_str = "." + exif_data['EXIF SubSecTimeOriginal'].values
                     else:
                         ms_str = ".000"
                     # TODO add from file
@@ -108,8 +137,8 @@ for dirpath, dirnames, filenames in os.walk(path):
                         dt_str = str(exif_data['EXIF DateTimeDigitized']) + ms_str
                     else:
                         dt_str = '1970:01:01 00:00:00.000'
-                        print("Missing Datetime")
-                    # TODO add from filename
+                        dt_str = file_dt.strftime("%Y:%m:%d %H:%M:%S.%f")
+                        print(f"Missing Datetime using filetime in {file}")
 
                     # Converting to dattime format, trying different format
                     dt:datetime = None
@@ -121,7 +150,7 @@ for dirpath, dirnames, filenames in os.walk(path):
                             dt:datetime = None
                     if dt == None:
                         try:
-                            # With ms and timezone T format 2025-01-01T12:01:01.001
+                            # format 2025-01-01T12:01:01.001
                             dt = datetime.strptime(dt_str, "%Y-%m-%dT%H:%M:%S.%f")
                         except ValueError as e:
                             dt:datetime = None
@@ -142,13 +171,24 @@ for dirpath, dirnames, filenames in os.walk(path):
                     elif dt != None and dt > datetime(1971,1,1,0,0,0):
                         dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
                 else:
-                    print(f"NO EXIF metadata found in {file}.")
                     # Try to extract from filename
                     if file_n[-3:] == 'iOS':
                         dt_str = file_n[0:18]
                         camera = 'Apple'
                         dt = datetime.strptime(dt_str, "%Y%m%d_%H%M%S%f")
                         dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
+                        print(f"NO EXIF metadata found in {file}")
+                    elif file_n[0:9] == 'Messenger':
+                        camera = 'Messenger'
+                        print(f"NO EXIF metadata found, using filetime in {file}")
+                        dt = file_dt
+                    elif file_n[0:10] == 'Screenshot':
+                        camera = 'Screenshot'
+                        print(f"NO EXIF metadata found, using filetime in {file}")
+                        dt = file_dt
+                    else:
+                        print(f"NO EXIF metadata found, No Camera info, using filetime in {file}")
+                        dt = file_dt
                     
         match camera:
             case 'Canon':
@@ -157,6 +197,12 @@ for dirpath, dirnames, filenames in os.walk(path):
                 ext_tag = 'iOS'
             case 'Google':
                 ext_tag = 'PXL'
+            case 'Olympus':
+                ext_tag = 'OLY'
+            case 'Messenger':
+                ext_tag = 'MES'
+            case 'Screenshot':
+                ext_tag = 'ScS'
             case 'Unknown':
                 ext_tag = 'uuu'
             case _: 
@@ -165,8 +211,8 @@ for dirpath, dirnames, filenames in os.walk(path):
         rec_list.append({'Path': dirpath, 'File': filename, 'Date': dt, 'Camera': camera, 'Model': model, 'Ext': ext_tag})
         
 for rec in rec_list:
-    #print(f'{os.path.join(rec['Path'],rec['File']):80} {rec['Date'].strftime("%Y%m%d_%H%M%S.%f")[:-3]:22} {rec['Camera']:10} {rec['Model']:16} {rec['Ext']}')
-    print(f'{os.path.join(rec['Path'],rec['File']):82} {rec['Date'].isoformat():34} {rec['Camera']:10} {rec['Model']:10} {rec['Ext']}')
+    pass
+    #print(f'{os.path.join(rec['Path'],rec['File']):82} {rec['Date'].isoformat():34} {rec['Camera']:10} {rec['Model']:10} {rec['Ext']}')
 
 exit()
 # Extract EXIF data
