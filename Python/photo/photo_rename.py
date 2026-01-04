@@ -1,5 +1,6 @@
 import numpy as np
 import os
+import json
 from datetime import datetime, timezone, timedelta
 from zoneinfo import ZoneInfo
 import exifread
@@ -27,12 +28,13 @@ record['Camera'] = ''
 record['Model'] = ''
 record['Ext'] = ''
 rec_list = []
+rename_list = []
 
 RENAME = False
 INFO = False
 PIC_EXT = ["jpeg", "jpg", 'dng', "heic", 'png', 'tiff', 'tif', 'crw', 'cr2', 'cr3', 'arw', 'nef']
 VID_EXT = ["mp4", "avi", 'mov']
-IGN_EXT = ["thm", "info"]
+IGN_EXT = ["thm", "info", "json"]
 
 # Traverse directories using os.walk
 for dirpath, dirnames, filenames in os.walk(path):
@@ -194,7 +196,7 @@ if INFO:
         pass
         print(f'{os.path.join(rec['Path'],rec['File']):82} {rec['Date'].isoformat():34} {rec['Camera']:10} {rec['Model']:10} {rec['Ext']}')
 
-# Renaming
+# Building renaming dictionary
 for rec in rec_list:
     file_n, file_ext = os.path.splitext(rec['File'])
     file_ext = str.lower(file_ext)
@@ -205,7 +207,8 @@ for rec in rec_list:
     new_name = dt.astimezone(timezone.utc).strftime("%Y%m%d_%H%M%S") + f"{dt_ms:03d}" + "_" + rec['Ext'] + file_ext
  
     old_file = os.path.join(rec['Path'], rec['File'])
-    new_file = os.path.join(rec['Path'], new_name) 
+    new_file = os.path.join(rec['Path'], new_name)
+
     if str.lower(old_file) != str.lower(new_file):
         while os.path.exists(new_file) and str.lower(old_file) != str.lower(new_file):
             dt_ms = (dt_ms + 1) % 1000
@@ -213,8 +216,19 @@ for rec in rec_list:
             new_file = os.path.join(rec['Path'], new_name)
     if INFO and str.lower(old_file) != str.lower(new_file): 
         print(f'{rec['File']:46} {new_name:30} {rec['Date'].isoformat():34}')
+    rename_list.append({'old_file': old_file, 'new_file': new_file})
+
     if RENAME:
         os.rename(old_file, new_file)
+
+try:
+    jason_file = os.path.normcase(os.path.join(path, f"photo_ren_{datetime.now().strftime("%Y%m%d_%H%M%S")}.json"))
+    with open(jason_file, "w", encoding="utf-8") as file:
+        json.dump(rename_list, file, indent=4, ensure_ascii=False)
+    print(f"Data successfully saved to '{jason_file}'")
+except (OSError, IOError) as e:
+    print(f"Error writing to file: {e}")
+
 exit()
 # Extract EXIF data
 #exif_data = image._exif
