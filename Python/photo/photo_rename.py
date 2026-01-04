@@ -1,32 +1,22 @@
 import numpy as np
-#from PIL import Image
-#from PIL.ExifTags import TAGS
 import os
 from datetime import datetime, timezone, timedelta
 from zoneinfo import ZoneInfo
 import exifread
-from tinytag import TinyTag
+import ffmpeg
 
-from support_functions import extract_from_file
+from support_functions import extract_from_file, camera_to_tag
 
 if not __name__ == "__main__":
     exit()
-# Open the image file
-#image = Image.open("C:/Users/Harald/OneDrive/Pictures/2025/Img_9065.jpg")
-
-#image = Image.open("C:/Users/Harald/OneDrive/Pictures/2025//PXL_20250823_120342128.jpg")
 
 '''
-Missing handling of meta from MP4
-Can maybe extract from filename for some. 
 Separation of Video in files is not added yet. 
 The timestamp in file seems to be UTC. Canon does not have this meta information.
-Decide if to convert to local time or use UTC in files.
-currently the records are being buildt.
 '''
 
 #path = "C:/Users/Harald/OneDrive/Pictures/2025"
-path = "C:/Temp/2025"
+path = "C:/Temp/Pic"
 files = []
 
 record = {}
@@ -39,7 +29,11 @@ record['Ext'] = ''
 rec_list = []
 
 RENAME = False
-INFO = True
+INFO = False
+PIC_EXT = ["jpeg", "jpg", 'dng', "heic", 'png', 'tiff', 'tif', 'crw', 'cr2', 'cr3', 'arw', 'nef']
+VID_EXT = ["mp4", "avi", 'mov']
+IGN_EXT = ["thm", "info"]
+
 # Traverse directories using os.walk
 for dirpath, dirnames, filenames in os.walk(path):
     #print(f"Directory: {dirpath}")
@@ -60,19 +54,53 @@ for dirpath, dirnames, filenames in os.walk(path):
         file = os.path.abspath(os.path.join(dirpath, filename))
         file_path, file_name = os.path.split(file)
         file_n, file_ext = os.path.splitext(file_name)
+        file_ext = file_ext[1:]
 
+
+        if str.lower(file_ext) in IGN_EXT:
+            continue
         # Video file
-        if str.lower(file_ext) == '.mp4':
-            tag = TinyTag.get(file)
-            # print(f'{filename}: Title: {tag.title}, Artist: {tag.artist}, Year: {tag.year}')
-            if tag.year != None:
-                print(f'{filename}: Title: {tag.title}, Artist: {tag.artist}, Year: {tag.year}')
-                raise ValueError('TODO Year is found')
-            # Extracting from filename
-            camera, dt = extract_from_file(file)
-            if camera == 'Unknown':
-                print(f'Date from file: {file_name}')
-        else:            
+        elif str.lower(file_ext) in VID_EXT:
+            dt = None
+            camera = 'Unknown'
+            model = 'Unknown'
+            try:
+                probe = ffmpeg.probe(file)
+                if 'format' in probe and 'tags' in probe['format'] :
+                    if 'creation_time' in probe['format']['tags']:
+                        dt_str = probe['format']['tags']['creation_time']
+                        dt = None
+                        if dt == None:
+                            try:
+                                dt = datetime.strptime(dt_str, "%Y-%m-%dT%H:%M:%S.%f%z")
+                            except (ValueError, TypeError) as e:
+                                dt = None
+                        if dt == None:
+                            try:
+                                dt = datetime.strptime(dt_str, "%Y-%m-%d %H:%M:%S")
+                                dt = dt.replace(tzinfo=timezone.utc)         
+                            except (ValueError, TypeError) as e:
+                                dt = None
+                        if dt == None:
+                            print(f'Cant extract date from ffmpge.probe in file {file}')
+                    if 'com.android.manufacturer' in probe['format']['tags']:
+                        camera = probe['format']['tags']['com.android.manufacturer']
+                    if 'com.android.model' in probe['format']['tags']:
+                        model = probe['format']['tags']['com.android.model']
+            except (ffmpeg.Error) as e:
+                print("Error reading metadata:", e.stderr.decode())        
+            except Exception as e:
+                pass
+                pass
+            if camera == 'Unknown' or dt == None:
+                # Extracting from filename
+                camera_file, dt_file = extract_from_file(file)
+                if dt == None:
+                    dt = dt_file
+                    print(f'Date from file: {file_name}')
+                if camera == 'Unknown':
+                    camera = camera_file
+        elif str.lower(file_ext) in PIC_EXT:
             camera, dt = extract_from_file(file)
             with open(file, "rb") as file_:
                 # Extract metadata
@@ -87,6 +115,8 @@ for dirpath, dirnames, filenames in os.walk(path):
                         except (ValueError, TypeError) as e:
                             camera = exif_data['Image Make'].values
                         camera = camera.replace(' Soft Imaging Solutions', '')   
+                        camera = camera.replace(' Corporation', '')
+                        camera = camera.replace('SAMSUNG TECHWIN CO., LTD.', 'Samsung')
                     if 'Image Model' in exif_data:
                         try:
                             model = ''.join(chr(i) for i in exif_data['Image Model'].values)
@@ -94,6 +124,9 @@ for dirpath, dirnames, filenames in os.walk(path):
                             model = exif_data['Image Model'].values
                         model = model.replace('Canon ', '')
                         model = model.replace('Olympus ', '')
+                        model = model.replace('PENTAX ', '')                        
+                        model = model.replace('HTC_', '')                        
+                        model = model.replace('DIGITAL ', '')                        
 
                     # Time ms
                     if 'EXIF SubSecTime' in exif_data:
@@ -150,30 +183,10 @@ for dirpath, dirnames, filenames in os.walk(path):
                         dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
                 else:
                     print(f"NO EXIF metadata found in {file}")
-                    
-        match str.lower(camera):
-            case 'canon':
-                ext_tag = 'EOS'
-            case 'apple':
-                ext_tag = 'iOS'
-            case 'google':
-                ext_tag = 'PXL'
-            case 'olympus':
-                ext_tag = 'OLY'
-            case 'messenger':
-                ext_tag = 'MES'
-            case 'screenshot':
-                ext_tag = 'ScS'
-            case 'received':
-                ext_tag = 'RCV'
-            case 'windows':
-                ext_tag = 'WIN'
-            case 'unknown':
-                ext_tag = 'uuu'
-            case 'ooo':
-                ext_tag = 'ooo'
-            case _: 
-                ext_tag = 'ooo'
+        else:
+            print(f"File not supported {file}")
+            continue   
+        ext_tag = camera_to_tag(camera, model)         
                     
         rec_list.append({'Path': file_path, 'File': file_name, 'Date': dt, 'Camera': camera, 'Model': model, 'Ext': ext_tag})
 if INFO:
