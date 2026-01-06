@@ -18,9 +18,11 @@ GPS is not used for timezone
 InfoTag means camera from Meta
 InfoDate means date from meta
 TODO add command line
+TODO add thm
+TODO tag shall be model EOS500
 '''
 #path = "C:/Users/Harald/OneDrive/Pictures/2025"
-path = "C:/Temp/Pic" 
+path = "C:/Temp/Pic/2025" 
 files = []
 
 record = {}
@@ -37,7 +39,7 @@ rec_list = []
 rename_list = []
 
 RENAME = False
-INFO = False
+INFO = True
 
 PIC_EXT = ["jpeg", "jpg", 'dng', "heic", 'png', 'tiff', 'tif', 'crw', 'cr2', 'cr3', 'arw', 'nef']
 VID_EXT = ["mp4", "avi", 'mov']
@@ -101,7 +103,7 @@ for dirpath, dirnames, filenames in os.walk(path):
                 pass
             if camera == 'Unknown' or dt == None:
                 # Extracting from filename
-                camera_file, dt_file = photo_sup.extract_from_file(file)
+                camera_file, model_file, dt_file = photo_sup.extract_from_file(file)
                 if dt == None:
                     dt = dt_file
                     print(f'Date from file: {file_name}')
@@ -117,7 +119,7 @@ for dirpath, dirnames, filenames in os.walk(path):
 
         # Pictures
         elif file_ext in PIC_EXT:
-            camera, dt = photo_sup.extract_from_file(file)
+            camera, model, dt = photo_sup.extract_from_file(file)
             with open(file, "rb") as file_:
                 # Extract metadata
                 exif_data = exifread.process_file(file_)
@@ -138,12 +140,11 @@ for dirpath, dirnames, filenames in os.walk(path):
                         try:
                             model = ''.join(chr(i) for i in exif_data['Image Model'].values)
                         except (ValueError, TypeError) as e:
-                            model = exif_data['Image Model'].values
-                        model = model.replace('Canon ', '')
-                        model = model.replace('Olympus ', '')
-                        model = model.replace('PENTAX ', '')                        
-                        model = model.replace('HTC_', '')                        
-                        model = model.replace('DIGITAL ', '')                        
+                            model:str = exif_data['Image Model'].values
+                        model = model.upper()
+                        model = model.replace('CANON ', '')
+                        model = model.replace('OLYMPUS ', '')
+                        pass
 
                     # Time ms
                     if 'EXIF SubSecTime' in exif_data:
@@ -154,7 +155,6 @@ for dirpath, dirnames, filenames in os.walk(path):
                         ms_str = "." + exif_data['EXIF SubSecTimeOriginal'].values
                     else:
                         ms_str = ".000"
-                    # TODO add from file
 
                     # Datetime
                     if 'Image DateTime' in exif_data:
@@ -204,7 +204,7 @@ for dirpath, dirnames, filenames in os.walk(path):
         else:
             print(f"File not supported {file}")
             continue   
-        ext_tag = photo_sup.camera_to_tag(camera, model)         
+        ext_tag = photo_sup.model_to_tag(camera, model)         
                     
         rec_list.append({'Path': file_path, 'File': file_name, 'Date': dt.isoformat(timespec='microseconds'), 'Camera': camera, 'Model': model, 'Ext': ext_tag, 'InfoTag':info_tag, 'InfoDate':info_date})
 if INFO:
@@ -233,13 +233,8 @@ for rec in rec_list:
             new_name = dt_str + "_" + rec['Ext'] + file_ext
             new_file = os.path.join(rec['Path'], new_name)
     if INFO and str.lower(old_file) != str.lower(new_file): 
-        print(f'{rec['File']:46} {new_name:30} {rec['Date'].isoformat(timespec='microseconds'):34}')
+        print(f'{rec['File']:46} {new_name:30} {rec['Date']:34}')
     rename_list.append({'old_file': old_file, 'new_file': new_file})
-
-if RENAME:
-    for (old_file, new_file) in rename_list:
-        if str.lower(old_file) != str.lower(new_file):
-            os.rename(old_file, new_file)
 
 # Jason information
 dt_tag:str = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -250,6 +245,7 @@ try:
     print(f"Data successfully saved to '{jason_file}'")
 except (OSError, IOError) as e:
     print(f"Error writing to file: {e}")
+    exit()
 try:
     jason_file = os.path.normcase(os.path.join(path, f"photo_ren_{dt_tag}.json"))
     with open(jason_file, "w", encoding="utf-8") as file:
@@ -257,6 +253,14 @@ try:
     print(f"Data successfully saved to '{jason_file}'")
 except (OSError, IOError) as e:
     print(f"Error writing to file: {e}")
+    exit()
+
+
+if RENAME:
+    for rec in rename_list:
+        if str.lower(rec['old_file']) != str.lower(rec['new_file']):
+            os.rename(rec['old_file'], rec['new_file'])
+
 
 exit()
 

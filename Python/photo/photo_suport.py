@@ -7,14 +7,7 @@ from zoneinfo import ZoneInfo
 #if not __name__ == "__main__":
 #    exit()
 
-CAMERA_TAG = {'EOS': 'Canon', # EOS
-              'IXU': 'Canon', # Ixus
-              'CAN': 'Canon', # No specific model
-              'CPI': 'Nikon', # Coolpix
-              'NIK': 'Nikon', # No specific model
-              'PTX': 'Pentax',
-              'OLY': 'Olympus',
-              'iOS': 'Apple',
+CAMERA_TAG = {'iOS': 'Apple',
               'PXL': 'Google',
               'GLX': 'Samsung',
               'HTC': 'HTC',
@@ -24,7 +17,23 @@ CAMERA_TAG = {'EOS': 'Canon', # EOS
               'MES': 'Messenger',
               'uuu': 'Unknown',
               }
-CAMERA_TAG_LC = {k.lower(): CAMERA_TAG[k] for k in CAMERA_TAG}
+
+CAMERA_TAG_LC = {k.lower(): CAMERA_TAG[k] for k in CAMERA_TAG}   
+
+CAMERA_MODEL_TAG = {('CANON', 'EOS 500D'):      'EOS500',
+                    ('CANON', 'UNKNOWN'):       'CAN', 
+                    ('APPLE', 'IPHONE 12 PRO'): 'IP12P',
+                    ('APPLE', 'UNKNOWN'):       'IPHN',
+                    ('OLYMPUS', 'UNKNOWN'):     'OLY',
+                    ('OLYMPUS', 'EP50'):        'EP50',
+                    ('GOOGLE', 'PIXEL 7'):      'PXL7',
+                    ('GOOGLE', 'UNKNOWN'):      'GOOG',
+                    ('SCREENSHOT', 'UNKNOWN'):  'SCRN',
+                    ('MESSENGER', 'UNKNOWN'):   'MESN',
+                    ('RECEIVED', 'UNKNOWN'):    'RECV',
+                    ('WINDOWS','UNKNOWN'):      'WIN',
+                    ('UNKNOWN','UNKNOWN'):      'UNKN',
+}
 
 def extract_from_file(file:str):
     '''
@@ -32,6 +41,7 @@ def extract_from_file(file:str):
     
     :param file: Description
     :type file: str full path
+    : return (camera, model)
     ''' 
     dt = None
     file_path, file_name = os.path.split(file)
@@ -44,23 +54,29 @@ def extract_from_file(file:str):
     last_accessed = datetime.fromtimestamp(stats.st_atime)        
     file_dt = min([last_modified, created, last_accessed])
     file_dt = file_dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
+    model = 'Unknown'
 
     try:
         # Try to extract from file_n
         # Prefix from some files
-        if file_n[0:3] in CAMERA_TAG_LC:
-            camera = CAMERA_TAG_LC[file_n[0:3]]
+        file_split = file_n.split('_')
+        start = len(file_split[0])+1
+
+        if file_split[0] in CAMERA_TAG_LC:
+            camera = CAMERA_TAG_LC[file_split[0]]
             dt = None
             if dt == None:
                 try:
-                    dt_str = file_n[4:22]
+                    stop = start + 18
+                    dt_str = file_n[start:stop]
                     dt = datetime.strptime(dt_str, "%Y%m%d_%H%M%S%f")
                     dt = dt.replace(tzinfo=timezone.utc)
                 except (ValueError, TypeError) as e:
                     dt = None
             if dt == None:
                 try:
-                    dt_str = file_n[4:21]
+                    stop = start + 17
+                    dt_str = file_n[start:stop]
                     dt = datetime.strptime(dt_str, "%Y%m%d_%H_%M_%S")
                     dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
                 except (ValueError, TypeError) as e:
@@ -69,9 +85,37 @@ def extract_from_file(file:str):
                 print(f'Cant extract date from file for prefix in file {file}')
                 dt = file_dt
 
-        # Postfix normally from this program
-        elif file_n[-3:] in CAMERA_TAG_LC:
-            camera = CAMERA_TAG_LC[file_n[-3:]]
+        elif file_split[0] == 'messenger':
+            camera = 'Messenger'
+            dt = file_dt
+        elif file_split[0] == 'screenshot':
+            camera = 'Screenshot'
+            stop = start + 15
+            dt_str = file_n[start:stop]
+            try:
+                dt = datetime.strptime(dt_str, "%Y%m%d-%H%M%S")
+                dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
+            except (ValueError, TypeError) as e:
+                dt = file_dt
+        elif file_split[0] == 'video':
+            stop = start + 14
+            dt_str = file_n[start:stop]
+            camera = 'Olympus'
+            dt = datetime.strptime(dt_str, "%Y%m%d%H%M%S")
+            dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
+        elif file_split[0] == 'received':
+            camera = 'Received'
+            dt = file_dt
+        elif file_split[0] == 'img' and len(file_n)>=22:
+            camera = 'Unknown'
+            try:
+                dt = datetime.strptime(dt_str, "%Y-%m-%d_%H-%M-%S")
+                dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
+            except (ValueError, TypeError) as e:
+                dt = file_dt
+        # Postfix Tag
+        elif file_split[-1] in CAMERA_TAG_LC:
+            camera = CAMERA_TAG_LC[file_split[-1]]
             dt = None
             if dt == None:
                 dt_str = file_n[0:18]
@@ -79,32 +123,15 @@ def extract_from_file(file:str):
             if dt == None:
                 print(f'Cant extract date from file for prefix in file {file}')
                 dt = file_dt
-        elif file_n[0:9] == 'messenger':
-            camera = 'Messenger'
-            dt = file_dt
-        elif file_n[0:10] == 'screenshot':
-            camera = 'Screenshot'
-            dt_str = file_n[11:26]
-            try:
-                dt = datetime.strptime(dt_str, "%Y%m%d-%H%M%S")
-                dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
-            except (ValueError, TypeError) as e:
-                dt = file_dt
-        elif file_n[0:5] == 'video':
-            dt_str = file_n[6:20]
-            camera = 'Olympus'
-            dt = datetime.strptime(dt_str, "%Y%m%d%H%M%S")
-            dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
-        elif file_n[0:5] == 'received':
-            camera = 'Received'
-            dt = file_dt
-        elif file_n[0:3] == 'img' and len(file_n)>=22:
-            camera = 'Unknown'
-            try:
-                dt_str = file_n[4:23]
-                dt = datetime.strptime(dt_str, "%Y-%m-%d_%H-%M-%S")
-                dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
-            except (ValueError, TypeError) as e:
+        # Postfix from this program
+        elif file_split[-1] in CAMERA_MODEL_TAG.values():
+            (camera, model) = [key for key, value in CAMERA_MODEL_TAG() if value == file_split[-1]][0]
+            dt = None
+            if dt == None:
+                dt_str = file_n[0:18]
+                dt = str_to_dt(dt_str)
+            if dt == None:
+                print(f'Cant extract date from file for prefix in file {file}')
                 dt = file_dt
         else:
             camera = 'Unknown'
@@ -119,33 +146,18 @@ def extract_from_file(file:str):
     except (ValueError, TypeError) as e:
         pass
 
-    return camera, dt
+    return camera, model, dt
 
-def camera_to_tag(camera:str, model:str='') -> str:
-    camera = str.lower(camera)
-    model = str.lower(model)
-    ext_tag = 'ooo'
+def model_to_tag(camera:str, model:str) -> str:
+    camera = camera.upper()
+    model = model.upper()
+    tag = 'OOO'
 
-    k = [key for key, value in CAMERA_TAG.items() if value.lower() == camera]
-    if len(k) == 1:
-        ext_tag = k[0]
+    if (camera, model) in CAMERA_MODEL_TAG:
+       tag = CAMERA_MODEL_TAG[(camera, model)] 
     else:
-        match camera:
-            case 'canon':
-                if 'eos' in model:
-                    ext_tag = 'EOS'
-                elif 'ixus' in model:
-                    ext_tag = 'IXU'
-                else:
-                    ext_tag = k[-1]
-            case 'nikon':
-                if 'e3200' in model:
-                    ext_tag = 'CPI'
-                else:
-                    ext_tag = k[-1]
-    if ext_tag == 'ooo':
-        pass
-    return ext_tag
+        tag == 'OOO'
+    return tag
 
 def dt_to_str(dt:datetime) -> str:
     '''
