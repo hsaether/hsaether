@@ -20,18 +20,31 @@ CAMERA_TAG = {'iOS': 'Apple',
 
 CAMERA_TAG_LC = {k.lower(): CAMERA_TAG[k] for k in CAMERA_TAG}   
 
-CAMERA_MODEL_TAG = {('CANON', 'EOS 500D'):      'EOS500',
-                    ('CANON', 'UNKNOWN'):       'CAN', 
+CAMERA_MODEL_TAG = {('CANON', 'EOS R5'):        'EOSR5',
+                    ('CANON', 'EOS 500D'):      'EOS500',
+                    ('CANON', 'EOS 300D'):      'EOS300',
+                    ('CANON', 'IXUS 700'):      'CIX700',
+                    ('CANON', 'IXUS 500'):      'CIX500',
+                    ('CANON', 'UNKNOWN'):       'CANO', 
+                    ('NIKON', 'E3200'):         'NE3200',
+                    ('NIKON', 'E2500'):         'NE2500',
+                    ('PENTAX', 'OPTIO 50'):     'POPT50',
                     ('APPLE', 'IPHONE 12 PRO'): 'IP12P',
+                    ('APPLE', 'IPHONE 4'):      'IP4',
                     ('APPLE', 'UNKNOWN'):       'IPHN',
-                    ('OLYMPUS', 'UNKNOWN'):     'OLY',
+                    ('OLYMPUS', 'UNKNOWN'):     'OLYM',
                     ('OLYMPUS', 'EP50'):        'EP50',
                     ('GOOGLE', 'PIXEL 7'):      'PXL7',
                     ('GOOGLE', 'UNKNOWN'):      'GOOG',
+                    ('SAMSUNG', 'GT-I9100'):    'SGSII',
+                    ('SAMSUNG', 'SM-A520F'):    'SGSA5',
+                    ('SAMSUNG', 'DIGIMAX L60'): 'SDIL60',
+                    ('SAMSUNG', 'SM-T500'):     'STA7',
+                    ('HTC', 'S710'):            'HS710',
                     ('SCREENSHOT', 'UNKNOWN'):  'SCRN',
                     ('MESSENGER', 'UNKNOWN'):   'MESN',
                     ('RECEIVED', 'UNKNOWN'):    'RECV',
-                    ('WINDOWS','UNKNOWN'):      'WIN',
+                    ('WINDOWS','UNKNOWN'):      'WIND',
                     ('UNKNOWN','UNKNOWN'):      'UNKN',
 }
 
@@ -109,6 +122,8 @@ def extract_from_file(file:str):
         elif file_split[0] == 'img' and len(file_n)>=22:
             camera = 'Unknown'
             try:
+                stop = start + 19
+                dt_str = file_n[start:stop]
                 dt = datetime.strptime(dt_str, "%Y-%m-%d_%H-%M-%S")
                 dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
             except (ValueError, TypeError) as e:

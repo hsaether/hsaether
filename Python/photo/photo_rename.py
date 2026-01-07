@@ -22,7 +22,7 @@ TODO add thm
 TODO tag shall be model EOS500
 '''
 #path = "C:/Users/Harald/OneDrive/Pictures/2025"
-path = "C:/Temp/Pic/2025" 
+path = "C:/Temp/Pic" 
 files = []
 
 record = {}
@@ -142,8 +142,10 @@ for dirpath, dirnames, filenames in os.walk(path):
                         except (ValueError, TypeError) as e:
                             model:str = exif_data['Image Model'].values
                         model = model.upper()
-                        model = model.replace('CANON ', '')
-                        model = model.replace('OLYMPUS ', '')
+                        model = model.replace(f"{camera.upper()} ", '')
+                        model = model.replace(f"{camera.upper()}_", '')
+                        model = model.replace(' DIGITAL', '')
+                        model = model.replace('DIGITAL ', '')
                         pass
 
                     # Time ms
