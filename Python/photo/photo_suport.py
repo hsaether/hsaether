@@ -3,6 +3,7 @@ import numpy as np
 import os
 from datetime import datetime, timezone, timedelta
 from zoneinfo import ZoneInfo
+import exifread
 
 #if not __name__ == "__main__":
 #    exit()
@@ -226,3 +227,98 @@ def str_to_dt(dt_str:str) -> datetime:
     if dt == None:
         print(f"Invalid date conversion for datestring {dt_str}")
     return dt
+
+def extract_exif_data(file:str):
+    camera = "Unknown"
+    model = "Unknown"
+    dt = None
+    if not isinstance(file, str) or not file.strip():
+        raise ValueError("Invalid file path. Must be a non-empty string.")    
+    if not os.path.exists(file) or not os.path.isfile(file):
+        return (camera, model, dt)
+    with open(file, "rb") as file_:
+        # Extract metadata
+        exif_data = exifread.process_file(file_)
+        if exif_data:
+            #for tag_id, value in exif_data.items():
+                #tag = TAGS.get(tag_id, tag_id)
+                #print(f"{tag}: {value}")
+            if 'Image Make' in exif_data:
+                try:
+                    camera = ''.join(chr(i) for i in exif_data['Image Make'].values)
+                except (ValueError, TypeError) as e:
+                    camera = exif_data['Image Make'].values
+                camera = camera.replace(' Soft Imaging Solutions', '')   
+                camera = camera.replace(' Corporation', '')
+                camera = camera.replace('SAMSUNG TECHWIN CO., LTD.', 'Samsung')
+            if 'Image Model' in exif_data:
+                try:
+                    model = ''.join(chr(i) for i in exif_data['Image Model'].values)
+                except (ValueError, TypeError) as e:
+                    model:str = exif_data['Image Model'].values
+                model = model.upper()
+                model = model.replace(f"{camera.upper()} ", '')
+                model = model.replace(f"{camera.upper()}_", '')
+                model = model.replace(' DIGITAL', '')
+                model = model.replace('DIGITAL ', '')
+                pass
+
+            # Time ms
+            if 'EXIF SubSecTime' in exif_data:
+                ms_str = "." + exif_data['EXIF SubSecTime'].values
+            elif 'EXIF SubSecTimeOriginal' in exif_data:
+                ms_str = "." + exif_data['EXIF SubSecTimeOriginal'].values
+            elif 'EXIF SubSecTimeDigitized' in exif_data:
+                ms_str = "." + exif_data['EXIF SubSecTimeOriginal'].values
+            else:
+                ms_str = ".000"
+
+            # Datetime
+            if 'Image DateTime' in exif_data:
+                dt_str = str(exif_data['Image DateTime']) + ms_str
+            elif 'EXIF DateTimeOriginal' in exif_data:
+                dt_str = str(exif_data['EXIF DateTimeOriginal']) + ms_str
+            elif 'EXIF DateTimeDigitized' in exif_data:
+                dt_str = str(exif_data['EXIF DateTimeDigitized']) + ms_str
+            else:
+                dt_str = None
+
+            # Converting to dattime format, trying different format
+            dt_conv = None
+            if dt_str != None and dt_conv == None:
+                try:
+                    # With ms and timezone
+                    dt_conv = datetime.strptime(dt_str, "%Y:%m:%d %H:%M:%S.%f")
+                except ValueError as e:
+                    dt_conv = None
+            if dt_str != None and dt_conv == None:
+                try:
+                    # format 2025-01-01T12:01:01.001
+                    dt_conv = datetime.strptime(dt_str, "%Y-%m-%dT%H:%M:%S.%f")
+                except ValueError as e:
+                    dt_conv = None
+            if dt_conv != None:
+                dt = dt_conv
+                info_date = True
+
+            if dt != None:
+                # Adding timezone
+                if 'EXIF OffsetTime' in exif_data:
+                    tz_str = str(exif_data['EXIF OffsetTime'])
+                    tz = datetime.strptime(tz_str, "%z").tzinfo
+                    dt = dt.replace(tzinfo=tz)
+                elif 'EXIF OffsetTimeOriginal' in exif_data:
+                    tz_str = str(exif_data['EXIF OffsetTimeOriginal'])
+                    tz = datetime.strptime(tz_str, "%z").tzinfo
+                    dt = dt.replace(tzinfo=tz)                        
+                elif 'EXIF OffsetTimeDigitized' in exif_data:
+                    tz_str = str(exif_data['EXIF OffsetTimeDigitized'])
+                    tz = datetime.strptime(tz_str, "%z").tzinfo
+                    dt = dt.replace(tzinfo=tz)                        
+                elif dt.tzinfo == None:
+                    dt = dt.replace(tzinfo=ZoneInfo("Europe/Oslo"))
+            if camera == "Unknown":
+                pass
+        else:
+            print(f"NO EXIF metadata found in {file}")
+    return (camera, model, dt)
