@@ -6,6 +6,14 @@ import ffmpeg
 
 import photo_suport as photo_sup
 
+'''
+Not all files has meta information about camera.
+Not all have timezone information
+GPS is not used for timezone
+InfoTag means camera from Meta
+InfoDate means date from meta
+'''
+
 PIC_EXT = ["jpeg", "jpg", 'dng', "heic", 'png', 'tiff', 'tif', 'crw', 'cr2', 'cr3', 'arw', 'nef']
 VID_EXT = ["mp4", "avi", 'mov']
 IGN_EXT = ["thm", "info", "json", "pdf", "xls", "xlsx", "doc", "docx", "wks", "htm", "ini", "gif", "wdb", "x3d", "ppt"]
