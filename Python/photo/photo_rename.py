@@ -199,6 +199,12 @@ def main():
             if str.lower(rec['old_file']) != str.lower(rec['new_file']):
                 os.rename(rec['old_file'], rec['new_file'])
 
+            if rec.get('old_file2'):
+                old_file2 = rec['old_file2']
+                new_file2 = os.path.splitext(rec['new_file'])[0] + os.path.splitext(old_file2)[1]
+                if str.lower(old_file2) != str.lower(new_file2):
+                    os.rename(old_file2, new_file2)
+
     return 0
 
 
