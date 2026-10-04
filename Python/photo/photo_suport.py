@@ -272,7 +272,7 @@ def extract_exif_data(file: str):
             elif 'EXIF SubSecTimeOriginal' in exif_data:
                 ms_str = "." + exif_data['EXIF SubSecTimeOriginal'].values
             elif 'EXIF SubSecTimeDigitized' in exif_data:
-                ms_str = "." + exif_data['EXIF SubSecTimeOriginal'].values
+                ms_str = "." + exif_data['EXIF SubSecTimeDigitized'].values
             else:
                 ms_str = ".000"
 

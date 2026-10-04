@@ -2,6 +2,9 @@ import os
 import sys
 import tempfile
 import unittest
+from datetime import datetime, timezone
+from types import SimpleNamespace
+from unittest.mock import patch
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -10,6 +13,21 @@ import photo.photo_suport as photo_suport
 
 
 class PhotoSuportTests(unittest.TestCase):
+    def test_extract_exif_data_uses_digitized_subseconds(self):
+        metadata = {
+            "EXIF DateTimeDigitized": "2024:01:01 12:34:56",
+            "EXIF SubSecTimeDigitized": SimpleNamespace(values="123"),
+            "EXIF OffsetTimeDigitized": "+0000",
+        }
+        with tempfile.TemporaryDirectory() as tmpdir:
+            file_path = os.path.join(tmpdir, "photo.jpg")
+            with open(file_path, "wb") as handle:
+                handle.write(b"test")
+            with patch.object(photo_suport.exifread, "process_file", return_value=metadata):
+                _, _, dt = photo_suport.extract_exif_data(file_path)
+
+        self.assertEqual(dt, datetime(2024, 1, 1, 12, 34, 56, 123000, tzinfo=timezone.utc))
+
     def test_extract_from_file_parses_postfix_model_tag(self):
         with tempfile.TemporaryDirectory() as tmpdir:
             file_path = os.path.join(tmpdir, "20240101_123456_EOS500.jpg")
