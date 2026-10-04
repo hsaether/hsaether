@@ -1,208 +1,223 @@
 ---
 name: iaf-valuation
-description: Investment Analysis Framework (IAF) — a forward-looking valuation screen using a dividend-yield-plus-growth hurdle test (d plus g must exceed k) and the resulting PE (or P/FCF) ceiling, combined with a Bear/Base/Bull scenario build. ALWAYS use this skill whenever the user asks to value or screen a company "using the IAF" or "the framework", mentions "d+g" versus "k", a "PE ceiling", a "BBB case" or "Bear/Base/Bull", asks whether a stock "clears the hurdle" or "k", or wants an investment thesis / stock screen built around a required-return test — even if they don't say "IAF" by name. This is the standing valuation methodology for this workspace; default to it for any company valuation request unless the user asks for a different approach.
+description: Investment Analysis Framework (IAF) — the standing valuation method for this workspace. A forward-looking required-return test (d + g versus k, k = 12%), a PE or P/FCF ceiling, a year-by-year IRR build with a hurdle price for cyclical and capital-intensive companies (shipping, offshore, rigs), growth treated as a capital-allocation decision (ROIC on growth capex versus k), and Bear/Base/Bull where Base is the decision case and Bear/Bull are catalyst-based stress tests. ALWAYS use this skill when the user asks to value, screen or analyse a company, mentions IAF, "the framework", d+g, k, hurdle, PE ceiling, P/FCF, IRR, growth capex, ROIC, BBB or Bear/Base/Bull, or asks whether a stock clears the required return — even without naming IAF.
 ---
 
 # Investment Analysis Framework (IAF)
 
-A forward-looking, total-return-based screen for whether a stock's price is defensible. It is a
-margin-of-safety filter, not a discounted cash flow model — it tells you what multiple is
-defensible given expected yield and growth, not an intrinsic value. Always be explicit about that
-distinction when presenting results.
+**Revision:** 2026-10-04.1 — bump on every change (date.counter). The installed skill is only a
+pointer to this file; this folder copy is the master.
+
+A forward-looking test of whether today's price is defensible given the return it can deliver over
+the rest of the current year plus 3 calendar years. It answers one question: **does the expected
+return clear k, and by how much margin?**
+It is a margin-of-safety screen. Never present its output as a price target.
+
+## Standing parameters
+
+- **k = 12%** baseline required return. **Never below 10%.** k may be raised (not lowered) for high
+  leverage, single-asset or single-contract exposure, or poor liquidity; state the reason.
+- **Horizon = stub period + 3 full calendar years** (the rest of the current year, then the next
+  three calendar years). Up to 5 years only for steady compounders; state which. Roll the window
+  forward each January. See Step 1b.
+- **Base case = the decision.** Bear and Bull are stress tests (see BBB).
+- **25/50/25** is only a labelled convention for an optional reference figure — never a probability.
+- Everything per share, forward-looking, same currency and same basis (no trailing/forward mixing).
 
 ## Definitions
 
 | Symbol | Meaning |
 |---|---|
-| P | Current stock price |
-| E | Earnings (use for most companies) |
-| FCF | Free Cash Flow (use instead of E for shipping, offshore, and other capex/D&A-distorted, cyclical sectors) |
-| d | Forward dividend yield at entry price — the income component of expected return |
-| g | Expected per-share growth in the chosen metric (EPS for PE, FCF/share for P/FCF) to the terminal year of the forecast window (3–5 years out) — the capital-appreciation component. It is a consequence of the capital-allocation build (see Growth policy), not an independently forecast number |
-| k | Required rate of return. Baseline **12%**, and **never set below 10%** |
-| PE | P/E (or P/FCF for FCF-based names) |
+| P | Current share price (entry price) |
+| E / FCF | Earnings, or free cash flow to equity. Use FCF for capital-intensive and cyclical sectors |
+| D_t | Cash returned to shareholders in period t per share (dividends + buybacks), placed at its payment date |
+| d | Annualised distribution yield on entry price: (Σ D over the horizon ÷ T) ÷ P |
+| V_t | Value per share at end of year t (see Terminal value) — V_0 = P |
+| g | Per-share growth in value/earning power. An output of the build, not a free input |
+| IRR | Return that equates P with the D_t stream plus V_T. Equivalent to d + g |
+| P_k | Hurdle price: the most you can pay and still earn exactly k |
+| ROIC_g | Return on growth capex (new capital deployed) |
 
-## Core test
+## Step 1 — Choose the track
 
-**Rule 1 — total return hurdle:**
+- **Track A (steady):** stable earnings, low capex volatility. Use E, PE and a growth rate.
+- **Track B (cyclical / capital-intensive):** shipping, offshore, rigs, commodities, or any company
+  where capex, D&A or rates swing earnings. Use FCF, the year-by-year IRR build and P_k.
+- State which track and why. When in doubt, use Track B.
+
+## Step 1b — Time grid: stub period + 3 calendar years
+
+- **Valuation date = today. Exit date = 31 Dec of the third full calendar year.** Example:
+  valuation 4 Oct 2026 → exit 31 Dec 2029, T ≈ 3.24 years. Calendar years match company reporting
+  and the sector BBB skills.
+
+| Period | Content | Granularity |
+|---|---|---|
+| Stub | Remaining quarters of the current year, including a quarter that has ended but is not yet reported | Quarterly |
+| Year 1 | Next calendar year (contract cover, drydocks, deliveries, debt instalments fall in specific quarters) | Quarterly |
+| Years 2–3 | Following two calendar years | Annual |
+
+- **Stub quarters are modelled from locked-in information**: booked days and rates from the latest
+  guidance, actual spot rates for elapsed open days, current spot/forward for remaining open days,
+  known opex, drydock days, debt instalments and deliveries. An ended-but-unreported quarter is the
+  highest-confidence estimate in the model.
+- **Starting balance sheet**: roll the last reported balance sheet forward through the stub to net
+  debt at 31 Dec (the start of Year 1). Also state net debt at the valuation date.
+- **Dividends at payment dates.** A declared dividend counts only if the share has not yet gone
+  ex-dividend on the valuation date.
+- **Never annualise stub figures.** Show them as quarters.
+- In IRR terms the stub is small. Its main value is the starting point (net debt), near-term
+  catalysts, and tracking actuals against the model.
+
+## Step 2A — Track A: the core rules
+
 ```
-d + g > k        equivalently        (d + g) / k > 1
+Rule 1  (hurdle)     d + g > k            ⇔  (d + g) / k > 1
+Rule 2  (anchor)     PE = 1 / k           (zero-growth stock priced to return k)
+Rule 3  (ceiling)    PE < (d + g) / k²
 ```
+At k = 12% (k² = 0.0144): d = 1%, g = 20% → PE < 14.6; d = 1%, g = 30% → PE < 21.5.
 
-**Rule 2 — no-growth fair-value anchor:**
+g = forward per-share EPS CAGR over the horizon, built from drivers, fading toward a sustainable
+rate. Cross-check: sustainable g ≈ ROIC × reinvestment rate. If the forecast g needs more
+reinvestment than the payout leaves, d and g are inconsistent — fix one of them.
+
+Rule 3 combines a total-return hurdle with a no-growth earnings-yield anchor. It is a heuristic for
+how much premium is defensible, not a value from a cash-flow model.
+
+## Step 2B — Track B: year-by-year IRR build
+
+For each period (stub quarters, Year 1 quarters, Years 2–3), build per share:
+
+| Line | Content |
+|---|---|
+| Maintenance FCF | Cash generated before growth spending (after interest, tax, maintenance capex, drydock) |
+| Growth capex | Capital spent to expand the earning base (new vessels, rigs, projects), net of new debt raised for it |
+| Retained cash | Maintenance FCF − growth capex − D_t (goes into V_t via net debt / cash) |
+| D_t | Actual dividends + buybacks |
+| V_t | Value at year end (see Terminal value) |
+| r_t | Period return = (D_t + V_t − V_(t−1)) / V_(t−1), shown per year-end (stub not annualised) |
+| IRR to t | Cumulative IRR if exiting at each year-end, including the end of the stub |
+
+Then:
 ```
-PE = 1/k         (a zero-growth stock priced to return exactly k)
+t_j = (payment date of D_j − valuation date) / 365;   T = (exit date − valuation date) / 365
+IRR_T solves      P = Σ_j D_j/(1+IRR)^(t_j) + V_T/(1+IRR)^T        (XIRR on dates)
+Hurdle price      P_k = Σ_j D_j/(1+k)^(t_j) + V_T/(1+k)^T
+Rule 1 (Track B)  IRR_T > k   ⇔   P < P_k
+Margin of safety  P_k / P − 1
+Implied split     d = (Σ D_j / T) / P,   g = IRR_T − d
 ```
+- Retained cash must be counted exactly once: either paid out in D_t or added to V_t, never both,
+  never neither.
+- r_t and IRR-to-each-year are a path diagnostic, not a per-year pass/fail. A weak middle year is
+  not a failure, but it must be visible.
+- Rule 3 cross-check: P/FCF_normalized < IRR_T / k². Report it, but decide on P vs P_k (the
+  ceiling uses an IRR that itself depends on P).
 
-**Rule 3 — combined PE ceiling** (Rule 1 and Rule 2 combined, PE·k=1 and (d+g)/k>1):
+Worked example: P = 100, D = 8 / 8 / 8, V_3 = 110, k = 12% → IRR ≈ 11.0% (d = 8.0%, g = 3.0%),
+P_k ≈ 97.5. Fails the hurdle by ~2.5%: no margin of safety.
+
+## Step 3 — Terminal value (V_T)
+
+V_T drives most of the result, so build it, never assume it.
+
+- **Base it on normalized, mid-cycle economics**, not the last modelled year: mid-cycle rates ×
+  operating days − normalized costs, or NAV (vessel/rig values at mid-cycle prices) less net debt.
+- **Exit multiple must be stated and independent.** Never use the IAF ceiling as the exit multiple
+  (circular). For finite-life assets (ships, rigs), prefer NAV over a perpetuity multiple.
+- **Roll the capital base forward**: V_T includes the value of growth capex deployed during the
+  horizon (Step 4) and the change in net debt / retained cash.
+- Show V_T as a bridge: starting value → + value of growth capex → ± net debt change → ± cycle
+  normalization → V_T.
+
+## Step 4 — Growth as a capital-allocation decision
+
+Growth capex lowers cash returned now and raises earning power later. Both effects must run through
+the same IRR, otherwise growth only shows up as a cost.
+
 ```
-PE < (d + g) / k²
+Value of growth capex at T  ≈  Growth capex × ROIC_g / k
+Value created               ≈  Growth capex × (ROIC_g / k − 1)
 ```
-For FCF-based names, substitute P/FCF for PE throughout.
+Example at k = 12%: 20 invested at ROIC_g 15% → worth 25 (+5). At ROIC_g 9% → worth 15 (−5).
 
-Worked examples at k=12% (k²=0.0144):
-- d=1%, g=20% → PE < 14.6
-- d=1%, g=30% → PE < 21.5
+- **ROIC_g must come from evidence**: contracted charters or day rates on the new capacity, realised
+  returns on past newbuilds or projects, current newbuild price vs secondhand value. State the
+  source. For finite-life assets, use NAV of the asset at T instead of the perpetuity formula.
+- **Test ROIC_g vs k separately from Rule 1.** ROIC_g > k: growth is accretive even though D_t falls.
+  ROIC_g ≤ k: growth destroys value even if revenue, earnings or FCF rise.
+- **Per share**: growth funded by new shares only counts if ROIC_g > k after dilution.
+- g is the result of this build. Never forecast g separately and then add it on top.
 
-**Note the two things being combined**: Rule 1 is a total-return hurdle test; Rule 2 is a no-growth
-earnings-yield anchor. Multiplying them gives a defensible-multiple heuristic, not a value derived
-from a single coherent cash-flow model — say so when presenting a ceiling, so it's never mistaken
-for a price target.
+## Step 5 — Growth hygiene (both tracks)
 
-## Computing g: forward, year-by-year, to a terminal value
+1. Match the metric to the multiple: EPS for PE, FCF/share for P/FCF. Revenue is a driver, never g.
+2. Geometric (compound) growth, never averages of annual rates. No above-k growth in perpetuity.
+3. Never compute a growth rate from a base near zero or negative — work with levels.
+4. Strip non-repeatable items: one-offs, asset-sale gains, M&A, FX.
+5. Cyclicals: rate-driven earnings mean-revert and do not compound. Split g into **structural**
+   (growth capex at ROIC_g, NAV change) and **cyclical** (rates vs mid-cycle), and report both.
+6. Flag growth quality: share issuance, asset-sale gains, dependence on the cycle turning.
 
-1. **Forward-looking only** — never trailing. d, g, and PE/P-FCF must all sit on the same
-   forward-looking basis.
-2. **Build each of the 3–5 years bottom-up**, driven by the real levers for that company (charter
-   rates, deliveries, dry-docking and capex cycles for shipping/offshore; unit growth, pricing,
-   margin trajectory for others) — not a flat extrapolated growth rate.
-3. **What matters is the end value.** g is derived from the terminal year (year 3 or year 5) versus
-   today, not from requiring every single intermediate year to individually clear d+g>k. A weak
-   year in the middle of an otherwise strong build is not a failure on its own — it's just part of
-   the path to the endpoint.
-4. **d is separate from this build** — it's the yield earned on the entry price over the holding
-   period, not a terminal-year figure.
-5. Apply Rule 1 and Rule 3 to the resulting (d, g) pair.
+## Step 6 — Bear / Base / Bull
 
-## Growth policy
+There is no statistical distribution behind sector events, so Bear and Bull are not percentiles.
 
-Growth is the softest input in the framework. Fix its definition before projecting it.
+- **Base**: the most likely path, from the central view of the relevant sector skill (Oil Market
+  BBB, Oil Shipping BBB, Rig Market BBB). It carries the decision: IRR_T vs k and P vs P_k.
+- **Bear**: a stress test anchored to a named catalyst from the sector skill (e.g. chokepoint
+  reopening, fleet oversupply, demand shock). Report:
+  - Bear IRR_T and P_k (Bear),
+  - capital preservation: does ΣD_t + V_T (Bear) cover P? If not, size the permanent loss,
+  - balance-sheet survival: liquidity, covenants, refinancing in the Bear path.
+  If Bear breaks the thesis, say so plainly.
+- **Bull**: anchored to a named upside catalyst. Report Bull IRR_T and how much of it the current
+  price already reflects.
+- **Stub period**: most days are already booked, so scenarios differ only on open days and spot
+  exposure. Do not create an artificial spread in the stub; Bear and Bull diverge from Year 1.
+- Scenarios need not be symmetric. Bear is the worst reasonably foreseeable case, Bull the best.
+- Optional reference figure: weight the scenario **levels** (D_t and V_T, not growth rates or IRRs)
+  25/50/25 and compute one IRR. Label it "scenario-weighted reference (convention)". It never
+  replaces Base as the decision figure.
 
-**All companies**
+## Step 7 — Output
 
-1. **Match the metric to the multiple**: EPS growth for PE, FCF-per-share growth for P/FCF.
-   Revenue growth is a driver, never the g in d+g.
-2. **Per share, not aggregate.** Adjust for dilution (new equity issued to fund growth) and
-   buybacks.
-3. **Decompose and forecast drivers**: revenue = volume × price; earnings = revenue × margin;
-   FCF = earnings − capex + D&A ± working capital. Let g fall out of the drivers.
-4. **Use geometric (compound) growth**, never the average of annual rates. Fade growth toward a
-   sustainable long-run rate; no above-k growth in perpetuity.
-5. **Strip out non-repeatable items** (one-offs, vessel-sale gains, M&A, FX) before measuring
-   growth.
-6. **Never compute a growth rate from a base near zero or negative.** Work with levels and express
-   the change against a stable base (per-share value, market cap).
+1. **Header**: company, ticker, price, valuation date, exit date and T in years, track (A or B)
+   and why, k used and why, sources (filings via FinancialFilings connector, sector skill outputs).
+2. **Scenario definitions**: one line each for Base, Bear, Bull with the named catalyst.
+3. **Near-term section**: table for the stub quarters (e.g. Q3E, Q4E) with booked share of days,
+   TCE or day rate, EBITDA, FCF and dividend per share, versus consensus where available; next
+   report and dividend dates (ex-date, payment date); net debt bridge to 31 Dec.
+4. **Period table** per scenario: stub quarters, Year 1 quarters, Years 2–3 (Track B lines above).
+   Track A: E, EPS growth, D_t per period.
+5. **V_T bridge** for Base, starting from net debt at 31 Dec of the current year.
+6. **Growth capex test**: amount, ROIC_g with source, value created vs k.
+7. **Results table**:
 
-**Growth as a capital-allocation decision (linking reinvestment to the terminal value)**
+| | Bear | Base | Bull |
+|---|---|---|---|
+| IRR_T (or d+g) | | | |
+| d / g split (g: structural / cyclical) | | | |
+| P_k (hurdle price) / margin of safety | | | |
+| PE or P/FCF ceiling (Rule 3) vs actual | | | |
+| Capital preserved? (Bear) | | | |
 
-Growth is not free: capital spent to grow the business reduces cash available for distribution now,
-and the payoff shows up later as a larger earning or cash-generating base. A model that forecasts
-lower near-term FCF because of growth capex, without crediting the resulting increase in the
-company's earning power, makes growth look like a pure cost. Make the link mechanical, not implicit:
+8. **Verdict**: clears / marginal (within ±2% of k) / fails, based on Base; whether it survives
+   Bear; key assumptions that would flip the verdict.
+9. **Caveat**: margin-of-safety screen, not an intrinsic valuation or price target.
 
-1. **Split each year's cash flow into maintenance FCF and growth capex.** Maintenance FCF is what
-   the business generates before any capital spent to grow it (replacement capex only). Growth
-   capex is capital spent beyond that, to expand the earning base (new vessels, new rigs, expansion
-   projects). The distribution used in the IRR, D_t = maintenance FCF − growth capex (adjusted for
-   debt funding if growth is debt-funded rather than self-funded from FCF).
-2. **Roll the invested capital forward.** Track an invested-capital or NAV base that increases each
-   year by that year's growth capex (plus any asset revaluation). The terminal value V_t is not a
-   free-standing guess — it is this rolled-forward base (or the earning power it supports) at year t.
-3. **State the return assumption on the growth capex explicitly: ROIC (or ROE for equity-funded
-   growth).** Derive it from realised economics — historical returns on past newbuilds or
-   projects, contracted day rates/charters on the new capacity — not an invented number. This ROIC
-   is what turns growth capex (lower D_t) into a larger V_T.
-4. **Test ROIC on the growth capex against k, separately from the overall d+g>k test.** This is the
-   actual investment decision on growth:
-   - ROIC on new capital > k → growth is accretive to IRR even though it lowers near-term
-     distributions. State this explicitly, so growth isn't penalised by a naive read of falling D_t.
-   - ROIC on new capital ≤ k → growth is value-destructive even if it raises revenue, earnings, or
-     FCF in absolute terms. Flag this — rising FCF is not the same as rising value if the capital
-     funding it doesn't earn its keep.
-5. **g is a consequence of this build, not an independently forecast number.** The implied g
-   (= IRR − d) should fall out of the maintenance-FCF / growth-capex / ROIC build above.
+**Tracking (after each quarterly report)**: replace the estimate with the actual, move the
+valuation date forward, and add a line: actual vs model for the quarter (FCF, dividend, net debt),
+change in Base P_k, and whether the company is running ahead of or behind the Base path.
 
-**Cyclical and asset-heavy names (tankers, offshore, etc.)**
+## Checks before finishing
 
-- **Cyclical growth mean-reverts; it does not compound.** A rate spike is a recovery that
-  reverses, not a growth engine. Do not capitalise it into g — keep it separate from the structural
-  growth produced by the capital-allocation build above.
-- **The base year decides the answer** (a trough flatters, a peak penalises). Use a normalized,
-  mid-cycle base and terminal value, state how it is defined, and never take the last modeled year
-  as the terminal value by default.
-- **Model levels, not growth rates.** Build FCF to equity per year in each scenario, then derive
-  growth from the levels.
-- **Definition: IRR, year by year.** For each year t = 1..T (T = 3 or 5) in each scenario, estimate
-  the distribution per share D_t (from the maintenance-FCF/growth-capex split above) and the
-  normalized value per share V_t at the end of that year — built from the rolled-forward
-  invested-capital/NAV base and stated ROIC, never assumed independently and never the IAF PE
-  ceiling itself as the exit multiple (that is circular) — with V_0 = P. Report for every year:
-  - the annual total return r_t = (D_t + V_t − V_(t−1)) / V_(t−1), and
-  - the cumulative IRR from entry to an exit at year t, solving
-    P = sum over s≤t of D_s / (1+IRR)^s + V_t / (1+IRR)^t.
-  Rule 1 is tested on the terminal-year IRR (year T) > k, and implied g = IRR_T − d is used in
-  Rule 3. The yearly r_t and the IRR-to-each-year are a path diagnostic, not a per-year pass/fail:
-  a weak middle year is not a failure, but it must be visible.
-- **Split implied g into structural and cyclical parts** — structural = growth capex compounding at
-  its ROIC (fleet additions, NAV change); cyclical = rate reversion around mid-cycle — and report
-  both, so it is visible how much of the return depends on the cycle turning versus capital actually
-  being put to work above k.
-- **Flag growth quality**: growth funded by share issuance, gains on asset sales, and dependence on
-  the cycle turning.
-
-## Bear / Base / Bull (BBB): stress tests around a Base case, not statistical percentiles
-
-There is no return distribution behind these scenarios — they are built from a qualitative read of
-specific drivers (chokepoints, fleet supply, OPEC decisions, rig demand, etc., typically from the
-relevant sector BBB skill) rather than from historical data you could calibrate a percentile
-against. Treating Bear/Bull as a 25th/75th percentile overstates the rigor behind them.
-
-1. **Base is the investment case.** It carries the IRR (or d+g) used for the Rule 1 and Rule 3
-   decision. It is the single most-likely path, built from the central view in the relevant sector
-   BBB skill(s) (Oil Market BBB, Oil Shipping BBB, Rig Market BBB, etc.) and the capital-allocation
-   build above.
-2. **Bear and Bull are stress tests, each anchored to a specific, named catalyst or risk** from the
-   sector BBB skill(s) (e.g. a named chokepoint reopening, an oversupply event, a demand-destruction
-   scenario) — not a generic "X% worse/better" shift applied mechanically to the Base case. They do
-   not need to be symmetric in severity; use the worst and best *reasonably foreseeable* cases, not
-   an arbitrary symmetric band.
-3. **Use Bear to test resilience, not to compute an expected value.** Report whether the Base case
-   decision survives Bear — IRR still acceptable, or at least capital broadly preserved (e.g. V_T
-   doesn't fall through a liquidation/NAV floor). If Bear breaks the thesis, say so plainly; that is
-   the point of the stress test.
-4. **Use Bull to show the asymmetry and optionality**, not a 25% chance of happening. Report how
-   much upside is available if the named catalyst materialises, and whether the Base case already
-   prices much of it in.
-5. **Do not default to a single probability-weighted number.** Report Base, Bear, and Bull as three
-   distinct IRRs (and PE/P-FCF ceilings), each with the catalyst behind it. If a single comparable
-   figure is wanted for screening across many names, it may be shown as a "scenario-weighted
-   reference figure" using the 25/50/25 convention — but it must be labelled explicitly as a
-   summarising convention, not a calibrated probability-weighted expectation, and it must never
-   replace showing Base on its own as the actual decision case.
-
-## Sector variant: E vs FCF
-
-- **Default**: earnings (E) and PE.
-- **Shipping, offshore, and other capital-intensive, cyclical sectors**: use FCF and P/FCF instead.
-  Capex and amortization swing E around in ways that don't reflect the underlying cash economics,
-  and a single year's FCF is rarely representative — which is exactly why the multi-year forward
-  build matters most for these names. Apply the cyclical rules in the Growth policy section.
-
-## Applying the framework to a company
-
-When asked to run the IAF on a company, produce:
-
-1. **Inputs**: current price, current forward dividend yield (d), whether this is an E-based or
-   FCF-based name (state which and why).
-2. **The year-by-year build** for Base, Bear, and Bull, out to year 3 or 5 — name the catalyst
-   behind each scenario, and show the terminal value driving each scenario's g, the maintenance
-   FCF / growth capex split, and the ROIC assumption on growth capex. State the growth metric and
-   base used, and for cyclicals show the year-by-year table (D_t, V_t, r_t, cumulative IRR) and the
-   structural vs cyclical split.
-3. **Rule 1 check** (IRR or d+g vs k) for Base — the decision figure — and the resilience/upside
-   read from Bear and Bull.
-4. **ROIC vs k on growth capex**, stated separately from Rule 1 — flag whether growth is accretive
-   or value-destructive regardless of the direction of FCF/earnings.
-5. **Rule 3 ceiling** (PE or P/FCF < (d+g)/k²) for Base, Bear, and Bull individually. An optional
-   scenario-weighted reference figure (25/50/25) may be shown alongside, clearly labelled as a
-   convention, not a probability-weighted expectation.
-6. **A read against the current multiple**: is the stock's actual PE/P-FCF inside the Base ceiling,
-   and does the position survive the Bear stress test — not just whether it clears a blended number.
-7. A short caveat line noting this is a margin-of-safety screen, not an intrinsic valuation.
-
-## Standing parameters (don't ask the user to re-supply these each time)
-
-- k = 12% baseline; hard floor of 10% — never go lower even for very safe names.
-- BBB weights = 25% Bear / 50% Base / 25% Bull remain only as the convention for an optional
-  scenario-weighted reference figure, not as calibrated probabilities. The Base-case IRR is the
-  primary decision figure.
+- k ≥ 10%, all figures per share and forward-looking.
+- Stub included, cash flows at payment dates, stub figures not annualised, ex-dividend status
+  checked, net debt rolled forward to 31 Dec.
+- Retained cash counted once; dilution included.
+- V_T built from normalized economics, exit multiple independent of the IAF ceiling.
+- ROIC_g sourced, not assumed.
+- Bear and Bull each tied to a named catalyst; no probability language.
+- Base verdict uses P vs P_k (Track B) or Rules 1 and 3 (Track A).

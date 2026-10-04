@@ -1,210 +1,293 @@
 ---
 name: oil-market-bbb
-description: Bear/Base/Bull (25/50/25) rammeverk for råolje- og destillatmarkedet, med 3-års utfallsrom for Brent, dieselcrack og andre produktcracks. Dekker chokepoints (Hormuz, Rødehavet/Bab el-Mandeb, Suez, Panama, Saudi/UAE bypass), råoljetilbud, lagerstatus, etterspørsel, Russland/Ukraina, raffinering og forwardkurve. Dekker IKKE shipping/tankrater — det er en egen skill, [[oil-shipping-bbb]]. ALLTID bruk denne skillen når brukeren nevner "Oil Market BBB", ber om å "lage", "kjøre" eller "oppdatere modul" for oljemarkedet, spør om olje-BBB, destillatmarked, crack-spreader, Brent-utfallsrom, eller ber om en oppdatert baseline for råolje/diesel/jet/bensin-markedet — selv om de ikke nevner skillnavnet eksplisitt. Dette er en input til Investment Analysis Framework (IAF, se [[iaf-valuation]]) for olje- og raffineriselskaper — for shipping/tank-selskaper, gå via [[oil-shipping-bbb]] i stedet. Kan også kjøres frittstående som et rent markedssyn.
+description: Bear/Base/Bull-rammeverk for råolje- og destillatmarkedet med årlig bane 2027–2029 (rulleres hvert år) for Brent og produktcracks (diesel/gasoil, jet, bensin). Base er hovedscenarioet; Bear og Bull er stresstester knyttet til navngitte katalysatorer, og 25/50/25 er en merket konvensjonsvekt, ikke en kalibrert sannsynlighet. Dekker chokepoints (Hormuz, Rødehavet/Bab el-Mandeb, Suez/SUMED, Panama, Saudi/UAE bypass), råoljetilbud, lager, etterspørsel, Russland/Ukraina, raffinering og forwardkurve. Dekker IKKE tankshipping ([[oil-shipping-bbb]]) eller riggmarkedet ([[rig-market-bbb]]) — begge bruker denne som input. ALLTID bruk når brukeren nevner "Oil Market BBB"/olje-BBB, ber om å lage, kjøre eller "oppdatere modul" for oljemarkedet, eller spør om Brent-utfallsrom, destillatmarkedet, crack-spreader, forwardkurve eller oljelager — selv uten skillnavnet. Input til IAF ([[iaf-valuation]]) for olje- og raffineriselskaper.
 ---
 
 # Oil Market BBB
 
-Et strukturert Bear/Base/Bull-scenariosett (25 % / 50 % / 25 %, i tråd med
-[[iaf-valuation]]) for råolje- og destillatmarkedet, med et utfallsrom for de
-neste ca. 3 årene. Formålet er **ikke** en utømmende nyhetsoppsummering, men
-en testbar hypotese om hvor markedet er på vei, pluss en eksplisitt
-risikovurdering — komprimert til hovedpunktene, uten å drukne i detaljer.
+**Revision:** 2026-10-04.1 — bump on every change (date.counter). The installed skill is only a
+pointer to this file; this folder copy is the master.
 
-Output av enhver kjøring er ett dokument: **`Oil Market BBB.md`**. Strukturen
-står under "Output-format". Shipping/tankrater dekkes **ikke** her — det er
-en egen skill, [[oil-shipping-bbb]], som bruker denne baselinen som input og
-oversetter den til rater/TCE.
+Et Bear/Base/Bull-scenariosett for råolje- og destillatmarkedet med en årlig
+bane for de tre neste hele kalenderårene. Formålet er en testbar hypotese om
+utfallsrommet og en eksplisitt risikovurdering — ikke en nyhetsoppsummering.
+Hold dokumentet til hovedpunktene.
 
-## To atskilte, men koblede markeder
+Skillen er **toppen av kjeden**: [[oil-shipping-bbb]] og [[rig-market-bbb]]
+henter oljebildet herfra og lager aldri egne oljeprognoser. Det betyr at
+denne skillen må levere et stabilt, definert grensesnitt (se «Grensesnitt
+mot nedstrømsskills og IAF»).
 
-1. **Råoljemarkedet** — retningen på Brent/WTI.
-2. **Destillatmarkedet** (diesel/gasoil, jet, bensin) — behandles som
-   **marginmessig delvis frikoblet** fra råoljeprisen. Crack-spreadene har sin
-   egen tilbuds-/etterspørselsdynamikk (raffinerikapasitet, outages,
-   sesong, regionale ubalanser) og kan bevege seg motsatt av råolje. Hver
-   BBB-runde skal derfor gi **separate** scenariointervaller for Brent og for
-   de viktigste crackene — ikke utlede crack fra en fast beta mot råolje.
+## Filer og lagring
+
+- Skill: `C:\GitWork\hsaether\Claude\Finance\skills\oil-market-bbb\`
+  (`SKILL.md` + `references/update-procedure.md` +
+  `references/definitions-and-sources.md`).
+- Output: `C:\GitWork\hsaether\Claude\Finance\docs\oil-market-bbb.md` — én
+  løpende baseline-fil. Baseline-dato står i H1. Git gir historikk.
+- Før overskriving: les forrige fil og ta med forrige BBB-verdier i change
+  log som «forrige verdi», slik at endringer kan spores uten eldre filer.
+- Skriv alltid via Filesystem-verktøyene og **les filen tilbake** for å
+  kontrollere tabeller og innhold. Levering kun i chat er ikke nok.
 
 ## To kjøremodus
 
-### A. Initiér (lag ny baseline fra bunnen)
+### A. Initiér
 
-Trigges av f.eks. "lag Oil Market BBB", "start en ny baseline". Gjør full
-research på alle punktene under "Analyseområder", og skriv et komplett
-`Oil Market BBB.md` med dagens dato som baseline-dato.
+Trigges av «lag Oil Market BBB», «start ny baseline» — og automatisk når
+`docs\oil-market-bbb.md` ikke finnes. Full research på alle analyseblokkene.
+Status: «Initiell baseline».
 
 ### B. Oppdater modul
 
-Trigges av "oppdater modul" eller "oppdater Oil Market BBB". Følg
-`references/update-procedure.md` **trinn for trinn** — dette er en presis,
-brukerdefinert prosedyre og skal ikke forkortes eller erstattes med en
-friere research-runde.
-
-Den viktigste regelen, gjentatt fra prosedyren fordi den lett glemmes:
+Trigges av «oppdater modul» i oljesammenheng, «oppdater Oil Market BBB», eller
+av en rekalibreringstrigger. Følg `references/update-procedure.md` **trinn for
+trinn** — ikke forkort eller erstatt med en friere research-runde.
 
 > «Oppdater modul» betyr ikke «oppsummer siste olje-nyheter». Det betyr «gjør
 > ny grundig research og test om den eksisterende Oil Market BBB fortsatt er
-> riktig». Hvis ny informasjon ikke er sterk nok til å endre modellen, skal
-> konklusjonen være eksplisitt: **Oil Market BBB beholdes uendret.**
+> riktig». Bruk siste baseline som utgangspunkt, men la den ikke bli et anker:
+> hver kjøring skal aktivt forsøke å falsifisere Base. Hvis ny informasjon ikke
+> er sterk nok til å endre modellen, skal konklusjonen være eksplisitt: **Oil
+> Market BBB beholdes uendret.**
 
-## Analyseområder (initiér-modus dekker alle; oppdater-modus se referansefilen)
+## Analysevindu og prisbasis
 
-Grupper research i disse blokkene — bruk dem som overskrifter i det
-ferdige dokumentet:
+- Tre hele kalenderår fra kjøringstidspunktet — per nå **2027–2029**, samme
+  vindu som [[oil-shipping-bbb]] og [[rig-market-bbb]].
+- Rulleres ved årsskiftet: første kjøring i et nytt år legger til nytt sluttår
+  og flytter første år til «realisert» (grunnlag for forecast vs. faktisk).
+  Rulling er ikke nullstilling — overlappende år arves og testes.
+- Alle priser er **årsgjennomsnitt i nominelle USD**, ikke sluttkurs eller
+  spot. Dagens spot (eller en krigstopp) brukes aldri automatisk som
+  treårsforutsetning.
+- Benchmarks og crack-definisjoner står i `references/definitions-and-sources.md`
+  og skal brukes uendret fra kjøring til kjøring. Bytte av serie dokumenteres
+  i change log.
 
-1. **Chokepoints og omdirigering** — Hormuz (trafikk, angrep, forsikring,
-   reopening-signaler), Rødehavet/Bab el-Mandeb (Houthi-aktivitet,
-   rerouting), Suez/SUMED (faktisk flow), Saudi East–West-pipeline +
-   UAE/Fujairah bypass (kapasitet, skader, faktisk pumping), Saudi/Oman STS
-   (kø, transfertid, bundet tonnasje), Iran–USA-spenning, Panama
-   (transitbegrensninger, vannstand, effekt på produktfrakt).
-2. **Råoljetilbud** — OPEC+ (kvoter, compliance, faktisk eksport), Saudi/UAE/
-   Iran/øvrig Gulf, USA/Brasil/Guyana/Canada, russisk råoljeeksport. Skill
-   alltid mellom nominell produksjon og fysisk supply som faktisk når
-   markedet.
-3. **Lager** — USA (crude, Cushing, SPR, bensin, distillates), Kina
-   (crude + produkt), OECD/Europa, ARA (diesel/gasoil/jet), Singapore
-   (middle distillates). Se på ukentlig trekk/bygg, sesongavvik, nivå mot
-   5-årssnitt, og dagers lagerdekning.
-4. **Etterspørsel** — global + USA/Kina/Europa/India, brutt ned på
-   diesel/jet/bensin. Skill mellom strukturell etterspørselsendring, demand
-   destruction (pris/knapphet), og rebound etter tidligere destruction.
-5. **Russland/Ukraina** — fast premiss (se "Standing parameters"), men
-   verifiser hver gang: raffineriangrep, throughput/outages, innenlands
-   produktmangel, diesel-/produkteksport.
-6. **Raffinering og destillatproduksjon** — utilization/outages i Gulf, USA,
-   Europa, Kina, India, Afrika/Dangote, Korea/Japan; ny kapasitet og
-   permanente closures; Kina som swing-supplier (throughput, lager,
-   eksportkvoter); USA/India som marginale eksportører. Dette er også der
-   destillat-spesifikke drivere hører hjemme: kapasitetsøkninger i
-   USA/Europa/Kina/Afrika, og regionale over-/underskuddsbilder per marked.
-   Selve seilings-/ton-mile-effekten av disse ubalansene dekkes av
-   [[oil-shipping-bbb]], ikke her.
-7. **Forwardmarked** — Brent spot/front + minst 3-måneders kurve, klassifisert
-   etter tabellen under. ICE gasoil/diesel 3-måneders spread i $/tonn. Les
-   alltid kurven sammen med lagerbevegelsen (se tabell).
-8. **Cracks** — diesel/gasoil, jet, bensin. Vurder for hver om endringen
-   skyldes råoljeprisen, raffineritilgjengelighet, eller faktisk
-   produktknapphet — dette er kjernen i frikoblingsvurderingen mellom
-   råolje og destillat.
+## Scenarioer: Base og katalysatorbaserte stresstester
+
+Det finnes ingen statistisk fordeling bak geopolitiske og strukturelle
+oljehendelser. I tråd med [[iaf-valuation]] gjelder derfor:
+
+- **Base** er den mest sannsynlige banen og beslutningscaset som
+  selskapsanalyser bygger på.
+- **Bear** og **Bull** er stresstester, hver knyttet til **navngitte
+  katalysatorer** — hva som må skje, mekanismen, når det tidligst kan slå inn,
+  og hvilke **signposts** (observerbare indikatorer) som viser at markedet
+  beveger seg dit. Bear er det verste rimelig forutsigbare utfallet, Bull det
+  beste. De trenger ikke være symmetriske.
+- Vurder både en **tilbuds-** og en **etterspørselskatalysator** for hver hale
+  (f.eks. Bear: Hormuz-gjenåpning *og* global resesjon/OPEC+-markedsandelskamp;
+  Bull: varig chokepoint-stenging *og* sterk rebound med tomme lagre). Velg den
+  eller kombinasjonen som gir det mest relevante stresset, og si hvorfor.
+- **25/50/25** er en merket konvensjonsvekt, ikke en kalibrert sannsynlighet.
+  Kolonnen heter «Vekt (konvensjon)». Den brukes som felles vekting i
+  nedstrømsskills, og endres bare ved en dokumentert skjevhet. Sannsynlighets-
+  språk om halene unngås.
+
+## To atskilte, men koblede markeder
+
+1. **Råolje** — Brent (og WTI-spread ved behov).
+2. **Destillat** (diesel/gasoil, jet, bensin) — behandles som **marginmessig
+   delvis frikoblet** fra råolje. Crackene har egen dynamikk (raffinerikapasitet,
+   outages, sesong, regionale balanser) og kan gå motsatt vei av Brent.
+
+Derfor lages Brent-bane og crack-bane **separat**, og produktprisen fremkommer
+som sum:
+
+```
+Produktpris ($/fat) = Brent + crack
+Δ produktpris        = Δ Brent + Δ crack
+```
+
+### Destillat-prissensitivitet
+
+1. Vurder hver crack mot sitt eget historiske normalbånd, ikke bare mot Brent.
+2. Bruk raffineringsblokken som hoveddriver for crack-banen; lager, sesong og
+   forwardspread som bekreftende signaler.
+3. Vis en **sensitivitetsmatrise** for diesel/gasoil (Brent-scenario ×
+   crack-scenario, Base-året 2027 og snitt 2027–2029), med produktpris i $/fat
+   og $/tonn. Marker hvilke kombinasjoner som er konsistente og hvilke som er
+   lite sannsynlige (f.eks. Bear-Brent + Bull-crack krever raffineribortfall
+   uten råoljeknapphet).
+4. Dekomponér siste periodes faktiske diesel-prisendring i Brent-bidrag og
+   crack-bidrag. Det er det konkrete svaret på «hvor frikoblet er destillat nå».
+
+## Analyseblokker (bruk som overskrifter)
+
+Detaljer per steg i `references/update-procedure.md`.
+
+1. **Chokepoints og omdirigering** — Hormuz, Rødehavet/Bab el-Mandeb,
+   Suez/SUMED, Saudi East–West og UAE/Fujairah bypass, Saudi/Oman STS,
+   Iran–USA, Panama. Uttrykk effekten i fat/dag som faktisk når markedet, ikke
+   bare «åpen/stengt». Tonnasje- og rate-effekter hører hjemme i
+   [[oil-shipping-bbb]].
+2. **Råoljetilbud** — OPEC+ (kvoter, compliance, faktisk eksport, ledig
+   kapasitet og om den fysisk kan nå markedet), Gulf, USA/Brasil/Guyana/Canada,
+   Russland. Skill nominell produksjon fra fysisk supply.
+3. **Lager** — USA (crude, Cushing, SPR, bensin, destillat), Kina, OECD/Europa,
+   ARA, Singapore. Trekk/bygg, sesongavvik, nivå mot 5-årssnitt, dager dekning.
+4. **Etterspørsel** — global og USA/Kina/Europa/India, per produkt. Skill
+   strukturell endring, demand destruction og rebound.
+5. **Russland/Ukraina** — fast premiss, verifiseres hver gang.
+6. **Raffinering og destillatproduksjon** — utilization/outages per region, ny
+   kapasitet og closures, Kina som swing-supplier, USA/India som marginale
+   eksportører, regionale over-/underskudd.
+7. **Forwardmarked** — Brent M1–M4-spread (klassifisering under), ICE gasoil
+   M1–M4 i $/tonn, og **lang ende** (desemberkontrakter for 2027–2029). Lang
+   ende er markedets pris på mid-cycle og er nøkkelinput for E&P-capex i
+   [[rig-market-bbb]].
+8. **Cracks** — diesel/gasoil, jet, bensin. Vurder om endringen skyldes
+   råolje, raffineritilgjengelighet eller faktisk produktknapphet.
+9. **Balansesjekk** — enkel tilbud − etterspørsel = implisitt lagerendring
+   (mb/d) per scenario og år. Formålet er konsistens: en Brent-bane som krever
+   en lagerbane markedet ikke kan levere, må justeres.
 
 ## Forwardkurve-klassifisering (fast regel)
 
-| Brent 3M-spread | Signal |
+| Brent M1–M4 | Signal |
 |---|---|
-| Backwardation > $5/bbl | Tydelig Tight |
-| Backwardation $2–5/bbl | Moderat Tight |
-| −$2 til +$2/bbl (om lag flatt) | Omtrent balansert |
-| Contango | Loose / Bear |
+| Backwardation > $5/fat | Tydelig Tight |
+| Backwardation $2–5/fat | Moderat Tight |
+| Backwardation $0–2/fat | Omtrent balansert |
+| Contango $0–2/fat | Svakt Loose |
+| Contango > $2/fat | Tydelig Loose / Bear |
 
-Kombinér alltid med lagerretningen:
+Les alltid sammen med lagerretningen:
 
 | Kurve | Lager | Tolkning |
 |---|---|---|
 | Backwardation | Fallende | Sterk fysisk Tightness |
 | Backwardation | Byggende | Mulig normalisering på vei |
+| Contango | Fallende | Kurven henger etter, eller risikopremie er priset ut — sjekk |
 | Contango | Byggende | Klart Loose-signal |
 
-## Fakta vs. tolkning (gjelder begge moduser)
+Hvis spreaden ikke kan hentes med kilde og dato: merk `[?]` og ikke klassifiser.
 
-Del hver oppdatering mentalt i tre: (1) ny fakta, (2) hva den betyr fysisk,
-(3) om den faktisk endrer modellen. Enkeltstående nyhetssaker skal normalt
-**ikke** flytte BBB-scenarioene eller -sannsynlighetene. Diplomatiske
-signaler (forhandlinger, våpenhviler, uttalelser) teller ikke som
-modellendring før de gir en verifisert fysisk og varig effekt på flow,
-produksjon eller lager.
+## Datadisiplin
 
-## Output-format: `Oil Market BBB.md`
+- Merk hvert tall: `[F]` rapportert fakta, `[E]` ekstern prognose, `[A]` egen
+  antakelse, `[?]` ukjent. Manglende nye data er ikke bevis for uendret marked.
+- Oppgi kilde, definisjon, enhet og dato (observasjon og publisering).
+  Bland aldri serier (f.eks. NYMEX ULSD–WTI og ICE gasoil–Brent) uten å si det.
+- Fakta vs. tolkning: (1) ny fakta, (2) hva den betyr fysisk, (3) om den
+  endrer modellen. Enkeltnyheter flytter normalt ikke BBB. Diplomatiske
+  signaler teller ikke før de gir verifisert, varig fysisk effekt.
+- **Brukerens input er input, ikke referanse.** Lenker, tall og utkast vurderes
+  kritisk (hva måler det, ferskhet, definisjon) — bruk det som holder, avvis
+  resten, og dokumenter vurderingen i kildeoversikten.
+- Kildekatalog, konverteringsfaktorer og kjente datasvakheter står i
+  `references/definitions-and-sources.md`.
 
-Bruk alltid denne strukturen:
+## Rekalibreringstriggere (forslag)
+
+Full oppdatering utløses når:
+
+- Brent front eller lang ende (des.-kontrakt) flytter seg > 15 % på en måned
+- Brent M1–M4 skifter regime i klassifiseringstabellen og holder seg der i to uker
+- faktisk flow gjennom Hormuz, Bab el-Mandeb/Suez eller East–West/Yanbu endres > 20 %
+- OPEC+-vedtak eller faktisk produksjonsendring > 0,5 mb/d
+- raffineri- eller eksportkapasitet endres > 0,5 mb/d (outage, oppstart, closure)
+- dieselcrack beveger seg > 25 % på en måned
+- IEA/OPEC/EIA reviderer global etterspørsel > 0,5 mb/d for et år i vinduet
+- Russland/Ukraina-premisset brytes (f.eks. eksportforbud opphevet eller varig utvidet)
+- en Bear- eller Bull-katalysator utløses eller en signpost krysses
+
+## Output-format: `docs\oil-market-bbb.md`
 
 ```markdown
 # Oil Market BBB — [baseline-dato]
 
-## Sammendrag
-- Base case i én-to setninger (Brent-intervall + diesel crack-intervall)
-- De 2-3 største risikoene til hver side (bear-risiko / bull-risiko)
+## Metadata
+- Analysedato, status (Initiell / Endelig / Foreløpig og hvorfor)
+- Forrige baseline (dato), analysevindu (2027–2029)
+- Benchmarks brukt (se definitions-and-sources)
 
-## Scenariotabell
-| Scenario | Sannsynlighet | Brent (3 år) | Diesel crack | Nøkkeldrivere |
+## Hovedkonklusjon
+- BBB endret / beholdes uendret — eksplisitt
+- Base i to setninger (Brent-bane + dieselcrack-bane)
+- Viktigste Bear- og Bull-katalysator
+
+## Scenariodefinisjoner
+| Scenario | Vekt (konvensjon) | Katalysator(er) | Mekanisme | Tidligst | Signposts |
+|---|---|---|---|---|---|
+| Bear | 25 % | ... | ... | ... | ... |
+| Base | 50 % | ... | ... | ... | ... |
+| Bull | 25 % | ... | ... | ... | ... |
+
+## Brent ($/fat, årsgjennomsnitt)
+| Scenario | 2027 | 2028 | 2029 | Snitt |
 |---|---|---|---|---|
-| Bear  | 25 % | ... | ... | ... |
-| Base  | 50 % | ... | ... | ... |
-| Bull  | 25 % | ... | ... | ... |
+
+## Cracks ($/fat, årsgjennomsnitt)
+| Scenario | Diesel/gasoil 27 / 28 / 29 | Jet 27 / 28 / 29 | Bensin 27 / 28 / 29 |
+|---|---|---|---|
+
+## Destillat-sensitivitet
+- Matrise Brent × dieselcrack (produktpris $/fat og $/tonn)
+- Dekomponering av siste periodes dieselprisendring (Brent vs. crack)
 
 ## Råoljemarkedet
 ### Chokepoints og omdirigering
-### Tilbud (OPEC+, non-OPEC, Russland)
+### Tilbud
 ### Lager
 ### Etterspørsel
 ### Russland/Ukraina (fast premiss — status)
-### Forwardkurve
+### Forwardkurve (M1–M4, gasoil-spread, lang ende, klassifisering)
+### Balansesjekk
 
 ## Destillatmarkedet
 ### Raffinering og kapasitet
 ### Regionale balanser
 ### Sesongeffekter
-### Cracks (diesel / jet / bensin)
-### Frikobling fra råolje — vurdering av prissensitivitet
-   (se metodikk under "Destillat-prissensitivitet")
+### Cracks
 
-## Risikovurdering
-- Hva må skje for at Bear/Bull faktisk inntreffer
-- Hva overvåkes videre til neste oppdatering
+## Signpost-status og risikovurdering
+- Signposts: status nå vs. forrige baseline
+- Hva overvåkes til neste oppdatering
+
+## Grensesnitt for nedstrømsskills
+- Kort liste: hva endret seg som [[oil-shipping-bbb]] / [[rig-market-bbb]]
+  må ta inn (eller «ingen endring av betydning»)
 
 ## Change log
-- Nytt siden forrige baseline
-- Uendret siden forrige baseline
-- Endringer i BBB (scenario, sannsynlighet, intervaller) — eller eksplisitt:
-  "Oil Market BBB beholdes uendret"
+- Nytt / uendret / endret (forrige verdi → ny verdi, årsak, kilde)
+- Forecast vs. faktisk (for realisert eller delvis observert år)
+- Vekter: beholdt eller endret — eksplisitt
 - Ny baseline-dato
+
+## Vedlegg: kilder
+(kilde, definisjon, observasjons- og publiseringsdato)
 ```
 
-Hold hoveddelen komprimert til hovedpunkter per underoverskrift (noen
-setninger til et par avsnitt) — detaljerte tallrekker/kilder kan legges i et
-vedlegg nederst i dokumentet hvis nødvendig, men skal ikke drukne
-sammendraget og scenariotabellen.
+Hoveddelen skal være kort per underoverskrift. Tallrekker og kildedetaljer
+legges i vedlegg.
 
-## Destillat-prissensitivitet — hvordan anslå den
+## Grensesnitt mot nedstrømsskills og IAF
 
-Fordi destillat er delvis frikoblet fra råolje, skal crack-spreaden
-behandles som en **egen tilstandsvariabel**, ikke som råoljepris × en fast
-beta:
+Hver baseline skal levere, i fast form:
 
-1. Se på nivå og trend i crack-spreadene isolert (diesel/gasoil, jet,
-   bensin) mot deres egne historiske normalbånd, ikke bare mot råoljeprisen.
-2. Bygg Bear/Base/Bull for cracks **separat** fra Bear/Base/Bull for Brent —
-   de kan gå ulik vei (f.eks. løst råoljemarked + stram destillatbalanse pga.
-   raffineri-outages).
-3. Bruk raffineringsblokken (utilization, outages, ny kapasitet, Kina som
-   swing-supplier) som hoveddriver for crack-scenarioene, og
-   lager/sesong som bekreftende signaler.
-4. Angi eksplisitt hvor sensitiv sluttproduktprisen (diesel/jet/bensin til
-   forbruker/marginalkjøper) er for en gitt endring i crack vs. en gitt
-   endring i råolje — dette er selve svaret på "hvordan blir frikoblingen
-   fremover".
+- Brent-bane per scenario og år, og lang ende av forwardkurven
+- crack-bane per scenario og år (diesel/gasoil, jet, bensin)
+- chokepoint-status uttrykt i fat/dag som faktisk når markedet
+- raffineri- og handelsgeografi (hvem eksporterer, hvem underskudd)
+- lagerbane (bygging/tapping, inkl. SPR-gjenoppbygging)
+- scenariokatalysatorer og signposts
+
+**IAF ([[iaf-valuation]])**: For olje- og raffineriselskaper mates Base-banen
+inn som beslutningscase; Bear og Bull brukes som katalysatorbaserte
+stresstester. For shipping- og riggselskaper går veien via
+[[oil-shipping-bbb]] eller [[rig-market-bbb]] — Oil Market BBB mates ikke
+direkte inn i deres IAF.
 
 ## Standing parameters
 
-- BBB-vekting: 25 % Bear / 50 % Base / 25 % Bull — konsistent med
-  [[iaf-valuation]], med mindre brukeren ber om noe annet for denne kjøringen.
-- Tidshorisont: 3 år (samme vindu som IAF sitt standard forecast-vindu).
-- Russland/Ukraina er et **fast premiss** inntil ny verifisert informasjon
-  tvinger en endring — se punkt 5 og "Fakta vs. tolkning" over.
-- Forwardkurve-terskler: se tabellen over — ikke sett egne terskler ad hoc.
-- Shipping/tankrater, ton-mile og fartøystilbud hører hjemme i
-  [[oil-shipping-bbb]], ikke her — ikke legg dette til i denne skillen igjen.
-- Ved oppdatering: følg alltid `references/update-procedure.md` i sin
-  helhet fremfor å improvisere en kortere runde.
-
-## Kobling til IAF
-
-Når Oil Market BBB brukes som input til en selskapsanalyse i
-[[iaf-valuation]] (oljeselskap, raffineri), er det scenariotabellen
-(Brent-intervaller og crack-intervaller per scenario) som mates inn i det
-år-for-år-bygde g-estimatet for det selskapet — ikke et enkelt
-punktestimat. Behold Bear/Base/Bull-spennet helt til IAF-testen, i tråd med
-IAF-skillens egne prinsipper. For shipping/tank-selskaper: gå via
-[[oil-shipping-bbb]], som oversetter denne baselinen til rater/TCE — ikke
-mat Oil Market BBB direkte inn i et shippingselskaps IAF.
+- Analysevindu: tre hele kalenderår (2027–2029 nå), rulleres årlig.
+- Base = beslutningscase; Bear/Bull = stresstester med navngitte katalysatorer.
+- Vekt 25/50/25 = konvensjon, ikke sannsynlighet.
+- Årsgjennomsnitt, nominelle USD, faste benchmarks.
+- Russland/Ukraina er fast premiss til ny verifisert informasjon tvinger en endring.
+- Forwardkurve-terskler som i tabellen — ikke sett egne terskler ad hoc.
+- Shipping, tonnasje og rigger hører ikke hjemme her.
+- Ved oppdatering: følg `references/update-procedure.md` i sin helhet.

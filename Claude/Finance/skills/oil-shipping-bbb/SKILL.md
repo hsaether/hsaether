@@ -5,6 +5,9 @@ description: Bear/Base/Bull (25/50/25) rammeverk for tank shipping (crude og pro
 
 # Oil Shipping BBB
 
+**Revision:** 2026-10-04.1 — bump on every change (date.counter). The installed skill is only a
+pointer to this file; this folder copy is the master.
+
 Et strukturert Bear/Base/Bull-scenariosett (25 % / 50 % / 25 %, i tråd med
 [[iaf-valuation]]) for tank shipping-markedet, med et utfallsrom for de neste
 ca. 3 årene (2027-2029). Formålet er å **oversette** [[oil-market-bbb]] til
