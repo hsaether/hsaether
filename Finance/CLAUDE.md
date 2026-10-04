@@ -15,6 +15,8 @@ Skills and the chain between them:
 - `oil-market-bbb` → top of the chain; output `docs/oil-market-bbb.md`
 - `oil-shipping-bbb` → reads the oil baseline; output `docs/oil-shipping-bbb.md`
 - `rig-market-bbb` → reads the oil baseline; output `docs/rig-market-bbb.md`
+- `supply-market-bbb` (Supply BBB: OSVs, focus North Sea and South America) → reads the oil and
+  rig baselines; output `docs/supply-market-bbb.md`
 - `iaf-valuation` → company valuation using the sector baselines; outputs
   `docs/<company>-analysis.md` (e.g. `docs/capt-analysis.md`, `docs/SED-analysis.md`)
 - Background on the IAF reasoning: `docs/iaf-reference-notes.md`
@@ -29,6 +31,7 @@ Skills and the chain between them:
 - Input the user gives (links, drafts, numbers) is input, not a reference: assess its value
   critically, extract what is sensible, and update the skill or document accordingly.
 - Downstream skills never make their own oil-market forecast; they read the current
-  `docs/oil-market-bbb.md`.
+  `docs/oil-market-bbb.md`. Supply BBB likewise never makes its own rig forecast; it reads
+  `docs/rig-market-bbb.md`.
 - Never use git for any work (no git mv, rm, add, commit, status, etc.) and never ask about
   commits. The user handles all git transactions. Use plain file operations only.

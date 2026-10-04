@@ -1,19 +1,19 @@
 ---
 name: oil-market-bbb
-description: Oil Market BBB — the price baseline for crude oil and distillates at the top of the analysis chain. Produces Bear/Base/Bull price paths for Brent and distillate cracks (diesel/ULSD, jet) on the IAF time grid (stub quarter(s) of the current year + 3 calendar years, now 2027–2029), plus mid-cycle prices for terminal values, the forward curve, the supply/demand/inventory balance and named catalysts with signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Covers prices and their physical drivers only — no shipping (rates, tonnage, ton-mile, routes) and no rigs. ALWAYS use when the user mentions Oil Market BBB / oil BBB, asks to create, run or update ("oppdater modul") the oil module, or asks about the Brent outlook, oil price scenarios, diesel or jet cracks, distillate prices, the oil forward curve or oil inventories — even without naming the skill. Feeds oil-shipping-bbb, rig-market-bbb and iaf-valuation; it is the only place an oil price forecast is made.
+description: Oil Market BBB — the price baseline for crude oil and distillates at the top of the analysis chain. Produces Bear/Base/Bull price paths for Brent and distillate cracks (diesel/ULSD, jet) on the IAF time grid (stub quarter(s) of the current year + 3 calendar years, now 2027–2029), plus mid-cycle prices for terminal values, the forward curve, the supply/demand/inventory balance and named catalysts with signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Covers prices and their physical drivers only — no shipping (rates, tonnage, ton-mile, routes) and no rigs. ALWAYS use when the user mentions Oil Market BBB / oil BBB, asks to create, run or update ("oppdater modul") the oil module, or asks about the Brent outlook, oil price scenarios, diesel or jet cracks, distillate prices, the oil forward curve or oil inventories — even without naming the skill. Feeds oil-shipping-bbb, rig-market-bbb, supply-market-bbb and iaf-valuation; it is the only place an oil price forecast is made.
 ---
 
 # Oil Market BBB
 
-**Revision:** 2026-10-04.5 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-04.6 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/oil-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull price baseline for crude oil and distillates. It answers one question: **what
 Brent and distillate prices should the downstream analyses use, year by year, and what named
 events would move them?** It is a testable hypothesis with explicit risks, not a news summary.
 
-This skill is the top of the chain. [[oil-shipping-bbb]], [[rig-market-bbb]] and
-[[iaf-valuation]] read `docs/oil-market-bbb.md` and never make their own oil forecast, so the
+This skill is the top of the chain. [[oil-shipping-bbb]], [[rig-market-bbb]],
+[[supply-market-bbb]] and [[iaf-valuation]] read `docs/oil-market-bbb.md` and never make their own oil forecast, so the
 output must keep the fixed interface defined under Output.
 
 **Scope:** crude and distillate prices and the physical drivers behind them (supply, demand,
@@ -333,7 +333,7 @@ Keep the main part short per heading; series and source details go to the append
 - What to watch before the next update
 
 ## For downstream skills
-- What changed that [[oil-shipping-bbb]] / [[rig-market-bbb]] / IAF must take in, or "no material change"
+- What changed that [[oil-shipping-bbb]] / [[rig-market-bbb]] / [[supply-market-bbb]] / IAF must take in, or "no material change"
 
 ## Change log
 - New / unchanged / changed (previous → new, reason, source)
@@ -365,8 +365,10 @@ Use by skill:
   differentials are set in the company analysis.
 - **[[rig-market-bbb]]**: Brent path per scenario and the long end of the curve (E&P cash flow and
   FID logic).
+- **[[supply-market-bbb]]**: Brent long end and mid-cycle (FID, tender and Petrobras capex logic)
+  and disruption status; drilling activity reaches it through [[rig-market-bbb]].
 - **[[oil-shipping-bbb]]**: crude and product volumes, regional balances, refining changes and
-  disruption status, translated there into shipping effects. Shipping and rig companies do not take
+  disruption status, translated there into shipping effects. Shipping, rig and OSV companies do not take
   this baseline directly into IAF; it reaches them through their sector skill.
 
 ## Checks before finishing

@@ -5,7 +5,7 @@ description: Oil Shipping BBB — the tanker-market baseline for crude tankers (
 
 # Oil Shipping BBB
 
-**Revision:** 2026-10-04.3 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-04.4 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/oil-shipping-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the tanker market. It answers one question: **what market TCE and
@@ -114,9 +114,28 @@ Connector quirks (tested 2026-10-04):
 - **Nordic Financial:** always set `ticker` and `fiscal_year`. The first chunk of a quarterly
   report usually has spot TCE per segment and new TC fixtures; booked share of the current quarter
   is further down. Text excerpts only — read numbers from the text.
+- **Broker weeklies as PDFs** (tested 2026-10-04): Hellenic Shipping News republishes them. Find
+  the PDF link on the article page with `curl -A "Mozilla/5.0" <article> | grep -o 'https://[^"]*\.pdf'`,
+  download with curl and read with `pdftotext -layout`.
+  - **Xclusiv** (Mondays): segment average T/CE for VLCC, Suezmax and Aframax, route TCEs, newbuild
+    prices and 5/10/15-year values. It is the primary segment-average and asset-value publisher.
+    Its TC2/TC6 text has repeated TC1/TC5 numbers (template error), so do not use those two.
+  - **Intermodal** (Tuesdays): 1-year and 3-year TC by segment with 2024/2025 averages, and 5-year
+    values. `-layout` scrambles the TC table; rebuild each row from "this week" + "diff" = "last
+    week" before use.
+  - **Fearnleys** (Wednesdays): 1-year TC for eco/scrubber vessels, values and newbuild prices.
+  - **Affinity** (Fridays): Baltic route TCEs for the TD and TC routes (right-hand columns; use
+    `cut -c180-`).
+  - The Baltic Exchange site and Seatrade/Splash247 block automated fetches (challenge page or 403).
+- **FFA levels from BWET holdings:** amplifyetfs.com/bwet lists TD3C/TD20 monthly contracts with
+  lots and notional market value. Price in $/t = market value ÷ (lots × 1,000 t). Convert TD3C to
+  TCE with (price × 270,000 − ~$2.6m voyage costs) ÷ ~48 days. Then scale to the segment average
+  with the observed segment/TD3C ratio. Mark `[A]`; contracts beyond three months are thin.
 - **EODHD** `get_sanctions_vessels` returns 403 on the free plan. Not usable.
-- **Yahoo** has no freight or FFA series. BWET (tanker FFA ETF) has a distorted price history and
-  is not a rate source. Use Yahoo only for tanker equity prices (company analysis).
+- **Yahoo** has no freight or FFA series, and the BWET price history is distorted. Use Yahoo only
+  for tanker equity prices (company analysis).
+- No Python on this machine. Compute PortWatch averages with PowerShell `Invoke-RestMethod`, paging
+  with `resultOffset`.
 - Do not use SEO "market report" pages without a traceable primary source. When sources conflict,
   give both and say which one is used and why. Tables loaded as images cannot be read: mark "not
   read" and ask the user for the figures.

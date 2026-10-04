@@ -5,7 +5,7 @@ description: Investment Analysis Framework (IAF) — the standing valuation meth
 
 # Investment Analysis Framework (IAF)
 
-**Revision:** 2026-10-04.11 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-04.13 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/iaf-valuation/` in the Finance folder.
 
 A forward-looking test of whether today's price is defensible given the return it can deliver over
@@ -143,7 +143,14 @@ monthly averages from 1987 and lag about a month. An unknown ticker returns `{}`
   highest-confidence estimate in the model. Oil prices for the stub and Year-1 quarters come from
   the Stub and Year 1 by quarter tables in `docs/oil-market-bbb.md`. Tanker spot TCE for open days
   comes from the same tables in `docs/oil-shipping-bbb.md` (market basis; the company's own
-  premium or discount to market is set and sourced in the company analysis).
+  premium or discount to market is set and sourced in the company analysis). For drilling
+  contractors, booked rig-days and rates come from the fleet status; open rig-days use the
+  leading-edge dayrate for the rig's segment row in `docs/rig-market-bbb.md`, with idle time
+  informed by the segment utilization. A rig earns its backlog rate until expiry, then the
+  leading-edge rate for that year. For OSV and subsea-vessel owners, booked days and rates come
+  from the company's contract lists; open days use the vessel's row in `docs/supply-market-bbb.md`
+  (North Sea spot by quarter × the row's utilization for spot-exposed vessels; leading-edge term or
+  Petrobras rate otherwise). A vessel earns its contract rate until expiry, then the row's rate.
 - **Starting balance sheet**: roll the last reported balance sheet forward through the stub to net
   debt at 31 Dec (the start of Year 1). Also state net debt at the valuation date.
 - **Dividends at payment dates.** A declared dividend counts only if the share has not yet gone
@@ -209,7 +216,10 @@ V_T drives most of the result, so build it, never assume it.
   operating days − normalized costs, or NAV (vessel/rig values at mid-cycle prices) less net debt.
   For oil-price-driven companies, take mid-cycle Brent and cracks from the Mid-cycle column of
   `docs/oil-market-bbb.md`. For tanker companies, take mid-cycle TCE and mid-cycle asset values
-  from `docs/oil-shipping-bbb.md`, adjusted for the fleet's age at exit.
+  from `docs/oil-shipping-bbb.md`, adjusted for the fleet's age at exit. For drilling
+  contractors, take mid-cycle dayrate, utilization and rig values from `docs/rig-market-bbb.md`,
+  adjusted for each rig's age and spec at exit. For OSV owners, take mid-cycle rate, utilization
+  and vessel values from `docs/supply-market-bbb.md`, adjusted for each vessel's age and spec.
 - **Exit multiple must be stated and independent.** Never use the IAF ceiling as the exit multiple
   (circular). For finite-life assets (ships, rigs), prefer NAV over a perpetuity multiple.
 - **Roll the capital base forward**: V_T includes the value of growth capex deployed during the
@@ -230,8 +240,11 @@ Example at k = 12%: 20 invested at ROIC_g 15% → worth 25 (+5). At ROIC_g 9% �
 
 - **ROIC_g must come from evidence**: contracted charters or day rates on the new capacity, realised
   returns on past newbuilds or projects, current newbuild price vs secondhand value (for tankers:
-  newbuild prices, period rates and newbuild-parity TCE in `docs/oil-shipping-bbb.md`). State the
-  source. For finite-life assets, use NAV of the asset at T instead of the perpetuity formula.
+  newbuild prices, period rates and newbuild-parity TCE in `docs/oil-shipping-bbb.md`; for rigs:
+  reactivation parity, secondhand rig prices and the contract rate secured, from
+  `docs/rig-market-bbb.md` and the company's own announcements; for OSVs: newbuild and
+  reactivation parity and secondhand values in `docs/supply-market-bbb.md`). State the source. For
+  finite-life assets, use NAV of the asset at T instead of the perpetuity formula.
 - **Test ROIC_g vs k separately from Rule 1.** ROIC_g > k: growth is accretive even though D_t falls.
   ROIC_g ≤ k: growth destroys value even if revenue, earnings or FCF rise.
 - **Per share**: growth funded by new shares only counts if ROIC_g > k after dilution.
@@ -252,7 +265,7 @@ Example at k = 12%: 20 invested at ROIC_g 15% → worth 25 (+5). At ROIC_g 9% �
 There is no statistical distribution behind sector events, so Bear and Bull are not percentiles.
 
 - **Base**: the most likely path, from the central view of the relevant sector skill (Oil Market
-  BBB, Oil Shipping BBB, Rig Market BBB). It carries the decision: IRR_T vs k and P vs P_k.
+  BBB, Oil Shipping BBB, Rig Market BBB, Supply Market BBB). It carries the decision: IRR_T vs k and P vs P_k.
 - **Bear**: a stress test anchored to a named catalyst from the sector skill (e.g. chokepoint
   reopening, fleet oversupply, demand shock). Report:
   - Bear IRR_T and P_k (Bear),
@@ -273,7 +286,8 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
 1. **Header**: company, ticker, price, valuation date, exit date and T in years, track (A or B)
    and why, k used and why, sources per the Data sources section (connector, document and
    period for each key figure; price source and time stamp; sector outputs from
-   `docs/oil-market-bbb.md`, `docs/oil-shipping-bbb.md`, `docs/rig-market-bbb.md`).
+   `docs/oil-market-bbb.md`, `docs/oil-shipping-bbb.md`, `docs/rig-market-bbb.md`,
+   `docs/supply-market-bbb.md`).
 2. **Scenario definitions**: one line each for Base, Bear, Bull with the named catalyst.
 3. **Near-term section**: table for the stub quarters (e.g. Q3E, Q4E) with booked share of days,
    TCE or day rate, EBITDA, FCF and dividend per share, versus consensus where available; next

@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__9abcc285-c1f4-4ddd-bb6e-22e4e896b929__companies_list",
+      "mcp__9abcc285-c1f4-4ddd-bb6e-22e4e896b929__companies_retrieve",
+      "mcp__9abcc285-c1f4-4ddd-bb6e-22e4e896b929__companies_financials_retrieve",
+      "mcp__9abcc285-c1f4-4ddd-bb6e-22e4e896b929__isins_retrieve",
+      "mcp__9abcc285-c1f4-4ddd-bb6e-22e4e896b929__filings_list",
+      "mcp__9abcc285-c1f4-4ddd-bb6e-22e4e896b929__filings_retrieve",
+      "mcp__9abcc285-c1f4-4ddd-bb6e-22e4e896b929__filings_markdown_retrieve",
+      "mcp__9abcc285-c1f4-4ddd-bb6e-22e4e896b929__filings_markdown_search",
+      "mcp__b2a58603-38ea-464c-8840-9b051e7bc66a__search_filings",
+      "mcp__b2a58603-38ea-464c-8840-9b051e7bc66a__company_research",
+      "mcp__b2a58603-38ea-464c-8840-9b051e7bc66a__get_company_info",
+      "mcp__b2a58603-38ea-464c-8840-9b051e7bc66a__get_current_power_price",
+      "mcp__b2a58603-38ea-464c-8840-9b051e7bc66a__parse_pdf_to_text",
+      "mcp__b2a58603-38ea-464c-8840-9b051e7bc66a__analyze_company",
+      "mcp__b2a58603-38ea-464c-8840-9b051e7bc66a__ping",
+      "mcp__86b2ecee-03b2-4b19-b8ba-05bd214e41a4__get_quote",
+      "mcp__86b2ecee-03b2-4b19-b8ba-05bd214e41a4__get_chart",
+      "mcp__86b2ecee-03b2-4b19-b8ba-05bd214e41a4__quote_summary",
+      "mcp__86b2ecee-03b2-4b19-b8ba-05bd214e41a4__search",
+      "mcp__5b1fcced-e1b1-4f65-b83b-ef6c339a6677__get_historical_stock_prices",
+      "mcp__5b1fcced-e1b1-4f65-b83b-ef6c339a6677__resolve_ticker",
+      "mcp__2e356cb8-e87f-4f8b-af24-87440154df2a__BRENT",
+      "mcp__2e356cb8-e87f-4f8b-af24-87440154df2a__WTI",
+      "mcp__2e356cb8-e87f-4f8b-af24-87440154df2a__COMPANY_OVERVIEW",
+      "mcp__2e356cb8-e87f-4f8b-af24-87440154df2a__SYMBOL_SEARCH",
+      "mcp__2e356cb8-e87f-4f8b-af24-87440154df2a__GLOBAL_QUOTE"
+    ]
+  }
+}
