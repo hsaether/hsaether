@@ -5,7 +5,7 @@ description: Investment Analysis Framework (IAF) — the standing valuation meth
 
 # Investment Analysis Framework (IAF)
 
-**Revision:** 2026-10-04.5 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-04.11 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/iaf-valuation/` in the Finance folder.
 
 A forward-looking test of whether today's price is defensible given the return it can deliver over
@@ -35,7 +35,8 @@ nothing, say so and fall back to the next one. Never fill a gap with an invented
 | Nordic listed company: quarterly figures, guidance, booked days/rates, backlog, dividend policy, CEO outlook | **Nordic Financial** (`search_filings`, `company_research`) | FinancialFilings, issuer IR / Newsweb |
 | Structured IS/BS/CF line items, any listed company (Nordic, EU, US, SG) | **FinancialFilings** (`companies_financials_retrieve`) | Nordic Financial text, issuer report |
 | Filing list: new reports, share issues, insider trades, prospectuses | **FinancialFilings** (`filings_list`, newest first) | Nordic Financial `report_type="press_release"` |
-| Share price, FX, futures, Oslo tickers, market cap | **Yahoo** (`get_quote`, `get_chart`, `quote_summary`) | EODHD EOD prices |
+| Share price, spot FX, futures, Oslo tickers, market cap | **Yahoo** (`get_quote`, `get_chart`, `quote_summary`) | EODHD EOD prices; AllRatesToday for spot FX |
+| FX at a past moment (balance-sheet date, ex-date, payment date), several pairs at once; official central-bank rates | **AllRatesToday** (`get_rates_authenticated` with `time`, `get_official_rates`) | Yahoo `get_chart` |
 | Price history (EOD) as a cross-check | **EODHD** | Yahoo `get_chart` |
 | US company ratios, Brent/WTI monthly history | **Alpha Vantage** (`COMPANY_OVERVIEW`, `BRENT`, `WTI`) | FinancialFilings, Yahoo |
 | Norwegian macro (policy rate, CPI, NOK FX), Nordic power price | **Nordic Financial** (`report_type="macro_summary"`, `get_current_power_price`) | — |
@@ -52,6 +53,8 @@ quarterly reports, Newsweb/exchange announcements, press releases and quarterly 
 - `analyze_company` writes a synthesised answer. Use it only for orientation and never as a figure
   source.
 - `get_company_info` works for the NO/DK/FI registries, not for Sweden.
+- No oil-price series (`macro_summary` does not cover oil). Realised oil and gas prices appear in
+  producers' quarterly reports (e.g. Equinor) and serve as a cross-check of the oil baseline only.
 
 **FinancialFilings** (official filings from SEC, ESMA, Oslo and other regulators):
 - Resolve the company first with `companies_list(search=…)` and confirm name and country, then
@@ -65,11 +68,31 @@ quarterly reports, Newsweb/exchange announcements, press releases and quarterly 
   each analysis or tracking update: share issues (CAP/424B5), insider trades (DIRS) and new
   reports. A share issue changes the share count used in the per-share figures.
 
-**Yahoo**: no quota. Best source for prices, FX, futures and Oslo tickers (`.OL`).
+**Yahoo**: no quota. Best source for prices, spot FX, futures and Oslo tickers (`.OL`).
 - Multiples are wrong for NOK-listed companies that report in USD, because currencies get mixed
   (e.g. Hafnia EV/EBITDA 67x). Compute multiples yourself from price × shares and the reported
   figures.
 - An unknown ticker is dropped silently, so check that every ticker came back.
+
+**FX rule**: convert reported figures (often USD) to the share-price currency (often NOK) at the
+rate matching the price time stamp. Use Yahoo for that market rate (AllRatesToday
+`get_exchange_rate` as cross-check; they agreed to the 4th decimal when tested). State pair, rate,
+source and time stamp in the header.
+
+Historical FX (quarter-end, year-end, ex-date, payment date) comes from AllRatesToday
+`get_rates_authenticated` with `time` set to the moment (e.g. `2025-12-31T16:00:00Z`); give several
+targets comma-separated in one call. Fall back to Yahoo `get_chart`.
+
+**AllRatesToday** (free API key): live interbank mid-market rates for 160+ currencies.
+- `get_rates_authenticated` with `time`: one point per pair at any past datetime. `group` with
+  `time` still returns one point, not a series.
+- `get_historical_rates`: fixed windows ending now only (`30d` daily, `1y` weekly). Use Yahoo
+  `get_chart` for longer or custom-window series.
+- `get_official_rates`: the latest published central-bank table (Norges Bank = `norges`, ECB =
+  `ecb`, Fed = `fed`, BoE = `boe`; other codes via `list_central_banks`, whose output is large).
+  Dated official rates need a paid plan (403). Use the Norges Bank rate when a company or a tax
+  rule names it; otherwise use the market rate.
+- Always cite the returned `time` or `rate_date`.
 
 **EODHD** (free plan): 20 calls per day, EOD prices only. Fundamentals and live data return 403.
 Tickers are `.OL` for Oslo and `.US` for the US. One bad ticker in a batch gives a 404 for the
@@ -117,7 +140,10 @@ monthly averages from 1987 and lag about a month. An unknown ticker returns `{}`
 - **Stub quarters are modelled from locked-in information**: booked days and rates from the latest
   guidance, actual spot rates for elapsed open days, current spot/forward for remaining open days,
   known opex, drydock days, debt instalments and deliveries. An ended-but-unreported quarter is the
-  highest-confidence estimate in the model.
+  highest-confidence estimate in the model. Oil prices for the stub and Year-1 quarters come from
+  the Stub and Year 1 by quarter tables in `docs/oil-market-bbb.md`. Tanker spot TCE for open days
+  comes from the same tables in `docs/oil-shipping-bbb.md` (market basis; the company's own
+  premium or discount to market is set and sourced in the company analysis).
 - **Starting balance sheet**: roll the last reported balance sheet forward through the stub to net
   debt at 31 Dec (the start of Year 1). Also state net debt at the valuation date.
 - **Dividends at payment dates.** A declared dividend counts only if the share has not yet gone
@@ -181,6 +207,9 @@ V_T drives most of the result, so build it, never assume it.
 
 - **Base it on normalized, mid-cycle economics**, not the last modelled year: mid-cycle rates ×
   operating days − normalized costs, or NAV (vessel/rig values at mid-cycle prices) less net debt.
+  For oil-price-driven companies, take mid-cycle Brent and cracks from the Mid-cycle column of
+  `docs/oil-market-bbb.md`. For tanker companies, take mid-cycle TCE and mid-cycle asset values
+  from `docs/oil-shipping-bbb.md`, adjusted for the fleet's age at exit.
 - **Exit multiple must be stated and independent.** Never use the IAF ceiling as the exit multiple
   (circular). For finite-life assets (ships, rigs), prefer NAV over a perpetuity multiple.
 - **Roll the capital base forward**: V_T includes the value of growth capex deployed during the
@@ -200,7 +229,8 @@ Value created               ≈  Growth capex × (ROIC_g / k − 1)
 Example at k = 12%: 20 invested at ROIC_g 15% → worth 25 (+5). At ROIC_g 9% → worth 15 (−5).
 
 - **ROIC_g must come from evidence**: contracted charters or day rates on the new capacity, realised
-  returns on past newbuilds or projects, current newbuild price vs secondhand value. State the
+  returns on past newbuilds or projects, current newbuild price vs secondhand value (for tankers:
+  newbuild prices, period rates and newbuild-parity TCE in `docs/oil-shipping-bbb.md`). State the
   source. For finite-life assets, use NAV of the asset at T instead of the perpetuity formula.
 - **Test ROIC_g vs k separately from Rule 1.** ROIC_g > k: growth is accretive even though D_t falls.
   ROIC_g ≤ k: growth destroys value even if revenue, earnings or FCF rise.
