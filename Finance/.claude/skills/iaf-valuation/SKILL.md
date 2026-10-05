@@ -5,7 +5,7 @@ description: Investment Analysis Framework (IAF) — the standing valuation meth
 
 # Investment Analysis Framework (IAF)
 
-**Revision:** 2026-10-04.13 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-05.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/iaf-valuation/` in the Finance folder.
 
 A forward-looking test of whether today's price is defensible given the return it can deliver over
@@ -111,10 +111,11 @@ monthly averages from 1987 and lag about a month. An unknown ticker returns `{}`
 | P | Current share price (entry price) |
 | E / FCF | Earnings, or free cash flow to equity. Use FCF for capital-intensive and cyclical sectors |
 | D_t | Cash returned to shareholders in period t per share (dividends + buybacks), placed at its payment date |
-| d | Annualised distribution yield on entry price: (Σ D over the horizon ÷ T) ÷ P |
+| d | Cash yield on entry: (Σ D over the horizon ÷ T) ÷ P. Simple and undiscounted |
 | V_t | Value per share at end of year t (see Terminal value) — V_0 = P |
-| g | Per-share growth in value/earning power. An output of the build, not a free input |
-| IRR | Return that equates P with the D_t stream plus V_T. Equivalent to d + g |
+| NAV_0 | NAV per share at the valuation date by the V_T method, at the scenario's mid-cycle marks, less net debt at the valuation date |
+| g | Per-share value growth. Track A: EPS CAGR (value growth at a constant PE). Track B: (V_T / P)^(1/T) − 1. An output of the build, not a free input |
+| IRR | Return that equates P with the D_t stream plus V_T. Track A: ≈ d + g. Track B: IRR_T = d + g + c, c = timing term (Step 2B) |
 | P_k | Hurdle price: the most you can pay and still earn exactly k |
 | ROIC_g | Return on growth capex (new capital deployed) |
 
@@ -181,9 +182,10 @@ For each period (stub quarters, Year 1 quarters, Years 2–3), build per share:
 
 | Line | Content |
 |---|---|
-| Maintenance FCF | Cash generated before growth spending (after interest, tax, maintenance capex, drydock) |
-| Growth capex | Capital spent to expand the earning base (new vessels, rigs, projects), net of new debt raised for it |
-| Retained cash | Maintenance FCF − growth capex − D_t (goes into V_t via net debt / cash) |
+| Maintenance FCF | EBITDA − tax − net interest − lease payments − maintenance capex and drydock: cash generated before growth spending. **Before scheduled debt amortisation**, which moves cash and debt equally and leaves net debt unchanged |
+| Debt amortisation | Own line. If the payout policy is set on FCF after debt service, apply the payout to Maintenance FCF − amortisation and say so |
+| Growth capex | Capital spent to expand the earning base (new vessels, rigs, projects), gross. Show the new debt raised for it on its own line |
+| Retained cash / net debt | Retained cash = Maintenance FCF − growth capex − D_t paid (+ new equity). Net debt falls by retained cash; show net debt at each period end. This is how retained cash reaches V_t |
 | D_t | Actual dividends + buybacks |
 | V_t | Value at year end (see Terminal value) |
 | r_t | Period return = (D_t + V_t − V_(t−1)) / V_(t−1), shown per year-end (stub not annualised) |
@@ -196,17 +198,40 @@ IRR_T solves      P = Σ_j D_j/(1+IRR)^(t_j) + V_T/(1+IRR)^T        (XIRR on dat
 Hurdle price      P_k = Σ_j D_j/(1+k)^(t_j) + V_T/(1+k)^T
 Rule 1 (Track B)  IRR_T > k   ⇔   P < P_k
 Margin of safety  P_k / P − 1
-Implied split     d = (Σ D_j / T) / P,   g = IRR_T − d
 ```
 - Retained cash must be counted exactly once: either paid out in D_t or added to V_t, never both,
   never neither.
 - r_t and IRR-to-each-year are a path diagnostic, not a per-year pass/fail. A weak middle year is
-  not a failure, but it must be visible.
-- Rule 3 cross-check: P/FCF_normalized < IRR_T / k². Report it, but decide on P vs P_k (the
-  ceiling uses an IRR that itself depends on P).
+  not a failure, but it must be visible. Interim V_t follows the marking convention in Step 3.
+- Rule 3 cross-check: P/FCF_normalised < IRR_T / k². Report it as "P/FCF x vs ceiling y" (always in
+  that order), but decide on P vs P_k (the ceiling uses an IRR that itself depends on P).
+  - **FCF_normalised** = Maintenance FCF at Base mid-cycle (full fleet, exit-year costs, interest on
+    exit net debt) **less a fleet-renewal charge**: one year of mid-cycle ageing on the V_T method
+    (the ageing line of the V_T bridge ÷ T). Debt amortisation is not deducted; it is
+    financing, and the renewal charge carries the asset wear.
+  - Why: Track A's E is after depreciation. Without the renewal charge, P/FCF flatters ageing
+    fleets (DOF 8.1x without it, 17.2x with it, against a 7.8x ceiling).
 
-Worked example: P = 100, D = 8 / 8 / 8, V_3 = 110, k = 12% → IRR ≈ 11.0% (d = 8.0%, g = 3.0%),
-P_k ≈ 97.5. Fails the hurdle by ~2.5%: no margin of safety.
+**Return split (reporting only; the decision is IRR_T and P_k):**
+```
+d           = (Σ_j D_j / T) / P               cash yield on entry
+g           = (V_T / P)^(1/T) − 1             per-share value growth, P to V_T
+  re-rating = (NAV_0 / P)^(1/T) − 1           price-to-NAV gap closing by exit
+  NAV growth= (V_T / NAV_0)^(1/T) − 1         (1 + g) = (1 + re-rating) × (1 + NAV growth)
+c           = IRR_T − d − g                   timing and compounding term
+```
+- **Never set g = IRR_T − d.** That plug puts c into g, so g stops being value growth. In the CAPT,
+  SED and DOF Base cases the plug differed from the value CAGR by 0.6–1.9 pp, and it flatters g
+  whenever value falls.
+- c is usually within ±2 pp. A larger |c| means front-loaded distributions or a large value change;
+  check the dividend dates. Do not interpret c as a source of return.
+- **Re-rating** is the part of g that exists only because V_T is a NAV and P is a market price. It
+  assumes the share trades at NAV at exit. Name it whenever P/NAV_0 is outside 0.95–1.05: a flat g
+  can be a falling NAV plus a discount assumed to close (DOF Base: re-rating +4.6% a year, NAV
+  growth −5.4% a year, g −1.1%).
+
+Worked example: P = 100, D = 8 / 8 / 8, V_3 = 110, k = 12% → IRR ≈ 11.0% (d = 8.0%, g = 3.2%,
+c = −0.2 pp), P_k ≈ 97.5. Margin of safety −2.5%: fails, no margin of safety.
 
 ## Step 3 — Terminal value (V_T)
 
@@ -220,12 +245,30 @@ V_T drives most of the result, so build it, never assume it.
   contractors, take mid-cycle dayrate, utilization and rig values from `docs/rig-market-bbb.md`,
   adjusted for each rig's age and spec at exit. For OSV owners, take mid-cycle rate, utilization
   and vessel values from `docs/supply-market-bbb.md`, adjusted for each vessel's age and spec.
+  If the sector BBB gives no Bear/Bull mid-cycle for a row, derive it from the nearest row's
+  Bear/Base/Bull mid-cycle ratios and tag it `[A]`.
 - **Exit multiple must be stated and independent.** Never use the IAF ceiling as the exit multiple
   (circular). For finite-life assets (ships, rigs), prefer NAV over a perpetuity multiple.
 - **Roll the capital base forward**: V_T includes the value of growth capex deployed during the
   horizon (Step 4) and the change in net debt / retained cash.
-- Show V_T as a bridge: starting value → + value of growth capex → ± net debt change → ± cycle
-  normalization → V_T.
+- **Two NAVs at the valuation date** (both per share, less net debt at the valuation date), in the
+  header with P/NAV for each:
+  - NAV at **today's market marks** (broker or secondhand values). Omit if no current mark exists.
+  - **NAV_0** at the **Base mid-cycle marks** (the V_T method, incl. firm-contract premium). It
+    anchors the re-rating in Step 2B. Bear and Bull compute their own NAV_0 at their own marks.
+- **V_T bridge (Base), from NAV_0**, in $m and per share, with the re-rating P → NAV_0 shown above
+  it so the whole of g is explained:
+  NAV_0 → + value created by growth capex (value at T − value in NAV_0 − capex paid in the horizon)
+  → − ageing of the existing fleet at mid-cycle marks → ± firm-contract premium roll-off →
+  + retained cash (Σ Maintenance FCF − D_t paid; = −Δ net debt excluding growth capex) → V_T.
+  There is no separate cycle-normalisation step: with NAV_0 at mid-cycle marks it sits in the
+  re-rating.
+- **Interim V_t** (end of stub, Years 1–2) is a path diagnostic and does not enter IRR_T. Use the
+  V_T method with asset marks gliding from today's market marks (Base mid-cycle where no market
+  mark exists) to the scenario's mid-cycle value at exit; state the glide. End-of-stub marks are
+  identical in all scenarios (Step 6). Marking straight to each scenario's mid-cycle at the end of
+  the stub creates a spread the stub does not have, and makes "IRR to Year 1" look like a pass
+  whenever P is below mid-cycle NAV.
 
 ## Step 4 — Growth as a capital-allocation decision
 
@@ -256,8 +299,17 @@ Example at k = 12%: 20 invested at ROIC_g 15% → worth 25 (+5). At ROIC_g 9% �
 2. Geometric (compound) growth, never averages of annual rates. No above-k growth in perpetuity.
 3. Never compute a growth rate from a base near zero or negative — work with levels.
 4. Strip non-repeatable items: one-offs, asset-sale gains, M&A, FX.
-5. Cyclicals: rate-driven earnings mean-revert and do not compound. Split g into **structural**
-   (growth capex at ROIC_g, NAV change) and **cyclical** (rates vs mid-cycle), and report both.
+5. Cyclicals: rate-driven earnings mean-revert and do not compound. Split **IRR_T** (not g alone)
+   into structural and cyclical, for each scenario:
+   - **Structural IRR**: the same model with every open or re-priced day from 1 Jan of Year 1 at
+     **that scenario's own mid-cycle rate**. The stub, firm contract days and exit asset values are
+     unchanged; unexercised options count as open days; dividends and net debt follow the cash
+     flows.
+   - **Cyclical = IRR_T − structural IRR** (pp), shown as Δd and Δg. For high-payout companies the
+     cycle shows up mostly in d (DOF Base: +1.8 pp, all of it through d), so a g-only split misses it.
+   - The gap between a scenario's structural IRR and the Base structural IRR is a **mid-cycle
+     shift**, not the cycle. Using the Base structural run for Bear and Bull labels that shift
+     "cyclical" (SED Bear: −31.9 pp reported as cyclical, +2.6 pp on its own mid-cycle).
 6. Flag growth quality: share issuance, asset-sale gains, dependence on the cycle turning.
 
 ## Step 6 — Bear / Base / Bull
@@ -273,9 +325,13 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
   - balance-sheet survival: liquidity, covenants, refinancing in the Bear path.
   If Bear breaks the thesis, say so plainly.
 - **Bull**: anchored to a named upside catalyst. Report Bull IRR_T and how much of it the current
-  price already reflects.
+  price already reflects: (P − P_k Base) / (P_k Bull − P_k Base). Negative means P is below the
+  Base hurdle.
 - **Stub period**: most days are already booked, so scenarios differ only on open days and spot
-  exposure. Do not create an artificial spread in the stub; Bear and Bull diverge from Year 1.
+  exposure. Do not create an artificial spread in the stub, including in the end-of-stub asset
+  marks used for interim V_t; Bear and Bull diverge from Year 1.
+- **Read the structural IRRs** (Step 5) to say what kind of stress test each scenario is: a rate
+  path around an unchanged mid-cycle, or a shift in the mid-cycle itself.
 - Scenarios need not be symmetric. Bear is the worst reasonably foreseeable case, Bull the best.
 - Optional reference figure: weight the scenario **levels** (D_t and V_T, not growth rates or IRRs)
   25/50/25 and compute one IRR. Label it "scenario-weighted reference (convention)". It never
@@ -283,32 +339,53 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
 
 ## Step 7 — Output
 
-1. **Header**: company, ticker, price, valuation date, exit date and T in years, track (A or B)
-   and why, k used and why, sources per the Data sources section (connector, document and
-   period for each key figure; price source and time stamp; sector outputs from
-   `docs/oil-market-bbb.md`, `docs/oil-shipping-bbb.md`, `docs/rig-market-bbb.md`,
-   `docs/supply-market-bbb.md`).
+1. **Header**: company, ticker, price, valuation date, exit date and T in years, shares, market cap
+   and EV, the two NAVs with P/NAV (Step 3), FX, track (A or B) and why, k used and why, sources
+   per the Data sources section (connector, document and period for each key figure; price source
+   and time stamp; sector outputs from `docs/oil-market-bbb.md`, `docs/oil-shipping-bbb.md`,
+   `docs/rig-market-bbb.md`, `docs/supply-market-bbb.md`).
 2. **Scenario definitions**: one line each for Base, Bear, Bull with the named catalyst.
 3. **Near-term section**: table for the stub quarters (e.g. Q3E, Q4E) with booked share of days,
    TCE or day rate, EBITDA, FCF and dividend per share, versus consensus where available; next
-   report and dividend dates (ex-date, payment date); net debt bridge to 31 Dec.
-4. **Period table** per scenario: stub quarters, Year 1 quarters, Years 2–3 (Track B lines above).
-   Track A: E, EPS growth, D_t per period.
-5. **V_T bridge** for Base, starting from net debt at 31 Dec of the current year.
+   report and dividend dates (ex-date, payment date); net debt bridge to 31 Dec and net debt at the
+   valuation date.
+4. **Period table** per scenario: stub quarters, Year 1 quarters, Years 2–3 (Track B lines above;
+   Bear and Bull may drop lines that equal Base, saying so). Dividends are shown declared, in the
+   period earned; D_t in the year-end path is paid. Then the **year-end path** (D_t, V_t, r_t, IRR
+   to t) for all three scenarios. Track A: E, EPS growth, D_t per period.
+5. **V_T bridge** for Base, from NAV_0 (Step 3), plus the exit asset table for all three scenarios.
 6. **Growth capex test**: amount, ROIC_g with source, value created vs k.
-7. **Results table**:
+7. **Results table** (rows in this order):
 
 | | Bear | Base | Bull |
 |---|---|---|---|
-| IRR_T (or d+g) | | | |
-| d / g split (g: structural / cyclical) | | | |
+| IRR_T (Track A: d + g) | | | |
+| d / g / c | | | |
+| g: re-rating / NAV growth (P/NAV_0) | | | |
+| Structural IRR / cyclical (pp; Δd, Δg) | | | |
+| ΣD_t / V_T | | | |
 | P_k (hurdle price) / margin of safety | | | |
-| PE or P/FCF ceiling (Rule 3) vs actual | | | |
-| Capital preserved? (Bear) | | | |
+| Rule 3: P/FCF normalised vs ceiling IRR_T/k² (Track A: PE vs ceiling) | | | |
+| Capital preserved? ΣD_t + V_T vs P | | | |
 
-8. **Verdict**: clears / marginal (within ±2% of k) / fails, based on Base; whether it survives
-   Bear; key assumptions that would flip the verdict.
+   Below the table: how the structural and cyclical runs were defined, the FCF_normalised build,
+   the optional scenario-weighted reference, the share of Bull already priced, Bear balance-sheet
+   survival and the sensitivity table.
+8. **Verdict** on the Base margin of safety (P_k / P − 1): **clears** above +2%, **marginal**
+   from −2% to +2%, **fails** below −2%. Then whether it survives Bear, and the key assumptions
+   that would flip the verdict.
 9. **Caveat**: margin-of-safety screen, not an intrinsic valuation or price target.
+
+**Document order** (`docs/<company>-analysis.md`): title · skill revisions and sector inputs used
+· tags · Header · Scenario definitions · Company and status · Near term · Market input (sector rows
+used and how they enter) · Common assumptions · Period tables and year-end path · V_T bridge ·
+Growth capex test · Results · Verdict and caveat · Tracking (from the second version) · Risks and
+signposts · For other modules (input for the sector BBB skills, or "no change needed") · Change
+log · Appendix: own assumptions · Appendix: sources.
+
+**Tags** on figures: `[F]` fact from a filing or market print · `[B]` derived from a disclosed
+contract value · `[E]` external or secondary · `[C]` secondary source carried from an earlier
+version · `[A]` own assumption · `[?]` not found.
 
 **Tracking (after each quarterly report)**: replace the estimate with the actual, move the
 valuation date forward, and add a line: actual vs model for the quarter (FCF, dividend, net debt),
@@ -321,8 +398,13 @@ change in Base P_k, and whether the company is running ahead of or behind the Ba
   `filings_list` was checked for share issues and new reports since the last analysis.
 - Stub included, cash flows at payment dates, stub figures not annualised, ex-dividend status
   checked, net debt rolled forward to 31 Dec.
-- Retained cash counted once; dilution included.
-- V_T built from normalized economics, exit multiple independent of the IAF ceiling.
+- Retained cash counted once; dilution included. Maintenance FCF is before debt amortisation.
+- V_T built from normalized economics, exit multiple independent of the IAF ceiling. V_T bridge
+  starts from NAV_0; end-of-stub marks are the same in all scenarios.
+- g is the value CAGR (V_T vs P), never IRR − d; c is shown; the re-rating is named when P/NAV_0
+  is outside 0.95–1.05.
+- Structural IRR per scenario on that scenario's own mid-cycle; cyclical measured on IRR.
+- FCF_normalised for Rule 3 is after the fleet-renewal charge.
 - ROIC_g sourced, not assumed.
 - Bear and Bull each tied to a named catalyst; no probability language.
-- Base verdict uses P vs P_k (Track B) or Rules 1 and 3 (Track A).
+- Base verdict uses the margin of safety P_k / P − 1 (Track B) or Rules 1 and 3 (Track A).
