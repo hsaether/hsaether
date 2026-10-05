@@ -5,7 +5,7 @@ description: Supply Market BBB (Supply BBB) — the offshore supply vessel (OSV)
 
 # Supply Market BBB
 
-**Revision:** 2026-10-04.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-05.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/supply-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the offshore supply vessel market. It answers one question: **what
@@ -91,9 +91,9 @@ only as demand that competes for CSVs, PSVs and AHTS.
 
 | Row | Definition | Rate series | Utilization / cover series | Role |
 |---|---|---|---|---|
-| **NS large PSV — spot** | North Sea PSV in the source's large class (typically ≥ ~900 m² deck) | Broker monthly spot average, GBP/day (one named broker series) | Same broker's spot utilization; active and laid-up counts | Core BBB, with Year-1 quarters |
+| **NS large PSV — spot** | North Sea PSV, Seabrokers class "PSVs > 900 m²" | Seabrokers *Seabreeze* monthly spot average, GBP/day | Seabrokers spot average utilisation (large PSV); active and laid-up counts | Core BBB, with Year-1 quarters |
 | **NS large PSV — term** | Same class, firm term ≥ ~6 months, NCS and UK fixtures logged separately | Leading-edge term fixtures, GBP/day | Term cover of the named North Sea PSV fleet | Core BBB |
-| **NS AHTS — spot** | North Sea AHTS in the source's large class (typically ≥ ~18,000 BHP); high-end subset noted | Broker monthly spot average, GBP/day | Same broker's spot utilization | Core BBB, with Year-1 quarters |
+| **NS AHTS — spot** | North Sea AHTS, Seabrokers class "AHTS > 22,000 bhp"; high-end subset noted | Seabrokers *Seabreeze* monthly spot average, GBP/day | Seabrokers spot average utilisation (large AHTS) | Core BBB, with Year-1 quarters |
 | **NS subsea / CSV-IMR** | Construction support and IMR vessels (crane, deck, ROV hangar, accommodation) in the North Sea, vessel-only basis | Leading-edge term or seasonal vessel charters, GBP/day (USD/EUR converted) | Cover of the named North Sea CSV fleet; offshore wind share recorded | Core BBB |
 | **Brazil PSV** | PSVs on Petrobras or IOC contracts in Brazil, by Petrobras class (e.g. PSV 3000 / 4500); Brazilian vs foreign flag noted | Petrobras tender/award leading-edge, USD/day | Vessels contracted ÷ vessels available in Brazil (proxy; named source) | Core BBB |
 | **Brazil AHTS** | AHTS on Petrobras or IOC contracts, by Petrobras BHP class; flag noted | Petrobras tender/award leading-edge, USD/day | As Brazil PSV | Core BBB |
@@ -157,7 +157,7 @@ Guyana/Suriname · Other South America**, plus the global-context regions above.
 | Vessel-day | One vessel on hire for one day. Demand in vessel-days = activity × documented ratio (see Procedure, Step 5) |
 | Effective capacity | Qualified fleet × days − drydock/SPS, mobilisation, transit and offhire days |
 | Friction ceiling | Practical maximum utilization (drydocks, transits, gaps between jobs), below 100%. Rates react before it is reached |
-| **Spot average** | Monthly (or quarterly/annual, time-weighted) average of spot fixtures for the class, as published by the named broker |
+| **Spot average** | Monthly average of spot fixtures for the class, as published by the named broker. **Quarterly and annual values = arithmetic mean of the monthly averages.** Seabrokers' own annual figure is fixture-weighted (~11% lower in 2025); show it as a cross-check only |
 | **Leading-edge term rate** | Comparable recent term fixtures (same class/spec and region, start within ~12 months, firm ≥ ~6 months): median, range and n |
 | **Petrobras leading-edge** | Rates in the latest Petrobras tender results or awards for the class (start within ~18 months, firm term stated): median, range, n |
 | Realised rate | Rate a company reports for its fleet (blended regions, spot/term, services) — never a clean market index |
@@ -205,21 +205,43 @@ gap with an invented number.
 | FX for currency conversion | **AllRatesToday** (`get_rates_authenticated` with `time`) per the IAF FX rule | Yahoo `get_chart` |
 | Trade press | Offshore Energy, Offshore mag, Splash247, TradeWinds, Upstream, Brasil Energia, Petronotícias | Analyst notes — `[E]`, grade C, never sole evidence for a rate |
 
-Expected quirks — verify on the first run and replace this list with what was observed:
+Quirks (observed in the 2026-10-05 initial run):
 
-- Broker reports are often PDFs or images, weekly or monthly, with their own class boundaries and
-  spot-pool definitions. Pick **one broker series per North Sea spot row** and keep it; cross-check
-  with a second broker, never splice them.
-- Dynamic spot lists (Hagland, broker web pages) are samples: the number of listed vessels is not
-  total availability or utilization. An empty or incomplete page is missing data, not zero
-  availability or zero fixtures. Record the shown update time and whether a rate is public or P&C.
-- Petrobras tender results are not always public. Many awards are known only from owner
-  announcements, often without a rate, or as total contract value (grade B).
-- Company regional averages (e.g. Tidewater "Europe/Mediterranean", "Americas") blend regions,
-  classes and contract types. Use them as context and cross-check, never as a regional index.
-- Paid databases (Clarksons, Westwood Atlas, Esgian, VesselsValue) are not assumed available.
-- Expect 20+ searches and fetches for a full run: brokers first, then Petrobras and owners, then
-  activity sources.
+- **Seabrokers *Seabreeze*** is the anchor series for the North Sea spot rows:
+  - `seabrokers.no/chartering/seabreeze` serves the latest monthly report as a PDF. Older months
+    are at `seabrokers.no/chartering/seabreeze/markedsrapport-<month>-<year>` (Norwegian month
+    names), and some at `wp-content/uploads/...`.
+  - WebFetch cannot parse the PDF but saves it to `tool-results/`. Convert with
+    `pdftotext -table <file> -` (available in Git Bash). `-layout` misaligns the utilisation table;
+    `-table` gives clean columns. pdftoppm is not installed, so pages cannot be read as images.
+  - Each report gives:
+    - the monthly averages for the current and previous year per class;
+    - the month's average, minimum and maximum rate;
+    - six months of spot utilisation;
+    - named arrivals and departures, excluding term/layup.
+  - December reports give the annual averages. The daily availability chart is not extractable.
+- **SSY Offshore Spot Market Update** (cms.ssyglobal.com PDFs, weekly) splits Norway (NOK) and UK
+  (GBP) PSV spot and lists fixtures. Use it for the NCS–UK two-tier check, not as the anchor series.
+- **Hagland spot list** loads dynamically and returns no content via fetch: mark "not read".
+- **Tidewater results PDF** (q4cdn) parses with `pdftotext -table`. It gives day rate,
+  utilization, vessel counts and vessel opex by region and class. That is the best public
+  cross-check (Europe/Med for the North Sea; Americas blends Brazil, Guyana and others).
+- **Petrobras rates:**
+  - Brasil Energia, Seatrade, Marinelog, BNamericas and Splash247 return 403. Award rates often
+    survive only in search snippets (grade C) or as owner contract values (grade B).
+  - Reference rates in tender documents (e.g. PSV 4500 $40,670.51, Apr 2025) are a cap, not an award.
+  - Portuguese searches ("licitação", "taxa diária") find more than English ones.
+- **Owner announcements** state contract value and duration but rarely the scope split (ROV,
+  services). Show the value per day as grade B with the scope stated.
+- SEO "market report" pages without a traceable primary source are rejected (e.g.
+  offshoreindustry.co.uk). Check the date of every press snippet: old Prorefam bids (2013) and
+  2025 market reports surface in searches for 2026.
+- Company regional averages (Tidewater "Europe/Mediterranean", "Americas") blend regions, classes
+  and contract types. Use them as context and cross-check, never as a regional index.
+- Paid databases (Clarksons, Westwood MarineLogix, Esgian, VesselsValue) are not available.
+  Westwood public "Insight" notes give global fleet, laid-up, orderbook and utilization.
+- Expect 50+ searches and fetches for a full run: Seabreeze first, then Tidewater/owners, then
+  Petrobras (Portuguese), then activity sources.
 
 ## Data discipline
 
