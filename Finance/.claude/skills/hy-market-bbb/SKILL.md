@@ -5,7 +5,7 @@ description: Nordic HY Market BBB (HY BBB) — the Nordic high-yield bond market
 
 # Nordic HY Market BBB
 
-**Revision:** 2026-10-06.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-06.8 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/hy-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the Nordic high-yield bond market. It answers two questions:
@@ -100,6 +100,8 @@ investment-grade corporates, covered bonds and government bonds except as the se
   `.claude/skills/iaf-valuation/SKILL.md` for the time grid and scenario convention.
 - Outputs:
   - `docs/hy-market-bbb.md` — one running market baseline. Baseline date in the H1.
+  - `docs/hy-exposure.md` — company look-through across the user's funds and the Stamdata
+    distress screen (Step F9).
   - `docs/hy-funds-analysis.md` — one running fund file: comparison table plus one section per
     fund. Funds are compared side by side, so they share one file.
 - Git holds the history, so the previous version is read from the file before it is overwritten.
@@ -246,6 +248,8 @@ gap with an invented number.
 | Sweden, Denmark, Finland GDP | Statistics Sweden (SCB), Statistics Denmark, Statistics Finland | FRED Eurostat series (`CLVMNACSCAB1GQSE`, `…DK`, `…FI` — check the id with `fred-search-series`) |
 | GDP forecasts (Base anchor `[E]`) | Norges Bank MPR, SSB forecasts, Riksbank, Finance ministries' budgets | IMF WEO (April, October), OECD Economic Outlook (June, December), European Commission (spring, autumn) |
 | Monthly index returns, spreads, market colour, fund metrics | **Fund monthly reports**: Heimdal (`heimdalfondene.no` → Markedsrapporter), Fondsfinans (`fondsfinans.no/nyheter/rapporter/`, monthly "Markedsrapport", HY pages near the end), Sissener (`sissener.no` → monthly reports) | Morningstar factsheets; Nordnet; Finansportalen (fees) |
+| **Full fund holdings** (weights; prices where available) | **Fondsfinans:** `fondsfinans.fundlist.com/details/holdings/<ISIN>`; the page embeds Morningstar data in `__NEXT_DATA__` (each holding's weight, market value in NOK, nominal, currency, maturity; credit-quality breakdown; calendar-year returns since 2016). **Heimdal:** `heimdalfondene.no/fondsportefolje-heimdal-hoyrente/` and `/fondsportefolje-heimdal-hoyrente-pluss-2/` (HTML table of all holdings with weights, no prices) | Top 10 in monthly reports; annual reports (full holdings, semi-annual) |
+| **Sissener holdings** | **Annual / semi-annual report** of Sissener SICAV (`irp.cdn-website.com/411e317f/files/uploaded/Sissener+SICAV_Annual+Report_<date>…pdf`): full statement of investments (nominal, cost, market value, % of NAV) and industrial and geographical classification. Use `pdftotext -raw` on the statement pages; `-layout` scrambles the columns. **Nordnet** fund page ("Største eierandeler" via "Se alle"): top ~25 holdings at month-end (Morningstar), read in the in-app browser | Monthly report (top 10) |
 | Fund rules: mandate, limits, fees, liquidity terms, share classes | **Prospectus, vedtekter and PRIIPs KID** from the manager's site | Finanstilsynet register; annual and half-year reports (holdings) |
 | Global HY context | **FRED** `BAMLHE00EHYIOAS`, `BAMLH0A0HYM2`, `BAMLH0A3HYC` (CCC) | Moody's / S&P default outlooks via press `[E]` |
 | FX for hedge and conversion | **Yahoo** spot; **AllRatesToday** `get_rates_authenticated` with `time` | — |
@@ -261,6 +265,14 @@ Quirks (observed in the 2026-10-05 build):
   by sector: "Defaults vs. issue spreads" lists sector, FTD rate, average issue spread and volume
   share in that order. Definitions are on the last spread. `pdfinfo` and `pdftoppm` are not
   installed.
+- **Stamdata public access** (tested 2026-10-06):
+  - the news feed and notice PDFs work;
+  - **Nordic Bond Pricing prices** on `/issues/<ISIN>/prices` are licensed (table empty without a
+    login);
+  - `/issues/<ISIN>/documents` and `/issuers/<id>/news` come back empty when logged out;
+  - `/prices/trade-reporting` (Swedish SSMA trade reports) showed no trades for the HY bonds
+    tested.
+  - So prices come from fund holdings (Fondsfinans/Morningstar), annual reports and press.
 - **Stamdata** is a JavaScript app; `curl` gets only the shell. Public content is free for
   non-systematic, non-commercial use; **scraping or systematic download is prohibited**. Read one
   issuer, bond or news filter at a time in the in-app browser and cite what was read. Never bulk-
@@ -295,8 +307,14 @@ Quirks (observed in the 2026-10-05 build):
   level and recent trend, not for long-run averages.
 - **Fund report metrics are not comparable as printed.** Check per fund: yield before or after
   fee; YTM or yield-to-worst; distressed cap (Fondsfinans: 30% per bond); share-class currency
-  (Sissener quotes class-currency yields, e.g. SEK); whether cash and short bonds count as cash
-  (Fondsfinans: bonds < 92 days are "cash").
+  (Sissener quotes class-currency yields, e.g. SEK).
+  - **Multi-currency funds may quote a local-currency yield blend:** USD, EUR and SEK bonds at
+    their own base rates (SOFR, EURIBOR, STIBOR), not NOK-hedged. Sissener, Aug 2026: yield
+    7.3% but credit spread ~340 bp.
+  - In that case carry = NIBOR + the manager's credit spread × the invested share, not yield −
+    NIBOR. The wrong basis understated Sissener's carry by ~0.4 pp a year in the first run.
+  - Also check whether cash and short bonds count as cash (Fondsfinans: bonds < 92 days are
+    "cash").
 - **Heimdal report file names are irregular and not all are linked from the fund pages.** For
   example, Høyrente Pluss Aug/Sep 2026 are `wp-content/uploads/2026/09/Manedsrapport-august-10.pdf`
   and `.../2026/10/Manedsrapport-september-20.pdf`; Høyrente Sep 2026 is
@@ -307,6 +325,24 @@ Quirks (observed in the 2026-10-05 build):
   falls (Høyrente Pluss: 8.19% → 9.4% from Jul to Sep 2026 as the market tightened 30 bp) signals
   distressed holdings. Strip the estimated distressed part from carry and show the full-yield case
   as an upside sensitivity.
+- **The quoted Nordic spread is not a clean MTM series.** In 2025 the Heimdal-quoted Nordic spread
+  widened from 4.2% to ~4.85%, yet the DNB Carnegie Nordic HY index returned +8.4%. Composition
+  (record non-Nordic issuance) and the DNB Markets → DNB Carnegie change in Jan 2025 move the
+  number.
+  - Use spread changes for scenario MTM (forward), but calibrate funds on index returns (relative
+    method).
+  - Year-end anchor values: 2023 6.1% (Norway 5.6%), 2024 4.2% (4.3%), 2025 ~4.85% (~5.2%).
+- **Heimdal yield rule:** Heimdal uses the **coupon rate instead of YTM for bonds priced below 70**
+  if the issuer pays its coupon (report footnote). Its yields therefore understate distressed
+  YTM. A non-paying distressed bond may still be at YTM `[?]`.
+- **Holdings pages (first read 2026-10-06):**
+  - **fundlist (Fondsfinans):** Morningstar lists ~99 lines = ~78% of NAV (cash and the smallest
+    positions are left out). **Price** = market value (NOK) ÷ (nominal × FX at the portfolio
+    date) × 100. That price includes accrued interest; use AllRatesToday `time` for the FX.
+    Fondsfinans 31 Aug 2026: only Hofseth (77) below 80; 3.6% of NAV below 90.
+  - **Heimdal:** a plain HTML table with names and weights (no prices); updated around month-end.
+    Group lines by issuer (several ISINs per issuer) and by type: boligkreditt = covered bonds,
+    "Kontanter" = cash, "Valutaterminer" = FX forwards.
 - **Prospectus beats factsheet:** the Fondsfinans HY web page states rate duration 0–5 years and
   credit duration ≤ 5, while the Morningstar factsheet states ≤ 4 and 0–2 (2026-09). Record the
   conflict and use the prospectus/vedtekter.
@@ -510,6 +546,20 @@ baseline must be current or the fund analysis is **Provisional**. Default fund s
 Høyrente, Heimdal Høyrente Pluss, Sissener Corporate Bond, Fondsfinans High Yield**; add others on
 request. Write to `docs/hy-funds-analysis.md`.
 
+**Share classes (the user's classes; use these unless told otherwise):**
+
+| Fund | Class | ISIN | Ongoing fee | Note |
+|---|---|---|---|---|
+| Heimdal Høyrente | N | NO0012948878 | 0.70% | A: 0.85% |
+| Heimdal Høyrente Pluss | B | NO0013580654 | 0.70% | A: 0.85%. Minimum NOK 50m direct, or NOK 100 via distributors without retrocession |
+| Fondsfinans High Yield | B | NO0013168773 | 0.41% | A: 0.45% + 0.5% entry and 0.5% exit charge (Morningstar). B minimum NOK 100m direct |
+| Sissener Corporate Bond | NOK-R | LU1923202326 | TER 0.41% + 20% above 3M NIBOR + 1% (high-water mark) | NOK-RF: 1.00% flat |
+
+- Monthly reports quote **class A** yields after the A fee. **Class yield = A yield + (A fee − class
+  fee).** Track-record gaps need no adjustment (the fee is in both the yield and the return).
+- Fees from the PRIIPs KID (Heimdal: `heimdalfondene.no/wp-content/uploads/.../<date>-Priips-<fund>-<class>.pdf`),
+  or Morningstar `OngoingCharge` on fundlist (Fondsfinans).
+
 **Step F0 — Setup.** State this skill's revision and the HY baseline date used. Read the previous
 `docs/hy-funds-analysis.md` and record the previous figures per fund.
 
@@ -528,6 +578,10 @@ weights, currency and hedging, equity from restructurings.
 - **Read cash in context, never as a fault by default:**
   - A **notice-period fund** (e.g. Høyrente Pluss: monthly dealing, one month's notice) knows its
     redemptions in advance, so it does not need a cash buffer. Near-zero cash is design, not risk.
+  - A **daily-dealing UCITS** that holds its buffer in **covered bonds or short IG** (e.g. Heimdal
+    Høyrente: ~11% boligkreditt) keeps a standing **liquidity buffer**. It earns about NIBOR, is
+    not redeployed in the model, and dilutes carry permanently. Only cash clearly above the
+    fund's usual buffer is dry powder.
   - A **daily-dealing UCITS** holding cash well above its liquidity needs (~5%) has usually
     **chosen** to wait for better entry points: dry powder (e.g. Sissener "a lot of dry powder",
     Fondsfinans 17% cash and short bonds). Model it as dry powder (Step F5), not as permanent
@@ -560,13 +614,51 @@ then adjust for quality, manager style and concentration with stated reasons:
       upside);
     - a longer horizon, which needs a liquidity structure that supports it (notice periods,
       AIF).
+- **Use full holdings when published** (they beat the manager's sector chart):
+  - map each issuer to a row;
+  - aggregate by issuer for concentration (top-10 issuers, not top-10 lines);
+  - list positions priced below 80 and 80–90 (distress ratio) and the hard restructurings;
+  - show the currency split.
+- **Distressed yield must be consistent across funds holding the same names.** Estimate it per
+  name: weight × (that name's yield − a normal HY yield), with the price from any fund that
+  publishes prices (e.g. the Fondsfinans holdings give Sigma/Flora at 81.6). Sister funds with
+  similar weights get similar estimates (Heimdal Høyrente and Pluss, Oct 2026: ~110 and ~120 bp).
 - **Concentration:** the top-10 share and the largest position. Show a single-name stress: loss if
   the largest position defaults at the row's Bear LGD.
 - **Watchlist overlap:** fund holdings that are on the market watchlist, with weights.
-- **Track record calibration:** per past calendar year under the current mandate, realised return
-  vs start-of-year yield after fee; the gap (after rate and spread MTM) is the manager's realised
-  loss and selection effect. Use it as a cross-check, not as a forecast. For workout managers,
-  include restructuring outcomes (e.g. DOF, Agilyx) as evidence of the workout premium.
+- **Sanity check against IG:** a forward excess over NIBOR near IG levels (≤ ~1.2 pp) for a HY
+  fund needs an explicit explanation: quality, cash share, fees, yield basis. Decompose the first
+  window year line by line (NIBOR, spread carry, dry powder, fees, EL, calibration, MTM,
+  performance fee).
+- **Credit-cost calibration from the fund's own record** (added 2026-10-06 on user input). The
+  market-based EL above is a prior. Blend it with what the manager has actually delivered:
+  1. **Per year** (or year-to-date, annualised), from the monthly reports:
+     - fund gap = calendar-year return − start-of-year yield after fee (on a NOK-hedged basis;
+       see the yield-basis quirk);
+     - market gap = DNB Carnegie Nordic HY index return − start-of-year index yield (3M NIBOR +
+       the anchor spread at the start of the year).
+  2. **Relative = fund gap − market gap.** Comparing with the index removes most of the common
+     spread MTM and NIBOR drift. Do not calibrate on changes in the quoted spread (see Quirks).
+  3. **Fund net credit cost** in that year = market realised EL (NT FTD at year-end × 55%) −
+     relative. It nets defaults, workout recoveries, repricing, calls at a premium and equity
+     windfalls.
+  4. **Weight the record by its length:** Z = years of record ÷ (years + 3) `[A]`.
+     - Blended cost = (1 − Z) × model net cost + Z × record. Model net cost = EL − the ρ part of
+       distressed yield.
+     - The shift (model − blended) is added to Base and Bull carry. **Bear keeps the model EL**
+       unless the record contains a Bear-type year (e.g. 2015–16, 2020).
+  5. **Young funds** (record < 2 years) use the record of a sister fund run by the same team
+     with the same style (Høyrente Pluss uses Heimdal Høyrente plus both funds' 2026), and say
+     so.
+  6. **Caveats:**
+     - **Survivorship and selection bias:** funds the user chose to analyse tend to have good
+       records. Z is capped by the formula, and records shorter than 3 years get less than half
+       the weight.
+     - Mandate changes (Heimdal Høyrente, Nov 2025): keep pre-change years only if the team and
+       style are unchanged, and say so.
+  - This replaces the separate "repricing term": repricing gains are inside the record.
+- **Track record table** in each fund section: year, start yield, return, fund gap, market gap,
+  relative, net credit cost, plus annual returns further back as context.
 
 **Step F5 — Return paths.** Per scenario and year: carry = NIBOR path + the fund's implied running
 spread (moved with the market spread path, β = 1 unless evidence says otherwise `[A]`) − fees; EL
@@ -603,6 +695,43 @@ the market reference, then attractive / marginal / unattractive. Also report:
 
 **Step F8 — Comparison and write.** Comparison table across funds (same date, same baseline),
 then the per-fund sections. Read the file back and run the fund checks.
+
+**Step F9 — Company look-through across the user's funds** (added 2026-10-06; the risk is the
+company, not the fund). Write to `docs/hy-exposure.md`.
+1. **Combine all holdings** (Step F4 sources) and map every line to one **company or group**
+   (all ISINs of an issuer; parent and sister issuers, e.g. Flora Food Group + Sigma Holdco).
+   Covered bonds, cash and FX forwards are separate rows.
+2. **Look-through exposure** to company *i* = Σ_f (user amount in fund *f* ÷ total) × weight of *i*
+   in fund *f*.
+   - Use the user's actual amounts when given; otherwise equal amounts, labelled EW.
+   - Record each fund's holdings date and coverage (e.g. a top-25 list = partial).
+3. **Report:**
+   - the largest companies (top 20 with per-fund weights);
+   - pairwise fund overlap = Σ_i min(w_a, w_b) over HY names; above 50% means the two funds are
+     close to one position (Heimdal Høyrente vs Pluss, Oct 2026: 68%);
+   - sector look-through and **correlated clusters** (e.g. the largest oil service names, which
+     move together in a rig/OSV Bear);
+   - the share of the top 10 and top 20 companies.
+4. **Distress screen** (Stamdata routine below): match the companies against the notices; classify
+   each as hard (default, restructuring, price < 80), stressed (80–90), watch or
+   post-restructuring, or routine. Total the exposure per group and per fund.
+5. **Company-level stress:** loss at Bear LGD from par and from the current price for the largest
+   flagged names; a cluster shock (e.g. −20% MTM on the oil service cluster); all hard and stressed
+   names defaulting.
+
+**Stamdata distress routine** (each update and on request):
+- Read `stamdata.com/news` page by page (`?page=N`, about one week per page, ~25 notices; wait
+  about 4 s for the table to render in the in-app browser) back to the previous scan date.
+- Filter rows on: default, deferral, standstill, written resolution or procedure, summons,
+  bondholders' meeting, waiver, amendment, recapitalisation, bankruptcy or estates.
+- For each hit on a **held company** (or a large issuer for the market log), download the notice
+  PDF (`/news/api/pdf/<id>`, free via curl) and classify it:
+  - default / distressed amendment (deferral, PIK, extension without compensation, haircut,
+    equity conversion) / recapitalisation;
+  - **routine** (fee-compensated alignment, change of owner, waiver with a fee).
+  - Older summonses may lack a public PDF; record what the notice says.
+- Add the hits to the default and distress log (market baseline) and to `docs/hy-exposure.md`.
+  Record the scan window.
 
 ## Recalibration triggers
 
@@ -748,12 +877,16 @@ appendix.
 | Fund | Style | Yield after fee (date, basis) | Rating PD / q | Credit / rate duration | Oil exposure | Cash (read as) | Base net return (window) | E: excess over NIBOR | R: stress loss | E / R vs market reference | Bear window / worst year | Liquidity | Verdict |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 
+- Below the comparison: the **held-to-maturity view**. Window returns value the portfolio at the
+  window-end spread, and any spread MTM still open at the end reverses by maturity if nothing
+  defaults. Show the per-year size of that leftover.
+
 ## [Fund name]
 ### Facts (legal form, class, fees, mandate, liquidity terms, mandate changes)
 ### Portfolio snapshot (date; yield basis; durations; rating mix; top 10; cash; issuers)
 ### Mapping to market rows (fund label → row → weight)
 ### Loss rate (quality and concentration adjustments; single-name stress; watchlist overlap)
-### Track record calibration (year: start yield after fee, realised return, MTM, implied loss)
+### Credit-cost calibration (year: start yield, return, fund gap, market gap, relative, net credit cost; blend)
 ### Return paths
 | Scenario | Stub | 2027 | 2028 | 2029 | Window (ann.) | Excess over NIBOR |
 |---|---|---|---|---|---|---|

@@ -20,7 +20,8 @@ Skills and the chain between them:
 - `hy-market-bbb` (Nordic HY BBB: NIBOR path, Nordic GDP, HY spreads, default rates, expected
   returns) → reads the oil baseline and, for energy issuers, the rig, supply and shipping
   baselines; output `docs/hy-market-bbb.md`. Fund mode (Heimdal Høyrente, Heimdal Høyrente Pluss,
-  Sissener Corporate Bond, Fondsfinans High Yield) → `docs/hy-funds-analysis.md`
+  Sissener Corporate Bond, Fondsfinans High Yield) → `docs/hy-funds-analysis.md`; company look-through
+  across those funds and the Stamdata distress screen → `docs/hy-exposure.md`
 - `iaf-valuation` → company valuation using the sector baselines; outputs
   `docs/<company>-analysis.md` (e.g. `docs/capt-analysis.md`, `docs/SED-analysis.md`)
 - Background on the IAF reasoning: `docs/iaf-reference-notes.md`
