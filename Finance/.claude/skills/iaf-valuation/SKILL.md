@@ -5,7 +5,7 @@ description: Investment Analysis Framework (IAF) — the standing valuation meth
 
 # Investment Analysis Framework (IAF)
 
-**Revision:** 2026-10-05.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-05.4 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/iaf-valuation/` in the Finance folder.
 
 A forward-looking test of whether today's price is defensible given the return it can deliver over
@@ -32,29 +32,52 @@ nothing, say so and fall back to the next one. Never fill a gap with an invented
 
 | Need | First choice | Fallback |
 |---|---|---|
-| Nordic listed company: quarterly figures, guidance, booked days/rates, backlog, dividend policy, CEO outlook | **Nordic Financial** (`search_filings`, `company_research`) | FinancialFilings, issuer IR / Newsweb |
+| Nordic listed company: quarterly figures, guidance, booked days/rates, backlog, dividend policy, CEO outlook | **Nordic Financial** (`search_filings`, `company_research`); full report via `parse_pdf_to_text` on the IR PDF | FinancialFilings, issuer IR / Newsweb |
+| Contract awards, fixtures, newbuild orders, results dates since the last report (backlog tracking) | **Nordic Financial** `search_filings` with `source="newsweb"` + `ticker` + `fiscal_year`, `limit` 10–20 | FinancialFilings `filings_list` |
 | Structured IS/BS/CF line items, any listed company (Nordic, EU, US, SG) | **FinancialFilings** (`companies_financials_retrieve`) | Nordic Financial text, issuer report |
 | Filing list: new reports, share issues, insider trades, prospectuses | **FinancialFilings** (`filings_list`, newest first) | Nordic Financial `report_type="press_release"` |
 | Share price, spot FX, futures, Oslo tickers, market cap | **Yahoo** (`get_quote`, `get_chart`, `quote_summary`) | EODHD EOD prices; AllRatesToday for spot FX |
 | FX at a past moment (balance-sheet date, ex-date, payment date), several pairs at once; official central-bank rates | **AllRatesToday** (`get_rates_authenticated` with `time`, `get_official_rates`) | Yahoo `get_chart` |
 | Price history (EOD) as a cross-check | **EODHD** | Yahoo `get_chart` |
-| US company ratios, Brent/WTI monthly history | **Alpha Vantage** (`COMPANY_OVERVIEW`, `BRENT`, `WTI`) | FinancialFilings, Yahoo |
-| Norwegian macro (policy rate, CPI, NOK FX), Nordic power price | **Nordic Financial** (`report_type="macro_summary"`, `get_current_power_price`) | — |
+| US company ratios | **Alpha Vantage** (`COMPANY_OVERVIEW`) | FinancialFilings, Yahoo |
+| Brent/WTI/diesel spot history (cross-check of realised prices against the oil baseline) | **FRED** (`DCOILBRENTEU`, `DCOILWTICO`, `DDFUELNYH`, averaged server-side per quarter) | Alpha Vantage (`BRENT`, `WTI`) |
+| NIBOR path per scenario (NOK floating-rate debt service), Nordic HY spread and new-issue spreads (refinancing in Bear), HY watchlist (distress signal for an analysed issuer) | **`docs/hy-market-bbb.md`** (Interface tables, watchlist) | FRED and Norges Bank API for current levels only — never an own rate path |
+| Rate and credit context: US 10-year, US high-yield spread, Norwegian 10-year and 3-month | **FRED** (`DGS10`, `BAMLH0A0HYM2`, `IRLTLT01NOM156N`, `IR3TIB01NOM156N`) | AllRatesToday `get_official_rates` (Norges Bank) |
+| Norwegian macro (policy rate, NOK FX) | **FRED** for rates; **Yahoo** / **AllRatesToday** for NOK FX | Norges Bank website |
+| Nordic power price (today/tomorrow, hourly, EUR/kWh) | **Nordic Financial** `get_current_power_price` (zones NO1–NO5, SE1–SE4, DK1, DK2, FI) | — |
 
 **Nordic Financial** (aidatanorge Nordic MCP server): about 1,500 companies listed in Oslo,
 Stockholm, Helsinki and Copenhagen, plus First North, from 2020 onwards. Covers annual and
-quarterly reports, Newsweb/exchange announcements, press releases and quarterly macro summaries.
+quarterly reports, Newsweb/exchange announcements and press releases (the advertised macro
+summaries returned nothing in testing, see below), plus Nordic power prices and PDF extraction.
 - **Always set `fiscal_year`** and `ticker`. Without them, old reports (e.g. 2020) outrank the
   latest quarter.
 - Use `company_research` with one section per IAF need (results, guidance/coverage, fleet and
   capex, dividend and capital allocation, debt), each with `ticker` set.
-- Results are text excerpts, not tables. Read the numbers from the text and use
-  `parse_pdf_to_text` for the full report when needed.
+- Results are text excerpts, not tables. For 2026, `report_type="quarterly_report"` holds only the
+  Newsweb results announcement (about 3 chunks: headline figures, backlog, dividend), not the full
+  report. Segment TCE/rates, coverage, the statements and the notes need the full report.
+- **Full report:** `parse_pdf_to_text(pdf_url)` on the issuer's IR PDF (tested 2026-10-05 on Hafnia
+  Q2 2026: 34 pages, about 106k characters). IR pages often build their links with JavaScript,
+  so WebFetch sees no PDF. Get the URL in the in-app browser by collecting `a[href$=".pdf"]`
+  (Hafnia: `s201.q4cdn.com/891122012/files/doc_financials/<year>/q<n>/…`). The output is too
+  large for the conversation and is saved to a file: read it with `py`, split on
+  `--- Page N ---`. Tables come out one cell per line in column order (current quarter, prior-year
+  quarter, YTD, prior YTD); map the columns from the header lines before reading figures.
+- **Newsweb stream:** `source="newsweb"` + `ticker` + `fiscal_year` returns dated announcements
+  (contract awards with the issuer's size class, newbuilds, results dates). It is the quickest way
+  to update backlog after the last report.
+- Do not use the `sector` filter: company documents carry `sector = null`, so a sector filter
+  returns nothing. `macro_summary` returned nothing for any country or year (tested 2026-10-05),
+  and no freight or commodity series were found despite the server's documentation.
 - `analyze_company` writes a synthesised answer. Use it only for orientation and never as a figure
-  source.
+  source or a complete list (tested 2026-10-05: it missed 2 of 6 DOF contract awards in
+  July–August that `search_filings` found).
 - `get_company_info` works for the NO/DK/FI registries, not for Sweden.
-- No oil-price series (`macro_summary` does not cover oil). Realised oil and gas prices appear in
-  producers' quarterly reports (e.g. Equinor) and serve as a cross-check of the oil baseline only.
+- Oil prices: only daily `BZ=F` closes copied from Yahoo (`report_type="macro"`), found by
+  semantic search as scattered single days; `macro_summary` does not cover oil. Use Yahoo or FRED
+  instead. Realised oil and gas prices appear in producers' quarterly reports (e.g. Equinor) and
+  serve as a cross-check of the oil baseline only.
 
 **FinancialFilings** (official filings from SEC, ESMA, Oslo and other regulators):
 - Resolve the company first with `companies_list(search=…)` and confirm name and country, then
@@ -101,6 +124,18 @@ whole batch. Use it only as a price cross-check.
 **Alpha Vantage** (free key): 25 calls per day and at most 1 call per second, so call
 sequentially. `COMPANY_OVERVIEW` gives usable ratios for US companies. `BRENT`/`WTI` are EIA
 monthly averages from 1987 and lag about a month. An unknown ticker returns `{}`.
+
+**FRED** (St. Louis Fed; tested 2026-10-05, no quota met): official US and OECD time series.
+- Find a series with `fred-search-series`, fetch with `fred-get-series-observations`. Set
+  `frequency_aggregation` (`m`, `q`, `a`) with `aggregation_method="avg"` to get period averages
+  in one call; `eop` for period-end values.
+- Lags: `DGS10` and `BAMLH0A0HYM2` about 1 trading day; EIA oil spot about 1 week; OECD Norwegian
+  rates are monthly averages about 1 month behind; `DEXNOUS` (USD/NOK) about 1 week, so keep Yahoo
+  for spot FX. Cite the last observation date.
+- Oil series are EIA spot (Dated proxy), not the futures basis of the oil baseline — label them.
+- Rates and spreads are context for k only: they can support raising k (e.g. wide high-yield
+  spreads for a leveraged name) and never lower it below the standing rule.
+- No company data, rig counts, tanker or OSV rates, or futures curves.
 
 **Not used for IAF:** sector or oil forecasts from any connector. These always come from `docs/oil-market-bbb.md` and the sector BBB documents.
 
@@ -322,7 +357,8 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
   reopening, fleet oversupply, demand shock). Report:
   - Bear IRR_T and P_k (Bear),
   - capital preservation: does ΣD_t + V_T (Bear) cover P? If not, size the permanent loss,
-  - balance-sheet survival: liquidity, covenants, refinancing in the Bear path.
+  - balance-sheet survival: liquidity, covenants, refinancing in the Bear path (Bear NIBOR and
+    HY spread from `docs/hy-market-bbb.md` for bond refinancing).
   If Bear breaks the thesis, say so plainly.
 - **Bull**: anchored to a named upside catalyst. Report Bull IRR_T and how much of it the current
   price already reflects: (P − P_k Base) / (P_k Bull − P_k Base). Negative means P is below the

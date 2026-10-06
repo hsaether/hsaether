@@ -5,7 +5,7 @@ description: Oil Shipping BBB — the tanker-market baseline for crude tankers (
 
 # Oil Shipping BBB
 
-**Revision:** 2026-10-04.4 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-05.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/oil-shipping-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the tanker market. It answers one question: **what market TCE and
@@ -92,7 +92,7 @@ gap with an invented number.
 |---|---|---|
 | Oil volumes, prices, disruptions, refining | **`docs/oil-market-bbb.md`** (Interface + "For downstream skills") | — never a connector or own estimate |
 | Spot TCE by segment, weekly | Broker weekly reports (Intermodal, Banchero Costa, Gibson, BRS, Poten, Signal Ocean) and Baltic figures quoted in Lloyd's List, TradeWinds, Splash247 | Company-reported spot TCE |
-| Realised TCE, booked share of next quarter, TC fixtures | **Nordic Financial** `search_filings`/`company_research` with `ticker` + `fiscal_year` (FRO tested; HAFNI, OET, TRMD-A to test) | **FinancialFilings** for US filers (DHT, INSW, TNK, STNG, NAT): resolve id with `companies_list` |
+| Realised TCE, booked share of next quarter, TC fixtures | **Nordic Financial** `search_filings`/`company_research` with `ticker` + `fiscal_year` (FRO and HAFNI tested; OET, TRMD-A to test); full report via `parse_pdf_to_text` on the IR PDF | **FinancialFilings** for US filers (DHT, INSW, TNK, STNG, NAT): resolve id with `companies_list` |
 | 1-year / 3-year TC rates | Broker weekly TC tables | Company TC fixtures in reports and announcements |
 | FFAs (Q and Cal contracts) | Baltic/FIS curves quoted in press or broker reports | Company commentary — mark `[E]`, "not verified" if no dated level |
 | Fleet, orderbook, deliveries, age, scrapping, contracting | Clarksons, BIMCO, Veson, Breakwave, broker reports via press | Company presentations (cite their underlying source) |
@@ -113,7 +113,13 @@ Connector quirks (tested 2026-10-04):
   Panama, and as a direction signal only where vessels sail dark.
 - **Nordic Financial:** always set `ticker` and `fiscal_year`. The first chunk of a quarterly
   report usually has spot TCE per segment and new TC fixtures; booked share of the current quarter
-  is further down. Text excerpts only — read numbers from the text.
+  is further down. Text excerpts only — read numbers from the text. For 2026 the database holds
+  only the Newsweb results announcement. Hafnia's announcement (2026-10-05 test) gives fleet TCE
+  and coverage but not TCE per segment (LR2/LR1/MR/Handy), so read those from the full report:
+  `parse_pdf_to_text` on the IR PDF (Hafnia: `s201.q4cdn.com/891122012/files/doc_financials/<year>/q<n>/`;
+  get the link in the in-app browser, since the IR page builds it with JavaScript). The large
+  output is saved to a file: read it with `py`. For new TC fixtures and newbuild orders, use
+  `source="newsweb"` + `ticker` + `fiscal_year`. See the iaf-valuation skill for details.
 - **Broker weeklies as PDFs** (tested 2026-10-04): Hellenic Shipping News republishes them. Find
   the PDF link on the article page with `curl -A "Mozilla/5.0" <article> | grep -o 'https://[^"]*\.pdf'`,
   download with curl and read with `pdftotext -layout`.

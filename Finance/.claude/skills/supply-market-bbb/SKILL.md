@@ -5,7 +5,7 @@ description: Supply Market BBB (Supply BBB) — the offshore supply vessel (OSV)
 
 # Supply Market BBB
 
-**Revision:** 2026-10-05.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-05.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/supply-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the offshore supply vessel market. It answers one question: **what
@@ -192,13 +192,13 @@ gap with an invented number.
 | Brent path, long end, mid-cycle, disruptions | **`docs/oil-market-bbb.md`** (Interface + "For downstream skills") | — never a connector or own estimate |
 | Rig activity, rig-years, NCS/UK/Brazil/Guyana rig status, Petrobras drilling, rig moves | **`docs/rig-market-bbb.md`** (Interface, region × segment matrix, operator demand) | — never an own rig forecast; flag gaps to [[rig-market-bbb]] |
 | North Sea spot rates, spot utilization, fixtures, vessels in/out of the North Sea | Broker market reports: **Westshore, Seabrokers, Fearnley Offshore Supply (FOSLive), Braemar** | [Hagland](https://hagland.market/) spot listings and monthly reports (sample, not total market) |
-| North Sea term fixtures | Owner announcements (Nordic Financial / Newsweb), broker reports | Trade press `[E]`, grade C |
+| North Sea term fixtures, contract awards by owner | Owner announcements: **Nordic Financial** `search_filings` with `source="newsweb"` + `ticker` + `fiscal_year`, `limit` 10–20 (dated, with the owner's size class); broker reports | Trade press `[E]`, grade C |
 | NCS / UK activity | Sokkeldirektoratet (wells, field developments, production), Havtil consents, NSTA (UK wells, decommissioning), OEUK reports | Operator plans (Equinor, Aker BP, Vår Energi, Harbour, others) |
 | Brazil demand and contracts | **Petrobras** (Strategic Plan, usually late Nov; FPSO start-ups, wells to connect; Petronect tenders and results) | Owner announcements; ANP (production, wells); trade press |
 | Brazil fleet by flag and type | ABEAM fleet statistics; Antaq authorisations | Owner fleet lists (DOF, Solstad, OceanPact, CBO, Tidewater, Bram) |
 | Guyana/Suriname | ExxonMobil and TotalEnergies project schedules (FPSO sequence, drilling) | Company fleet status (e.g. Tidewater Americas) |
 | Global fleet, orderbook, laid-up, global utilization | Westwood public publications; Clarksons/Esgian via press `[E]` | Tidewater quarterly (utilization and dayrate by region and class) |
-| Owner filings — Oslo/Nordic (DOF, Solstad, Havila, Eidesvik, Paratus, others) | **Nordic Financial** `search_filings` / `company_research` with `ticker` + `fiscal_year` | FinancialFilings, Newsweb, company IR |
+| Owner filings — Oslo/Nordic (DOF, Solstad, Havila, Eidesvik, Paratus, others) | **Nordic Financial** `search_filings` / `company_research` with `ticker` + `fiscal_year`; 2026 holds only the results announcement, so read the full report with `parse_pdf_to_text` on the IR PDF | FinancialFilings, Newsweb, company IR |
 | Owner filings — US and other (Tidewater, OceanPact) | **FinancialFilings** (`companies_list` → id; `filings_list` newest first) | SEC EDGAR, CVM/B3, company IR |
 | Offshore wind demand competing for CSV/PSV/AHTS | Developer and contractor announcements (construction schedules, W2W and cable campaigns, floating-wind mooring) | Trade press `[E]` |
 | Vessel values, newbuild prices and lead times, reactivation cost | Sale and purchase announcements (price, age, spec, date, buyer); newbuild orders with price; owner reactivation guidance | VesselsValue/Clarksons values via press `[E]` |

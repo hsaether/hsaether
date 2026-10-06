@@ -17,6 +17,10 @@ Skills and the chain between them:
 - `rig-market-bbb` → reads the oil baseline; output `docs/rig-market-bbb.md`
 - `supply-market-bbb` (Supply BBB: OSVs, focus North Sea and South America) → reads the oil and
   rig baselines; output `docs/supply-market-bbb.md`
+- `hy-market-bbb` (Nordic HY BBB: NIBOR path, Nordic GDP, HY spreads, default rates, expected
+  returns) → reads the oil baseline and, for energy issuers, the rig, supply and shipping
+  baselines; output `docs/hy-market-bbb.md`. Fund mode (Heimdal Høyrente, Heimdal Høyrente Pluss,
+  Sissener Corporate Bond, Fondsfinans High Yield) → `docs/hy-funds-analysis.md`
 - `iaf-valuation` → company valuation using the sector baselines; outputs
   `docs/<company>-analysis.md` (e.g. `docs/capt-analysis.md`, `docs/SED-analysis.md`)
 - Background on the IAF reasoning: `docs/iaf-reference-notes.md`
@@ -32,6 +36,7 @@ Skills and the chain between them:
   critically, extract what is sensible, and update the skill or document accordingly.
 - Downstream skills never make their own oil-market forecast; they read the current
   `docs/oil-market-bbb.md`. Supply BBB likewise never makes its own rig forecast; it reads
-  `docs/rig-market-bbb.md`.
+  `docs/rig-market-bbb.md`. The NIBOR path and Nordic GDP view are set only in
+  `docs/hy-market-bbb.md`; other skills read them there.
 - Never use git for any work (no git mv, rm, add, commit, status, etc.) and never ask about
   commits. The user handles all git transactions. Use plain file operations only.

@@ -1,11 +1,11 @@
 ---
 name: oil-market-bbb
-description: Oil Market BBB — the price baseline for crude oil and distillates at the top of the analysis chain. Produces Bear/Base/Bull price paths for Brent and distillate cracks (diesel/ULSD, jet) on the IAF time grid (stub quarter(s) of the current year + 3 calendar years, now 2027–2029), plus mid-cycle prices for terminal values, the forward curve, the supply/demand/inventory balance and named catalysts with signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Covers prices and their physical drivers only — no shipping (rates, tonnage, ton-mile, routes) and no rigs. ALWAYS use when the user mentions Oil Market BBB / oil BBB, asks to create, run or update ("oppdater modul") the oil module, or asks about the Brent outlook, oil price scenarios, diesel or jet cracks, distillate prices, the oil forward curve or oil inventories — even without naming the skill. Feeds oil-shipping-bbb, rig-market-bbb, supply-market-bbb and iaf-valuation; it is the only place an oil price forecast is made.
+description: Oil Market BBB — the price baseline for crude oil and distillates at the top of the analysis chain. Produces Bear/Base/Bull price paths for Brent and distillate cracks (diesel/ULSD, jet) on the IAF time grid (stub quarter(s) of the current year + 3 calendar years, now 2027–2029), plus mid-cycle prices for terminal values, the forward curve, the supply/demand/inventory balance and named catalysts with signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Covers prices and their physical drivers only — no shipping (rates, tonnage, ton-mile, routes) and no rigs. ALWAYS use when the user mentions Oil Market BBB / oil BBB, asks to create, run or update ("oppdater modul") the oil module, or asks about the Brent outlook, oil price scenarios, diesel or jet cracks, distillate prices, the oil forward curve or oil inventories — even without naming the skill. Feeds oil-shipping-bbb, rig-market-bbb, supply-market-bbb, hy-market-bbb and iaf-valuation; it is the only place an oil price forecast is made.
 ---
 
 # Oil Market BBB
 
-**Revision:** 2026-10-04.6 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-05.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/oil-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull price baseline for crude oil and distillates. It answers one question: **what
@@ -13,7 +13,7 @@ Brent and distillate prices should the downstream analyses use, year by year, an
 events would move them?** It is a testable hypothesis with explicit risks, not a news summary.
 
 This skill is the top of the chain. [[oil-shipping-bbb]], [[rig-market-bbb]],
-[[supply-market-bbb]] and [[iaf-valuation]] read `docs/oil-market-bbb.md` and never make their own oil forecast, so the
+[[supply-market-bbb]], [[hy-market-bbb]] and [[iaf-valuation]] read `docs/oil-market-bbb.md` and never make their own oil forecast, so the
 output must keep the fixed interface defined under Output.
 
 **Scope:** crude and distillate prices and the physical drivers behind them (supply, demand,
@@ -88,13 +88,14 @@ Never fill a gap with an invented number.
 
 | Need | First choice | Fallback / cross-check |
 |---|---|---|
-| Brent, WTI, ULSD front and every contract month | **Yahoo** `get_quote`: `BZ=F`, `CL=F`, `HO=F`; months as `BZZ27.NYM`, `CLZ29.NYM`, `HOZ28.NYM` (F,G,H,J,K,M,N,Q,U,V,X,Z) | EODHD EOD prices; press settlement reports |
-| Monthly / annual actuals (forecast vs actual) | **Yahoo** `get_chart` on `BZ=F`, `HO=F` (monthly) | **Alpha Vantage** `BRENT`, `WTI` (EIA spot monthly averages, ~1 month lag; spot basis, so label it) |
+| Brent, WTI, ULSD front and every contract month | **Yahoo** `get_quote`: `BZ=F`, `CL=F`, `HO=F`; months as `BZZ27.NYM`, `CLZ29.NYM`, `HOZ28.NYM` (F,G,H,J,K,M,N,Q,U,V,X,Z) | EODHD EOD prices; press settlement reports; Nordic Financial for a single past `BZ=F` close (see quirks) |
+| Monthly / annual actuals (forecast vs actual) | **Yahoo** `get_chart` on `BZ=F`, `HO=F` (monthly; futures basis = BBB basis) | **FRED** `fred-get-series-observations` with `frequency_aggregation="q"` (or `"m"`/`"a"`) and `aggregation_method="avg"` on `DCOILBRENTEU`, `DCOILWTICO`, `DDFUELNYH` — EIA spot basis, so label it and never mix it with futures actuals in one comparison; then **Alpha Vantage** `BRENT`, `WTI` (monthly, ~1 month lag) |
+| Dated Brent (for the Dated–futures spread), spot diesel and jet prices | **FRED** daily EIA spot: `DCOILBRENTEU` (Brent spot, used as the Dated proxy), `DDFUELNYH` (ULSD New York Harbor, $/gal), `DJFUELUSGULF` (jet, US Gulf Coast, $/gal) | Platts Dated quoted in Reuters/Bloomberg |
 | US inventories, refinery runs, product supplied | EIA Weekly Petroleum Status Report (Wednesdays) | Press summaries citing EIA |
 | Global balance, demand, supply forecasts | IEA Oil Market Report, EIA STEO, OPEC MOMR (monthly) — tag `[E]`, note revisions | JODI (country data, lagged) |
 | OPEC+ quotas and actual output | OPEC statements; MOMR secondary-source table | Agency surveys via press |
 | European / Asian product stocks | Insights Global ARA (Thursdays), Enterprise Singapore (weekly) via press | — |
-| Gasoil crack, jet crack, Dated Brent | Argus/Platts/ICE figures quoted in Reuters/Bloomberg | Agency reports |
+| Gasoil crack, NWE jet crack | Argus/Platts/ICE figures quoted in Reuters/Bloomberg | Agency reports; FRED `DJFUELUSGULF` × 42 − `DCOILBRENTEU` as a direction check only (US Gulf, not NWE) |
 | Disruptions (barrels reaching market) | Kpler/Vortexa export data via press; IEA/EIA; company statements | Other tracking firms — state the spread between estimates |
 | Realised producer prices (cross-check only) | **Nordic Financial** `search_filings`/`company_research` with `ticker` + `fiscal_year` (e.g. EQNR, AKRBP) | Company reports |
 
@@ -108,7 +109,16 @@ Connector quirks (tested 2026-10-04):
 - Yahoo drops unknown tickers silently — check that every requested ticker came back. ICE gasoil
   is **not** available on Yahoo.
 - Alpha Vantage: 25 calls/day, 1 call/second, call sequentially.
-- Nordic Financial has no oil-price series; `macro_summary` does not cover oil.
+- **FRED** (tested 2026-10-05): no quota met. EIA spot series update about weekly and lag the
+  market by ~1 week; check the last observation date. Server-side averaging gives the IAF-grid
+  periods in one call. EIA Brent spot is a physical spot assessment close to Dated, not Platts
+  Dated itself — call it "Dated proxy (EIA)". In a tight market spot and futures differ a lot
+  (29 Sep 2026: EIA spot 113.96 vs `BZ=F` 102.59), which is exactly the Dated–futures signal and
+  why the two bases are never mixed. FRED has no futures curves and no ICE gasoil.
+- **Nordic Financial** has daily `BZ=F` closes (`report_type="macro"`, `ticker="BZ=F"`, source
+  yfinance), i.e. a copy of Yahoo. It is semantic search, so it returns scattered single days, not
+  a date range — use it only to recover one specific past close when Yahoo fails. `macro_summary`
+  does not cover oil.
 - Do not use SEO "market report" pages without a traceable primary source. When sources conflict,
   give both and say which one is used and why. Tables loaded as images cannot be read: mark "not
   read" and ask the user for the figures.
@@ -173,7 +183,8 @@ migrate it and log the migration.
 **Step 1 — Market snapshot.** From the connectors: Brent, WTI and ULSD front month; the contract
 strip for the stub, every quarter of Year 1 and each December to the end of the window; M1−M4;
 diesel crack per contract month; Brent–WTI. Check the time stamp of every print. Add the Dated–
-futures spread, the European gasoil crack and the jet crack from the latest reliable report.
+futures spread (FRED `DCOILBRENTEU` − `BZ=F` close on the same date), the European gasoil crack
+and the jet crack from the latest reliable report.
 
 **Step 2 — Crude supply.** OPEC+ quotas, compliance, actual exports and spare capacity, and whether
 that spare capacity can physically reach the market. Non-OPEC growth (US, Brazil, Guyana, Canada,
@@ -333,7 +344,7 @@ Keep the main part short per heading; series and source details go to the append
 - What to watch before the next update
 
 ## For downstream skills
-- What changed that [[oil-shipping-bbb]] / [[rig-market-bbb]] / [[supply-market-bbb]] / IAF must take in, or "no material change"
+- What changed that [[oil-shipping-bbb]] / [[rig-market-bbb]] / [[supply-market-bbb]] / [[hy-market-bbb]] / IAF must take in, or "no material change"
 
 ## Change log
 - New / unchanged / changed (previous → new, reason, source)
@@ -367,6 +378,8 @@ Use by skill:
   FID logic).
 - **[[supply-market-bbb]]**: Brent long end and mid-cycle (FID, tender and Petrobras capex logic)
   and disruption status; drilling activity reaches it through [[rig-market-bbb]].
+- **[[hy-market-bbb]]**: Brent path per scenario and mid-cycle (E&P issuers' cash flow and
+  borrowing base) and disruption status (inflation and rate channel for non-energy issuers).
 - **[[oil-shipping-bbb]]**: crude and product volumes, regional balances, refining changes and
   disruption status, translated there into shipping effects. Shipping, rig and OSV companies do not take
   this baseline directly into IAF; it reaches them through their sector skill.
