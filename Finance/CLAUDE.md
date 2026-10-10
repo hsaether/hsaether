@@ -20,8 +20,11 @@ Skills and the chain between them:
 - `hy-market-bbb` (Nordic HY BBB: NIBOR path, Nordic GDP, HY spreads, default rates, expected
   returns) → reads the oil baseline and, for energy issuers, the rig, supply and shipping
   baselines; output `docs/hy-market-bbb.md`. Fund mode (Heimdal Høyrente, Heimdal Høyrente Pluss,
-  Sissener Corporate Bond, Fondsfinans High Yield) → `docs/hy-funds-analysis.md`; company look-through
-  across those funds and the Stamdata distress screen → `docs/hy-exposure.md`
+  Sissener Corporate Bond, Fondsfinans High Yield) → `docs/hy-funds-analysis.md`; company bond assessment
+  (expected return and risk per bond) and the Stamdata distress screen → `docs/hy-issuers.md`
+- `defense-market-bbb` (Defense BBB: European defense spending per country, equipment and
+  addressable spending, segment order and revenue paths) → top of its own chain, independent of
+  oil; reads Nordic GDP from `docs/hy-market-bbb.md`; output `docs/defense-market-bbb.md`
 - `iaf-valuation` → company valuation using the sector baselines; outputs
   `docs/<company>-analysis.md` (e.g. `docs/capt-analysis.md`, `docs/SED-analysis.md`)
 - Background on the IAF reasoning: `docs/iaf-reference-notes.md`
@@ -38,6 +41,7 @@ Skills and the chain between them:
 - Downstream skills never make their own oil-market forecast; they read the current
   `docs/oil-market-bbb.md`. Supply BBB likewise never makes its own rig forecast; it reads
   `docs/rig-market-bbb.md`. The NIBOR path and Nordic GDP view are set only in
-  `docs/hy-market-bbb.md`; other skills read them there.
+  `docs/hy-market-bbb.md`; other skills read them there. Defense spending paths and the defense
+  market view are set only in `docs/defense-market-bbb.md`.
 - Never use git for any work (no git mv, rm, add, commit, status, etc.) and never ask about
   commits. The user handles all git transactions. Use plain file operations only.

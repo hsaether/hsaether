@@ -5,7 +5,7 @@ description: Nordic HY Market BBB (HY BBB) — the Nordic high-yield bond market
 
 # Nordic HY Market BBB
 
-**Revision:** 2026-10-06.8 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-06.12 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/hy-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the Nordic high-yield bond market. It answers two questions:
@@ -100,8 +100,8 @@ investment-grade corporates, covered bonds and government bonds except as the se
   `.claude/skills/iaf-valuation/SKILL.md` for the time grid and scenario convention.
 - Outputs:
   - `docs/hy-market-bbb.md` — one running market baseline. Baseline date in the H1.
-  - `docs/hy-exposure.md` — company look-through across the user's funds and the Stamdata
-    distress screen (Step F9).
+  - `docs/hy-issuers.md` — company bond assessment (expected return and risk per bond) and the
+    Stamdata distress screen (Step F9).
   - `docs/hy-funds-analysis.md` — one running fund file: comparison table plus one section per
     fund. Funds are compared side by side, so they share one file.
 - Git holds the history, so the previous version is read from the file before it is overwritten.
@@ -222,6 +222,14 @@ Excess_t = R_t − B_t                                  return above money marke
   its recovery case. Never put an uncapped distressed yield into carry and a market EL on top
   without stating the overlap.
 - **Mid-cycle return** = neutral NIBOR + normal spread − normal EL, with no MTM.
+- **Index vs fund: who carries the credit loss** (added 2026-10-06 on user input). A bond either
+  defaults or it does not. A bond that does not default loses nothing: it earns its yield and
+  pulls to par. A bond that defaults loses its price minus the recovery.
+  - **Market rows** (an index of every bond, including those that will default, unnamed) use DR ×
+    LGD, as above.
+  - **Funds and single bonds** never spread a market default rate over all holdings. The loss is
+    charged only to **named bonds judged at risk of default**, from today's price (fund mode F4,
+    Step F9). Performing bonds carry **zero** loss in Base.
 - The formula is linear: convexity, reinvestment timing, swing pricing and transaction costs are
   ignored and named as such.
 
@@ -329,12 +337,23 @@ Quirks (observed in the 2026-10-05 build):
   widened from 4.2% to ~4.85%, yet the DNB Carnegie Nordic HY index returned +8.4%. Composition
   (record non-Nordic issuance) and the DNB Markets → DNB Carnegie change in Jan 2025 move the
   number.
-  - Use spread changes for scenario MTM (forward), but calibrate funds on index returns (relative
-    method).
+  - Use spread changes for scenario MTM (forward), but measure a manager's record on index
+    returns (relative method, F4 item 7).
   - Year-end anchor values: 2023 6.1% (Norway 5.6%), 2024 4.2% (4.3%), 2025 ~4.85% (~5.2%).
 - **Heimdal yield rule:** Heimdal uses the **coupon rate instead of YTM for bonds priced below 70**
   if the issuer pays its coupon (report footnote). Its yields therefore understate distressed
   YTM. A non-paying distressed bond may still be at YTM `[?]`.
+- **Heimdal contributions → prices of unpriced bonds** (added 2026-10-06.12). Heimdal publishes
+  weights but no prices. Two estimates from the monthly reports:
+  - **monthly price move ≈ contribution (p.p.) ÷ the position's weight at the start of the month**
+    (the text names the largest positive and negative contributors);
+  - **position value = weight × fund size (NOK m)**, tracked from report to report. A fall with
+    no news of a sale is a price fall (trades and coupons blur it).
+  - Example, HX (Oct 2026): Pluss −0.56 p.p. in August at ~2.2% weight → about −26%; Høyrente's
+    HX value fell from NOK ~240m (Jan) to ~153m (Sep), −36%. So the price is roughly 50–60 if it
+    started 2026 near 85–90 `[E]`.
+  - Use the same method for Trustly, Intrum, Convene, Norse and other Heimdal-only names before
+    falling back to an assumed price.
 - **Holdings pages (first read 2026-10-06):**
   - **fundlist (Fondsfinans):** Morningstar lists ~99 lines = ~78% of NAV (cash and the smallest
     positions are left out). **Price** = market value (NOK) ÷ (nominal × FX at the portfolio
@@ -343,6 +362,18 @@ Quirks (observed in the 2026-10-05 build):
   - **Heimdal:** a plain HTML table with names and weights (no prices); updated around month-end.
     Group lines by issuer (several ISINs per issuer) and by type: boligkreditt = covered bonds,
     "Kontanter" = cash, "Valutaterminer" = FX forwards.
+- **Fondsfinans annual report** (`fondsfinans.no/wp-content/uploads/<yyyy>/03/Arsrapport-<yyyy>-SFDR*.pdf`):
+  - the HY portfolio statement (~3 pages) lists each holding with ISIN, currency, nominal, cost,
+    **market price**, market value and % of the fund, plus bank deposits and FX hedges by
+    currency;
+  - parse with `pdftotext -raw` (`-layout` shifts the name and ISIN columns);
+  - comparing year-end prices with the latest fundlist prices shows which names were added,
+    trimmed or exited as prices moved: evidence of the manager's style and workout record.
+- **Always convert a price before reading it:** price = market value (NOK) ÷ (nominal × FX) × 100.
+  Reading the raw MV ÷ nominal column without FX produced a false "104.5" for Foxway (true 96.3).
+- **Morningstar documents** (`global.morningstar.com/.../funds/<id>/documents`) list annual and
+  semi-annual reports, but the downloads need a login. Check the fund ID: 0P0000VE1L is Sissener
+  Canopus, not Corporate Bond.
 - **Prospectus beats factsheet:** the Fondsfinans HY web page states rate duration 0–5 years and
   credit duration ≤ 5, while the Morningstar factsheet states ≤ 4 and 0–2 (2026-09). Record the
   conflict and use the prospectus/vedtekter.
@@ -591,20 +622,23 @@ weights, currency and hedging, equity from restructurings.
 fund's label → row → weight). IG and AT1 go to the "IG / bank capital" row, cash to NIBOR.
 Compute the fund's oil exposure (E&P + Oil Service + oil shipping) and compare with the market.
 
-**Step F4 — Fund-specific loss rate.** Start from the mapped market rows' DR and LGD per scenario,
-then adjust for quality, manager style and concentration with stated reasons:
+**Step F4 — Fund credit loss, bond by bond** (revised 2026-10-06.11 on user input: "if a bond is
+judged to default it is a loss; if it does not default there is no loss"). Quality, manager style
+and concentration are still recorded, with stated reasons:
 - **Quality:**
   - **Rating split published** (preferred): q = PD_fund ÷ PD_sector-mapped, both at mid-cycle.
     PD_fund = Σ rating weight × the one-year PD in the rating table (Definitions); PD_sector-mapped
     = Σ sector weight × the mid-cycle sector FTD.
   - **No rating split:** q = HY-sleeve spread ÷ market spread, where the HY sleeve excludes cash,
-    IG and bank capital `[A]`.
+    IG, bank capital **and the named at-risk bonds** (their yields would otherwise inflate q) `[A]`.
+  - **q is used only for the Bear catalyst loss** on the performing book (below). It never sets a
+    Base loss.
   - **A yield below "NIBOR + market spread" is expected** when a fund holds better-rated paper. It
     is a quality signal and is scored through q and R, never as underperformance.
-- **Manager style** (record it per fund with evidence; it changes LGD, distressed carry and
-  horizon):
+- **Manager style** (record it per fund with evidence; it shows up in which bonds are held, their
+  recoveries, the restructuring outcomes and the record, not in a separate factor):
   - **Avoider** (e.g. Sissener: sells or avoids names heading for restructuring):
-    - lower DR (q) and lower carry;
+    - fewer named at-risk bonds and lower carry;
     - losses taken at the market price on exit (LGD on market recovery, often early and smaller);
     - no workout upside; shorter effective horizon.
   - **Workout / active** (e.g. Heimdal: stays in, or buys into, restructurings where the yield
@@ -619,59 +653,95 @@ then adjust for quality, manager style and concentration with stated reasons:
   - aggregate by issuer for concentration (top-10 issuers, not top-10 lines);
   - list positions priced below 80 and 80–90 (distress ratio) and the hard restructurings;
   - show the currency split.
-- **Distressed yield must be consistent across funds holding the same names.** Estimate it per
-  name: weight × (that name's yield − a normal HY yield), with the price from any fund that
-  publishes prices (e.g. the Fondsfinans holdings give Sigma/Flora at 81.6). Sister funds with
-  similar weights get similar estimates (Heimdal Høyrente and Pluss, Oct 2026: ~110 and ~120 bp).
+- **Bond inputs must be consistent across funds holding the same names.** One price, yield, PD
+  and recovery per bond, with the price from any fund that publishes prices (e.g. the Fondsfinans
+  holdings give Sigma at 81.6). The yield removed from carry for a restructuring in progress =
+  weight × that bond's yield (Oct 2026: HX at an estimated price of 50–60, YTM ~28% hedged → HH
+  0.51, HH+ 0.45 pp; on Heimdal's coupon basis 0.21 / 0.18 `[A]`).
 - **Concentration:** the top-10 share and the largest position. Show a single-name stress: loss if
   the largest position defaults at the row's Bear LGD.
 - **Watchlist overlap:** fund holdings that are on the market watchlist, with weights.
 - **Sanity check against IG:** a forward excess over NIBOR near IG levels (≤ ~1.2 pp) for a HY
   fund needs an explicit explanation: quality, cash share, fees, yield basis. Decompose the first
-  window year line by line (NIBOR, spread carry, dry powder, fees, EL, calibration, MTM,
-  performance fee).
-- **Credit-cost calibration from the fund's own record** (added 2026-10-06 on user input). The
-  market-based EL above is a prior. Blend it with what the manager has actually delivered:
-  1. **Per year** (or year-to-date, annualised), from the monthly reports:
-     - fund gap = calendar-year return − start-of-year yield after fee (on a NOK-hedged basis;
-       see the yield-basis quirk);
+  window year line by line (NIBOR, spread carry, dry powder, fees, named-bond loss,
+  restructurings, residual, MTM, performance fee).
+- **Credit loss per scenario and year** (replaces the market-rate EL, the overlay and the
+  credit-cost calibration of revisions .4–.10):
+  1. **Named at-risk bonds** = every holding that is distressed (< 80), stressed (80–90) or on
+     watch (Stamdata notice, weak results, post-restructuring, a recent price fall), with its
+     weight. Price, yield, PD and recovery come from Step F9, **the same values for every fund
+     holding the bond**.
+  2. **Loss if default**, % of today's value = (price − recovery) ÷ price + half a year of the
+     bond's yield. The carry counts the full year's yield, and a default forfeits on average half
+     of it, pull-to-par included.
+  3. **Named loss** = Σ weight × PD × loss if default.
+     - **2027:** the full one-year PD.
+     - **2028:** 0.5 × that PD: the names still at risk if they survive 2027 `[A]`.
+     - **2029:** 0. By then, any loss comes from names that are not visible today (item 5).
+     - **Bear:** Bear PD and Bear recovery. **Bull:** 0.5 × Base PD.
+  4. **Restructurings in progress** (e.g. HX, Booster, Jøtul in Oct 2026):
+     - the loss is already in the price, so the bond's yield is removed from carry: weight × the
+       bond's yield **on the basis the manager uses** (Heimdal: coupon below a price of 70 if the
+       coupon is paid, otherwise YTM). When the basis is unknown, use YTM at the estimated price
+       (conservative) and show the coupon basis as a sensitivity;
+     - return on today's value in 2027: Base 0, Bull +25% `[A]`;
+     - **Bear depends on the collateral** `[A]`:
+       - **−25%** when the bond is secured on identifiable, modern, saleable assets (ships,
+         rigs) and the price has already absorbed the restructuring terms (e.g. HX: two modern
+         expedition ships, −26% in the month the resolutions were adopted);
+       - **−40%** otherwise (operating companies, unsecured, or security of unclear value);
+     - replace with the terms and prices when they are public.
+  5. **Residual for defaults not visible today:**
+     - 2027: 0 (one-year defaults are almost always visible as named stress beforehand);
+     - 2028: 0.5 × the residual; 2029: 1.0 × the residual.
+     - **Residual = the manager's own record of net credit cost** (item 7), floored at 0 and not
+       blended with the market rate. Sister funds run by the same team share one record.
+     - Bull: half the Base residual.
+     - Show a sensitivity at a residual of 0.5 pp for every fund.
+  6. **Bear catalyst loss on the performing book:**
+     - The Bear catalysts (oil Bear path, recession) make names default that look healthy today.
+       Which ones cannot be named, so the stress is q × Σ performing weight per row × (Bear − Base
+       sector DR) × Bear LGD (× the style factor);
+     - plus dry powder deployed in Bear × (Bear − Base market DR) × Bear LGD.
+     - **Name the largest performing positions in the rows that carry it** (e.g. drillers and
+       E&P in an oil Bear).
+  7. **The manager's record** (used only for the residual), per year (or year to date,
+     annualised), from the monthly reports:
+     - fund gap = calendar-year return − start-of-year yield after fee, NOK-hedged (see the
+       yield-basis quirk);
      - market gap = DNB Carnegie Nordic HY index return − start-of-year index yield (3M NIBOR +
-       the anchor spread at the start of the year).
-  2. **Relative = fund gap − market gap.** Comparing with the index removes most of the common
-     spread MTM and NIBOR drift. Do not calibrate on changes in the quoted spread (see Quirks).
-  3. **Fund net credit cost** in that year = market realised EL (NT FTD at year-end × 55%) −
-     relative. It nets defaults, workout recoveries, repricing, calls at a premium and equity
-     windfalls.
-  4. **Weight the record by its length:** Z = years of record ÷ (years + 3) `[A]`.
-     - Blended cost = (1 − Z) × model net cost + Z × record. Model net cost = EL − the ρ part of
-       distressed yield.
-     - The shift (model − blended) is added to Base and Bull carry. **Bear keeps the model EL**
-       unless the record contains a Bear-type year (e.g. 2015–16, 2020).
-  5. **Young funds** (record < 2 years) use the record of a sister fund run by the same team
-     with the same style (Høyrente Pluss uses Heimdal Høyrente plus both funds' 2026), and say
-     so.
-  6. **Caveats:**
-     - **Survivorship and selection bias:** funds the user chose to analyse tend to have good
-       records. Z is capped by the formula, and records shorter than 3 years get less than half
-       the weight.
-     - Mandate changes (Heimdal Høyrente, Nov 2025): keep pre-change years only if the team and
-       style are unchanged, and say so.
-  - This replaces the separate "repricing term": repricing gains are inside the record.
+       the anchor spread at the start of the year);
+     - relative = fund gap − market gap (this removes most of the common spread MTM and NIBOR
+       drift; never use changes in the quoted spread);
+     - **net credit cost = market realised EL (NT FTD at year-end × 55%) − relative.** It nets
+       defaults, workout recoveries, repricing, premium calls and equity windfalls;
+     - record = the time-weighted average over the available years, with the length stated.
+       Young funds use the sister fund's record (Høyrente Pluss uses Heimdal Høyrente).
+     - **Caveats:** the record is short, from 2024–26, and from funds chosen because they are good
+       (selection bias). It also includes losses on names that were already stressed at the start,
+       so it is an upper bound for "not visible" defaults. Mandate changes: keep pre-change years
+       only with the same team and style.
 - **Track record table** in each fund section: year, start yield, return, fund gap, market gap,
   relative, net credit cost, plus annual returns further back as context.
+- **Never** add a market or sector default rate to the Base loss of a fund on top of the named
+  bonds. That would charge performing bonds a loss they will not have.
 
 **Step F5 — Return paths.** Per scenario and year: carry = NIBOR path + the fund's implied running
-spread (moved with the market spread path, β = 1 unless evidence says otherwise `[A]`) − fees; EL
-from F4; MTM from the fund's credit and rate duration and the scenario spread and swap paths;
+spread (moved with the market spread path, β = 1 unless evidence says otherwise `[A]`) − fees;
+credit loss from F4; MTM from the fund's credit and rate duration and the scenario spread and swap paths;
 total and excess return; window total. For non-NOK share classes, report in the class currency
 and in NOK-equivalent terms (base-rate differential), never mixed.
+- **Carry includes the full yield of the named at-risk bonds.** If they do not default they pay
+  it, pull to par included. Their default risk is charged once, in the named loss (F4). Only the
+  yield of **restructurings in progress** is removed from carry (estimate: weight × that bond's
+  excess yield, consistent across sister funds).
 - **Dry powder:** cash above ~5% of NAV in a daily-dealing fund is redeployed at the scenario's
-  market spread and market loss rate: half in 2027, all from 2028 `[A]`. In Bear this is a benefit
-  (entry at wide spreads), and the R measure shows it.
-- **Distressed yield** (yield up while the market tightens, or named restructurings):
-  - **Avoider:** strip it from carry (expected to be sold at market).
-  - **Workout manager:** earn it × a realisation factor ρ: Base 0.5, Bear 0, Bull 1.0 `[A]`.
-    Show the range 0–1 as a sensitivity.
+  market spread: half in 2027, all from 2028 `[A]`. The new bonds are performing (no named loss),
+  and the residual and the Bear catalyst loss cover them. In Bear this is a benefit (entry at wide
+  spreads), and the R measure shows it.
+- **Manager style** enters through the named list (what the manager holds), the recoveries
+  (secured vs unsecured), the restructuring outcomes and the record. There is no separate
+  realisation factor ρ (removed in revision .11).
 
 **Step F6 — Liquidity and structure.** Dealing terms vs the liquidity of the holdings; swing
 pricing.
@@ -696,28 +766,36 @@ the market reference, then attractive / marginal / unattractive. Also report:
 **Step F8 — Comparison and write.** Comparison table across funds (same date, same baseline),
 then the per-fund sections. Read the file back and run the fund checks.
 
-**Step F9 — Company look-through across the user's funds** (added 2026-10-06; the risk is the
-company, not the fund). Write to `docs/hy-exposure.md`.
-1. **Combine all holdings** (Step F4 sources) and map every line to one **company or group**
-   (all ISINs of an issuer; parent and sister issuers, e.g. Flora Food Group + Sigma Holdco).
-   Covered bonds, cash and FX forwards are separate rows.
-2. **Look-through exposure** to company *i* = Σ_f (user amount in fund *f* ÷ total) × weight of *i*
-   in fund *f*.
-   - Use the user's actual amounts when given; otherwise equal amounts, labelled EW.
-   - Record each fund's holdings date and coverage (e.g. a top-25 list = partial).
-3. **Report:**
-   - the largest companies (top 20 with per-fund weights);
-   - pairwise fund overlap = Σ_i min(w_a, w_b) over HY names; above 50% means the two funds are
-     close to one position (Heimdal Høyrente vs Pluss, Oct 2026: 68%);
-   - sector look-through and **correlated clusters** (e.g. the largest oil service names, which
-     move together in a rig/OSV Bear);
-   - the share of the top 10 and top 20 companies.
-4. **Distress screen** (Stamdata routine below): match the companies against the notices; classify
-   each as hard (default, restructuring, price < 80), stressed (80–90), watch or
-   post-restructuring, or routine. Total the exposure per group and per fund.
-5. **Company-level stress:** loss at Bear LGD from par and from the current price for the largest
-   flagged names; a cluster shock (e.g. −20% MTM on the oil service cluster); all hard and stressed
-   names defaulting.
+**Step F9 — Company bond assessment** (revised 2026-10-06 on user input: the analysis is about
+**expected bond performance and risk per company**, not portfolio allocation, overlap or
+covariance; never ask for the user's amounts per fund). Write to `docs/hy-issuers.md`.
+1. **Select companies:** the largest positions in the analysed funds, plus every company flagged
+   by the Stamdata routine or by price (< 90). List the funds only as "held by".
+2. **Per company:**
+   - **bond:** coupon, maturity, currency, security, call;
+   - **price:** FX-adjusted dirty price from holdings or annual reports; clean ≈ dirty − 0.25 ×
+     coupon `[A]`; record the date;
+   - **yield:** NOK-hedged (+ NIBOR − local base), to maturity, or to an assumed call (102 within
+     1.5 years) when the clean price is above 102;
+   - **status:** performing / watch / stressed (80–90) / distressed (< 80) / restructuring or
+     default.
+3. **Default probability, 1 year:**
+   - Performing: **0 in Base** (no loss: the bond earns its yield). Bear: the market baseline's
+     Bear 2027 sector rate (the catalyst stress).
+   - Watch, stressed and distressed: Base = midpoint of the bucket value (5 / 10 / 20%) and the
+     **market-implied PD** = (yield − NIBOR − 3 pp) ÷ LGD. Bear = 1.3 × the higher of the two.
+   - Never let a bucket value alone make a stressed bond look like a bargain.
+4. **Recovery (% of par):** secured 55 / 40, senior unsecured 35 / 25, hybrid 25 / 10 (Base /
+   Bear), adjusted for known asset cover (Hofseth, Oct 2026: 60 / 45). **Loss if default**, % of
+   today's value = (price − recovery) ÷ price + half a year of the bond's yield. **EL** = PD ×
+   loss if default.
+5. **Expected 1-year return:** Base = yield − EL. Bear = yield − Bear EL − credit duration × Bear
+   spread shock (energy +5.5 pp, others +4.2 pp, stressed and watch +4.0–5.0 pp). Restructurings in
+   progress: loss priced in, outcome `[?]` until the terms are public.
+6. **Use in fund mode:** the named bonds and their PD, price, yield and recovery **are** the
+   fund's credit loss (F4). Update this table first, then run the funds.
+7. **Rank** bonds by Base return against Bear loss: carriers (performing, 8–11%), workout bets
+   (high yield, large Bear loss) and expensive bonds (low yield to call, Bear loss).
 
 **Stamdata distress routine** (each update and on request):
 - Read `stamdata.com/news` page by page (`?page=N`, about one week per page, ~25 notices; wait
@@ -730,7 +808,7 @@ company, not the fund). Write to `docs/hy-exposure.md`.
     equity conversion) / recapitalisation;
   - **routine** (fee-compensated alignment, change of owner, waiver with a fee).
   - Older summonses may lack a public PDF; record what the notice says.
-- Add the hits to the default and distress log (market baseline) and to `docs/hy-exposure.md`.
+- Add the hits to the default and distress log (market baseline) and to `docs/hy-issuers.md`.
   Record the scan window.
 
 ## Recalibration triggers
@@ -885,8 +963,8 @@ appendix.
 ### Facts (legal form, class, fees, mandate, liquidity terms, mandate changes)
 ### Portfolio snapshot (date; yield basis; durations; rating mix; top 10; cash; issuers)
 ### Mapping to market rows (fund label → row → weight)
-### Loss rate (quality and concentration adjustments; single-name stress; watchlist overlap)
-### Credit-cost calibration (year: start yield, return, fund gap, market gap, relative, net credit cost; blend)
+### Credit loss (named at-risk bonds: weight, price, PD, recovery, loss if default, contribution; restructurings; residual from the record; Bear catalyst loss and the performing names behind it; single-name stress)
+### Manager record (year: start yield, return, fund gap, market gap, relative, net credit cost)
 ### Return paths
 | Scenario | Stub | 2027 | 2028 | 2029 | Window (ann.) | Excess over NIBOR |
 |---|---|---|---|---|---|---|
@@ -936,5 +1014,8 @@ Use by skill:
   mapping shown; single-name stress shown; rating split used where published; cash read in
   context (notice period vs dry powder); manager style stated; verdict on yield versus risk (E / R
   against the market reference).
+- Fund credit loss: Base loss only on named bonds (performing bonds zero); the same price, PD and
+  recovery for a bond in every fund; restructurings valued on their own; residual from the record
+  shown with its length; Bear catalyst loss named by row.
 - Change log complete (previous → new) or explicit "kept unchanged".
 - File written, read back, tables render.

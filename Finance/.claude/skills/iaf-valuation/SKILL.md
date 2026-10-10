@@ -5,7 +5,7 @@ description: Investment Analysis Framework (IAF) — the standing valuation meth
 
 # Investment Analysis Framework (IAF)
 
-**Revision:** 2026-10-05.4 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-08.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/iaf-valuation/` in the Finance folder.
 
 A forward-looking test of whether today's price is defensible given the return it can deliver over
@@ -39,9 +39,12 @@ nothing, say so and fall back to the next one. Never fill a gap with an invented
 | Share price, spot FX, futures, Oslo tickers, market cap | **Yahoo** (`get_quote`, `get_chart`, `quote_summary`) | EODHD EOD prices; AllRatesToday for spot FX |
 | FX at a past moment (balance-sheet date, ex-date, payment date), several pairs at once; official central-bank rates | **AllRatesToday** (`get_rates_authenticated` with `time`, `get_official_rates`) | Yahoo `get_chart` |
 | Price history (EOD) as a cross-check | **EODHD** | Yahoo `get_chart` |
-| US company ratios | **Alpha Vantage** (`COMPANY_OVERVIEW`) | FinancialFilings, Yahoo |
+| US company ratios | **Zacks** (`compare_stocks`, `get_zacks_metrics`) | Alpha Vantage (`COMPANY_OVERVIEW`), FinancialFilings, Yahoo |
+| Market check on the hurdle price (US listings and US ADRs): broker ratings and price targets per firm, consensus EPS/sales with number of estimates, next report date | **Zacks** (`get_wall_st_rating`, `compare_stocks` with `section="EDT"`) | Yahoo `quote_summary` |
+| Analyst digest of results, guidance, backlog and management market commentary (US listings) | **Zacks** `get_zacks_research` (dated report), `get_zacks_commentary` | Issuer report via FinancialFilings |
 | Brent/WTI/diesel spot history (cross-check of realised prices against the oil baseline) | **FRED** (`DCOILBRENTEU`, `DCOILWTICO`, `DDFUELNYH`, averaged server-side per quarter) | Alpha Vantage (`BRENT`, `WTI`) |
 | NIBOR path per scenario (NOK floating-rate debt service), Nordic HY spread and new-issue spreads (refinancing in Bear), HY watchlist (distress signal for an analysed issuer) | **`docs/hy-market-bbb.md`** (Interface tables, watchlist) | FRED and Norges Bank API for current levels only — never an own rate path |
+| Defense companies: defense spending per country, equipment and addressable spending, segment order and revenue growth per scenario, long end and steady-state margins, capacity balance | **`docs/defense-market-bbb.md`** (Interface tables, "For IAF") | — never an own defense spending or defense market forecast |
 | Rate and credit context: US 10-year, US high-yield spread, Norwegian 10-year and 3-month | **FRED** (`DGS10`, `BAMLH0A0HYM2`, `IRLTLT01NOM156N`, `IR3TIB01NOM156N`) | AllRatesToday `get_official_rates` (Norges Bank) |
 | Norwegian macro (policy rate, NOK FX) | **FRED** for rates; **Yahoo** / **AllRatesToday** for NOK FX | Norges Bank website |
 | Nordic power price (today/tomorrow, hourly, EUR/kWh) | **Nordic Financial** `get_current_power_price` (zones NO1–NO5, SE1–SE4, DK1, DK2, FI) | — |
@@ -125,6 +128,27 @@ whole batch. Use it only as a price cross-check.
 sequentially. `COMPANY_OVERVIEW` gives usable ratios for US companies. `BRENT`/`WTI` are EIA
 monthly averages from 1987 and lag about a month. An unknown ticker returns `{}`.
 
+**Zacks** (Zacks Investment Research; tested 2026-10-08, no quota met): US listings and US OTC
+ADRs only (e.g. TDW, RIG, VAL, NE, BORR, FRO, HAFN; BAESY, RNMBY, SAABY). Oslo-only names are not
+covered (DOFG returned an error).
+- `get_wall_st_rating`: one row per broker with rating, target, previous target and date,
+  including Nordic brokers (DNB Carnegie, Fearnley, Clarksons Platou on TDW). Use it as a market
+  check beside the hurdle price; a broker target is never an IAF input.
+- `get_zacks_research`: a dated analyst report (only names with a full Zacks report; e.g. RIG,
+  22 Sep 2026). It digests results, guidance, backlog, coverage and management's market
+  commentary. Quote it as Zacks' view with its publish date, tag `[E]`, and check figures against
+  the issuer report before use.
+- `compare_stocks`: up to 5 tickers side by side; the `section` parameter picks the detail block
+  (`EDT` estimates with high/low and count, `SEH` surprise history, `PEERS`, `CFIN` ratios). An
+  unknown ticker is dropped silently, so check that every ticker came back.
+- Consensus is thin: 1–2 estimates for TDW, VAL and BORR, none for FRO. Always state the number
+  of estimates; never call it "the market's view" on one or two estimates.
+- Statement quirks: FRO EBITDA equals EBIT (D&A missing from the income statement, present in the
+  cash flow); the capex sign is inconsistent (FRO 2025 +24.6). FinancialFilings stays the source
+  for statements; Zacks is a cross-check. ADR figures are per ADR in USD, not per local share.
+- Zacks Rank and the style scores measure short-term estimate-revision momentum. They are not an
+  IAF input and never move k or the hurdle.
+
 **FRED** (St. Louis Fed; tested 2026-10-05, no quota met): official US and OECD time series.
 - Find a series with `fred-search-series`, fetch with `fred-get-series-observations`. Set
   `frequency_aggregation` (`m`, `q`, `a`) with `aggregation_method="avg"` to get period averages
@@ -160,6 +184,9 @@ monthly averages from 1987 and lag about a month. An unknown ticker returns `{}`
 - **Track B (cyclical / capital-intensive):** shipping, offshore, rigs, commodities, or any company
   where capex, D&A or rates swing earnings. Use FCF, the year-by-year IRR build and P_k.
 - State which track and why. When in doubt, use Track B.
+- Defense companies are normally Track A (backlog-driven growth, moderate capital intensity). Use
+  Track B, or Track A with explicit capex, when a capacity build-out makes FCF swing (new
+  ammunition or missile plants); state which.
 
 ## Step 1b — Time grid: stub period + 3 calendar years
 
@@ -187,6 +214,11 @@ monthly averages from 1987 and lag about a month. An unknown ticker returns `{}`
   from the company's contract lists; open days use the vessel's row in `docs/supply-market-bbb.md`
   (North Sea spot by quarter × the row's utilization for spot-exposed vessels; leading-edge term or
   Petrobras rate otherwise). A vessel earns its contract rate until expiry, then the row's rate.
+  For defense companies, stub and Year-1 revenue comes from the company's firm backlog, delivery
+  schedule and guidance; the market check in `docs/defense-market-bbb.md` (segment book-to-bill,
+  capacity) tests that guidance. Years 2–3 apply the baseline's segment revenue growth paths to
+  the company's segment and regional mix, ± a named and sourced share change, and show backlog
+  coverage of each year.
 - **Starting balance sheet**: roll the last reported balance sheet forward through the stub to net
   debt at 31 Dec (the start of Year 1). Also state net debt at the valuation date.
 - **Dividends at payment dates.** A declared dividend counts only if the share has not yet gone
@@ -205,8 +237,10 @@ Rule 3  (ceiling)    PE < (d + g) / k²
 At k = 12% (k² = 0.0144): d = 1%, g = 20% → PE < 14.6; d = 1%, g = 30% → PE < 21.5.
 
 g = forward per-share EPS CAGR over the horizon, built from drivers, fading toward a sustainable
-rate. Cross-check: sustainable g ≈ ROIC × reinvestment rate. If the forecast g needs more
-reinvestment than the payout leaves, d and g are inconsistent — fix one of them.
+rate. For defense companies the fade follows the long-end CAGR and steady state, and normalised
+margins follow the steady-state segment margins, in `docs/defense-market-bbb.md`.
+Cross-check: sustainable g ≈ ROIC × reinvestment rate. If the forecast g needs more reinvestment
+than the payout leaves, d and g are inconsistent — fix one of them.
 
 Rule 3 combines a total-return hurdle with a no-growth earnings-yield anchor. It is a heuristic for
 how much premium is defensible, not a value from a cash-flow model.
@@ -280,6 +314,9 @@ V_T drives most of the result, so build it, never assume it.
   contractors, take mid-cycle dayrate, utilization and rig values from `docs/rig-market-bbb.md`,
   adjusted for each rig's age and spec at exit. For OSV owners, take mid-cycle rate, utilization
   and vessel values from `docs/supply-market-bbb.md`, adjusted for each vessel's age and spec.
+  For defense companies on Track B, normalised earnings at exit use the steady-state segment
+  margins and long-end growth from `docs/defense-market-bbb.md`; its sector multiples are
+  context only and never the exit multiple.
   If the sector BBB gives no Bear/Bull mid-cycle for a row, derive it from the nearest row's
   Bear/Base/Bull mid-cycle ratios and tag it `[A]`.
 - **Exit multiple must be stated and independent.** Never use the IAF ceiling as the exit multiple
@@ -321,7 +358,9 @@ Example at k = 12%: 20 invested at ROIC_g 15% → worth 25 (+5). At ROIC_g 9% �
   newbuild prices, period rates and newbuild-parity TCE in `docs/oil-shipping-bbb.md`; for rigs:
   reactivation parity, secondhand rig prices and the contract rate secured, from
   `docs/rig-market-bbb.md` and the company's own announcements; for OSVs: newbuild and
-  reactivation parity and secondhand values in `docs/supply-market-bbb.md`). State the source. For
+  reactivation parity and secondhand values in `docs/supply-market-bbb.md`; for defense capacity
+  such as new plants: the segment capacity balance per scenario in `docs/defense-market-bbb.md`
+  — a plant needed only in Bull, or coming on line into a surplus, earns less). State the source. For
   finite-life assets, use NAV of the asset at T instead of the perpetuity formula.
 - **Test ROIC_g vs k separately from Rule 1.** ROIC_g > k: growth is accretive even though D_t falls.
   ROIC_g ≤ k: growth destroys value even if revenue, earnings or FCF rise.
@@ -352,7 +391,8 @@ Example at k = 12%: 20 invested at ROIC_g 15% → worth 25 (+5). At ROIC_g 9% �
 There is no statistical distribution behind sector events, so Bear and Bull are not percentiles.
 
 - **Base**: the most likely path, from the central view of the relevant sector skill (Oil Market
-  BBB, Oil Shipping BBB, Rig Market BBB, Supply Market BBB). It carries the decision: IRR_T vs k and P vs P_k.
+  BBB, Oil Shipping BBB, Rig Market BBB, Supply Market BBB, Defense Market BBB). It carries the
+  decision: IRR_T vs k and P vs P_k (Track A: Rules 1 and 3).
 - **Bear**: a stress test anchored to a named catalyst from the sector skill (e.g. chokepoint
   reopening, fleet oversupply, demand shock). Report:
   - Bear IRR_T and P_k (Bear),
@@ -375,18 +415,32 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
 
 ## Step 7 — Output
 
+0. **Summary** (first section, readable on its own; everything after it is the supporting build):
+   - **Verdict** in 2–4 bullets: clears / marginal / fails, the Base margin of safety, Bear outcome,
+     and what the price needs (the break-even assumption).
+   - **Decision table** (Bear / Base / Bull): IRR_T; V_T per share; P_k and margin of safety;
+     capital preserved?; cumulative Maintenance FCF per share over the horizon; net debt (or net
+     cash) per share at exit; the one balance-sheet line that matters (liquidity, covenant or
+     refinancing outcome).
+   - **Per-share path** (Track B): columns = stub quarters (or the stub as one column), Year 1, Years
+     2–3; rows for Base = EBITDA ($m and per share), Maintenance FCF per share, debt amortisation per
+     share, FCF after debt service per share, D_t per share, net debt per share, V_t per share; then
+     Maintenance FCF per share and V_t per share for Bear and Bull. Track A: EPS, D_t and FCF per
+     share per year.
+   - Keep the summary short: no method text, no sources; those stay in the sections below.
 1. **Header**: company, ticker, price, valuation date, exit date and T in years, shares, market cap
    and EV, the two NAVs with P/NAV (Step 3), FX, track (A or B) and why, k used and why, sources
    per the Data sources section (connector, document and period for each key figure; price source
    and time stamp; sector outputs from `docs/oil-market-bbb.md`, `docs/oil-shipping-bbb.md`,
-   `docs/rig-market-bbb.md`, `docs/supply-market-bbb.md`).
+   `docs/rig-market-bbb.md`, `docs/supply-market-bbb.md`, `docs/defense-market-bbb.md`).
 2. **Scenario definitions**: one line each for Base, Bear, Bull with the named catalyst.
 3. **Near-term section**: table for the stub quarters (e.g. Q3E, Q4E) with booked share of days,
    TCE or day rate, EBITDA, FCF and dividend per share, versus consensus where available; next
    report and dividend dates (ex-date, payment date); net debt bridge to 31 Dec and net debt at the
    valuation date.
 4. **Period table** per scenario: stub quarters, Year 1 quarters, Years 2–3 (Track B lines above;
-   Bear and Bull may drop lines that equal Base, saying so). Dividends are shown declared, in the
+   Bear and Bull may drop lines that equal Base, saying so). Show $m **and** per share for
+   Maintenance FCF, FCF after debt service and net debt; a table in $m only does not meet Step 2B. Dividends are shown declared, in the
    period earned; D_t in the year-end path is paid. Then the **year-end path** (D_t, V_t, r_t, IRR
    to t) for all three scenarios. Track A: E, EPS growth, D_t per period.
 5. **V_T bridge** for Base, from NAV_0 (Step 3), plus the exit asset table for all three scenarios.
@@ -413,7 +467,7 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
 9. **Caveat**: margin-of-safety screen, not an intrinsic valuation or price target.
 
 **Document order** (`docs/<company>-analysis.md`): title · skill revisions and sector inputs used
-· tags · Header · Scenario definitions · Company and status · Near term · Market input (sector rows
+· **Summary** (verdict, decision table, per-share path) · tags · Header · Scenario definitions · Company and status · Near term · Market input (sector rows
 used and how they enter) · Common assumptions · Period tables and year-end path · V_T bridge ·
 Growth capex test · Results · Verdict and caveat · Tracking (from the second version) · Risks and
 signposts · For other modules (input for the sector BBB skills, or "no change needed") · Change
@@ -430,6 +484,8 @@ change in Base P_k, and whether the company is running ahead of or behind the Ba
 ## Checks before finishing
 
 - k ≥ 10%, all figures per share and forward-looking.
+- Summary first, with the decision table and the per-share path (FCF per share per period for all
+  three scenarios).
 - Every key figure has a source and period. Price and figures are in the same currency.
   `filings_list` was checked for share issues and new reports since the last analysis.
 - Stub included, cash flows at payment dates, stub figures not annualised, ex-dividend status

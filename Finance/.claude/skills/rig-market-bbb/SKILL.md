@@ -5,7 +5,7 @@ description: Rig Market BBB — the offshore drilling-rig market baseline for dr
 
 # Rig Market BBB
 
-**Revision:** 2026-10-04.4 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-08.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/rig-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the offshore rig market. It answers one question: **what market
@@ -153,6 +153,7 @@ gap with an invented number.
 | Brazil demand | Westwood Brazil Offshore Rig Count (monthly; operating rigs, outstanding rig-days) | Petrobras plans and tender results |
 | Fixtures, rig-by-rig contracts, cover by year | Contractor **fleet status reports** and contract announcements | Westwood dashboard fixtures; trade press `[E]`, grade C |
 | Contractor filings — US filers (RIG, VAL, NE, SDRL, BORR) | **FinancialFilings** (`companies_list` → id; `filings_list` newest first; 8-K/6-K exhibits) | SEC EDGAR, company IR |
+| Contractor market commentary digest — US listings (RIG, VAL, NE, BORR): utilization outlook, rig-years awarded, open tenders, cover by year, average dayrates, backlog | **Zacks** `get_zacks_research` (dated analyst report), `get_zacks_commentary` | Contractor results release and call transcript |
 | Contractor filings — Oslo/Nordic (ODL, ENH, BORR, SHLF and similar) | **Nordic Financial** `search_filings`/`company_research` with `ticker` + `fiscal_year` | FinancialFilings, company IR |
 | Operator plans, tenders, FIDs, consents | Operators (Petrobras, Equinor, Aker BP, Aramco, ADNOC, PTTEP, Petronas, ONGC, majors); Sokkeldirektoratet/Havtil; ANP | Trade press |
 | Offshore capex / EPC and FID pipeline | Westwood, Rystad, company capex guidance `[E]` | Trade press |
@@ -173,6 +174,13 @@ Quirks (observed in the 2026-09-29 run):
   half of Westwood working (~510): **levels are not comparable**, use direction only.
 - **Fleet status reports** are as-of a date that can lag a quarter, and many contracts are
   announced without a rate. Selective disclosure means known rates are not a representative sample.
+- **Zacks** (tested 2026-10-08): a full analyst report exists only for some names (RIG yes;
+  VAL, NE and BORR have only quantitative reports). The RIG report of 22 Sep 2026 carried
+  management's view (high-spec utilization >90% in 2027; ~100 rig-years awarded in H1 2026; ~40
+  open tenders for 75–80 rig-years; Brazil 30–33 rigs; Africa 20–25). That is contractor
+  commentary relayed by Zacks: tag `[E]`, grade C, cite the publish date, use it for signposts and
+  cross-checks, never as sole evidence for MCU or a rate. Its consensus has 1–6 estimates per
+  name and is not a market check on the rig paths.
 - Paid databases (RigLogix, Petrodata Rigs, Clarksons, Bassoe) are not assumed available.
 - Expect 20+ searches and fetches for a full run: monthly and weekly dashboards first, then
   contractors, then operators.
@@ -322,12 +330,48 @@ Build the region × segment matrix for material cells only; mark the rest "not a
 - **Reactivation parity:** the rate that pays opex plus the reactivation cost over the typical
   first firm term at 8% nominal (convention; state cost, term and lead time). It caps the rate
   while cold-stacked units of the class exist.
-- **Newbuild parity:** the rate that pays opex plus an annuity on the newbuild (or stranded-unit
-  completion) price over 30 years at 8% nominal (convention), net of scrap. Test whether an order
-  placed now could deliver inside the window.
+- **Newbuild parity:** the dayrate at which a newbuild (or stranded-unit completion) is worth its
+  price on the asset-value convention below, age 0, at 92% MCU. Test whether an order placed now
+  could deliver inside the window.
 - **Asset values:** newbuild/completion price, recent secondhand transactions ($m per rig, age,
-  spec, date, buyer), reactivation cost, recycling value. **Asset-implied rate:** the rate a recent
-  transaction capitalises over the rig's remaining life at the same 8%.
+  spec, date, buyer), reactivation cost, recycling value. **Asset-implied rate:** the dayrate at
+  which the convention below reproduces a transaction price (same age and MCU).
+
+**Asset-value convention (one method).** Every rig value in this baseline uses it: mid-cycle
+values, values by age, asset-implied rates and newbuild parity. Every IAF drilling-contractor
+analysis uses it for V_T, NAV_0 and market marks. It values the rig as a buyer would: rig-level
+free cash flow before corporate G&A and financing.
+
+```
+Annual cash flow = 365 × [ MCU × (rate × RE − opex) − (1 − MCU) × idle × opex ]
+                   − tax × (rate × RE × 365 × MCU) − maintenance capex
+Value            = annual cash flow × annuity(8%, 30 − age), floored at the recycling/stacking value
+```
+
+- **rate, MCU:** the scenario's mid-cycle (or the rate being tested), flat in nominal terms; MCU is
+  used as the working share.
+- **Parameters per segment** (RE = revenue efficiency; idle = idle-day cost as a share of opex;
+  maintenance capex includes SPS, annualised). Keep them in the document's parameter table with
+  sources; change them only with evidence, logged as a method change:
+
+| Segment | Opex $k/d | RE | Idle | Maint. capex $m/yr | Tax % revenue | Floor $m |
+|---|---|---|---|---|---|---|
+| Floaters (drillships, semis) | segment cash floor (225; HE 250) | 95% (HE 96%) | 40% | 6 (benign semis 5) | 5% | 10 |
+| High-spec jackups | 75 | 96% | 40% | 2.5 | 4.5% | 10 |
+| Tender barges / semi-tenders | 35 / 40 | 98% | 40% | 3.0 / 3.5 | 6.4% | 10 |
+
+- **Life 30 years, discount 8% nominal** (unchanged conventions). Show 35-year life and opex ±10%
+  as sensitivities for each core segment: margins are thin, so values are very sensitive to opex.
+- **Excluded:** corporate G&A, financing, working capital. The company analysis carries these in
+  its cash flows; it may show capitalised G&A as a sensitivity on V_T, never in the base figure.
+- **Company adjustments** (IAF): age always; a spec premium or discount on the rate, or own opex,
+  maintenance capex or tax, only where sourced in the company analysis. Never mix this convention
+  with a gross-margin capitalisation ((rate − opex) × 365 × MCU × annuity), which ignores idle
+  cost, maintenance capex and tax and overstates values by ~1.5–2.5x at Base mid-cycle.
+- **Market check (required):** the asset-implied rate of each recent transaction against the
+  segment's Base mid-cycle rate. A gap > 10% is stated in the Market check and carried as an open
+  checkpoint; it is evidence for the next mid-cycle review, not an automatic change. IAF analyses
+  then show V_T at transaction-implied marks as a sensitivity.
 
 **Step 9 — Test BBB.**
 - **Base:** what would have to be true for Base to be wrong, and do we see it? Search actively for
@@ -353,9 +397,10 @@ Build the region × segment matrix for material cells only; mark the rest "not a
   window, per scenario. Anchor on the long-run leading-edge for the segment (state the years, with
   and without the 2014 peak and the 2016–2021 trough), the cash floor and reactivation parity, and
   the fleet age at exit — never the last modelled year by default.
-- **Asset values at mid-cycle** per scenario (rig of typical age for the segment and newbuild/
-  replacement cost), consistent with the mid-cycle rate (asset-implied rate ≈ mid-cycle rate). The
-  company analysis adjusts for its own rigs' age and spec.
+- **Asset values at mid-cycle** per scenario on the asset-value convention (Step 8): a rig of
+  typical age for the segment, plus a values-by-age table (5, 10, 12, 15, 20 years) for each core
+  segment so IAF can read values for its own fleet. Compare with newbuild/replacement cost and the
+  transaction market check. The company analysis adjusts for its own rigs' age and spec.
 
 **Step 11 — Write, log and check.** Write the document in the output format, with a complete
 change log (new / unchanged / changed with previous → new value, reason and source; forecast vs
@@ -414,6 +459,9 @@ appendix.
 ## Interface — asset values and anchors
 | Segment | Newbuild / completion $m | Secondhand $m (age, date) | Reactivation $m, lead time | Value mid-cycle Bear / Base / Bull $m | Cash floor $k/d | Reactivation parity $k/d | Newbuild parity $k/d |
 |---|---|---|---|---|---|---|---|
+- Asset-value convention: parameter table (with sources), values by age per core segment and
+  scenario, sensitivities (35-year life, opex ±10%), transaction market check (asset-implied rate
+  vs Base mid-cycle)
 
 ## Scenario definitions
 | Scenario | Weight (convention) | Oil BBB scenario used | Catalyst(s) | Mechanism | Earliest | Signposts |
@@ -488,8 +536,10 @@ Use in [[iaf-valuation]] (drilling contractors, Track B):
 - **Years 2–3:** Base path as the decision case; Bear/Bull paths as the catalyst stress tests.
   Re-pricing follows the company's contract expiries: a rig earns its backlog rate until expiry,
   then the leading-edge rate for that year.
-- **Terminal value V_T:** NAV of the fleet from mid-cycle asset values, adjusted for each rig's age
-  and spec at exit, or mid-cycle rate × mid-cycle MCU × days − normalised opex.
+- **Terminal value V_T:** NAV of the fleet from mid-cycle asset values on the asset-value
+  convention (Step 8), read from the values-by-age table or recomputed with the same formula and
+  parameters for each rig's age and sourced spec at exit. No other value method is used for V_T,
+  NAV_0 or market marks; transaction-implied marks are a sensitivity.
 - **Growth capex (ROIC_g):** reactivations and rig acquisitions are tested against reactivation
   parity, recent secondhand prices and the contract rate actually secured.
 - **Mapping:** match each rig to the right row (class, spec, region). The company's revenue
@@ -506,6 +556,8 @@ Use in [[iaf-valuation]] (drilling contractors, Track B):
 - Stub identical across scenarios; spread follows contract cover.
 - Point value and range for every core-segment scenario figure; mid-cycle rate, MCU and asset
   values set and anchored; rates inside the floor–parity band or the exception explained.
+- Every rig value, asset-implied rate and newbuild parity on the asset-value convention, with the
+  parameter table, values by age, sensitivities and the transaction market check shown.
 - Fleet reconciliation holds (regions sum to global, no double counting); balance check consistent
   with each path.
 - Bear and Bull each tied to named catalysts with signposts and an oil scenario; no probability
