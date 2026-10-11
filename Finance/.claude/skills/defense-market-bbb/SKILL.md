@@ -5,7 +5,7 @@ description: Defense Market BBB — the European defense market baseline used to
 
 # Defense Market BBB
 
-**Revision:** 2026-10-07.3 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-10.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/defense-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the European defense market. It answers one question: **how much
@@ -299,6 +299,26 @@ Quirks (observed in the source test on 2026-10-07):
 - **User input is input, not a reference.** Links, numbers and drafts are assessed critically
   (what it measures, how fresh, which definition). Use what holds, reject the rest, and note the
   assessment in the source appendix.
+- **Provenance on every fetched value.** Record the source (connector or publisher plus series,
+  ticker or document), the **as-of date** (observation or report date, not the fetch date) and the
+  unit and currency. A value without an as-of date is `[?]`. Show the as-of date in every table
+  that carries market data, and the oldest input date in the Metadata section.
+- **Raw → checked → derived.** Keep the value as fetched in the source appendix before it is
+  converted, averaged or adjusted. A derived value names its conversion. A correction never
+  overwrites the raw value: record both and say why.
+- **Validate before use.** Run these checks on every fetched value. A failed check is flagged in
+  the text ("stale", "unverified", "unit check failed"), never silently fixed or dropped:
+  - *Units and scale:* EUR bn vs local currency bn, % of GDP vs absolute spend, million vs billion.
+  - *Basis and period:* current vs constant prices (state the price year), NATO estimate (e) vs
+    final, budget vs outturn, NATO core vs SIPRI vs national definition, FX at which year's rate.
+  - *Staleness:* NATO and national budget figures older than the latest release; contract awards
+    older than the last log entry date. Older inputs are used only with the flag and their age.
+  - *Plausibility:* a country path or segment value more than 15% from the current document, or a
+    single award larger than 10% of the country's annual equipment spend. Such a jump is confirmed
+    in a second source or the primary document before it moves the model. Otherwise it is held as
+    `[?]`.
+  - *Cross-source:* where two sources cover the same item, compare them. A gap beyond normal noise
+    is explained, never averaged away.
 
 ## Scenarios
 
@@ -598,4 +618,6 @@ Use in [[iaf-valuation]] (defense companies):
 - Long end and steady state set and anchored; no indefinite build-up growth.
 - Bear and Bull each tied to named catalysts with signposts; no probability language.
 - Change log complete (previous → new) or explicit "kept unchanged".
+- Every fetched value has source, as-of date and unit; raw kept beside derived; validation
+  checks run and failures flagged in the text.
 - File written, read back, tables render.

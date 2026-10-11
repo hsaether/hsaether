@@ -25,6 +25,10 @@ Skills and the chain between them:
 - `defense-market-bbb` (Defense BBB: European defense spending per country, equipment and
   addressable spending, segment order and revenue paths) → top of its own chain, independent of
   oil; reads Nordic GDP from `docs/hy-market-bbb.md`; output `docs/defense-market-bbb.md`
+- `equity-market-bbb` (Equity BBB: Oslo/OSEBX and global/MSCI World index returns in NOK, IAF at
+  index level, oil and NOK linkage, equity triggers mirroring the HY rule) → reads the oil
+  baseline (Oslo energy earnings) and the HY baseline (NIBOR, GDP, HY return) plus the HY
+  reference in `docs/hy-funds-analysis.md`; output `docs/equity-market-bbb.md`
 - `iaf-valuation` → company valuation using the sector baselines; outputs
   `docs/<company>-analysis.md` (e.g. `docs/capt-analysis.md`, `docs/SED-analysis.md`)
 - Background on the IAF reasoning: `docs/iaf-reference-notes.md`
@@ -42,6 +46,7 @@ Skills and the chain between them:
   `docs/oil-market-bbb.md`. Supply BBB likewise never makes its own rig forecast; it reads
   `docs/rig-market-bbb.md`. The NIBOR path and Nordic GDP view are set only in
   `docs/hy-market-bbb.md`; other skills read them there. Defense spending paths and the defense
-  market view are set only in `docs/defense-market-bbb.md`.
+  market view are set only in `docs/defense-market-bbb.md`. Equity index return paths, index
+  hurdles and the NOK scenario path are set only in `docs/equity-market-bbb.md`.
 - Never use git for any work (no git mv, rm, add, commit, status, etc.) and never ask about
   commits. The user handles all git transactions. Use plain file operations only.

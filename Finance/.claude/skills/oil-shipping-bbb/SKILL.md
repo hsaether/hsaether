@@ -5,7 +5,7 @@ description: Oil Shipping BBB — the tanker-market baseline for crude tankers (
 
 # Oil Shipping BBB
 
-**Revision:** 2026-10-05.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-10.3 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/oil-shipping-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the tanker market. It answers one question: **what market TCE and
@@ -94,8 +94,13 @@ gap with an invented number.
 | Spot TCE by segment, weekly | Broker weekly reports (Intermodal, Banchero Costa, Gibson, BRS, Poten, Signal Ocean) and Baltic figures quoted in Lloyd's List, TradeWinds, Splash247 | Company-reported spot TCE |
 | Realised TCE, booked share of next quarter, TC fixtures | **Nordic Financial** `search_filings`/`company_research` with `ticker` + `fiscal_year` (FRO and HAFNI tested; OET, TRMD-A to test); full report via `parse_pdf_to_text` on the IR PDF | **FinancialFilings** for US filers (DHT, INSW, TNK, STNG, NAT): resolve id with `companies_list` |
 | 1-year / 3-year TC rates | Broker weekly TC tables | Company TC fixtures in reports and announcements |
-| FFAs (Q and Cal contracts) | Baltic/FIS curves quoted in press or broker reports | Company commentary — mark `[E]`, "not verified" if no dated level |
-| Fleet, orderbook, deliveries, age, scrapping, contracting | Clarksons, BIMCO, Veson, Breakwave, broker reports via press | Company presentations (cite their underlying source) |
+| FFAs (Q and Cal contracts) | **Gibson weekly** (current-quarter FFA in TCE); BWET holdings for the next months (derived `[A]`); Baltic/FIS curves quoted in press | Company commentary — mark `[E]`, "not verified" if no dated level |
+| Orderbook in vessels (VLCC, Suezmax, Aframax/LR2) and share of fleet ≥ 20 years | **Frontline quarterly release** (industry sources; SEC 6-K exhibit or GlobeNewswire), "orderbook" paragraph | Company presentations quoting Clarksons (cite the underlying source) |
+| Fleet count and dwt per segment; half-year deliveries, recycling, contracting, cancellations | **Allied QuantumSea research** in the Allied weekly (semi-annual tanker fleet issue) | Breakwave, BIMCO |
+| Orderbook/fleet ratio per segment incl. LR1/Panamax, MR2, Handy/MR1 | **Xclusiv** orderbook issue (periodic, e.g. 13 Jul 2026) | BIMCO (crude vs product %) |
+| Delivery schedule by year | VLCC: BRS weekly (via press), Clarksons via Frontline presentations, Signal Ocean quarterly crude schedule (via press). Products: Hafnia quarterly presentation (orderbook by year in m dwt, Handy–LR2/Aframax) | BIMCO outlook (share of orderbook delivering 2028+) |
+| Weekly new orders and demolition sales | **Xclusiv weekly** "NEWBUILDING ORDERS" and "DEMO SALES" tables (reported deals only = a minimum count) | Allied weekly newbuilding table; Signal/MSI/Allied year-to-date order counts via press |
+| Sanctioned share of the old fleet | BIMCO outlook; Clarksons tallies via press | Frontline management comments |
 | Sanctioned / shadow fleet | Lloyd's List Intelligence, Kpler, S&P Global via press; OFAC/EU/UK designation lists | Company presentations |
 | Chokepoint transits | **IMF PortWatch** API (daily, ~1 week lag) | Kpler/Vortexa via press; canal authorities (Suez, Panama) |
 | Trade flows by route, floating storage | Kpler/Vortexa export and route data via press | IEA/EIA trade data (lagged) |
@@ -132,16 +137,36 @@ Connector quirks (tested 2026-10-04):
   - **Fearnleys** (Wednesdays): 1-year TC for eco/scrubber vessels, values and newbuild prices.
   - **Affinity** (Fridays): Baltic route TCEs for the TD and TC routes (right-hand columns; use
     `cut -c180-`).
+  - **Xclusiv NEWBUILDING ORDERS / DEMO SALES tables** (tested 2026-10-10): extract with
+    `awk '/NEWBUILDING ORDERS/{p=1} /Sale & Purchase|SECONDHAND PRICES/{p=0} p' file.txt | grep "^ *TANKER"`
+    (demolitions: from `DEMO SALES` to `Commodities`). Units and dwt per line are reliable; the
+    yard, buyer, price and delivery columns are often misaligned, so read those with care. Issues are
+    weekly at `wp-content/uploads/<yyyy>/<mm>/xclusiv-<yyyy>_<mm>_<dd>.pdf` (Mondays).
+  - **Allied weekly** PDFs are on cyprusshippingnews.com (`wp-content/uploads/<yyyy>/<mm>/ALLIED-Weekly-Market-Report-Week-<n>.pdf`).
+    The "Market Snapshot" table extracts with values shifted one row down; realign before use.
   - The Baltic Exchange site and Seatrade/Splash247 block automated fetches (challenge page or 403).
+- **Frontline release on SEC** (tested 2026-10-10): `curl -A "<name> <email>"` on the 6-K exhibit
+  (sec.gov requires a user agent), strip tags, and grep "order book". It gives the orderbook in
+  vessels for VLCC, Suezmax and Aframax/LR2 and the ≥ 20-year shares now and at full delivery.
+- **Hafnia investor presentation** (tested 2026-10-10): `s201.q4cdn.com/891122012/files/doc_financials/<yyyy>/q<n>/Hafnia-Limited-Q<n>-<yyyy>-Investor-Presentation-vF.pdf`
+  (Q1 2026 used `-vF2`). The "Orderbook, Scrap & Sanctioned Landscape" slide extracts as bar labels:
+  the four orderbook bars (2026–2029, m dwt) sum to the stated total, which confirms the reading.
+  Company view: tag `[E]`.
 - **FFA levels from BWET holdings:** amplifyetfs.com/bwet lists TD3C/TD20 monthly contracts with
   lots and notional market value. Price in $/t = market value ÷ (lots × 1,000 t). Convert TD3C to
-  TCE with (price × 270,000 − ~$2.6m voyage costs) ÷ ~48 days. Then scale to the segment average
-  with the observed segment/TD3C ratio. Mark `[A]`; contracts beyond three months are thin.
+  TCE with (price × 270,000 − ~USD 2.6m voyage costs) ÷ ~48 days. Then scale to the segment
+  average with the observed segment/TD3C ratio. Mark `[A]`. Check the lot count per month: Q1
+  contracts became usable in Oct 2026 (110 lots/month); 5 lots is too thin to use. Tested
+  2026-10-10: derived Q4 TD3C USD 1.38m/day vs Gibson's quoted USD 1.40m/day.
+- **Gibson weekly report** (gibsons.co.uk/report/<slug>, Fridays; the Hellenic Shipping News copy
+  is only an excerpt): route WS and TCE tables with a **quoted Q4 FFA in TCE** for TD3C, TD20, TD25,
+  TC5, TC7 and TC18, plus attack and downtime counts. It is the first-choice FFA source for the
+  rest of the current quarter.
 - **EODHD** `get_sanctions_vessels` returns 403 on the free plan. Not usable.
 - **Yahoo** has no freight or FFA series, and the BWET price history is distorted. Use Yahoo only
   for tanker equity prices (company analysis).
-- No Python on this machine. Compute PortWatch averages with PowerShell `Invoke-RestMethod`, paging
-  with `resultOffset`.
+- Python runs as `py` (not `python`). PortWatch averages also work in PowerShell with
+  `Invoke-RestMethod`, paging with `resultOffset` (tested 2026-10-10).
 - Do not use SEO "market report" pages without a traceable primary source. When sources conflict,
   give both and say which one is used and why. Tables loaded as images cannot be read: mark "not
   read" and ask the user for the figures.
@@ -160,6 +185,27 @@ Connector quirks (tested 2026-10-04):
 - **User input is input, not a reference.** Links, numbers and drafts are assessed critically (what
   it measures, how fresh, which definition); use what holds, reject the rest, and note the
   assessment in the source appendix.
+- **Provenance on every fetched value.** Record the source (connector or publisher plus series,
+  ticker or document), the **as-of date** (observation or report date, not the fetch date) and the
+  unit and currency. A value without an as-of date is `[?]`. Show the as-of date in every table
+  that carries market data, and the oldest input date in the Metadata section.
+- **Raw → checked → derived.** Keep the value as fetched in the source appendix before it is
+  converted, averaged or adjusted. A derived value names its conversion. A correction never
+  overwrites the raw value: record both and say why.
+- **Validate before use.** Run these checks on every fetched value. A failed check is flagged in
+  the text ("stale", "unverified", "unit check failed"), never silently fixed or dropped:
+  - *Units and scale:* $/day vs $k/day, Worldscale points vs TCE, dwt vs vessel count, ton-miles vs
+    ton-days.
+  - *Basis and period:* spot vs 1-year TC vs FFA, eco/scrubber vs standard TCE, route vs segment
+    average, weekly vs period average.
+  - *Staleness:* spot TCE older than 1 week; TC and FFA quotes older than 2 weeks; asset values and
+    fleet/orderbook counts older than 1 month. Older inputs are used only with the flag and their
+    age.
+  - *Plausibility:* a spot move of more than 25% in a week, or a TC/asset-value move of more than
+    10% vs the current document. Such a jump is confirmed in a second source or the primary document
+    before it moves the model. Otherwise it is held as `[?]`.
+  - *Cross-source:* where two sources cover the same item, compare them. A gap beyond normal noise
+    is explained, never averaged away.
 
 ## Scenarios
 
@@ -250,13 +296,39 @@ fleet start + deliveries − scrapping ± clean/dirty crossover = fleet end
 effective fleet growth = change in (fleet − unavailable tonnage) / effective fleet start
 ```
 
-Track orderbook/fleet, new contracting, delivery schedule and slippage, cancellations, scrapping
-and the scrapping pool (≥ 20 years), yard slots (earliest delivery for a new order) and
-newbuild prices. A shadow fleet returning to compliant trade or being scrapped changes effective
-supply even when the nominal fleet does not.
+A shadow fleet returning to compliant trade or being scrapped changes effective supply even when
+the nominal fleet does not.
+
+**Fleet and orderbook register (every run).** Keep the fixed register table in the output (see
+Output) for all six segments and update every cell, with source and as-of date:
+
+- **Fleet** (vessels, m dwt), **orderbook** (vessels, % of fleet; say whether the fleet is the
+  total or the commercially traded fleet), **deliveries year-to-date**, **delivery schedule** for
+  the rest of the current year and each year of the window plus the year after, **new orders**
+  (current quarter and year-to-date), **scrapping** (current quarter and year-to-date),
+  **share ≥ 20 years** (now and at full delivery where published), **sanctioned/outside compliant
+  trade**, **newbuild price** and **earliest yard slot** (by yard country).
+- **Delivery schedule rules:** use published schedules first and show the spread between
+  sources. Where only the total orderbook is known, allocate it by year using the closest
+  published shape (e.g. Signal Ocean's crude schedule, Hafnia's dwt by year), mark `[A]`, and make
+  the years sum to the orderbook. Cross-check against any published dwt total (e.g. VLCC +
+  Suezmax deliveries over the window).
+- **Contracting and demolition log:** each run adds the reported orders and demolitions since the
+  last run (Xclusiv weekly tables) to the quarter's log, per segment. Reported deals are a minimum
+  count; compare with tracker totals (Signal, MSI, Allied, BIMCO) and state the gap.
+- **Slippage:** once a year's actual deliveries are known, compare them with the schedule recorded
+  at the start of that year and log the difference.
+- **Scrapping assumption:** state per segment and year in Base, Bear and Bull, against the
+  ≥ 20-year pool, the sanctioned share (sanctioned ships are hard to sell for recycling) and the
+  rate level in that scenario. Scrapping is a scenario variable, not a constant.
+- **Triggers:** test the orderbook (> 2 pp) and quarterly contracting (> 3% of fleet) triggers
+  on one consistent basis each run, and say which source the test uses.
+- A cell that cannot be sourced is `[?]`, never filled from an older run without its date.
 
 **Step 7 — Balance check.** Per segment, scenario and year: demand growth (ton-days) − effective
-fleet growth = change in tightness (percentage points). Read it against the rate path: a rising
+fleet growth = change in tightness (percentage points). Count inefficiency (waiting, STS, shuttles,
+rerouting) **once**, in ton-days demand. Effective fleet growth covers only fleet changes
+(deliveries, scrapping, damage and repair, sanctions, clean/dirty crossover). Read it against the rate path: a rising
 TCE with a loosening balance, or the reverse, must be explained or adjusted. Compare with
 published utilisation estimates from one named source.
 
@@ -378,7 +450,18 @@ Keep the main part short per heading; series and source details go to the append
 ### Trade flows and demand (ton-days / ton-miles per scenario and year)
 ### Chokepoints (transits vs normal, extra sailing days, fleet share absorbed)
 ### Effective tonnage (per segment, share of fleet unavailable)
-### Fleet supply (fleet, orderbook %, deliveries, scrapping, effective growth per year)
+### Fleet and orderbook register
+| Segment | Fleet (vessels; m dwt) | Orderbook (vessels; % fleet) | Delivered YTD | Schedule: rest of year / Y1 / Y2 / Y3 / later | New orders: quarter / YTD | Scrapped: quarter / YTD | ≥ 20 yrs now / at full delivery | Sanctioned / outside compliant trade | Newbuild $m; earliest slot |
+|---|---|---|---|---|---|---|---|---|---|
+| VLCC | | | | | | | | | |
+| Suezmax | | | | | | | | | |
+| Aframax/LR2 | | | | | | | | | |
+| LR1/Panamax | | | | | | | | | |
+| MR | | | | | | | | | |
+- One row per segment; source and as-of date in every cell (or `[?]`)
+- Contracting and demolition log for the quarter (reported deals per segment vs tracker totals)
+- Delivery schedule spread between sources; slippage vs the schedule recorded at the start of the year
+### Fleet supply (fleet growth per segment and year; scrapping per scenario)
 ### Balance check (demand − effective fleet growth, per segment, scenario and year)
 
 ## Signposts and monitoring
@@ -435,7 +518,12 @@ Use in [[iaf-valuation]] (tanker companies, Track B):
 - Point value and range for every scenario rate; mid-cycle TCE and asset values set and anchored.
 - Gaps > 20% to the period market explained; balance check consistent with each rate path.
 - Chokepoints in sailing days and fleet share, not "open/closed".
+- Fleet and orderbook register complete for all six segments, every cell sourced and dated or
+  `[?]`; delivery schedule sums to the orderbook; contracting/demolition log updated; orderbook and
+  contracting triggers tested on a stated basis.
 - Bear and Bull each tied to named catalysts with signposts and an oil scenario; no probability
   language.
 - Change log complete (previous → new) or explicit "kept unchanged".
+- Every fetched value has source, as-of date and unit; raw kept beside derived; validation
+  checks run and failures flagged in the text.
 - File written, read back, tables render.

@@ -5,7 +5,7 @@ description: Nordic HY Market BBB (HY BBB) — the Nordic high-yield bond market
 
 # Nordic HY Market BBB
 
-**Revision:** 2026-10-06.12 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-11.7 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/hy-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the Nordic high-yield bond market. It answers two questions:
@@ -88,6 +88,17 @@ investment-grade corporates, covered bonds and government bonds except as the se
     **preserves capital in Bear** (cumulative Bear window ≥ 0), and the worst Bear calendar year.
   - A low yield is not a fault in itself. Funds holding better-rated paper, IG or bank capital earn
     less and lose less; the ratio, not the yield, decides.
+  - **Reference fund: Arctic Return** (added 2026-10-11 on user input: "a reference point with an
+    excellent track record"). It is short-dated, internally rated investment-grade Nordic credit:
+    the low-risk alternative to the HY funds.
+    - It is run through the same model (fund mode, Step F10) and shown as its own row. It is not
+      graded on the HY verdict, since E ≥ 1.0 pp is a HY hurdle.
+    - **Step-up ratio** for every HY fund = (E_fund − E_ref) ÷ (R_fund − R_ref): the extra excess
+      return per unit of extra stress loss for moving from the reference to the fund.
+    - Compare it with the **market step-up** = (E_mkt − E_ref) ÷ (R_mkt − R_ref), where E_mkt is
+      after the 0.6% fee convention.
+    - A fund whose step-up is below the market's is paid less for the extra risk than the index
+      would pay. Report it beside E / R; it informs the verdict, it does not replace it.
 - Rows, series and definitions below are fixed. Changing one is a method change and goes in the
   change log.
 
@@ -248,7 +259,12 @@ gap with an invented number.
 | Issuer announcements: results, refinancing, bondholder meetings, standstills | **Nordic Financial** `search_filings` with `source="newsweb"` + `ticker` + `fiscal_year` (Oslo-listed issuers and Nordic ABM bonds) | FinancialFilings `filings_list`; issuer IR; Swedish issuers via MFN / Cision |
 | Issuer financials (leverage, liquidity, maturities) for watchlist names | **Nordic Financial** `company_research` / `parse_pdf_to_text` on the IR PDF | FinancialFilings `companies_financials_retrieve` |
 | Policy rate, NOWA, T-bill and government yields | **Norges Bank API** `https://data.norges-bank.no/api/data/<flow>/<key>?format=csv&lastNObservations=N&locale=en` (`IR/B.KPRA.SD.R`, `SHORT_RATES/B.NOWA.ON.R`, `GOVT_GENERIC_RATES/B.3M.TBIL`, `B.10Y.GBON`) | FRED `IR3TIB01NOM156N` (3M interbank, OECD monthly), `IRLTLT01NOM156N` |
-| Policy rate path (Base anchor), Norwegian macro projections, neutral rate | **Norges Bank Monetary Policy Report** (March, June, September, December) and rate decisions | Norges Bank Expectations Survey; Regional Network |
+| Market check on the rate path (what the bond market prices against the Norges Bank path) | **Norges Bank API** `GOVT_ZEROCOUPON/B.<tenor>` (government zero-coupon 6M–10Y, daily): 1-year forwards from the zero curve + the NIBOR–T-bill spread (3M) ≈ market NIBOR path `[A]`; includes a term premium, so it is a check, never the path | FRED `IRLTLT01NOM156N` |
+| Financial conditions (signpost) | **Norges Bank API** `FINANCIAL_INDICATORS/D.FCI_TOTAL` and subcomponents (`FCI_STOCK`, `FCI_FEX`, `FCI_LENDINGRATES`, `FCI_HOUSING`); positive = tighter (2008 +7, Mar 2020 +4, mean +0.5 since 2007) | — |
+| Norwegian activity by sector (signpost for energy and non-energy issuers) | **Norges Bank API** `REGNET` (Regional Network, quarterly: output, employment plans, capacity, by sector incl. `OLJE_TOT` oil services) | Regional Network report |
+| Fiscal policy: SOBU (NOK bn, % of mainland trend GDP), withdrawal rate vs 3%, budget indicator, fund share of state spending | **Nasjonalbudsjettet** chapter 3 figure data on regjeringen.no: `…/kap_3_nb_<year>-filer/sheet002.htm` (SOBU % of trend GDP, 2001–), `sheet003.htm` (budget indicator), `sheet004.htm` (withdrawal rate vs expected real return), `sheet005.htm` (fund share of state spending), `sheet006.htm` (GPFG value, weekly). HTML tables, Windows-1252, decimal comma; read with `py` | Revidert nasjonalbudsjett (May); Prop. 1 S; NBIM for the live fund value |
+| Drivers of changes in the Norges Bank path | MPR dataset sheet **Data K** (cumulative contributions: output gap, exchange rate, inflation, wage costs, foreign rates, smoothing) | MPR text |
+| Policy rate path (Base anchor), Norwegian macro projections, neutral rate | **Norges Bank Monetary Policy Report** (March, June, September, December) and rate decisions; MPR dataset sheet **Data D** = Table 3 (annual CPI, policy rate, **I-44**, GDP …) | Norges Bank Expectations Survey; Regional Network |
 | 3M NIBOR fixings | NoRe (administrator; check the publication delay) | Bank rate pages, press; FRED `IR3TIB01NOM156N` (monthly, lagged) |
 | STIBOR, EURIBOR, SOFR (hedge carry) | Riksbank / SFBF (STIBOR), EMMI (EURIBOR), FRED `SOFR` | AllRatesToday `get_official_rates` for central-bank tables |
 | Swedish, Danish, Finnish policy rates and projections | Riksbank MPR, Danmarks Nationalbank, ECB (Finland) | FRED |
@@ -288,7 +304,15 @@ Quirks (observed in the 2026-10-05 build):
 - **Nordic Trustee "Ongoing"** (voting procedures, bondholder notices) loads through an API:
   `curl` shows "API error". Use the in-app browser.
 - **Norges Bank API** works without a key (tested 2026-10-05: policy rate 4.50 on 2026-10-02,
-  NOWA 4.50, 3M T-bill 4.46, 10Y 4.59). **NIBOR is not in the API.**
+  NOWA 4.50, 3M T-bill 4.46, 10Y 4.59). **NIBOR is not in the API.** Retested 2026-10-11: 24
+  dataflows (`/api/dataflow/all/all/latest`); the useful ones are listed in the table above and in
+  the iaf-valuation skill (Norges Bank paragraph). Zero-coupon curve 7 Oct 2026: 12M 4.736, 2Y
+  4.781, 3Y 4.733, 4Y 4.679 → 1-year forwards ≈ 4.83 / 4.64 / 4.52 for 2027–29 (government basis).
+  FCI 8 Oct 2026: −1.50 (loose). `UNIT_MULT` = 2 in `EXR` means per 100 units.
+- **MCP connector `norges-bank`** (installed 2026-10-11): `get_series` reads every flow above
+  (policy rate, NOWA, T-bills, government bonds, zero-coupon, FCI) with the same values as the
+  direct API; good for the daily checks. It drops series attributes (per-100 multipliers, the
+  buy/sell direction in `ANN_FX_SPU`); details in the iaf-valuation skill.
 - **Norges Bank MPR dataset** (first run 2026-10-05): the meeting page
   (`norges-bank.no/en/topics/monetary-policy/Monetary-policy-meetings/<year>/<month>-<year>/`)
   links `data-mpr-<n>-<yy>.xlsx`. Sheet **Data A** = quarterly policy-rate path (current and
@@ -374,6 +398,43 @@ Quirks (observed in the 2026-10-05 build):
 - **Morningstar documents** (`global.morningstar.com/.../funds/<id>/documents`) list annual and
   semi-annual reports, but the downloads need a login. Check the fund ID: 0P0000VE1L is Sissener
   Canopus, not Corporate Bond.
+- **Arctic Return sources** (first read 2026-10-11):
+  - **Monthly Investment Manager Report** (all Arctic funds):
+    `cdn.arctic.com/documents/AAM-Documents/InvestmentManagerReport_ArcticFunds_<MMYY>.pdf`, with
+    the September issue around mid-October. The fund-information page (top 10, internal credit
+    score, composition, monthly returns of class I) is an image: render it with PyMuPDF
+    (`py -m pip install pymupdf`; `pymupdf.open(f)[page].get_pixmap(dpi=110).save(...)`) and read
+    the picture.
+  - Semi-annual and annual reports with every holding, its fair value and % of NAV: from the
+    "arctic-funds-plc" documents page. Use `pdftotext -raw`. Price = fair value ÷ quantity; for
+    non-NOK lines, divide by the FX rate as well.
+  - KIDs per class: `.../AR/PRIIP_Arctic-Return_<class>-Acct.-<ccy>_<ISIN>_EN_<date>.pdf`.
+    Supplement: `.../AR/Combined-Supplement-Annex-Arctic-Return-<date>.pdf`.
+  - The PRIIP "transaction costs" (0.37%) is an estimate that is already inside returns; do not
+    deduct it again.
+- **Report locations, Oct 2026:**
+  - Sissener: the list at `sissener.no/rapporter`. Files are
+    `irp.cdn-website.com/411e317f/files/uploaded/<MM>-<YYYY>+Månedsrapport+Sissener+Corporate+Bond+Fund+NOK-R+Norsk.pdf`
+    (from May 2026; earlier "CBF" names).
+  - Fondsfinans: `fondsfinans.no/markedsrapport-<month>-<year>/` → PDF
+    `wp-content/uploads/<yyyy>/<mm>/Markedsrapport-<month>.pdf`. The HY page is ~p. 26; its
+    sector and rating charts are images (render them).
+- **NIBOR for a month-end fund yield:** Heimdal states that its yield uses money-market rates at
+  month end. Use the same month-end 3M NIBOR for every fund on that date, so their spreads stay
+  comparable.
+- **Morningstar return series on fundlist** (`HistoricalPerformanceSeries` in `__NEXT_DATA__`):
+  - `Frequency: "Q"` series are **12-month returns to each 30 Sep**;
+  - `Frequency: "Y"` series are **calendar-year returns**.
+  - Use the Y series for calendar-year records, and check the dates before labelling a number with
+    a year.
+  - `CreditQualityBreakdown` codes: 2 AAA, 3 AA, 4 A, 5 BBB, 6 BB, 7 B, 8 below B, 9 not rated.
+- **Fondsfinans sister funds** (High Yield and Kreditt) are run by the same managers from the same
+  bond list. Kreditt holds smaller weights of the same HY names, plus bank capital (AT1/T2) and IG.
+  - Both share one manager record (F4 item 7).
+  - Spread beta of Kreditt to the HY path is 0.85 `[A]`. That is conservative: 2016–25 excess
+    volatility was 0.73 × High Yield's, and the 2020 shock was ~0.55 × High Yield's.
+  - Fundlist holdings pages can be newer than the monthly report: Kreditt was at 30 Sep when read on
+    11 Oct.
 - **Prospectus beats factsheet:** the Fondsfinans HY web page states rate duration 0–5 years and
   credit duration ≤ 5, while the Morningstar factsheet states ≤ 4 and 0–2 (2026-09). Record the
   conflict and use the prospectus/vedtekter.
@@ -410,6 +471,27 @@ Quirks (observed in the 2026-10-05 build):
 - **User input is input, not a reference.** Links, numbers and drafts are assessed critically
   (what it measures, how fresh, which definition); use what holds, reject the rest, and note the
   assessment in the source appendix.
+- **Provenance on every fetched value.** Record the source (connector or publisher plus series,
+  ticker or document), the **as-of date** (observation or report date, not the fetch date) and the
+  unit and currency. A value without an as-of date is `[?]`. Show the as-of date in every table
+  that carries market data, and the oldest input date in the Metadata section.
+- **Raw → checked → derived.** Keep the value as fetched in the source appendix before it is
+  converted, averaged or adjusted. A derived value names its conversion. A correction never
+  overwrites the raw value: record both and say why.
+- **Validate before use.** Run these checks on every fetched value. A failed check is flagged in
+  the text ("stale", "unverified", "unit check failed"), never silently fixed or dropped:
+  - *Units and scale:* % vs bp, price vs yield, NOK vs NOKm vs NOKbn, fund return in % vs NAV level.
+  - *Basis and period:* clean vs dirty price, yield to maturity vs to call vs to worst, NOK-hedged
+    vs local currency, gross vs net of fees, FRN margin vs all-in coupon.
+  - *Staleness:* bond prices and spreads older than 1 week; NIBOR and the policy-rate path older
+    than 1 trading day at the time of a run; fund holdings and factsheets older than the last
+    month-end report. Older inputs are used only with the flag and their age.
+  - *Plausibility:* a bond price move of more than 10 points, a spread move of more than 100 bp vs
+    the current document, or a fund return far outside its yield-implied range. Such a jump is
+    confirmed in a second source or the primary document before it moves the model. Otherwise it is
+    held as `[?]`.
+  - *Cross-source:* where two sources cover the same item, compare them. A gap beyond normal noise
+    is explained, never averaged away.
 
 ## Scenarios
 
@@ -494,6 +576,30 @@ Norges Bank, SSB, Riksbank, IMF, OECD, EU Commission `[E]` with report dates. Ba
 central institutional view, stated; Bear/Bull from the catalysts. This block is the workspace's
 only Nordic macro view: other skills read it here.
 
+**Step 3b — Fiscal block (oil-fund spending) and the rate-path test.** Fiscal policy is a driver
+of demand, inflation and therefore of the Norges Bank path; it is tracked here and used to *test*
+the Base rate path, never to build an own rate forecast.
+- Track from the latest **Nasjonalbudsjett** (October) or **Revidert nasjonalbudsjett** (May):
+  - structural non-oil deficit (SOBU), NOK bn and **% of mainland trend GDP** (the measure of how
+    much fund money the economy absorbs);
+  - **withdrawal rate** = SOBU ÷ GPFG at the start of the year, against the 3% fiscal rule;
+  - **budget indicator** (change in SOBU, pp of trend GDP = the fiscal impulse; long-run average
+    +0.4);
+  - share of state spending financed by the fund;
+  - GPFG value in NOK (latest) and the **fiscal-rule room**: 3% × fund value. Show the
+    withdrawal rate if the fund falls 20% (equity Bear) or the NOK strengthens 10%, at unchanged
+    spending: the rule is tied to a fund that moves with global equities and the krone.
+- Read **Norges Bank's rate-path decomposition** (MPR dataset, sheet **Data K**: contributions
+  from output gap, exchange rate, inflation, wage costs, foreign rates) to see what moved the
+  path, and the **market path** (Norges Bank API zero-coupon curve, 1-year forwards + NIBOR–T-bill
+  spread; Step 2).
+- **Test:** if the fiscal impulse for Year 1 is above +0.5 pp, or the market path is more than
+  0.3 pp above the Norges Bank path in a window year, state a "higher for longer" reading and
+  decide whether Base keeps the Norges Bank path (default) or moves toward the market path, with
+  the reason. Fiscal expansion with rising rates is the stagflation side case's mechanism; keep
+  the two consistent.
+- User views on fiscal policy are input, not a reference: test them against the series above.
+
 **Step 4 — Market observation.** Latest complete month as anchor:
 - Spread (anchor series), new-issue spreads by sector (NT), global HY OAS for context; spread
   percentile against its own history (state the window).
@@ -574,8 +680,9 @@ checks below.
 
 Run when the user asks about a named HY fund, after (or together with) the market baseline. The
 baseline must be current or the fund analysis is **Provisional**. Default fund set: **Heimdal
-Høyrente, Heimdal Høyrente Pluss, Sissener Corporate Bond, Fondsfinans High Yield**; add others on
-request. Write to `docs/hy-funds-analysis.md`.
+Høyrente, Heimdal Høyrente Pluss, Sissener Corporate Bond, Fondsfinans High Yield**, plus the
+reference fund **Arctic Return** (Step F10); add others on request. Write to
+`docs/hy-funds-analysis.md`.
 
 **Share classes (the user's classes; use these unless told otherwise):**
 
@@ -585,11 +692,28 @@ request. Write to `docs/hy-funds-analysis.md`.
 | Heimdal Høyrente Pluss | B | NO0013580654 | 0.70% | A: 0.85%. Minimum NOK 50m direct, or NOK 100 via distributors without retrocession |
 | Fondsfinans High Yield | B | NO0013168773 | 0.41% | A: 0.45% + 0.5% entry and 0.5% exit charge (Morningstar). B minimum NOK 100m direct |
 | Sissener Corporate Bond | NOK-R | LU1923202326 | TER 0.41% + 20% above 3M NIBOR + 1% (high-water mark) | NOK-RF: 1.00% flat |
+| Fondsfinans Kreditt (evaluated 2026-10-11; not a holding) | B | NO0013168765 | 0.31% (DNB listing) | A NO0010676083 0.35%. Same team as Fondsfinans High Yield; weighted rating ≥ BB, nothing below B− at purchase, modified duration 0–2 years |
+| **Arctic Return** (reference) | **L NOK** (the user's class, 2026-10-11) | IE00BYT07T65 | 0.50% ongoing (KID), no performance fee | The class on Nordnet. I IE00B40J7B48 0.20% (min NOK 250m); B IE00BVV23V37 0.25% (min NOK 50m); A IE00B4PM2R92 0.30%; R IE00BZ3C8C56 0.30% + 10% above the Norwegian T-bill index (~0.11%; min NOK 1,000). Its published track record is class I: subtract 0.30 pp a year for class L |
 
 - Monthly reports quote **class A** yields after the A fee. **Class yield = A yield + (A fee − class
   fee).** Track-record gaps need no adjustment (the fee is in both the yield and the return).
 - Fees from the PRIIPs KID (Heimdal: `heimdalfondene.no/wp-content/uploads/.../<date>-Priips-<fund>-<class>.pdf`),
   or Morningstar `OngoingCharge` on fundlist (Fondsfinans).
+- **Investor-level cost (added 2026-10-11.4):** the classes above are the Nordnet classes. Fund
+  rows are after the class fee only and never include a platform fee.
+  - **Nordnet** charges a **0.19% a year platform fee** on bond and HY funds ("andre rentefond").
+    It is flat, with no size tiers, and charged quarterly. Nordnet's "total price" = class fee +
+    0.19.
+  - **A direct purchase** from the fund company pays no platform fee, but at NOK 0.5–4m it gets
+    **class A**:
+    - Høyrente and Pluss 0.85%, min NOK 100. Høyrente N is for distributors only; Pluss B needs
+      NOK 50m;
+    - FF HY 0.45%, min NOK 100k. Morningstar lists a 0.5% entry and exit charge, but the
+      Fondsfinans factsheet shows none `[?]`;
+    - Kreditt 0.35%, min NOK 10k. The Fondsfinans B classes need NOK 100m.
+  - Net effect: direct is 0.15 pp a year cheaper for the Fondsfinans funds and 0.04 pp for
+    Heimdal.
+  - When a user asks for an allocation, state the route (Nordnet or direct) and deduct its cost.
 
 **Step F0 — Setup.** State this skill's revision and the HY baseline date used. Read the previous
 `docs/hy-funds-analysis.md` and record the previous figures per fund.
@@ -633,6 +757,14 @@ and concentration are still recorded, with stated reasons:
     IG, bank capital **and the named at-risk bonds** (their yields would otherwise inflate q) `[A]`.
   - **q is used only for the Bear catalyst loss** on the performing book (below). It never sets a
     Base loss.
+  - **Most Nordic bonds have no public rating** (user input, 2026-10-11). Managers' internal
+    ratings are the best available quality measure: Arctic's "internal credit score", Fondsfinans'
+    credit committee where no official rating exists. Use them with three caveats:
+    - they are the manager's own view (managers talk their book);
+    - an unrated "IG-equivalent" bond pays a spread pickup over rated IG for that uncertainty and
+      for lower liquidity;
+    - in a liquidity shock it behaves more like crossover than like rated IG (Arctic Return −3.46%
+      in March 2020). The reference model's spread beta carries this.
   - **A yield below "NIBOR + market spread" is expected** when a fund holds better-rated paper. It
     is a quality signal and is scored through q and R, never as underperformance.
 - **Manager style** (record it per fund with evidence; it shows up in which bonds are held, their
@@ -797,6 +929,37 @@ covariance; never ask for the user's amounts per fund). Write to `docs/hy-issuer
 7. **Rank** bonds by Base return against Bear loss: carriers (performing, 8–11%), workout bets
    (high yield, large Bear loss) and expensive bonds (low yield to call, Bear loss).
 
+**Step F10 — Reference fund (Arctic Return)** (added 2026-10-11). Same engine, own inputs:
+1. **Facts:** Irish UCITS (Arctic Funds plc), daily dealing. Mandate (supplement 18 Jun 2026):
+   - ≥ 70% IG or IG-equivalent on the manager's internal scale at purchase; it may add crossover
+     and short non-IG bonds;
+   - modified duration 0–12 months; credit duration limit 0–3 years on the web page (0–4 in older
+     text: record the conflict).
+2. **Snapshot** from the monthly Investment Manager Report: running yield, credit duration,
+   internal credit score split, composition, country split, top 10, monthly returns. Full holdings
+   with fair values come from the semi-annual and annual reports.
+3. **Carry spread** (gross of fees). Two estimates; record both and use the midpoint `[A]`:
+   - (a) running yield − the 3M NIBOR the coupons were set at (it is not stated whether the yield
+     is before fees or NOK-hedged);
+   - (b) the recent run-rate: the last 2–3 months' return in months with stable spreads,
+     annualised, + the class fee − NIBOR.
+4. **Credit loss:**
+   - **named at-risk bonds** from the latest holdings (none priced below 94 on 30 Jun 2026);
+   - **residual = rating-table PD × 55% LGD** on the internal split (the HY relative-record method
+     does not apply to an IG book);
+   - **Bear catalyst loss = 3 × rating-table PD × 65%** per year `[A]`, defaults lagging (Oct 2026:
+     0.33 / 0.40 / 0.25 pp).
+5. **Spread MTM:** credit duration × **β 0.25** × the HY spread path `[A]`. That is calibrated on:
+   - 2020: −3.46% in March at ~1.5 years' credit duration, i.e. ~0.45 × the HY move at the trough,
+     with the year still +1.7 pp over NIBOR;
+   - 2022: excess +0.2 pp, against ~1.5 pp in normal years.
+   Rate MTM uses the modified duration (~0.2 years).
+6. **Track record vs NIBOR:** yearly return − the FRED 3M interbank annual average
+   (`IR3TIB01NOM156N`); worst month, worst year, recovery time. Explain any gap between the record
+   and the forward excess (spread level then vs now, tightening gains).
+7. **Output:** a reference row in the comparison, the step-up ratio for each HY fund (decision
+   rule), and its own section (facts, snapshot, record, return paths, class table with fees).
+
 **Stamdata distress routine** (each update and on request):
 - Read `stamdata.com/news` page by page (`?page=N`, about one week per page, ~25 notices; wait
   about 4 s for the table to render in the in-app browser) back to the previous scan date.
@@ -827,6 +990,8 @@ A full update is due when any of these occurs:
   downstream section flags a change
 - A GDP or unemployment forecast for Norway or Sweden changes ≥ 0.5 pp at Norges Bank, SSB or the
   Riksbank
+- A national budget or revised budget changes the fiscal impulse for a window year by ≥ 0.5 pp of
+  trend GDP, or the market rate path (zero curve) moves ≥ 0.3 pp away from Base in a window year
 - A tracked fund changes mandate, fees or liquidity terms (fund mode)
 - A Bear or Bull catalyst is triggered or a signpost is crossed
 - The baseline is older than 30 days
@@ -862,6 +1027,8 @@ appendix.
 | Sweden GDP growth (%) | | | | | |
 | Norway unemployment, registered NAV (%) | | | | | |
 | Sweden unemployment, LFS (%) | | | | | |
+| Fiscal (government budget, Base only): SOBU % of mainland trend GDP / withdrawal % of GPFG / budget indicator (pp) | | | | | — |
+| Market path check: 1-year forwards from the zero curve + NIBOR–T-bill spread (%) | — | | | | — |
 
 ## Year 1 by quarter — policy rate and 3M NIBOR (%)
 | Scenario | Q1-27 | Q2-27 | Q3-27 | Q4-27 | Year avg |
@@ -952,8 +1119,9 @@ appendix.
 - Share classes used (ISIN, currency, fee) and report dates per fund
 
 ## Comparison (Base unless stated; % p.a., NOK or class currency as marked)
-| Fund | Style | Yield after fee (date, basis) | Rating PD / q | Credit / rate duration | Oil exposure | Cash (read as) | Base net return (window) | E: excess over NIBOR | R: stress loss | E / R vs market reference | Bear window / worst year | Liquidity | Verdict |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Fund | Style | Yield after fee (date, basis) | Rating PD / q | Credit / rate duration | Oil exposure | Cash (read as) | Base net return (window) | E: excess over NIBOR | R: stress loss | E / R vs market reference | Step-up over reference vs market step-up | Bear window / worst year | Liquidity | Verdict |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Reference: Arctic Return [class] | … | | | | | | | | | | — | | | Reference (not graded) |
 
 - Below the comparison: the **held-to-maturity view**. Window returns value the portfolio at the
   window-end spread, and any spread MTM still open at the end reverses by maturity if nothing
@@ -970,6 +1138,12 @@ appendix.
 |---|---|---|---|---|---|---|
 ### Liquidity and structure
 ### Verdict (attractive / marginal / unattractive; Bear capital preservation; what flips it)
+
+## Reference fund: Arctic Return
+### Facts and share classes (fees, minimums)
+### Snapshot (running yield, credit duration, internal credit score, composition, top 10, holdings check)
+### Track record vs NIBOR (yearly excess, worst month and year, record vs forward)
+### Return paths and step-up table
 
 ## Change log
 ## Appendix: sources
@@ -1014,8 +1188,12 @@ Use by skill:
   mapping shown; single-name stress shown; rating split used where published; cash read in
   context (notice period vs dry powder); manager style stated; verdict on yield versus risk (E / R
   against the market reference).
+- Reference fund: Arctic Return run on the same date and baseline; class and fee stated; carry
+  spread from both estimates; step-up ratios against the market step-up shown for every HY fund.
 - Fund credit loss: Base loss only on named bonds (performing bonds zero); the same price, PD and
   recovery for a bond in every fund; restructurings valued on their own; residual from the record
   shown with its length; Bear catalyst loss named by row.
 - Change log complete (previous → new) or explicit "kept unchanged".
+- Every fetched value has source, as-of date and unit; raw kept beside derived; validation
+  checks run and failures flagged in the text.
 - File written, read back, tables render.

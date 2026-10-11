@@ -136,3 +136,4 @@ dmypy.json
 Finance/docs/
 Chatgpt/Finance/Doc/
 Chatgpt/Finance/work/
+Finance/.playwright-mcp/

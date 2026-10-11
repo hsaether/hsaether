@@ -5,7 +5,7 @@ description: Investment Analysis Framework (IAF) — the standing valuation meth
 
 # Investment Analysis Framework (IAF)
 
-**Revision:** 2026-10-08.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-11.3 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/iaf-valuation/` in the Finance folder.
 
 A forward-looking test of whether today's price is defensible given the return it can deliver over
@@ -37,7 +37,8 @@ nothing, say so and fall back to the next one. Never fill a gap with an invented
 | Structured IS/BS/CF line items, any listed company (Nordic, EU, US, SG) | **FinancialFilings** (`companies_financials_retrieve`) | Nordic Financial text, issuer report |
 | Filing list: new reports, share issues, insider trades, prospectuses | **FinancialFilings** (`filings_list`, newest first) | Nordic Financial `report_type="press_release"` |
 | Share price, spot FX, futures, Oslo tickers, market cap | **Yahoo** (`get_quote`, `get_chart`, `quote_summary`) | EODHD EOD prices; AllRatesToday for spot FX |
-| FX at a past moment (balance-sheet date, ex-date, payment date), several pairs at once; official central-bank rates | **AllRatesToday** (`get_rates_authenticated` with `time`, `get_official_rates`) | Yahoo `get_chart` |
+| FX at a past moment (balance-sheet date, ex-date, payment date), several pairs at once | **AllRatesToday** (`get_rates_authenticated` with `time`) for a market rate at a time of day | **Norges Bank API** daily fixing; Yahoo `get_chart` |
+| Official NOK fixings on any date, monthly and annual average rates (period-average conversion of a USD or EUR income statement; a rate named by a company, a contract or a tax rule) | **Norges Bank API** `EXR` (keyless; see the Norges Bank paragraph) | AllRatesToday `get_official_rates` (latest table only) |
 | Price history (EOD) as a cross-check | **EODHD** | Yahoo `get_chart` |
 | US company ratios | **Zacks** (`compare_stocks`, `get_zacks_metrics`) | Alpha Vantage (`COMPANY_OVERVIEW`), FinancialFilings, Yahoo |
 | Market check on the hurdle price (US listings and US ADRs): broker ratings and price targets per firm, consensus EPS/sales with number of estimates, next report date | **Zacks** (`get_wall_st_rating`, `compare_stocks` with `section="EDT"`) | Yahoo `quote_summary` |
@@ -45,8 +46,10 @@ nothing, say so and fall back to the next one. Never fill a gap with an invented
 | Brent/WTI/diesel spot history (cross-check of realised prices against the oil baseline) | **FRED** (`DCOILBRENTEU`, `DCOILWTICO`, `DDFUELNYH`, averaged server-side per quarter) | Alpha Vantage (`BRENT`, `WTI`) |
 | NIBOR path per scenario (NOK floating-rate debt service), Nordic HY spread and new-issue spreads (refinancing in Bear), HY watchlist (distress signal for an analysed issuer) | **`docs/hy-market-bbb.md`** (Interface tables, watchlist) | FRED and Norges Bank API for current levels only — never an own rate path |
 | Defense companies: defense spending per country, equipment and addressable spending, segment order and revenue growth per scenario, long end and steady-state margins, capacity balance | **`docs/defense-market-bbb.md`** (Interface tables, "For IAF") | — never an own defense spending or defense market forecast |
-| Rate and credit context: US 10-year, US high-yield spread, Norwegian 10-year and 3-month | **FRED** (`DGS10`, `BAMLH0A0HYM2`, `IRLTLT01NOM156N`, `IR3TIB01NOM156N`) | AllRatesToday `get_official_rates` (Norges Bank) |
-| Norwegian macro (policy rate, NOK FX) | **FRED** for rates; **Yahoo** / **AllRatesToday** for NOK FX | Norges Bank website |
+| Equity market context: Oslo (OSEBX) and MSCI World index Base IRR, index hurdle levels, energy share of Oslo earnings | **`docs/equity-market-bbb.md`** (context only: a market priced below k never lowers k; IAF keeps spot FX, not the baseline's NOK path) | — |
+| Rate and credit context: US 10-year, US high-yield spread | **FRED** (`DGS10`, `BAMLH0A0HYM2`) | — |
+| Norwegian rates (daily): policy rate, NOWA, T-bills, government bonds 3–10Y, government zero-coupon curve 6M–10Y; Norges Bank Financial Conditions Index | **Norges Bank API** (`IR`, `SHORT_RATES`, `GOVT_GENERIC_RATES`, `GOVT_ZEROCOUPON`, `FINANCIAL_INDICATORS`) | FRED `IRLTLT01NOM156N`, `IR3TIB01NOM156N` (OECD monthly, ~1 month lag) |
+| NOK spot for the price time stamp; import-weighted krone index (I-44) | **Yahoo** / **AllRatesToday** for spot; **Norges Bank API** `EXR/B.I44.NOK.SP` for I-44 (context; the NOK scenario path is in `docs/equity-market-bbb.md`) | Norges Bank website |
 | Nordic power price (today/tomorrow, hourly, EUR/kWh) | **Nordic Financial** `get_current_power_price` (zones NO1–NO5, SE1–SE4, DK1, DK2, FI) | — |
 
 **Nordic Financial** (aidatanorge Nordic MCP server): about 1,500 companies listed in Oslo,
@@ -107,7 +110,45 @@ source and time stamp in the header.
 
 Historical FX (quarter-end, year-end, ex-date, payment date) comes from AllRatesToday
 `get_rates_authenticated` with `time` set to the moment (e.g. `2025-12-31T16:00:00Z`); give several
-targets comma-separated in one call. Fall back to Yahoo `get_chart`.
+targets comma-separated in one call. Fall back to Yahoo `get_chart`. When the figure is an official
+rate (a company converts at Norges Bank's rate, a tax rule names it) or a **period average** (a
+USD income statement translated at the quarter or year average), use the Norges Bank fixing or
+its monthly / annual average from the Norges Bank API.
+
+**Norges Bank API** (keyless SDMX; tested 2026-10-11; `query.norges-bank.no` is the query
+builder for the same API):
+- URL: `https://data.norges-bank.no/api/data/<flow>/<key>?format=csv&locale=en` plus
+  `startPeriod` / `endPeriod` (`YYYY-MM-DD`, `YYYY-MM` or `YYYY`) or `lastNObservations=N`.
+  Several codes join with `+`: `EXR/B.USD+EUR+SEK.NOK.SP`. CSV is `;`-separated; with
+  `locale=en` the decimal mark is `.` but volumes carry `,` thousand separators.
+- **Exchange rates** `EXR/<freq>.<cur>.NOK.SP`: freq `B` daily fixing (ECB concertation 14:15 CET),
+  `M` monthly average, `A` annual average; ~40 currencies plus `I44` (import-weighted krone
+  index; rising = weaker NOK) and `TWI`. **`UNIT_MULT` = 2 means per 100 units** (SEK, DKK, JPY,
+  CNY…): divide by 100. Example: 31 Dec 2025 USD 10.0791, EUR 11.843, SEK 109.44 per 100;
+  annual average 2025 USD 10.3912.
+- No fixing on Norwegian holidays and weekends: the request then returns blank lines. Ask for a
+  window ending on the date and take the last observation on or before it.
+- **Rates:** `IR/B.KPRA.SD.R` policy rate; `SHORT_RATES/B.NOWA.ON.R` NOWA (also NOWA averages
+  1M/3M/6M and a NOWA index); `GOVT_GENERIC_RATES/B.<tenor>.<TBIL|GBON>` (3M–12M bills, 3/5/7/10Y
+  bonds; also `M` and `A` averages); `GOVT_ZEROCOUPON/B.<tenor>` government zero-coupon yields
+  6M–10Y (daily, ~2-day lag). **NIBOR is not in the API** (NoRe publishes it).
+- **Other flows:** `FINANCIAL_INDICATORS/D.FCI_TOTAL` (Financial Conditions Index; positive =
+  tighter: 2008 +7, Mar 2020 +4; mean 0.5 since 2007), `ANN_FX_SPU` (Norges Bank's daily FX
+  purchases or sales for the GPFG, NOK m/day per month), `REGNET` (Regional Network survey by
+  sector, incl. oil services), `LENDINGSURVEY`. `GOVT_IRS` is the government's own swap trades,
+  not a market swap curve, and `MONEY_MARKET` is transaction-level statistics: not used.
+- **MCP connector `norges-bank`** (local `@pipeworx/mcp-norges-bank@0.1.3`, calls only
+  `data.norges-bank.no`; tested 2026-10-11, values identical to the direct API). Use it for quick
+  lookups; use the direct CSV API for long histories and where attributes matter.
+  - `get_exchange_rate(currency, last_n | start_period/end_period)`: daily fixing; also takes
+    `I44`. A window with only holidays returns `empty_reason: no_match`.
+  - `get_series(flow_ref, key, …)`: works on **every** flow (tested `EXR` M/A averages,
+    `IR`, `SHORT_RATES`, `GOVT_GENERIC_RATES`, `GOVT_ZEROCOUPON`, `FINANCIAL_INDICATORS`),
+    although `list_flows` names only four.
+  - **It drops the series attributes.** `UNIT_MULT` is lost, so SEK, DKK, JPY, CNY come back per
+    100 units although the tool text says per unit (SEK 109.44 on 31 Dec 2025 = NOK 1.0944 per
+    SEK). `ANN_FX_SPU` loses the buy/sell direction and the transaction month (it returns the
+    announcement date): read that flow from the direct API.
 
 **AllRatesToday** (free API key): live interbank mid-market rates for 160+ currencies.
 - `get_rates_authenticated` with `time`: one point per pair at any past datetime. `group` with
@@ -116,8 +157,8 @@ targets comma-separated in one call. Fall back to Yahoo `get_chart`.
   `get_chart` for longer or custom-window series.
 - `get_official_rates`: the latest published central-bank table (Norges Bank = `norges`, ECB =
   `ecb`, Fed = `fed`, BoE = `boe`; other codes via `list_central_banks`, whose output is large).
-  Dated official rates need a paid plan (403). Use the Norges Bank rate when a company or a tax
-  rule names it; otherwise use the market rate.
+  Dated official rates need a paid plan (403); use the Norges Bank API for those. Use the Norges
+  Bank rate when a company or a tax rule names it; otherwise use the market rate.
 - Always cite the returned `time` or `rate_date`.
 
 **EODHD** (free plan): 20 calls per day, EOD prices only. Fundamentals and live data return 403.
@@ -162,6 +203,30 @@ covered (DOFG returned an error).
 - No company data, rig counts, tanker or OSV rates, or futures curves.
 
 **Not used for IAF:** sector or oil forecasts from any connector. These always come from `docs/oil-market-bbb.md` and the sector BBB documents.
+
+### Provenance and validation
+
+- **Provenance on every fetched value.** Record the source (connector or publisher plus series,
+  ticker or document), the **as-of date** (observation or report date, not the fetch date) and the
+  unit and currency. A value without an as-of date is `[?]`. Show the as-of date in every table
+  that carries market data, and the oldest input date in the Metadata section.
+- **Raw → checked → derived.** Keep the value as fetched in the source appendix before it is
+  converted, averaged or adjusted. A derived value names its conversion. A correction never
+  overwrites the raw value: record both and say why.
+- **Validate before use.** Run these checks on every fetched value. A failed check is flagged in
+  the text ("stale", "unverified", "unit check failed"), never silently fixed or dropped:
+  - *Units and scale:* per share vs per ADR, thousands vs millions, NOK vs USD, % vs fraction.
+  - *Basis and period:* fiscal vs calendar year, quarter vs LTM vs annual, reported vs adjusted,
+    basic vs diluted share count after buybacks and issues, ex-dividend status of the price.
+  - *Staleness:* share price and FX older than 1 trading day; financials older than the latest
+    reported quarter; consensus older than 1 month. Older inputs are used only with the flag and
+    their age.
+  - *Plausibility:* a line item more than 30% from the prior period without a named cause, a share
+    count change without a filing behind it, or a figure outside the company's own guidance range.
+    Such a jump is confirmed in a second source or the primary document before it moves the model.
+    Otherwise it is held as `[?]`.
+  - *Cross-source:* where two sources cover the same item, compare them. A gap beyond normal noise
+    is explained, never averaged away.
 
 ## Definitions
 
@@ -319,6 +384,43 @@ V_T drives most of the result, so build it, never assume it.
   context only and never the exit multiple.
   If the sector BBB gives no Bear/Bull mid-cycle for a row, derive it from the nearest row's
   Bear/Base/Bull mid-cycle ratios and tag it `[A]`.
+- **Exit consistency: final year vs mid-cycle.** V_T at mid-cycle assumes that earnings jump from
+  the Year-3 level to mid-cycle the day after exit. When the two are far apart, that jump must be
+  explained or priced, in either direction.
+  - **Test** each segment row or fleet block that drives open-day earnings, in every scenario:
+    gap = (Year-3 rate − mid-cycle rate) ÷ mid-cycle rate. Use the scenario's own Year-3 and
+    mid-cycle values, on the row's earnings basis (rate × utilization where the sector BBB gives
+    utilization; margin for a services line valued on mid-cycle earnings). Leave out days under firm
+    contract after T: the firm-contract premium already carries them.
+  - **Material = |gap| > 10%** (the sector BBB minimum change).
+  - **If the gap is material, use one of two treatments and say which:**
+    1. **Named reason.** The sector BBB, or a company document for a company-specific item, names a
+       sourced cause that brings the row to mid-cycle within about a year of exit. Quote the
+       reason and the BBB section it comes from. The analyst's own view does not count; if the BBB
+       gives no reason, use treatment 2. Examples:
+       - the BBB's delivery schedule, scrapping or contract-roll timing for the year after the
+         window;
+       - the asset market already prices the row at or below mid-cycle (asset-implied rate ≤
+         mid-cycle rate in the BBB), so a buyer at exit pays the mid-cycle mark and the exit is
+         market-consistent;
+       - for a gap below mid-cycle, the BBB's named recovery cause (deliveries falling, a large
+         ≥ 20-year pool, contract re-pricing).
+    2. **Reversion tail.** Add to V_T the present value of the gap on the open days, fading linearly
+       to mid-cycle over **2 years** after exit (2/3 of the gap in year 1, 1/3 in year 2). Take it
+       after the company's cash tax and discount it to T at the sector BBB's asset-value rate (8%).
+       The tail is negative when Year 3 is below mid-cycle. Per row:
+       `tail = (rate_Y3 − rate_mc) × open earning days a year (as in Year 3, after the company's
+       utilization or realisation factor) × (2/3 ÷ 1.08 + 1/3 ÷ 1.08²) × (1 − tax)`
+       The discount factor ≈ 0.90, so the tail is about one year of the Year-3 gap. It is a line in
+       the exit asset table and in the V_T bridge.
+  - **Always show the exit-consistency table:** row, scenario, Year-3 rate, mid-cycle rate, gap,
+    open days, treatment (the reason with its source, or the tail) and the tail per share.
+  - Decide on the chosen treatment, and report the other as a sensitivity: IRR_T and P_k with and
+    without the tail.
+  - The tail is a bridge, not a second cycle. Never extend it past 2 years, and never use it to
+    carry a scenario's rate path beyond exit.
+  - In the structural run (Step 5) Year 3 is at mid-cycle, so the tail is zero; the tail therefore
+    belongs to the cyclical part of IRR_T.
 - **Exit multiple must be stated and independent.** Never use the IAF ceiling as the exit multiple
   (circular). For finite-life assets (ships, rigs), prefer NAV over a perpetuity multiple.
 - **Roll the capital base forward**: V_T includes the value of growth capex deployed during the
@@ -332,15 +434,16 @@ V_T drives most of the result, so build it, never assume it.
   it so the whole of g is explained:
   NAV_0 → + value created by growth capex (value at T − value in NAV_0 − capex paid in the horizon)
   → − ageing of the existing fleet at mid-cycle marks → ± firm-contract premium roll-off →
+  ± reversion tail (exit consistency; zero where no gap is material or a named reason is used) →
   + retained cash (Σ Maintenance FCF − D_t paid; = −Δ net debt excluding growth capex) → V_T.
   There is no separate cycle-normalisation step: with NAV_0 at mid-cycle marks it sits in the
   re-rating.
 - **Interim V_t** (end of stub, Years 1–2) is a path diagnostic and does not enter IRR_T. Use the
   V_T method with asset marks gliding from today's market marks (Base mid-cycle where no market
-  mark exists) to the scenario's mid-cycle value at exit; state the glide. End-of-stub marks are
-  identical in all scenarios (Step 6). Marking straight to each scenario's mid-cycle at the end of
-  the stub creates a spread the stub does not have, and makes "IRR to Year 1" look like a pass
-  whenever P is below mid-cycle NAV.
+  mark exists) to the scenario's mid-cycle value at exit (plus any reversion tail at T); state the
+  glide. End-of-stub marks are identical in all scenarios (Step 6). Marking straight to each
+  scenario's mid-cycle at the end of the stub creates a spread the stub does not have, and makes
+  "IRR to Year 1" look like a pass whenever P is below mid-cycle NAV.
 
 ## Step 4 — Growth as a capital-allocation decision
 
@@ -377,8 +480,8 @@ Example at k = 12%: 20 invested at ROIC_g 15% → worth 25 (+5). At ROIC_g 9% �
    into structural and cyclical, for each scenario:
    - **Structural IRR**: the same model with every open or re-priced day from 1 Jan of Year 1 at
      **that scenario's own mid-cycle rate**. The stub, firm contract days and exit asset values are
-     unchanged; unexercised options count as open days; dividends and net debt follow the cash
-     flows.
+     unchanged, except the reversion tail, which is zero in the structural run (Step 3). Unexercised
+     options count as open days; dividends and net debt follow the cash flows.
    - **Cyclical = IRR_T − structural IRR** (pp), shown as Δd and Δg. For high-payout companies the
      cycle shows up mostly in d (DOF Base: +1.8 pp, all of it through d), so a g-only split misses it.
    - The gap between a scenario's structural IRR and the Base structural IRR is a **mid-cycle
@@ -443,7 +546,9 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
    Maintenance FCF, FCF after debt service and net debt; a table in $m only does not meet Step 2B. Dividends are shown declared, in the
    period earned; D_t in the year-end path is paid. Then the **year-end path** (D_t, V_t, r_t, IRR
    to t) for all three scenarios. Track A: E, EPS growth, D_t per period.
-5. **V_T bridge** for Base, from NAV_0 (Step 3), plus the exit asset table for all three scenarios.
+5. **V_T bridge** for Base, from NAV_0 (Step 3), plus the exit asset table for all three scenarios
+   and the **exit-consistency table** (Step 3: gap per row and scenario, treatment, tail per
+   share; IRR_T and P_k with the other treatment as a sensitivity).
 6. **Growth capex test**: amount, ROIC_g with source, value created vs k.
 7. **Results table** (rows in this order):
 
@@ -493,6 +598,9 @@ change in Base P_k, and whether the company is running ahead of or behind the Ba
 - Retained cash counted once; dilution included. Maintenance FCF is before debt amortisation.
 - V_T built from normalized economics, exit multiple independent of the IAF ceiling. V_T bridge
   starts from NAV_0; end-of-stub marks are the same in all scenarios.
+- Exit consistency tested per row and scenario. Every gap > 10% between the Year-3 rate and
+  mid-cycle has either a named, sourced reason from the sector BBB or a 2-year reversion tail in
+  V_T, with the other treatment shown as a sensitivity.
 - g is the value CAGR (V_T vs P), never IRR − d; c is shown; the re-rating is named when P/NAV_0
   is outside 0.95–1.05.
 - Structural IRR per scenario on that scenario's own mid-cycle; cyclical measured on IRR.
@@ -500,3 +608,5 @@ change in Base P_k, and whether the company is running ahead of or behind the Ba
 - ROIC_g sourced, not assumed.
 - Bear and Bull each tied to a named catalyst; no probability language.
 - Base verdict uses the margin of safety P_k / P − 1 (Track B) or Rules 1 and 3 (Track A).
+- Every fetched value has source, as-of date and unit; raw kept beside derived; validation
+  checks run and failures flagged in the text.

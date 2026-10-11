@@ -1,11 +1,11 @@
 ---
 name: oil-market-bbb
-description: Oil Market BBB — the price baseline for crude oil and distillates at the top of the analysis chain. Produces Bear/Base/Bull price paths for Brent and distillate cracks (diesel/ULSD, jet) on the IAF time grid (stub quarter(s) of the current year + 3 calendar years, now 2027–2029), plus mid-cycle prices for terminal values, the forward curve, the supply/demand/inventory balance and named catalysts with signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Covers prices and their physical drivers only — no shipping (rates, tonnage, ton-mile, routes) and no rigs. ALWAYS use when the user mentions Oil Market BBB / oil BBB, asks to create, run or update ("oppdater modul") the oil module, or asks about the Brent outlook, oil price scenarios, diesel or jet cracks, distillate prices, the oil forward curve or oil inventories — even without naming the skill. Feeds oil-shipping-bbb, rig-market-bbb, supply-market-bbb, hy-market-bbb and iaf-valuation; it is the only place an oil price forecast is made.
+description: Oil Market BBB — the price baseline for crude oil and distillates at the top of the analysis chain. Produces Bear/Base/Bull price paths for Brent and distillate cracks (diesel/ULSD, jet) on the IAF time grid (stub quarter(s) of the current year + 3 calendar years, now 2027–2029), plus mid-cycle prices for terminal values, the forward curve, the supply/demand/inventory balance and named catalysts with signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Covers prices and their physical drivers only — no shipping (rates, tonnage, ton-mile, routes) and no rigs. ALWAYS use when the user mentions Oil Market BBB / oil BBB, asks to create, run or update ("oppdater modul") the oil module, or asks about the Brent outlook, oil price scenarios, diesel or jet cracks, distillate prices, the oil forward curve or oil inventories — even without naming the skill. Feeds oil-shipping-bbb, rig-market-bbb, supply-market-bbb, hy-market-bbb, equity-market-bbb and iaf-valuation; it is the only place an oil price forecast is made.
 ---
 
 # Oil Market BBB
 
-**Revision:** 2026-10-05.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-11.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/oil-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull price baseline for crude oil and distillates. It answers one question: **what
@@ -13,7 +13,7 @@ Brent and distillate prices should the downstream analyses use, year by year, an
 events would move them?** It is a testable hypothesis with explicit risks, not a news summary.
 
 This skill is the top of the chain. [[oil-shipping-bbb]], [[rig-market-bbb]],
-[[supply-market-bbb]], [[hy-market-bbb]] and [[iaf-valuation]] read `docs/oil-market-bbb.md` and never make their own oil forecast, so the
+[[supply-market-bbb]], [[hy-market-bbb]], [[equity-market-bbb]] and [[iaf-valuation]] read `docs/oil-market-bbb.md` and never make their own oil forecast, so the
 output must keep the fixed interface defined under Output.
 
 **Scope:** crude and distillate prices and the physical drivers behind them (supply, demand,
@@ -21,6 +21,14 @@ inventories, refining, disruptions measured in barrels). **Out of scope:** freig
 tonnage, ton-mile, sailing routes and transit days (→ [[oil-shipping-bbb]]); rigs and E&P capex
 (→ [[rig-market-bbb]]); company figures (→ [[iaf-valuation]]); gasoline and other non-distillate
 products.
+
+**Freight shocks — price effect only.** Freight levels stay in [[oil-shipping-bbb]], but a freight
+shock moves oil prices, and that part belongs here. Quote one freight figure per route as a
+cost in $/bbl (with source and date), then report only the price effects: the Brent–WTI spread
+(US crude must discount to clear when the Asia arbitrage shuts), regional crude differentials
+(Murban/Dubai vs Brent), the Dated–futures spread, and support for cracks where importing
+refiners pay higher delivered costs. Judge whether the effect lasts beyond the stub by checking
+the Brent–WTI forward strip, not the front month alone.
 
 ## Standing parameters
 
@@ -101,11 +109,13 @@ Never fill a gap with an invented number.
 
 Connector quirks (tested 2026-10-04):
 
-- **Yahoo back months print stale.** Check `regularMarketTime` on every contract. Prints older
-  than ~5 trading days (common for BZ 2028–2029) are flagged with their date; use the bid/ask
-  midpoint only if both sides are present and plausible, otherwise cross-check with the liquid WTI
-  contract of the same month plus the Brent–WTI spread from the nearest liquid month, and mark
-  `[A]`.
+- **Yahoo back months: settlement vs stale.** `regularMarketPrice` follows the daily settlement
+  even when `regularMarketTime` (last trade) is weeks old (re-tested 2026-10-10: BZ Q27/Z28/Z29
+  settlements moved with the curve despite old last-trade times). A contract is **stale** only
+  when its price is unchanged over several sessions and out of line with its neighbours (e.g. BZ
+  V27/X27 stuck at May values). Interpolate stale months between liquid neighbours, or use the
+  liquid WTI contract plus the Brent–WTI spread from the nearest liquid month, and mark `[A]`.
+  Comparing with the previous run's strip is the quickest test.
 - Yahoo drops unknown tickers silently — check that every requested ticker came back. ICE gasoil
   is **not** available on Yahoo.
 - Alpha Vantage: 25 calls/day, 1 call/second, call sequentially.
@@ -136,6 +146,25 @@ Connector quirks (tested 2026-10-04):
 - **User input is input, not a reference.** Links, numbers and drafts are assessed critically (what
   it measures, how fresh, which definition); use what holds, reject the rest, and note the
   assessment in the source appendix.
+- **Provenance on every fetched value.** Record the source (connector or publisher plus series,
+  ticker or document), the **as-of date** (observation or report date, not the fetch date) and the
+  unit and currency. A value without an as-of date is `[?]`. Show the as-of date in every table
+  that carries market data, and the oldest input date in the Metadata section.
+- **Raw → checked → derived.** Keep the value as fetched in the source appendix before it is
+  converted, averaged or adjusted. A derived value names its conversion. A correction never
+  overwrites the raw value: record both and say why.
+- **Validate before use.** Run these checks on every fetched value. A failed check is flagged in
+  the text ("stale", "unverified", "unit check failed"), never silently fixed or dropped:
+  - *Units and scale:* $/bbl vs $/t (diesel and jet about 7.45 bbl/t), kb/d vs mb/d, mb vs mt.
+  - *Basis and period:* ICE Brent futures vs Dated, front month vs continuation, monthly average vs
+    month-end, agency balance quarter vs year.
+  - *Staleness:* prices and curve points older than 5 trading days; agency balances older than the
+    latest monthly release. Older inputs are used only with the flag and their age.
+  - *Plausibility:* a move of more than 10% vs the value in the current document, or a stock change
+    implied by the balance that conflicts with reported inventories. Such a jump is confirmed in a
+    second source or the primary document before it moves the model. Otherwise it is held as `[?]`.
+  - *Cross-source:* where two sources cover the same item, compare them. A gap beyond normal noise
+    is explained, never averaged away.
 
 ## Scenarios
 
@@ -344,7 +373,7 @@ Keep the main part short per heading; series and source details go to the append
 - What to watch before the next update
 
 ## For downstream skills
-- What changed that [[oil-shipping-bbb]] / [[rig-market-bbb]] / [[supply-market-bbb]] / [[hy-market-bbb]] / IAF must take in, or "no material change"
+- What changed that [[oil-shipping-bbb]] / [[rig-market-bbb]] / [[supply-market-bbb]] / [[hy-market-bbb]] / [[equity-market-bbb]] / IAF must take in, or "no material change"
 
 ## Change log
 - New / unchanged / changed (previous → new, reason, source)
@@ -380,6 +409,9 @@ Use by skill:
   and disruption status; drilling activity reaches it through [[rig-market-bbb]].
 - **[[hy-market-bbb]]**: Brent path per scenario and mid-cycle (E&P issuers' cash flow and
   borrowing base) and disruption status (inflation and rate channel for non-energy issuers).
+- **[[equity-market-bbb]]**: Brent path per scenario and mid-cycle (Oslo energy-block earnings
+  and the Oslo index exit value) and the Bear/Bull catalysts (equity scenarios and the oil side
+  case).
 - **[[oil-shipping-bbb]]**: crude and product volumes, regional balances, refining changes and
   disruption status, translated there into shipping effects. Shipping, rig and OSV companies do not take
   this baseline directly into IAF; it reaches them through their sector skill.
@@ -396,4 +428,6 @@ Use by skill:
 - Bear and Bull each tied to named catalysts with signposts; no probability language.
 - No shipping or rig content.
 - Change log complete (previous → new) or explicit "kept unchanged".
+- Every fetched value has source, as-of date and unit; raw kept beside derived; validation
+  checks run and failures flagged in the text.
 - File written, read back, tables render.

@@ -5,7 +5,7 @@ description: Supply Market BBB (Supply BBB) — the offshore supply vessel (OSV)
 
 # Supply Market BBB
 
-**Revision:** 2026-10-05.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-10.3 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/supply-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the offshore supply vessel market. It answers one question: **what
@@ -98,7 +98,7 @@ only as demand that competes for CSVs, PSVs and AHTS.
 | **Brazil PSV** | PSVs on Petrobras or IOC contracts in Brazil, by Petrobras class (e.g. PSV 3000 / 4500); Brazilian vs foreign flag noted | Petrobras tender/award leading-edge, USD/day | Vessels contracted ÷ vessels available in Brazil (proxy; named source) | Core BBB |
 | **Brazil AHTS** | AHTS on Petrobras or IOC contracts, by Petrobras BHP class; flag noted | Petrobras tender/award leading-edge, USD/day | As Brazil PSV | Core BBB |
 | **Brazil RSV** | ROV support vessels on Petrobras contracts, **vessel + ROV package** | Petrobras award leading-edge, USD/day, package basis | Cover of the named Brazil RSV fleet | Core BBB |
-| **Brazil PLSV** | Flexible pipe-lay support vessels for Petrobras (tension, carousel capacity, water depth, Petrobras qualification) | Petrobras award leading-edge, USD/day (vessel + crew; services stated) | Cover of the named PLSV fleet (closed set, rig-by-rig style) | Core BBB |
+| **Brazil PLSV** | Flexible pipe-lay support vessels for Petrobras (tension, carousel capacity, water depth, Petrobras qualification); row level = 550 t-class (Seagems/Subsea7 type), **100% vessel basis** | Petrobras award leading-edge, USD/day (vessel + crew; services stated) | Cover of the named PLSV fleet (closed set, rig-by-rig style) | Core BBB |
 | NS medium PSV | Below the large-PSV boundary; mostly older tonnage | Broker spot average where published | Broker counts | Secondary (attrition and migration signal) |
 | NS AHTS — term | Large/high-end AHTS on term (mooring campaigns, floating wind, FPSO hook-up) | Term fixtures | Named-fleet cover | Secondary |
 | Guyana/Suriname PSV & AHTS | Vessels supporting Stabroek and Suriname developments | Contract announcements; company regional averages `[E]` | Company fleet status | Secondary |
@@ -192,7 +192,7 @@ gap with an invented number.
 | Brent path, long end, mid-cycle, disruptions | **`docs/oil-market-bbb.md`** (Interface + "For downstream skills") | — never a connector or own estimate |
 | Rig activity, rig-years, NCS/UK/Brazil/Guyana rig status, Petrobras drilling, rig moves | **`docs/rig-market-bbb.md`** (Interface, region × segment matrix, operator demand) | — never an own rig forecast; flag gaps to [[rig-market-bbb]] |
 | North Sea spot rates, spot utilization, fixtures, vessels in/out of the North Sea | Broker market reports: **Westshore, Seabrokers, Fearnley Offshore Supply (FOSLive), Braemar** | [Hagland](https://hagland.market/) spot listings and monthly reports (sample, not total market) |
-| North Sea term fixtures, contract awards by owner | Owner announcements: **Nordic Financial** `search_filings` with `source="newsweb"` + `ticker` + `fiscal_year`, `limit` 10–20 (dated, with the owner's size class); broker reports | Trade press `[E]`, grade C |
+| North Sea term fixtures, contract awards by owner | Owner announcements: **Nordic Financial** `search_filings` with `source="newsweb"` + `ticker` + `fiscal_year`, `limit` 10–20 (dated, with the owner's size class); **Newsweb backend via the Edge connection** (see Quirks) when Nordic Financial is unavailable or for a complete date-range sweep; broker reports | Trade press `[E]`, grade C |
 | NCS / UK activity | Sokkeldirektoratet (wells, field developments, production), Havtil consents, NSTA (UK wells, decommissioning), OEUK reports | Operator plans (Equinor, Aker BP, Vår Energi, Harbour, others) |
 | Brazil demand and contracts | **Petrobras** (Strategic Plan, usually late Nov; FPSO start-ups, wells to connect; Petronect tenders and results) | Owner announcements; ANP (production, wells); trade press |
 | Brazil fleet by flag and type | ABEAM fleet statistics; Antaq authorisations | Owner fleet lists (DOF, Solstad, OceanPact, CBO, Tidewater, Bram) |
@@ -205,7 +205,23 @@ gap with an invented number.
 | FX for currency conversion | **AllRatesToday** (`get_rates_authenticated` with `time`) per the IAF FX rule | Yahoo `get_chart` |
 | Trade press | Offshore Energy, Offshore mag, Splash247, TradeWinds, Upstream, Brasil Energia, Petronotícias | Analyst notes — `[E]`, grade C, never sole evidence for a rate |
 
-Quirks (observed in the 2026-10-05 initial run):
+Quirks (observed in the 2026-10-05 initial run and the 2026-10-10 update):
+
+- **Newsweb sweep (best owner-announcement source).** Use the user's logged-in Edge connection
+  (`mcp__edge__*`; the user approves each connection). Open any `newsweb.oslobors.no` page, then
+  call the backend with `fetch` inside `browser_evaluate`:
+  - `POST https://api3.oslo.oslobors.no/v1/newsreader/list?category=&issuer=&fromDate=YYYY-MM-DD&toDate=YYYY-MM-DD&market=&messageTitle=<text>`
+    returns at most ~600 messages, so sweep in 7-day chunks. Filter on `issuerSign`, e.g. DOFG,
+    SOFF, SOMA, EIOF, GEOS, PLSV, AKAST, HAVI, SIOFF.
+  - `POST .../v1/newsreader/message?messageId=<id>` returns the full text.
+  - A weekly sweep found awards that web search missed (Eidesvik, Golden Energy, DDW/Akastor sales).
+- **Nordnet news links** (user input) open only through the Edge connection. They are usually
+  copies of Newsweb releases, so read the primary release.
+- **SSY weekly offshore PDFs** are no longer at the public `cms.ssyglobal.com/wp-content/uploads/…`
+  pattern after Feb 2026. Treat SSY as unavailable unless the user supplies a report.
+- **Golden Energy Offshore (GEOS)** publishes a monthly fleet working dayrate and utilisation in its
+  Newsweb releases (large PSVs, mostly North Sea). Use it as a monthly cross-check for the term rows,
+  never as the anchor series.
 
 - **Seabrokers *Seabreeze*** is the anchor series for the North Sea spot rows:
   - `seabrokers.no/chartering/seabreeze` serves the latest monthly report as a PDF. Older months
@@ -264,6 +280,10 @@ Quirks (observed in the 2026-10-05 initial run):
   the annual average.
 - **Management guidance is `[E]`.** Owners talk their book; Base is set from cover, tenders,
   fixtures and the balance, and the gap to guidance is stated.
+- **100% vessel basis.** Before dividing revenue, opex or backlog by vessel-days, check whether the
+  company reports a JV **share** (e.g. Paratus reports 50% of Seagems; DOF reports 50% of DOFCON).
+  Convert to 100% and say so. Cross-check every derived rate against the contractual or reported
+  dayrate (the 5 Oct 2026 PLSV row was half the real level because of this).
 - n < 3 comparable fixtures in six months → a range and "low confidence", not a point.
 - Known weak data: North Sea term rates (few published), Brazil rates (selective publication),
   vessel-per-rig ratios (calibrated, not observed), offshore wind demand for oil-and-gas tonnage,
@@ -271,6 +291,27 @@ Quirks (observed in the 2026-10-05 initial run):
 - **User input is input, not a reference.** Links, numbers and drafts are assessed critically (what
   it measures, how fresh, which definition); use what holds, reject the rest, and note the
   assessment in the source appendix.
+- **Provenance on every fetched value.** Record the source (connector or publisher plus series,
+  ticker or document), the **as-of date** (observation or report date, not the fetch date) and the
+  unit and currency. A value without an as-of date is `[?]`. Show the as-of date in every table
+  that carries market data, and the oldest input date in the Metadata section.
+- **Raw → checked → derived.** Keep the value as fetched in the source appendix before it is
+  converted, averaged or adjusted. A derived value names its conversion. A correction never
+  overwrites the raw value: record both and say why.
+- **Validate before use.** Run these checks on every fetched value. A failed check is flagged in
+  the text ("stale", "unverified", "unit check failed"), never silently fixed or dropped:
+  - *Units and scale:* GBP vs NOK vs USD, per day vs k/day, vessel count vs vessel-days, 100% vessel
+    basis vs JV share.
+  - *Basis and period:* spot vs term, North Sea spot average vs single fixture, paid vs calendar
+    days, rate incl. vs excl. ROV and crew.
+  - *Staleness:* North Sea spot older than 1 week; term fixtures and Petrobras tender data older
+    than 3 months; fleet and lay-up counts older than 1 month. Older inputs are used only with the
+    flag and their age.
+  - *Plausibility:* a spot weekly average more than 50% from the prior week, or a term rate or
+    vessel value more than 15% from the current document. Such a jump is confirmed in a second
+    source or the primary document before it moves the model. Otherwise it is held as `[?]`.
+  - *Cross-source:* where two sources cover the same item, compare them. A gap beyond normal noise
+    is explained, never averaged away.
 
 ## Scenarios
 
@@ -429,6 +470,14 @@ mark the rest "not assessed".
 - **Asset values:** newbuild price and lead time, recent secondhand transactions (price, age, spec,
   date, buyer), reactivation cost, scrap value. **Asset-implied rate:** the rate a recent
   transaction capitalises over the vessel's remaining life at the same 8% and a stated utilization.
+- **Economic life per row:** state it in the asset section with evidence; the default is 25 years.
+  - Evidence includes operator age caps, the age at which vessels leave the focus region, and
+    class or docking programmes.
+  - **Test it against transactions:** at the row's mid-cycle rate, the model value of a mid-aged
+    vessel should not sit above recent secondhand prices. If it already does, a longer life is
+    not supported unless the mid-cycle rate is cut at the same time.
+  - Change a row's life only on a primary source (e.g. a class extension accepted by the main
+    charterer), and log the change as a method change.
 
 **Step 9 — Test BBB.**
 - **Base:** what would have to be true for Base to be wrong, and do we see it? Search actively for
@@ -644,4 +693,6 @@ rate and payable days → cost and capacity risk.**
 - Bear and Bull each tied to named catalysts with signposts and oil and rig scenarios; no
   probability language.
 - Change log complete (previous → new) or explicit "kept unchanged".
+- Every fetched value has source, as-of date and unit; raw kept beside derived; validation
+  checks run and failures flagged in the text.
 - File written, read back, tables render.

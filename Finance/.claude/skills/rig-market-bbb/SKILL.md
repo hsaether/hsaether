@@ -5,7 +5,7 @@ description: Rig Market BBB — the offshore drilling-rig market baseline for dr
 
 # Rig Market BBB
 
-**Revision:** 2026-10-08.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-10.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/rig-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the offshore rig market. It answers one question: **what market
@@ -212,6 +212,26 @@ Quirks (observed in the 2026-09-29 run):
 - **User input is input, not a reference.** Links, numbers and drafts are assessed critically (what
   it measures, how fresh, which definition); use what holds, reject the rest, and note the
   assessment in the source appendix.
+- **Provenance on every fetched value.** Record the source (connector or publisher plus series,
+  ticker or document), the **as-of date** (observation or report date, not the fetch date) and the
+  unit and currency. A value without an as-of date is `[?]`. Show the as-of date in every table
+  that carries market data, and the oldest input date in the Metadata section.
+- **Raw → checked → derived.** Keep the value as fetched in the source appendix before it is
+  converted, averaged or adjusted. A derived value names its conversion. A correction never
+  overwrites the raw value: record both and say why.
+- **Validate before use.** Run these checks on every fetched value. A failed check is flagged in
+  the text ("stale", "unverified", "unit check failed"), never silently fixed or dropped:
+  - *Units and scale:* $/day vs $k/day, rig count vs rig-years, contract value vs dayrate.
+  - *Basis and period:* leading-edge vs average contracted rate, marketed vs total utilization, rate
+    incl. vs excl. mobilisation, integrated services and bonuses.
+  - *Staleness:* leading-edge rates older than 3 months for a segment with fixtures; fleet status
+    and cover older than the latest monthly census or company fleet status report. Older inputs are
+    used only with the flag and their age.
+  - *Plausibility:* a leading-edge rate more than 15% from the last comparable fixture, or a
+    utilization change of more than 5 points in a month. Such a jump is confirmed in a second source
+    or the primary document before it moves the model. Otherwise it is held as `[?]`.
+  - *Cross-source:* where two sources cover the same item, compare them. A gap beyond normal noise
+    is explained, never averaged away.
 
 ## Scenarios
 
@@ -563,4 +583,6 @@ Use in [[iaf-valuation]] (drilling contractors, Track B):
 - Bear and Bull each tied to named catalysts with signposts and an oil scenario; no probability
   language.
 - Change log complete (previous → new) or explicit "kept unchanged".
+- Every fetched value has source, as-of date and unit; raw kept beside derived; validation
+  checks run and failures flagged in the text.
 - File written, read back, tables render.
