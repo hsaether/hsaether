@@ -28,7 +28,15 @@ Skills and the chain between them:
 - `equity-market-bbb` (Equity BBB: Oslo/OSEBX and global/MSCI World index returns in NOK, IAF at
   index level, oil and NOK linkage, equity triggers mirroring the HY rule) → reads the oil
   baseline (Oslo energy earnings) and the HY baseline (NIBOR, GDP, HY return) plus the HY
-  reference in `docs/hy-funds-analysis.md`; output `docs/equity-market-bbb.md`
+  reference in `docs/hy-funds-analysis.md`; output `docs/equity-market-bbb.md`. Fund mode (named
+  equity funds, e.g. DNB Teknologi) → `docs/<fund>-analysis.md` (e.g. `docs/dnb-teknologi-analysis.md`);
+  index funds compared for one role → `docs/global-index-funds-analysis.md` (DNB Global Indeks,
+  Nordnet Global Indeks)
+- `ai-market-bbb` (AI BBB: AI capex and its financing, hardware (compute, memory, foundry and
+  equipment, networking and DC infrastructure, power), AI engines (frontier labs, AI cloud) and
+  tools (copilots, AI-native tools, incumbent software); layer-basket IAF test) → reads the equity
+  baseline (scenarios, NOK path, World) and NIBOR from the HY baseline; output
+  `docs/ai-market-bbb.md`
 - `iaf-valuation` → company valuation using the sector baselines; outputs
   `docs/<company>-analysis.md` (e.g. `docs/capt-analysis.md`, `docs/SED-analysis.md`)
 - Background on the IAF reasoning: `docs/iaf-reference-notes.md`
@@ -47,6 +55,8 @@ Skills and the chain between them:
   `docs/rig-market-bbb.md`. The NIBOR path and Nordic GDP view are set only in
   `docs/hy-market-bbb.md`; other skills read them there. Defense spending paths and the defense
   market view are set only in `docs/defense-market-bbb.md`. Equity index return paths, index
-  hurdles and the NOK scenario path are set only in `docs/equity-market-bbb.md`.
+  hurdles and the NOK scenario path are set only in `docs/equity-market-bbb.md`. AI market paths
+  (capex, layer revenues, lab revenue, adoption, layer EPS paths) are set only in
+  `docs/ai-market-bbb.md`.
 - Never use git for any work (no git mv, rm, add, commit, status, etc.) and never ask about
   commits. The user handles all git transactions. Use plain file operations only.

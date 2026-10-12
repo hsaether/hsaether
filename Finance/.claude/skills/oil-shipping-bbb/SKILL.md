@@ -5,7 +5,7 @@ description: Oil Shipping BBB — the tanker-market baseline for crude tankers (
 
 # Oil Shipping BBB
 
-**Revision:** 2026-10-10.3 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-12.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/oil-shipping-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the tanker market. It answers one question: **what market TCE and
@@ -92,7 +92,8 @@ gap with an invented number.
 |---|---|---|
 | Oil volumes, prices, disruptions, refining | **`docs/oil-market-bbb.md`** (Interface + "For downstream skills") | — never a connector or own estimate |
 | Spot TCE by segment, weekly | Broker weekly reports (Intermodal, Banchero Costa, Gibson, BRS, Poten, Signal Ocean) and Baltic figures quoted in Lloyd's List, TradeWinds, Splash247 | Company-reported spot TCE |
-| Realised TCE, booked share of next quarter, TC fixtures | **Nordic Financial** `search_filings`/`company_research` with `ticker` + `fiscal_year` (FRO and HAFNI tested; OET, TRMD-A to test); full report via `parse_pdf_to_text` on the IR PDF | **FinancialFilings** for US filers (DHT, INSW, TNK, STNG, NAT): resolve id with `companies_list` |
+| Realised TCE, booked share of next quarter, TC fixtures | **Nordic Financial** `search_filings`/`company_research` with `ticker` + `fiscal_year` (FRO and HAFNI tested; OET, TRMD-A to test); full report via `parse_pdf_to_text` on the IR PDF. **DHT business updates** (GlobeNewswire, ~2 weeks after quarter end: last quarter's spot/TC TCE and the booked share of the current quarter, discharge-to-discharge) | **FinancialFilings** for US filers (DHT, INSW, TNK, STNG, NAT): resolve id with `companies_list`; SEC 6-K usually a day or more later |
+| VLCC fixture count and daily TD3C/TD15 marks | **Infront TDN Direkt via Nordnet** ("TANK: N VLCC-slutninger …", from the Fearnleys fixture list): fixtures per day, WS and TCE, and the AG VLCC fixture count by loading month (a volume signpost) | Baltic via Affinity; Fearnleys weekly |
 | 1-year / 3-year TC rates | Broker weekly TC tables | Company TC fixtures in reports and announcements |
 | FFAs (Q and Cal contracts) | **Gibson weekly** (current-quarter FFA in TCE); BWET holdings for the next months (derived `[A]`); Baltic/FIS curves quoted in press | Company commentary — mark `[E]`, "not verified" if no dated level |
 | Orderbook in vessels (VLCC, Suezmax, Aframax/LR2) and share of fleet ≥ 20 years | **Frontline quarterly release** (industry sources; SEC 6-K exhibit or GlobeNewswire), "orderbook" paragraph | Company presentations quoting Clarksons (cite the underlying source) |
@@ -145,6 +146,17 @@ Connector quirks (tested 2026-10-04):
   - **Allied weekly** PDFs are on cyprusshippingnews.com (`wp-content/uploads/<yyyy>/<mm>/ALLIED-Weekly-Market-Report-Week-<n>.pdf`).
     The "Market Snapshot" table extracts with values shifted one row down; realign before use.
   - The Baltic Exchange site and Seatrade/Splash247 block automated fetches (challenge page or 403).
+- **Company updates and Nordnet news** (tested 2026-10-12):
+  - GlobeNewswire blocks WebFetch (403). The search page and releases read fine through the Edge
+    connection (`mcp__edge__browser_navigate`, then `browser_evaluate` with `innerText`).
+  - Nordnet news links (`nordnet.no/market/news/<uuid>`) load only in the user's logged-in Edge.
+    Wait ~2 s after navigating before reading `innerText`, or the result is empty.
+  - Nordnet items are TDN summaries: use the primary release, and the TDN text as a cross-check.
+  - TDN bunker prices differed from Gibson/Xclusiv by ~$100/t on the same day (Oct 2026). Do not
+    use them.
+  - **Company realised TCE is a lagging cross-check, never a market mark.** A discharge-to-discharge
+    reporter's booked share of the current quarter reflects fixtures made 4–6 weeks earlier. In a
+    fast market, compare it with the segment average of the fixing period, not with the stub.
 - **Frontline release on SEC** (tested 2026-10-10): `curl -A "<name> <email>"` on the 6-K exhibit
   (sec.gov requires a user agent), strip tags, and grep "order book". It gives the orderbook in
   vessels for VLCC, Suezmax and Aframax/LR2 and the ≥ 20-year shares now and at full delivery.

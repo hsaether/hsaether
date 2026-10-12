@@ -5,7 +5,7 @@ description: Nordic HY Market BBB (HY BBB) — the Nordic high-yield bond market
 
 # Nordic HY Market BBB
 
-**Revision:** 2026-10-11.7 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-11.8 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/hy-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the Nordic high-yield bond market. It answers two questions:
@@ -114,7 +114,9 @@ investment-grade corporates, covered bonds and government bonds except as the se
   - `docs/hy-issuers.md` — company bond assessment (expected return and risk per bond) and the
     Stamdata distress screen (Step F9).
   - `docs/hy-funds-analysis.md` — one running fund file: comparison table plus one section per
-    fund. Funds are compared side by side, so they share one file.
+    fund. Funds are compared side by side, so they share one file. **Fund facts, performance and
+    verdicts only** (user instruction, 2026-10-11.8): no allocation splits or proposals, no
+    portfolio or pension views and no user holdings. Those belong in `docs/portfolio-overview.md`.
 - Git holds the history, so the previous version is read from the file before it is overwritten.
 - Write with Write/Edit, then **read the file back** and check every table and number. An answer
   in the conversation alone is not delivery.
@@ -684,7 +686,7 @@ Høyrente, Heimdal Høyrente Pluss, Sissener Corporate Bond, Fondsfinans High Yi
 reference fund **Arctic Return** (Step F10); add others on request. Write to
 `docs/hy-funds-analysis.md`.
 
-**Share classes (the user's classes; use these unless told otherwise):**
+**Share classes (the classes sold on Nordnet; use these unless told otherwise):**
 
 | Fund | Class | ISIN | Ongoing fee | Note |
 |---|---|---|---|---|
@@ -692,20 +694,20 @@ reference fund **Arctic Return** (Step F10); add others on request. Write to
 | Heimdal Høyrente Pluss | B | NO0013580654 | 0.70% | A: 0.85%. Minimum NOK 50m direct, or NOK 100 via distributors without retrocession |
 | Fondsfinans High Yield | B | NO0013168773 | 0.41% | A: 0.45% + 0.5% entry and 0.5% exit charge (Morningstar). B minimum NOK 100m direct |
 | Sissener Corporate Bond | NOK-R | LU1923202326 | TER 0.41% + 20% above 3M NIBOR + 1% (high-water mark) | NOK-RF: 1.00% flat |
-| Fondsfinans Kreditt (evaluated 2026-10-11; not a holding) | B | NO0013168765 | 0.31% (DNB listing) | A NO0010676083 0.35%. Same team as Fondsfinans High Yield; weighted rating ≥ BB, nothing below B− at purchase, modified duration 0–2 years |
-| **Arctic Return** (reference) | **L NOK** (the user's class, 2026-10-11) | IE00BYT07T65 | 0.50% ongoing (KID), no performance fee | The class on Nordnet. I IE00B40J7B48 0.20% (min NOK 250m); B IE00BVV23V37 0.25% (min NOK 50m); A IE00B4PM2R92 0.30%; R IE00BZ3C8C56 0.30% + 10% above the Norwegian T-bill index (~0.11%; min NOK 1,000). Its published track record is class I: subtract 0.30 pp a year for class L |
+| Fondsfinans Kreditt (evaluated 2026-10-11) | B | NO0013168765 | 0.31% (DNB listing) | A NO0010676083 0.35%. Same team as Fondsfinans High Yield; weighted rating ≥ BB, nothing below B− at purchase, modified duration 0–2 years |
+| **Arctic Return** (reference) | **L NOK** (the class on Nordnet, 2026-10-11) | IE00BYT07T65 | 0.50% ongoing (KID), no performance fee | The class on Nordnet. I IE00B40J7B48 0.20% (min NOK 250m); B IE00BVV23V37 0.25% (min NOK 50m); A IE00B4PM2R92 0.30%; R IE00BZ3C8C56 0.30% + 10% above the Norwegian T-bill index (~0.11%; min NOK 1,000). Its published track record is class I: subtract 0.30 pp a year for class L |
 
 - Monthly reports quote **class A** yields after the A fee. **Class yield = A yield + (A fee − class
   fee).** Track-record gaps need no adjustment (the fee is in both the yield and the return).
 - Fees from the PRIIPs KID (Heimdal: `heimdalfondene.no/wp-content/uploads/.../<date>-Priips-<fund>-<class>.pdf`),
   or Morningstar `OngoingCharge` on fundlist (Fondsfinans).
-- **Investor-level cost (added 2026-10-11.4):** the classes above are the Nordnet classes. Fund
+- **Cost by purchase route (added 2026-10-11.4):** the classes above are the Nordnet classes. Fund
   rows are after the class fee only and never include a platform fee.
   - **Nordnet** charges a **0.19% a year platform fee** on bond and HY funds ("andre rentefond").
     It is flat, with no size tiers, and charged quarterly. Nordnet's "total price" = class fee +
     0.19.
-  - **A direct purchase** from the fund company pays no platform fee, but at NOK 0.5–4m it gets
-    **class A**:
+  - **A direct purchase** from the fund company pays no platform fee, but below the size
+    thresholds it gets **class A**:
     - Høyrente and Pluss 0.85%, min NOK 100. Høyrente N is for distributors only; Pluss B needs
       NOK 50m;
     - FF HY 0.45%, min NOK 100k. Morningstar lists a 0.5% entry and exit charge, but the
@@ -713,7 +715,9 @@ reference fund **Arctic Return** (Step F10); add others on request. Write to
     - Kreditt 0.35%, min NOK 10k. The Fondsfinans B classes need NOK 100m.
   - Net effect: direct is 0.15 pp a year cheaper for the Fondsfinans funds and 0.04 pp for
     Heimdal.
-  - When a user asks for an allocation, state the route (Nordnet or direct) and deduct its cost.
+  - Record these as fund cost facts in the fund file. An allocation is not made here; when one is
+    made in `docs/portfolio-overview.md`, it states the route (Nordnet or direct) and deducts its
+    cost.
 
 **Step F0 — Setup.** State this skill's revision and the HY baseline date used. Read the previous
 `docs/hy-funds-analysis.md` and record the previous figures per fund.
@@ -1145,6 +1149,8 @@ appendix.
 ### Track record vs NIBOR (yearly excess, worst month and year, record vs forward)
 ### Return paths and step-up table
 
+## Share classes and cost by purchase route (platform fee; classes open to a direct buyer)
+
 ## Change log
 ## Appendix: sources
 ```
@@ -1184,6 +1190,7 @@ Use by skill:
   volume.
 - Bear and Bull each tied to named catalysts with rate, macro and oil scenarios and signposts; no
   probability language.
+- Fund file holds no allocation, proposal, portfolio or pension content.
 - Fund mode: prospectus used for rules; yield basis, share class currency and fee stated; sector
   mapping shown; single-name stress shown; rating split used where published; cash read in
   context (notice period vs dry powder); manager style stated; verdict on yield versus risk (E / R

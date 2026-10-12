@@ -1,11 +1,11 @@
 ---
 name: equity-market-bbb
-description: Equity Market BBB — the equity index baseline for Oslo (OSEBX) and global equities (MSCI World, in NOK unhedged and in USD). Applies the IAF method at index level (d + g + re-rating, a year-by-year IRR build, the hurdle level at k = 12%) and produces Bear/Base/Bull index total-return paths on the IAF time grid (stub of the current year + 3 calendar years, now 2027–2029), index EPS and P/E paths, the NOK scenario path, mid-cycle returns, the oil and NOK linkage (correlations, betas, the energy share of Oslo earnings), and equity triggers that mirror the HY trigger (E / R against the Nordic HY market reference, Base IRR against k and against the HY book). Oslo energy earnings follow the Brent path in docs/oil-market-bbb.md; NIBOR, Nordic GDP and the HY return come from docs/hy-market-bbb.md. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. ALWAYS use when the user mentions Equity BBB / Equity Market BBB / aksjemarked, asks to create, run or update ("oppdater modul") the equity module, or asks about the Oslo Børs or OSEBX outlook, Oslo valuation (P/E, P/B), global equity or MSCI World expected returns, equities versus high yield, when to move from HY to equities, the oil–Oslo or oil–NOK correlation, or whether to hold Norwegian or global equity funds — even without naming the skill. It is the only place an equity index return path, an index hurdle or a NOK scenario path is set.
+description: Equity Market BBB — the equity index baseline for Oslo (OSEBX) and global equities (MSCI World, in NOK unhedged and in USD). Applies the IAF method at index level (d + g + re-rating, a year-by-year IRR build, the hurdle level at k = 12%) and produces Bear/Base/Bull index total-return paths on the IAF time grid (stub of the current year + 3 calendar years, now 2027–2029), index EPS and P/E paths, the NOK scenario path, mid-cycle returns, the oil and NOK linkage (correlations, betas, the energy share of Oslo earnings), and equity triggers that mirror the HY trigger (E / R against the Nordic HY market reference, Base IRR against k and against the HY book). Oslo energy earnings follow the Brent path in docs/oil-market-bbb.md; NIBOR, Nordic GDP and the HY return come from docs/hy-market-bbb.md. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. ALWAYS use when the user mentions Equity BBB / Equity Market BBB / aksjemarked, asks to create, run or update ("oppdater modul") the equity module, or asks about the Oslo Børs or OSEBX outlook, Oslo valuation (P/E, P/B), global equity or MSCI World expected returns, equities versus high yield, when to move from HY to equities, the oil–Oslo or oil–NOK correlation, or whether to hold Norwegian or global equity funds — even without naming the skill. Fund mode applies the baseline to named equity funds, active (DNB Teknologi, Gambak) or index (DNB Global Indeks, Nordnet Global Indeks) — look-through, cyclical blocks or index tilts, all-in cost, alpha or tracking difference, hurdle NAV and E / R against HY; output docs/<fund>-analysis.md. ALWAYS use it when the user asks to analyse, keep or switch an equity fund. It is the only place an equity index return path, an index hurdle or a NOK scenario path is set.
 ---
 
 # Equity Market BBB
 
-**Revision:** 2026-10-11.3 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-12.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/equity-market-bbb/` in the Finance folder.
 
 An index-level baseline for Oslo and global equities. It answers one question: **what total
@@ -27,8 +27,9 @@ Place in the chain:
 
 **Scope:** broad equity indices held through index or broad funds: Oslo (OSEBX), global developed
 (MSCI World; ACWI as cross-check), and the NOK translation. **Out of scope:** single stocks
-(→ [[iaf-valuation]]), sector forecasts (→ the sector BBBs), bonds (→ [[hy-market-bbb]]), and
-named active equity funds (a fund mode can be added later, as in [[hy-market-bbb]]).
+(→ [[iaf-valuation]]), sector forecasts (→ the sector BBBs), bonds (→ [[hy-market-bbb]]).
+**Named equity funds** (active or sector funds held by the user or proposed to them) are covered
+by **Fund mode** below: they apply this baseline and never change it.
 
 ## Standing parameters
 
@@ -56,6 +57,9 @@ named active equity funds (a fund mode can be added later, as in [[hy-market-bbb
   of the last run (fetch, look-through, consensus, correlations, model, triggers) and a README.
 - Output: `docs/equity-market-bbb.md`, one running baseline. Baseline date in the H1. Git holds
   history, so read the previous version before overwriting it.
+- Fund mode output: `docs/<fund>-analysis.md`, one running file per fund (e.g.
+  `docs/dnb-teknologi-analysis.md`). Index funds compared for the same role share one file
+  (`docs/global-index-funds-analysis.md`). Fund-mode scripts are in `references/fund/`.
 - Calculations run in the scratchpad (`py -I`, copies of the reference scripts) from fetched raw
   data. The document records inputs, method and results so a later run can reproduce them; copy
   changed scripts back to `references/`.
@@ -268,8 +272,9 @@ All per index, in NOK, before tax, after an index-fund fee of **0.20%** `[A]`:
 
 ## Procedure
 
-Two modes: **Initiate** (no `docs/equity-market-bbb.md`) and **Update** ("update Equity BBB",
-"oppdater modul" in an equity context, or a recalibration trigger). Run every step; actively try
+Three modes: **Initiate** (no `docs/equity-market-bbb.md`), **Update** ("update Equity BBB",
+"oppdater modul" in an equity context, or a recalibration trigger) and **Fund** (a named equity
+fund; see Fund mode, which has its own steps). Run every step; actively try
 to falsify Base. If the evidence does not move it by the minimum change, say **Equity Market BBB
 kept unchanged**.
 
@@ -302,6 +307,234 @@ paths), and is it visible? Are the catalysts still right? Has a signpost been cr
 
 **Step 8 — Write, log and check.** Write the document in the output format; full change log
 (previous → new with reason); read it back; run the checks.
+
+## Fund mode
+
+Applies the baseline to a named equity fund. It answers: **what does this fund return in NOK after
+its cost, per unit of the same stress, against the HY book and against an index fund holding the
+same market — and at what NAV would it clear k?** It never changes an index path, a NOK path or
+a trigger in `docs/equity-market-bbb.md`. If the baseline is stale, update it first or mark the
+fund analysis provisional.
+
+First run: DNB Teknologi A, 11 Oct 2026 (`docs/dnb-teknologi-analysis.md`). Base 4.8% after
+cost; P/E 15.8 on CY+1 consensus but 19.1 without memory chips. Re-run 12 Oct on the AI BBB
+layer paths: Base 4.9%; 65% of NAV in AI layers; its AI holdings returned 5.2% before cost
+against ~2.2% for the AI baskets on the same paths. The Samsung preference shares were found
+from the gap between the country weight and the listed lines: check country and currency
+weights against the holdings list. First index-fund run: DNB Global
+Indeks A vs Nordnet Global Indeks, 11 Oct 2026 (`docs/global-index-funds-analysis.md`). Nordnet's
+fund had switched to the MSCI World Climate Change Index (energy 0.3%, IT 37%, P/E premium
+×1.056). Base 5.8% vs 6.2%, and the gap reverses if half the premium goes. Re-run 12 Oct on the AI BBB
+layers: AI is 26.8% of MSCI World and 32.0% of the climate index. Nordnet's Base fell to 5.79% vs
+DNB's 5.84%. The implied rest of World needs 8.8% a year of EPS growth, which is flagged to the Equity BBB.
+
+### Fund data
+
+| Need | First choice | Fallback / cross-check |
+|---|---|---|
+| NAV and date, fund size, number of holdings, top 10, sectors, countries, **currency mix**, management fee, benchmark, returns (calendar, 3/5/10 y), risk (vol, beta, tracking error, max drawdown) | Manager's fund page via WebFetch (DNB AM: `dnbam.com/en/our-funds/funds/<fund>`; the dnb.no fund-list pages return nothing) | Storebrand fund profile, Morningstar |
+| **Top 25 holdings with weights**, total cost ("Total pris"), regions | **Nordnet fund page** via WebFetch (`nordnet.no/market/funds/<id>-<name>`); month-end holdings | Manager's monthly report |
+| NAV history (daily) | **Yahoo** chart API on the Morningstar id (`0P00000MVB.IR` = DNB Teknologi A; find with Yahoo search `/v1/finance/search?q=<ISIN or name>`). History may start late (DNB Teknologi: Mar 2022) | Manager's calendar-year table |
+| Prices and consensus EPS of the holdings | **Yahoo** quoteSummary (`earningsTrend`, `price`, `summaryDetail`, `defaultKeyStatistics`, `financialData`; script `references/fund/hold.py`) | Zacks for US listings |
+| Sector earnings cycle (margins vs average, growth by industry) | **FactSet Earnings Insight** PDF; read with `pypdf` under `py -I` (WebFetch cannot decode it) | — |
+| Sector ETF look-through P/E (benchmark context) | Yahoo `topHoldings` (IXN tech, IXP communication services, XLK, QQQ; ratios inverted) | — |
+
+Quirks seen (11 Oct 2026):
+- The manager's page may garble calendar-year labels. Cross-check at least three years against
+  the Yahoo NAV.
+- Yahoo EPS for some Oslo-listed USD reporters is in NOK (Nordic Semiconductor). Check that the
+  forward P/E from the quote agrees.
+- Large one-off gains distort CY EPS (Alphabet and Amazon 2026). Value on CY+1 and leave the
+  distorted year out of the growth figure.
+- Thin or inconsistent +1y estimates (Atlassian: 8 analysts against 30): use the quote's forward
+  P/E.
+- Fiscal years: blend June/July year-ends half and half into calendar years. Map Jan–Mar
+  year-ends to the calendar year they mostly cover, and Sep–Oct year-ends to the same calendar
+  year.
+
+Index-fund data and quirks (11 Oct 2026):
+- **Index fundamentals and weights:** the MSCI factsheet PDF of the fund's index
+  (`msci.com/documents/10199/255599/<index-name>-usd-net.pdf`, curl, text with `pypdf`): P/E,
+  forward P/E, P/BV, yield, sectors, top 10 next to the parent index, net returns, beta, tracking
+  error, turnover. MSCI World's own factsheet shows **gross** annual returns; take net returns from
+  the parent column of the tilted index's factsheet. A plain-named URL can serve a renamed index
+  (World Climate Change → "Climate Change CTB"); match the launch date and top-10 weights against
+  the fund's holdings list.
+- **KIDs:** Nordnet's fund page links the PRIIP KID on `doc.morningstar.com`. curl it and read it
+  with `pypdf` for structure, replication, counterparty, ongoing and transaction costs, and index.
+- **Nordnet URLs:** `market/funds/<id>` can resolve to a sister fund (18142188 is the leveraged
+  Nordnet Global Indeks 125). Use the `fond/liste/<name>-nok-<hash>` page and check the NAV.
+- **dnb.no fund pages** (incl. the pension fund list) return only security.txt to WebFetch; read
+  them in the in-app browser. They give the DNB platform fee and transaction costs.
+- Yahoo fund ids: DNB Global Indeks A `0P0000PS3V.IR` (NAV from Mar 2022), Nordnet Global Indeks
+  NOK `0P0001K6NJ.IR` (from Sep 2020); find others with Yahoo search on the ISIN. Yahoo lags the
+  manager's NAV by a day or more: take the NAV of the market-price date from DNB AM or Nordnet.
+- **MSCI World constituent weights:** iShares URTH holdings CSV
+  (`ishares.com/us/products/239696/ishares-msci-world-etf/latest-holdings.csv`, curl; the
+  `1467271812596.ajax` URL returns HTML). There are 1,251 equity rows, with weights summing to
+  99.78%, so normalise. **Tickers repeat across countries** (SAP = SAP SE and Saputo; 20
+  duplicates on 9 Oct): match on ticker and country, and sum sectors from the CSV rows, not
+  from a ticker dictionary.
+
+### Method
+
+1. **Fund facts and position.** Record the NAV and date, cost, currency mix, hedging (stated, or
+   inferred from the NOK-return correlation with World in NOK vs in USD, tagged `[E/A]`), size,
+   number of holdings, benchmark and record. Take the user's units, value, cost and account type
+   from `docs/portfolio-overview.md`.
+2. **Look-through.** Use the top holdings covering **≥ 75% of NAV**. The rest is assumed to look
+   like the sample `[A]`; say so. Use prices at the last close and Yahoo consensus EPS for CY and
+   CY+1, calendarised. Compute the harmonic (earnings-weighted) P/E on CY+1, block by block and
+   for the fund.
+3. **Blocks.** Group holdings by what drives their earnings, as Step A does for Oslo, and report
+   each block's **share of CY+1 earnings** next to its weight.
+   - Any block whose P/E is far below the fund's (≤ half) on peak earnings is a **cyclical
+     block**. It gets a mid-cycle EPS level, the way Oslo energy gets mid-cycle Brent. Example:
+     memory at P/E 3.6 was 5% of DNB Teknologi's weight and 21% of its earnings.
+   - Report the fund P/E with and without the cyclical block.
+   - Name the evidence for the block's mid-cycle level: sector margins vs their average (FactSet),
+     past peak-to-trough, how far consensus has risen. Tag it `[A]`.
+4. **Scenarios = the baseline's scenarios** for the fund's market: World for global funds, Oslo
+   for Norwegian funds, both weighted for mixed funds. Add a sector mechanism to each scenario
+   (e.g. an AI capex cut in the Bear). Never use a separate macro world.
+   - **Sector paths come from the sector baseline where one exists.**
+     - Map AI-exposed holdings to the layers of `docs/ai-market-bbb.md`: E platforms, H1 compute,
+       H2 memory, H3 foundry and equipment, H4 networking and DC infrastructure, T software.
+       Copy the layer's EPS path, exit P/E and payout unchanged, and take the AI catalysts and
+       signposts for the scenario mechanism.
+     - Do the same for energy (oil BBB via the Oslo energy block) and defense
+       (`docs/defense-market-bbb.md`).
+     - Only blocks no baseline covers keep own `[A]` paths. Show the mapping table.
+     - Report each block alone (before cost) against the matching baseline basket. That is the
+       selection effect, measured without assuming alpha.
+     - Report the sector-only stress: the sector blocks on Bear, the rest and the NOK on Base.
+   - EPS per block per year (CY+1 consensus = 1.00) plus a normalised exit year.
+   - Year-1 haircut for analyst optimism, larger for the fastest-growing blocks.
+   - Exit forward P/E per block on normalised EPS, anchored on the sector's long-run multiple or
+     today's level; never the IAF ceiling.
+   - **Base and Bull glide** the P/E linearly to exit. **Bear de-rates at the end of Year 1**, as
+     the index Bear does.
+   - Cash yield = payout per block × EPS (dividends + net buybacks), reinvested inside an
+     accumulating fund.
+5. **NOK translation.** USD share × the baseline's USD/NOK path; other foreign currency × the
+   I-44 path; NOK share flat. A hedged fund or class instead uses the local return + NIBOR − the
+   foreign short rate.
+6. **Cost and alpha.**
+   - Deduct the **all-in cost on the platform where the fund is (or would be) held** from values
+     and cash flows every year:
+     - **Nordnet "Total pris"** = ongoing charges − rebate + Nordnet's platform fee. The platform
+       fee is 0.29% for active equity funds, 0.19% for Nordnet's own index funds, 0.15% for
+       external index funds (from 1 Apr 2025), 0.09% for money market and 0.19% for other bond
+       funds. Checked on 11 Oct 2026: DNB Teknologi 0.85 + 0.29 = 1.14%; DNB Global Indeks A
+       0.10 + 0.15 = 0.25%; Nordnet Global Indeks 0.00 + 0.19 = 0.19%.
+     - **DNB:** ongoing charges + DNB's platform fee (0.10% for DNB Global Indeks A in the
+       self-select pension account), plus the transaction costs DNB lists.
+     - When only the fund's ongoing charges are known, add the platform fee and say so.
+     - State which platform the figure is for. The HY fund rows in `docs/hy-funds-analysis.md` are
+       before Nordnet's platform fee; keep that basis there.
+   - **Manager alpha = 0 in Base** (IAF: no credit for unproven gains). Show as sensitivities:
+     alpha = the cost (the manager earns its fee), and alpha = the fund's after-cost record
+     against its benchmark (state the period, and the fund size then vs now).
+7. **IRR build** as Step C: stub flat (cash accrual less cost, the same in all scenarios), year
+   returns, XIRR, **hurdle NAV P_k** at k = 12% and the margin of safety. Show the return split
+   (d, g = normalised EPS growth + P/E change + FX − cost, c), the structural run and the share of
+   Bull priced.
+   - A P/E "re-rating" that only comes from a cyclical block's earnings falling is not a
+     re-rating. Say so, and give the P/E without that block now and at exit.
+8. **Decision rules.**
+   - E = Base IRR after cost − Base NIBOR over the window; R = Base Year 1 − Bear Year 1.
+   - E / R vs the HY market reference, the HY book, and **an index fund on the same baseline**
+     (World or Oslo after 0.20%).
+   - Report the **alpha needed** to match the index fund and to match the HY book's Base.
+   - IAF verdict on the margin of safety (clears > +2%, marginal ±2%, fails < −2%); whether
+     capital is preserved in Bear.
+9. **Triggers.** Solve the NAV change, at unchanged earnings and composition, for: Base = HY book
+   Base (pre-alert), E / R = HY market reference, E / R = HY book, Base = k. Give each as %, NAV
+   level and look-through P/E (with and without the cyclical block), and compare with the fund's
+   NAV over the last 12 months.
+10. **Linkage.** From month-end NAVs: volatility; correlation and beta with World NOK, World USD,
+    the sector ETF in NOK, OSEBX, Brent and USD/NOK; max drawdown; calendar returns vs World NOK
+    and the sector ETF. This states the fund's role in the user's portfolio (e.g. its oil link
+    against the ~37% oil exposure of the HY book).
+11. **Sensitivities:** cost at index level, alpha (two values), exit P/E ± 1, the cyclical
+    block's mid-cycle level, CY+1 consensus −5%.
+12. **Tax and account.** In a taxable AF account an equity fund (≥ 80% equities) is taxed like
+    shares (37.84% on gains after the skjermingsfradrag). A switch realises the gain; state the
+    tax brought forward. Inside ASK or a pension wrapper a switch has no tax effect.
+
+### Index funds (variant of the method)
+
+An index fund is the baseline index held at a cost, so steps 2–3 and 6 change:
+
+- **Look-through = the fund's index**, from the index factsheet (fundamentals, sectors, top 10
+  against the parent) and the full holdings of an ETF on the parent index, not from the fund's
+  top holdings.
+- **Split the baseline index into sector blocks and an implied rest** (first used 12 Oct 2026):
+  - **AI blocks:** the AI BBB basket names that are in the index, at index weights, on the AI
+    BBB layer paths (EPS, exit P/E, payout; block P/E from the AI BBB's prices and CY+1 EPS).
+  - **Energy:** the index's energy weight on the oil path (Oslo energy block formula).
+  - **Rest:** implied, so that the blocks plus the rest equal the baseline index path exactly
+    (value, earnings and dividends in each year).
+  - The split reproduces the baseline at zero cost. Check that, and report:
+    - the rest's implied EPS growth, P/E path and payout;
+    - each block's return against the matching AI BBB basket;
+    - the AI-only stress.
+  - If the implied rest needs growth well above trend, show "rest at trend growth" as a check
+    and flag it to the next Equity BBB update. Never change the baseline path here.
+  - List the names that fit a layer but are not in the AI BBB baskets (the "wider" AI share);
+    they stay in the rest.
+- **Plain index** (MSCI World, OSEBX): the baseline paths apply unchanged; the split is a
+  look-through only.
+- **Tilted index** (climate, ESG, factor, equal-weight): the same blocks at the tilted index's own
+  weights.
+  - Weights: top 10 via the factsheet's index/parent ratios applied to today's parent weights;
+    other names from the fund's holdings list, or ×1.0 of the parent with a ×0.7 / ×1.3
+    sensitivity. A large parent name missing from the fund's top 25 gets a multiplier below the
+    25th weight.
+  - Report the active sector and top-10 weights, and what the tilt sells and buys, with the
+    earnings-weighted P/E of each side.
+  - The tilted index's total P/E (factsheet forward ratio × the baseline's CY+1 P/E), less its
+    blocks, gives its rest P/E. The **premium over the parent's rest** is a stated assumption:
+    kept in Base and Bull, half lost in Bear. Show "premium halves" and "premium gone" as
+    sensitivities, and name what drives the premium (e.g. Tesla). If the ranking between funds
+    flips inside them, say the model cannot rank them on return.
+  - Lesson from 11 → 12 Oct: growing a tilt "like the index ex energy" hides the AI layers' flat
+    post-2027 paths. Put AI weight on the AI paths.
+- **Tracking difference replaces alpha.**
+  - Measure it from the manager's fund-vs-benchmark table (1/3/5/10 years) and from NAVs against
+    the index. For a tilted index, compare with a plain-index fund and take out the index gap.
+  - Base takes tracking beyond cost as 0. Show a drag sensitivity when the record or the
+    structure (swap spread) suggests one.
+- **Structure and index stability:**
+  - Record physical vs synthetic replication, the swap counterparty and the UCITS 10% exposure
+    cap, the domicile and base currency.
+  - Record the index history: a fund that has changed index is a different exposure from its
+    record.
+  - For AF use, check the tax equity share of a synthetic fund, which depends on the substitute
+    basket.
+- **Decision rules and triggers** as steps 8–9, plus the baseline's own triggers translated into
+  each fund's NAV (e.g. the World trigger as a DNB Global Indeks NAV).
+- **Recommendation between funds:** cost per year in NOK on the planned amount; the model gap and
+  whether it survives the premium sensitivity; Bear and side-case gaps; the size of the tilt at
+  portfolio level (NOK of energy and tech moved); structure; and which fund the account can hold.
+
+### Output: `docs/<fund>-analysis.md`
+
+IAF document order adapted to a fund: title · skill revisions and inputs · **Summary** (verdict,
+decision table: IRR, Year-1 return, NAV equivalent at exit, hurdle NAV and margin of safety,
+capital preserved, position value per scenario, Year-1 stress in NOK, E / R; per-year path with
+EPS, forward P/E, return and NAV equivalent) · tags · Header (fund facts, cost, currency and
+hedging, position, track, k) · Scenario definitions (baseline anchor + sector mechanism; side
+case) · Fund and status (holdings, sectors, record) · Near term · Market input · Look-through
+valuation (blocks, references, data handling) · Common assumptions · Period table and year-end
+path · Return split, structural run and sensitivities · Results · Against high yield and an index
+fund (E / R table, triggers, tax) · Verdict and caveat · Risks and signposts · For other modules ·
+Change log · Appendix: own assumptions · Appendix: sources (incl. raw consensus per holding and
+validation notes).
+
+- Update the fund's row in `docs/portfolio-overview.md` when the user holds the fund.
+- A fund analysis is stale when the baseline is updated, after the fund's next monthly report
+  shows a block weight change > 3 pp, or after a NAV move of more than 10%.
 
 ## Recalibration triggers
 
@@ -377,3 +610,13 @@ paths), and is it visible? Are the catalysts still right? Has a signpost been cr
   language.
 - Correlation tables built from daily → month-end data; windows and dates stated.
 - Change log complete or explicit "kept unchanged". File written, read back, tables render.
+- **Fund mode:** top holdings ≥ 75% of NAV, with each one's consensus validated (currency, fiscal
+  year, one-offs, analyst count); block earnings shares shown, and the P/E shown with and without
+  any cyclical block; scenarios and NOK paths taken from the current baseline; all-in cost for
+  the named platform deducted; alpha 0 in Base, with the record as a sensitivity; E / R against
+  the HY references and an index fund; hurdle NAV and triggers as NAV levels; tax on a switch
+  stated; portfolio row updated.
+- **Index funds:** index identified from the KID and matched to the factsheet; index history
+  stated; active weights and the P/E premium of any tilt shown, with premium sensitivities;
+  tracking difference measured; replication and counterparty stated; the model reproduces the
+  baseline at zero cost.
