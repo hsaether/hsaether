@@ -18,9 +18,13 @@ def at(dp):
     M.EPS=copy.deepcopy(base)
     # price change at unchanged earnings: P0 = 100*(1+dp) while earnings fixed -> scale P/E now
     BL=copy.deepcopy(M.BL)
+    PF={c:M.COMP[c]['PF'] for c in M.COMP}
     for k in M.BL: M.BL[k]['pe27']=BL[k]['pe27']*(1+dp)
-    o,E,R=M.run(P0=100*(1+dp)); M.BL.update(BL); return o,E,R
-NAV=7730.93
+    for c in M.COMP: M.COMP[c]['PF']=PF[c]*(1+dp)   # company blocks: price moves with the NAV
+    o,E,R=M.run(P0=100*(1+dp)); M.BL.update(BL)
+    for c in M.COMP: M.COMP[c]['PF']=PF[c]
+    return o,E,R
+NAV=7637.81
 PE0=sum(x['w'] for x in M.BL.values())*100/sum(x['w']*100/x['pe27'] for x in M.BL.values())
 for lab,fn in [("E/R = 0.196 (HY market ref)",lambda m: 0.196-at(m)[1]/at(m)[2]),("Base IRR = 12% (k)",lambda m: 0.12-at(m)[0]['Base']['irr']),
                ("Base IRR = 6.9% (HY book)",lambda m: 0.069-at(m)[0]['Base']['irr']),("E/R = 0.291 (HY book)",lambda m: 0.291-at(m)[1]/at(m)[2])]:

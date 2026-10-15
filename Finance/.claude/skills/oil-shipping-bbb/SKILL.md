@@ -5,7 +5,7 @@ description: Oil Shipping BBB — the tanker-market baseline for crude tankers (
 
 # Oil Shipping BBB
 
-**Revision:** 2026-10-12.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-15.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/oil-shipping-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the tanker market. It answers one question: **what market TCE and
@@ -136,6 +136,10 @@ Connector quirks (tested 2026-10-04):
     values. `-layout` scrambles the TC table; rebuild each row from "this week" + "diff" = "last
     week" before use.
   - **Fearnleys** (Wednesdays): 1-year TC for eco/scrubber vessels, values and newbuild prices.
+    Read it directly at **fearnpulse.com** in the in-app browser: navigate, wait ~5 s (the page is
+    a JavaScript app and shows a spinner first), then `get_page_text`. It is available on the
+    publication day, before the Hellenic Shipping News PDF (tested 2026-10-15). Its "Brent Spot"
+    figure was stale ($83.97 vs a $105.88 front-month) and is not used.
   - **Affinity** (Fridays): Baltic route TCEs for the TD and TC routes (right-hand columns; use
     `cut -c180-`).
   - **Xclusiv NEWBUILDING ORDERS / DEMO SALES tables** (tested 2026-10-10): extract with
@@ -145,7 +149,15 @@ Connector quirks (tested 2026-10-04):
     weekly at `wp-content/uploads/<yyyy>/<mm>/xclusiv-<yyyy>_<mm>_<dd>.pdf` (Mondays).
   - **Allied weekly** PDFs are on cyprusshippingnews.com (`wp-content/uploads/<yyyy>/<mm>/ALLIED-Weekly-Market-Report-Week-<n>.pdf`).
     The "Market Snapshot" table extracts with values shifted one row down; realign before use.
-  - The Baltic Exchange site and Seatrade/Splash247 block automated fetches (challenge page or 403).
+  - The Baltic Exchange site and Seatrade/Splash247 block WebFetch and curl (challenge page or 403).
+    Splash247 articles read fine in the in-app browser (`mcp__Claude_Browser__navigate`, then
+    `get_page_text`; tested 2026-10-13). Splash often names the yard, price comparables and S&P
+    deals, which is enough to confirm an aggregator report.
+  - **TradeWinds** is paywalled, but a share link from the user (`…?lid=…&unlockToken=…`) reads in
+    full in the in-app browser (navigate, wait ~4 s, `get_page_text`; tested 2026-10-15). Its
+    period-fixture reports (named ship, term, rate, charterer, broker 1- and 3-year assessments) feed
+    the period-market check. Test a 3-year fixture against Base over the same 36 months **including
+    the stub**, not against the 2027–29 average.
 - **Company updates and Nordnet news** (tested 2026-10-12):
   - GlobeNewswire blocks WebFetch (403). The search page and releases read fine through the Edge
     connection (`mcp__edge__browser_navigate`, then `browser_evaluate` with `innerText`).
@@ -154,6 +166,11 @@ Connector quirks (tested 2026-10-04):
   - Nordnet items are TDN summaries: use the primary release, and the TDN text as a cross-check.
   - TDN bunker prices differed from Gibson/Xclusiv by ~$100/t on the same day (Oct 2026). Do not
     use them.
+  - **Newbuilding news from aggregators** (e.g. maritimebriefs.com) often lacks yard, price or
+    primary reference, and can mix up sizes (LR1 vs LR2). Log it as unconfirmed `[?]` in the
+    contracting log and register, outside the delivery schedule, until a broker table (Xclusiv,
+    Allied), the yard, the buyer or TradeWinds confirms it. Size the effect (orderbook %, quarter
+    contracting %, deliveries per window year) even when unconfirmed.
   - **Company realised TCE is a lagging cross-check, never a market mark.** A discharge-to-discharge
     reporter's booked share of the current quarter reflects fixtures made 4–6 weeks earlier. In a
     fast market, compare it with the segment average of the fixing period, not with the stub.

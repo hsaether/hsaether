@@ -5,7 +5,7 @@ description: AI Market BBB — the baseline for the AI value chain over the IAF 
 
 # AI Market BBB
 
-**Revision:** 2026-10-12.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-15.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/ai-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the AI market. It answers three questions:
@@ -180,6 +180,15 @@ Quirks (2026-10-12 run):
 - Statista Market Insights ("Artificial Intelligence – Worldwide") sizes the market from the
   funding of AI companies, not from spending; its editions disagree with each other and the page
   shows no yearly values. Use its growth rate as a cross-check at most, never its level.
+- (15 Oct run) TSMC's release site (`pr.tsmc.com/english/news/<id>`) works with WebFetch; CNBC
+  returns 403. Anthropic's S-1 is not public on EDGAR; its figures come from Reuters' review of
+  the draft via secondary sources (`[E]`); booked 2025 revenue (~4.6bn) differs from the run-rate
+  figures that circulate. Korean closes come in before the US close: label the price date per
+  region.
+- **Market-mood updates:** a sharp sell-off is a reason to re-run the baskets (prices,
+  `hist.py` table) and test the paths, not a reason to move them. Paths move only on evidence
+  that meets the minimum-change rule (earnings, guidance, prices of memory or compute, a
+  financing event).
 
 ## Data discipline
 

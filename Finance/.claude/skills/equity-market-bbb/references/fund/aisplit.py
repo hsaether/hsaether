@@ -3,7 +3,7 @@ import fundmodel as M, copy
 EPS0=copy.deepcopy(M.EPS); PEX0=copy.deepcopy(M.PEX); BL0=copy.deepcopy(M.BL); FXU0=copy.deepcopy(M.FXU); FXO0=copy.deepcopy(M.FXO)
 def reset():
     M.EPS=copy.deepcopy(EPS0); M.PEX=copy.deepcopy(PEX0); M.BL.clear(); M.BL.update(copy.deepcopy(BL0)); M.FXU.update(copy.deepcopy(FXU0)); M.FXO.update(copy.deepcopy(FXO0))
-AI=["E","H1","H2","H3","T"]
+AI=["CM","CG","E","H1","H2","H3","T"]
 # 1) per-block IRR inside the fund (before cost), each block alone
 print("Block alone, before cost (Bear/Base/Bull IRR NOK; 2027 Bear):")
 for b in BL0:

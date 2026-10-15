@@ -1,20 +1,20 @@
-# AI Market BBB — layer baskets, IAF index-level build (USD and NOK). Prices: Yahoo close 9 Oct 2026.
+# AI Market BBB — layer baskets, IAF index-level build (USD and NOK). Prices: Yahoo close 14 Oct 2026 (US, Europe) and 15 Oct 2026 (Korea).
 import json
-KRW=1333.04; EUR=1.12095
+KRW=1348.18; EUR=1.1212
 q={r['symbol']:r for r in json.load(open('data/q.json'))}
 def mc(s):
     r=q[s]; m=r.get('marketCap') or 0
     if r.get('currency')=='KRW': m/=KRW
     if r.get('currency')=='EUR': m*=EUR
     return m/1e9
-# CY27 consensus EPS (Yahoo earningsTrend 11-12 Oct 2026); calendarised [A]
+# CY27 consensus EPS (Yahoo earningsTrend 11-12 Oct 2026; Samsung, TSM 15 Oct); calendarised [A]
 eps27={'NVDA':15.9146,'AMD':15.72189,'AVGO':19.39382,'MRVL':7.28277,
- 'MU':206.33243,'000660.KS':470324.3,'005930.KS':72011,
- 'TSM':22.04995,'ASML':58.475166,'AMAT':18.47894,'LRCX':11.76415,
+ 'MU':206.33243,'000660.KS':470324.3,'005930.KS':72180.14,
+ 'TSM':22.31735,'ASML':58.475166,'AMAT':18.47894,'LRCX':11.76415,
  'ANET':5.21686,'VRT':9.18451,'ETN':16.2461,
  'MSFT':(19.76867+23.67732)/2,'GOOGL':14.97242,'AMZN':10.5269,'META':34.07467,'ORCL':(8.14059+10.99899)/2,
  'NOW':5.00551,'CRM':16.0207,'ADBE':27.67328,'PLTR':2.35154,'SAP.DE':8.36656,'INTU':27.07543,'SNOW':3.0052,'DDOG':2.97446}
-eps26={'NVDA':9.31242,'AMD':7.5868,'AVGO':11.65755,'TSM':16.9565,'MU':176.15115,'000660.KS':355218.94,'ANET':4.11606,'VRT':6.73858,
+eps26={'NVDA':9.31242,'AMD':7.5868,'AVGO':11.65755,'TSM':17.05163,'MU':176.15115,'000660.KS':355218.94,'ANET':4.11606,'VRT':6.73858,
  'MSFT':(17.28+19.76867)/2,'META':31.04359,'ORCL':(7.63+8.14059)/2,'NOW':4.06673,'CRM':16.75426,'ADBE':24.48076,'PLTR':1.61977,'SAP.DE':7.13653,'SNOW':2.22305}
 L={ # layer: members, Base/Bear/Bull EPS 2027,2028,2029,2030(norm) vs CY27 cons=1, exit PE B/Base/Bull, payout
  'H1 Compute (NVDA AMD AVGO MRVL)':(['NVDA','AMD','AVGO','MRVL'],
@@ -31,7 +31,7 @@ L={ # layer: members, Base/Bear/Bull EPS 2027,2028,2029,2030(norm) vs CY27 cons=
    dict(Bear=(.88,.85,.93,1.00),Base=(.95,1.03,1.11,1.19),Bull=(1.0,1.10,1.20,1.30)),(15,20,24),.45),
 }
 FX=dict(Bear=(10.70,10.42,10.42),Base=(9.5555,9.5555,9.5555),Bull=(9.27,9.27,9.27)); FX0=9.5555
-NIB=4.38; T0=80/365  # 12 Oct -> 31 Dec
+NIB=4.38; T0=77/365  # 15 Oct -> 31 Dec
 def irr(fl):
     lo,hi=-0.9,2.0
     for _ in range(200):

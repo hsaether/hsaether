@@ -5,7 +5,7 @@ description: Nordic HY Market BBB (HY BBB) — the Nordic high-yield bond market
 
 # Nordic HY Market BBB
 
-**Revision:** 2026-10-11.8 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-15.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/hy-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the Nordic high-yield bond market. It answers two questions:
@@ -272,6 +272,8 @@ gap with an invented number.
 | Swedish, Danish, Finnish policy rates and projections | Riksbank MPR, Danmarks Nationalbank, ECB (Finland) | FRED |
 | Norway GDP (mainland and total), unemployment, bankruptcies | **SSB API** `https://data.ssb.no/api/v0/no/table/09190` (quarterly national accounts) and `09189` (annual); SSB bankruptcy statistics | FRED Eurostat series `CLVMNACSCAB1GQNO` (total GDP, chained euros) |
 | Sweden, Denmark, Finland GDP | Statistics Sweden (SCB), Statistics Denmark, Statistics Finland | FRED Eurostat series (`CLVMNACSCAB1GQSE`, `…DK`, `…FI` — check the id with `fred-search-series`) |
+| Norway inflation (CPI, CPI-ATE; monthly 12-month rate, published ~10th of the next month) | **SSB API v2** table **14706** (derived series incl. CPI-ATE, 2025 = 100, from 1995): `https://data.ssb.no/api/pxwebapi/v2/tables/14706/data?lang=en&valueCodes[KPIavledetSerie]=KPI,KPI-JAE&valueCodes[ContentsCode]=Tolvmanedersendring&valueCodes[Tid]=from(2015M01)` | SSB table 14700 (CPI by group) |
+| Wages, CPI, CPI-ATE, money-market rate, I-44: annual actuals and SSB forecasts (real wages = wages − CPI) | **SSB API v2** table **12880** ("Main economic indicators. Accounts and forecasts", codes `Aarslonn`, `KPI`, `KPIJAE`, `PengemRente`, `ImpVKroneKurs`; updated with each Economic Survey) | Norges Bank MPR Table 3 (Data D) |
 | GDP forecasts (Base anchor `[E]`) | Norges Bank MPR, SSB forecasts, Riksbank, Finance ministries' budgets | IMF WEO (April, October), OECD Economic Outlook (June, December), European Commission (spring, autumn) |
 | Monthly index returns, spreads, market colour, fund metrics | **Fund monthly reports**: Heimdal (`heimdalfondene.no` → Markedsrapporter), Fondsfinans (`fondsfinans.no/nyheter/rapporter/`, monthly "Markedsrapport", HY pages near the end), Sissener (`sissener.no` → monthly reports) | Morningstar factsheets; Nordnet; Finansportalen (fees) |
 | **Full fund holdings** (weights; prices where available) | **Fondsfinans:** `fondsfinans.fundlist.com/details/holdings/<ISIN>`; the page embeds Morningstar data in `__NEXT_DATA__` (each holding's weight, market value in NOK, nominal, currency, maturity; credit-quality breakdown; calendar-year returns since 2016). **Heimdal:** `heimdalfondene.no/fondsportefolje-heimdal-hoyrente/` and `/fondsportefolje-heimdal-hoyrente-pluss-2/` (HTML table of all holdings with weights, no prices) | Top 10 in monthly reports; annual reports (full holdings, semi-annual) |
@@ -337,6 +339,12 @@ Quirks (observed in the 2026-10-05 build):
 - **cbonds** (NIBOR, NOK swap pages) returns 403. FRED `IR3TIB01EZM156N` (euro 3M) stopped in Jan
   2026; use EMMI or the ECB for EURIBOR.
 - **SSB API** v0 answers on table metadata (`09190`, `09189`); query with a JSON POST for values.
+- **SSB CPI tables changed in 2026** (tested 2026-10-15): the old v0 tables `03013` (CPI) and
+  `05327` (CPI-ATE) stop at Dec 2025. Use the v2 API (`/api/pxwebapi/v2/tables/<id>/data`):
+  `14706` (CPI and CPI-ATE monthly), `12880` (annual actuals and forecasts). Find tables with
+  `/api/pxwebapi/v2/tables?query=<text>`. The v2 API returns JSON-stat even when `format=csv` is
+  asked; parse `value` against the `Tid` index. In `curl`, use `-g` because of the `[ ]` in the
+  query.
 - **FRED ICE BofA series** keep only 3 years of history since April 2026. Use them for the current
   level and recent trend, not for long-run averages.
 - **Fund report metrics are not comparable as printed.** Check per fund: yield before or after
@@ -581,6 +589,9 @@ only Nordic macro view: other skills read it here.
 **Step 3b — Fiscal block (oil-fund spending) and the rate-path test.** Fiscal policy is a driver
 of demand, inflation and therefore of the Norges Bank path; it is tracked here and used to *test*
 the Base rate path, never to build an own rate forecast.
+- Show the inflation record next to it: CPI, CPI-ATE, wages and real wages per year (last ten
+  years plus SSB and Norges Bank forecasts), the latest monthly CPI and CPI-ATE, and the I-44
+  change, so imported and domestic inflation can be told apart.
 - Track from the latest **Nasjonalbudsjett** (October) or **Revidert nasjonalbudsjett** (May):
   - structural non-oil deficit (SOBU), NOK bn and **% of mainland trend GDP** (the measure of how
     much fund money the economy absorbs);

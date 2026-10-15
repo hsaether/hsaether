@@ -5,7 +5,7 @@ description: Equity Market BBB — the equity index baseline for Oslo (OSEBX) an
 
 # Equity Market BBB
 
-**Revision:** 2026-10-12.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-15.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/equity-market-bbb/` in the Finance folder.
 
 An index-level baseline for Oslo and global equities. It answers one question: **what total
@@ -408,6 +408,13 @@ Index-fund data and quirks (11 Oct 2026):
      - Report each block alone (before cost) against the matching baseline basket. That is the
        selection effect, measured without assuming alpha.
      - Report the sector-only stress: the sector blocks on Bear, the rest and the NOK on Base.
+     - **A holding with its own company analysis** (`docs/<company>-analysis.md`) gets its own
+       block. Take its per-share V_t, D_t and EPS per scenario (they include net cash, stakes and
+       dilution, which a layer path cannot). Value them at the fund's price date: V_t / P_close
+       and D_t / P_close, plus its stub dividend. Show the effect against the layer path. First
+       use: Microsoft and Alphabet in DNB Teknologi, 15 Oct 2026, +0.4 pp on the fund's Base.
+     - Price every holding at its close on the NAV date (`references/fund/close.py`), not at the
+       latest quote. Markets that were closed take their last close before it.
    - EPS per block per year (CY+1 consensus = 1.00) plus a normalised exit year.
    - Year-1 haircut for analyst optimism, larger for the fastest-growing blocks.
    - Exit forward P/E per block on normalised EPS, anchored on the sector's long-run multiple or
