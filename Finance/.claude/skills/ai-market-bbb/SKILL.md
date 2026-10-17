@@ -5,7 +5,7 @@ description: AI Market BBB — the baseline for the AI value chain over the IAF 
 
 # AI Market BBB
 
-**Revision:** 2026-10-15.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-17.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/ai-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the AI market. It answers three questions:
@@ -56,9 +56,9 @@ domestic AI chain except as an export and competition row.
   for the realised year; a new end year). Rolling is not a reset.
 - **The current year has no scenario spread** (IAF rule): 2026 market sizes are guidance plus
   year-to-date actuals, the same in all three scenarios. Scenarios diverge from 2027.
-- **Units:** USD bn nominal, calendar years. Fiscal years are calendarised and the method is
-  stated (NVIDIA's FY ending January ≈ the previous calendar year; Microsoft's FY ending June =
-  half of two calendar years; Oracle's FY ending May ≈ the calendar year it mostly covers).
+- **Units:** USD bn nominal, calendar years. Fiscal years are calendarised by months and the
+  method is stated (see the fiscal-year quirk under Data sources; NVIDIA by calendar quarters,
+  because its consensus rises ~15% a quarter).
   Where no reliable dollar series exists, the row is an **index (2026 = 100)**.
 - **Returns:** basket IRR in USD and in NOK (NOK path from [[equity-market-bbb]]), before fund
   fees and tax. EPS paths are relative to **CY27 consensus = 1.00**.
@@ -80,7 +80,8 @@ domestic AI chain except as an export and competition row.
 ## Files
 
 - Skill: `.claude/skills/ai-market-bbb/SKILL.md`, plus `references/` with the scripts of the
-  last run (`model.py` for the layer baskets and the README).
+  last run (`model.py` for the layer baskets with switches `CAL RET PATH` for attribution,
+  `members.py` for the per-name company check, `trend2.py`, `hist.py` and the README).
 - Inputs (read only): `docs/equity-market-bbb.md` (scenarios, World paths, USD/NOK path, World
   Base IRR and E / R), `docs/hy-market-bbb.md` (NIBOR path), `docs/hy-funds-analysis.md` (HY
   market reference E / R), `.claude/skills/iaf-valuation/SKILL.md` (method, k), company and fund
@@ -108,7 +109,7 @@ domestic AI chain except as an export and competition row.
 | Row | Content | Listed proxies | Role |
 |---|---|---|---|
 | **H1 Compute** | Data-center accelerators (GPU, ASIC) and AI networking silicon | NVDA (data center), AVGO (AI semis), AMD (Instinct), MRVL (custom) | Core |
-| **H2 Memory** | DRAM incl. HBM, server DRAM; enterprise SSD memo | MU, SK hynix, Samsung | Core; cyclical (Track B in IAF) |
+| **H2 Memory** | DRAM incl. HBM, server DRAM; enterprise SSD memo | MU, SK hynix, Samsung | Core; cyclical (Track B in IAF). The revenue index (2026 average = 100) must reconcile with the H2 EPS path via consensus revenue and a revenue-to-EPS mapping; show the Q4 run-rate as a memo |
 | **H3 Foundry, packaging and equipment** | Leading-edge wafers, CoWoS, lithography, deposition and etch | TSM, ASML, AMAT, LRCX | Core |
 | **H4 Networking and DC infrastructure** | Switching, optics, power distribution, cooling | ANET, VRT, ETN (GEV, optics names secondary) | Core |
 | H5 Power | Grid connection, on-site generation, GW available vs needed | Utilities, turbines (memo) | Constraint row, signposts only |
@@ -143,7 +144,10 @@ are shown as memo, not in a P/E.
 | Backlog / RPO | Contracted, not yet recognised revenue. Labs' commitments in it are only as good as the labs' funding |
 | Compute share | Share of capex spent on short-lived assets (servers, accelerators, network). Microsoft: about two-thirds (Q4 FY26) |
 | Consensus | Yahoo `earningsTrend` mean, with the number of analysts; calendarised. Context and starting point, never the Base by default |
-| Basket IRR | IAF Track-B-style build on the basket: P = today's price at CY27 P/E; cash yield = payout × EPS; exit value = exit P/E × normalised 2030 EPS; flows dated mid-year; stub 12 Oct–31 Dec price flat |
+| Basket IRR | IAF Track-B-style build on the basket: P = today's price at CY27 P/E; D_t = payout × EPS; **retained cash = (c − payout) × EPS each year, accumulated at face value into V_t and V_T** (negative = net debt build), where **c = cash conversion** (free cash after growth capex and dilution offsets ÷ EPS, per layer, year and scenario, calibrated on the company analyses); exit value = exit P/E × normalised 2030 EPS + accumulated cash; flows dated mid-year; stub price flat. Retained cash is counted once; the payout only sets timing. Bear: the P/E is at the Bear exit multiple from end-2027 (above today's for names priced below it, e.g. memory: the basket method is not a per-name valuation) |
+| Cash conversion c | Free cash flow after growth capex, working capital and stakes, less buybacks or withholding that only offset dilution, ÷ the EPS on the path. Platforms in the build-out are near zero or negative; memory and compute 0.6–0.95. `[A]`, sourced to the company analyses |
+| Path consistency | Every layer's EPS path must reconcile with its revenue path or index in each scenario: EPS falls faster than revenue in a downturn (operating leverage, rising depreciation). Indexed layers show the Q4 run-rate of the current year as a memo |
+| Company check | Where company analyses exist for a layer's names, compare them with the layer (`members.py`: each name on the layer path and method). Bottom-up company paths that are independent of the layer path (not those that take the layer path as input) move the layer path for their market-cap share when the gap reaches the minimum change |
 | **E / R** | As in the HY rule: E = Base NOK IRR − Base window NIBOR; R = Base 2027 − Bear 2027 return (NOK). Compared with the HY market reference and the World index |
 | Implied growth | Constant annual EPS growth after 2027 (from the Base 2027 level, at the Base exit P/E) that gives 12% in NOK. It shows what the price assumes |
 
@@ -170,6 +174,19 @@ Quirks (2026-10-12 run):
   `earningsTrend` does (KRW). Market caps come in KRW; convert at `KRW=X`.
 - Yahoo flags TSM's `financialCurrency` as TWD, but the ADR EPS in `earningsTrend` is USD per ADR
   (forward P/E confirms).
+- **Fiscal-year labels (16 Oct fix):** Yahoo's `earningsTrend` endDate labels for non-calendar
+  fiscal years can be a year off (on 12 Oct Micron's FY Aug-27 showed endDate 2026-08-31), and
+  "0y / +1y" is not "CY26 / CY27". For every non-calendar name, read the endDate **and** check
+  that `yearAgoEps` of "0y" equals the last reported fiscal year, then calendarise by months:
+  FY Jan = 1/12 FY Jan-27 + 11/12 FY Jan-28; FY May = 5/12 + 7/12; FY Jun = ½ + ½; FY Jul =
+  7/12 + 5/12; FY Aug = 8/12 + 4/12 — or by calendar quarters where a company analysis has done
+  so (NVIDIA $15.21, Micron $192). FY Oct/Nov: Yahoo gives no FY+2 consensus, so the FY ending in
+  the year stands for CY27; it **understates** CY27 when earnings grow fast (Broadcom by up to
+  ~5%): state the bias. Micron, Lam Research and Intuit were on the year after CY27 until 16 Oct;
+  NVIDIA, Marvell, Salesforce, Snowflake and Oracle were on the old convention until 17 Oct.
+- **Currency of consensus (17 Oct fix):** ASML's `earningsTrend` is in **EUR** (2025 actual
+  24.71 = EUR) while the ADR price is in USD; convert at `EURUSD=X`. Until 17 Oct it was read as
+  USD (P/E overstated ~12%). Check `yearAgoEps` against the reported currency for every ADR.
 - Alphabet's and Amazon's CY26 EPS include large equity gains, so their CY26→CY27 consensus growth
   is negative; use CY27 for P/E and leave CY26 out of growth figures.
 - Microsoft changed building useful lives (15 → 25 years) and is shifting finance leases to
@@ -201,6 +218,10 @@ Quirks (2026-10-12 run):
 - **Never double count:** lab revenue paid to clouds appears again as cloud revenue and again as
   capex; neocloud capex financed by hyperscaler contracts is not extra demand; vendor financing
   (chip makers investing in customers) is netted in the financing row, not added to demand.
+- **Vendor financing (K3) counts** loans, guarantees (at their cap) and equity commitments that
+  suppliers give AI customers (labs, neoclouds, their landlords), plus buy-back agreements for
+  cloud capacity. It is shown as a stock (level) and tracked as a flow (new commitments a quarter,
+  calls, impairments); the Bear signpost is on the flow and on calls, not on the level.
 - **User input is input, not a reference:** assess, extract, note in the source appendix.
 - Provenance on every fetched value (source, as-of date, unit); raw kept beside derived;
   plausibility checks: a row moved more than 15% from the previous baseline needs a second source.
@@ -248,14 +269,20 @@ cloud growth and backlog; price-per-token trend. Compute the monetisation ratio 
 software growth, guidance and margins; adoption (BTOS). State winners and losers by mechanism
 (seat compression vs consumption pricing).
 
-**Step 5 — Layer baskets (IAF).** Fetch prices and consensus (CY26, CY27, analysts); basket P/E;
-set EPS paths per scenario (relative to CY27 consensus) from Steps 1–4; exit P/E per scenario;
-payout; run `model.py`: IRR USD and NOK, 2027 return, hurdle P/E at k = 12%, margin of safety,
-E / R, implied growth. Compare with World (equity BBB) and the HY reference.
+**Step 5 — Layer baskets (IAF).** Fetch prices and consensus (CY26, CY27, analysts; check
+fiscal-year labels and currency with `trend2.py`); basket P/E; set EPS paths per scenario
+(relative to CY27 consensus) from Steps 1–4 and check each against its revenue path (path
+consistency); exit P/E per scenario; payout and cash conversion; run `model.py`: IRR USD and NOK,
+2027 return, hurdle P/E at k = 12%, margin of safety, E / R, implied growth. When the method or
+consensus basis changes, run the switches step by step and show the attribution. Compare with
+World (equity BBB) and the HY reference.
 
 **Step 6 — Test BBB.** Pre-mortem for Base; catalysts still right; signposts crossed; consistency
-with the equity baseline's scenarios and World EPS path; consistency with fund and company
-analyses that use AI blocks (flag differences for re-run).
+with the equity baseline's scenarios and World EPS path; **company check** (`members.py` against
+each company analysis; move a layer path for the analysed share only on independent bottom-up
+evidence that meets the minimum change); consistency with fund analyses that use AI blocks (flag
+differences for re-run). A basket that clears k or the HY E / R on the strength of a few names is
+a lead for company analyses, not a decision.
 
 **Step 7 — Write, log and check.** Output format below; complete change log; read back; checks.
 

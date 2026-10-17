@@ -5,7 +5,7 @@ description: Oil Shipping BBB — the tanker-market baseline for crude tankers (
 
 # Oil Shipping BBB
 
-**Revision:** 2026-10-15.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-17.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/oil-shipping-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the tanker market. It answers one question: **what market TCE and
@@ -93,7 +93,7 @@ gap with an invented number.
 | Oil volumes, prices, disruptions, refining | **`docs/oil-market-bbb.md`** (Interface + "For downstream skills") | — never a connector or own estimate |
 | Spot TCE by segment, weekly | Broker weekly reports (Intermodal, Banchero Costa, Gibson, BRS, Poten, Signal Ocean) and Baltic figures quoted in Lloyd's List, TradeWinds, Splash247 | Company-reported spot TCE |
 | Realised TCE, booked share of next quarter, TC fixtures | **Nordic Financial** `search_filings`/`company_research` with `ticker` + `fiscal_year` (FRO and HAFNI tested; OET, TRMD-A to test); full report via `parse_pdf_to_text` on the IR PDF. **DHT business updates** (GlobeNewswire, ~2 weeks after quarter end: last quarter's spot/TC TCE and the booked share of the current quarter, discharge-to-discharge) | **FinancialFilings** for US filers (DHT, INSW, TNK, STNG, NAT): resolve id with `companies_list`; SEC 6-K usually a day or more later |
-| VLCC fixture count and daily TD3C/TD15 marks | **Infront TDN Direkt via Nordnet** ("TANK: N VLCC-slutninger …", from the Fearnleys fixture list): fixtures per day, WS and TCE, and the AG VLCC fixture count by loading month (a volume signpost) | Baltic via Affinity; Fearnleys weekly |
+| VLCC fixture count and daily TD3C/TD15 marks | **Infront TDN Direkt via Nordnet** ("TANK: N VLCC-slutninger …", from the Fearnleys fixture list): fixtures per day, WS and TCE, and the AG VLCC fixture count by loading month (a volume signpost) | Baltic weekly roundup (direct; see quirks); Affinity; Fearnleys weekly |
 | 1-year / 3-year TC rates | Broker weekly TC tables | Company TC fixtures in reports and announcements |
 | FFAs (Q and Cal contracts) | **Gibson weekly** (current-quarter FFA in TCE); BWET holdings for the next months (derived `[A]`); Baltic/FIS curves quoted in press | Company commentary — mark `[E]`, "not verified" if no dated level |
 | Orderbook in vessels (VLCC, Suezmax, Aframax/LR2) and share of fleet ≥ 20 years | **Frontline quarterly release** (industry sources; SEC 6-K exhibit or GlobeNewswire), "orderbook" paragraph | Company presentations quoting Clarksons (cite the underlying source) |
@@ -140,8 +140,31 @@ Connector quirks (tested 2026-10-04):
     a JavaScript app and shows a spinner first), then `get_page_text`. It is available on the
     publication day, before the Hellenic Shipping News PDF (tested 2026-10-15). Its "Brent Spot"
     figure was stale ($83.97 vs a $105.88 front-month) and is not used.
+  - **Baltic Exchange weekly tanker roundup** (Fridays, published the same day; tested 2026-10-17):
+    `balticexchange.com/en/data-services/WeeklyRoundup/tanker/news/<yyyy>/tanker-report-week-<n>.html`.
+    It reads in the in-app browser: navigate, wait ~3 s, then read `document.body.innerText` with
+    `javascript_tool` (`get_page_text` returns only a sidebar headline). It gives WS and Baltic
+    round-trip TCE for every TD and TC route, the MR Atlantic Triangulation Basket and the BDTI.
+    It is the first choice for Baltic route TCEs; Affinity and Cyprus Shipping News republish it
+    later. Copy errors occur (week 41 gave TD19 the TD25 TCE), so check each TCE against its WS
+    move. Baltic TCEs are a standard-vessel basis, ~4–6% below Gibson's eco basis.
+  - **TD34** (Gulf of Oman/Mina al Fahal → Ningbo, 270 kt; live June 2026; ICE FFA since 5 Oct
+    2026, alongside TD15) is the VLCC that loads after the shuttles and STS. It tracked the Xclusiv
+    VLCC segment average within 3% on 9 Oct 2026. Use TD34 ÷ TD3C as a second estimate of the
+    segment/TD3C ratio for the stub. No public TD34 FFA levels; BWET holds only TD3C and TD20.
   - **Affinity** (Fridays): Baltic route TCEs for the TD and TC routes (right-hand columns; use
-    `cut -c180-`).
+    `cut -c180-`). Fallback to the Baltic roundup above.
+  - **Compass Maritime weekly** (Mondays; tested 2026-10-17): curl and `pdftotext -layout` work on
+    `compassmar.com/wp-content/uploads/<yyyy>/<mm>/Compass-Weekly-Report-<Mon>-<dd>-<yy>.pdf`
+    (e.g. `Oct-12-26`). It gives:
+    - 12-month TC for VLCC, Suezmax, Aframax, LR1 (80k) and MR (47k), current and last week. It is
+      the third TC source and the second free LR1 source besides Intermodal. Its Suezmax TC can stay
+      unchanged for weeks, so check whether it moved.
+    - "Newbuilding statistics": deliveries in vessels per segment for the rest of the year and the
+      next two years. Use them for the delivery-schedule spread.
+    - Values (newbuild / resale / 5-yr / 10-yr). In the text the rows shift one line down; realign
+      before use.
+    - The S&P and recycling-statistics tables extract misaligned; do not use them.
   - **Xclusiv NEWBUILDING ORDERS / DEMO SALES tables** (tested 2026-10-10): extract with
     `awk '/NEWBUILDING ORDERS/{p=1} /Sale & Purchase|SECONDHAND PRICES/{p=0} p' file.txt | grep "^ *TANKER"`
     (demolitions: from `DEMO SALES` to `Commodities`). Units and dwt per line are reliable; the
@@ -150,6 +173,7 @@ Connector quirks (tested 2026-10-04):
   - **Allied weekly** PDFs are on cyprusshippingnews.com (`wp-content/uploads/<yyyy>/<mm>/ALLIED-Weekly-Market-Report-Week-<n>.pdf`).
     The "Market Snapshot" table extracts with values shifted one row down; realign before use.
   - The Baltic Exchange site and Seatrade/Splash247 block WebFetch and curl (challenge page or 403).
+    The Baltic weekly roundup and press releases read in the in-app browser (see above).
     Splash247 articles read fine in the in-app browser (`mcp__Claude_Browser__navigate`, then
     `get_page_text`; tested 2026-10-13). Splash often names the yard, price comparables and S&P
     deals, which is enough to confirm an aggregator report.

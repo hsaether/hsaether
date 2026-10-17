@@ -2,31 +2,31 @@
 import json
 H=json.load(open("hold.json")); C=json.load(open("closes.json"))
 # holding: (weight %, block, CY26 EPS, CY27 EPS) in the price currency of the Yahoo listing
-# weights: top 10 from DNB AM (holdings 9 Sep 2026); others Nordnet (31 Aug 2026); Korea split [A] (Korea 5.37% on 9 Sep)
-# blocks: CM = Microsoft, CG = Alphabet (company analyses, docs/msft-analysis.md and docs/googl-analysis.md); E = AMZN, META on the AI BBB E layer
+# weights: top 10 from DNB AM (holdings 10 Sep 2026); others Nordnet (31 Aug 2026); Korea split [A] (Korea 5.35% on 10 Sep)
+# blocks: company analyses CM = Microsoft, CG = Alphabet, CN = NVIDIA, CT = TSMC (docs/<co>-analysis.md); E = AMZN, META on the AI BBB E layer
 # CY mapping: FY Jun/Jul = half-year blend; FY Jan/Mar next year -> CY of most months; FY Sep/Oct -> same CY
 def e(s,p): return H[s]["tr"][p]["eps"]
 def ya(s): return H[s]["tr"]["0y"]["ya"]
 HOLD={
-"MSFT":(9.33,"CM",.5*ya("MSFT")+.5*e("MSFT","0y"),.5*e("MSFT","0y")+.5*e("MSFT","+1y")),
-"GOOGL":(6.87,"CG",None,e("GOOGL","+1y")),      # CY26 includes one-off gains: growth taken as P block median [A]
-"NVDA":(5.85,"H1",e("NVDA","0y"),e("NVDA","+1y")),
-"AMZN":(5.18,"E",None,e("AMZN","+1y")),        # same as GOOGL
-"V":(4.59,"X",e("V","0y"),e("V","+1y")),
-"MA":(3.88,"X",e("MA","0y"),e("MA","+1y")),
-"AVGO":(3.88,"H1",e("AVGO","0y"),e("AVGO","+1y")),
-"META":(4.19,"E",e("META","0y"),e("META","+1y")),
-"ERIC-B.ST":(3.65,"X",e("ERIC-B.ST","0y"),e("ERIC-B.ST","+1y")),
+"MSFT":(9.40,"CM",.5*ya("MSFT")+.5*e("MSFT","0y"),.5*e("MSFT","0y")+.5*e("MSFT","+1y")),
+"GOOGL":(6.95,"CG",None,e("GOOGL","+1y")),      # CY26 includes one-off gains: growth taken as P block median [A]
+"NVDA":(5.75,"CN",e("NVDA","0y"),15.21),   # CY27 calendarised by quarters (docs/nvda-analysis.md, AI BBB 17 Oct)
+"AMZN":(5.20,"E",None,e("AMZN","+1y")),        # same as GOOGL
+"V":(4.61,"X",e("V","0y"),e("V","+1y")),
+"MA":(3.89,"X",e("MA","0y"),e("MA","+1y")),
+"AVGO":(3.87,"H1",e("AVGO","0y"),e("AVGO","+1y")),
+"META":(4.16,"E",e("META","0y"),e("META","+1y")),
+"ERIC-B.ST":(3.66,"X",e("ERIC-B.ST","0y"),e("ERIC-B.ST","+1y")),
 "SAP.DE":(2.96,"T",e("SAP.DE","0y"),e("SAP.DE","+1y")),
 "ADYEN.AS":(2.96,"X",e("ADYEN.AS","0y"),e("ADYEN.AS","+1y")),
 "TEAM":(2.93,"T",None,None),                   # +1y estimate (n8) inconsistent; Yahoo forward P/E used [A]
 "6758.T":(2.41,"X",e("6758.T","0y"),e("6758.T","+1y")),
 "DSY.PA":(2.22,"T",e("DSY.PA","0y"),e("DSY.PA","+1y")),
 "TMUS":(1.99,"X",e("TMUS","0y"),e("TMUS","+1y")),
-"TSM":(1.97,"H3",e("TSM","0y"),e("TSM","+1y")),
-"005930.KS":(1.96,"H2",e("005930.KS","0y"),e("005930.KS","+1y")),
+"TSM":(1.97,"CT",e("TSM","0y"),e("TSM","+1y")),
+"005930.KS":(1.95,"H2",e("005930.KS","0y"),e("005930.KS","+1y")),
 "000660.KS":(2.12,"H2",e("000660.KS","0y"),e("000660.KS","+1y")),
-"005935.KS":(1.29,"H2",e("005930.KS","0y"),e("005930.KS","+1y")),
+"005935.KS":(1.28,"H2",e("005930.KS","0y"),e("005930.KS","+1y")),
 "LOGI":(1.65,"X",e("LOGI","0y"),e("LOGI","+1y")),
 "HPQ":(1.63,"X",e("HPQ","0y"),e("HPQ","+1y")),
 "INTU":(1.40,"T",.58*ya("INTU")+.42*e("INTU","0y"),.58*e("INTU","0y")+.42*e("INTU","+1y")),
@@ -37,7 +37,7 @@ HOLD={
 }
 rows=[]
 for s,(w,b,a,c) in HOLD.items():
-    px=C[s]["14"]   # 14 Oct 2026 close = prices in the 14 Oct NAV
+    px=C[s]["14"]   # close on the NAV date (15 Oct 2026; key "14" = date passed to close.py)
     if s=="TEAM": pe27=H[s]["fpe"]*C[s]["14"]/H[s]["px"]; g=None
     else:
         pe27=px/c; g=(c/a-1) if a else None

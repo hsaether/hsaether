@@ -5,7 +5,7 @@ description: Equity Market BBB — the equity index baseline for Oslo (OSEBX) an
 
 # Equity Market BBB
 
-**Revision:** 2026-10-15.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-17.3 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/equity-market-bbb/` in the Finance folder.
 
 An index-level baseline for Oslo and global equities. It answers one question: **what total
@@ -173,11 +173,31 @@ or MSCI Norway; GICS-like sectors from the ETF look-through):
   F at mid-cycle NIBOR, O on trend. This is the V_T basis (IAF Step 3: normalised, never the last
   modelled year by default).
 
-### Step B — World: index earnings
+### Step B — World: index earnings, built from blocks (AI split; since 17 Oct 2026)
 
 - **Earnings base = consensus CY+1 EPS = 100**, anchored on FactSet's S&P 500 CY+1 growth and the
-  MSCI World trailing/forward P/E ratio. Base takes a Year-1 haircut for analyst optimism `[A]`
-  (state the size), then nominal growth fading toward ~5–6%.
+  MSCI World trailing/forward P/E ratio (World P/E on CY+1).
+- **World = company blocks + AI layer blocks + energy + rest.** The World path is the sum of the
+  blocks; it is never set top-down and then backed into a rest.
+  - **Company blocks:** names with their own IAF analysis (now Microsoft, Alphabet, NVIDIA) at
+    index weights, with that analysis's per-share EPS, D_t and V_t per scenario.
+  - **AI layer blocks:** the other AI BBB basket names in the index, at index weights, on the
+    layer paths of `docs/ai-market-bbb.md` (EPS, exit P/E, payout, cash conversion c; block P/E
+    from today's prices and calendarised CY+1 EPS). AI earnings paths are set only there.
+  - **Energy:** the index's energy weight on the oil path (Oslo energy formula, Brent − 30), P/E
+    from IXC, c = 0.80.
+  - **Rest** (≈ 70% of earnings): its own explicit EPS path per scenario `[A]`: Base = Year-1
+    haircut on consensus (state it, now 3%), then trend nominal growth (now 5.5%); Bear and Bull
+    from the [[hy-market-bbb]] recession / soft-landing catalysts. Rest P/E and payout paths
+    are stated per scenario (the World multiple view without its AI and energy part).
+  - Report: block weights (value and earnings), the World EPS path that results, each block's
+    contribution, and the sensitivity to rest growth (± 1 pp) and to all multiples (± 1).
+- **Retained-cash convention (one rule, counted once):** a block whose model counts free cash
+  beyond the payout in V_t (company analyses, AI layers with c) keeps it there and gets no extra
+  growth for it. The rest uses P/E × EPS, so its retention funds its own EPS growth. Never add a
+  block's retained cash and grow its EPS from the same cash.
+- Scripts: `references/fund/idxai3.py` (blocks, company and layer paths) and the update script
+  in `references/` (`upd.py`, World from blocks and rest; `osl.py`, Oslo).
 - Bear and Bull take the global recession / soft-landing paths that match [[hy-market-bbb]].
 - **Currency:** the NOK path is set in **I-44** terms and translated to USD/NOK for World (≈ 70%
   USD) and for Oslo's USD earners.
@@ -292,7 +312,8 @@ shares, B_cons. Cross-check the index P/E with MSCI Norway's forward P/E.
 
 **Step 3 — World earnings base.** FactSet: forward P/E vs 5- and 10-year averages, trailing P/E,
 CY and CY+1 growth, revisions. MSCI World P/E, forward P/E, P/BV. Sector concentration (top 10,
-tech share).
+tech share). Then the block split (Step B): index weights of the company and AI names (URTH
+holdings), their prices and calendarised CY+1 EPS, the energy weight, and the rest by difference.
 
 **Step 4 — Linkage.** Step E above; compare with the previous run.
 
@@ -327,6 +348,16 @@ fund had switched to the MSCI World Climate Change Index (energy 0.3%, IT 37%, P
 ×1.056). Base 5.8% vs 6.2%, and the gap reverses if half the premium goes. Re-run 12 Oct on the AI BBB
 layers: AI is 26.8% of MSCI World and 32.0% of the climate index. Nordnet's Base fell to 5.79% vs
 DNB's 5.84%. The implied rest of World needs 8.8% a year of EPS growth, which is flagged to the Equity BBB.
+Re-run 15 Oct with Microsoft and Alphabet as company blocks, at the 14 Oct NAVs. Nordnet 6.32% vs DNB
+6.16% in Base, level on E / R (0.074), Nordnet 1.8 pp deeper in the 2027 Bear. The ranking flips
+if Nordnet's rest premium halves, so the model cannot rank them on return. In World the company
+blocks only move value between blocks and the rest, because the World total is fixed.
+Re-run 17 Oct on AI BBB Update 2 (retained cash, revenue-consistent Bears) with NVIDIA as a
+company block, at the 15 Oct NAVs: DNB 6.03%, Nordnet 6.16%, both at E / R 0.068. The method and
+NVIDIA steps moved Nordnet by −0.01 pp. NVIDIA has the same weight in both indices, and TSMC
+(Emerging Markets) is in neither. The fund changes came from price and stub only. Lesson: in an
+index split, company and layer work changes what the index is made of (the implied rest), not
+what a plain index returns. Only the Equity BBB path moves a plain index fund.
 
 ### Fund data
 
@@ -423,6 +454,24 @@ Index-fund data and quirks (11 Oct 2026):
      the index Bear does.
    - Cash yield = payout per block × EPS (dividends + net buybacks), reinvested inside an
      accumulating fund.
+   - **Retained cash counted once** (IAF rule; AI BBB method v2, 17 Oct 2026):
+     - Each layer or own block has a cash conversion c, defined as free cash after growth capex
+       and dilution offsets ÷ EPS.
+     - Each year (c − payout) × EPS accumulates at face value into V_t and V_T. It is negative
+       where capex absorbs the cash (platforms).
+     - AI layers take c from `docs/ai-market-bbb.md`. Own blocks set c from payout consistency
+       (retention ≈ growth ÷ ROE, the rest is free cash) and show c as a sensitivity.
+     - The energy block in an index split takes c = 0.80 `[A]`: it has no growth to fund, and
+       sustaining capex runs a little above depreciation. Show c = payout and c = 1.0.
+     - Company blocks already carry their cash in V_t.
+     - First use: DNB Teknologi, 17 Oct 2026, +1.4 pp on the fund's Base.
+   - **Company-analysis variants:** a company analysis may state a variant that the sector
+     baseline has since adopted, such as calendarised consensus or a revenue-consistent Bear
+     (NVIDIA, TSMC, 17 Oct). Use that variant, rebuild the per-share V_t and D_t from the
+     analysis' own tables, check that they reproduce the variant's stated IRR, and say so.
+   - **Layer-method artefact:** a name priced below its layer's Bear exit multiple rises in the
+     Bear (memory at 2.6× against 8×). Show a stressed Bear, with the Bear exit at no more than
+     today's multiple, next to the baseline Bear, and report E / R both ways.
 5. **NOK translation.** USD share × the baseline's USD/NOK path; other foreign currency × the
    I-44 path; NOK share flat. A hedged fund or class instead uses the local return + NIBOR − the
    foreign short rate.
@@ -488,6 +537,8 @@ An index fund is the baseline index held at a cost, so steps 2–3 and 6 change:
     - the AI-only stress.
   - If the implied rest needs growth well above trend, show "rest at trend growth" as a check
     and flag it to the next Equity BBB update. Never change the baseline path here.
+  - Since 17 Oct 2026 the baseline World path is itself built from these blocks with an explicit
+    rest (Step B), so for MSCI World the rest is the baseline's rest, not an implied one.
   - List the names that fit a layer but are not in the AI BBB baskets (the "wider" AI share);
     they stay in the rest.
 - **Plain index** (MSCI World, OSEBX): the baseline paths apply unchanged; the split is a
@@ -521,6 +572,17 @@ An index fund is the baseline index held at a cost, so steps 2–3 and 6 change:
     basket.
 - **Decision rules and triggers** as steps 8–9, plus the baseline's own triggers translated into
   each fund's NAV (e.g. the World trigger as a DNB Global Indeks NAV).
+  - **Trigger convention for index funds:** a price change moves only today's price and leaves
+    every block's future values (V_t, D_t) unchanged, as the Equity BBB's `triggers.py` does for
+    the index. Do not let the layer blocks' P/E glide start from the changed price. On 15 Oct
+    that would have put the World trigger ~1% higher than the baseline's.
+  - Roll to the manager's NAV of the market-price date and reprice every block to that close.
+    The baseline index then sits at a price different from the baseline's date: run it at
+    `P0` = the index move at unchanged earnings (URTH for MSCI World; a tilted index from the
+    two NAVs' relative move). Apply the FX paths relative to that day's spot.
+  - Company blocks in an index: the index total stays the baseline's, so a company path only
+    shifts value against the implied rest. It changes a tilted index by the weight difference
+    × (company − rest).
 - **Recommendation between funds:** cost per year in NOK on the planned amount; the model gap and
   whether it survives the premium sensitivity; Bear and side-case gaps; the size of the tilt at
   portfolio level (NOK of energy and tech moved); structure; and which fund the account can hold.
@@ -581,7 +643,7 @@ validation notes).
 ## Valuation snapshot (Oslo; World; yield gaps; historical anchors)
 ## Oil and NOK linkage (correlations, rolling, episodes, energy earnings share, Brent sensitivity)
 ## Oslo build (blocks, B_cons, paths, P/E, payout)
-## World build
+## World build (blocks: company, AI layers, energy, rest; weights, P/E, EPS paths; retained-cash convention)
 ## Return split, structural run and sensitivities
 ## Against high yield (decision rules, tax, pension horizon)
 ## Signposts and monitoring
@@ -610,6 +672,8 @@ validation notes).
 - Every fetched value has source, as-of date, unit and currency; inverted ETF ratios and USD-EPS /
   NOK-price mismatches handled; raw values in the appendix.
 - Earnings base is CY+1 consensus; block shares are earnings shares; B_cons stated.
+- World EPS path is the sum of its blocks (Step B); the rest path is explicit and its growth
+  stated; AI paths read from `docs/ai-market-bbb.md`, not set here; retained cash counted once.
 - Stub identical across scenarios; V_T on normalised earnings and mid-cycle P/E; g is the value
   CAGR; c shown; structural run shown.
 - E, R and E / R computed with the HY definitions; trigger levels given as level, % and multiple.

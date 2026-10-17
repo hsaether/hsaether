@@ -1,6 +1,6 @@
 import sys,os; sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 import fundmodel as M, copy
-NAV=7637.81
+NAV=7660.89
 o,E,R=M.run(); BL=M.BL
 E27=sum(x['w']*100/x['pe27'] for x in BL.values())
 for s in M.SC:
@@ -21,8 +21,4 @@ for b in M.EPS:
     for s in M.SC: M.EPS[b][s]=[base[b][s][3]]*4
 o2,_,_=M.run(); M.EPS=base
 print("structural (company blocks as in their analyses)", {s:round(o2[s]['irr']*100,1) for s in M.SC})
-# attribution: company blocks replaced by the E layer path at the same prices
-M.BL['E2']=dict(w=M.BL['CM']['w']+M.BL['CG']['w'],pe27=(M.BL['CM']['w']+M.BL['CG']['w'])/(M.BL['CM']['w']/M.BL['CM']['pe27']+M.BL['CG']['w']/M.BL['CG']['pe27']),share=0)
-cm,cg=M.BL.pop('CM'),M.BL.pop('CG')
-M.EPS['E2']=M.EPS['E']; M.PEX['E2']=M.PEX['E']; M.PAY['E2']=M.PAY['E']
-o3,E3,R3=M.run(); print("MSFT+GOOGL on the E layer path instead:", {s:round(o3[s]['irr']*100,2) for s in M.SC}, "E/R", round(E3/R3,3))
+# attribution: see attrib.py

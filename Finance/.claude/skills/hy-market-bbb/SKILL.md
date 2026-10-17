@@ -5,7 +5,7 @@ description: Nordic HY Market BBB (HY BBB) — the Nordic high-yield bond market
 
 # Nordic HY Market BBB
 
-**Revision:** 2026-10-15.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-17.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/hy-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the Nordic high-yield bond market. It answers two questions:
@@ -1131,7 +1131,8 @@ appendix.
 
 ## Metadata
 - Analysis date, status, skill revision, HY Market BBB baseline date and status
-- Share classes used (ISIN, currency, fee) and report dates per fund
+- Report dates per fund, and a pointer to the share-class section (classes and fees are listed
+  only there; user instruction 2026-10-17)
 
 ## Comparison (Base unless stated; % p.a., NOK or class currency as marked)
 | Fund | Style | Yield after fee (date, basis) | Rating PD / q | Credit / rate duration | Oil exposure | Cash (read as) | Base net return (window) | E: excess over NIBOR | R: stress loss | E / R vs market reference | Step-up over reference vs market step-up | Bear window / worst year | Liquidity | Verdict |
@@ -1143,7 +1144,7 @@ appendix.
   defaults. Show the per-year size of that leftover.
 
 ## [Fund name]
-### Facts (legal form, class, fees, mandate, liquidity terms, mandate changes)
+### Facts (legal form, mandate, liquidity terms, mandate changes; fees only where a fund-specific mechanism needs explaining, e.g. a performance fee)
 ### Portfolio snapshot (date; yield basis; durations; rating mix; top 10; cash; issuers)
 ### Mapping to market rows (fund label → row → weight)
 ### Credit loss (named at-risk bonds: weight, price, PD, recovery, loss if default, contribution; restructurings; residual from the record; Bear catalyst loss and the performing names behind it; single-name stress)
@@ -1160,7 +1161,7 @@ appendix.
 ### Track record vs NIBOR (yearly excess, worst month and year, record vs forward)
 ### Return paths and step-up table
 
-## Share classes and cost by purchase route (platform fee; classes open to a direct buyer)
+## Share classes, fees and purchase route (the only place classes and fees are listed: one table with class analysed and ISIN, legal form and dealing, class fee, other fees, the direct buyer's class, the Nordnet price; then the platform-fee notes)
 
 ## Change log
 ## Appendix: sources
