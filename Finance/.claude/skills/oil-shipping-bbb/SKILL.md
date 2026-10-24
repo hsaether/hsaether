@@ -5,7 +5,7 @@ description: Oil Shipping BBB — the tanker-market baseline for crude tankers (
 
 # Oil Shipping BBB
 
-**Revision:** 2026-10-17.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-24.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/oil-shipping-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the tanker market. It answers one question: **what market TCE and
@@ -181,7 +181,18 @@ Connector quirks (tested 2026-10-04):
     full in the in-app browser (navigate, wait ~4 s, `get_page_text`; tested 2026-10-15). Its
     period-fixture reports (named ship, term, rate, charterer, broker 1- and 3-year assessments) feed
     the period-market check. Test a 3-year fixture against Base over the same 36 months **including
-    the stub**, not against the 2027–29 average.
+    the stub**, not against the 2027–29 average. Test any period fixture over the months it actually
+    runs, **from its delivery month**. A one-year deal delivering in November covers Nov–Dec at the
+    late-quarter paper level, not the stub average, so scale those months with the monthly FFA shape
+    (BWET or Gibson). Fixtures and broker assessments are cross-checks; the 15% trigger is tested
+    only on the baseline's own TC series (Intermodal, then Fearnleys).
+    Without an unlock link, the user's DN Media login (logged-in Edge, `mcp__edge__browser_navigate`
+    + `browser_evaluate` over the `<article>` paragraphs) shows only the lead paragraphs. The rest
+    sits behind a TradeWinds paywall (tested 2026-10-22). Use the lead for the headline fact. The
+    user has no TradeWinds subscription: unlock links come only when the user happens to receive
+    one, so do not ask for them. Look for the same fact in a free source instead (Splash247,
+    broker weeklies). The "Read more" list on each article is
+    a free headline feed for leads.
 - **Company updates and Nordnet news** (tested 2026-10-12):
   - GlobeNewswire blocks WebFetch (403). The search page and releases read fine through the Edge
     connection (`mcp__edge__browser_navigate`, then `browser_evaluate` with `innerText`).
@@ -407,7 +418,14 @@ and their change since the last baseline. Compute per segment:
 - **Spot TCE** per segment and scenario: stub, each year, 3-year average and mid-cycle, as point
   value + range ($k/day).
 - **Stub:** quarter-to-date actual spot plus the FFA (or latest spot if no FFA) for the rest,
-  identical across scenarios.
+  identical across scenarios. Build it on the segment itself:
+  - Take the quarter-to-date segment average (weekly Xclusiv; estimate the latest unpublished week
+    from the Baltic routes, TD34 for VLCC, and mark it `[A]`).
+  - Scale the remaining months by the paper's own path (BWET monthly contracts, or the Gibson
+    quarter FFA against the route's quarter-to-date average).
+  - Use "route quarter FFA × one-day segment/route ratio" only as a cross-check. It fails when the
+    route diverges from its segment (Oct 2026: TD25 vs the Aframax average, TD3C vs the VLCC
+    average).
 - **Year 1 by quarter:** shape from the FFA quarterly curve where liquid, otherwise from typical
   seasonality (strong Q1 and Q4, weaker Q2–Q3) marked `[A]`; rescaled so the four quarters average
   to the scenario's annual value.

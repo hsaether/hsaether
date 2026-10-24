@@ -1,5 +1,5 @@
 # Per-name check: each name on its layer's v2 path and method (Base and Bear, NOK), against the company analyses.
-import sys; sys.argv=['model.py']; exec(open('model.py').read().split("out = {}")[0])
+import sys; sys.argv=['model.py']; exec(open('model.py',encoding='utf-8').read().split("out = {}")[0])
 def one(s, key, conv=None, exbase=None, exbear=None):
     name, mem, PE, po = L[key]; P = q[s]['regularMarketPrice']/eps27[s]
     r = {}
@@ -14,7 +14,7 @@ def one(s, key, conv=None, exbase=None, exbear=None):
         if sc in('Base','Bear'): r[sc+'27']=((V[0]+D[0])*f[0]/P-1)*100
     ER=(r['Base']-NIB)/(r['Base27']-r['Bear27'])
     return P, r, ER
-co={'NVDA':'13.0 USD (P/E 13.5 on FY Jan-28)','MU':'2.8','TSM':'7.4','MSFT':'8.8','GOOGL':'3.8'}
+co={'NVDA':'13.0 (11.4 calendarised)','MU':'2.8','TSM':'7.4','MSFT':'8.8','GOOGL':'3.8','AMZN':'6.8'}
 for key in ['H1','H2','H3','E']:
     for s in L[key][1]:
         P,r,ER=one(s,key); print(f"{key} {s:10s} P/E {P:5.1f}  Bear {r['Bear']:6.1f} Base {r['Base']:5.1f} Bull {r['Bull']:5.1f}  Bear27 {r['Bear27']:6.1f}  E/R {ER:+.3f}   company: {co.get(s,'-')}")

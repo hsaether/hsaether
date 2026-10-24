@@ -1,11 +1,11 @@
 ---
 name: ai-market-bbb
-description: AI Market BBB — the baseline for the AI value chain over the IAF window (stub of the current year + 3 calendar years, now 2027–2029). Covers market growth from the money in (hyperscaler and other AI data-center capex and how it is financed) through three layers — Hardware (accelerators/GPUs and custom ASICs, memory and HBM, foundry, packaging and equipment, networking and data-center power and cooling), AI engines (frontier model labs and the AI cloud platforms that sell compute) and Tools (copilots and agents in incumbent software, AI-native tools such as coding agents, and the seat-based software they disrupt). Produces Bear/Base/Bull paths for capex, layer revenues, adoption and the monetisation ratio, layer EPS paths and exit multiples, and an index-level IAF test per layer basket (Base IRR in USD and NOK, hurdle P/E at k = 12%, E / R against the HY reference), plus catalysts and signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Reads the equity index scenarios, NOK path and World paths from docs/equity-market-bbb.md, NIBOR from docs/hy-market-bbb.md and the IAF method from iaf-valuation; it is the only place an AI market path is set. ALWAYS use when the user mentions AI Market BBB / AI BBB / AI-markedet, asks to create, run or update ("oppdater modul") the AI module, or asks about AI capex, hyperscaler spending, GPUs, Nvidia/AMD/Broadcom/TSMC demand, HBM or memory in AI, data-center power, OpenAI/Anthropic revenue, AI adoption, copilots, AI agents, AI disruption of software, or whether AI stocks clear the required return — even without naming the skill. Feeds iaf-valuation for AI hardware, platform and software companies and equity fund analyses with AI exposure.
+description: AI Market BBB — the baseline for the AI value chain over the IAF window (stub of the current year + 3 calendar years, now 2027–2029). Covers market growth from the money in (hyperscaler and other AI data-center capex and how it is financed) through three layers — Hardware (accelerators/GPUs and custom ASICs, memory and HBM, foundry, packaging and equipment, networking and data-center power and cooling), AI engines (frontier model labs and the AI cloud platforms that sell compute) and Tools (copilots and agents in incumbent software, AI-native tools such as coding agents, and the seat-based software they disrupt). Produces Bear/Base/Bull paths for capex, layer revenues, adoption and the monetisation ratio, layer EPS paths and exit multiples, and an index-level IAF test per layer basket (Base IRR in USD and NOK, hurdle P/E at k = 12%, E / R against the HY reference), plus catalysts and signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Reads the equity index scenarios, NOK path and World paths from docs/equity-market-bbb.md, NIBOR from docs/hy-market-bbb.md and the IAF method from iaf-valuation; it is the only place an AI market path is set. ALWAYS use when the user mentions AI Market BBB / AI BBB / AI-markedet, asks to create, run or update ("oppdater modul") the AI module, or asks about AI capex, hyperscaler spending, GPUs, Nvidia/AMD/Broadcom/TSMC demand, HBM or memory in AI, data-center power, OpenAI/Anthropic revenue, AI adoption, copilots, AI agents, AI disruption of software, or whether AI stocks clear the required return — even without naming the skill. Feeds iaf-valuation for AI hardware, platform and software companies. Market only: it analyses no fund and does not read or flag fund documents.
 ---
 
 # AI Market BBB
 
-**Revision:** 2026-10-17.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-24.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/ai-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the AI market. It answers three questions:
@@ -80,12 +80,18 @@ domestic AI chain except as an export and competition row.
 ## Files
 
 - Skill: `.claude/skills/ai-market-bbb/SKILL.md`, plus `references/` with the scripts of the
-  last run (`model.py` for the layer baskets with switches `CAL RET PATH` for attribution,
+  last run (`model.py` for the layer baskets with switches `CAL RET PATH AMZN` for attribution and
+  `BEARCAP` as a diagnostic,
   `members.py` for the per-name company check, `trend2.py`, `hist.py` and the README).
 - Inputs (read only): `docs/equity-market-bbb.md` (scenarios, World paths, USD/NOK path, World
-  Base IRR and E / R), `docs/hy-market-bbb.md` (NIBOR path), `docs/hy-funds-analysis.md` (HY
-  market reference E / R), `.claude/skills/iaf-valuation/SKILL.md` (method, k), company and fund
-  analyses with AI exposure (e.g. `docs/dnb-teknologi-analysis.md`) for consistency.
+  Base IRR and E / R, World exit P/E and mid-cycle return), `docs/hy-market-bbb.md` (NIBOR path, HY
+  market return and the HY market reference E / R, which the HY baseline publishes since 24 Oct),
+  `.claude/skills/iaf-valuation/SKILL.md` (method, k), and the company analyses with AI exposure
+  (`docs/<company>-analysis.md`) for the company check.
+- **Market only** (as Equity BBB): compare with World and the Nordic HY market and its reference
+  E / R; never with the user's portfolio or HY book (`docs/portfolio-overview.md` is not read). No
+  fund analysis: fund documents are neither read nor flagged from here (24 Oct); fund analyses may
+  read this baseline.
 - Output: `docs/ai-market-bbb.md`, one running baseline. Baseline date in the H1. Git holds
   history; read the previous version before overwriting it.
 - Calculations run in the scratchpad (`py -I`, copies of the reference scripts, Yahoo quote and
@@ -147,7 +153,9 @@ are shown as memo, not in a P/E.
 | Basket IRR | IAF Track-B-style build on the basket: P = today's price at CY27 P/E; D_t = payout × EPS; **retained cash = (c − payout) × EPS each year, accumulated at face value into V_t and V_T** (negative = net debt build), where **c = cash conversion** (free cash after growth capex and dilution offsets ÷ EPS, per layer, year and scenario, calibrated on the company analyses); exit value = exit P/E × normalised 2030 EPS + accumulated cash; flows dated mid-year; stub price flat. Retained cash is counted once; the payout only sets timing. Bear: the P/E is at the Bear exit multiple from end-2027 (above today's for names priced below it, e.g. memory: the basket method is not a per-name valuation) |
 | Cash conversion c | Free cash flow after growth capex, working capital and stakes, less buybacks or withholding that only offset dilution, ÷ the EPS on the path. Platforms in the build-out are near zero or negative; memory and compute 0.6–0.95. `[A]`, sourced to the company analyses |
 | Path consistency | Every layer's EPS path must reconcile with its revenue path or index in each scenario: EPS falls faster than revenue in a downturn (operating leverage, rising depreciation). Indexed layers show the Q4 run-rate of the current year as a memo |
-| Company check | Where company analyses exist for a layer's names, compare them with the layer (`members.py`: each name on the layer path and method). Bottom-up company paths that are independent of the layer path (not those that take the layer path as input) move the layer path for their market-cap share when the gap reaches the minimum change |
+| Company check | Where company analyses exist for a layer's names, compare them with the layer (`members.py`: each name on the layer path and method). Bottom-up company paths that are independent of the layer path (not those that take the layer path as input) move the layer path for their market-cap share when the gap reaches the minimum change; the unanalysed rest keeps the previous layer path, shown as its own memo row ("E rest"). Cash conversion is recalibrated the same way |
+| Exit cross-check (basket) | IAF Step 3 at layer level: buyer's implied return at the Base exit = c (last year) ÷ exit P/E + long-run growth (World's, and the layer's own 2029–30 growth), against Equity BBB's World exit P/E and mid-cycle return. A layer below World needs a stated reason |
+| Bear-cap diagnostic | The Bear with the exit multiple capped at today's P/E (`model.py BEARCAP`). Not the rule (cyclical P/Es rise on trough earnings), but shown wherever a layer trades below its Bear multiple, because its E / R then rests on the Bear multiple |
 | **E / R** | As in the HY rule: E = Base NOK IRR − Base window NIBOR; R = Base 2027 − Bear 2027 return (NOK). Compared with the HY market reference and the World index |
 | Implied growth | Constant annual EPS growth after 2027 (from the Base 2027 level, at the Base exit P/E) that gives 12% in NOK. It shows what the price assumes |
 
@@ -201,7 +209,12 @@ Quirks (2026-10-12 run):
   returns 403. Anthropic's S-1 is not public on EDGAR; its figures come from Reuters' review of
   the draft via secondary sources (`[E]`); booked 2025 revenue (~4.6bn) differs from the run-rate
   figures that circulate. Korean closes come in before the US close: label the price date per
-  region.
+  region. When Seoul is open, `quote` returns intraday prices: take the previous close from the
+  chart API for a clean snapshot (22 Oct).
+- **Lab run-rates are not like for like** (22 Oct): Anthropic's annualised revenue includes sales
+  through AWS and Google Cloud, OpenAI's does not. Reported run-rates and targets get mixed in the
+  press (OpenAI ~50bn at end-September 2026 vs the ~70bn end-2026 target). Use booked quarterly
+  revenue where it exists and date every run-rate.
 - **Market-mood updates:** a sharp sell-off is a reason to re-run the baskets (prices,
   `hist.py` table) and test the paths, not a reason to move them. Paths move only on evidence
   that meets the minimum-change rule (earnings, guidance, prices of memory or compute, a
@@ -273,15 +286,15 @@ software growth, guidance and margins; adoption (BTOS). State winners and losers
 fiscal-year labels and currency with `trend2.py`); basket P/E; set EPS paths per scenario
 (relative to CY27 consensus) from Steps 1–4 and check each against its revenue path (path
 consistency); exit P/E per scenario; payout and cash conversion; run `model.py`: IRR USD and NOK,
-2027 return, hurdle P/E at k = 12%, margin of safety, E / R, implied growth. When the method or
+2027 return, hurdle P/E at k = 12%, margin of safety, E / R, implied growth, the exit cross-check,
+and the Bear-cap diagnostic for layers priced below their Bear multiple. When the method or
 consensus basis changes, run the switches step by step and show the attribution. Compare with
 World (equity BBB) and the HY reference.
 
 **Step 6 — Test BBB.** Pre-mortem for Base; catalysts still right; signposts crossed; consistency
 with the equity baseline's scenarios and World EPS path; **company check** (`members.py` against
 each company analysis; move a layer path for the analysed share only on independent bottom-up
-evidence that meets the minimum change); consistency with fund analyses that use AI blocks (flag
-differences for re-run). A basket that clears k or the HY E / R on the strength of a few names is
+evidence that meets the minimum change); flag the company analyses whose inputs changed. A basket that clears k or the HY E / R on the strength of a few names is
 a lead for company analyses, not a decision.
 
 **Step 7 — Write, log and check.** Output format below; complete change log; read back; checks.

@@ -1,5 +1,7 @@
-# AI Market BBB — layer baskets, IAF index-level build (USD and NOK). Version 2 (17 Oct 2026).
-# Prices: Yahoo close 16 Oct 2026 (US, Europe, Korea). Consensus: Yahoo earningsTrend 17 Oct 2026.
+# AI Market BBB — layer baskets, IAF index-level build (USD and NOK). Version 2.1 (run of 24 Oct 2026).
+# Prices: Yahoo close 23 Oct 2026 (US, Europe, Korea). Consensus: Yahoo earningsTrend 24 Oct 2026.
+# 2.1 (22 Oct): E layer recalibrated with the Amazon analysis (switch AMZN: E Bear/Bull paths and cash
+# conversion); USD/NOK path from the 17/18 Oct Equity BBB; Bear-cap and exit cross-check diagnostics.
 # Changes from version 1 (16 Oct): (1) retained cash counted once: each year the layer converts
 # conv x EPS into free cash after growth capex (net of dilution offsets); payout x EPS is paid as
 # D_t and the rest (conv - payout) x EPS accumulates at face value into V_t and V_T (negative =
@@ -7,38 +9,40 @@
 # docs/nvda-analysis.md; MU by calendar quarters, docs/mu-analysis.md); ASML's consensus is in EUR
 # and is converted to USD. (3) Bear paths reconciled to revenue (H1, H3, H4) and the E layer moved
 # to the Microsoft and Alphabet company analyses where the gap is >= 0.05.
-# Switches (for the attribution in the change log): CAL, RET, PATH. Run: py -I model2.py [CAL RET PATH]
+# Switches (for the attribution in the change log): CAL, RET, PATH, AMZN; BEARCAP = diagnostic
+# (Bear P/E capped at today's). Run: py -I model.py [CAL RET PATH AMZN] [BEARCAP]
 import json, sys
-ARGS = set(sys.argv[1:]) or {'CAL', 'RET', 'PATH'}
-CAL, RET, PATH = 'CAL' in ARGS, 'RET' in ARGS, 'PATH' in ARGS
-KRW = 1329.6; EUR = 1.12435
+ARGS = set(sys.argv[1:]) or {'CAL', 'RET', 'PATH', 'AMZN'}
+if ARGS == {'BEARCAP'}: ARGS = {'CAL', 'RET', 'PATH', 'AMZN', 'BEARCAP'}
+CAL, RET, PATH, AMZN, BEARCAP = 'CAL' in ARGS, 'RET' in ARGS, 'PATH' in ARGS, 'AMZN' in ARGS, 'BEARCAP' in ARGS
+KRW = 1325.4; EUR = 1.12045
 q = {r['symbol']: r for r in json.load(open('data/q.json'))}
 def mc(s):
     r = q[s]; m = r.get('marketCap') or 0
     if r.get('currency') == 'KRW': m /= KRW
     if r.get('currency') == 'EUR': m *= EUR
     return m / 1e9
-# CY27 consensus EPS (Yahoo earningsTrend 17 Oct 2026), in the price currency of each line.
+# CY27 consensus EPS (Yahoo earningsTrend 24 Oct 2026), in the price currency of each line.
 # Old convention (version 1): next fiscal year taken as CY27 for FY Jan names, ORCL FY mean,
 # ASML in EUR read as USD. Calendarised (version 2): by months, or by quarters where a company
 # analysis did so.
 cal = dict(
  NVDA=15.21,                                   # by calendar quarters (nvda-analysis); FY Jan-28 15.91
  AMD=15.75529, AVGO=19.39695,                  # AVGO FY Oct-27 (no FY28 consensus; understates CY27 by up to ~5%)
- MRVL=4.22026/12 + 7.29625*11/12,              # FY Jan: 1/12 FY Jan-27 + 11/12 FY Jan-28
- MU=192.1,                                     # by calendar quarters (mu-analysis 191.3 at FY28 204.47; FY28 now 206.89)
- **{'000660.KS': 466735.6, '005930.KS': 72043.35},
- TSM=23.10742, ASML=55.92932*EUR,              # ASML consensus in EUR -> USD
- AMAT=18.45665, LRCX=(9.47647 + 11.76569)/2,   # AMAT FY Oct-27; LRCX FY Jun: 1/2 + 1/2
- ANET=5.22238, VRT=9.19314, ETN=16.28635,
- MSFT=(19.77839 + 23.72118)/2,                 # FY Jun: 1/2 + 1/2
- GOOGL=15.07611, AMZN=10.55194, META=33.91912,
- ORCL=8.14059*5/12 + 10.99155*7/12,            # FY May: 5/12 FY May-27 + 7/12 FY May-28
- NOW=5.00529, CRM=16.7558/12 + 16.02297*11/12, ADBE=27.50756, PLTR=2.3505,
- **{'SAP.DE': 8.37917}, INTU=23.81046*7/12 + 26.94382*5/12,
- SNOW=2.22372/12 + 3.00785*11/12, DDOG=2.97446)
-old = dict(cal, NVDA=15.9146, MRVL=7.29625, CRM=16.02297, SNOW=3.00785,
-           ORCL=(8.14059 + 10.99155)/2, ASML=55.92932)
+ MRVL=4.22025/12 + 7.32904*11/12,              # FY Jan: 1/12 FY Jan-27 + 11/12 FY Jan-28
+ MU=191.8,                                     # by calendar quarters (mu-analysis v2, 22 Oct: FY27 176.50, FY28 206.85)
+ **{'000660.KS': 467761.1, '005930.KS': 72486.63},
+ TSM=23.38529, ASML=55.92932*EUR,              # ASML consensus in EUR -> USD
+ AMAT=18.49094, LRCX=(9.62799 + 12.15311)/2,   # AMAT FY Oct-27; LRCX FY Jun: 1/2 + 1/2
+ ANET=5.22238, VRT=9.19448, ETN=16.29552,
+ MSFT=(19.76133 + 23.70396)/2,                 # FY Jun: 1/2 + 1/2
+ GOOGL=15.11123, AMZN=10.5582, META=33.94866,
+ ORCL=8.14069*5/12 + 10.99551*7/12,            # FY May: 5/12 FY May-27 + 7/12 FY May-28
+ NOW=5.00711, CRM=16.75484/12 + 16.01523*11/12, ADBE=27.50756, PLTR=2.3505,
+ **{'SAP.DE': 8.4042}, INTU=23.81046*7/12 + 26.94382*5/12,
+ SNOW=2.22372/12 + 3.02051*11/12, DDOG=2.98616)
+old = dict(cal, NVDA=15.9146, MRVL=7.32904, CRM=16.01523, SNOW=3.02051,
+           ORCL=(8.14069 + 10.99551)/2, ASML=55.92932)
 eps27 = cal if CAL else old
 # CY26 (display only: consensus growth CY26 -> CY27)
 eps26 = {'NVDA': 4.77/12 + 9.31242*11/12, 'AMD': 7.5868, 'AVGO': 11.65797, 'TSM': 17.30924, 'MU': 118.9,
@@ -61,6 +65,8 @@ P2['H3']['Bear'] = (.76, .63, .67, .71)   # revenue-consistent (TSMC margin buil
 P2['H4']['Bear'] = (.75, .54, .56, .65)   # revenue -20% in 2028 at ~1.4x operating leverage, flat 2029 [A]
 P2['E']['Bear']  = (.82, .80, .88, .96)   # MSFT + GOOGL company Bears for their 62% of the basket
 P2['E']['Bull']  = (1.0, 1.13, 1.27, 1.47) # 2030 only (+0.06); 2028-29 gaps < 0.05
+if AMZN:  # 22 Oct: MSFT, GOOGL, AMZN company paths for their 83% of E, the old layer path for META and ORCL
+    P2['E'] = dict(P2['E'], Bear=(.82, .75, .82, .91), Bull=(1.0, 1.19, 1.37, 1.54))
 PATHS = P2 if PATH else P1
 CONV = {  # [A], calibrated on the company analyses' FCF after growth capex
  'H1': dict(Bear=(.85,.95,.95), Base=(.80,.90,.90), Bull=(.75,.85,.90)),   # NVDA .77/.95/.97
@@ -69,6 +75,8 @@ CONV = {  # [A], calibrated on the company analyses' FCF after growth capex
  'H4': dict(Bear=(.90,.90,.90), Base=(.90,.90,.90), Bull=(.90,.90,.90)),   # asset-light, no analysis
  'E':  dict(Bear=(.00,.40,.60), Base=(-.10,.10,.30), Bull=(-.20,-.10,.10)),# MSFT .22/.34/.45, GOOGL -.30/-.14/.06 (after withholding)
  'T':  dict(Bear=(.80,.80,.80), Base=(.80,.80,.80), Bull=(.80,.80,.80))}   # non-GAAP EPS; SBC dilution offset
+if AMZN:  # AMZN -.48/-.16/.11 (Bear -.58/.00/.30; Bull -.75/-.52/-.22); META assumed like GOOGL (Q3-26 FCF -2.1bn)
+    CONV['E'] = dict(Bear=(-.10,.30,.50), Base=(-.20,.00,.20), Bull=(-.30,-.20,.00))
 L = {
  'H1': ('H1 Compute (NVDA AMD AVGO MRVL)', ['NVDA','AMD','AVGO','MRVL'], (13,17,19), .25),
  'H2': ('H2 Memory (MU SK hynix Samsung)', ['MU','000660.KS','005930.KS'], (8,10,11), .15),
@@ -76,8 +84,8 @@ L = {
  'H4': ('H4 Networking and DC infrastructure (ANET VRT ETN)', ['ANET','VRT','ETN'], (15,20,24), .35),
  'E':  ('E Engines and cloud platforms (MSFT GOOGL AMZN META ORCL)', ['MSFT','GOOGL','AMZN','META','ORCL'], (17,21,23.5), .34),
  'T':  ('T Tools and application software (NOW CRM ADBE PLTR SAP INTU SNOW DDOG)', ['NOW','CRM','ADBE','PLTR','SAP.DE','INTU','SNOW','DDOG'], (15,20,24), .45)}
-FX = dict(Bear=(10.70,10.42,10.42), Base=(9.5555,9.5555,9.5555), Bull=(9.27,9.27,9.27)); FX0 = 9.5555
-NIB = 4.38; T0 = 75/365  # 17 Oct -> 31 Dec
+FX = dict(Bear=(10.54,10.27,10.27), Base=(9.41,9.41,9.41), Bull=(9.13,9.13,9.13)); FX0 = 9.41  # Equity BBB 17/18 Oct
+NIB = 4.38; T0 = 68/365  # 24 Oct -> 31 Dec
 def irr(fl):
     lo, hi = -0.9, 2.0
     for _ in range(200):
@@ -86,6 +94,7 @@ def irr(fl):
     return m
 def build(e, P, ex, po, cv, bear):
     """Year-end values V (per unit of CY27 consensus EPS) and payouts D for 2027-29."""
+    if bear and BEARCAP: ex = min(ex, P)   # diagnostic: no re-rating above today's multiple in the Bear
     pe = [ex]*3 if bear else [P + (ex - P)*k/3 for k in (1, 2, 3)]
     D = [po*e[k] for k in range(3)]
     C, cum = [], 0.0
@@ -136,3 +145,9 @@ for k, v in out.items():
 print(f"ALL  {tot/1e3:6.2f}             | {w('Bear_NOK'):6.1f} {w('Base_NOK'):6.1f} {w('Bull_NOK'):6.1f} | {w('Base_USD'):6.1f} | {w('Bear_r27'):6.1f}")
 print('weights', {k: round(v['mcap']/tot*100) for k, v in out.items()})
 json.dump(out, open('model_out_' + '_'.join(sorted(ARGS)) + '.json', 'w'), default=float, indent=1)
+# Exit cross-check (IAF Step 3, Track A form): buyer's implied return at the Base exit = c(2029) / exit P/E
+# + long-run growth (World's 5.3%), against World's mid-cycle return 8.2% at exit P/E 17 (Equity BBB 18 Oct).
+print('exit cross-check (Base): layer, exit P/E, c 2029, cash yield, + g 5.3% = buyer return vs World 8.2%')
+for key, (name, mem, PE, po) in L.items():
+    c = CONV[key]['Base'][2]; y = c/PE[1]*100
+    print(f'  {key:3s} {PE[1]:5.1f} {c:5.2f} {y:5.1f}% {y + 5.3:5.1f}%')

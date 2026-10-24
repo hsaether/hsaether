@@ -5,7 +5,7 @@ description: Investment Analysis Framework (IAF) — the standing valuation meth
 
 # Investment Analysis Framework (IAF)
 
-**Revision:** 2026-10-11.3 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-18.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/iaf-valuation/` in the Finance folder.
 
 A forward-looking test of whether today's price is defensible given the return it can deliver over
@@ -46,7 +46,7 @@ nothing, say so and fall back to the next one. Never fill a gap with an invented
 | Brent/WTI/diesel spot history (cross-check of realised prices against the oil baseline) | **FRED** (`DCOILBRENTEU`, `DCOILWTICO`, `DDFUELNYH`, averaged server-side per quarter) | Alpha Vantage (`BRENT`, `WTI`) |
 | NIBOR path per scenario (NOK floating-rate debt service), Nordic HY spread and new-issue spreads (refinancing in Bear), HY watchlist (distress signal for an analysed issuer) | **`docs/hy-market-bbb.md`** (Interface tables, watchlist) | FRED and Norges Bank API for current levels only — never an own rate path |
 | Defense companies: defense spending per country, equipment and addressable spending, segment order and revenue growth per scenario, long end and steady-state margins, capacity balance | **`docs/defense-market-bbb.md`** (Interface tables, "For IAF") | — never an own defense spending or defense market forecast |
-| Equity market context: Oslo (OSEBX) and MSCI World index Base IRR, index hurdle levels, energy share of Oslo earnings | **`docs/equity-market-bbb.md`** (context only: a market priced below k never lowers k; IAF keeps spot FX, not the baseline's NOK path) | — |
+| Equity market context: Oslo (OSEBX) and MSCI World index Base IRR, index hurdle levels, energy share of Oslo earnings; index exit P/E, exit P/B and mid-cycle return (the exit cross-check, Step 3); the NOK scenario path (Bear/Bull NOK return, FX rule) | **`docs/equity-market-bbb.md`** (context only: a market priced below k never lowers k; the decision stays at spot FX, see the FX rule) | — |
 | Rate and credit context: US 10-year, US high-yield spread | **FRED** (`DGS10`, `BAMLH0A0HYM2`) | — |
 | Norwegian rates (daily): policy rate, NOWA, T-bills, government bonds 3–10Y, government zero-coupon curve 6M–10Y; Norges Bank Financial Conditions Index | **Norges Bank API** (`IR`, `SHORT_RATES`, `GOVT_GENERIC_RATES`, `GOVT_ZEROCOUPON`, `FINANCIAL_INDICATORS`) | FRED `IRLTLT01NOM156N`, `IR3TIB01NOM156N` (OECD monthly, ~1 month lag) |
 | NOK spot for the price time stamp; import-weighted krone index (I-44) | **Yahoo** / **AllRatesToday** for spot; **Norges Bank API** `EXR/B.I44.NOK.SP` for I-44 (context; the NOK scenario path is in `docs/equity-market-bbb.md`) | Norges Bank website |
@@ -107,6 +107,15 @@ summaries returned nothing in testing, see below), plus Nordic power prices and 
 rate matching the price time stamp. Use Yahoo for that market rate (AllRatesToday
 `get_exchange_rate` as cross-check; they agreed to the 4th decimal when tested). State pair, rate,
 source and time stamp in the header.
+
+**FX by scenario.** The decision (IRR_T, P_k and margin of safety in all three scenarios) stays at
+spot FX, held flat. Equity BBB's Base NOK path is spot flat, so Base is the same either way. For
+companies whose cash flows or exit value are in another currency than the share price (USD
+reporters listed in Oslo, foreign shares held in NOK), also report **Bear and Bull IRR_T in NOK on
+the Equity BBB NOK path** (`docs/equity-market-bbb.md`, NOK path table): USD amounts on USD/NOK,
+other currencies on I-44; each D_t at the factor for its payment year, V_T at the exit-year factor.
+Label it "NOK path (Equity BBB)". It shows how much a weaker or firmer krone cushions or deepens the
+scenario; it never replaces the spot figure. The NOK path is set only in Equity BBB.
 
 Historical FX (quarter-end, year-end, ex-date, payment date) comes from AllRatesToday
 `get_rates_authenticated` with `time` set to the moment (e.g. `2025-12-31T16:00:00Z`); give several
@@ -238,14 +247,15 @@ covered (DOFG returned an error).
 | d | Cash yield on entry: (Σ D over the horizon ÷ T) ÷ P. Simple and undiscounted |
 | V_t | Value per share at end of year t (see Terminal value) — V_0 = P |
 | NAV_0 | NAV per share at the valuation date by the V_T method, at the scenario's mid-cycle marks, less net debt at the valuation date |
-| g | Per-share value growth. Track A: EPS CAGR (value growth at a constant PE). Track B: (V_T / P)^(1/T) − 1. An output of the build, not a free input |
-| IRR | Return that equates P with the D_t stream plus V_T. Track A: ≈ d + g. Track B: IRR_T = d + g + c, c = timing term (Step 2B) |
+| g | Per-share value growth (V_T / P)^(1/T) − 1, both tracks. An output of the build, not a free input. Track A's Rule 1 screen uses EPS CAGR instead, which is value growth only if today's P/E holds at exit |
+| IRR | Return that equates P with the D_t stream plus V_T. IRR_T = d + g + c, c = timing term (Step 2B). Track A's screen d + g (EPS CAGR) ≈ IRR only at a constant P/E |
 | P_k | Hurdle price: the most you can pay and still earn exactly k |
 | ROIC_g | Return on growth capex (new capital deployed) |
 
 ## Step 1 — Choose the track
 
-- **Track A (steady):** stable earnings, low capex volatility. Use E, PE and a growth rate.
+- **Track A (steady):** stable earnings, low capex volatility. Use E, PE and a growth rate for the
+  screen (Rules 1 and 3), and decide on a dated IRR to an independent exit P/E (Step 2A).
 - **Track B (cyclical / capital-intensive):** shipping, offshore, rigs, commodities, or any company
   where capex, D&A or rates swing earnings. Use FCF, the year-by-year IRR build and P_k.
 - State which track and why. When in doubt, use Track B.
@@ -310,6 +320,19 @@ than the payout leaves, d and g are inconsistent — fix one of them.
 Rule 3 combines a total-return hurdle with a no-growth earnings-yield anchor. It is a heuristic for
 how much premium is defensible, not a value from a cash-flow model.
 
+**Rule 1 with g = EPS CAGR assumes today's P/E holds at exit.** That is a screen, not the decision:
+at a high P/E it assumes the growth premium lasts for ever (Microsoft, Oct 2026: d + g = 12.4% at a
+constant 29x, against 8.8% to an exit P/E of 23). **Decide Track A on a dated IRR to an independent
+exit P/E** (Step 3), with the same IRR_T, P_k and margin of safety as Track B:
+- V_T = exit P/E × normalised EPS of the year after exit (+ net cash and stakes at exit where they
+  are not in EPS). D_t at payment dates; retained cash counted once (Step 2B).
+- Exit P/E per scenario, stated and sourced: own P/E history over a full cycle, the layer or sector
+  exit P/E in the relevant BBB (AI BBB layers, Defense BBB context), and Equity BBB's index exit P/E
+  (Oslo or World), with the premium or discount to the index explained (growth at exit, margin,
+  cash conversion). Never the IAF ceiling, never today's P/E by default.
+- Interim V_t: P/E glides from today's to the exit P/E (state the glide).
+- Report Rule 1 at constant P/E beside the dated IRR, labelled "assumes today's P/E holds".
+
 ## Step 2B — Track B: year-by-year IRR build
 
 For each period (stub quarters, Year 1 quarters, Years 2–3), build per share:
@@ -360,7 +383,8 @@ c           = IRR_T − d − g                   timing and compounding term
 - c is usually within ±2 pp. A larger |c| means front-loaded distributions or a large value change;
   check the dividend dates. Do not interpret c as a source of return.
 - **Re-rating** is the part of g that exists only because V_T is a NAV and P is a market price. It
-  assumes the share trades at NAV at exit. Name it whenever P/NAV_0 is outside 0.95–1.05: a flat g
+  assumes the share trades at NAV at exit (the Track B exit convention in Step 3; NAV is not book,
+  so this is not P/B = 1, and the exit cross-check tests it against the market). Name it whenever P/NAV_0 is outside 0.95–1.05: a flat g
   can be a falling NAV plus a discount assumed to close (DOF Base: re-rating +4.6% a year, NAV
   growth −5.4% a year, g −1.1%).
 
@@ -370,6 +394,18 @@ c = −0.2 pp), P_k ≈ 97.5. Margin of safety −2.5%: fails, no margin of safe
 ## Step 3 — Terminal value (V_T)
 
 V_T drives most of the result, so build it, never assume it.
+
+**Exit principle (shared with Equity BBB).** V_T is the price a market buyer pays for the share on
+the exit date for a **continuing business**. The business does not stop at exit; the forecast does.
+Everything after exit is priced into V_T:
+- on **normalised (mid-cycle) earnings**, because a 3-year forecast cannot see the cycle beyond exit
+  and capitalising a peak or trough year is the classic cyclical error;
+- at the **market's required return at exit**, through an independent market price: asset-market
+  marks (NAV) for finite-life asset owners (Track B), an exit P/E for Track A, a mid-cycle P/E for
+  an index (Equity BBB). **Never at k** (k is the investor's hurdle for buying today) and never at the
+  IAF ceiling;
+- plus the **backlog the scenario holds at exit** (contracts running past exit, rule below), and
+  the exit-consistency bridge where the final year is far from mid-cycle.
 
 - **Base it on normalized, mid-cycle economics**, not the last modelled year: mid-cycle rates ×
   operating days − normalized costs, or NAV (vessel/rig values at mid-cycle prices) less net debt.
@@ -384,14 +420,39 @@ V_T drives most of the result, so build it, never assume it.
   context only and never the exit multiple.
   If the sector BBB gives no Bear/Bull mid-cycle for a row, derive it from the nearest row's
   Bear/Base/Bull mid-cycle ratios and tag it `[A]`.
+- **Backlog at exit (contract premium in V_T).** An asset on contract at exit is worth its
+  mid-cycle value plus the present value of the contract's margin over the mid-cycle day. Which
+  contracts count:
+  - **Firm today** (signed on the valuation date): for their full remaining term.
+  - **Signed in the scenario** (contracts, options or extensions the scenario assumes, started by
+    the exit date): they are backlog in that scenario on the exit date, and a buyer pays for them.
+    Count them for **at most 2 years after exit** (the bridge length of the reversion tail), at the
+    rate the scenario signs them at, and never longer than the typical term the sector BBB gives
+    for the row. Beyond the cap the days are open at mid-cycle.
+  - **Same earnings basis as the asset mark:** premium per day = contract day (rate × revenue
+    efficiency − opex − tax) − mid-cycle day (the asset convention's average day: rate × MCU ×
+    revenue efficiency, idle cost on idle days, tax). The utilisation difference is part of the
+    premium: a contracted asset is not idle while the contract runs. Where the sector BBB gives no
+    MCU for the row, state the MCU used and tag it `[A]`. Discount at the sector BBB's asset rate.
+  - Show the scenario-signed premium on its own line in the exit asset table and the V_T bridge,
+    and report IRR_T and P_k **without it** (firm-today contracts only) as a sensitivity.
+  - NAV_0 counts firm-today contracts only (nothing else is signed on the valuation date).
+    End-of-stub interim marks do the same, so they are identical in all scenarios (Step 6); later
+    interim marks count the scenario's backlog on that date with the same 2-year cap.
+- **Holding-company G&A is not deducted in NAV** (NAV_0, interim V_t, V_T). NAV values the assets;
+  the holding company does not operate them (financing and strategy only). Overhead that runs the
+  assets (onshore operations, technical management, crewing) is an operating cost and belongs in
+  the asset opex; state the split, or tag it `[A]` when the company reports one SG&A line. Within
+  the window, holdco G&A is in the cash flows as paid (it reduces D_t and retained cash).
 - **Exit consistency: final year vs mid-cycle.** V_T at mid-cycle assumes that earnings jump from
   the Year-3 level to mid-cycle the day after exit. When the two are far apart, that jump must be
   explained or priced, in either direction.
   - **Test** each segment row or fleet block that drives open-day earnings, in every scenario:
     gap = (Year-3 rate − mid-cycle rate) ÷ mid-cycle rate. Use the scenario's own Year-3 and
     mid-cycle values, on the row's earnings basis (rate × utilization where the sector BBB gives
-    utilization; margin for a services line valued on mid-cycle earnings). Leave out days under firm
-    contract after T: the firm-contract premium already carries them.
+    utilization; margin for a services line valued on mid-cycle earnings). Leave out days under
+    backlog at exit (firm today or signed in the scenario, within the cap): the contract premium
+    already carries them. A row fully under backlog for the 2 years after exit has no test.
   - **Material = |gap| > 10%** (the sector BBB minimum change).
   - **If the gap is material, use one of two treatments and say which:**
     1. **Named reason.** The sector BBB, or a company document for a company-specific item, names a
@@ -412,7 +473,9 @@ V_T drives most of the result, so build it, never assume it.
        `tail = (rate_Y3 − rate_mc) × open earning days a year (as in Year 3, after the company's
        utilization or realisation factor) × (2/3 ÷ 1.08 + 1/3 ÷ 1.08²) × (1 − tax)`
        The discount factor ≈ 0.90, so the tail is about one year of the Year-3 gap. It is a line in
-       the exit asset table and in the V_T bridge.
+       the exit asset table and in the V_T bridge. Where backlog covers part of the 2 years after
+       exit, the tail runs only on the open days in that window (drop the year-1 or year-2 weight
+       for days under backlog).
   - **Always show the exit-consistency table:** row, scenario, Year-3 rate, mid-cycle rate, gap,
     open days, treatment (the reason with its source, or the tail) and the tail per share.
   - Decide on the chosen treatment, and report the other as a sensitivity: IRR_T and P_k with and
@@ -423,17 +486,34 @@ V_T drives most of the result, so build it, never assume it.
     belongs to the cyclical part of IRR_T.
 - **Exit multiple must be stated and independent.** Never use the IAF ceiling as the exit multiple
   (circular). For finite-life assets (ships, rigs), prefer NAV over a perpetuity multiple.
+- **Exit cross-check against the equity market (every analysis, all three scenarios).** One table:
+  - **exit P/E** = V_T ÷ normalised earnings of the year after exit (Track B: FCF_normalised
+    **before holdco G&A**, the same basis as the NAV; state holdco G&A a year beside it);
+  - **exit P/B** = V_T ÷ book equity at exit (book now rolled forward with earnings less D_t;
+    Track B book uses accounting depreciation, not the mid-cycle marks);
+  - **buyer's implied return at exit**: Track B = the asset rate behind the marks (sector BBB,
+    e.g. 8%), adjusted for net debt where material; Track A = normalised cash yield at the exit
+    P/E + long-run growth (Equity BBB Step D form);
+  - beside Equity BBB's index exit P/E, exit P/B and mid-cycle return (Oslo for Oslo listings and
+    Nordic names, World for others).
+  - P/NAV = 1 at exit stays the Track B default: the marks come from the asset market, the most
+    independent exit available. If the buyer's implied return is below the index's mid-cycle
+    return with no stated reason (quality, growth, contract cover), show IRR_T and P_k with the
+    exit marks re-discounted at the index return as a sensitivity. An exit P/E or P/B far outside
+    the sector's or index's history needs a stated reason.
 - **Roll the capital base forward**: V_T includes the value of growth capex deployed during the
   horizon (Step 4) and the change in net debt / retained cash.
 - **Two NAVs at the valuation date** (both per share, less net debt at the valuation date), in the
   header with P/NAV for each:
   - NAV at **today's market marks** (broker or secondhand values). Omit if no current mark exists.
-  - **NAV_0** at the **Base mid-cycle marks** (the V_T method, incl. firm-contract premium). It
+  - **NAV_0** at the **Base mid-cycle marks** (the V_T method, incl. the premium on contracts firm
+    today). It
     anchors the re-rating in Step 2B. Bear and Bull compute their own NAV_0 at their own marks.
 - **V_T bridge (Base), from NAV_0**, in $m and per share, with the re-rating P → NAV_0 shown above
   it so the whole of g is explained:
   NAV_0 → + value created by growth capex (value at T − value in NAV_0 − capex paid in the horizon)
-  → − ageing of the existing fleet at mid-cycle marks → ± firm-contract premium roll-off →
+  → − ageing of the existing fleet at mid-cycle marks → ± contract premium, in two lines: roll-off
+  of the firm-today premium, and the premium on backlog signed in the scenario (capped) →
   ± reversion tail (exit consistency; zero where no gap is material or a named reason is used) →
   + retained cash (Σ Maintenance FCF − D_t paid; = −Δ net debt excluding growth capex) → V_T.
   There is no separate cycle-normalisation step: with NAV_0 at mid-cycle marks it sits in the
@@ -441,7 +521,8 @@ V_T drives most of the result, so build it, never assume it.
 - **Interim V_t** (end of stub, Years 1–2) is a path diagnostic and does not enter IRR_T. Use the
   V_T method with asset marks gliding from today's market marks (Base mid-cycle where no market
   mark exists) to the scenario's mid-cycle value at exit (plus any reversion tail at T); state the
-  glide. End-of-stub marks are identical in all scenarios (Step 6). Marking straight to each
+  glide. End-of-stub marks are identical in all scenarios (Step 6) and carry only the premium on
+  contracts firm today. Marking straight to each
   scenario's mid-cycle at the end of the stub creates a spread the stub does not have, and makes
   "IRR to Year 1" look like a pass whenever P is below mid-cycle NAV.
 
@@ -479,8 +560,10 @@ Example at k = 12%: 20 invested at ROIC_g 15% → worth 25 (+5). At ROIC_g 9% �
 5. Cyclicals: rate-driven earnings mean-revert and do not compound. Split **IRR_T** (not g alone)
    into structural and cyclical, for each scenario:
    - **Structural IRR**: the same model with every open or re-priced day from 1 Jan of Year 1 at
-     **that scenario's own mid-cycle rate**. The stub, firm contract days and exit asset values are
-     unchanged, except the reversion tail, which is zero in the structural run (Step 3). Unexercised
+     **that scenario's own mid-cycle rate**. The stub, firm-today contract days and exit asset values
+     are unchanged, except the reversion tail, which is zero in the structural run (Step 3).
+     Scenario-signed backlog at exit stays, re-priced like the other days to the scenario's
+     mid-cycle rate, so only its utilisation premium remains. Unexercised
      options count as open days; dividends and net debt follow the cash flows.
    - **Cyclical = IRR_T − structural IRR** (pp), shown as Δd and Δg. For high-payout companies the
      cycle shows up mostly in d (DOF Base: +1.8 pp, all of it through d), so a g-only split misses it.
@@ -495,7 +578,7 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
 
 - **Base**: the most likely path, from the central view of the relevant sector skill (Oil Market
   BBB, Oil Shipping BBB, Rig Market BBB, Supply Market BBB, Defense Market BBB). It carries the
-  decision: IRR_T vs k and P vs P_k (Track A: Rules 1 and 3).
+  decision: IRR_T vs k and P vs P_k (both tracks; Track A reports Rules 1 and 3 as screens).
 - **Bear**: a stress test anchored to a named catalyst from the sector skill (e.g. chokepoint
   reopening, fleet oversupply, demand shock). Report:
   - Bear IRR_T and P_k (Bear),
@@ -548,13 +631,18 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
    to t) for all three scenarios. Track A: E, EPS growth, D_t per period.
 5. **V_T bridge** for Base, from NAV_0 (Step 3), plus the exit asset table for all three scenarios
    and the **exit-consistency table** (Step 3: gap per row and scenario, treatment, tail per
-   share; IRR_T and P_k with the other treatment as a sensitivity).
+   share; IRR_T and P_k with the other treatment as a sensitivity), the **backlog-at-exit lines**
+   (firm today, signed in the scenario, IRR_T and P_k without the latter) and the **exit
+   cross-check table** (exit P/E, exit P/B, buyer's implied return, against Equity BBB). Track A:
+   the exit P/E per scenario with its anchors, then the same cross-check table.
 6. **Growth capex test**: amount, ROIC_g with source, value created vs k.
 7. **Results table** (rows in this order):
 
 | | Bear | Base | Bull |
 |---|---|---|---|
-| IRR_T (Track A: d + g) | | | |
+| IRR_T (dated, to the exit value; both tracks) | | | |
+| IRR_T in NOK on the Equity BBB NOK path (foreign-currency cash flows only) | | | |
+| Track A only: Rule 1 screen d + g at constant P/E | | | |
 | d / g / c | | | |
 | g: re-rating / NAV growth (P/NAV_0) | | | |
 | Structural IRR / cyclical (pp; Δd, Δg) | | | |
@@ -598,15 +686,25 @@ change in Base P_k, and whether the company is running ahead of or behind the Ba
 - Retained cash counted once; dilution included. Maintenance FCF is before debt amortisation.
 - V_T built from normalized economics, exit multiple independent of the IAF ceiling. V_T bridge
   starts from NAV_0; end-of-stub marks are the same in all scenarios.
-- Exit consistency tested per row and scenario. Every gap > 10% between the Year-3 rate and
-  mid-cycle has either a named, sourced reason from the sector BBB or a 2-year reversion tail in
-  V_T, with the other treatment shown as a sensitivity.
+- V_T follows the exit principle: continuing business, normalised earnings, market pricing at exit
+  (never k). Track A decides on a dated IRR to an independent exit P/E, not on d + g at constant
+  P/E.
+- Backlog at exit: firm-today contracts in full; scenario-signed contracts capped at 2 years after
+  exit, on the asset convention's earnings basis, on their own line, with the firm-today-only
+  sensitivity.
+- Exit consistency tested per row and scenario on the open days after exit. Every gap > 10%
+  between the Year-3 rate and mid-cycle has either a named, sourced reason from the sector BBB or a
+  2-year reversion tail in V_T, with the other treatment shown as a sensitivity.
+- Exit cross-check table (exit P/E, exit P/B, buyer's implied return vs Equity BBB) for all three
+  scenarios.
+- Foreign-currency cash flows: Bear and Bull also in NOK on the Equity BBB NOK path, labelled.
 - g is the value CAGR (V_T vs P), never IRR − d; c is shown; the re-rating is named when P/NAV_0
   is outside 0.95–1.05.
 - Structural IRR per scenario on that scenario's own mid-cycle; cyclical measured on IRR.
 - FCF_normalised for Rule 3 is after the fleet-renewal charge.
 - ROIC_g sourced, not assumed.
 - Bear and Bull each tied to a named catalyst; no probability language.
-- Base verdict uses the margin of safety P_k / P − 1 (Track B) or Rules 1 and 3 (Track A).
+- Base verdict uses the margin of safety P_k / P − 1 (both tracks; Track A also reports Rules 1
+  and 3 as screens).
 - Every fetched value has source, as-of date and unit; raw kept beside derived; validation
   checks run and failures flagged in the text.

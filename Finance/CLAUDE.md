@@ -20,18 +20,16 @@ Skills and the chain between them:
 - `hy-market-bbb` (Nordic HY BBB: NIBOR path, Nordic GDP, HY spreads, default rates, expected
   returns) → reads the oil baseline and, for energy issuers, the rig, supply and shipping
   baselines; output `docs/hy-market-bbb.md`. Fund mode (Heimdal Høyrente, Heimdal Høyrente Pluss,
-  Sissener Corporate Bond, Fondsfinans High Yield) → `docs/hy-funds-analysis.md`; company bond assessment
+  Sissener Corporate Bond, Fondsfinans High Yield, Fondsfinans Kreditt) → `docs/hy-funds-analysis.md`; company bond assessment
   (expected return and risk per bond) and the Stamdata distress screen → `docs/hy-issuers.md`
 - `defense-market-bbb` (Defense BBB: European defense spending per country, equipment and
   addressable spending, segment order and revenue paths) → top of its own chain, independent of
   oil; reads Nordic GDP from `docs/hy-market-bbb.md`; output `docs/defense-market-bbb.md`
 - `equity-market-bbb` (Equity BBB: Oslo/OSEBX and global/MSCI World index returns in NOK, IAF at
   index level, oil and NOK linkage, equity triggers mirroring the HY rule) → reads the oil
-  baseline (Oslo energy earnings) and the HY baseline (NIBOR, GDP, HY return) plus the HY
-  reference in `docs/hy-funds-analysis.md`; output `docs/equity-market-bbb.md`. Fund mode (named
-  equity funds, e.g. DNB Teknologi) → `docs/<fund>-analysis.md` (e.g. `docs/dnb-teknologi-analysis.md`);
-  index funds compared for one role → `docs/global-index-funds-analysis.md` (DNB Global Indeks,
-  Nordnet Global Indeks)
+  baseline (Oslo energy earnings) and the HY baseline (NIBOR, GDP, HY return and the HY market
+  reference E / R); output `docs/equity-market-bbb.md`. Market only: it
+  analyses no named fund or single paper and does not read or write `docs/portfolio-overview.md`
 - `ai-market-bbb` (AI BBB: AI capex and its financing, hardware (compute, memory, foundry and
   equipment, networking and DC infrastructure, power), AI engines (frontier labs, AI cloud) and
   tools (copilots, AI-native tools, incumbent software); layer-basket IAF test) → reads the equity
@@ -40,6 +38,10 @@ Skills and the chain between them:
 - `iaf-valuation` → company valuation using the sector baselines; outputs
   `docs/<company>-analysis.md` (e.g. `docs/capt-analysis.md`, `docs/SED-analysis.md`)
 - Background on the IAF reasoning: `docs/iaf-reference-notes.md`
+- `update-chain` → orchestrator over all of the above: it keeps `docs/update-register.md` (which
+  document reads which input version, stale dates, planned events) and updates documents in
+  dependency order, each by its own skill; check script
+  `.claude/skills/update-chain/references/update_check.py`
 
 ## Working rules
 
@@ -58,5 +60,10 @@ Skills and the chain between them:
   hurdles and the NOK scenario path are set only in `docs/equity-market-bbb.md`. AI market paths
   (capex, layer revenues, lab revenue, adoption, layer EPS paths) are set only in
   `docs/ai-market-bbb.md`.
+- After any document in `docs/` is updated, by any skill and also outside the update chain,
+  record it in the register:
+  `py .claude/skills/update-chain/references/update_check.py record <id> --as-of <date> --changed yes|no --stale-after <date>`.
+  `--changed yes` only when a value other documents read moved. Add the new dated events (report
+  dates, decisions) to the register's Events table. A new document gets its rows in the register.
 - Never use git for any work (no git mv, rm, add, commit, status, etc.) and never ask about
   commits. The user handles all git transactions. Use plain file operations only.

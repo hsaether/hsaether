@@ -1,4 +1,4 @@
-# Equity Market BBB — scripts (initial run 11 Oct 2026)
+# Equity Market BBB — scripts (market only; initial run 11 Oct 2026)
 
 Copy the scripts to the scratchpad, create a `data/` folder there, and run them with `py -I`
 from that folder (never from inside a download folder). They hold the 11 Oct 2026 inputs as
@@ -20,85 +20,31 @@ Model inputs to refresh each run (all in `model.py`): stub length, NIBOR path (H
 path and mid-cycle (oil BBB), B_cons and block shares (bottom-up), P/E paths, payout, USD/NOK
 path, World EPS path.
 
-## Fund mode — `fund/` (first run: DNB Teknologi A, 11 Oct 2026)
-
-Copy `fund/` to the scratchpad and run there with `py -I`, in this order. The holdings, blocks,
-EPS paths, exit P/Es, payouts, currency mix and baseline paths are literals for DNB Teknologi on
-17 Oct 2026 (fourth run). Company blocks CM, CG, CN, CT carry the per-share V_t, D_t and EPS
-paths of `docs/msft-analysis.md`, `docs/googl-analysis.md`, `docs/nvda-analysis.md` (calendarised,
-revenue-consistent Bear) and `docs/tsm-analysis.md` (revenue-consistent Bear) (`COMP` in
-`fundmodel.py`); re-copy them when those analyses change. Layer and own blocks count retained cash
-(`CONV`, AI BBB v2; `RET` switch). AI-exposed blocks (E, H1, H2, H3, T) carry the layer paths of
-`docs/ai-market-bbb.md`; re-copy them from there on every run, and keep own paths only for
-non-AI blocks. Replace them for each fund and run, from the fund's own sources and the current
-`docs/equity-market-bbb.md`.
-
-| Script | Does | Run as |
-|---|---|---|
-| `close.py` | Daily closes on the NAV date (and 9 Oct, last) for all holdings and NOK=X → `closes.json`; `blocks.py` prices from it | `py -I close.py 2026-10-14 MSFT GOOGL … NOK=X` |
-| `hold.py` | Yahoo quoteSummary per holding: price, currencies, P/E, dividend yield, consensus EPS 0y / +1y with analyst counts → `hold.json` | `py -I hold.py MSFT GOOGL … 005930.KS` |
-| `blocks.py` | Holdings table (weight, block, CY / CY+1 EPS after calendarisation) → block weights, CY+1 P/E, earnings shares, growth → `blocks.json` | `py -I blocks.py` |
-| `fundmodel.py` | Scenario model: block EPS paths, P/E glide (Bear de-rates in Year 1), payout, USD/NOK and I-44 paths, total cost, alpha → returns, XIRR, hurdle NAV, E / R | `py -I fundmodel.py` |
-| `sens.py` | Sensitivities (cost, alpha, exit P/E, cyclical mid-cycle, consensus) and NAV triggers (imports `fundmodel.py`) | `py -I sens.py` |
-| `attrib.py` | Attribution from the previous version (method v1 → v2 Bears → company blocks → retained cash) and the method sensitivities (X cash conversion, NVIDIA/TSMC variants, memory-stressed Bear) | `py -I attrib.py` |
-| `aisplit.py` | Per-block IRR (each block alone, before cost) vs the AI BBB baskets; AI layers vs non-AI part; AI-only Bear and Bull (non-AI block and NOK on Base); path and exit sensitivities (imports `fundmodel.py`) | `py -I aisplit.py` |
-| `detail.py` | Per-year NAV equivalents, blended forward P/E, IRR to each year-end | `py -I detail.py` |
-| `link.py` | Fund NAV vs World NOK/USD, sector ETF, OSEBX, Brent, USD/NOK: volatility, correlation, beta, drawdowns, calendar returns. Needs `data/d_<sym>.json` from `../fetchd.py` (fund on its Morningstar id, e.g. `0P00000MVB.IR`) | `py -I link.py` |
-| `pdf.py` | PDF → text with `pypdf` (FactSet Earnings Insight, MSCI factsheets, KIDs) | `py -I pdf.py in.pdf out.txt` |
-
-### Index funds (first run: DNB Global Indeks A vs Nordnet Global Indeks, 11 Oct 2026)
-
-Inputs are literals for that run: World paths from the baseline, the energy share of World
-earnings (5.5%), the oil block path, the Climate Change P/E premium (18.93 / 17.92), payouts, costs
-and NAVs. Refresh them from the current baseline, the index factsheets and the fund pages.
-
-| Script | Does | Run as |
-|---|---|---|
-| `idxfunds.py` | Index-fund model on the World paths: World unchanged (must reproduce the baseline at zero cost); tilted index = World ex energy (energy on the oil path) with a P/E premium; all-in cost → returns, XIRR, hurdle NAV, E / R, NAV paths | `py -I idxfunds.py` |
-| `idxsens.py` | Sensitivities (premium halves / gone, Tesla P/E, Bear premium, energy share, swap drag, cost, exit P/E, consensus), NAV triggers, structural run, oil side case (imports `idxfunds.py`) | `py -I idxsens.py` |
-| `idxdetail.py` | Per-year paths, NAV levels, IRR to each year-end, NOK 508k outcomes, return split, share of Bull priced | `py -I idxdetail.py` |
-| `idxcmp.py` | Two fund NAVs vs URTH × USD/NOK: calendar and period returns, volatility, correlations (World, OSEBX, Brent, USD/NOK), tracking between the funds before and after an index change, drawdowns. Needs `data/d_<sym>.json` from `../fetchd.py` (`0P0001K6NJ.IR`, `0P0000PS3V.IR`, URTH, NOK=X, OSEBX.OL, BZ=F) | `py -I idxcmp.py` |
-| `idxtd.py` | Fund-vs-fund NAV ratio against the index-vs-index ratio from the MSCI factsheet (1 y, YTD) | `py -I idxtd.py` |
-
-**AI split (12 Oct 2026 re-run).** Needs `dl2/urth_ai.json`: weights of the AI basket names
-(ticker + country), the total of 99.78 and the energy sector weight 4.18, built from the URTH
-holdings CSV (see SKILL.md, index-fund data). Literals: the AI BBB layer paths, exit P/Es and
-payouts; block P/Es from the AI BBB appendix prices and CY27 EPS; Climate Change multipliers;
-energy P/E 14.8; NAVs of 9 Oct.
-
-| Script | Does | Run as |
-|---|---|---|
-| `idxai.py` | World = AI blocks (AI BBB paths) + energy (oil path) + implied rest, reproducing the Equity BBB World path; the climate index = the same blocks at its weights, with its rest premium; options for cost, tail weights, premium mode, exit P/E shift, AI-only stress, consensus shift (`em`), price change (`P0`) | `py -I idxai.py` |
-| `idxaidetail.py` | Blocks alone vs the AI baskets, fund results after cost, AI-only stress, sensitivities, the "rest at trend growth" check, Nordnet triggers, return split (imports `idxai.py`) | `py -I idxaidetail.py` |
-
-**15 Oct 2026 re-run (company blocks, NAV-date prices).** The same inputs as above, plus:
-Microsoft and Alphabet per-share V_t, D_t and EPS per scenario from their analyses; the 9 Oct and
-14 Oct prices of every block name (AI BBB appendix); the index moves since 9 Oct (URTH, and the
-Climate Change index from the NAV ratio); IXC for energy; NAVs of 14 Oct. Triggers keep future
-values unchanged (the Equity BBB convention); `dp` moves only today's price.
-
-| Script | Does | Run as |
-|---|---|---|
-| `idxai2.py` | World = company blocks (MSFT, GOOGL) + AI layer blocks + energy + implied rest at the NAV-date prices, reproducing the Equity BBB World path at its price; the climate index = the same blocks at its weights with its rest premium; options `cost`, `tail`, `prem_mode`, `pex_shift`, `ai_only`, `dp`, `em`, `co_as_layer` (company names back on the E layer), `rest_trend`, `only` | `py -I idxai2.py` |
-| `idxai2detail.py` | Blocks alone (incl. company vs layer path), fund results after cost with NAV levels and NOK 920k / 508k outcomes, AI-only stress, rest-at-trend check, sensitivities, triggers for both funds, return split | `py -I idxai2detail.py` |
-| `close.py` | Closes on a given date for any Yahoo symbols (also used by the fund mode) | `py -I close.py 2026-10-14 URTH NOK=X …` |
-
-**17 Oct 2026 re-run (AI BBB Update 2, NVIDIA as a company block).** Same data files as 15 Oct
-(`dl2/urth_ai.json`). New literals: NVIDIA per-share V_t, D_t and EPS (calendarised,
-revenue-consistent Bear, as in `fundmodel.py` CN); AI BBB v2 Bear paths and cash conversion `CONV`;
-energy c = 0.80; calendarised CY27 consensus (`EPS27`; the old basis kept as `EPS27_V1`); 15 Oct
-closes (`P15`, Alphabet C at its own price); NAVs of 15 Oct. TSMC is not in MSCI World.
-
-| Script | Does | Run as |
-|---|---|---|
-| `idxai3.py` | As `idxai2.py`, plus block CN, retained cash counted once in layer and energy blocks, and switches `RET`, `BEAR_V1`, `CONS_V1`, `CN_LAYER` for the attribution; `co_layer` puts any company block back on its layer; `PEX_OVR` for the memory-stressed Bear | `py -I idxai3.py` |
-| `idxai3detail.py` | Company-block check against the analyses (USD), blocks alone, fund results, AI-only stress, rest checks and the layer retained cash, attribution from the 15 Oct version, sensitivities (incl. energy c, cash conversion, NVIDIA variants), triggers, return split | `py -I idxai3detail.py` |
-
 **17 Oct 2026 — Equity BBB Update 1 (World from the AI split; Oslo repriced).** Copy `upd.py`,
-`osl.py` and `fund/idxai3.py` (+ `fund/dl2/urth_ai.json`, URTH weights of 9 Oct) into one
-scratch folder and run with `py -I`.
+`osl.py` and `idxai3.py` (+ `dl2/urth_ai.json`, URTH weights of 9 Oct) into one scratch
+folder and run with `py -I`.
 
 | Script | Does | Run as |
 |---|---|---|
 | `upd.py` | World = company blocks + AI layer blocks + energy (imports `idxai3.py`, repriced to the 16 Oct closes, Brent Base 2027 88) + an explicit rest path per scenario (`REST_EPS`, `REST_PE`, `REST_PAY`); returns in NOK, E / R, sensitivities, triggers; `only_rest_old=True` reruns the 11 Oct top-down path | `py -I upd.py` |
 | `osl.py` | Oslo on the 11 Oct block model at the 16 Oct price, Brent Base 2027 88, USD earnings at the 16 Oct NOK spot, stub 75 days; return split, sensitivities, triggers | `py -I osl.py` |
+
+**18 Oct 2026 — amendment (skill 2026-10-18.1: one retained-cash and payout rule, currency mix).**
+`osl.py` and `upd.py` above were replaced; the 17 Oct versions are in git history. Run from one
+scratch folder with `idxai3.py` and `dl2/urth_ai.json` next to them.
+
+| Script | Does | Run as |
+|---|---|---|
+| `osl.py` | Oslo: payout per block (E 0.76, F 0.63, O 0.56), energy cash conversion 0.80 credited to V_t, energy on USD/NOK and the O block's foreign half on I-44. Prints returns, return split (EPS, re-rating, retained cash), structural run, sensitivities (Brent, multiples ±10% and ±1, NOK ±10%, energy cash conversion), triggers with P/B and P/E (MSCI scaled from 30 Sep), the Brent trigger move both ways, and the exit P/B–ROE check | `py -I osl.py` |
+| `upd.py` | World: as 17 Oct, plus energy payout 0.76 (as Oslo), 70% USD/NOK and 30% I-44, the value-multiple path, numeric return split (EPS, value multiple, FX), exit P/B–ROE, sensitivities (multiples ±10% and ±1, NOK ±10%, rest growth), checks against the 17 Oct currency and payout, triggers with the forward P/E scaled from 30 Sep | `py -I upd.py` |
+| `valq.py` | Yahoo quoteSummary per name: price, currencies, BVPS, P/B, ROE, dividend yield (latest declared, annualised), trailing dividend rate, P/E, payout → JSON | `py -I valq.py data/val.json EQNR.OL DNB.OL KOG.OL NHY.OL AKRBP.OL MOWI.OL STB.OL TEL.OL SUBC.OL YAR.OL ORK.OL GJF.OL FRO.OL VAR.OL` |
+| `valagg.py` | P/B (harmonic), P/E, ROE trailing / forward / Yahoo, forward dividend yield and dividend run rate ÷ trailing EPS for the Oslo sample on OBX weights, MSCI Norway weights and market cap; per block; without Frontline, without Kongsberg (and Gjensidige, Vår). Fixes USD book values (Vår) | `py -I valagg.py data/val.json 9.41` |
+
+**World block model.** `idxai3.py` (company blocks, AI layer blocks, energy; switches for the
+attribution) and `dl2/urth_ai.json` (MSCI World weights of the AI basket names from the URTH
+holdings CSV, total 99.78, energy weight 4.18) were moved here from `fund/` on 18 Oct 2026. Its
+Climate Change index parts are unused by the baseline.
+
+**`fund/`** holds the scripts of the former fund mode. Fund mode was removed from this skill on
+18 Oct 2026 (revision 2026-10-18.5): the skill estimates markets only and never analyses a named
+fund or a single paper. The folder is not part of this skill.

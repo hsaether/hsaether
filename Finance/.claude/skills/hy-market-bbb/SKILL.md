@@ -1,11 +1,11 @@
 ---
 name: hy-market-bbb
-description: Nordic HY Market BBB (HY BBB) — the Nordic high-yield bond market baseline and the method for judging Nordic high-yield funds. Produces Bear/Base/Bull paths on the IAF time grid (stub quarter(s) of the current year + 3 calendar years, now 2027–2029) for the NIBOR path, Nordic HY spreads, first-time default rates and loss given default (market and per sector, with oil service, E&P and shipping linked to the oil, rig, supply and tanker baselines), Nordic GDP, and the expected NOK total return of the market, plus mid-cycle values, a default and distress log, and named catalysts with signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Fund mode applies the baseline to named funds (Heimdal Høyrente, Heimdal Høyrente Pluss, Sissener Corporate Bond, Fondsfinans High Yield and others) to give the expected net return, loss and liquidity risk per fund. Reads docs/oil-market-bbb.md (and the rig, supply and tanker baselines for energy issuers) and never makes its own oil, rig, OSV or tanker forecast; it is the only place a NIBOR path or Nordic GDP view is set. ALWAYS use when the user mentions HY BBB / Nordic HY / høyrente / high yield, asks to create, run or update ("oppdater modul") the HY module, or asks about Nordic or Norwegian high-yield bonds, default rates, kredittpåslag or credit spreads, NIBOR-linked bonds, bond restructurings, Stamdata or Nordic Trustee statistics, Nordic GDP, the Norges Bank rate path, or high-yield funds such as Heimdal Høyrente, Høyrente Pluss, Sissener Corporate Bond or Fondsfinans High Yield — even without naming the skill.
+description: Nordic HY Market BBB (HY BBB) — the Nordic high-yield bond market baseline and the method for judging Nordic high-yield funds. Produces Bear/Base/Bull paths on the IAF time grid (stub quarter(s) of the current year + 3 calendar years, now 2027–2029) for the NIBOR path, Nordic HY spreads, first-time default rates and loss given default (market and per sector, with oil service, E&P and shipping linked to the oil, rig, supply and tanker baselines), Nordic GDP, and the expected NOK total return of the market, plus mid-cycle values, a default and distress log, and named catalysts with signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Fund mode applies the baseline to named funds (Heimdal Høyrente, Heimdal Høyrente Pluss, Sissener Corporate Bond, Fondsfinans High Yield, Fondsfinans Kreditt and others) to give the expected net return, loss and liquidity risk per fund. Reads docs/oil-market-bbb.md (and the rig, supply and tanker baselines for energy issuers) and never makes its own oil, rig, OSV or tanker forecast; it is the only place a NIBOR path or Nordic GDP view is set. ALWAYS use when the user mentions HY BBB / Nordic HY / høyrente / high yield, asks to create, run or update ("oppdater modul") the HY module, or asks about Nordic or Norwegian high-yield bonds, default rates, kredittpåslag or credit spreads, NIBOR-linked bonds, bond restructurings, Stamdata or Nordic Trustee statistics, Nordic GDP, the Norges Bank rate path, or high-yield funds such as Heimdal Høyrente, Høyrente Pluss, Sissener Corporate Bond, Fondsfinans High Yield or Fondsfinans Kreditt — even without naming the skill.
 ---
 
 # Nordic HY Market BBB
 
-**Revision:** 2026-10-17.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-24.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/hy-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the Nordic high-yield bond market. It answers two questions:
@@ -111,8 +111,10 @@ investment-grade corporates, covered bonds and government bonds except as the se
   `.claude/skills/iaf-valuation/SKILL.md` for the time grid and scenario convention.
 - Outputs:
   - `docs/hy-market-bbb.md` — one running market baseline. Baseline date in the H1.
-  - `docs/hy-issuers.md` — company bond assessment (expected return and risk per bond) and the
-    Stamdata distress screen (Step F9).
+  - `docs/hy-issuers.md` — the **master watchlist** (every held name with a status on the one
+    status scale, its entry and its outcome record), the company bond assessment (expected return
+    and risk per bond) and the Stamdata distress screen (Step F9). The market file and the fund
+    file read their at-risk names from it (revised 2026-10-18).
   - `docs/hy-funds-analysis.md` — one running fund file: comparison table plus one section per
     fund. Funds are compared side by side, so they share one file. **Fund facts, performance and
     verdicts only** (user instruction, 2026-10-11.8): no allocation splits or proposals, no
@@ -187,7 +189,8 @@ Norwegian corporate HY in 2025 `[F]`) are inside the universe.
 | Running spread | Yield − base rate of the same currency; for a fund, implied as (yield after fee + fee) − 3M NIBOR on NOK-hedged portfolios |
 | Distress ratio | Share of outstanding volume priced below 80 or above 1,000 bp spread. Leading indicator of defaults |
 | Maturity wall | HY volume maturing per year in the window (NT/Stamdata) |
-| Watchlist | Bonds with an ongoing non-routine bondholder vote, a standstill, a missed payment grace period, a price below 80, or a maturity inside 12 months without announced refinancing |
+| Watchlist | Every bond with a status other than Performing on the status scale below. One master list in `docs/hy-issuers.md` (held names); the market file adds only names that are not held, on the same scale |
+| Outcome record | For every name that enters the watchlist: entry date, entry price and status; for every exit or status change: date, new status or outcome (defaulted, cured, repaid, sold, matured). Names never just disappear from the list. It calibrates the status values |
 
 **Rating → one-year default probability** (long-run global corporate averages, approximate, S&P
 Global annual default studies `[E]`; confirm the exact values when the study is read). Used for
@@ -196,6 +199,28 @@ fund quality (Step F4). Applied to manager-internal ratings with that caveat.
 | Rating | A or better / deposits | BBB | BB+ | BB | BB− | B+ | B | B− | CCC/C | Equity |
 |---|---|---|---|---|---|---|---|---|---|---|
 | PD % p.a. | 0.05 | 0.15 | 0.3 | 0.5 | 0.9 | 1.9 | 3.0 | 5.5 | 26 | n/a (price risk) |
+
+**Status scale** (one scale for the market watchlist, the company bond assessment and the funds;
+revised 2026-10-18, replacing the separate Step 5 buckets and the F9 statuses). The status value is
+the one-year Base default probability of the status `[A]`, recalibrated from the outcome record:
+
+| Status | Rule (the most severe status that applies) | Status value (1-year PD) |
+|---|---|---|
+| Performing | None of the below | 0 for a bond (it earns its yield); the market uses a background rate |
+| Watch | Price ≥ 90 with a named warning: weak results, owner support needed, recapitalised or post-restructuring, a recent price fall, or a non-routine notice whose purpose is not yet read | 5% |
+| Stressed | Price 80 to below 90 | 10% |
+| Distressed | Price 60 to below 80 | 20% |
+| Deep distress | Price below 60 | 50% |
+| Vote or standstill | A non-routine bondholder vote, a standstill, events of default, or a payment inside its grace period | 50% |
+| Maturity flag | Maturity inside 12 months without announced refinancing (combines with a price status: use the higher value) | 30% |
+| In restructuring | A distressed amendment or exchange adopted, or a payment default: an FTD under the NT definition | In default; valued on its own (F4 item 4) |
+
+- The price is the latest observed price, with its date. A price older than one month is
+  **stale**: the status still follows it, but the bond is listed in Data gaps with the share of
+  each fund's named loss it carries.
+- A price exactly on a band edge belongs to the band above it in price (80.0 is Stressed, not
+  Distressed). Show the PD at the neighbouring band as a sensitivity when a bond sits within one
+  point of an edge.
 
 - **Default rates are volume-weighted** (NT basis). An issuer-count rate is a cross-check and is
   labelled as such.
@@ -327,7 +352,9 @@ Quirks (observed in the 2026-10-05 build):
 - **Riksbank MPR PDF** (`riksbank.se/.../penningpolitisk-rapport-<month>-<year>.pdf`):
   `pdftotext -layout` reads Tabell 2 (GDP, unemployment), Tabell 4 (policy path) and Tabell 10
   cleanly. The decision page also links the xlsx data ("Sifferunderlag").
-- **Stamdata news** shows about one week per page of 25 (544 pages in Oct 2026). Read the most
+- **Stamdata news** shows about one week per page of 25 (544 pages in Oct 2026); a quiet stretch
+  can fill a page with ten days (page 1 on 24 Oct 2026 covered 13–23 Oct), so read by date, not by
+  page count. Read the most
   recent pages and filter rows on distress words (default, deferral, standstill, written
   procedure/resolution, waiver, bankruptcy) in the in-app browser. Individual notice PDFs at
   `stamdata.com/news/api/pdf/<id>` download with `curl` and parse with `pdftotext`. Decline
@@ -432,6 +459,13 @@ Quirks (observed in the 2026-10-05 build):
 - **NIBOR for a month-end fund yield:** Heimdal states that its yield uses money-market rates at
   month end. Use the same month-end 3M NIBOR for every fund on that date, so their spreads stay
   comparable.
+- **Daily fund NAVs between monthly reports** (added 2026-10-24): Yahoo `get_chart` has
+  Fondsfinans High Yield B as `0P0001SXZ4.IR` (A: `0P000131AW.IR`), daily NAV in NOK. On fundlist,
+  the `DayEnd` NAV block gives `ClosePrice`, `M0` (= year to date) and `M1` (= trailing month, not
+  month to date). Month-to-date = NAV today ÷ NAV at the last month-end − 1. It is a fund proxy for
+  the index month (`[E]`), never the index itself. Heimdal funds are not on Yahoo.
+- **FRED `fredgraph.csv` can hang** in `curl` without output: always pass `-m 25` (and a
+  `timeout`), and retry once; it answered on the second try on 2026-10-24.
 - **Morningstar return series on fundlist** (`HistoricalPerformanceSeries` in `__NEXT_DATA__`):
   - `Frequency: "Q"` series are **12-month returns to each 30 Sep**;
   - `Frequency: "Y"` series are **calendar-year returns**.
@@ -622,23 +656,40 @@ the Base rate path, never to build an own rate forecast.
 - Maturity wall: HY volume maturing in the stub and each window year, by sector where available.
 - Fund flows where published (VFF statistics) — outflows force selling in a thin market.
 
-**Step 5 — Default and distress log.** Update the log (appendix) from Stamdata news, Nordic
-Trustee notices and voting procedures, Newsweb and press since the last baseline. For each event:
-issuer, ISIN(s), sector row, country, currency, outstanding (NOK equivalent at the event-date
-FX), event type (missed payment, bankruptcy, distressed amendment, distressed exchange,
-standstill), date, **FTD under the NT definition yes/no**, price before and ~30 days after,
-restructuring outcome and recovery when known, source, and which tracked funds hold it. Then:
+**Step 5 — Default and distress log** (tracking revised 2026-10-18). Update the log (appendix)
+from Stamdata news, Nordic Trustee notices and voting procedures, Newsweb and press since the last
+baseline. For each event: issuer, ISIN(s), sector row, country, currency, outstanding (NOK
+equivalent at the event-date FX), event type (missed payment, bankruptcy, distressed amendment,
+distressed exchange, standstill), date, **FTD under the NT definition yes/no**, price before and
+~30 days after, restructuring outcome and recovery when known, **visible at 1 Jan of the event
+year** (yes if it was priced below 90 or on the watchlist then; `[?]` if unknown), source, and
+which tracked funds hold it. Then:
+- **Scan coverage, stated once** in the market file Metadata and repeated by reference in the
+  issuer file: the market-wide news-feed window (all issuers) and the held-company window (issuer
+  by issuer). They can differ; never state one as the other.
+- **Monthly tracking table** (market file, section "Default tracking"), one row per month: the
+  window and pages read, distress notices (issuers), new FTDs (number and NOKm), pending cases
+  (number and NOKm), routine or technical notices, and the pace annualised over the market-wide
+  window, with and without the pending and uncertain cases `[A]`. It is the time series behind the
+  distress-notice signpost and the FTD trigger.
 - **Running FTD rate** for the current year: logged FTD volume ÷ outstanding (latest NT figure,
   adjusted for net issuance), labelled "NT-definition replica `[A]`" until NT publishes the
-  official figure; reconcile with NT when it does and log the gap.
-- **Watchlist** with volume per bucket: (a) non-routine vote or standstill ongoing, (b) price < 60,
-  (c) price 60–80, (d) maturity < 12 months without refinancing. Distress ratio where data allows.
+  official figure; reconcile with NT when it does and log the gap. State the months the log
+  covers. **A pace measured over less than three months is reported but never fires the FTD
+  trigger**; the trigger uses the replica over at least a full quarter.
+- **Fund default record** (held universe): per tracked fund, the FTD events among its holdings in
+  the current year, with weight and price at the event. It is complete because the holdings are
+  known, and it checks the funds' named PDs against what happened.
+- **Watchlist** on the status scale (Definitions), with volume per status and a distress ratio
+  where data allows. The held names live in the master watchlist in `docs/hy-issuers.md`; the
+  market file lists only the names that are not held, and points to the master list.
 - Recoveries realised in the log so far (market and ultimate), per sector, with n.
 
 **Step 6 — Default rates per row.** Per core row, scenario and year:
-- **Year 1:** watchlist volume × conversion probability per bucket + a background rate on the rest.
-  Conversion probabilities are `[A]` conventions (start: (a) 50%, (b) 50%, (c) 20%, (d) 30%) and
-  are recalibrated from the log as outcomes arrive; record each recalibration.
+- **Year 1:** watchlist volume × the status value per status (Definitions: Watch 5, Stressed 10,
+  Distressed 20, Deep distress 50, Vote or standstill 50, Maturity flag 30%) + a background rate on
+  the rest. The status values are `[A]` conventions, recalibrated from the outcome record as
+  outcomes arrive; record each recalibration.
 - **Years 2–3:** background rate driven by the macro path (non-energy rows), the sector BBB paths
   (energy rows: compare scenario cash flow with debt service and maturities of the sector's main
   issuers) and refinancing conditions (spread level, new-issue window).
@@ -693,9 +744,10 @@ checks below.
 
 Run when the user asks about a named HY fund, after (or together with) the market baseline. The
 baseline must be current or the fund analysis is **Provisional**. Default fund set: **Heimdal
-Høyrente, Heimdal Høyrente Pluss, Sissener Corporate Bond, Fondsfinans High Yield**, plus the
-reference fund **Arctic Return** (Step F10); add others on request. Write to
-`docs/hy-funds-analysis.md`.
+Høyrente, Heimdal Høyrente Pluss, Sissener Corporate Bond, Fondsfinans High Yield, Fondsfinans
+Kreditt** (Kreditt added 2026-10-18 on user instruction; first evaluated 2026-10-11), plus the
+reference fund **Arctic Return** (Step F10); add others on request. Every tracked fund gets the
+full fund-mode treatment and the same six-part section. Write to `docs/hy-funds-analysis.md`.
 
 **Share classes (the classes sold on Nordnet; use these unless told otherwise):**
 
@@ -705,7 +757,7 @@ reference fund **Arctic Return** (Step F10); add others on request. Write to
 | Heimdal Høyrente Pluss | B | NO0013580654 | 0.70% | A: 0.85%. Minimum NOK 50m direct, or NOK 100 via distributors without retrocession |
 | Fondsfinans High Yield | B | NO0013168773 | 0.41% | A: 0.45% + 0.5% entry and 0.5% exit charge (Morningstar). B minimum NOK 100m direct |
 | Sissener Corporate Bond | NOK-R | LU1923202326 | TER 0.41% + 20% above 3M NIBOR + 1% (high-water mark) | NOK-RF: 1.00% flat |
-| Fondsfinans Kreditt (evaluated 2026-10-11) | B | NO0013168765 | 0.31% (DNB listing) | A NO0010676083 0.35%. Same team as Fondsfinans High Yield; weighted rating ≥ BB, nothing below B− at purchase, modified duration 0–2 years |
+| Fondsfinans Kreditt (tracked from 2026-10-18) | B | NO0013168765 | 0.31% (DNB listing) | A NO0010676083 0.35%. Same team as Fondsfinans High Yield; weighted rating ≥ BB, nothing below B− at purchase, modified duration 0–2 years |
 | **Arctic Return** (reference) | **L NOK** (the class on Nordnet, 2026-10-11) | IE00BYT07T65 | 0.50% ongoing (KID), no performance fee | The class on Nordnet. I IE00B40J7B48 0.20% (min NOK 250m); B IE00BVV23V37 0.25% (min NOK 50m); A IE00B4PM2R92 0.30%; R IE00BZ3C8C56 0.30% + 10% above the Norwegian T-bill index (~0.11%; min NOK 1,000). Its published track record is class I: subtract 0.30 pp a year for class L |
 
 - Monthly reports quote **class A** yields after the A fee. **Class yield = A yield + (A fee − class
@@ -814,10 +866,9 @@ and concentration are still recorded, with stated reasons:
   restructurings, residual, MTM, performance fee).
 - **Credit loss per scenario and year** (replaces the market-rate EL, the overlay and the
   credit-cost calibration of revisions .4–.10):
-  1. **Named at-risk bonds** = every holding that is distressed (< 80), stressed (80–90) or on
-     watch (Stamdata notice, weak results, post-restructuring, a recent price fall), with its
-     weight. Price, yield, PD and recovery come from Step F9, **the same values for every fund
-     holding the bond**.
+  1. **Named at-risk bonds** = every holding on the master watchlist with a status of Watch or
+     worse (status scale, Definitions), with its weight. Price, yield, PD and recovery come from
+     Step F9, **the same values for every fund holding the bond**.
   2. **Loss if default**, % of today's value = (price − recovery) ÷ price + half a year of the
      bond's yield. The carry counts the full year's yield, and a default forfeits on average half
      of it, pull-to-par included.
@@ -845,6 +896,15 @@ and concentration are still recorded, with stated reasons:
        blended with the market rate. Sister funds run by the same team share one record.
      - Bull: half the Base residual.
      - Show a sensitivity at a residual of 0.5 pp for every fund.
+     - **The 2027 zero is an untested assumption** (added 2026-10-18). The market reference charges
+       every year's full FTD × LGD, so a fund with no 2027 allowance is compared with a benchmark
+       that pays for a loss the fund is assumed not to have. Until it is tested:
+       - show for every fund the sensitivity **2027 allowance = 0.5 × market Base EL 2027 × q**
+         `[A]` (half of a year's defaults assumed to come from names that look healthy at the
+         start of the year), in "What would change the verdicts";
+       - test it with the default log's "visible at 1 Jan" column. When the log covers 12 months,
+         or at the NT report in February, set the 2027 allowance from the measured share of
+         defaults that were not visible, and log it as a method change.
   6. **Bear catalyst loss on the performing book:**
      - The Bear catalysts (oil Bear path, recession) make names default that look healthy today.
        Which ones cannot be named, so the stress is q × Σ performing weight per row × (Bear − Base
@@ -921,17 +981,24 @@ covariance; never ask for the user's amounts per fund). Write to `docs/hy-issuer
 2. **Per company:**
    - **bond:** coupon, maturity, currency, security, call;
    - **price:** FX-adjusted dirty price from holdings or annual reports; clean ≈ dirty − 0.25 ×
-     coupon `[A]`; record the date;
+     coupon `[A]`; record the date and mark it **stale** when it is older than one month, or
+     **assumed** when no price is published;
    - **yield:** NOK-hedged (+ NIBOR − local base), to maturity, or to an assumed call (102 within
      1.5 years) when the clean price is above 102;
-   - **status:** performing / watch / stressed (80–90) / distressed (< 80) / restructuring or
-     default.
-3. **Default probability, 1 year:**
+   - **status** on the status scale (Definitions): Performing / Watch / Stressed / Distressed /
+     Deep distress / Vote or standstill / Maturity flag / In restructuring.
+3. **Default probability, 1 year** (wording revised 2026-10-18; the status values are unchanged):
    - Performing: **0 in Base** (no loss: the bond earns its yield). Bear: the market baseline's
      Bear 2027 sector rate (the catalyst stress).
-   - Watch, stressed and distressed: Base = midpoint of the bucket value (5 / 10 / 20%) and the
-     **market-implied PD** = (yield − NIBOR − 3 pp) ÷ LGD. Bear = 1.3 × the higher of the two.
-   - Never let a bucket value alone make a stressed bond look like a bargain.
+   - Every other status except In restructuring:
+     - **market-implied PD** = (yield − NIBOR − 3 pp) ÷ (1 − the bond's own Base recovery);
+     - **Base PD = (status value + market-implied PD) ÷ 2;**
+     - **Bear PD = 1.3 × the higher of the two.**
+   - **Overrides:** a Bear PD may be set above the rule when there is a stated reason (for
+     example an assumed price, or a judgement on the business). The table shows the rule value
+     next to the override and the reason. A Base PD is never set below the rule.
+   - **Assumed prices** (no published price) follow the same rule at the assumed price and yield.
+   - Never let a status value alone make a stressed bond look like a bargain.
 4. **Recovery (% of par):** secured 55 / 40, senior unsecured 35 / 25, hybrid 25 / 10 (Base /
    Bear), adjusted for known asset cover (Hofseth, Oct 2026: 60 / 45). **Loss if default**, % of
    today's value = (price − recovery) ÷ price + half a year of the bond's yield. **EL** = PD ×
@@ -943,6 +1010,16 @@ covariance; never ask for the user's amounts per fund). Write to `docs/hy-issuer
    fund's credit loss (F4). Update this table first, then run the funds.
 7. **Rank** bonds by Base return against Bear loss: carriers (performing, 8–11%), workout bets
    (high yield, large Bear loss) and expensive bonds (low yield to call, Bear loss).
+8. **Master watchlist and outcome record** (added 2026-10-18). The issuer file holds the one
+   watchlist for every held name:
+   - **open entries:** issuer, row, status now, on the list since (date, price, status), price
+     now (date, and stale or assumed), next decisive event, held by (weight), outstanding;
+   - **outcome record:** every exit or status change (date, from → to, outcome: defaulted, cured,
+     repaid, sold, matured). A name that leaves the list stays in the record. Year-end holdings
+     with prices (annual reports) give a transition from one year-end to the latest price; record
+     it once a year;
+   - **stale-price share:** per fund, the share of the named loss that rests on stale or assumed
+     prices, in Data gaps.
 
 **Step F10 — Reference fund (Arctic Return)** (added 2026-10-11). Same engine, own inputs:
 1. **Facts:** Irish UCITS (Arctic Funds plc), daily dealing. Mandate (supplement 18 Jun 2026):
@@ -987,7 +1064,9 @@ covariance; never ask for the user's amounts per fund). Write to `docs/hy-issuer
   - **routine** (fee-compensated alignment, change of owner, waiver with a fee).
   - Older summonses may lack a public PDF; record what the notice says.
 - Add the hits to the default and distress log (market baseline) and to `docs/hy-issuers.md`.
-  Record the scan window.
+  Record the scan coverage: the market-wide feed window and the held-company window, separately
+  (Step 5). Update the monthly tracking table in the same run, so the three files never show
+  different windows.
 
 ## Recalibration triggers
 
@@ -998,7 +1077,8 @@ A full update is due when any of these occurs:
 - The anchor spread moves > 100 bp within a month, or the monthly index return is below −2%
 - A default or distressed exchange of an issuer ≥ 1% of the Nordic HY market, or ≥ 3 defaults in
   one sector row within a quarter
-- The running FTD rate deviates > 1.5 pp from the Base path for the current year
+- The running FTD rate (NT-definition replica over at least a full quarter, Step 5) deviates
+  > 1.5 pp from the Base path for the current year
 - The new-issue market shuts (monthly issuance < 25% of the same month last year) or reopens
 - Nordic Trustee publishes a new annual report, or NT/Stamdata publish new default statistics
 - `docs/oil-market-bbb.md` or a sector BBB used for an energy row gets a new baseline whose
@@ -1083,13 +1163,21 @@ appendix.
 ## Defaults and losses per row — point (range)
 | Scenario | Row | 2027 | 2028 | 2029 | Mid-cycle | Volume share | n defaults (3 yrs) | Confidence |
 |---|---|---|---|---|---|---|---|---|
-- Year-1 build from the watchlist (bucket volume × conversion) plus background rate
+- Year-1 build from the watchlist (volume per status × status value) plus background rate
 - LGD per row and the security mix assumed
 
 ## Market check
 | Measure | Latest (date, source) | Previous baseline | 12 months ago | Long-run (years) |
 |---|---|---|---|---|
 | Spread, new-issue spread, index return YTD, running FTD rate, issuance YTD, distress ratio, maturity wall | | | | |
+
+## Default tracking
+- Scan coverage (market-wide feed window; held-company window)
+| Month | Window and pages read | Distress notices (issuers) | New FTDs (n / NOKm) | Pending (n / NOKm) | Routine or technical | Pace, annualised `[A]` |
+|---|---|---|---|---|---|---|
+- Running FTD replica (logged volume ÷ outstanding, months covered); trigger status
+- Fund default record (per tracked fund: FTD events among holdings this year, weight, price)
+- Pointer to the master watchlist in `docs/hy-issuers.md`
 
 ## Drivers
 ### Rates (Norges Bank path, NIBOR–policy spread, hedge carry)
@@ -1116,55 +1204,110 @@ appendix.
 - New baseline date
 
 ## Appendix
-### Default and distress log (issuer, ISIN, row, currency, outstanding NOKm, event, date, FTD y/n, price before/after, recovery, source, funds holding)
-### Watchlist (issuer, ISIN, bucket, outstanding NOKm, price/spread, maturity, trigger, funds holding)
+### Default and distress log (issuer, ISIN, row, currency, outstanding NOKm, event, date, FTD y/n, visible at 1 Jan, price before/after, recovery, source, funds holding)
+### Watchlist — names not held (issuer, ISIN, status, outstanding NOKm, price/spread, maturity, trigger); held names: pointer to `docs/hy-issuers.md`
 ### Maturity wall (year × sector, NOKbn)
 ### Sources
 | ID | Source | Content | Definition / universe | Observed / published |
 |---|---|---|---|---|
 ```
 
-## Output: `docs/hy-funds-analysis.md`
+## Output: `docs/hy-issuers.md`
+
+(Template added 2026-10-18.)
 
 ```markdown
-# Nordic HY funds — [analysis date]
+# Nordic HY — master watchlist and company bond assessment — [date]
 
 ## Metadata
-- Analysis date, status, skill revision, HY Market BBB baseline date and status
-- Report dates per fund, and a pointer to the share-class section (classes and fees are listed
-  only there; user instruction 2026-10-17)
+- Date, skill revision, HY Market BBB baseline date, price dates, scan coverage (by reference to
+  the market file), method in short (status scale and PD rule: pointer to the skill)
 
-## Comparison (Base unless stated; % p.a., NOK or class currency as marked)
-| Fund | Style | Yield after fee (date, basis) | Rating PD / q | Credit / rate duration | Oil exposure | Cash (read as) | Base net return (window) | E: excess over NIBOR | R: stress loss | E / R vs market reference | Step-up over reference vs market step-up | Bear window / worst year | Liquidity | Verdict |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Reference: Arctic Return [class] | … | | | | | | | | | | — | | | Reference (not graded) |
+## Conclusion
+- Performing carriers; at-risk bonds (yield, PD, loss if default, Base and Bear return);
+  expensive bonds; restructurings
 
-- Below the comparison: the **held-to-maturity view**. Window returns value the portfolio at the
-  window-end spread, and any spread MTM still open at the end reverses by maturity if nothing
-  defaults. Show the per-year size of that leftover.
+## Master watchlist — open entries
+| Issuer | Row | Status now | On list since (date: price, status) | Price now (date; stale / assumed) | Next decisive event | Held by (% of NAV) | Outstanding NOKm |
+|---|---|---|---|---|---|---|---|
 
-## [Fund name]
-### Facts (legal form, mandate, liquidity terms, mandate changes; fees only where a fund-specific mechanism needs explaining, e.g. a performance fee)
-### Portfolio snapshot (date; yield basis; durations; rating mix; top 10; cash; issuers)
-### Mapping to market rows (fund label → row → weight)
-### Credit loss (named at-risk bonds: weight, price, PD, recovery, loss if default, contribution; restructurings; residual from the record; Bear catalyst loss and the performing names behind it; single-name stress)
-### Manager record (year: start yield, return, fund gap, market gap, relative, net credit cost)
+## Outcome record (exits and status changes; names never just disappear)
+| Issuer | From (date: price, status) | To (date: price, status or outcome) | Outcome | Note |
+|---|---|---|---|---|
+
+## Company bond table
+| Company | Row | Bond | Price (date) | Yield, NOK-hedged | Status | PD 1y Base / Bear (implied; Bear rule if overridden, reason) | Recovery Base / Bear | Loss if default Base / Bear | EL Base / Bear | Exp. 1y return Base / Bear | Held by |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+
+## Price history
+## Stamdata and news screen (scan coverage; held companies)
+## Data gaps (incl. the stale-price share of each fund's named loss)
+```
+
+## Output: `docs/hy-funds-analysis.md`
+
+(Structure revised 2026-10-18 for readability: summary first, short tables, reference material in
+the appendix, change log capped. User instruction 2026-10-17 still holds: classes and fees are
+listed only in the share-class appendix.)
+
+```markdown
+# Nordic HY funds — [date of the latest update]
+
+## Summary (6–10 lines)
+| Fund | Verdict | E / R (% of market) | What drives it |
+|---|---|---|---|
+- What changed in this update; the open items that could flip a verdict
+
+## How to read this
+- The decision rule (E, R, E / R, market reference, verdict thresholds, step-up), the tags, and a
+  table of the abbreviations used in the file
+
+## Metadata
+- Dates of the last full run and of any partial update; status; skill revision; HY Market BBB
+  baseline date and status; report dates per fund; NIBOR used; the method in short
+
+## Comparison (state the run the values come from)
+### Decision
+| Fund | Base window return | E: excess over NIBOR | R: stress loss | E / R (% of market) | Step-up over reference (market) | Verdict |
+|---|---|---|---|---|---|---|
+### Risk
+| Fund | At-risk bonds (% of NAV) | Named loss 2027 Base | Credit loss 2027 Bear | Bear window / worst year | Single-name stress | Oil exposure |
+|---|---|---|---|---|---|---|
+### Profile
+| Fund | Style | Yield after fee (date, basis) | Credit / rate duration | Cash (read as) | Quality q | Liquidity |
+|---|---|---|---|---|---|---|
+- Ranking; what the reference adds; the **held-to-maturity view** (any spread MTM still open at
+  the window end reverses by maturity if nothing defaults: show the per-year size)
+
+## What would change the verdicts (per fund; incl. the 0.5 pp residual and the 2027 allowance, F4 item 5)
+
+## Credit loss, bond by bond
+### Bond inputs (from `docs/hy-issuers.md`: status, price and its date, yield, PD, recovery, loss if default)
+### Weights by fund (bond × fund, % of NAV)
+### Credit loss per fund (2027 Base named, largest contributions, residual, 2027 Bear; when a partial update is not rerun, show both the current value and the value in the paths)
+- Bear catalyst loss and the performing names behind it
+
+## [Fund name] (the same six parts for every fund)
+### Facts (legal form, mandate, liquidity terms, mandate changes; fees only where a fund-specific mechanism needs explaining)
+### Snapshot (date; yield basis; durations; rating mix; sectors and the mapping to market rows; top 10; cash; issuers)
+### Credit loss (named bonds and contribution; restructurings; residual; Bear catalyst loss; single-name stress)
+### 2027 Base build (NIBOR, spread carry, dry powder, fee, named loss, MTM, performance fee, total)
 ### Return paths
 | Scenario | Stub | 2027 | 2028 | 2029 | Window (ann.) | Excess over NIBOR |
 |---|---|---|---|---|---|---|
-### Liquidity and structure
-### Verdict (attractive / marginal / unattractive; Bear capital preservation; what flips it)
+### Verdict (attractive / marginal / unattractive; Bear capital preservation; liquidity; main risks)
 
 ## Reference fund: Arctic Return
-### Facts and share classes (fees, minimums)
-### Snapshot (running yield, credit duration, internal credit score, composition, top 10, holdings check)
-### Track record vs NIBOR (yearly excess, worst month and year, record vs forward)
-### Return paths and step-up table
+### Facts and share classes · Snapshot · Track record vs NIBOR · Return paths · Reading
 
-## Share classes, fees and purchase route (the only place classes and fees are listed: one table with class analysed and ISIN, legal form and dealing, class fee, other fees, the direct buyer's class, the Nordnet price; then the platform-fee notes)
+## Open checkpoints (numbered; what each would change)
 
-## Change log
-## Appendix: sources
+## Appendix
+### Share classes, fees and purchase route (the only place classes and fees are listed)
+### Manager record (market gap and fund records; record → residual)
+### Historical portfolios and holdings evidence (year-end holdings, price moves, style evidence)
+### Change log (the latest run in full; one line per older run; git holds the rest)
+### Sources
 ```
 
 ## Interface to IAF and other skills
@@ -1215,4 +1358,15 @@ Use by skill:
 - Change log complete (previous → new) or explicit "kept unchanged".
 - Every fetched value has source, as-of date and unit; raw kept beside derived; validation
   checks run and failures flagged in the text.
+- Default tracking (added 2026-10-18): every named fund bond is on the master watchlist with one
+  status on the status scale; every exit is in the outcome record; the monthly tracking table and
+  the fund default record are current; every new log entry has "visible at 1 Jan" filled in or
+  `[?]`; Bear overrides show the rule value and a reason; the stale-price share is shown per fund;
+  the 2027 unseen-default sensitivity is shown for every fund.
+- Consistency across files: the market, issuer and fund files state the same skill revision for
+  their last update, the same HY baseline date and the same scan coverage.
+- A partial update (prices only, one file only) labels every table it did not rerun and says which
+  run its values come from.
+- Fund file: summary first; comparison tables of at most 7 columns; abbreviations explained;
+  change log capped (latest run in full, one line per older run).
 - File written, read back, tables render.

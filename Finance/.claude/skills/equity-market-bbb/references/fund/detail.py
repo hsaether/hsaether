@@ -1,6 +1,6 @@
 import sys,os; sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 import fundmodel as M, copy
-NAV=7660.89
+NAV=7615.95   # NAV 21 Oct 2026
 o,E,R=M.run(); BL=M.BL
 E27=sum(x['w']*100/x['pe27'] for x in BL.values())
 for s in M.SC:

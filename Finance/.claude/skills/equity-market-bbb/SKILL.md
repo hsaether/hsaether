@@ -1,11 +1,11 @@
 ---
 name: equity-market-bbb
-description: Equity Market BBB — the equity index baseline for Oslo (OSEBX) and global equities (MSCI World, in NOK unhedged and in USD). Applies the IAF method at index level (d + g + re-rating, a year-by-year IRR build, the hurdle level at k = 12%) and produces Bear/Base/Bull index total-return paths on the IAF time grid (stub of the current year + 3 calendar years, now 2027–2029), index EPS and P/E paths, the NOK scenario path, mid-cycle returns, the oil and NOK linkage (correlations, betas, the energy share of Oslo earnings), and equity triggers that mirror the HY trigger (E / R against the Nordic HY market reference, Base IRR against k and against the HY book). Oslo energy earnings follow the Brent path in docs/oil-market-bbb.md; NIBOR, Nordic GDP and the HY return come from docs/hy-market-bbb.md. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. ALWAYS use when the user mentions Equity BBB / Equity Market BBB / aksjemarked, asks to create, run or update ("oppdater modul") the equity module, or asks about the Oslo Børs or OSEBX outlook, Oslo valuation (P/E, P/B), global equity or MSCI World expected returns, equities versus high yield, when to move from HY to equities, the oil–Oslo or oil–NOK correlation, or whether to hold Norwegian or global equity funds — even without naming the skill. Fund mode applies the baseline to named equity funds, active (DNB Teknologi, Gambak) or index (DNB Global Indeks, Nordnet Global Indeks) — look-through, cyclical blocks or index tilts, all-in cost, alpha or tracking difference, hurdle NAV and E / R against HY; output docs/<fund>-analysis.md. ALWAYS use it when the user asks to analyse, keep or switch an equity fund. It is the only place an equity index return path, an index hurdle or a NOK scenario path is set.
+description: Equity Market BBB — the equity index baseline for Oslo (OSEBX) and global equities (MSCI World, in NOK unhedged and in USD). Applies the IAF method at index level (d + g + re-rating, a year-by-year IRR build, the hurdle level at k = 12%) and produces Bear/Base/Bull index total-return paths on the IAF time grid (stub of the current year + 3 calendar years, now 2027–2029), index EPS and P/E paths, the NOK scenario path, mid-cycle returns, the oil and NOK linkage (correlations, betas, the energy share of Oslo earnings), and equity triggers that mirror the HY trigger (E / R against the Nordic HY market reference, Base IRR against k and against the HY market's Base return). Oslo energy earnings follow the Brent path in docs/oil-market-bbb.md; NIBOR, Nordic GDP and the HY return come from docs/hy-market-bbb.md. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. ALWAYS use when the user mentions Equity BBB / Equity Market BBB / aksjemarked, asks to create, run or update ("oppdater modul") the equity module, or asks about the Oslo Børs or OSEBX outlook, Oslo valuation (P/E, P/B), global equity or MSCI World expected returns, equities versus high yield, when to move from HY to equities, the oil–Oslo or oil–NOK correlation, or how Oslo compares with global equities — even without naming the skill. It estimates markets only: it never analyses a named fund, a portfolio or a single paper. It is the only place an equity index return path, an index hurdle or a NOK scenario path is set.
 ---
 
 # Equity Market BBB
 
-**Revision:** 2026-10-17.3 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-24.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/equity-market-bbb/` in the Finance folder.
 
 An index-level baseline for Oslo and global equities. It answers one question: **what total
@@ -17,19 +17,24 @@ Place in the chain:
 
 - Reads `docs/oil-market-bbb.md` (Brent path and mid-cycle → Oslo energy earnings) and
   `docs/hy-market-bbb.md` (NIBOR path, Nordic GDP, HY spreads and defaults → Oslo financials and
-  the Bear macro; Nordic HY expected return → the comparison). Reads the HY decision rule and
-  market reference from `docs/hy-funds-analysis.md` and the user's HY book figures from
-  `docs/portfolio-overview.md`. Defense and sector baselines are context only.
+  the Bear macro; Nordic HY expected return, the decision rule and the market reference E / R →
+  the comparison). It never reads the HY fund analysis (`docs/hy-funds-analysis.md`). Defense and
+  sector baselines are context only.
 - Never makes its own oil, rate, GDP or credit forecast. If an upstream baseline is stale, this
   baseline is provisional.
-- Feeds the portfolio discussion (`docs/portfolio-overview.md`) and gives [[iaf-valuation]] the
-  market context for k. It never lowers k.
+- Gives [[iaf-valuation]] the market context for k. It never lowers k.
+- **Market only.** The output is an estimate of the market. The skill never analyses a named
+  fund (active, sector or index) or a single paper, and never reads or writes
+  `docs/portfolio-overview.md`. It holds no portfolio figures (positions, HY book, account types,
+  horizons). The HY comparison is with the Nordic HY market.
 
-**Scope:** broad equity indices held through index or broad funds: Oslo (OSEBX), global developed
-(MSCI World; ACWI as cross-check), and the NOK translation. **Out of scope:** single stocks
-(→ [[iaf-valuation]]), sector forecasts (→ the sector BBBs), bonds (→ [[hy-market-bbb]]).
-**Named equity funds** (active or sector funds held by the user or proposed to them) are covered
-by **Fund mode** below: they apply this baseline and never change it.
+**Scope:** broad equity indices: Oslo (OSEBX), global developed (MSCI World; ACWI as
+cross-check), and the NOK translation.
+
+**Out of scope:** single stocks (→ [[iaf-valuation]]), named funds of any kind, portfolios,
+sector forecasts (→ the sector BBBs), and bonds (→ [[hy-market-bbb]]). Company analyses and the
+AI BBB enter only as building blocks of World's index earnings: the skill reads them and never
+makes them. ETFs (OBXD, URTH, NORW, IXC) are used only as data proxies for their index.
 
 ## Standing parameters
 
@@ -57,9 +62,6 @@ by **Fund mode** below: they apply this baseline and never change it.
   of the last run (fetch, look-through, consensus, correlations, model, triggers) and a README.
 - Output: `docs/equity-market-bbb.md`, one running baseline. Baseline date in the H1. Git holds
   history, so read the previous version before overwriting it.
-- Fund mode output: `docs/<fund>-analysis.md`, one running file per fund (e.g.
-  `docs/dnb-teknologi-analysis.md`). Index funds compared for the same role share one file
-  (`docs/global-index-funds-analysis.md`). Fund-mode scripts are in `references/fund/`.
 - Calculations run in the scratchpad (`py -I`, copies of the reference scripts) from fetched raw
   data. The document records inputs, method and results so a later run can reproduce them; copy
   changed scripts back to `references/`.
@@ -84,8 +86,12 @@ by **Fund mode** below: they apply this baseline and never change it.
   avoids that. Returns are monthly log returns.
 - OSEBX is a gross index: an index level trigger drifts up by the dividend yield (~0.45% a month)
   between runs. Give triggers both as a level on the run date and as a multiple at unchanged
-  earnings.
+  earnings. Only the P/E form is drift-free: at a fixed level the P/B falls as book grows by
+  retention (~0.5% a month for Oslo).
 - Never mix price and total-return series in one comparison, or USD and NOK returns.
+- **Name the index behind every multiple.** Oslo has three: OSEBX (price), OBX top names (earnings
+  model) and MSCI Norway (12 names; multiples). Give the bottom-up figure on the model's weights
+  next to MSCI's. Historical anchors are often on yet another index (the P/B band below is OSEBX).
 
 ## Data sources
 
@@ -96,9 +102,13 @@ by **Fund mode** below: they apply this baseline and never change it.
 | Consensus EPS CY / CY+1 per constituent, number of analysts | **Yahoo** `/v10/finance/quoteSummary/<sym>?modules=earningsTrend,earnings` (crumb) | Zacks for US listings and ADRs |
 | ETF look-through: sector weights, top holdings, P/E, P/B | Yahoo quoteSummary `topHoldings` (OBXD.OL = DNB OBX ETF, NORW/ENOR = MSCI Norway, URTH, ACWI, SPY) | Issuer factsheets |
 | Index fundamentals (P/E, fwd P/E, P/BV, yield) and top weights | **MSCI index pages** (`msci.com/indexes/index/957800` Norway, `990100` World) via WebFetch | MSCI factsheet PDFs |
+| MSCI World constituent weights (World blocks) | **iShares URTH holdings CSV** (`ishares.com/us/products/239696/ishares-msci-world-etf/latest-holdings.csv`, curl; the `1467271812596.ajax` URL returns HTML) → `references/dl2/urth_ai.json` | MSCI top 10 |
+| Index factsheets (fundamentals, sectors, top 10, net returns) | MSCI factsheet PDF (`msci.com/documents/10199/255599/<index-name>-usd-net.pdf`, curl, text with `pypdf` under `py -I`) | MSCI index pages |
+| Bottom-up P/B, ROE, dividend yield and payout of the Oslo sample | **Yahoo** quoteSummary (`price`, `summaryDetail`, `defaultKeyStatistics`, `financialData`; `references/valq.py`), aggregated with `references/valagg.py` | MSCI Norway (index level) |
+| Oslo P/B history | Nordnet blog "Hva er pris/bok på Oslo Børs" (4 Apr 2023; OSEBX, 67 names, Bloomberg, 13 years): 1.5 cheap, 2.1 expensive; 2.4–2.7 has often been followed by losses `[E]` | MSCI Norway factsheets (month-end P/BV, few points) |
 | US earnings path and valuation | **FactSet Earnings Insight** PDF (weekly; WebFetch saves the PDF, read with `pypdf` under `py -I`) | Yardeni, press |
 | NIBOR path, Nordic GDP, HY spreads, HY expected return | **`docs/hy-market-bbb.md`** | — never an own path |
-| HY decision rule, market reference E / R, HY book figures | `docs/hy-funds-analysis.md`, `docs/portfolio-overview.md` | — |
+| HY decision rule, market reference E / R, market stress loss R | **`docs/hy-market-bbb.md`** ("For other modules") | — never a fund document |
 | Brent path and mid-cycle | **`docs/oil-market-bbb.md`** | — never an own path |
 | US 10-year, US HY OAS (yield-gap and credit context) | **FRED** `DGS10`, `BAMLH0A0HYM2` | — |
 | Norway 10-year (yield gap), zero-coupon curve | **Norges Bank API** `GOVT_GENERIC_RATES/B.10Y.GBON` (daily), `GOVT_ZEROCOUPON/B.<tenor>` | FRED `IRLTLT01NOM156N` (OECD monthly, lagged) |
@@ -124,12 +134,31 @@ Connector quirks (tested 2026-10-11):
   10-year), but the 30-year `EXR` histories and `ANN_FX_SPU` (buy/sell direction) come from the
   direct CSV API; see the iaf-valuation skill, Norges Bank paragraph.
 - Yahoo quote `dividendYield` is in percent (3.54 = 3.54%); `trailingAnnualDividendYield` is a
-  fraction and is often wrong for USD reporters. Use `dividendYield`.
+  fraction and is often wrong for USD reporters. Use `dividendYield`. In quoteSummary
+  `summaryDetail.dividendYield` is a fraction. Both are the **latest declared dividend
+  annualised**, not a forecast: one strong quarter of a variable payer (Frontline 19.9%, 16 Oct)
+  shows as a yearly yield.
+- Yahoo `bookValue` for NOK-listed USD reporters is usually converted to NOK, but not always: Vår
+  Energi's is in USD, so its `priceToBook` reads 63.8 for a true 6.8 (16 Oct 2026). Check
+  P/B = price ÷ (BVPS × FX) for every USD reporter.
 - MSCI index pages give fundamentals at the last month-end and the top-10 weights; sector weights
   did not render. MSCI Norway has only 12 constituents: use it for valuation, not for weights
   below the top 10.
 - No free source gives a long series of Oslo forward P/E or P/B. Historical anchors are secondary
   (`[E]`); state them as such.
+- **URTH holdings CSV:** 1,251 equity rows with weights summing to 99.78% (9 Oct 2026), so
+  normalise. Tickers repeat across countries (SAP = SAP SE and Saputo; 20 duplicates): match on
+  ticker and country, and sum sectors from the CSV rows, not from a ticker dictionary.
+- MSCI World's own factsheet shows **gross** annual returns; a renamed index can sit behind a
+  plain-named URL (check the launch date and top 10).
+- **Consensus EPS checks** (Oslo constituents and World block names):
+  - Some Oslo-listed USD reporters have Yahoo EPS in NOK (Nordic Semiconductor); check against
+    the quote's forward P/E.
+  - Large one-off gains distort CY EPS (Alphabet and Amazon 2026): value on CY+1 and leave the
+    distorted year out of growth.
+  - Thin or inconsistent +1y estimates (few analysts): use the quote's forward P/E.
+  - Fiscal years: blend June/July year-ends half and half into calendar years; map Jan–Mar
+    year-ends to the calendar year they mostly cover and Sep–Oct year-ends to the same year.
 
 ## Data discipline
 
@@ -144,6 +173,19 @@ Connector quirks (tested 2026-10-11):
   look-through vs bottom-up; explain gaps, never average them away).
 - **User input is input, not a reference:** assess claims (correlations, rules of thumb, tax
   points) against data, keep what holds, and record the assessment.
+- **Dividend and cash yields carry a label.** Report three rows, the same for Oslo and World:
+  - **trailing:** dividends paid over 12 months (MSCI);
+  - **forward:** the latest declared dividend annualised (Yahoo). Show it with and without
+    names that pay more than 100% of trailing EPS or yield more than twice their block's average;
+  - **model cash yield:** dividends plus net buybacks plus retained cash credited (Step C).
+    Source the buybacks, or count none and say so.
+- **P/B anchors:**
+  - Name the index and the period of every historical P/B anchor.
+  - Add a composition note: the names that add most to the index P/B against the anchor years
+    (16 Oct 2026: Kongsberg at P/B 22.5 added ~0.19 to the Oslo sample's 2.36).
+  - Record the source's loss zone (P/B 2.4–2.7) next to the band.
+- **ROE carries its basis:** trailing (P/B ÷ trailing P/E) or forward (P/B ÷ forward P/E). A
+  "normal" ROE built from a point P/B and an average P/E is a rule of thumb `[E/A]`, not an anchor.
 
 ## Method
 
@@ -165,10 +207,20 @@ or MSCI Norway; GICS-like sectors from the ETF look-through):
     tanker and oil-service lags are not modelled separately; say so.
   - **B_cons** = the Brent level the consensus implies: from the largest producer's consensus EPS
     change between CY and CY+1 against the CY Brent average (same c). State it.
+  - Cash: payout per block (below) and cash conversion 0.80, as in Step C and as World energy.
+    (The cash conversion is not the break-even c above.)
 - **F block:** relative to consensus, from the NIBOR path (net interest margin) and the HY default
   path (credit losses). Bear peaks losses in the HY Bear default peak year.
 - **O block:** consensus less a haircut for analyst optimism in Year 1 `[A]`, then nominal growth
   (GDP + inflation); Bear from the HY Bear GDP path.
+- **Payout per block:** the latest declared dividend annualised ÷ trailing EPS from the bottom-up
+  sample `[F]`.
+  - Show it also without names flagged under the yield rule, and on dividends actually paid
+    (Yahoo payout ratio).
+  - 16 Oct 2026: E 0.76 (0.65 without Frontline's peak quarter), F 0.63, O 0.56; 0.66 weighted on
+    CY+1 earnings shares. On dividends paid: 0.61 / 0.63 / 0.54.
+  - Buybacks are counted only where a source gives them; energy's go through the cash
+    conversion.
 - **Normalised exit-year EPS** (the year after exit): energy at the scenario's **mid-cycle Brent**,
   F at mid-cycle NIBOR, O on trend. This is the V_T basis (IAF Step 3: normalised, never the last
   modelled year by default).
@@ -185,22 +237,22 @@ or MSCI Norway; GICS-like sectors from the ETF look-through):
     layer paths of `docs/ai-market-bbb.md` (EPS, exit P/E, payout, cash conversion c; block P/E
     from today's prices and calendarised CY+1 EPS). AI earnings paths are set only there.
   - **Energy:** the index's energy weight on the oil path (Oslo energy formula, Brent − 30), P/E
-    from IXC, c = 0.80.
+    from IXC; payout and cash conversion as Oslo energy (0.76 and 0.80; Step C).
   - **Rest** (≈ 70% of earnings): its own explicit EPS path per scenario `[A]`: Base = Year-1
     haircut on consensus (state it, now 3%), then trend nominal growth (now 5.5%); Bear and Bull
     from the [[hy-market-bbb]] recession / soft-landing catalysts. Rest P/E and payout paths
     are stated per scenario (the World multiple view without its AI and energy part).
   - Report: block weights (value and earnings), the World EPS path that results, each block's
-    contribution, and the sensitivity to rest growth (± 1 pp) and to all multiples (± 1).
-- **Retained-cash convention (one rule, counted once):** a block whose model counts free cash
-  beyond the payout in V_t (company analyses, AI layers with c) keeps it there and gets no extra
-  growth for it. The rest uses P/E × EPS, so its retention funds its own EPS growth. Never add a
-  block's retained cash and grow its EPS from the same cash.
-- Scripts: `references/fund/idxai3.py` (blocks, company and layer paths) and the update script
-  in `references/` (`upd.py`, World from blocks and rest; `osl.py`, Oslo).
+    contribution, and the sensitivity to rest growth (± 1 pp) and to all multiples (± 10% and ± 1).
+- **Retained cash:** the one rule in Step C, for World and Oslo alike.
+- Scripts: `references/idxai3.py` (blocks, company and layer paths; weights in
+  `references/dl2/urth_ai.json`), `references/upd.py` (World from blocks and rest) and
+  `references/osl.py` (Oslo).
 - Bear and Bull take the global recession / soft-landing paths that match [[hy-market-bbb]].
-- **Currency:** the NOK path is set in **I-44** terms and translated to USD/NOK for World (≈ 70%
-  USD) and for Oslo's USD earners.
+- **Currency:** the NOK path is set in **I-44** terms. USD earnings move with USD/NOK, other
+  foreign earnings with I-44:
+  - World: 70% on USD/NOK, 30% on I-44 `[A]` (the USD share of MSCI World).
+  - Oslo: the energy block on USD/NOK; the foreign half of the O block on I-44; F in NOK.
   - **Base = Norges Bank's latest MPR I-44 projection** (MPR 3/26: flat 110.0 from Q4-26 to
     2029) `[E]`, with cross rates unchanged against each other `[A]`. If the MPR level differs
     from today's fixing by more than 3%, say so and use the MPR path from Year 1.
@@ -214,28 +266,73 @@ or MSCI Norway; GICS-like sectors from the ETF look-through):
 ```
 V_t (year-end t)  = forward P/E_t × EPS_(t+1)          interim marks, path diagnostic
 V_T (exit)        = mid-cycle P/E (scenario) × normalised EPS_(T+1)
-D_t               = payout × EPS_t                      dividends + net buybacks, mid-year
+D_t               = payout × EPS_t                      cash paid (dividends + sourced net buybacks), mid-year
+V_t, V_T          + Σ (cash conversion − payout) × EPS   retained cash credited at face value (blocks with a cash conversion)
 Stub              = price flat, D = cash yield × stub length (same in all scenarios)
 IRR_T solves      P = Σ D_t/(1+IRR)^t + V_T/(1+IRR)^T   (XIRR on dates; T = stub + 3)
 Hurdle level      P_k = Σ D_t/(1+k)^t + V_T/(1+k)^T     k = 12%;  margin of safety P_k / P − 1
 Annual return r_t = (D_t + V_t − V_(t−1)) / V_(t−1)     V_stub-end = P
 ```
 
+- **Exit principle (shared with [[iaf-valuation]] Step 3):** V_T is the price a market buyer pays at
+  exit for a continuing index, on normalised earnings of the year after exit, at the market's
+  required return at exit (the mid-cycle P/E), never at k and never at the IAF ceiling. The same
+  rule sets V_T in every company analysis, so index and company exits are comparable.
+- **Exit consistency per block (as IAF Step 3):** for each block and scenario,
+  gap = (EPS multiplier in the exit year ÷ normalised multiplier of the year after exit) − 1.
+  - Material = |gap| > 10%. Then either a **named reason** from the upstream baseline (oil BBB,
+    HY BBB, AI BBB) that brings the block to its normalised level within about a year of exit, or
+    a **reversion tail**: add to V_T the block's gap × EPS × payout-adjusted cash conversion,
+    fading 2/3 then 1/3 over 2 years after exit, discounted at the mid-cycle return.
+  - Blocks valued as P/E × EPS on trend (Oslo O, World rest) have no gap by construction; say so.
+    Company and AI-layer blocks carry the test from their own documents.
+  - Show one table: block, scenario, exit-year multiplier, normalised multiplier, gap, treatment.
 - **P/E paths are forward 12-month P/E at each year-end.** The exit P/E is the scenario's
   **mid-cycle P/E**, anchored on long-run averages of forward P/E (state source and period) and
   cross-checked with P/B against ROE (P/B ÷ P/E = implied ROE). Never use k's ceiling as the exit
   multiple.
-- **Return split (Base):** d = (ΣD/T)/P; g = (V_T/P)^(1/T) − 1, split into normalised EPS growth and
-  re-rating (P/E_exit ÷ P/E_now); c = IRR − d − g. Never set g = IRR − d.
-- **Structural run:** EPS at the normalised level from Year 1; cyclical = IRR − structural.
-- **Payout consistency:** retained earnings (1 − payout) must fund the EPS growth assumed. If
-  growth needs more than ROE × retention, cut growth or payout.
+- **Return split (every scenario, both indices, as numbers):** d = (ΣD/T)/P; g = (V_T/P)^(1/T) − 1,
+  split into normalised EPS growth (from CY+1 consensus), re-rating (value multiple at exit ÷ P/E
+  now), retained cash, and FX for World in NOK; c = IRR − d − g. Never set g = IRR − d.
+  - World's value multiple is V_t ÷ EPS_(t+1) of the block sum (retained cash included).
+  - A rise that comes only from a cyclical block's EPS falling (memory) is not a re-rating; say so.
+- **Structural run (Oslo):** EPS at the normalised level from Year 1; cyclical = IRR − structural.
+  World is exempt: its blocks carry their own cyclical paths and the sum has no single normalised
+  level.
+- **Retained cash and payout: one rule for both indices** (counted once):
+  - A block with a **cash conversion** (free cash after growth capex and dilution ÷ EPS) credits
+    (conversion − payout) × EPS to V_t at face value and gets no extra growth for it. These are
+    the company analyses, the AI layers, and energy in both indices (conversion 0.80 `[A]`: no
+    growth to fund, sustaining capex a little above D&A).
+  - A block valued as P/E × EPS (Oslo F and O, World rest) uses its retention to fund its own
+    EPS growth.
+  - Never credit a block's retained cash and grow its EPS from the same cash.
+  - Energy has the same payout in both indices: Oslo's bottom-up figure.
+- **Payout consistency, both directions:**
+  - Growth must not need more than ROE × retention. If it does, cut growth or payout.
+  - If ROE × retention is well above the assumed growth, state the implied return on retained
+    earnings (growth ÷ retention) and the reason (dilution, field decline, low-return
+    reinvestment). 18 Oct 2026: Oslo 3.4% ÷ 0.34 ≈ 10%, World 5.3% ÷ 0.51 ≈ 10%, both below k.
+- **P/B–ROE check (both indices, every run):** one table with P/B now, ROE trailing and forward,
+  the ROE path, normalised ROE and **exit P/B**, set against the history.
+  - book_T = book_now + Σ (EPS_t − D_t), with the retained cash credit staying in book.
+  - Exit P/B = V_T ÷ book_T; normalised ROE = EPS_(T+1) ÷ book_T.
+  - An exit P/B outside the history band needs a stated reason, or the exit P/E is wrong.
 
 ### Step D — Mid-cycle return
 
 Long-run expected annual return at mid-cycle earnings and P/E, no re-rating:
-`cash yield (payout ÷ mid-cycle P/E) + long-run nominal EPS growth`. Used for horizons beyond the
-window (pension blocks) and as the equity risk premium check against mid-cycle NIBOR.
+`cash yield (cash conversion ÷ mid-cycle P/E) + long-run nominal EPS growth`. Used for horizons
+beyond the window and as the equity risk premium check against mid-cycle NIBOR.
+
+- **Show the inputs per index and scenario** in a table: cash conversion (payout plus retained
+  cash credited), mid-cycle P/E, cash yield, long-run growth and the total.
+- **Long-run growth (Base) = the index's Base trend growth `[A]`:**
+  - World: the rest's trend for all non-energy blocks, energy at 2% (inflation, flat volumes).
+  - Oslo: block trends weighted on normalised earnings shares (energy 2%, F at nominal mainland
+    GDP ~3.5%, O at its trend).
+- Bear −1.5 pp, Bull +0.75 pp on long-run growth `[A]`.
+- Show the implied return on retained earnings (Step C).
 
 ### Step E — Oil and NOK linkage (monitor, every run)
 
@@ -274,27 +371,30 @@ years, plus rolling 36-month correlations at each September:
 All per index, in NOK, before tax, after an index-fund fee of **0.20%** `[A]`:
 
 - **E** = Base window IRR − Base NIBOR over the window − fee. **R** = Base 2027 − Bear 2027
-  (Year-1 stress loss). Same definitions as the HY fund mode.
+  (Year-1 stress loss). Same definitions as in [[hy-market-bbb]].
 - **Attractive vs HY:** E / R ≥ the **HY market reference** (now 0.196, from
-  `docs/hy-funds-analysis.md`). Compare also with the user's HY book E / R
-  (`docs/portfolio-overview.md`).
+  `docs/hy-market-bbb.md`).
 - **IAF test:** Base IRR vs k = 12% and the margin of safety P_k / P − 1 (clears > +2%, marginal
   ±2%, fails < −2%).
 - **Triggers:** solve for the index level (price change at unchanged earnings) where
-  (1) E / R = HY market reference, (2) Base IRR = k, (3) Base IRR = the HY book's Base return,
-  (4) E / R = HY book. Report each as % from today, as the index level, and as the multiple at
-  unchanged earnings (Oslo forward P/E and P/B; World forward P/E).
-- **Long horizons:** R is a one-year stress. For pension money with a 6–16 year horizon also show
-  the Bear window return and the mid-cycle return; the allocation choice is the user's.
-- **Tax note** (taxable AF accounts): equity net ≈ e − 0.3784 × (e − skjermingsrente) vs HY
-  × (1 − 0.22). Inside pension wrappers the asset's tax rate does not matter. Point to the
-  break-even in `docs/portfolio-overview.md`; never let tax change the market baseline.
+  (1) E / R = HY market reference, (2) Base IRR = k, (3) pre-alert: Base IRR = the HY market's
+  Base window return (before fees, from `docs/hy-market-bbb.md`, the same basis as the equity
+  Base). Report each as % from today, as the index level, and as the multiple at
+  unchanged earnings (Oslo forward P/E and P/B; World forward P/E). Every row gets every column.
+  - **Multiples at the triggers:** scale the MSCI month-end multiple by the index move **since
+    that month-end** (OSEBX for Oslo; URTH in USD for World), never by the move since the
+    previous run. Then apply the trigger's price change.
+- **Long horizons:** R is a one-year stress. For horizons beyond the window also show the Bear
+  window return and the mid-cycle return against HY's mid-cycle return. The allocation is not
+  set here.
+- **Tax note** (general, taxable accounts): equity net ≈ e − 0.3784 × (e − skjermingsrente) vs
+  HY × (1 − 0.22). Tax never changes the market baseline.
 
 ## Procedure
 
-Three modes: **Initiate** (no `docs/equity-market-bbb.md`), **Update** ("update Equity BBB",
-"oppdater modul" in an equity context, or a recalibration trigger) and **Fund** (a named equity
-fund; see Fund mode, which has its own steps). Run every step; actively try
+Two modes: **Initiate** (no `docs/equity-market-bbb.md`) and **Update** ("update Equity BBB",
+"oppdater modul" in an equity context, or a recalibration trigger). A request to analyse a named
+fund or a single paper is not this skill's work: say so. Run every step; actively try
 to falsify Base. If the evidence does not move it by the minimum change, say **Equity Market BBB
 kept unchanged**.
 
@@ -317,9 +417,17 @@ holdings), their prices and calendarised CY+1 EPS, the energy weight, and the re
 
 **Step 4 — Linkage.** Step E above; compare with the previous run.
 
-**Step 5 — Paths.** EPS (Steps A, B), P/E paths, NOK path, payout, per scenario. Run the model;
-annual returns, window IRR, P_k, structural run, return split, sensitivities (exit P/E ± 1, Brent
-± $10 for Oslo, FX for World).
+**Step 5 — Paths.** EPS (Steps A, B), P/E paths, NOK path, payout and cash conversion, per
+scenario. Run the model: annual returns, window IRR, P_k, structural run (Oslo), return split, P/B–ROE
+check (Step C).
+
+Sensitivities, the same set for both indices (Base window):
+- **All multiples ±10%** (values × 0.9 / 1.1), plus ±1 point.
+- **NOK ±10% by the end of the window**, linear, on USD/NOK and I-44 alike.
+- **Brent ±$10** on every year and mid-cycle (Oslo, and World energy).
+- World only: rest growth ±1 pp.
+- For the Oslo trigger, give the Brent ±$10 move two ways: Base and Bull paths only (R changes),
+  and all scenarios including Bear (R unchanged).
 
 **Step 6 — Test BBB.** What would make Base wrong (earnings revisions, P/E regime, oil and NIBOR
 paths), and is it visible? Are the catalysts still right? Has a signpost been crossed?
@@ -329,288 +437,14 @@ paths), and is it visible? Are the catalysts still right? Has a signpost been cr
 **Step 8 — Write, log and check.** Write the document in the output format; full change log
 (previous → new with reason); read it back; run the checks.
 
-## Fund mode
-
-Applies the baseline to a named equity fund. It answers: **what does this fund return in NOK after
-its cost, per unit of the same stress, against the HY book and against an index fund holding the
-same market — and at what NAV would it clear k?** It never changes an index path, a NOK path or
-a trigger in `docs/equity-market-bbb.md`. If the baseline is stale, update it first or mark the
-fund analysis provisional.
-
-First run: DNB Teknologi A, 11 Oct 2026 (`docs/dnb-teknologi-analysis.md`). Base 4.8% after
-cost; P/E 15.8 on CY+1 consensus but 19.1 without memory chips. Re-run 12 Oct on the AI BBB
-layer paths: Base 4.9%; 65% of NAV in AI layers; its AI holdings returned 5.2% before cost
-against ~2.2% for the AI baskets on the same paths. The Samsung preference shares were found
-from the gap between the country weight and the listed lines: check country and currency
-weights against the holdings list. First index-fund run: DNB Global
-Indeks A vs Nordnet Global Indeks, 11 Oct 2026 (`docs/global-index-funds-analysis.md`). Nordnet's
-fund had switched to the MSCI World Climate Change Index (energy 0.3%, IT 37%, P/E premium
-×1.056). Base 5.8% vs 6.2%, and the gap reverses if half the premium goes. Re-run 12 Oct on the AI BBB
-layers: AI is 26.8% of MSCI World and 32.0% of the climate index. Nordnet's Base fell to 5.79% vs
-DNB's 5.84%. The implied rest of World needs 8.8% a year of EPS growth, which is flagged to the Equity BBB.
-Re-run 15 Oct with Microsoft and Alphabet as company blocks, at the 14 Oct NAVs. Nordnet 6.32% vs DNB
-6.16% in Base, level on E / R (0.074), Nordnet 1.8 pp deeper in the 2027 Bear. The ranking flips
-if Nordnet's rest premium halves, so the model cannot rank them on return. In World the company
-blocks only move value between blocks and the rest, because the World total is fixed.
-Re-run 17 Oct on AI BBB Update 2 (retained cash, revenue-consistent Bears) with NVIDIA as a
-company block, at the 15 Oct NAVs: DNB 6.03%, Nordnet 6.16%, both at E / R 0.068. The method and
-NVIDIA steps moved Nordnet by −0.01 pp. NVIDIA has the same weight in both indices, and TSMC
-(Emerging Markets) is in neither. The fund changes came from price and stub only. Lesson: in an
-index split, company and layer work changes what the index is made of (the implied rest), not
-what a plain index returns. Only the Equity BBB path moves a plain index fund.
-
-### Fund data
-
-| Need | First choice | Fallback / cross-check |
-|---|---|---|
-| NAV and date, fund size, number of holdings, top 10, sectors, countries, **currency mix**, management fee, benchmark, returns (calendar, 3/5/10 y), risk (vol, beta, tracking error, max drawdown) | Manager's fund page via WebFetch (DNB AM: `dnbam.com/en/our-funds/funds/<fund>`; the dnb.no fund-list pages return nothing) | Storebrand fund profile, Morningstar |
-| **Top 25 holdings with weights**, total cost ("Total pris"), regions | **Nordnet fund page** via WebFetch (`nordnet.no/market/funds/<id>-<name>`); month-end holdings | Manager's monthly report |
-| NAV history (daily) | **Yahoo** chart API on the Morningstar id (`0P00000MVB.IR` = DNB Teknologi A; find with Yahoo search `/v1/finance/search?q=<ISIN or name>`). History may start late (DNB Teknologi: Mar 2022) | Manager's calendar-year table |
-| Prices and consensus EPS of the holdings | **Yahoo** quoteSummary (`earningsTrend`, `price`, `summaryDetail`, `defaultKeyStatistics`, `financialData`; script `references/fund/hold.py`) | Zacks for US listings |
-| Sector earnings cycle (margins vs average, growth by industry) | **FactSet Earnings Insight** PDF; read with `pypdf` under `py -I` (WebFetch cannot decode it) | — |
-| Sector ETF look-through P/E (benchmark context) | Yahoo `topHoldings` (IXN tech, IXP communication services, XLK, QQQ; ratios inverted) | — |
-
-Quirks seen (11 Oct 2026):
-- The manager's page may garble calendar-year labels. Cross-check at least three years against
-  the Yahoo NAV.
-- Yahoo EPS for some Oslo-listed USD reporters is in NOK (Nordic Semiconductor). Check that the
-  forward P/E from the quote agrees.
-- Large one-off gains distort CY EPS (Alphabet and Amazon 2026). Value on CY+1 and leave the
-  distorted year out of the growth figure.
-- Thin or inconsistent +1y estimates (Atlassian: 8 analysts against 30): use the quote's forward
-  P/E.
-- Fiscal years: blend June/July year-ends half and half into calendar years. Map Jan–Mar
-  year-ends to the calendar year they mostly cover, and Sep–Oct year-ends to the same calendar
-  year.
-
-Index-fund data and quirks (11 Oct 2026):
-- **Index fundamentals and weights:** the MSCI factsheet PDF of the fund's index
-  (`msci.com/documents/10199/255599/<index-name>-usd-net.pdf`, curl, text with `pypdf`): P/E,
-  forward P/E, P/BV, yield, sectors, top 10 next to the parent index, net returns, beta, tracking
-  error, turnover. MSCI World's own factsheet shows **gross** annual returns; take net returns from
-  the parent column of the tilted index's factsheet. A plain-named URL can serve a renamed index
-  (World Climate Change → "Climate Change CTB"); match the launch date and top-10 weights against
-  the fund's holdings list.
-- **KIDs:** Nordnet's fund page links the PRIIP KID on `doc.morningstar.com`. curl it and read it
-  with `pypdf` for structure, replication, counterparty, ongoing and transaction costs, and index.
-- **Nordnet URLs:** `market/funds/<id>` can resolve to a sister fund (18142188 is the leveraged
-  Nordnet Global Indeks 125). Use the `fond/liste/<name>-nok-<hash>` page and check the NAV.
-- **dnb.no fund pages** (incl. the pension fund list) return only security.txt to WebFetch; read
-  them in the in-app browser. They give the DNB platform fee and transaction costs.
-- Yahoo fund ids: DNB Global Indeks A `0P0000PS3V.IR` (NAV from Mar 2022), Nordnet Global Indeks
-  NOK `0P0001K6NJ.IR` (from Sep 2020); find others with Yahoo search on the ISIN. Yahoo lags the
-  manager's NAV by a day or more: take the NAV of the market-price date from DNB AM or Nordnet.
-- **MSCI World constituent weights:** iShares URTH holdings CSV
-  (`ishares.com/us/products/239696/ishares-msci-world-etf/latest-holdings.csv`, curl; the
-  `1467271812596.ajax` URL returns HTML). There are 1,251 equity rows, with weights summing to
-  99.78%, so normalise. **Tickers repeat across countries** (SAP = SAP SE and Saputo; 20
-  duplicates on 9 Oct): match on ticker and country, and sum sectors from the CSV rows, not
-  from a ticker dictionary.
-
-### Method
-
-1. **Fund facts and position.** Record the NAV and date, cost, currency mix, hedging (stated, or
-   inferred from the NOK-return correlation with World in NOK vs in USD, tagged `[E/A]`), size,
-   number of holdings, benchmark and record. Take the user's units, value, cost and account type
-   from `docs/portfolio-overview.md`.
-2. **Look-through.** Use the top holdings covering **≥ 75% of NAV**. The rest is assumed to look
-   like the sample `[A]`; say so. Use prices at the last close and Yahoo consensus EPS for CY and
-   CY+1, calendarised. Compute the harmonic (earnings-weighted) P/E on CY+1, block by block and
-   for the fund.
-3. **Blocks.** Group holdings by what drives their earnings, as Step A does for Oslo, and report
-   each block's **share of CY+1 earnings** next to its weight.
-   - Any block whose P/E is far below the fund's (≤ half) on peak earnings is a **cyclical
-     block**. It gets a mid-cycle EPS level, the way Oslo energy gets mid-cycle Brent. Example:
-     memory at P/E 3.6 was 5% of DNB Teknologi's weight and 21% of its earnings.
-   - Report the fund P/E with and without the cyclical block.
-   - Name the evidence for the block's mid-cycle level: sector margins vs their average (FactSet),
-     past peak-to-trough, how far consensus has risen. Tag it `[A]`.
-4. **Scenarios = the baseline's scenarios** for the fund's market: World for global funds, Oslo
-   for Norwegian funds, both weighted for mixed funds. Add a sector mechanism to each scenario
-   (e.g. an AI capex cut in the Bear). Never use a separate macro world.
-   - **Sector paths come from the sector baseline where one exists.**
-     - Map AI-exposed holdings to the layers of `docs/ai-market-bbb.md`: E platforms, H1 compute,
-       H2 memory, H3 foundry and equipment, H4 networking and DC infrastructure, T software.
-       Copy the layer's EPS path, exit P/E and payout unchanged, and take the AI catalysts and
-       signposts for the scenario mechanism.
-     - Do the same for energy (oil BBB via the Oslo energy block) and defense
-       (`docs/defense-market-bbb.md`).
-     - Only blocks no baseline covers keep own `[A]` paths. Show the mapping table.
-     - Report each block alone (before cost) against the matching baseline basket. That is the
-       selection effect, measured without assuming alpha.
-     - Report the sector-only stress: the sector blocks on Bear, the rest and the NOK on Base.
-     - **A holding with its own company analysis** (`docs/<company>-analysis.md`) gets its own
-       block. Take its per-share V_t, D_t and EPS per scenario (they include net cash, stakes and
-       dilution, which a layer path cannot). Value them at the fund's price date: V_t / P_close
-       and D_t / P_close, plus its stub dividend. Show the effect against the layer path. First
-       use: Microsoft and Alphabet in DNB Teknologi, 15 Oct 2026, +0.4 pp on the fund's Base.
-     - Price every holding at its close on the NAV date (`references/fund/close.py`), not at the
-       latest quote. Markets that were closed take their last close before it.
-   - EPS per block per year (CY+1 consensus = 1.00) plus a normalised exit year.
-   - Year-1 haircut for analyst optimism, larger for the fastest-growing blocks.
-   - Exit forward P/E per block on normalised EPS, anchored on the sector's long-run multiple or
-     today's level; never the IAF ceiling.
-   - **Base and Bull glide** the P/E linearly to exit. **Bear de-rates at the end of Year 1**, as
-     the index Bear does.
-   - Cash yield = payout per block × EPS (dividends + net buybacks), reinvested inside an
-     accumulating fund.
-   - **Retained cash counted once** (IAF rule; AI BBB method v2, 17 Oct 2026):
-     - Each layer or own block has a cash conversion c, defined as free cash after growth capex
-       and dilution offsets ÷ EPS.
-     - Each year (c − payout) × EPS accumulates at face value into V_t and V_T. It is negative
-       where capex absorbs the cash (platforms).
-     - AI layers take c from `docs/ai-market-bbb.md`. Own blocks set c from payout consistency
-       (retention ≈ growth ÷ ROE, the rest is free cash) and show c as a sensitivity.
-     - The energy block in an index split takes c = 0.80 `[A]`: it has no growth to fund, and
-       sustaining capex runs a little above depreciation. Show c = payout and c = 1.0.
-     - Company blocks already carry their cash in V_t.
-     - First use: DNB Teknologi, 17 Oct 2026, +1.4 pp on the fund's Base.
-   - **Company-analysis variants:** a company analysis may state a variant that the sector
-     baseline has since adopted, such as calendarised consensus or a revenue-consistent Bear
-     (NVIDIA, TSMC, 17 Oct). Use that variant, rebuild the per-share V_t and D_t from the
-     analysis' own tables, check that they reproduce the variant's stated IRR, and say so.
-   - **Layer-method artefact:** a name priced below its layer's Bear exit multiple rises in the
-     Bear (memory at 2.6× against 8×). Show a stressed Bear, with the Bear exit at no more than
-     today's multiple, next to the baseline Bear, and report E / R both ways.
-5. **NOK translation.** USD share × the baseline's USD/NOK path; other foreign currency × the
-   I-44 path; NOK share flat. A hedged fund or class instead uses the local return + NIBOR − the
-   foreign short rate.
-6. **Cost and alpha.**
-   - Deduct the **all-in cost on the platform where the fund is (or would be) held** from values
-     and cash flows every year:
-     - **Nordnet "Total pris"** = ongoing charges − rebate + Nordnet's platform fee. The platform
-       fee is 0.29% for active equity funds, 0.19% for Nordnet's own index funds, 0.15% for
-       external index funds (from 1 Apr 2025), 0.09% for money market and 0.19% for other bond
-       funds. Checked on 11 Oct 2026: DNB Teknologi 0.85 + 0.29 = 1.14%; DNB Global Indeks A
-       0.10 + 0.15 = 0.25%; Nordnet Global Indeks 0.00 + 0.19 = 0.19%.
-     - **DNB:** ongoing charges + DNB's platform fee (0.10% for DNB Global Indeks A in the
-       self-select pension account), plus the transaction costs DNB lists.
-     - When only the fund's ongoing charges are known, add the platform fee and say so.
-     - State which platform the figure is for. The HY fund rows in `docs/hy-funds-analysis.md` are
-       before Nordnet's platform fee; keep that basis there.
-   - **Manager alpha = 0 in Base** (IAF: no credit for unproven gains). Show as sensitivities:
-     alpha = the cost (the manager earns its fee), and alpha = the fund's after-cost record
-     against its benchmark (state the period, and the fund size then vs now).
-7. **IRR build** as Step C: stub flat (cash accrual less cost, the same in all scenarios), year
-   returns, XIRR, **hurdle NAV P_k** at k = 12% and the margin of safety. Show the return split
-   (d, g = normalised EPS growth + P/E change + FX − cost, c), the structural run and the share of
-   Bull priced.
-   - A P/E "re-rating" that only comes from a cyclical block's earnings falling is not a
-     re-rating. Say so, and give the P/E without that block now and at exit.
-8. **Decision rules.**
-   - E = Base IRR after cost − Base NIBOR over the window; R = Base Year 1 − Bear Year 1.
-   - E / R vs the HY market reference, the HY book, and **an index fund on the same baseline**
-     (World or Oslo after 0.20%).
-   - Report the **alpha needed** to match the index fund and to match the HY book's Base.
-   - IAF verdict on the margin of safety (clears > +2%, marginal ±2%, fails < −2%); whether
-     capital is preserved in Bear.
-9. **Triggers.** Solve the NAV change, at unchanged earnings and composition, for: Base = HY book
-   Base (pre-alert), E / R = HY market reference, E / R = HY book, Base = k. Give each as %, NAV
-   level and look-through P/E (with and without the cyclical block), and compare with the fund's
-   NAV over the last 12 months.
-10. **Linkage.** From month-end NAVs: volatility; correlation and beta with World NOK, World USD,
-    the sector ETF in NOK, OSEBX, Brent and USD/NOK; max drawdown; calendar returns vs World NOK
-    and the sector ETF. This states the fund's role in the user's portfolio (e.g. its oil link
-    against the ~37% oil exposure of the HY book).
-11. **Sensitivities:** cost at index level, alpha (two values), exit P/E ± 1, the cyclical
-    block's mid-cycle level, CY+1 consensus −5%.
-12. **Tax and account.** In a taxable AF account an equity fund (≥ 80% equities) is taxed like
-    shares (37.84% on gains after the skjermingsfradrag). A switch realises the gain; state the
-    tax brought forward. Inside ASK or a pension wrapper a switch has no tax effect.
-
-### Index funds (variant of the method)
-
-An index fund is the baseline index held at a cost, so steps 2–3 and 6 change:
-
-- **Look-through = the fund's index**, from the index factsheet (fundamentals, sectors, top 10
-  against the parent) and the full holdings of an ETF on the parent index, not from the fund's
-  top holdings.
-- **Split the baseline index into sector blocks and an implied rest** (first used 12 Oct 2026):
-  - **AI blocks:** the AI BBB basket names that are in the index, at index weights, on the AI
-    BBB layer paths (EPS, exit P/E, payout; block P/E from the AI BBB's prices and CY+1 EPS).
-  - **Energy:** the index's energy weight on the oil path (Oslo energy block formula).
-  - **Rest:** implied, so that the blocks plus the rest equal the baseline index path exactly
-    (value, earnings and dividends in each year).
-  - The split reproduces the baseline at zero cost. Check that, and report:
-    - the rest's implied EPS growth, P/E path and payout;
-    - each block's return against the matching AI BBB basket;
-    - the AI-only stress.
-  - If the implied rest needs growth well above trend, show "rest at trend growth" as a check
-    and flag it to the next Equity BBB update. Never change the baseline path here.
-  - Since 17 Oct 2026 the baseline World path is itself built from these blocks with an explicit
-    rest (Step B), so for MSCI World the rest is the baseline's rest, not an implied one.
-  - List the names that fit a layer but are not in the AI BBB baskets (the "wider" AI share);
-    they stay in the rest.
-- **Plain index** (MSCI World, OSEBX): the baseline paths apply unchanged; the split is a
-  look-through only.
-- **Tilted index** (climate, ESG, factor, equal-weight): the same blocks at the tilted index's own
-  weights.
-  - Weights: top 10 via the factsheet's index/parent ratios applied to today's parent weights;
-    other names from the fund's holdings list, or ×1.0 of the parent with a ×0.7 / ×1.3
-    sensitivity. A large parent name missing from the fund's top 25 gets a multiplier below the
-    25th weight.
-  - Report the active sector and top-10 weights, and what the tilt sells and buys, with the
-    earnings-weighted P/E of each side.
-  - The tilted index's total P/E (factsheet forward ratio × the baseline's CY+1 P/E), less its
-    blocks, gives its rest P/E. The **premium over the parent's rest** is a stated assumption:
-    kept in Base and Bull, half lost in Bear. Show "premium halves" and "premium gone" as
-    sensitivities, and name what drives the premium (e.g. Tesla). If the ranking between funds
-    flips inside them, say the model cannot rank them on return.
-  - Lesson from 11 → 12 Oct: growing a tilt "like the index ex energy" hides the AI layers' flat
-    post-2027 paths. Put AI weight on the AI paths.
-- **Tracking difference replaces alpha.**
-  - Measure it from the manager's fund-vs-benchmark table (1/3/5/10 years) and from NAVs against
-    the index. For a tilted index, compare with a plain-index fund and take out the index gap.
-  - Base takes tracking beyond cost as 0. Show a drag sensitivity when the record or the
-    structure (swap spread) suggests one.
-- **Structure and index stability:**
-  - Record physical vs synthetic replication, the swap counterparty and the UCITS 10% exposure
-    cap, the domicile and base currency.
-  - Record the index history: a fund that has changed index is a different exposure from its
-    record.
-  - For AF use, check the tax equity share of a synthetic fund, which depends on the substitute
-    basket.
-- **Decision rules and triggers** as steps 8–9, plus the baseline's own triggers translated into
-  each fund's NAV (e.g. the World trigger as a DNB Global Indeks NAV).
-  - **Trigger convention for index funds:** a price change moves only today's price and leaves
-    every block's future values (V_t, D_t) unchanged, as the Equity BBB's `triggers.py` does for
-    the index. Do not let the layer blocks' P/E glide start from the changed price. On 15 Oct
-    that would have put the World trigger ~1% higher than the baseline's.
-  - Roll to the manager's NAV of the market-price date and reprice every block to that close.
-    The baseline index then sits at a price different from the baseline's date: run it at
-    `P0` = the index move at unchanged earnings (URTH for MSCI World; a tilted index from the
-    two NAVs' relative move). Apply the FX paths relative to that day's spot.
-  - Company blocks in an index: the index total stays the baseline's, so a company path only
-    shifts value against the implied rest. It changes a tilted index by the weight difference
-    × (company − rest).
-- **Recommendation between funds:** cost per year in NOK on the planned amount; the model gap and
-  whether it survives the premium sensitivity; Bear and side-case gaps; the size of the tilt at
-  portfolio level (NOK of energy and tech moved); structure; and which fund the account can hold.
-
-### Output: `docs/<fund>-analysis.md`
-
-IAF document order adapted to a fund: title · skill revisions and inputs · **Summary** (verdict,
-decision table: IRR, Year-1 return, NAV equivalent at exit, hurdle NAV and margin of safety,
-capital preserved, position value per scenario, Year-1 stress in NOK, E / R; per-year path with
-EPS, forward P/E, return and NAV equivalent) · tags · Header (fund facts, cost, currency and
-hedging, position, track, k) · Scenario definitions (baseline anchor + sector mechanism; side
-case) · Fund and status (holdings, sectors, record) · Near term · Market input · Look-through
-valuation (blocks, references, data handling) · Common assumptions · Period table and year-end
-path · Return split, structural run and sensitivities · Results · Against high yield and an index
-fund (E / R table, triggers, tax) · Verdict and caveat · Risks and signposts · For other modules ·
-Change log · Appendix: own assumptions · Appendix: sources (incl. raw consensus per holding and
-validation notes).
-
-- Update the fund's row in `docs/portfolio-overview.md` when the user holds the fund.
-- A fund analysis is stale when the baseline is updated, after the fund's next monthly report
-  shows a block weight change > 3 pp, or after a NAV move of more than 10%.
-
 ## Recalibration triggers
 
 - OSEBX or MSCI World moves more than 10% within a month, or crosses a trigger level
 - The oil or HY baseline is updated with a change that reaches Oslo earnings or NIBOR
 - Consensus CY+1 EPS for Oslo or the S&P 500 is revised by more than 5% since the last run
-- MSCI World forward P/E leaves 15.5–19.5, or MSCI Norway P/BV leaves 1.9–2.6
+- MSCI World forward P/E leaves 15.5–19.5, or MSCI Norway P/BV leaves 1.9–2.5. Above 2.5 is a
+  **valuation warning**, not a Bull sign: the P/B source's loss zone starts at 2.4. A rising P/B
+  supports Bull only if earnings rise with it.
 - USD/NOK moves more than 7% within a month
 - A Bear or Bull signpost is crossed; the baseline is older than 30 days
 
@@ -633,19 +467,22 @@ validation notes).
 
 ## Interface — earnings, valuation and NOK paths
 | Index EPS (CY+1 consensus = 100) per scenario per year + normalised exit year |
-| Forward P/E at each year-end per scenario |
+| Forward P/E at each year-end per scenario: Oslo index; World total value multiple (V_t ÷ EPS_t+1) and the rest |
 | I-44 and USD/NOK year-end per scenario (Base = Norges Bank MPR I-44) |
+| Mid-cycle inputs per index and scenario (cash conversion, P/E, cash yield, growth) |
+| Exit reference per index and scenario: exit P/E, exit P/B, mid-cycle return (read by IAF's exit cross-check) |
+| Exit consistency per block and scenario (exit-year vs normalised multiplier, gap, treatment) |
 
 ## Interface — hurdles and triggers
-| Index | Level / date | Base IRR | P_k (k = 12%) and MoS | E | R | E / R vs HY ref | Trigger levels |
+| Index | Level / date | Base IRR | P_k (k = 12%) and MoS | E | R | E / R vs HY ref | Trigger levels (%, level, P/E; Oslo also P/B) |
 
 ## Scenario definitions
-## Valuation snapshot (Oslo; World; yield gaps; historical anchors)
+## Valuation snapshot (Oslo; World; same rows for both: P/E, P/B, ROE with basis, three yield rows; yield gaps; historical anchors with index and composition note)
 ## Oil and NOK linkage (correlations, rolling, episodes, energy earnings share, Brent sensitivity)
-## Oslo build (blocks, B_cons, paths, P/E, payout)
-## World build (blocks: company, AI layers, energy, rest; weights, P/E, EPS paths; retained-cash convention)
-## Return split, structural run and sensitivities
-## Against high yield (decision rules, tax, pension horizon)
+## Oslo build (blocks, B_cons, paths, P/E, payout per block, cash conversion)
+## World build (blocks: company, AI layers, energy, rest; weights, P/E, EPS paths; currency mix)
+## Return split, structural run, P/B–ROE check and sensitivities (same table layout for both indices)
+## Against high yield (decision rules, tax, long horizon)
 ## Signposts and monitoring
 ## For other modules
 ## Change log
@@ -654,16 +491,20 @@ validation notes).
 
 ## Interface to other skills and documents
 
-- **Portfolio discussion** (`docs/portfolio-overview.md`): the Interface tables and the trigger
-  levels are the equity side of the HY-versus-equity question. This baseline does not set the
-  allocation; it states what each index pays per unit of the same stress as HY.
+- **Portfolio and named funds:** none. The baseline states what each index pays per unit of the
+  same stress as the HY market. It does not read, write or flag `docs/portfolio-overview.md` or
+  any fund analysis; those may read the Interface tables on their own.
 - **[[iaf-valuation]]:** the Oslo and World Base IRR is market context for k. A market priced below
   k does not lower k; it means few single stocks will clear it. Company analyses may cite the
   index hurdle and the energy share as context.
 - **[[hy-market-bbb]]:** the equity Bear uses the same catalysts; the equity Bear 2027 drawdown is a
   cross-check of the HY Bear's spread path. No HY input is set here.
 - **NOK path:** the scenario NOK path (I-44 and USD/NOK) is set only here, with Base anchored on
-  Norges Bank's MPR. IAF keeps spot FX at the valuation date for company figures.
+  Norges Bank's MPR. IAF decides at spot FX and reports Bear and Bull in NOK on this path for
+  foreign-currency cash flows (IAF FX rule).
+- **Exit cross-check:** company analyses set their exit P/E, exit P/B and buyer's implied return
+  beside this baseline's index exit P/E, exit P/B and mid-cycle return (Interface tables). Keep
+  those three figures per index and scenario in the Interface.
 
 ## Checks before finishing
 
@@ -673,21 +514,19 @@ validation notes).
   NOK-price mismatches handled; raw values in the appendix.
 - Earnings base is CY+1 consensus; block shares are earnings shares; B_cons stated.
 - World EPS path is the sum of its blocks (Step B); the rest path is explicit and its growth
-  stated; AI paths read from `docs/ai-market-bbb.md`, not set here; retained cash counted once.
+  stated; AI paths read from `docs/ai-market-bbb.md`, not set here.
+- One retained-cash and payout rule for both indices (Step C); energy has the same payout and cash
+  conversion in Oslo and World; currency on USD/NOK for USD earnings, I-44 for the rest.
+- Exit-consistency table per block and scenario (gap > 10%: named reason or 2-year tail).
 - Stub identical across scenarios; V_T on normalised earnings and mid-cycle P/E; g is the value
-  CAGR; c shown; structural run shown.
+  CAGR and split into numbers for both indices; c shown; structural run shown (Oslo).
+- P/B–ROE table for both indices with exit P/B; ROE basis stated; yields in three labelled rows;
+  P/B anchor index named, with the composition note and the loss zone.
+- Sensitivities like for like (multiples ±10%, NOK ±10%, Brent ±$10); the Brent trigger move
+  given both ways; trigger multiples scaled from the month-end.
+- Mid-cycle inputs shown; the implied return on retained earnings stated.
 - E, R and E / R computed with the HY definitions; trigger levels given as level, % and multiple.
 - Bear and Bull tied to named catalysts with signposts; the oil side case shown; no probability
   language.
 - Correlation tables built from daily → month-end data; windows and dates stated.
 - Change log complete or explicit "kept unchanged". File written, read back, tables render.
-- **Fund mode:** top holdings ≥ 75% of NAV, with each one's consensus validated (currency, fiscal
-  year, one-offs, analyst count); block earnings shares shown, and the P/E shown with and without
-  any cyclical block; scenarios and NOK paths taken from the current baseline; all-in cost for
-  the named platform deducted; alpha 0 in Base, with the record as a sensitivity; E / R against
-  the HY references and an index fund; hurdle NAV and triggers as NAV levels; tax on a switch
-  stated; portfolio row updated.
-- **Index funds:** index identified from the KID and matched to the factsheet; index history
-  stated; active weights and the P/E premium of any tilt shown, with premium sensitivities;
-  tracking difference measured; replication and counterparty stated; the model reproduces the
-  baseline at zero cost.

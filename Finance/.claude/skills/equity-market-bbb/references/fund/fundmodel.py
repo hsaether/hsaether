@@ -1,18 +1,18 @@
-# DNB Teknologi A — fund-mode scenario model (equity-market-bbb), version 4 (17 Oct 2026).
-# Layer blocks follow docs/ai-market-bbb.md Update 2 (method v2): EPS path x P/E glide, payout x EPS paid,
+# DNB Teknologi A — fund-mode scenario model (equity-market-bbb), version 5 (22 Oct 2026).
+# Layer blocks follow docs/ai-market-bbb.md Update 3 (method v2.1): EPS path x P/E glide, payout x EPS paid,
 # and (cash conversion - payout) x EPS retained at face value into V_t (retained cash counted once).
-# Company blocks (CM Microsoft, CG Alphabet, CN NVIDIA, CT TSMC) take per-share V_t, D_t and EPS from
+# Company blocks (CM Microsoft, CG Alphabet, CN NVIDIA, CT TSMC, CA Amazon) take per-share V_t, D_t and EPS from
 # their company analyses (NVIDIA calendarised and NVIDIA/TSMC Bears revenue-consistent, as those analyses
 # quantify and the AI BBB adopted). X = non-AI block, own [A].
 import json, sys
 BL=json.load(open("blocks.json"))
-STUB=75/365; T=STUB+3; K=0.12   # stub 17 Oct -> 31 Dec 2026
+STUB=70/365; T=STUB+3; K=0.12   # stub 22 Oct -> 31 Dec 2026
 RET=True                          # retained cash on (False = method v1, for the attribution)
 NIB={"stub":4.80,"2027":4.79,"2028":4.39,"2029":3.86}   # Base NIBOR, hy-market-bbb
 nibw=((1+NIB["stub"]/100)**STUB*(1+NIB["2027"]/100)*(1+NIB["2028"]/100)*(1+NIB["2029"]/100))**(1/T)-1
 SC=["Bear","Base","Bull"]
 # EPS paths rel. to block CY27 consensus = 1.00: [2027, 2028, 2029, 2030 normalised]
-EPS={"E": {"Bear":[.88,.88,.97,1.05],"Base":[.97,1.07,1.17,1.27],"Bull":[1.00,1.13,1.27,1.41]},   # AI BBB: E path for names other than MSFT/GOOGL
+EPS={"E": {"Bear":[.88,.88,.97,1.05],"Base":[.97,1.07,1.17,1.27],"Bull":[1.00,1.13,1.27,1.41]},   # AI BBB Update 3: "E rest" row (Meta, Oracle)
      "H1":{"Bear":[.68,.50,.53,.57],"Base":[.92,.98,1.00,.97],"Bull":[1.00,1.15,1.25,1.30]},   # AI BBB v2 (revenue-consistent Bear)
      "H2":{"Bear":[.60,.30,.25,.25],"Base":[.90,.60,.40,.35],"Bull":[1.00,.80,.55,.45]},
      "H3":{"Bear":[.76,.63,.67,.71],"Base":[.95,1.03,1.10,1.16],"Bull":[1.00,1.15,1.28,1.40]},
@@ -22,39 +22,44 @@ PEX={"E":{"Bear":17,"Base":21,"Bull":23.5},"H1":{"Bear":13,"Base":17,"Bull":19},
      "H3":{"Bear":14,"Base":18,"Bull":21},"T":{"Bear":15,"Base":20,"Bull":24},"X":{"Bear":13.5,"Base":16.5,"Bull":18}}
 PAY={"E":0.34,"H1":0.25,"H2":0.15,"H3":0.45,"T":0.45,"X":0.45}
 # cash conversion (free cash after growth capex and dilution offsets / EPS), 2027/28/29 — AI BBB v2; X own [A]
-CONV={"E": {"Bear":[.00,.40,.60],"Base":[-.10,.10,.30],"Bull":[-.20,-.10,.10]},
+CONV={"E": {"Bear":[-.10,.30,.50],"Base":[-.20,.00,.20],"Bull":[-.30,-.20,.00]},   # AI BBB Update 3 E layer (22 Oct)
       "H1":{"Bear":[.85,.95,.95],"Base":[.80,.90,.90],"Bull":[.75,.85,.90]},
       "H2":{"Bear":[.70,.75,.70],"Base":[.70,.65,.60],"Bull":[.70,.70,.55]},
       "H3":{"Bear":[.75,.90,.95],"Base":[.75,.80,.82],"Bull":[.70,.72,.78]},
       "T": {s:[.80]*3 for s in SC},
       "X": {s:[.75]*3 for s in SC}}   # [A]: payout consistency, ~8% growth at ROE ~30% needs ~25% retention
-# Company blocks: per-share V_t (year-end), D_t (paid in year), stub dividend, EPS 2027-30. PF = close on the NAV date (15 Oct).
-COMP={"CM":dict(PF=539.44,CONS=(19.78192+23.71027)/2,DST=0.98,   # docs/msft-analysis.md v2 (15 Oct)
+# Company blocks: per-share V_t (year-end), D_t (paid in year), stub dividend, EPS 2027-30. PF = close on the NAV date (21 Oct).
+COMP={"CM":dict(PF=532.95,CONS=(19.78192+23.71027)/2,DST=0.98,   # docs/msft-analysis.md v2 (15 Oct)
         Bear=dict(V=[339.1,370.7,406.9],D=[3.97,4.17,4.38],EPS=[18.02,17.67,18.97,20.41]),
         Base=dict(V=[592.3,646.5,692.0],D=[4.01,4.37,4.76],EPS=[20.58,23.16,25.81,28.06]),
         Bull=dict(V=[688.1,808.8,919.7],D=[4.02,4.42,4.86],EPS=[21.83,25.98,30.02,33.39])),
-      "CG":dict(PF=349.22,CONS=15.04601,DST=0.22,                    # docs/googl-analysis.md (15 Oct)
+      "CG":dict(PF=334.76,CONS=15.04601,DST=0.22,                    # docs/googl-analysis.md (15 Oct)
         Bear=dict(V=[170.8,190.4,215.1],D=[0.88,0.88,0.88],EPS=[11.12,10.48,11.66,13.02]),
         Base=dict(V=[361.5,377.1,390.1],D=[0.91,0.96,1.01],EPS=[13.45,15.04,16.70,18.27]),
         Bull=dict(V=[434.2,484.2,537.5],D=[0.95,1.04,1.14],EPS=[14.60,17.40,19.79,22.24])),
       # docs/nvda-analysis.md v1 (17 Oct), adjusted as that analysis quantifies [A]: EPS calendarised (x 15.21/15.91),
       # 60% of FCF paid, net cash rolled; Bear on the revenue-consistent path .68/.50/.53/.57 (AI BBB v2 H1 Bear)
-      "CN":dict(PF=217.23,CONS=15.21,DST=0.75,
+      "CN":dict(PF=221.97,CONS=15.21,DST=0.75,
         Bear=dict(V=[106.7,115.7,126.4],D=[4.99,4.57,4.18],EPS=[10.34,7.61,8.06,8.67]),
         Base=dict(V=[237.5,261.8,273.9],D=[6.41,8.45,8.80],EPS=[13.99,14.91,15.21,14.75]),
         Bull=dict(V=[289.0,350.2,402.5],D=[6.81,9.56,10.68],EPS=[15.21,17.49,19.01,19.77])),
       # docs/tsm-analysis.md v1 (17 Oct): Base and Bull as analysed; Bear on the revenue-consistent path .76/.63/.67/.71
       # (that analysis' own -13.2% case, AI BBB v2 H3 Bear), net cash rolled, dividends as analysed [A]
-      "CT":dict(PF=422.25,CONS=23.11,DST=0.0,
+      "CT":dict(PF=431.89,CONS=23.11,DST=0.0,
         Bear=dict(V=[214.9,229.3,244.7],D=[4.63,5.24,5.86],EPS=[17.56,14.56,15.48,16.41]),
         Base=dict(V=[447.1,474.9,499.0],D=[4.93,6.17,7.40],EPS=[21.95,23.80,25.42,26.80]),
-        Bull=dict(V=[523.8,606.7,690.0],D=[5.24,7.09,8.94],EPS=[23.11,26.58,29.58,32.35]))}
+        Bull=dict(V=[523.8,606.7,690.0],D=[5.24,7.09,8.94],EPS=[23.11,26.58,29.58,32.35])),
+      # docs/amzn-analysis.md v1 (22 Oct): core EPS (ex Anthropic gains), no dividends; V_t incl. the stake after tax and net debt
+      "CA":dict(PF=262.37,CONS=10.5582,DST=0.0,
+        Bear=dict(V=[108.8,123.4,146.2],D=[0,0,0],EPS=[7.84,6.49,7.35,8.56]),
+        Base=dict(V=[286.4,306.0,324.1],D=[0,0,0],EPS=[10.05,11.69,13.14,14.51]),
+        Bull=dict(V=[338.8,386.8,438.8],D=[0,0,0],EPS=[10.89,13.54,15.90,18.36]))}
 for c,x in COMP.items():
     EPS[c]={s:[e/x["CONS"] for e in x[s]["EPS"]] for s in SC}
     PEX[c]={s:x[s]["V"][2]/x[s]["EPS"][3] for s in SC}   # all-in exit multiple (incl. net cash, stakes), reporting only
     PAY[c]=x["Base"]["D"][0]/x["Base"]["EPS"][0]
-USD,OTH=0.6730,0.3117   # currency mix 10 Sep 2026 (DNB AM): USD 67.30, other foreign 31.17, NOK 1.53
-FXU={"Bear":[1.12,1.09,1.09],"Base":[1,1,1],"Bull":[0.97,0.97,0.97]}     # USD/NOK rel. to today (equity BBB)
+USD,OTH=0.6696,0.3148   # currency mix 16 Sep 2026 (DNB AM): USD 66.96, other foreign 31.48, NOK 1.56
+FXU={"Bear":[1.12,1.09,1.09],"Base":[1,1,1],"Bull":[0.97,0.97,0.97]}     # USD/NOK rel. to today (equity BBB 17/18 Oct: 9.41 -> 10.54/10.27/10.27; Bull 9.13)
 FXO={"Bear":[1.076,1.058,1.058],"Base":[1,1,1],"Bull":[0.977,0.977,0.977]} # I-44 rel. (equity BBB)
 def irr(fl):
     lo,hi=-0.9,1.5
