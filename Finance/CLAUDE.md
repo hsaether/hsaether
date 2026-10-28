@@ -64,6 +64,15 @@ Skills and the chain between them:
   record it in the register:
   `py .claude/skills/update-chain/references/update_check.py record <id> --as-of <date> --changed yes|no --stale-after <date>`.
   `--changed yes` only when a value other documents read moved. Add the new dated events (report
-  dates, decisions) to the register's Events table. A new document gets its rows in the register.
+  dates, decisions) to the register's Events table.
+- The register is part of delivering a document, so do it without being asked. A **new or retired
+  document** follows Mode D of the `update-chain` skill step by step:
+  - its own inputs;
+  - a search of `docs/` for every document that should read it;
+  - the events;
+  - edits by whole lines only;
+  - then `update_check.py lint`, which must show no structural error, with every hint judged.
+
+  Say in the answer what was changed in the register.
 - Never use git for any work (no git mv, rm, add, commit, status, etc.) and never ask about
   commits. The user handles all git transactions. Use plain file operations only.

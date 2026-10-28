@@ -1,11 +1,11 @@
 ---
 name: update-chain
-description: Update Chain — the orchestrator that keeps every document in docs/ current and updates them in the right order. Reads the update register (docs/update-register.md) and runs the check script, which lists what is stale, which documents were built on an input that has changed since, which planned events (rate decisions, OPEC+, quarterly reports, tenders) have passed or are coming up, and which skills have a newer revision. On the user's go-ahead it updates one document at a time in dependency order (oil → shipping / rig → supply → HY → equity → AI → defense → company analyses → funds → portfolio), each by its own skill in a fresh subagent. A change gate stops the cascade when an update keeps its values unchanged. It also takes unplanned news (a link, a company announcement) and finds every document it touches. Runs on a schedule: a weekly update run (Saturday) and a midweek check (Wednesday), both reported in docs/weekly-update.md. It makes no forecast and changes no method itself. ALWAYS use when the user asks what needs updating, what is stale, to run or check the update chain, to "update everything" / "oppdater alt" / "kjør oppdateringene", to update in the right order, or pastes news and asks what it affects across the documents — even without naming the skill.
+description: Update Chain — the orchestrator that keeps every document in docs/ current and updates them in the right order. Reads the update register (docs/update-register.md) and runs the check script, which lists what is stale, which documents were built on an input that has changed since, which planned events (rate decisions, OPEC+, quarterly reports, tenders) have passed or are coming up, and which skills have a newer revision. On the user's go-ahead it updates one document at a time in dependency order (oil → shipping / rig → supply → HY → equity → AI → defense → company analyses → funds → portfolio), each by its own skill in a fresh subagent. A change gate stops the cascade when an update keeps its values unchanged. It also takes unplanned news (a link, a company announcement) and finds every document it touches. Runs on a schedule: a weekly update run (Saturday) and a daily company news search (weekdays), both reported in docs/weekly-update.md. It makes no forecast and changes no method itself. ALWAYS use when the user asks what needs updating, what is stale, to run or check the update chain, to "update everything" / "oppdater alt" / "kjør oppdateringene", to update in the right order, or pastes news and asks what it affects across the documents — even without naming the skill.
 ---
 
 # Update Chain
 
-**Revision:** 2026-10-24.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-10-26.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/update-chain/` in the Finance folder.
 
 The update chain keeps the documents in `docs/` current and in step with each other. It
@@ -34,6 +34,14 @@ py .claude/skills/update-chain/references/update_check.py record <id> --as-of YY
 py .claude/skills/update-chain/references/update_check.py event-done "<event text>"
 ```
 
+```bash
+py .claude/skills/update-chain/references/update_check.py lint
+```
+
+- `lint` checks the register's structure (broken or merged rows, duplicates, bad values). It
+  also compares the register's links with each document's own header. It prints hints to judge,
+  not errors. The **Not links** table in the register holds the references judged not to be
+  inputs.
 - `status` (the default) also takes `--today YYYY-MM-DD` and `--days N` (event horizon,
   default 14).
 - `record` also takes `--rev REV` (defaults to the skill's current revision) and
@@ -44,7 +52,9 @@ py .claude/skills/update-chain/references/update_check.py event-done "<event tex
 1. **Update now, in order.** The causes:
    - the document is past its stale-after date;
    - a `main` input has a *last change* newer than the version the document read;
-   - a planned event that affects it has passed and is still `open`.
+   - a planned event that affects it has passed and is still `open`. A `watch` event (a data
+     release or decision where no change is expected) never flags an update on its own; read it
+     at the document's next run, and change it to `open` if it surprised.
 
    The order is a topological sort of the `main` inputs: upstream first, then by type (market →
    book → company → fund → portfolio).
@@ -159,16 +169,59 @@ The user pastes a link, an announcement or a number.
 
 ## Mode D — keeping the register right
 
-- **New document:**
-  - add a Documents row, with type, stale-after (company and fund: 30 days after "as of" unless
-    its header says otherwise) and revision;
-  - add one Inputs row per upstream it reads, with the date of the version read;
-  - add its next report date to Events.
-- **New skill or baseline:** add it to CLAUDE.md (layout and chain), then to the register.
-- **A back-reference that creates a cycle:** the script stops with an error. Mark the reference
-  that is a check, not a driver, as `loop` (CLAUDE.md's chain gives the direction).
-- **Retired document:** set its type to `static`.
-- After any hand edit, run the check and read the register back.
+Keeping the register right is part of delivering any document: the chat that writes or retires a
+document does this, without being asked (CLAUDE.md), and says in its answer what it changed in
+the register.
+
+**New document — all seven steps:**
+
+1. **Documents row:**
+   - a short, unique id;
+   - type: `market`, `book`, `company` or `fund`;
+   - "as of" and "last change": the build date;
+   - stale after: from the header, else 30 days after "as of";
+   - the skill revision used.
+2. **Its inputs:** one Inputs row per document its header says it read. "input as of" is the
+   date of the version read, as the header states it. The link is `main`, unless that upstream
+   itself reads the new document as `main` (then use `loop`, to break the cycle).
+3. **Who reads it (downstream).** The lint cannot find these, so search for them:
+   - search all of `docs/` for the company's name and ticker;
+   - every document that uses the company gets a row "document ← new id". That covers a fund
+     that holds it, an index or fund block, a peer comparison, and a baseline's layer or company
+     check;
+   - the link is `main` when the new analysis will feed that document's figures (a holding, a
+     block), and `loop` when it is a check (peer, layer check);
+   - "input as of" is that document's current "as of", and "reads what" ends with "not yet
+     read". The check then flags it.
+   - Not linked: documents that only mention the name (for example, an emerging-market name
+     outside MSCI World is not linked to World).
+4. **Events:**
+   - the next report date and other dated events;
+   - add the new id to existing events that affect it: peers' reports, the main customer's
+     report.
+5. **Edit by whole lines.** Insert or replace complete table rows; never delete by joining lines.
+   For an existing document, use `record`.
+6. **Lint:** run `update_check.py lint`.
+   - Part A (structure) must say "none".
+   - Judge every hint in B and C: either add the Inputs row, or add a row to the **Not links**
+     table with the reason.
+7. **Check and log:** run the check, add a dated change-log entry to the register, and read it
+   back.
+
+**Retired document** (the user stops tracking it):
+
+- set its type to `static` and write the reason in its note;
+- remove its own Inputs rows;
+- mark its open events `dropped`;
+- keep the file if other documents cite it, and add a "no longer tracked" note at its top.
+
+**New skill or baseline:** add it to CLAUDE.md (layout and chain), then to the register as
+above.
+
+**A back-reference that creates a cycle:** the script stops with an error. Mark the reference
+that is a check, not a driver, as `loop` (CLAUDE.md's chain gives the direction).
+
+After any hand edit: run `lint` and the check, and read the register back.
 
 ## Rules
 
@@ -192,8 +245,9 @@ it never asks; anything that needs the user goes into the report under **Needs y
 2. **Start the report** at the top of `docs/weekly-update.md` (newest week first): the check
    result in short form. Write the report as you go, so a run stopped by the usage limit still
    leaves a report and a consistent register.
-3. **News sweep for the week** (since the previous weekly entry), using web search and the
-   market-data connectors. **Never Edge**, so no Nordnet and no Newsweb through Edge:
+3. **News sweep for the week** (since the previous weekly entry). For companies, start from the
+   week's daily entries (Mode F) and search only the days they did not cover. Use web search and
+   the market-data connectors. **Never Edge**, so no Nordnet and no Newsweb through Edge:
    - **politics and macro:** the Gulf and Middle East, US politics and trade, Ukraine and
      European defense, OPEC+, Norges Bank, the Riksbank, the Fed and the ECB;
    - **sectors:** tankers, rigs, OSVs, Nordic HY defaults and restructurings, defense orders, AI
@@ -202,7 +256,9 @@ it never asks; anything that needs the user goes into the report under **Needs y
      capital moves.
 
    Treat each item as in Mode C: assess it, map it to the document that owns the variable, and
-   add any dated event to the Events table.
+   add any dated event to the Events table. For every `watch` event that passed this week, find
+   the outcome. If it surprised against the stated expectation, change it to `open` (so the check
+   flags its documents); otherwise mark it `done` and give the outcome in the report.
 4. **Run list,** in the check's order, **at most 6 documents**. Priority:
    1. market baselines with a passed event, a changed `main` input, or material news;
    2. companies with a passed report or material news;
@@ -226,21 +282,74 @@ it never asks; anything that needs the user goes into the report under **Needs y
 
    Read the file back.
 
-## Mode F — midweek check (scheduled, Wednesday 09:00)
+## Mode F — daily company news (scheduled, weekdays 08:00)
 
-Started by the scheduled task `midweek-update-check`, during the report season. **No updates.**
+Started by the scheduled task `daily-company-news`. **Report and flag only: no analysis document
+is changed.** The user chose this on 25 Oct 2026, in place of the Wednesday check. Saturday's
+run, or the user, starts the updates.
 
-- Run steps 1 and 3 of Mode E: the check, and the news sweep since the last entry.
-- Add the dated events to the register.
-- Write a short **Midweek check** entry at the top of `docs/weekly-update.md`:
-  - what the check flags;
-  - the news that matters;
-  - which documents are worth starting before Saturday, and why.
+1. **Window:** since the previous daily entry in `docs/weekly-update.md`. On Monday that covers
+   the weekend.
+2. **Who:**
+   - every `company` and `fund` row in the register (not `static`);
+   - the issuers on the HY master watchlist (`docs/hy-issuers.md`) that a tracked fund holds.
+3. **What:** use web search and the market-data connectors; **never Edge**, so no Nordnet and no
+   Newsweb through Edge. Look for:
+   - stock-exchange releases, reports and guidance, profit warnings;
+   - contracts won or lost, accidents and incidents, management changes;
+   - capital moves: issues, buybacks, dividends, refinancing, bondholder notices, covenant
+     waivers, defaults;
+   - rating actions, and large price moves with a named cause.
+4. **Assess each item as in Mode C:** is it new, is it material, is it a fact `[F]` or a claim
+   `[E]`? Map it to the document that owns it: the company's analysis, the watchlist for a bond
+   issuer, or a sector baseline for an industry-wide fact.
+5. **Register:** add every new dated event (report dates, decision dates, deadlines) to the
+   Events table. Add a same-day event only for material news, so the check flags the document
+   that needs an update.
+6. **Write a short entry at the top of `docs/weekly-update.md`,** headed "Daily news — <weekday>
+   <date>". **It must be short: at most 12 lines and about 150 words.** The user reads it in the
+   morning; the details belong in the documents at their next update, not here.
+   - **Material items, at most 6 bullets,** one line each (about 25 words): the company, the
+     document id in brackets, what happened, and the tag `[F]` or `[E]`. No source lists, no
+     tables, no prices beyond the one number that matters.
+   - **Minor items: at most one line in total**, names and a word or two each. Leave out what
+     changes nothing.
+   - **Needs you:** one line, only when something is urgent before Saturday. Examples: a profit
+     warning, a default or bondholder notice, a lost asset, a verdict that may flip.
+   - **Register:** one line naming the events added.
+   - "No material company news" when there is none, and nothing else.
+   - Never include method, sources searched, the search window, "nothing found for" lists or
+     coverage notes. A coverage gap goes in only when it hides a held name, in one short line.
 
-  Read the file back.
+   Read the file back.
+
+Saturday's run (Mode E, step 3) starts from these daily entries instead of searching the whole
+week again.
 
 ## Change log
 
+- **2026-10-26.1:** the daily entry (Mode F, step 6) has a hard format limit: at most 12 lines and
+  about 150 words, with no method, source or coverage notes. Why: the first entry (26 Oct) ran to
+  79 lines and 1,000 words; the user asked for a concise report.
+- **2026-10-25.3:**
+  - New event status `watch`, for data releases and decisions where no change is expected. It
+    shows in the upcoming events and never flags an update on its own.
+  - The weekly run resolves the passed `watch` events: a surprise turns `open`, otherwise `done`.
+
+  Why: the DNB Carnegie Week Ahead (23 Oct) listed holds at the Fed and the ECB. As `open`
+  events they would have re-run Equity BBB and HY BBB on 31 Oct, and again after Norges Bank on
+  5 Nov.
+- **2026-10-25.2:**
+  - Mode D rewritten as a seven-step procedure for new documents, with a downstream search, and a
+    retire procedure.
+  - New `lint` command and the register's **Not links** table.
+  - The chat that writes a document keeps the register and reports what it changed.
+
+  Why: the first lint found 12 links missing from the register, and earlier deletions by joined
+  lines had merged rows.
+- **2026-10-25.1:** Mode F is now a daily company news search on weekdays at 08:00 (report and
+  flag only), in place of the Wednesday midweek check, at the user's request. Mode E starts its
+  company sweep from the daily entries.
 - **2026-10-24.2:**
   - Mode E (weekly run, Saturday) and Mode F (midweek check, Wednesday), per the user's choices.
   - Effort by job (xhigh or high).

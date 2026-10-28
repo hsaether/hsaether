@@ -60,7 +60,9 @@ def read_tables(lines):
             rows, i = [], i + 2                      # skip the separator row
             while i < len(lines) and lines[i].lstrip().startswith("|"):
                 cells = [clean(c) for c in lines[i].strip().strip("|").split("|")]
-                rows.append((i, dict(zip(header, cells))))
+                row = dict(zip(header, cells))
+                row["_n"] = len(cells)
+                rows.append((i, row))
                 i += 1
             tables[section] = (header, rows)
             continue
@@ -137,6 +139,136 @@ def downstream(ups, start):
     return out
 
 
+# ---------- register structure ----------
+
+def structure_warnings(t, docs):
+    """Errors in the register itself: broken or merged rows, duplicates, bad values."""
+    warn = []
+    for name in ("Documents", "Inputs", "Events"):
+        header, rows = t[name]
+        for idx, r in rows:
+            if r["_n"] != len(header):
+                warn.append(f"{name} line {idx + 1}: {r['_n']} cells, expected {len(header)} "
+                            "(merged or broken row)")
+    seen = {}
+    for idx, r in t["Documents"][1]:
+        if r["id"] in seen:
+            warn.append(f"Documents: id '{r['id']}' twice (lines {seen[r['id']] + 1}, {idx + 1})")
+        seen[r["id"]] = idx
+        if r["type"] != "static" and r["type"] not in TYPE_RANK:
+            warn.append(f"Documents: '{r['id']}' has unknown type '{r['type']}'")
+        for col in ("as of", "last change", "stale after"):
+            try:
+                parse_date(r.get(col, ""))
+            except ValueError:
+                warn.append(f"Documents: '{r['id']}' has a bad date in '{col}': {r.get(col)}")
+    pairs = {}
+    for idx, e in t["Inputs"][1]:
+        key = (e["document"], e["reads"])
+        if key in pairs:
+            warn.append(f"Inputs: {key[0]} <- {key[1]} twice (lines {pairs[key] + 1}, {idx + 1})")
+        pairs[key] = idx
+        if e["document"] == e["reads"]:
+            warn.append(f"Inputs line {idx + 1}: '{e['document']}' reads itself")
+        if e["link"] not in ("main", "loop"):
+            warn.append(f"Inputs line {idx + 1}: link '{e['link']}' is not main or loop")
+        for k in ("document", "reads"):
+            d = docs.get(e[k])
+            if d and d["type"] == "static":
+                warn.append(f"Inputs line {idx + 1}: {e['document']} <- {e['reads']} involves "
+                            f"static document '{e[k]}'")
+        try:
+            parse_date(e["input as of"])
+        except ValueError:
+            warn.append(f"Inputs line {idx + 1}: bad date '{e['input as of']}'")
+    for idx, ev in t["Events"][1]:
+        if ev["status"].lower() not in ("open", "watch", "done", "dropped"):
+            warn.append(f"Events line {idx + 1}: status '{ev['status']}' is not "
+                        "open/watch/done/dropped")
+        if ev["firm"].lower() not in ("yes", "approx"):
+            warn.append(f"Events line {idx + 1}: firm '{ev['firm']}' is not yes/approx")
+        try:
+            parse_date(ev["date"])
+        except ValueError:
+            warn.append(f"Events line {idx + 1}: bad date '{ev['date']}'")
+    return warn
+
+
+# ---------- lint: register links against the documents' own headers ----------
+
+HEADER_END = ("## Summary", "## Conclusion", "## Header")
+NOT_USED = re.compile(r"not used|not read|is not an input|are not used|no longer|"
+                      r"used only through|neither reads", re.I)
+
+
+def doc_names(path):
+    """Names other documents use for a document: its H1 up to ' — ' or ' (', and the short
+    form without 'Nordic ' and ' Market' ('Nordic HY Market BBB' -> 'HY BBB')."""
+    try:
+        first = path.read_text(encoding="utf-8").splitlines()[0]
+    except (OSError, IndexError):
+        return []
+    name = first.lstrip("# ").split(" — ")[0].split(" (")[0].strip()
+    if not name:
+        return []
+    short = name.replace("Nordic ", "").replace(" Market", "")
+    return [name] + ([short] if short != name else [])
+
+
+def lint():
+    _, t, docs = load()
+    edges = [r for _, r in t["Inputs"][1]]
+    by_file = {d["file"]: i for i, d in docs.items()}
+    have = {(e["document"], e["reads"]) for e in edges}
+    have |= {(r["document"], r["names"]) for _, r in t.get("Not links", ([], []))[1]}
+    missing, unnamed = [], []
+    for i, d in docs.items():
+        if d["type"] == "static":
+            continue
+        path = ROOT / d["file"]
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        head = []
+        for n, line in enumerate(text.splitlines()):
+            if n > 0 and line.startswith(HEADER_END):
+                break
+            head.append(line)
+        for line in head:
+            if NOT_USED.search(line):
+                continue
+            for m in re.finditer(r"docs/([A-Za-z0-9_.-]+\.md)", line):
+                up = by_file.get(f"docs/{m.group(1)}")
+                if up and up != i and docs[up]["type"] != "static" and (i, up) not in have:
+                    missing.append(f"{i:<14} header names docs/{m.group(1)} ({up}); no Inputs row")
+        low = text.lower()
+        for e in edges:
+            if e["document"] != i or e["reads"] not in docs:
+                continue
+            u = docs[e["reads"]]
+            names = doc_names(ROOT / u["file"])
+            if u["file"] in text or any(n.lower() in low for n in names):
+                continue
+            if "not yet read" in e.get("reads what", "").lower():
+                continue
+            unnamed.append(f"{i:<14} <- {e['reads']:<12} the document never names "
+                           f"{u['file']} or " + " / ".join(f"'{n}'" for n in names))
+    print("Lint: register links against the document headers")
+    print()
+    print("A. STRUCTURE (errors in the register itself)")
+    sw = structure_warnings(t, docs)
+    print("   none" if not sw else "\n".join(f"   ! {w}" for w in sw))
+    print()
+    print("B. POSSIBLY MISSING LINKS (a header names a document the register does not link)")
+    print("   none" if not missing else "\n".join(f"   - {m}" for m in sorted(set(missing))))
+    print()
+    print("C. POSSIBLY STALE LINKS (the register links a document the text never names)")
+    print("   none" if not unnamed else "\n".join(f"   - {u}" for u in unnamed))
+    print()
+    print("B and C are hints, not errors: judge each one. Downstream links (who should read a new")
+    print("document) cannot be found this way; see Mode D in the skill.")
+
+
 # ---------- status ----------
 
 def status(today, days):
@@ -145,7 +277,7 @@ def status(today, days):
     events = [r for _, r in t["Events"][1]]
     revs = skill_revisions()
     order, ups = topo_order(docs, edges)
-    warn = []
+    warn = structure_warnings(t, docs)
 
     for e in edges:
         for k in ("document", "reads"):
@@ -239,14 +371,15 @@ def status(today, days):
     print()
     horizon = today + dt.timedelta(days=days)
     print(f"5. EVENTS IN THE NEXT {days} DAYS (to {horizon})")
-    up = [ev for ev in events if ev["status"].lower() == "open"
+    up = [ev for ev in events if ev["status"].lower() in ("open", "watch")
           and parse_date(ev["date"]) and today <= parse_date(ev["date"]) <= horizon]
     up.sort(key=lambda ev: parse_date(ev["date"]))
     if not up:
         print("   none")
     for ev in up:
         firm = "" if ev["firm"].lower() == "yes" else " (approx.)"
-        print(f"   - {ev['date']}{firm}  {ev['event']}  -> {ev['affects']}")
+        watch = " [watch]" if ev["status"].lower() == "watch" else ""
+        print(f"   - {ev['date']}{firm}{watch}  {ev['event']}  -> {ev['affects']}")
     print()
     print("6. METHOD CHANGED SINCE THE LAST RUN (skill revision; re-run only if the change matters)")
     if not method:
@@ -331,8 +464,11 @@ def main():
     r.add_argument("--skip-inputs")
     e = sub.add_parser("event-done")
     e.add_argument("text")
+    sub.add_parser("lint")
     a = p.parse_args()
-    if a.cmd == "record":
+    if a.cmd == "lint":
+        lint()
+    elif a.cmd == "record":
         for v in (a.as_of, a.stale_after):
             if v:
                 dt.date.fromisoformat(v)
