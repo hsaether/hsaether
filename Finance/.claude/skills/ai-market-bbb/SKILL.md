@@ -5,8 +5,20 @@ description: AI Market BBB — the baseline for the AI value chain over the IAF 
 
 # AI Market BBB
 
-**Revision:** 2026-10-24.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-06.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/ai-market-bbb/` in the Finance folder.
+
+Change note 2026-11-06.1: **revision 2026-11-05.1 reverted** on the user's instruction (6 Nov 2026).
+Its four additions (E-layer tiers, credit by tier in K3, a per-company K1 build, payback coverage)
+came from one review (`docs/review-ai-debt-and-market-power.md`) built on aggregator credit data
+and order-of-magnitude `[A]` arithmetic, which is not a sound basis for standing method. The text is
+again 2026-11-01.1's; `references/credit_tests.py` and `payback.py` are removed. The review stays as
+a dated record only. A method change on these questions needs a thorough evaluation first.
+
+Change note 2026-11-01.1: the **H2 Memory cycle** section and the **price-implied H2 path** are
+now standing outputs (Step 2b, Step 5, Output, Interface to IAF, Checks; `references/impl.py`,
+`references/cyclehist.py`). This follows the user's rule of 1 Nov 2026: memory positions lead
+with the cycle, not with E / R against HY or precise IRRs. No row, path or basket-method change.
 
 A Bear/Base/Bull baseline for the AI market. It answers three questions:
 
@@ -80,9 +92,13 @@ domestic AI chain except as an export and competition row.
 ## Files
 
 - Skill: `.claude/skills/ai-market-bbb/SKILL.md`, plus `references/` with the scripts of the
-  last run (`model.py` for the layer baskets with switches `CAL RET PATH AMZN` for attribution and
-  `BEARCAP` as a diagnostic,
-  `members.py` for the per-name company check, `trend2.py`, `hist.py` and the README).
+  last run and the README:
+  - `model.py`: the layer baskets, with switches `CAL RET PATH AMZN U5` for attribution and
+    `BEARCAP` as a diagnostic;
+  - `members.py`: the per-name company check;
+  - `impl.py`: the price-implied H2 path (basket and names; turn-date and depth paths);
+  - `cyclehist.py`: past-cycle share-price peaks and troughs;
+  - `trend2.py`, `hist.py`.
 - Inputs (read only): `docs/equity-market-bbb.md` (scenarios, World paths, USD/NOK path, World
   Base IRR and E / R, World exit P/E and mid-cycle return), `docs/hy-market-bbb.md` (NIBOR path, HY
   market return and the HY market reference E / R, which the HY baseline publishes since 24 Oct),
@@ -115,7 +131,7 @@ domestic AI chain except as an export and competition row.
 | Row | Content | Listed proxies | Role |
 |---|---|---|---|
 | **H1 Compute** | Data-center accelerators (GPU, ASIC) and AI networking silicon | NVDA (data center), AVGO (AI semis), AMD (Instinct), MRVL (custom) | Core |
-| **H2 Memory** | DRAM incl. HBM, server DRAM; enterprise SSD memo | MU, SK hynix, Samsung | Core; cyclical (Track B in IAF). The revenue index (2026 average = 100) must reconcile with the H2 EPS path via consensus revenue and a revenue-to-EPS mapping; show the Q4 run-rate as a memo |
+| **H2 Memory** | DRAM incl. HBM, server DRAM; enterprise SSD memo | MU, SK hynix, Samsung | Core; cyclical (Track B in IAF). The revenue index (2026 average = 100) must reconcile with the H2 EPS path via consensus revenue and a revenue-to-EPS mapping; show the Q4 run-rate as a memo. Carries the **Memory cycle** section (Step 2b), the lead section for the memory company and fund analyses |
 | **H3 Foundry, packaging and equipment** | Leading-edge wafers, CoWoS, lithography, deposition and etch | TSM, ASML, AMAT, LRCX | Core |
 | **H4 Networking and DC infrastructure** | Switching, optics, power distribution, cooling | ANET, VRT, ETN (GEV, optics names secondary) | Core |
 | H5 Power | Grid connection, on-site generation, GW available vs needed | Utilities, turbines (memo) | Constraint row, signposts only |
@@ -215,6 +231,10 @@ Quirks (2026-10-12 run):
   through AWS and Google Cloud, OpenAI's does not. Reported run-rates and targets get mixed in the
   press (OpenAI ~50bn at end-September 2026 vs the ~70bn end-2026 target). Use booked quarterly
   revenue where it exists and date every run-rate.
+- **Credit levels (5 Nov):** aggregators' CDS histories conflict (Oracle's April record was 198 bp
+  in one and early October's 151 bp "highest since 2009" in another). Use one series per name
+  (CNBC's for Oracle and CoreWeave) and say which. Meta's record CDS (114.79 bp) is undated in the
+  page that carries it; date it from the Reuters story. Never mix a CDS level with a bond yield.
 - **Market-mood updates:** a sharp sell-off is a reason to re-run the baskets (prices,
   `hist.py` table) and test the paths, not a reason to move them. Paths move only on evidence
   that meets the minimum-change rule (earnings, guidance, prices of memory or compute, a
@@ -275,6 +295,40 @@ guidance; AMD data center; TSMC growth and capex, CoWoS; memory prices (TrendFor
 status; networking and DC infrastructure orders; power constraint evidence. Check: H1 growth vs
 K1 growth (compute share), and that H1 Base ≤ supply limits stated by suppliers.
 
+**Step 2b — Memory cycle (H2), every run (since 1 Nov 2026).** Memory is the most cyclical
+layer, and the memory company and fund analyses (SK hynix, Samsung, the KOSPI fund; Micron may)
+lead with this section, not with E / R against HY or a precise IRR. It is an assessment that
+tests the H2 path; it moves a point only on independent evidence that meets the minimum change.
+Answer, with dated and tagged evidence:
+1. **Where is the cycle?** One table:
+   - DRAM, NAND and HBM contract prices, q/q, by segment, and their momentum (the second
+     derivative);
+   - spot against contract;
+   - supplier and customer inventory;
+   - utilisation and lead times;
+   - contract cover (LTAs: share, price ranges, floors, deposits);
+   - margins against past peaks;
+   - consensus revisions;
+   - share prices from their highs;
+   - foreign flows in Kospi.
+2. **Past cycles** (2016–19, 2020–23): lead times from the capex step-up to the first q/q
+   contract-price fall, and from the share-price peak to the earnings peak (and trough to trough);
+   peak-to-trough share falls; what turned each cycle. Compare with the current cycle.
+3. **What can turn it:**
+   - supply: the capex wave and fab timetable, node bits, CXMT and China, HBM wafers returning to
+     DRAM;
+   - demand: AI capex digestion (K1), lab financing (K3), phones and PCs, customer inventory,
+     easing statements;
+   - contracts: ranges renegotiated, floors.
+
+   Include a value-per-bit depth check (H2 revenue path against bit growth and K1).
+4. **Judgement against Base** for timing, 2028 depth and 2029–30 depth (earlier or later, deeper
+   or shallower), with the evidence for and against. Base stays the decision case; 25/50/25 stays a
+   convention.
+5. **Price-implied path** (Step 5).
+6. **Signposts with dates**, each with what confirms Base, an earlier or deeper turn, or a later or
+   shallower turn.
+
 **Step 3 — Engines (E1–E3).** Lab revenue (booked and run-rate, dated), commitments and cash burn;
 cloud growth and backlog; price-per-token trend. Compute the monetisation ratio per scenario.
 
@@ -290,6 +344,17 @@ consistency); exit P/E per scenario; payout and cash conversion; run `model.py`:
 and the Bear-cap diagnostic for layers priced below their Bear multiple. When the method or
 consensus basis changes, run the switches step by step and show the attribution. Compare with
 World (equity BBB) and the HY reference.
+
+For H2, also run `impl.py`, which gives the **price-implied path**. It is the output the memory
+analyses lead with, in place of a precise IRR. It reports, for the basket and for each name, on
+the Base method:
+- the uniform multiplier on Base 2028–30 (2027 held at Base) at which the price returns k = 12%,
+  and the one at which it returns 0%;
+- the flat 2028–30 level that does the same;
+- the IRR of named turn-date and depth paths (earlier, later, shallower, deeper, Bull, Bear at the
+  Base exit), at exit P/E 10 and 8.
+
+State whether the price discounts a turn earlier or deeper than Base, or later or shallower.
 
 **Step 6 — Test BBB.** Pre-mortem for Base; catalysts still right; signposts crossed; consistency
 with the equity baseline's scenarios and World EPS path; **company check** (`members.py` against
@@ -318,6 +383,7 @@ a lead for company analyses, not a decision.
 ## Conclusion
 ## Interface — money in (USD bn): K1 capex, K3 financing, K4 backlog
 ## Interface — hardware (USD bn or index 2026 = 100)
+## H2 Memory cycle (five lines; where; past cycles; what turns it; judgement; price-implied path; dated signposts)
 ## Interface — engines and tools
 ## Interface — monetisation ratio
 ## Interface — layer baskets (IAF): P/E, Base/Bear/Bull IRR USD and NOK, 2027, hurdle P/E, MoS, E / R, implied growth
@@ -341,6 +407,10 @@ a lead for company analyses, not a decision.
 - **Exit:** IAF sets the exit multiple independently; this baseline's exit P/E per layer is a
   reference, never the IAF ceiling.
 - **Bear/Bull:** map the catalysts above to the company's layers.
+- **Memory (H2) positions lead with the cycle** (user rule, 1 Nov 2026). SK hynix, Samsung and the
+  KOSPI fund open with the Memory cycle section and state their own price-implied multiplier
+  ("k at x× Base 2028–30") from their own build. The IRR follows as what the price implies. E / R
+  against HY is shown as a reference, not as the gate.
 
 ## Checks before finishing
 
@@ -351,5 +421,8 @@ a lead for company analyses, not a decision.
 - H1 growth reconciled with K1 growth and supplier limits; no double counting of lab, cloud and
   capex dollars.
 - Basket IRRs reproduced by `model.py`; NOK path and NIBOR read from upstream, not set here.
+- Memory cycle section updated: dated price, inventory and contract evidence; past-cycle lead
+  times; a judgement against Base for timing and depth; the price-implied multipliers reproduced by
+  `impl.py`; signposts with dates.
 - Bear and Bull tied to named catalysts with signposts; AI Bear consistent with the equity Bear.
 - Change log complete or explicit "kept unchanged". File written, read back, tables render.

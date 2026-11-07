@@ -5,7 +5,7 @@ description: Investment Analysis Framework (IAF) — the standing valuation meth
 
 # Investment Analysis Framework (IAF)
 
-**Revision:** 2026-10-18.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-01.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/iaf-valuation/` in the Finance folder.
 
 A forward-looking test of whether today's price is defensible given the return it can deliver over
@@ -613,6 +613,22 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
      share, FCF after debt service per share, D_t per share, net debt per share, V_t per share; then
      Maintenance FCF per share and V_t per share for Bear and Bull. Track A: EPS, D_t and FCF per
      share per year.
+   - **Prices in the traded instrument's own price and currency.** The summary and the decision
+     table show the price the user trades at (e.g. an ETF's exchange price in EUR, a share's Oslo
+     price in NOK, an ADR in USD) and P_k in that same price, for Bear, Base and Bull, plus any
+     trigger level as a price. A build on an index (P = 100), a NAV-equivalent or a home-market line
+     must convert to the traded price and state the FX and the price time used. A % move alone is
+     not enough: the user acts on the price on screen.
+   - **Opportunistic cyclical equity positions lead with the cycle** (user rule, 1 Nov 2026; first
+     case: IQQK, Samsung, SK hynix on the memory cycle). The summary opens with the cycle view read
+     from the baseline that owns it (memory: AI BBB H2; never an own forecast): where the cycle is,
+     what can turn it (supply, demand, contracts), how likely and when, and whether the turn is
+     later or shallower than the price assumes. The IRR build then answers one question: **what
+     does the price imply about the cycle** (the path at which Base returns k, set against the
+     baseline's Base). Show the k verdict and P_k, but not decimals on paths that a cycle shift
+     moves by whole points. E / R against the HY reference is not the gate for such a position: show
+     it as a reference row only, with no switch rows against HY funds. Switches inside the HY book
+     and the locked pension still follow the head-to-head rule.
    - Keep the summary short: no method text, no sources; those stay in the sections below.
 1. **Header**: company, ticker, price, valuation date, exit date and T in years, shares, market cap
    and EV, the two NAVs with P/NAV (Step 3), FX, track (A or B) and why, k used and why, sources

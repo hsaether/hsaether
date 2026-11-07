@@ -5,7 +5,7 @@ description: Update Chain — the orchestrator that keeps every document in docs
 
 # Update Chain
 
-**Revision:** 2026-10-26.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-05.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/update-chain/` in the Finance folder.
 
 The update chain keeps the documents in `docs/` current and in step with each other. It
@@ -162,8 +162,12 @@ The user pastes a link, an announcement or a number.
      never a downstream document directly.
 
    Use the Inputs table ("reads what") to see who else reads that variable.
-3. Show the user the affected documents and the order, then run Mode B from the highest affected
-   document. The change gate decides how far the cascade goes.
+3. **Company news or a company report: update that company's analysis at once,** without waiting
+   for a go-ahead or for Saturday (user rule, 29 Oct 2026), then its downstream documents as the
+   change gate flags them. Sector or macro news: show the user the affected documents and the
+   order, then run Mode B from the highest affected document. The change gate decides how far
+   the cascade goes. A casually shared item that turns out immaterial gets a one-line verdict and
+   no update.
 4. If the news carries a date (a decision date, a report date, a tender deadline), add it to the
    Events table.
 
@@ -282,11 +286,14 @@ it never asks; anything that needs the user goes into the report under **Needs y
 
    Read the file back.
 
-## Mode F — daily company news (scheduled, weekdays 08:00)
+## Mode F — daily company news and updates (scheduled, weekdays 08:00)
 
-Started by the scheduled task `daily-company-news`. **Report and flag only: no analysis document
-is changed.** The user chose this on 25 Oct 2026, in place of the Wednesday check. Saturday's
-run, or the user, starts the updates.
+Started by the scheduled task `daily-company-news`. **A company that reported or has material
+news is updated in this run, not on Saturday** (user rule, 29 Oct 2026: "When a company reports
+results, or has news that might impact analysis, it needs to be updated immediately"). The
+08:00 slot catches the previous evening's US reports (with the call transcript out) and the
+Oslo and Asian morning reports. It runs unattended, so it never asks; the Mode E unattended
+rules apply.
 
 1. **Window:** since the previous daily entry in `docs/weekly-update.md`. On Monday that covers
    the weekend.
@@ -300,22 +307,56 @@ run, or the user, starts the updates.
    - capital moves: issues, buybacks, dividends, refinancing, bondholder notices, covenant
      waivers, defaults;
    - rating actions, and large price moves with a named cause.
+
+   **Fund managers' forum posts (public, no login; read with WebFetch, not Edge).** The Nordnet
+   fund pages show the Nordnet Social forum, where the managers answer questions (e.g. Heimdal
+   Erik, Heimdal Martin): bond marks, trades, yields, contributions. Read the posts since the
+   previous daily entry on:
+   - Heimdal Høyrente N: https://www.nordnet.no/fond/liste/heimdal-hoyrente-n-nok-6e890321
+   - Heimdal Høyrente Pluss B: https://www.nordnet.no/fond/liste/heimdal-hoyrente-pluss-b-nok-4c49fed8
+   - Sissener Corporate Bond R: https://www.nordnet.no/fond/liste/sissener-corporate-bond-r-nok-bdb89592
+     (SissenerFredrik = Fredrik Galtung, IR at Sissener: monthly figures, duration, holdings answers)
+   - Fondsfinans High Yield B: https://www.nordnet.no/fond/liste/fondsfinans-high-yield-b-nok-8bfcfdd4
+   - Fondsfinans Kreditt B: https://www.nordnet.no/fond/liste/fondsfinans-kreditt-b-nok-7e0cbe6d
+     (Eotnes = Eyvind Otnes, communications at Fondsfinans, not a manager: mostly links to the monthly
+     manager commentary and return figures; follow the link only when it is new)
+
+   Use only posts by these fund-house people, tagged `[E]` (fund-house statement); other users' posts are
+   context at most. A stated bond mark, trade, yield or contribution goes to `hy-issuers` /
+   `hy-funds` as an item (and a same-day event if material); general market talk is left out.
 4. **Assess each item as in Mode C:** is it new, is it material, is it a fact `[F]` or a claim
    `[E]`? Map it to the document that owns it: the company's analysis, the watchlist for a bond
    issuer, or a sector baseline for an industry-wide fact.
 5. **Register:** add every new dated event (report dates, decision dates, deadlines) to the
-   Events table. Add a same-day event only for material news, so the check flags the document
-   that needs an update.
-6. **Write a short entry at the top of `docs/weekly-update.md`,** headed "Daily news — <weekday>
+   Events table. Add a same-day event for material news, so the check flags the document.
+6. **Update at once.** Run the check (`--today` = run date). Then run Mode B for:
+   1. every `company` document whose own report event has passed, or that has material news in
+      this window (a report is always material);
+   2. a `fund` document only when the news is about the fund itself;
+   3. with room left, the downstream `company` and `fund` documents a `changed: yes` above flags
+      (the cascade), in the check's order.
+
+   **At most 6 documents per run,** two subagents in parallel, effort by job (a passed report is
+   `xhigh`). Overflow goes under **Left for next run** and is first in line at the next daily
+   run. The company update runs on the current baselines: market baselines are not re-run here
+   (they follow Mode E or the user), and when a baseline later changes, the change gate re-runs
+   the company. Before running a US report, check that the call transcript or a call summary is
+   out; if not, run on the release and add a same-day "call re-check" event. Never `portfolio`;
+   never Edge. Record each document as soon as it is checked.
+7. **Write a short entry at the top of `docs/weekly-update.md`,** headed "Daily news — <weekday>
    <date>". **It must be short: at most 12 lines and about 150 words.** The user reads it in the
-   morning; the details belong in the documents at their next update, not here.
+   morning; the details belong in the documents, not here.
+   - **Updated:** one line per document updated: id, Base IRR before → after, verdict (and
+     "flipped" when it did). This counts toward the line limit.
    - **Material items, at most 6 bullets,** one line each (about 25 words): the company, the
      document id in brackets, what happened, and the tag `[F]` or `[E]`. No source lists, no
-     tables, no prices beyond the one number that matters.
+     tables, no prices beyond the one number that matters. An item already in **Updated** gets
+     no second bullet.
    - **Minor items: at most one line in total**, names and a word or two each. Leave out what
      changes nothing.
-   - **Needs you:** one line, only when something is urgent before Saturday. Examples: a profit
-     warning, a default or bondholder notice, a lost asset, a verdict that may flip.
+   - **Needs you:** one line, only when something needs the user. Examples: a verdict that
+     flipped, a default or bondholder notice, a subagent that failed, overflow left for the next
+     run.
    - **Register:** one line naming the events added.
    - "No material company news" when there is none, and nothing else.
    - Never include method, sources searched, the search window, "nothing found for" lists or
@@ -327,6 +368,17 @@ Saturday's run (Mode E, step 3) starts from these daily entries instead of searc
 week again.
 
 ## Change log
+
+- **2026-11-05.2:** forum pages for Sissener Corporate Bond R (SissenerFredrik, IR) and Fondsfinans High
+  Yield B and Kreditt B (Eotnes, communications) added to Mode F step 3, at the user's request.
+- **2026-11-05.1:** Mode F step 3 reads the fund managers' posts in the public Nordnet forum
+  (Heimdal Høyrente N and Pluss pages; no login, WebFetch). Why: the managers' own posts (28–30 Oct)
+  gave the Intrum, HX and Trustly marks days before the monthly report; the user asked for it.
+- **2026-10-29.1:** a company that reports or has material news is updated at once. Mode F (the
+  weekday 08:00 run) now updates those companies (at most 6 documents, overflow first next day)
+  instead of only flagging them; Mode C updates company news without a go-ahead. Why: the user's
+  rule of 29 Oct ("it needs to be updated immediately"); on 28 Oct Microsoft and Alphabet had
+  reported while the plan left them for Saturday.
 
 - **2026-10-26.1:** the daily entry (Mode F, step 6) has a hard format limit: at most 12 lines and
   about 150 words, with no method, source or coverage notes. Why: the first entry (26 Oct) ran to

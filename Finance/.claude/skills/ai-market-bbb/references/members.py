@@ -14,7 +14,7 @@ def one(s, key, conv=None, exbase=None, exbear=None):
         if sc in('Base','Bear'): r[sc+'27']=((V[0]+D[0])*f[0]/P-1)*100
     ER=(r['Base']-NIB)/(r['Base27']-r['Bear27'])
     return P, r, ER
-co={'NVDA':'13.0 (11.4 calendarised)','MU':'2.8','TSM':'7.4','MSFT':'8.8','GOOGL':'3.8','AMZN':'6.8'}
+co={'NVDA':'13.0 (11.4 calendarised) at $214','MU':'6.3 at $856 (v2)','TSM':'7.4 at $413','MSFT':'9.5 at $531 (v3)','GOOGL':'9.6 at $279.84 (v2, re-mark 1 Nov)','AMZN':'9.2 at $240.35 (v2)','000660.KS':'21.1 at 1,487,000 (v2)','005930.KS':'23.3 at 232,000 (v2)'}
 for key in ['H1','H2','H3','E']:
     for s in L[key][1]:
         P,r,ER=one(s,key); print(f"{key} {s:10s} P/E {P:5.1f}  Bear {r['Bear']:6.1f} Base {r['Base']:5.1f} Bull {r['Bull']:5.1f}  Bear27 {r['Bear27']:6.1f}  E/R {ER:+.3f}   company: {co.get(s,'-')}")

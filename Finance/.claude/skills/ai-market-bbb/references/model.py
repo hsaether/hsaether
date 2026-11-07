@@ -1,5 +1,7 @@
-# AI Market BBB — layer baskets, IAF index-level build (USD and NOK). Version 2.1 (run of 24 Oct 2026).
-# Prices: Yahoo close 23 Oct 2026 (US, Europe, Korea). Consensus: Yahoo earningsTrend 24 Oct 2026.
+# AI Market BBB — layer baskets, IAF index-level build (USD and NOK). Version 2.1 (run of 1 Nov 2026, Update 6).
+# Prices: Yahoo close 30 Oct 2026 (US, Europe, Korea). Consensus: Yahoo earningsTrend 1 Nov 2026.
+# U6 (1 Nov): inputs only (no path change); new output: the price-implied H2 memory path (Memory cycle section).
+# U5 (29 Oct): E Base 2027 .97 -> .92 (company check: MSFT v3, GOOGL v2, AMZN v1; blend .92, gap -0.05).
 # 2.1 (22 Oct): E layer recalibrated with the Amazon analysis (switch AMZN: E Bear/Bull paths and cash
 # conversion); USD/NOK path from the 17/18 Oct Equity BBB; Bear-cap and exit cross-check diagnostics.
 # Changes from version 1 (16 Oct): (1) retained cash counted once: each year the layer converts
@@ -9,47 +11,47 @@
 # docs/nvda-analysis.md; MU by calendar quarters, docs/mu-analysis.md); ASML's consensus is in EUR
 # and is converted to USD. (3) Bear paths reconciled to revenue (H1, H3, H4) and the E layer moved
 # to the Microsoft and Alphabet company analyses where the gap is >= 0.05.
-# Switches (for the attribution in the change log): CAL, RET, PATH, AMZN; BEARCAP = diagnostic
-# (Bear P/E capped at today's). Run: py -I model.py [CAL RET PATH AMZN] [BEARCAP]
+# Switches (for the attribution in the change log): CAL, RET, PATH, AMZN, U5; BEARCAP = diagnostic
+# (Bear P/E capped at today's). Run: py -I model.py [CAL RET PATH AMZN U5] [BEARCAP]
 import json, sys
-ARGS = set(sys.argv[1:]) or {'CAL', 'RET', 'PATH', 'AMZN'}
-if ARGS == {'BEARCAP'}: ARGS = {'CAL', 'RET', 'PATH', 'AMZN', 'BEARCAP'}
-CAL, RET, PATH, AMZN, BEARCAP = 'CAL' in ARGS, 'RET' in ARGS, 'PATH' in ARGS, 'AMZN' in ARGS, 'BEARCAP' in ARGS
-KRW = 1325.4; EUR = 1.12045
+ARGS = set(sys.argv[1:]) or {'CAL', 'RET', 'PATH', 'AMZN', 'U5'}
+if ARGS == {'BEARCAP'}: ARGS = {'CAL', 'RET', 'PATH', 'AMZN', 'U5', 'BEARCAP'}
+CAL, RET, PATH, AMZN, U5, BEARCAP = 'CAL' in ARGS, 'RET' in ARGS, 'PATH' in ARGS, 'AMZN' in ARGS, 'U5' in ARGS, 'BEARCAP' in ARGS
+KRW = 1333.44; EUR = 1.11657
 q = {r['symbol']: r for r in json.load(open('data/q.json'))}
 def mc(s):
     r = q[s]; m = r.get('marketCap') or 0
     if r.get('currency') == 'KRW': m /= KRW
     if r.get('currency') == 'EUR': m *= EUR
     return m / 1e9
-# CY27 consensus EPS (Yahoo earningsTrend 24 Oct 2026), in the price currency of each line.
+# CY27 consensus EPS (Yahoo earningsTrend 1 Nov 2026), in the price currency of each line.
 # Old convention (version 1): next fiscal year taken as CY27 for FY Jan names, ORCL FY mean,
 # ASML in EUR read as USD. Calendarised (version 2): by months, or by quarters where a company
 # analysis did so.
 cal = dict(
  NVDA=15.21,                                   # by calendar quarters (nvda-analysis); FY Jan-28 15.91
- AMD=15.75529, AVGO=19.39695,                  # AVGO FY Oct-27 (no FY28 consensus; understates CY27 by up to ~5%)
- MRVL=4.22025/12 + 7.32904*11/12,              # FY Jan: 1/12 FY Jan-27 + 11/12 FY Jan-28
- MU=191.8,                                     # by calendar quarters (mu-analysis v2, 22 Oct: FY27 176.50, FY28 206.85)
- **{'000660.KS': 467761.1, '005930.KS': 72486.63},
- TSM=23.38529, ASML=55.92932*EUR,              # ASML consensus in EUR -> USD
- AMAT=18.49094, LRCX=(9.62799 + 12.15311)/2,   # AMAT FY Oct-27; LRCX FY Jun: 1/2 + 1/2
- ANET=5.22238, VRT=9.19448, ETN=16.29552,
- MSFT=(19.76133 + 23.70396)/2,                 # FY Jun: 1/2 + 1/2
- GOOGL=15.11123, AMZN=10.5582, META=33.94866,
- ORCL=8.14069*5/12 + 10.99551*7/12,            # FY May: 5/12 FY May-27 + 7/12 FY May-28
- NOW=5.00711, CRM=16.75484/12 + 16.01523*11/12, ADBE=27.50756, PLTR=2.3505,
- **{'SAP.DE': 8.4042}, INTU=23.81046*7/12 + 26.94382*5/12,
- SNOW=2.22372/12 + 3.02051*11/12, DDOG=2.98616)
-old = dict(cal, NVDA=15.9146, MRVL=7.32904, CRM=16.01523, SNOW=3.02051,
-           ORCL=(8.14069 + 10.99551)/2, ASML=55.92932)
+ AMD=15.94326, AVGO=19.46507,                  # AVGO FY Oct-27 (no FY28 consensus; understates CY27 by up to ~5%)
+ MRVL=4.22211/12 + 7.32838*11/12,              # FY Jan: 1/12 FY Jan-27 + 11/12 FY Jan-28
+ MU=191.8,                                     # by calendar quarters (mu-analysis v2, 22 Oct: FY27 176.50, FY28 206.85); 1 Nov FY28 207.80 (+0.15% on CY27, kept)
+ **{'000660.KS': 527156.7, '005930.KS': 75627.07},   # 1 Nov: SK hynix 505,086 -> 527,157 (38), Samsung 72,281 -> 75,627 (33) after Q3
+ TSM=23.38529, ASML=55.929*EUR,              # ASML consensus in EUR -> USD
+ AMAT=18.55464, LRCX=(9.65024 + 12.23633)/2,   # AMAT FY Oct-27; LRCX FY Jun: 1/2 + 1/2
+ ANET=5.22238, VRT=9.74245, ETN=16.29552,
+ MSFT=(20.01689 + 24.13644)/2,                 # FY Jun: 1/2 + 1/2
+ GOOGL=14.83975, AMZN=10.65089, META=33.92516,
+ ORCL=8.14023*5/12 + 11.04006*7/12,            # FY May: 5/12 FY May-27 + 7/12 FY May-28
+ NOW=4.80166, CRM=16.75484/12 + 16.01523*11/12, ADBE=27.50756, PLTR=2.3503,
+ **{'SAP.DE': 8.47518}, INTU=23.81046*7/12 + 26.94382*5/12,
+ SNOW=2.22364/12 + 3.02718*11/12, DDOG=2.98446)
+old = dict(cal, NVDA=15.9146, MRVL=7.32838, CRM=16.01523, SNOW=3.02718,
+           ORCL=(8.14023 + 11.04006)/2, ASML=55.929)
 eps27 = cal if CAL else old
 # CY26 (display only: consensus growth CY26 -> CY27)
-eps26 = {'NVDA': 4.77/12 + 9.31242*11/12, 'AMD': 7.5868, 'AVGO': 11.65797, 'TSM': 17.30924, 'MU': 118.9,
-         '000660.KS': 354197.5, 'ANET': 4.11675, 'VRT': 6.73516, 'ETN': 13.59405,
-         'MSFT': (17.28 + 19.77839)/2, 'META': 30.61042, 'ORCL': 7.63*5/12 + 8.14059*7/12,
-         'NOW': 4.06681, 'CRM': 12.52/12 + 16.7558*11/12, 'ADBE': 24.47602, 'PLTR': 1.61873,
-         'SAP.DE': 7.13783, 'SNOW': 1.25/12 + 2.22372*11/12, 'DDOG': 2.52764}
+eps26 = {'NVDA': 4.77/12 + 9.31242*11/12, 'AMD': 7.62066, 'AVGO': 11.66568, 'TSM': 17.50426, 'MU': 118.9,
+         '000660.KS': 358671.7, 'ANET': 4.11675, 'VRT': 7.19136, 'ETN': 13.60251,
+         'MSFT': (17.28 + 20.01689)/2, 'META': 29.12343, 'ORCL': 7.63*5/12 + 8.14023*7/12,
+         'NOW': 3.95397, 'CRM': 12.52/12 + 16.75484*11/12, 'ADBE': 24.47602, 'PLTR': 1.61448,
+         'SAP.DE': 7.1569, 'SNOW': 1.25/12 + 2.22364*11/12, 'DDOG': 2.52786}
 # Layer: members, EPS 2027/28/29/2030 norm (CY27 consensus = 1), exit P/E Bear/Base/Bull, payout,
 # cash conversion (free cash after growth capex and dilution offsets / EPS) 2027/28/29 per scenario.
 P1 = {  # version 1 paths
@@ -67,6 +69,8 @@ P2['E']['Bear']  = (.82, .80, .88, .96)   # MSFT + GOOGL company Bears for their
 P2['E']['Bull']  = (1.0, 1.13, 1.27, 1.47) # 2030 only (+0.06); 2028-29 gaps < 0.05
 if AMZN:  # 22 Oct: MSFT, GOOGL, AMZN company paths for their 83% of E, the old layer path for META and ORCL
     P2['E'] = dict(P2['E'], Bear=(.82, .75, .82, .91), Bull=(1.0, 1.19, 1.37, 1.54))
+if U5:  # 29 Oct: E Base 2027 on the company blend (MSFT v3 .96, GOOGL v2 .83, AMZN v1 .95, rest .97 -> .92); 2028-30 gaps < 0.05
+    P2['E'] = dict(P2['E'], Base=(.92, 1.07, 1.17, 1.27))
 PATHS = P2 if PATH else P1
 CONV = {  # [A], calibrated on the company analyses' FCF after growth capex
  'H1': dict(Bear=(.85,.95,.95), Base=(.80,.90,.90), Bull=(.75,.85,.90)),   # NVDA .77/.95/.97
@@ -85,7 +89,7 @@ L = {
  'E':  ('E Engines and cloud platforms (MSFT GOOGL AMZN META ORCL)', ['MSFT','GOOGL','AMZN','META','ORCL'], (17,21,23.5), .34),
  'T':  ('T Tools and application software (NOW CRM ADBE PLTR SAP INTU SNOW DDOG)', ['NOW','CRM','ADBE','PLTR','SAP.DE','INTU','SNOW','DDOG'], (15,20,24), .45)}
 FX = dict(Bear=(10.54,10.27,10.27), Base=(9.41,9.41,9.41), Bull=(9.13,9.13,9.13)); FX0 = 9.41  # Equity BBB 17/18 Oct
-NIB = 4.38; T0 = 68/365  # 24 Oct -> 31 Dec
+NIB = 4.38; T0 = 60/365  # 1 Nov -> 31 Dec (prices 30 Oct)
 def irr(fl):
     lo, hi = -0.9, 2.0
     for _ in range(200):
@@ -151,3 +155,4 @@ print('exit cross-check (Base): layer, exit P/E, c 2029, cash yield, + g 5.3% = 
 for key, (name, mem, PE, po) in L.items():
     c = CONV[key]['Base'][2]; y = c/PE[1]*100
     print(f'  {key:3s} {PE[1]:5.1f} {c:5.2f} {y:5.1f}% {y + 5.3:5.1f}%')
+

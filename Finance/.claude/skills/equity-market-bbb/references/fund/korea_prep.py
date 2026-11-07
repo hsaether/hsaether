@@ -1,8 +1,14 @@
-# Korea ETFs: holdings -> block weights repriced to the valuation-date Seoul close (26 Oct and 28 Oct 2026); rest-of-Korea
-# P/E on the 26 Oct consensus. Writes korea_data.json with one entry per valuation date (v1.4, 28 Oct: 28 Oct closes added).
+# Korea ETFs: holdings -> block weights repriced to the valuation-date Seoul close (26, 28 and 29 Oct and 4 Nov 2026); rest-of-Korea
+# P/E on the 26 Oct consensus. Writes korea_data.json with one entry per valuation date (v1.4, 28 Oct: 28 Oct closes added;
+# v1.6, 29 Oct: 29 Oct closes added; v1.7, 4 Nov: 30 Oct, 2, 3 and 4 Nov closes added, and IQQK's own daily holdings file;
+# v1.8, 6 Nov: 5 and 6 Nov closes added, and IQQK's daily holdings file of 4 Nov for the 6 Nov entry).
 # Holdings: EWY iShares latest-holdings.csv (23 Oct 2026); FLKR Zacks get_etf_holdings (1 Oct 2026; Yahoo topHoldings
-# agrees on the top 10 and gives stock 99.48% / cash 0.46%); KORX Global X Canada product page (top 10, 30 Sep 2026).
-# Prices and CY26/CY27 consensus: Yahoo (korea_prices.json: consensus and closes fetched 26 Oct; 27-28 Oct closes fetched 28 Oct).
+# agrees on the top 10 and gives stock 99.48% / cash 0.46%); KORX Global X Canada product page (top 10, 30 Sep 2026);
+# IQQK iShares UK (IKOR) latest-holdings.csv of 2 Nov 2026 (korea_prices.json "iqqk_holdings_ishares_2nov"), used from v1.7;
+# of 4 Nov 2026 ("iqqk_holdings_ishares_4nov"), used from v1.8 (6 Nov entry).
+# Prices and CY26/CY27 consensus: Yahoo (korea_prices.json: consensus and closes fetched 26 Oct; 27-28 Oct closes fetched 28 Oct;
+# 29 Oct closes fetched 29 Oct after the Seoul close; 30 Oct-4 Nov closes fetched 4 Nov 07:25 UTC, after the Seoul close;
+# 5-6 Nov closes fetched 6 Nov ~07:00 UTC, after the Seoul close).
 import json, os
 ALL={}
 HERE=os.path.dirname(os.path.abspath(__file__))
@@ -28,12 +34,12 @@ FLKR_TAIL=99.48*sum(FLKR.values())/sum(FLKR.values())  # placeholder, set below
 KORX={"005930.KS":34.37,"000660.KS":27.27,"402340.KS":2.81,"009150.KS":2.27,"105560.KS":1.34,"005380.KS":1.28,"055550.KS":1.13,
  "034020.KS":0.95,"012450.KS":0.86+0.03,"006400.KS":0.86}
 KORX["012450.KS"]=0.89
-for VD in ("2026-10-26","2026-10-28"):
+for VD in ("2026-10-26","2026-10-28","2026-10-29","2026-11-04","2026-11-06"):
     REST=[s for s in EWY if s not in ("005930.KS","005935.KS","000660.KS","402340.KS","034730.KS")]
     W=sum(EWY[s] for s in REST)
     def restmove(d0):
         return sum(EWY[s]*p(s,VD)/p(s,d0) for s in REST)/W
-    mv={d:restmove(d) for d in ("2026-09-30","2026-10-01","2026-10-23")}
+    mv={d:restmove(d) for d in ("2026-09-30","2026-10-01","2026-10-23")+(("2026-11-02",) if VD>="2026-11-02" else ())+(("2026-11-04",) if VD>="2026-11-06" else ())}
     KPE0=W/sum(EWY[s]*C[s]["eps27"]/p(s,VD) for s in REST)
     KPE0_26=W/sum(EWY[s]*C[s]["eps26"]/p(s,VD) for s in REST)
     Qw={"402340.KS":2.64,"034730.KS":0.73}
@@ -55,6 +61,15 @@ for VD in ("2026-10-26","2026-10-28"):
            "S+H":{"S":korx["S"]/sh,"SP":0.0,"H":korx["H"]/sh,"Q":0.0,"K":0.0},
            "K":{"S":0.0,"SP":0.0,"H":0.0,"Q":0.0,"K":1.0}},
       tails={"EWY":EWY_TAIL,"FLKR":99.48-sum(FLKR.values()),"KORX":100-0.81-sum(KORX.values())})
+    if VD>="2026-11-02":
+        # IQQK from its own daily holdings file (2 Nov; 4 Nov from the 6 Nov entry), repriced to VD: Samsung, preference, SK hynix,
+        # SK Square at their closes; everything else (incl. SK Inc and cash) at the rest sample's move [A]. Weights of the whole fund.
+        fk,d0=("iqqk_holdings_ishares_4nov","2026-11-04") if VD>="2026-11-06" else ("iqqk_holdings_ishares_2nov","2026-11-02")
+        hq=X[fk]["weights_pct"]
+        v={"S":hq["005930.KS"]*p("005930.KS",VD)/p("005930.KS",d0),"SP":hq["005935.KS"]*p("005935.KS",VD)/p("005935.KS",d0),
+           "H":hq["000660.KS"]*p("000660.KS",VD)/p("000660.KS",d0),"Q":hq["402340.KS"]*p("402340.KS",VD)/p("402340.KS",d0)}
+        v["K"]=(100-hq["005930.KS"]-hq["005935.KS"]-hq["000660.KS"]-hq["402340.KS"])*mv[d0]
+        tot=sum(v.values()); out["etf"]["IQQK_d"]={b:x/tot for b,x in v.items()}; out["iqqk_move_"+("4nov" if VD>="2026-11-06" else "2nov")]=tot/100-1
     ALL[VD]=out
 json.dump(ALL,open(os.path.join(HERE,"korea_data.json"),"w"),indent=1)
 print(json.dumps({d:{k:v for k,v in o.items() if k!='etf'} for d,o in ALL.items()},indent=1))
