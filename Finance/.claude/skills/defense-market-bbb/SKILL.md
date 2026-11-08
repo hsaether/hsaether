@@ -5,7 +5,7 @@ description: Defense Market BBB — the European defense market baseline used to
 
 # Defense Market BBB
 
-**Revision:** 2026-10-10.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-08.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/defense-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the European defense market. It answers one question: **how much
@@ -212,7 +212,7 @@ Quirks (observed in the source test on 2026-10-07):
   prices, then 2021 prices); T3 share of real GDP (2021 prices) and annual real change (two
   blocks); T4 real change 2014–2026e; T5 GDP; T6 per capita; T7 personnel; T8a equipment share;
   T8b infrastructure share. The **PDF is image-based** and cannot be read as text, so use the
-  Excel (read with `py` + openpyxl). The 2026 edition reports **core** defence (3.5% guideline);
+  Excel (read with openpyxl in the Finance `.venv`; see Python in CLAUDE.md). The 2026 edition reports **core** defence (3.5% guideline);
   the 1.5% part is not tabulated. The current and previous year are estimates and are revised in
   the next edition.
 - **NATO USD totals:** the press-quoted total (European allies and Canada 2026e "about USD 634bn")

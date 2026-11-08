@@ -5,7 +5,7 @@ description: Update Chain — the orchestrator that keeps every document in docs
 
 # Update Chain
 
-**Revision:** 2026-11-07.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-08.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/update-chain/` in the Finance folder.
 
 The update chain keeps the documents in `docs/` current and in step with each other. It
@@ -418,6 +418,8 @@ week again.
 
 ## Change log
 
+- **2026-11-08.1:** script fix only. The 2026-11-07.1 edit had left the "method changed" check
+  inside the holds loop, so list 6 came out wrong or empty; it runs per document again.
 - **2026-11-07.1:** a stricter trigger rule (new section). Three gates: user holds (`HOLD (user`
   in the note; list 1b), materiality judged once at the source (new register column `affects`,
   `record --affects`, `id!` for verdict at risk; a price-only re-mark is `none`), and deferral of

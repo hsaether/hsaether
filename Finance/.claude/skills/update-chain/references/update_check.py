@@ -411,6 +411,8 @@ def status(today, days, defer_days=14):
             held[i] = (held[i], [])
         loop_check.pop(i, None)
         deferred.pop(i, None)
+    for i in order:
+        d = docs[i]
         sk = d["skill"]
         if sk in revs and d["rev used"] not in ("", "-", "?"):
             if rev_key(revs[sk]) > rev_key(d["rev used"]):

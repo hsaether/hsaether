@@ -5,7 +5,7 @@ description: Nordic HY Market BBB (HY BBB) — the Nordic high-yield bond market
 
 # Nordic HY Market BBB
 
-**Revision:** 2026-10-24.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-08.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/hy-market-bbb/` in the Finance folder.
 
 A Bear/Base/Bull baseline for the Nordic high-yield bond market. It answers two questions:
@@ -346,7 +346,7 @@ Quirks (observed in the 2026-10-05 build):
   (`norges-bank.no/en/topics/monetary-policy/Monetary-policy-meetings/<year>/<month>-<year>/`)
   links `data-mpr-<n>-<yy>.xlsx`. Sheet **Data A** = quarterly policy-rate path (current and
   previous MPR); sheet **Data E** = quarterly **3-month money-market rate (the NIBOR path)** and
-  the money-market premium. Read with `py` + `openpyxl` (installed 2026-10-05). The MPR PDF's
+  the money-market premium. Read with `openpyxl` in the Finance `.venv` (see Python in CLAUDE.md). The MPR PDF's
   Tabell 3 gives annual macro projections; use plain `pdftotext -f N -l N` (the `-layout` mode
   shifts the row labels).
 - **Riksbank MPR PDF** (`riksbank.se/.../penningpolitisk-rapport-<month>-<year>.pdf`):
@@ -440,7 +440,7 @@ Quirks (observed in the 2026-10-05 build):
     `cdn.arctic.com/documents/AAM-Documents/InvestmentManagerReport_ArcticFunds_<MMYY>.pdf`, with
     the September issue around mid-October. The fund-information page (top 10, internal credit
     score, composition, monthly returns of class I) is an image: render it with PyMuPDF
-    (`py -m pip install pymupdf`; `pymupdf.open(f)[page].get_pixmap(dpi=110).save(...)`) and read
+    (in the Finance `.venv`; `pymupdf.open(f)[page].get_pixmap(dpi=110).save(...)`) and read
     the picture.
   - Semi-annual and annual reports with every holding, its fair value and % of NAV: from the
     "arctic-funds-plc" documents page. Use `pdftotext -raw`. Price = fair value ÷ quantity; for

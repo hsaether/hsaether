@@ -5,7 +5,7 @@ description: Equity Market BBB — the equity index baseline for Oslo (OSEBX) an
 
 # Equity Market BBB
 
-**Revision:** 2026-10-24.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-08.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/equity-market-bbb/` in the Finance folder.
 
 An index-level baseline for Oslo and global equities. It answers one question: **what total
@@ -103,10 +103,10 @@ makes them. ETFs (OBXD, URTH, NORW, IXC) are used only as data proxies for their
 | ETF look-through: sector weights, top holdings, P/E, P/B | Yahoo quoteSummary `topHoldings` (OBXD.OL = DNB OBX ETF, NORW/ENOR = MSCI Norway, URTH, ACWI, SPY) | Issuer factsheets |
 | Index fundamentals (P/E, fwd P/E, P/BV, yield) and top weights | **MSCI index pages** (`msci.com/indexes/index/957800` Norway, `990100` World) via WebFetch | MSCI factsheet PDFs |
 | MSCI World constituent weights (World blocks) | **iShares URTH holdings CSV** (`ishares.com/us/products/239696/ishares-msci-world-etf/latest-holdings.csv`, curl; the `1467271812596.ajax` URL returns HTML) → `references/dl2/urth_ai.json` | MSCI top 10 |
-| Index factsheets (fundamentals, sectors, top 10, net returns) | MSCI factsheet PDF (`msci.com/documents/10199/255599/<index-name>-usd-net.pdf`, curl, text with `pypdf` under `py -I`) | MSCI index pages |
+| Index factsheets (fundamentals, sectors, top 10, net returns) | MSCI factsheet PDF (`msci.com/documents/10199/255599/<index-name>-usd-net.pdf`, curl, text with `pypdf` under the Finance `.venv` python with `-I`) | MSCI index pages |
 | Bottom-up P/B, ROE, dividend yield and payout of the Oslo sample | **Yahoo** quoteSummary (`price`, `summaryDetail`, `defaultKeyStatistics`, `financialData`; `references/valq.py`), aggregated with `references/valagg.py` | MSCI Norway (index level) |
 | Oslo P/B history | Nordnet blog "Hva er pris/bok på Oslo Børs" (4 Apr 2023; OSEBX, 67 names, Bloomberg, 13 years): 1.5 cheap, 2.1 expensive; 2.4–2.7 has often been followed by losses `[E]` | MSCI Norway factsheets (month-end P/BV, few points) |
-| US earnings path and valuation | **FactSet Earnings Insight** PDF (weekly; WebFetch saves the PDF, read with `pypdf` under `py -I`) | Yardeni, press |
+| US earnings path and valuation | **FactSet Earnings Insight** PDF (weekly; WebFetch saves the PDF, read with `pypdf` under the Finance `.venv` python with `-I`) | Yardeni, press |
 | NIBOR path, Nordic GDP, HY spreads, HY expected return | **`docs/hy-market-bbb.md`** | — never an own path |
 | HY decision rule, market reference E / R, market stress loss R | **`docs/hy-market-bbb.md`** ("For other modules") | — never a fund document |
 | Brent path and mid-cycle | **`docs/oil-market-bbb.md`** | — never an own path |
