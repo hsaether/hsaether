@@ -132,8 +132,7 @@ dmypy.json
 .vscode
 
 # Finance
+Chatgpt/
 **/Archive/
-Finance/docs/
-Chatgpt/Finance/Doc/
-Chatgpt/Finance/work/
 Finance/.playwright-mcp/
+Finance/docs/
