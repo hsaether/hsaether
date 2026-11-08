@@ -5,7 +5,7 @@ description: Update Chain — the orchestrator that keeps every document in docs
 
 # Update Chain
 
-**Revision:** 2026-11-05.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-07.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/update-chain/` in the Finance folder.
 
 The update chain keeps the documents in `docs/` current and in step with each other. It
@@ -27,7 +27,7 @@ py .claude/skills/update-chain/references/update_check.py
 ```
 
 ```bash
-py .claude/skills/update-chain/references/update_check.py record <id> --as-of YYYY-MM-DD --changed yes|no --stale-after YYYY-MM-DD
+py .claude/skills/update-chain/references/update_check.py record <id> --as-of YYYY-MM-DD --changed yes|no --affects id1,id2|none --stale-after YYYY-MM-DD
 ```
 
 ```bash
@@ -42,28 +42,66 @@ py .claude/skills/update-chain/references/update_check.py lint
   also compares the register's links with each document's own header. It prints hints to judge,
   not errors. The **Not links** table in the register holds the references judged not to be
   inputs.
-- `status` (the default) also takes `--today YYYY-MM-DD` and `--days N` (event horizon,
-  default 14).
+- `status` (the default) also takes `--today YYYY-MM-DD`, `--days N` (event horizon,
+  default 14) and `--defer-days N` (deferral window, default 14).
 - `record` also takes `--rev REV` (defaults to the skill's current revision) and
-  `--skip-inputs id1,id2` (inputs the run did not read).
+  `--skip-inputs id1,id2` (inputs the run did not read). With `--changed yes`, `--affects` is
+  required by this skill (the script falls back to `all` with a warning).
+
+## Trigger rule (2026-11-07)
+
+Every update costs a full skill run, so an upstream change triggers a downstream update only
+when it matters there. Three gates, applied in this order:
+
+1. **Hold.** A Documents note that starts `HOLD (user` keeps the document out of every run
+   list, whatever the causes, until the date the note names or until the user lifts it. Holds
+   come from the user only. When a dated hold has passed, the check says so; remove the prefix.
+2. **Materiality, judged once at the source.** When a run records `--changed yes`, it names in
+   `--affects` only the downstream documents for which a value they read (the Inputs "reads
+   what") moved materially:
+   - a path, scenario or mid-cycle value they read moved by more than the upstream skill's
+     recalibration trigger;
+   - a reference or hurdle they test against moved: the HY market reference E / R, a NIBOR path
+     point by 0.25 pp or more, the NOK scenario path's relative moves, an exit reference;
+   - or the move would shift their Base IRR by about 1 pp or more, or could flip their verdict
+     (margin of safety within ±5%, or on a band line). Mark these `id!` (urgent).
+
+   Never material: a re-mark of the upstream's own price or index level, a stub re-mark, a
+   consensus refresh, a changed verdict of the upstream itself, or text and signposts. A
+   price-only re-mark records `--affects none`. Use `all` only after a full re-baseline that
+   moved Base paths broadly. The rest of the downstream documents see the change under "no
+   action" and read it at their own next update. Documents named by an earlier change that have
+   not read it yet stay named (the script keeps them).
+3. **Deferral.** A document flagged only by upstream changes is not run now when its own update
+   is planned within 14 days (an open event of its own, such as its report, or its stale-after
+   date). It reads the change then. Urgent flags (`id!`) are not deferred.
+
+Own causes (a passed report or event, the stale-after date) are not touched by gates 2 and 3.
 
 ## What the check reports
 
 1. **Update now, in order.** The causes:
    - the document is past its stale-after date;
-   - a `main` input has a *last change* newer than the version the document read;
+   - a `main` input has a *last change* newer than the version the document read, **and** that
+     change names this document in its `affects` (the trigger rule), and the flag is not
+     deferred;
    - a planned event that affects it has passed and is still `open`. A `watch` event (a data
      release or decision where no change is expected) never flags an update on its own; read it
      at the document's next run, and change it to `open` if it surprised.
 
    The order is a topological sort of the `main` inputs: upstream first, then by type (market →
    book → company → fund → portfolio).
+   - **1a. Deferred:** flagged only by upstream changes, with its own update due within the
+     deferral window. Not run now.
+   - **1b. On hold:** held by the user. Never run, whatever the causes; the check counts the
+     causes waiting.
 2. **Re-check after an upstream update.** Documents downstream of an item in list 1. They need
    work only if that update moves values they read.
 3. **Loop checks.** A back-reference changed (Equity BBB reads the AI baseline and company
    blocks; the AI baseline reads company analyses as a check). These are checked once, at the
    end, and never restart the chain.
-4. **No action.** An upstream was re-run but kept unchanged. Mention it in the header at the
+4. **No action.** An upstream was re-run but kept unchanged, or changed in values that are not
+   material for this document (not in its `affects`). Mention it in the header at the
    document's next run.
 5. **Events in the next N days.**
 6. **Method changed.** The skill has a newer revision than the one the document was built
@@ -79,7 +117,8 @@ py .claude/skills/update-chain/references/update_check.py lint
    - list 2 grouped under its upstream;
    - the events of the next 14 days;
    - a single line each for lists 3, 4 and 6.
-3. Say which items are worth running now. Rule of thumb:
+3. Leave lists 1a (deferred) and 1b (on hold) out of the run proposal; one line each.
+4. Say which items are worth running now. Rule of thumb:
    - a passed event or a changed `main` input outranks a stale date alone;
    - a market baseline outranks the companies below it.
 
@@ -114,6 +153,9 @@ Work through list 1 **one document at a time, in the script's order**. For each 
    - what to return:
      - `changed: yes|no`: did a value other documents read move (path, scenario, mid-cycle,
        stub, verdict, decision figure)?
+     - `affects`: the downstream documents (from the Inputs table, the rows that read this one)
+       for which a value they read moved materially, by the trigger rule's tests; `id!` where
+       their verdict could flip; `none` for a price-only re-mark. One reason per name;
      - one line on what moved;
      - the new stale-after date;
      - every new dated event found (next report date, decision date) with the documents it
@@ -123,12 +165,15 @@ Work through list 1 **one document at a time, in the script's order**. For each 
    subagent's report on trust. If the document was not written, or the conclusion does not match
    the report, stop the chain and tell the user.
 3. **Record:**
-   - run `record <id> --as-of <run date> --changed yes|no --stale-after <date>`;
+   - run `record <id> --as-of <run date> --changed yes|no --affects <ids|none> --stale-after
+     <date>`. Check the subagent's `affects` against the trigger rule before you record it:
+     trim names whose read values did not move materially;
    - run `event-done` for each passed event the run dealt with;
    - add the new events the subagent returned to the Events table, so that every company ends up
      with its next report date.
-4. **Re-run the check** before the next item. A `changed: yes` adds downstream documents to
-   list 1. A `changed: no` leaves them alone. This is how the cascade stops.
+4. **Re-run the check** before the next item. A `changed: yes` adds to list 1 only the
+   downstream documents named in `affects` that are not deferred or on hold. A `changed: no`
+   leaves them all alone. This is how the cascade stops.
 
 After list 1 is empty:
 
@@ -232,7 +277,8 @@ After any hand edit: run `lint` and the check, and read the register back.
 - The register is bookkeeping only. Numbers, paths and verdicts live in the documents. When a
   header and the register disagree, the header wins: fix the register.
 - *Last change* moves only when a value other documents read moved. A run that keeps everything
-  unchanged updates only *as of*.
+  unchanged updates only *as of*. *Affects* names only the downstream documents for which that
+  move is material (trigger rule).
 - A newer skill revision alone (list 6) does not trigger a re-run. Mention it. The method is
   applied at the document's next run, or when the user asks.
 - Upstream before downstream, always. Never update a document while a `main` input of it is in
@@ -263,7 +309,8 @@ it never asks; anything that needs the user goes into the report under **Needs y
    add any dated event to the Events table. For every `watch` event that passed this week, find
    the outcome. If it surprised against the stated expectation, change it to `open` (so the check
    flags its documents); otherwise mark it `done` and give the outcome in the report.
-4. **Run list,** in the check's order, **at most 6 documents**. Priority:
+4. **Run list,** in the check's order, from list 1 only (never 1a deferred or 1b on hold),
+   **at most 6 documents**. Priority:
    1. market baselines with a passed event, a changed `main` input, or material news;
    2. companies with a passed report or material news;
    3. other changed-input items;
@@ -334,7 +381,9 @@ rules apply.
       this window (a report is always material);
    2. a `fund` document only when the news is about the fund itself;
    3. with room left, the downstream `company` and `fund` documents a `changed: yes` above flags
-      (the cascade), in the check's order.
+      (the cascade: only those named in its `affects`, not deferred), in the check's order.
+
+   Never a document on hold (list 1b) or deferred (list 1a).
 
    **At most 6 documents per run,** two subagents in parallel, effort by job (a passed report is
    `xhigh`). Overflow goes under **Left for next run** and is first in line at the next daily
@@ -369,6 +418,16 @@ week again.
 
 ## Change log
 
+- **2026-11-07.1:** a stricter trigger rule (new section). Three gates: user holds (`HOLD (user`
+  in the note; list 1b), materiality judged once at the source (new register column `affects`,
+  `record --affects`, `id!` for verdict at risk; a price-only re-mark is `none`), and deferral of
+  upstream-only flags to the document's own update within 14 days (list 1a). The script and the
+  register were changed with it; the current unread changes were set by hand (hy: hy-issuers,
+  global-index, portfolio; equity: global-index, portfolio; ai, mu, nvda, tsm: none; hy-funds,
+  dnbtek: portfolio; the rest `all`). Why: the user (7 Nov): "if equity is updated it does not
+  necessarily mean that following papers should be updated ... A stricter regime what triggers
+  dependency updates is needed." Equity's 6 Nov change (mostly price) had put 20 documents in
+  list 1; the AI re-mark of 7 Nov (prices only) nine more.
 - **2026-11-05.2:** forum pages for Sissener Corporate Bond R (SissenerFredrik, IR) and Fondsfinans High
   Yield B and Kreditt B (Eotnes, communications) added to Mode F step 3, at the user's request.
 - **2026-11-05.1:** Mode F step 3 reads the fund managers' posts in the public Nordnet forum

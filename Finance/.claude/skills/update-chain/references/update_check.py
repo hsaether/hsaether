@@ -2,16 +2,30 @@
 what needs updating, in dependency order.
 
 Usage (from the Finance folder or anywhere; paths are resolved from this file):
-  py update_check.py [status] [--today YYYY-MM-DD] [--days 14]
+  py update_check.py [status] [--today YYYY-MM-DD] [--days 14] [--defer-days 14]
   py update_check.py record <id> --as-of YYYY-MM-DD --changed yes|no
-                     [--stale-after YYYY-MM-DD] [--rev REV] [--skip-inputs id1,id2]
+                     [--affects id1,id2|all|none] [--stale-after YYYY-MM-DD] [--rev REV]
+                     [--skip-inputs id1,id2]
   py update_check.py event-done "<text that matches one open event>"
 
 status      : the check. Prints nothing to disk.
 record      : after a document is updated. Sets its "as of" (and "last change" when values
               that downstream documents read moved), stale-after and revision, and marks
               every input it reads as read at the upstream's current "as of".
+              With --changed yes, --affects is required: the downstream documents for which a
+              value they read moved materially (the trigger rule in SKILL.md). Only those are
+              flagged; the others see the change under "no action". Documents named by an
+              earlier change that have not read it yet are kept in the list.
 event-done  : marks one event in the Events table as done.
+
+Trigger rule in status (2026-11-07):
+  - a note starting "HOLD (user" keeps a document out of list 1 (until the date in the note,
+    or until the user lifts it);
+  - an upstream change flags a downstream document only if the upstream's "affects" names it
+    (or is "all");
+  - a flag that comes only from upstream changes is deferred when the document has its own
+    update planned within --defer-days (an open event of its own, or its stale-after date):
+    the change is read then.
 
 Standard library only. The register is the single source of the bookkeeping; this script
 never guesses a date from a document's text.
@@ -107,6 +121,43 @@ def skill_revisions():
 def rev_key(r):
     d, n = r.split(".")
     return (d, int(n))
+
+
+MONTHS = {m: n for n, m in enumerate(
+    ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"], 1)}
+HOLD_UNTIL = re.compile(r"until (?:[A-Za-z]{3} )?(\d{1,2}) ([A-Za-z]{3})[a-z]* (\d{4})")
+
+
+def hold_of(d, today):
+    """(on hold?, text) from a note that starts 'HOLD (user'. A hold with a date in the past
+    has lapsed: (False, 'lapsed ...')."""
+    note = d.get("note", "")
+    if not note.startswith("HOLD (user"):
+        return False, ""
+    text = note.split(".")[0] + "."
+    m = HOLD_UNTIL.search(text)
+    if m:
+        day, mon, year = int(m.group(1)), MONTHS.get(m.group(2).lower()[:3]), int(m.group(3))
+        if mon and today > dt.date(year, mon, day):
+            return False, f"hold lapsed {dt.date(year, mon, day)}: remove the HOLD prefix"
+    return True, text
+
+
+def affects_of(d):
+    """The downstream ids an upstream's last change was recorded for: a set, or 'all'."""
+    a = d.get("affects", "all").strip().lower()
+    if a in ("", "all", "?"):
+        return "all"
+    if a in ("none", "-"):
+        return set()
+    return {x.strip().rstrip("!") for x in a.split(",") if x.strip()}
+
+
+def urgent_of(d):
+    """Downstream ids marked 'id!' in affects: the change may flip their verdict, so the flag
+    is not deferred."""
+    return {x.strip().rstrip("!") for x in d.get("affects", "").split(",")
+            if x.strip().endswith("!")}
 
 
 # ---------- order ----------
@@ -271,7 +322,7 @@ def lint():
 
 # ---------- status ----------
 
-def status(today, days):
+def status(today, days, defer_days=14):
     lines, t, docs = load()
     edges = [r for _, r in t["Inputs"][1]]
     events = [r for _, r in t["Events"][1]]
@@ -297,11 +348,19 @@ def status(today, days):
             warn.append(f"{d['id']}: file {d['file']} does not exist")
 
     update, loop_check, notes, method = {}, {}, {}, {}
+    own = {}                  # causes of the document's own (stale date, passed event)
+    held, lapsed, deferred, urgent = {}, {}, {}, set()
+    defer_to = today + dt.timedelta(days=defer_days)
     for i in order:
         d = docs[i]
+        on_hold, htext = hold_of(d, today)
+        if on_hold:
+            held[i] = htext
+        elif htext:
+            lapsed[i] = htext
         sa = parse_date(d["stale after"])
         if sa and today > sa:
-            update.setdefault(i, []).append(f"stale after {sa}")
+            own.setdefault(i, []).append(f"stale after {sa}")
         for e in edges:
             if e["document"] != i or e["reads"] not in docs:
                 continue
@@ -312,15 +371,46 @@ def status(today, days):
                 warn.append(f"{i} <- {e['reads']}: no 'input as of' date")
                 continue
             if lc and lc > used:
-                msg = f"{e['reads']} changed {lc} (read {used})"
-                (update if e["link"] == "main" else loop_check).setdefault(i, []).append(msg)
+                aff = affects_of(u)
+                if aff == "all" or i in aff:
+                    msg = f"{e['reads']} changed {lc} (read {used})"
+                    if i in urgent_of(u):
+                        msg += " [urgent: verdict at risk]"
+                        urgent.add(i)
+                    (update if e["link"] == "main" else loop_check).setdefault(i, []).append(msg)
+                else:
+                    notes.setdefault(i, []).append(f"{e['reads']} {lc:%d %b} (not material here)")
             elif ao and ao > used:
                 notes.setdefault(i, []).append(f"{e['reads']} {ao:%d %b}")
         for ev in events:
             aff = [x.strip() for x in ev["affects"].split(",")]
             evd = parse_date(ev["date"])
             if i in aff and ev["status"].lower() == "open" and evd and evd < today:
-                update.setdefault(i, []).append(f"event passed {evd}: {ev['event']}")
+                own.setdefault(i, []).append(f"event passed {evd}: {ev['event']}")
+
+    # Deferral: a flag that comes only from upstream changes waits for the document's own
+    # planned update when that is near (an open event of its own, or its stale-after date).
+    for i in list(update):
+        if i in own or i in urgent:
+            continue
+        d = docs[i]
+        sa = parse_date(d["stale after"])
+        nxt = [parse_date(ev["date"]) for ev in events
+               if i in [x.strip() for x in ev["affects"].split(",")]
+               and ev["status"].lower() == "open" and parse_date(ev["date"])
+               and today <= parse_date(ev["date"]) <= defer_to]
+        when = min([x for x in nxt + [sa] if x and today <= x <= defer_to], default=None)
+        if when:
+            deferred[i] = (when, update.pop(i))
+    for i, causes in own.items():
+        update[i] = causes + update.get(i, [])
+    for i in held:
+        if i in update:
+            held[i] = (held[i], update.pop(i))
+        else:
+            held[i] = (held[i], [])
+        loop_check.pop(i, None)
+        deferred.pop(i, None)
         sk = d["skill"]
         if sk in revs and d["rev used"] not in ("", "-", "?"):
             if rev_key(revs[sk]) > rev_key(d["rev used"]):
@@ -348,6 +438,26 @@ def status(today, days):
             for r in update[i]:
                 print(f"         - {r}")
     print()
+    print(f"1a. DEFERRED: upstream change only, read at the document's own update within "
+          f"{defer_days} days")
+    if not deferred:
+        print("   none")
+    for i in order:
+        if i in deferred:
+            when, causes = deferred[i]
+            print(f"   - {i:<14} next own update {when}: " + "; ".join(causes))
+    print()
+    print("1b. ON HOLD (user): not run, whatever the causes")
+    if not held and not lapsed:
+        print("   none")
+    for i in order:
+        if i in held:
+            htext, causes = held[i]
+            extra = f"  [{len(causes)} cause(s) waiting]" if causes else ""
+            print(f"   - {i:<14} {htext}{extra}")
+        elif i in lapsed:
+            print(f"   ! {i:<14} {lapsed[i]}")
+    print()
     print("2. RE-CHECK AFTER AN UPSTREAM UPDATE (only if it changes values this document reads)")
     if not wait:
         print("   none")
@@ -362,8 +472,9 @@ def status(today, days):
         if i in loop_check and i not in update:
             print(f"   - {i:<14} " + "; ".join(loop_check[i]))
     print()
-    print("4. NO ACTION: upstream re-run but kept unchanged (mention in the header at the next run)")
-    shown = [i for i in order if i in notes and i not in update]
+    print("4. NO ACTION: upstream re-run but kept unchanged, or changed in values not material "
+          "here (mention in the header at the next run)")
+    shown = [i for i in order if i in notes and i not in update and i not in held]
     if not shown:
         print("   none")
     for i in shown:
@@ -410,9 +521,33 @@ def record(a):
     revs = skill_revisions()
     hdr = t["Documents"][0]
     d = docs[a.id]
-    d["as of"] = a.as_of
+    if "affects" not in hdr:
+        sys.exit("The Documents table has no 'affects' column (see SKILL.md, trigger rule)")
     if a.changed == "yes":
+        if not a.affects:
+            print("WARNING: --changed yes without --affects; recorded as 'all' (every downstream "
+                  "flagged). Give the downstream ids whose read values moved materially, or "
+                  "'none' (trigger rule in SKILL.md).")
+        new = (a.affects or "all").strip().lower()
+        if new != "all":
+            ids = set() if new == "none" else {x.strip() for x in new.split(",") if x.strip()}
+            bad = sorted({x.rstrip("!") for x in ids} - set(docs))
+            if bad:
+                sys.exit("Unknown id(s) in --affects: " + ", ".join(bad))
+            # keep documents named by the previous change that have not read it yet
+            old_lc, old_aff = parse_date(d["last change"]), affects_of(d)
+            if old_lc:
+                for _, e in t["Inputs"][1]:
+                    used = parse_date(e["input as of"])
+                    if (e["reads"] == a.id and used and used < old_lc
+                            and (old_aff == "all" or e["document"] in old_aff)
+                            and e["document"] + "!" not in ids):
+                        ids.add(e["document"] + ("!" if e["document"] in urgent_of(d) else ""))
+                ids = {x for x in ids if x + "!" not in ids}
+            new = ", ".join(sorted(ids)) or "none"
+        d["affects"] = new
         d["last change"] = a.as_of
+    d["as of"] = a.as_of
     if a.stale_after:
         d["stale after"] = a.stale_after
     if a.rev:
@@ -430,7 +565,7 @@ def record(a):
             bumped.append(f"{e['reads']}={e['input as of']}")
     save(lines)
     print(f"Recorded {a.id}: as of {a.as_of}, changed {a.changed}, rev {d['rev used']}, "
-          f"stale after {d['stale after']}")
+          f"stale after {d['stale after']}, affects {d.get('affects', 'all')}")
     print("Inputs marked as read: " + (", ".join(bumped) or "none"))
 
 
@@ -455,10 +590,12 @@ def main():
     for q in (p, s):
         q.add_argument("--today", default=None)
         q.add_argument("--days", type=int, default=14)
+        q.add_argument("--defer-days", type=int, default=14)
     r = sub.add_parser("record")
     r.add_argument("id")
     r.add_argument("--as-of", required=True)
     r.add_argument("--changed", choices=["yes", "no"], required=True)
+    r.add_argument("--affects")
     r.add_argument("--stale-after")
     r.add_argument("--rev")
     r.add_argument("--skip-inputs")
@@ -477,7 +614,7 @@ def main():
         event_done(a.text)
     else:
         today = dt.date.fromisoformat(a.today) if a.today else dt.date.today()
-        status(today, a.days)
+        status(today, a.days, a.defer_days)
 
 
 if __name__ == "__main__":
