@@ -41,6 +41,7 @@ REGISTER = ROOT / "docs" / "update-register.md"
 SKILLS = ROOT / ".claude" / "skills"
 
 TYPE_RANK = {"market": 0, "book": 1, "company": 2, "fund": 3, "portfolio": 4}
+SIZE_BUDGET = {"market": 800, "book": 800, "company": 450, "fund": 450}   # lines; CLAUDE.md
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -316,7 +317,18 @@ def lint():
     print("C. POSSIBLY STALE LINKS (the register links a document the text never names)")
     print("   none" if not unnamed else "\n".join(f"   - {u}" for u in unnamed))
     print()
-    print("B and C are hints, not errors: judge each one. Downstream links (who should read a new")
+    print("D. OVER THE SIZE BUDGET (CLAUDE.md lean documents; compact at the document's next run)")
+    over = []
+    for i, d in sorted(docs.items()):
+        budget = SIZE_BUDGET.get(d["type"])
+        path = ROOT / d["file"]
+        if budget and path.exists():
+            n = len(path.read_text(encoding="utf-8").splitlines())
+            if n > budget:
+                over.append(f"{i:<14} {n:>5} lines (budget {budget})")
+    print("   none" if not over else "\n".join(f"   - {o}" for o in over))
+    print()
+    print("B, C and D are hints, not errors: judge each one. Downstream links (who should read a new")
     print("document) cannot be found this way; see Mode D in the skill.")
 
 
@@ -423,7 +435,7 @@ def status(today, days, defer_days=14):
     wait = {}
     for i in update:
         for dn in downstream(ups, i):
-            if dn not in update:
+            if dn not in update and dn not in held:
                 wait.setdefault(dn, []).append(i)
 
     print(f"Update-chain check, {today} (register: docs/update-register.md)")

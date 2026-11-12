@@ -5,7 +5,7 @@ description: Update Chain — the orchestrator that keeps every document in docs
 
 # Update Chain
 
-**Revision:** 2026-11-08.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-12.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/update-chain/` in the Finance folder.
 
 The update chain keeps the documents in `docs/` current and in step with each other. It
@@ -18,7 +18,9 @@ and never changes another skill's method.
 | File | Role |
 |---|---|
 | `docs/update-register.md` | The bookkeeping. **Documents**: id, file, skill, type, as of, last change, stale after, revision used. **Inputs**: which document reads which, and the version it read (`main` or `loop`). **Events**: planned events with the documents they affect |
-| `references/update_check.py` | The check. Reads the register and the `**Revision:**` line in each skill. Never guesses a date from a document's text |
+| `references/update_check.py` | The check. Reads the register and the `**Revision:**` line in each skill. Never guesses a date from a document's text. `lint` also flags documents over the size budget (CLAUDE.md) |
+| `docs/archive/register-log.md` | The register's change log (moved out of the register on 12 Nov 2026 to keep the register lean). New entries go at the end |
+| `docs/weekly-update.md` | The run reports. Keep the last 14 days; move older entries to `docs/archive/weekly-update-YYYY-MM.md` at the weekly run |
 
 Commands (run from the Finance folder; `py`, not `python`):
 
@@ -142,8 +144,11 @@ Work through list 1 **one document at a time, in the script's order**. For each 
    - the document id and file, and the skill to invoke by name;
    - the causes from the check, word for word;
    - for each changed upstream: its file, the date of the version read, the date of its last
-     change, and the instruction to read that upstream's conclusion, its "for downstream" section
-     and its change-log entries since the read date;
+     change, and the instruction to read that upstream's **Interface section** (or, until it has
+     one, its "for downstream" section) and its latest change-log entry, going deeper only for a
+     value it needs. Never "read the whole document";
+   - the lean-document rules in CLAUDE.md: current state only, change log of the last 3 versions,
+     the size budget, and compacting the document at this run if it is over budget;
    - for each passed event: what it is, and that the subagent must find its outcome;
    - the **change gate**: first decide whether the change touches values this document reads. If
      it does not, follow the skill's own minimum-change rule: write a short dated note in the
@@ -254,7 +259,7 @@ the register.
    - Part A (structure) must say "none".
    - Judge every hint in B and C: either add the Inputs row, or add a row to the **Not links**
      table with the reason.
-7. **Check and log:** run the check, add a dated change-log entry to the register, and read it
+7. **Check and log:** run the check, add a dated change-log entry to `docs/archive/register-log.md`, and read it
    back.
 
 **Retired document** (the user stops tracking it):
@@ -418,54 +423,9 @@ week again.
 
 ## Change log
 
+- **2026-11-12.1:** lean documents (user): briefs read the upstream Interface section, not whole files; the register change
+  log moves to docs/archive/register-log.md; weekly-update keeps 14 days; lint flags documents over budget. Older change-log
+  entries removed (git keeps them).
+- **2026-11-09.1:** script fix only: documents on hold no longer appear in list 2 (re-check).
 - **2026-11-08.1:** script fix only. The 2026-11-07.1 edit had left the "method changed" check
   inside the holds loop, so list 6 came out wrong or empty; it runs per document again.
-- **2026-11-07.1:** a stricter trigger rule (new section). Three gates: user holds (`HOLD (user`
-  in the note; list 1b), materiality judged once at the source (new register column `affects`,
-  `record --affects`, `id!` for verdict at risk; a price-only re-mark is `none`), and deferral of
-  upstream-only flags to the document's own update within 14 days (list 1a). The script and the
-  register were changed with it; the current unread changes were set by hand (hy: hy-issuers,
-  global-index, portfolio; equity: global-index, portfolio; ai, mu, nvda, tsm: none; hy-funds,
-  dnbtek: portfolio; the rest `all`). Why: the user (7 Nov): "if equity is updated it does not
-  necessarily mean that following papers should be updated ... A stricter regime what triggers
-  dependency updates is needed." Equity's 6 Nov change (mostly price) had put 20 documents in
-  list 1; the AI re-mark of 7 Nov (prices only) nine more.
-- **2026-11-05.2:** forum pages for Sissener Corporate Bond R (SissenerFredrik, IR) and Fondsfinans High
-  Yield B and Kreditt B (Eotnes, communications) added to Mode F step 3, at the user's request.
-- **2026-11-05.1:** Mode F step 3 reads the fund managers' posts in the public Nordnet forum
-  (Heimdal Høyrente N and Pluss pages; no login, WebFetch). Why: the managers' own posts (28–30 Oct)
-  gave the Intrum, HX and Trustly marks days before the monthly report; the user asked for it.
-- **2026-10-29.1:** a company that reports or has material news is updated at once. Mode F (the
-  weekday 08:00 run) now updates those companies (at most 6 documents, overflow first next day)
-  instead of only flagging them; Mode C updates company news without a go-ahead. Why: the user's
-  rule of 29 Oct ("it needs to be updated immediately"); on 28 Oct Microsoft and Alphabet had
-  reported while the plan left them for Saturday.
-
-- **2026-10-26.1:** the daily entry (Mode F, step 6) has a hard format limit: at most 12 lines and
-  about 150 words, with no method, source or coverage notes. Why: the first entry (26 Oct) ran to
-  79 lines and 1,000 words; the user asked for a concise report.
-- **2026-10-25.3:**
-  - New event status `watch`, for data releases and decisions where no change is expected. It
-    shows in the upcoming events and never flags an update on its own.
-  - The weekly run resolves the passed `watch` events: a surprise turns `open`, otherwise `done`.
-
-  Why: the DNB Carnegie Week Ahead (23 Oct) listed holds at the Fed and the ECB. As `open`
-  events they would have re-run Equity BBB and HY BBB on 31 Oct, and again after Norges Bank on
-  5 Nov.
-- **2026-10-25.2:**
-  - Mode D rewritten as a seven-step procedure for new documents, with a downstream search, and a
-    retire procedure.
-  - New `lint` command and the register's **Not links** table.
-  - The chat that writes a document keeps the register and reports what it changed.
-
-  Why: the first lint found 12 links missing from the register, and earlier deletions by joined
-  lines had merged rows.
-- **2026-10-25.1:** Mode F is now a daily company news search on weekdays at 08:00 (report and
-  flag only), in place of the Wednesday midweek check, at the user's request. Mode E starts its
-  company sweep from the daily entries.
-- **2026-10-24.2:**
-  - Mode E (weekly run, Saturday) and Mode F (midweek check, Wednesday), per the user's choices.
-  - Effort by job (xhigh or high).
-  - Parallel runs cut to two after the 24 Oct run hit the session limit.
-- **2026-10-24.1:** initial version. Register first filled from the document headers of
-  24 Oct 2026.

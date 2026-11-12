@@ -1,12 +1,19 @@
 ---
 name: supply-market-bbb
-description: Supply Market BBB (Supply BBB) — the offshore supply vessel (OSV) market baseline with main focus on the North Sea (NCS and UK) and South America (Brazil first, then Guyana/Suriname). Covers PSV, AHTS, subsea/CSV/IMR, Brazil RSV (vessel + ROV) and Brazil PLSV. Produces Bear/Base/Bull rate and utilization paths per segment on the IAF time grid (stub quarter(s) of the current year + 3 calendar years, now 2027–2029), North Sea spot by quarter for Year 1, mid-cycle rates and vessel values for terminal values, newbuild and reactivation parity, demand in vessel-days, fleet supply (orderbook, laid-up, attrition, migration between regions) and named catalysts with signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Reads the oil path from docs/oil-market-bbb.md and rig activity from docs/rig-market-bbb.md and never makes its own oil or rig forecast. ALWAYS use when the user mentions Supply BBB / Supply Market BBB / OSV BBB, asks to create, run or update ("oppdater modul") the supply module, or asks about PSV or AHTS rates, North Sea spot, OSV utilization, Petrobras vessel tenders, RSV or PLSV rates, OSV fleet, newbuilds, laid-up vessels or OSV values — even without naming the skill. Feeds iaf-valuation for OSV and subsea-vessel owners (e.g. DOF, Solstad, Tidewater, Paratus/Seagems).
+description: Supply Market BBB (Supply BBB) — the offshore supply vessel (OSV) market baseline with main focus on the North Sea (NCS and UK) and South America (Brazil first, then Guyana/Suriname). Covers PSV, AHTS, subsea/CSV/IMR, Brazil RSV (vessel + ROV) and Brazil PLSV. Produces Bear/Base/Bull rate and utilization paths per segment on the IAF time grid (stub quarter(s) of the current year + 3 calendar years, now 2027–2029), North Sea spot by quarter for Year 1, mid-cycle rates and vessel values for terminal values, newbuild and reactivation parity, demand in vessel-days, fleet supply (orderbook, laid-up, attrition, migration between regions) and named catalysts with signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Reads the oil path from docs/oil-market-bbb.md and rig activity from docs/rig-market-bbb.md and never makes its own oil or rig forecast. ALWAYS use when the user mentions Supply BBB / Supply Market BBB / OSV BBB, asks to create, run or update ("oppdater modul") the supply module, or asks about PSV or AHTS rates, North Sea spot, OSV utilization, Petrobras vessel tenders, RSV or PLSV rates, OSV fleet, newbuilds, laid-up vessels or OSV values — even without naming the skill. Feeds iaf-valuation for OSV and subsea-vessel owners (e.g. DOF, Solstad, Tidewater).
 ---
 
 # Supply Market BBB
 
-**Revision:** 2026-10-10.3 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-12.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/supply-market-bbb/` in the Finance folder.
+
+Change note 2026-11-12.2: the remaining Paratus mentions (data sources, JV example, Step 4) neutralised to Seagems prints only.
+
+Change note 2026-11-12.1: Paratus is no longer tracked (user); its company note is replaced by a
+market-data-only line. If a second covered owner is needed to broaden the North Sea and subsea
+base, the user's preferred candidate is Solstad Offshore (SOFF), with Subsea 7 (SUBC) as the
+alternative. No row, path or method change.
 
 A Bear/Base/Bull baseline for the offshore supply vessel market. It answers one question: **what
 market rates, paid days and vessel values should an OSV-owner valuation use, year by year, per
@@ -198,7 +205,7 @@ gap with an invented number.
 | Brazil fleet by flag and type | ABEAM fleet statistics; Antaq authorisations | Owner fleet lists (DOF, Solstad, OceanPact, CBO, Tidewater, Bram) |
 | Guyana/Suriname | ExxonMobil and TotalEnergies project schedules (FPSO sequence, drilling) | Company fleet status (e.g. Tidewater Americas) |
 | Global fleet, orderbook, laid-up, global utilization | Westwood public publications; Clarksons/Esgian via press `[E]` | Tidewater quarterly (utilization and dayrate by region and class) |
-| Owner filings — Oslo/Nordic (DOF, Solstad, Havila, Eidesvik, Paratus, others) | **Nordic Financial** `search_filings` / `company_research` with `ticker` + `fiscal_year`; 2026 holds only the results announcement, so read the full report with `parse_pdf_to_text` on the IR PDF | FinancialFilings, Newsweb, company IR |
+| Owner filings — Oslo/Nordic (DOF, Solstad, Havila, Eidesvik, others; Seagems prints as market data only) | **Nordic Financial** `search_filings` / `company_research` with `ticker` + `fiscal_year`; 2026 holds only the results announcement, so read the full report with `parse_pdf_to_text` on the IR PDF | FinancialFilings, Newsweb, company IR |
 | Owner filings — US and other (Tidewater, OceanPact) | **FinancialFilings** (`companies_list` → id; `filings_list` newest first) | SEC EDGAR, CVM/B3, company IR |
 | Offshore wind demand competing for CSV/PSV/AHTS | Developer and contractor announcements (construction schedules, W2W and cable campaigns, floating-wind mooring) | Trade press `[E]` |
 | Vessel values, newbuild prices and lead times, reactivation cost | Sale and purchase announcements (price, age, spec, date, buyer); newbuild orders with price; owner reactivation guidance | VesselsValue/Clarksons values via press `[E]` |
@@ -281,7 +288,7 @@ Quirks (observed in the 2026-10-05 initial run and the 2026-10-10 update):
 - **Management guidance is `[E]`.** Owners talk their book; Base is set from cover, tenders,
   fixtures and the balance, and the gap to guidance is stated.
 - **100% vessel basis.** Before dividing revenue, opex or backlog by vessel-days, check whether the
-  company reports a JV **share** (e.g. Paratus reports 50% of Seagems; DOF reports 50% of DOFCON).
+  company reports a JV **share** (e.g. DOF reports 50% of DOFCON).
   Convert to 100% and say so. Cross-check every derived rate against the contractual or reported
   dayrate (the 5 Oct 2026 PLSV row was half the real level because of this).
 - n < 3 comparable fixtures in six months → a range and "low confidence", not a point.
@@ -406,7 +413,7 @@ months, and the 6–12 month trend. Selective and late publication means no new 
 "unchanged".
 
 **Step 4 — Contract cover.** From owner fleet lists and announcements (DOF, Solstad, Tidewater,
-Havila, Eidesvik, OceanPact, CBO, Paratus/Seagems and other owners — ownership as checked in
+Havila, Eidesvik, OceanPact, CBO, Seagems (prints only) and other owners — ownership as checked in
 Step 0), build vessel-by-vessel availability per window year for the term, Brazil, RSV, PLSV and
 CSV rows: expiries, options (with exercise probability), idle gaps, drydock/SPS, mobilisation,
 migration. Aggregate to cover per row and year. For the North Sea spot rows, record the spot-pool
@@ -666,10 +673,10 @@ rate and payable days → cost and capacity risk.**
 - **Company notes:**
   - **DOF:** separate PSV/AHTS, CSV and integrated subsea/RSV/EPCI packages. A gross project value
     is not a vessel rate. Newbuild payments and start-ups are delivered even beyond the window.
-  - **Paratus (Seagems):** use the Brazil PLSV row with comparable technical spec and Petrobras
-    tender scope. PSV/AHTS or global OSV utilization never replace the PLSV rate or cover. JV
-    ownership and cash to holding are handled in the company analysis.
-  - **Solstad, Tidewater and other owners:** map each vessel to the row by class, spec, region and
+  - **Paratus (Seagems): not tracked** (user, 12 Nov 2026: too much overhead for a narrow segment).
+    Seagems' public Petrobras PLSV prints stay usable as market data for the Brazil PLSV row, at no
+    extra effort; no Paratus-specific output is kept.
+  - **Solstad (SOFF), Tidewater and other owners:** map each vessel to the row by class, spec, region and
     flag; Tidewater's regional averages are context, not a substitute for the rows.
 - Company-specific growth, economic life and replacement, financing, liquidity, JV/leases,
   ownership share and return follow IAF. Market development alone does not establish them.

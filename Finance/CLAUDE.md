@@ -47,6 +47,19 @@ Skills and the chain between them:
 
 - Write every skill change and every output document to this folder, then read the file back to
   check tables and content. An answer in the conversation alone is not delivery.
+- **Lean documents (user, 12 Nov 2026; overrides any skill output template that keeps history):**
+  - **Current state only.** Git keeps every earlier version, so a document holds no superseded
+    notes, no old values in brackets, no old attributions and no dated re-mark blocks at the top.
+    Its change log keeps the **last 3 versions, one or two lines each**; older entries are deleted.
+  - **Size budgets:** company and fund analyses ≤ 450 lines; market baselines and books ≤ 800 lines;
+    reviews are static and exempt. `update_check.py lint` flags documents over budget.
+  - **Interface block:** every market baseline starts, after its status line, with a section
+    "## Interface (values other documents read)": one compact table of the paths, references and
+    signpost states that downstream documents use, with the as-of date.
+  - **Read sections, not files.** A run that reads an upstream document reads its Interface
+    section and its latest change-log entry, and goes deeper only for a value it needs. A run
+    reads a skill's steps for its own task, not every appendix.
+  - A document is compacted to these rules at its next run; no separate rewrite run is needed.
 - Python: standard-library scripts (`update_check.py`, the model scripts) run with `py`. Scripts
   that import a package (`pypdf`, `numpy`, `openpyxl`, `pymupdf`) run with the workspace venv,
   `C:/GitWork/hsaether/Finance/.venv/Scripts/python` (add `-I` when reading downloaded files).

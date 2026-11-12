@@ -5,8 +5,20 @@ description: AI Market BBB — the baseline for the AI value chain over the IAF 
 
 # AI Market BBB
 
-**Revision:** 2026-11-06.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-11.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/ai-market-bbb/` in the Finance folder.
+
+Change note 2026-11-11.2: **K1 capex cycle** section and **K1 return gauge** added (Step 1b,
+Definitions, Data discipline, Output, Checks; `references/k1ret.py`), from
+`docs/review-ai-k1-sustainability.md` Option D (user: "Yes, apply D", 11 Nov 2026). K1 Base is the
+most likely path, not guidance or consensus by default: guidance sets the current year, contracts
+the next, and the cycle judgement the years after. Step 1b also states how a K1 move is carried
+to the rows set from it (the rule used in the 11 Nov re-run). `references/impl.py` now also gives
+the price-implied multiplier for other layer baskets (Step 1b item 5), and `references/model.py`
+carries the switch `K1D` of that re-run. No row, scenario or basket-method change.
+
+Change note 2026-11-11.1: H1's non-K1 buyers made explicit (K2 sources, Step 2 check), from
+`docs/review-ai-h1-non-k1-funding.md` Option A+ (user, 11 Nov 2026). No row, path, scenario or basket-method change.
 
 Change note 2026-11-06.1: **revision 2026-11-05.1 reverted** on the user's instruction (6 Nov 2026).
 Its four additions (E-layer tiers, credit by tier in K3, a per-company K1 build, payback coverage)
@@ -98,6 +110,8 @@ domestic AI chain except as an export and competition row.
   - `members.py`: the per-name company check;
   - `impl.py`: the price-implied H2 path (basket and names; turn-date and depth paths);
   - `cyclehist.py`: past-cycle share-price peaks and troughs;
+  - `k1ret.py`: the K1 return gauge (Step 1b): coverage of the revenue needed for 10% pre-tax
+    and the pre-tax return on the AI asset base, with its sensitivities and other K1 paths;
   - `trend2.py`, `hist.py`.
 - Inputs (read only): `docs/equity-market-bbb.md` (scenarios, World paths, USD/NOK path, World
   Base IRR and E / R, World exit P/E and mid-cycle return), `docs/hy-market-bbb.md` (NIBOR path, HY
@@ -121,8 +135,8 @@ domestic AI chain except as an export and competition row.
 
 | Row | Content | Unit | Role |
 |---|---|---|---|
-| **K1 Hyperscaler capex** | MSFT, GOOGL, AMZN, META, ORCL; calendar year, incl. finance leases as each reports | USD bn | Core; the anchor series |
-| K2 Other AI capex | Neoclouds (CoreWeave, Nebius), labs' own builds, sovereign, xAI, enterprise, China | Memo, `[?]` until a source exists | Secondary |
+| **K1 Hyperscaler capex** | MSFT, GOOGL, AMZN, META, ORCL; calendar year, incl. finance leases as each reports | USD bn | Core; the anchor series. Base = the most likely path (Step 1b): current year on guidance, next year on contracts, later years on the K1 cycle judgement; never guidance or consensus by default |
+| K2 Other AI capex | Neoclouds (CoreWeave, Nebius), labs' own builds, sovereign, xAI, enterprise, China | Memo; sources: NVIDIA ACIE (10-Q), CoreWeave and Nebius capex, SpaceX SI segment capex, Anthropic filings | Secondary |
 | **K3 Financing** | Capex ÷ operating cash flow; debt and equity raised for AI; off-balance lease commitments; vendor financing | Ratios, USD bn | Core (risk gauge) |
 | **K4 Contracted backlog** | AWS backlog, Google Cloud backlog, Microsoft commercial RPO, Oracle RPO, neocloud backlog | USD bn | Core (leading indicator) |
 
@@ -162,6 +176,8 @@ are shown as memo, not in a P/E.
 | Term | Definition |
 |---|---|
 | **Monetisation ratio** | E1 frontier-lab revenue (calendar year, booked) ÷ K1 hyperscaler capex. A narrow but clean measure: lab revenue is the purest AI end revenue; the hyperscalers' own AI revenue is not separately reported. Track its direction, not its level |
+| **K1 return gauge** | Pre-tax return on the AI asset base (K1 above a non-AI baseline, by monthly vintage, including construction in progress), and the coverage of the AI revenue needed for 10% pre-tax, on the Base E-paths (E2 above a 10% trend from 2023, T1 seats, Meta above-trend revenue as an upper bound). Parameters from filings: short-lived share and lives, cash cost ratio (AWS, CoreWeave). `references/k1ret.py`. A durability gauge for the judgement, never a path-setter |
+| Digestion (K1) | A year of capex growth between −5% and +5% after a surge without a financing break (2019 +4%, 2023 −2%). An absolute cut beyond that is the Bear's financing break |
 | Run-rate | Latest month (or quarter) annualised. Never added to booked revenue |
 | Backlog / RPO | Contracted, not yet recognised revenue. Labs' commitments in it are only as good as the labs' funding |
 | Compute share | Share of capex spent on short-lived assets (servers, accelerators, network). Microsoft: about two-thirds (Q4 FY26) |
@@ -248,6 +264,9 @@ Quirks (2026-10-12 run):
   changes the model.
 - **Guidance is `[E]`.** Companies talk their book; capex guidance has been raised every quarter
   since 2024, and consensus has repeatedly lagged.
+- **K1 years after the current one** state the contracted share (backlog due within 24 months,
+  supplier and lease commitments) apart from the plan; beyond the contracted year the Base comes from
+  the K1 cycle judgement (Step 1b).
 - **Never double count:** lab revenue paid to clouds appears again as cloud revenue and again as
   capex; neocloud capex financed by hyperscaler contracts is not extra demand; vendor financing
   (chip makers investing in customers) is netted in the financing row, not added to demand.
@@ -290,10 +309,32 @@ if the evidence is not strong enough, say **AI Market BBB kept unchanged**.
 signals; consensus for the next two years (state source and date); capex ÷ OCF, FCF, debt and
 equity raised, lease commitments; backlog and RPO per company. Output: K1 per scenario.
 
+**Step 1b — K1 capex cycle, every full update (since 11 Nov 2026).** The K1 Base beyond the
+contracted year is a judgement, not a plan. Answer, with dated and tagged evidence:
+1. **Where is the cycle?** One table: capex growth and capex ÷ OCF; FCF after dividends and buybacks;
+   debt, equity and leases raised; D&A growth against revenue growth (AWS and the five); cloud and
+   segment margins; GPU rental indices (Silicon Data H100, B200) and their term curve; K4 backlog
+   q/q; customer concentration (labs in backlog); management language on returns; suppliers'
+   commitments.
+2. **Past cycles:** telecom 1996–2002, shale 2010–16, hyperscalers 2017–19 and 2020–23. Run-up, what
+   turned it, lag and fall, against the current cycle.
+3. **The return gauge** (`k1ret.py`): coverage and pre-tax return for 2027–29 on Base, with the
+   sensitivities (r 8/12%, cash cost 35/45%, life 4/6 years, strict attribution, E2 Bull).
+4. **Judgement against Base** for the year after the contracted one and the last window year:
+   timing (earlier or later digestion) and depth, with evidence for and against. A point moves only
+   by the minimum change (5% of the capex level). 25/50/25 stays a convention.
+5. **What the price implies:** the H1 and E basket multipliers on Base 2028–30 for k
+   (`impl.py H1`, `impl.py E`), and NVIDIA's and TSMC's from their analyses.
+6. **Signposts with dates.**
+
+When K1 Base moves, carry it through the rows set from it, each by its own rule and the minimum
+change: H1 (H1/K1 ratio, Step 2), H4 (DC infrastructure), the E cash conversion (the five's capex
+is K1), the monetisation ratio; H2 and H3 only where their own method reads it.
+
 **Step 2 — Hardware (H1–H5).** NVIDIA data-center revenue and guidance; Broadcom AI semis and
 guidance; AMD data center; TSMC growth and capex, CoWoS; memory prices (TrendForce) and sold-out
 status; networking and DC infrastructure orders; power constraint evidence. Check: H1 growth vs
-K1 growth (compute share), and that H1 Base ≤ supply limits stated by suppliers.
+K1 growth (compute share), and that H1 Base ≤ supply limits stated by suppliers, and the non-K1 share that the H1/K1 ratio implies against NVIDIA's ACIE share and the named non-K1 capex (Base keeps that share; a shortfall is the financing-break Bear).
 
 **Step 2b — Memory cycle (H2), every run (since 1 Nov 2026).** Memory is the most cyclical
 layer, and the memory company and fund analyses (SK hynix, Samsung, the KOSPI fund; Micron may)
@@ -382,6 +423,7 @@ a lead for company analyses, not a decision.
 ## Metadata
 ## Conclusion
 ## Interface — money in (USD bn): K1 capex, K3 financing, K4 backlog
+## K1 capex cycle (five lines; where; past cycles; return gauge; judgement; price-implied; dated signposts)
 ## Interface — hardware (USD bn or index 2026 = 100)
 ## H2 Memory cycle (five lines; where; past cycles; what turns it; judgement; price-implied path; dated signposts)
 ## Interface — engines and tools
@@ -424,5 +466,7 @@ a lead for company analyses, not a decision.
 - Memory cycle section updated: dated price, inventory and contract evidence; past-cycle lead
   times; a judgement against Base for timing and depth; the price-implied multipliers reproduced by
   `impl.py`; signposts with dates.
+- K1 capex cycle updated: indicator table dated, the return gauge re-run when K1 or E2 moved, a
+  judgement for the years after the contracted one, signposts with dates.
 - Bear and Bull tied to named catalysts with signposts; AI Bear consistent with the equity Bear.
 - Change log complete or explicit "kept unchanged". File written, read back, tables render.

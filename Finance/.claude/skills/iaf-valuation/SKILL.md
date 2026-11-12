@@ -5,7 +5,7 @@ description: Investment Analysis Framework (IAF) — the standing valuation meth
 
 # Investment Analysis Framework (IAF)
 
-**Revision:** 2026-11-01.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-12.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/iaf-valuation/` in the Finance folder.
 
 A forward-looking test of whether today's price is defensible given the return it can deliver over
@@ -236,6 +236,24 @@ covered (DOFG returned an error).
     Otherwise it is held as `[?]`.
   - *Cross-source:* where two sources cover the same item, compare them. A gap beyond normal noise
     is explained, never averaged away.
+  - *Rate basis (joint ventures and charter-plus-services contracts):* before a quoted contract
+    rate enters the model, map it to the company's own figures. Divide the backlog value the
+    company states for the contract by its vessel- or rig-days, at the company's ownership share.
+    Then compare it with the rate the model carries for that asset (its own segment revenue per
+    working day). A client's quoted rate can be a total for charter plus services shared with a
+    partner. It is used only once it is shown to be like-for-like; otherwise the company's
+    backlog-per-day figure is used, and the gap is stated. (DOF, 12 Nov 2026: Petrobras' $295–305k
+    PLSV totals against DOFCON's ~$114–126k per vessel-day share.)
+
+### Model scripts are kept
+
+- The scripts that build a document's figures are saved in the workspace, not only in the
+  scratchpad: `.claude/skills/iaf-valuation/references/models/<id>/` (for example `dof/`), with a
+  short header naming the document, the version and the date. The next run starts from them, so an
+  attribution between versions can be reproduced. Scratch copies may be used during a run; the
+  final versions are copied to that folder before the run ends. They are standard library unless
+  the workspace venv is needed (see Python in CLAUDE.md). Run them from their folder without `-I` (they import each other; `-I` drops the script's own
+  folder from the path); keep `-I` for scripts that read downloaded files.
 
 ## Definitions
 
@@ -424,6 +442,11 @@ Everything after exit is priced into V_T:
   mid-cycle value plus the present value of the contract's margin over the mid-cycle day. Which
   contracts count:
   - **Firm today** (signed on the valuation date): for their full remaining term.
+  - **Awarded, not yet signed** (a letter of award, a tender result with only signatures left):
+    enter the cash flows at the awarded rate and dates in every scenario, as for a firm contract,
+    and tag them `[B]`. In the exit premium they count as firm today. They are not re-priced on the
+    sector row. State the award's source and the signature risk once, and add the signing date as
+    an event. If the award fails, the asset reverts to the row, and that is a news update.
   - **Signed in the scenario** (contracts, options or extensions the scenario assumes, started by
     the exit date): they are backlog in that scenario on the exit date, and a buyer pays for them.
     Count them for **at most 2 years after exit** (the bridge length of the reversion tail), at the
@@ -601,9 +624,25 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
 
 ## Step 7 — Output
 
+**Layout rules (2026-11-10):**
+- **Current state only in the body.** The title is followed by one status line: version, price and
+  date, skill revisions, verdict. No earlier-version values in brackets ("(v1.1: …)", "(at $204.64:
+  …)") anywhere in the body. Re-mark notes, "change since" tables and all historical values go to
+  the Change log.
+- **The verdict is stated once**, in the Summary. The Verdict section (item 8) gives only the band
+  rule applied and what would flip it, and points to the Summary.
+- **A re-mark or news note never goes at the top.** It updates the figures in place and adds a
+  Change-log entry.
+
 0. **Summary** (first section, readable on its own; everything after it is the supporting build):
    - **Verdict** in 2–4 bullets: clears / marginal / fails, the Base margin of safety, Bear outcome,
      and what the price needs (the break-even assumption).
+   - **Base in brief** (2–4 bullets): what Base assumes against consensus (earnings or rates as
+     × consensus or × today), and where the return comes from (the Base return bridge, item 2), so
+     the reader sees whether it is earnings, cash or re-rating. Then the break-even in plain terms
+     (the exit multiple or marks, and the earnings or rate level, at which Base returns k).
+   - **Bear in brief** (2–4 bullets): the story and catalyst, the worst year, capital preserved or
+     the permanent loss, balance-sheet survival, and which driver does the damage (item 2).
    - **Decision table** (Bear / Base / Bull): IRR_T; V_T per share; P_k and margin of safety;
      capital preserved?; cumulative Maintenance FCF per share over the horizon; net debt (or net
      cash) per share at exit; the one balance-sheet line that matters (liquidity, covenant or
@@ -635,7 +674,23 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
    per the Data sources section (connector, document and period for each key figure; price source
    and time stamp; sector outputs from `docs/oil-market-bbb.md`, `docs/oil-shipping-bbb.md`,
    `docs/rig-market-bbb.md`, `docs/supply-market-bbb.md`, `docs/defense-market-bbb.md`).
-2. **Scenario definitions**: one line each for Base, Bear, Bull with the named catalyst.
+2. **Scenarios**: everything that defines a scenario in one place.
+   - **Scenario table**, with Bear / Base / Bull as columns and fixed rows:
+     - story and named catalyst, earliest timing;
+     - the sector baseline rows used (rates, utilisation, layer paths), with their source;
+     - the company driver: EPS (USD and × consensus), or rate × days, or loan growth and ROE;
+     - revenue and EBITDA;
+     - exit P/E or exit asset marks;
+     - company-specific items (stakes, charges, capex, disposals);
+     - the macro and NOK world (Equity BBB and HY BBB scenario);
+     - result: IRR_T, P_k, capital preserved?
+   - **Driver breakdown** for Bear and Bull: move one driver at a time from Base to the scenario
+     (sector path, then exit multiple or marks, then company-specific items) and show the IRR
+     after each step, so the reader sees what does the damage. When the analysis reports more than
+     one Bear figure, this table shows how they relate.
+   - **Base return bridge**: from P to ΣD_t + V_T, split into earnings growth, re-rating (exit
+     multiple against today's), cash retained or distributed, and other (stakes, asset marks), in
+     the price's currency per share.
 3. **Near-term section**: table for the stub quarters (e.g. Q3E, Q4E) with booked share of days,
    TCE or day rate, EBITDA, FCF and dividend per share, versus consensus where available; next
    report and dividend dates (ex-date, payment date); net debt bridge to 31 Dec and net debt at the
@@ -671,12 +726,14 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
    the optional scenario-weighted reference, the share of Bull already priced, Bear balance-sheet
    survival and the sensitivity table.
 8. **Verdict** on the Base margin of safety (P_k / P − 1): **clears** above +2%, **marginal**
-   from −2% to +2%, **fails** below −2%. Then whether it survives Bear, and the key assumptions
-   that would flip the verdict.
+   from −2% to +2%, **fails** below −2%. State the band applied and the key assumptions that would
+   flip it; the verdict itself is in the Summary and is not restated in other words.
 9. **Caveat**: margin-of-safety screen, not an intrinsic valuation or price target.
 
-**Document order** (`docs/<company>-analysis.md`): title · skill revisions and sector inputs used
-· **Summary** (verdict, decision table, per-share path) · tags · Header · Scenario definitions · Company and status · Near term · Market input (sector rows
+**Document order** (`docs/<company>-analysis.md`): title · one status line (version, price and
+date, skill revisions, verdict) · **Summary** (verdict, Base in brief, Bear in brief, decision
+table, per-share path) · tags · Header (with the sector inputs used) · **Scenarios** (table,
+driver breakdown, Base return bridge) · Company and status · Near term · Market input (sector rows
 used and how they enter) · Common assumptions · Period tables and year-end path · V_T bridge ·
 Growth capex test · Results · Verdict and caveat · Tracking (from the second version) · Risks and
 signposts · For other modules (input for the sector BBB skills, or "no change needed") · Change
@@ -695,6 +752,9 @@ change in Base P_k, and whether the company is running ahead of or behind the Ba
 - k ≥ 10%, all figures per share and forward-looking.
 - Summary first, with the decision table and the per-share path (FCF per share per period for all
   three scenarios).
+- Layout (Step 7): one status line under the title; the verdict stated once; the scenario table,
+  driver breakdown and Base return bridge present; no earlier-version values in the body (search
+  for "(v1", "(was", "(at $" and similar before finishing).
 - Every key figure has a source and period. Price and figures are in the same currency.
   `filings_list` was checked for share issues and new reports since the last analysis.
 - Stub included, cash flows at payment dates, stub figures not annualised, ex-dividend status
@@ -724,3 +784,6 @@ change in Base P_k, and whether the company is running ahead of or behind the Ba
   and 3 as screens).
 - Every fetched value has source, as-of date and unit; raw kept beside derived; validation
   checks run and failures flagged in the text.
+- Contract rates from joint ventures or charter-plus-services awards mapped to the company's own
+  backlog per day (rate-basis check); awarded-not-signed contracts entered at the awarded rate.
+- The model scripts copied to `references/models/<id>/` with a header naming the version.
