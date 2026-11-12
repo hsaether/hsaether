@@ -314,3 +314,5 @@ Moved out of `docs/update-register.md` on 12 Nov 2026 (lean documents). New entr
   agent ran one read-only `git config` by mistake (no change); a v1.4 re-mark of 08:22 came from the daily run.
 - **2026-11-12 (log folder):** docs/archive/ is git-ignored (**/Archive/ in the root .gitignore), so the register log moved to
   docs/log/register-log.md to stay versioned; references updated (CLAUDE.md, update-chain, memory).
+- **2026-11-12 (ai, compaction):** AI BBB compacted to the lean rules (3,228 → 763 lines, Interface section first), `--changed no`.
+  2,458 interface numbers checked (38 removed, all superseded); every script reproduces the figures. Old version in git.
