@@ -19,8 +19,8 @@ and never changes another skill's method.
 |---|---|
 | `docs/update-register.md` | The bookkeeping. **Documents**: id, file, skill, type, as of, last change, stale after, revision used. **Inputs**: which document reads which, and the version it read (`main` or `loop`). **Events**: planned events with the documents they affect |
 | `references/update_check.py` | The check. Reads the register and the `**Revision:**` line in each skill. Never guesses a date from a document's text. `lint` also flags documents over the size budget (CLAUDE.md) |
-| `docs/archive/register-log.md` | The register's change log (moved out of the register on 12 Nov 2026 to keep the register lean). New entries go at the end |
-| `docs/weekly-update.md` | The run reports. Keep the last 14 days; move older entries to `docs/archive/weekly-update-YYYY-MM.md` at the weekly run |
+| `docs/log/register-log.md` | The register's change log (moved out of the register on 12 Nov 2026 to keep the register lean). New entries go at the end |
+| `docs/weekly-update.md` | The run reports. Keep the last 14 days; move older entries to `docs/log/weekly-update-YYYY-MM.md` at the weekly run |
 
 Commands (run from the Finance folder; `py`, not `python`):
 
@@ -262,7 +262,7 @@ the register.
    - Part A (structure) must say "none".
    - Judge every hint in B and C: either add the Inputs row, or add a row to the **Not links**
      table with the reason.
-7. **Check and log:** run the check, add a dated change-log entry to `docs/archive/register-log.md`, and read it
+7. **Check and log:** run the check, add a dated change-log entry to `docs/log/register-log.md`, and read it
    back.
 
 **Retired document** (the user stops tracking it):
@@ -430,6 +430,6 @@ week again.
 - **2026-11-12.2:** commits are part of the run (user): the orchestrating session commits each recorded run by path;
   subagents never use git.
 - **2026-11-12.1:** lean documents (user): briefs read the upstream Interface section, not whole files; the register change
-  log moves to docs/archive/register-log.md; weekly-update keeps 14 days; lint flags documents over budget. Older change-log
+  log moves to docs/log/register-log.md; weekly-update keeps 14 days; lint flags documents over budget. Older change-log
   entries removed (git keeps them).
 - **2026-11-09.1:** script fix only: documents on hold no longer appear in list 2 (re-check).

@@ -437,4 +437,4 @@ it to `open`.
 
 ## Change log
 
-Kept in `docs/archive/register-log.md` (moved 12 Nov 2026).
+Kept in `docs/log/register-log.md` (moved 12 Nov 2026).

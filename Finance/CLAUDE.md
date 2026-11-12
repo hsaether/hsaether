@@ -102,7 +102,7 @@ Skills and the chain between them:
     branch, tag or amend; the user handles those. File moves and deletes stay plain file
     operations.
   - When: after each document's run is checked and recorded, commit the files that run changed
-    (the document, `docs/update-register.md`, `docs/archive/register-log.md`, and any skill or
+    (the document, `docs/update-register.md`, `docs/log/register-log.md`, and any skill or
     script it changed). Add paths by name; never `git add -A` or `.`; never commit outside the
     Finance folder. Before an agent rewrites or compacts a document that has uncommitted changes,
     commit its current state first.
