@@ -64,7 +64,7 @@ Kept by the `update-chain` skill; checked by
 | shb | docs/handelsbanken-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 12 Nov): no update until 3 Feb 2027 (year-end report). Version 2 |
 | msft | docs/msft-analysis.md | iaf-valuation | company | 2026-11-07 | 2026-10-28 | all | 2026-11-20 | 2026-11-01.1 | Version 3 (28 Oct, Q1 FY27 report and call): Base 8.8% → 9.5%, fails |
 | mu | docs/mu-analysis.md | iaf-valuation | company | 2026-11-05 | 2026-11-05 | none | 2026-11-17 | 2026-11-01.1 | v3 5 Nov price re-mark on the 5 Nov sell-off close $656.39 (was $856.49): Base 6.3% → 18.3%, P_k $751.6, margin −12.6% → +14.5%, fails → clears; Bear −1.7%, Bull 32.0%; E / R 0.616 vs HY BBB reference 0.254; model blocks kept; existing margin rule (not cycle-first); AI BBB layer method prices Micron at 1.05× Base 2028–30 (method gap) |
-| nvda | docs/nvda-analysis.md | iaf-valuation | company | 2026-11-12 | 2026-11-05 | none | 2026-11-17 | 2026-11-10.1 | v1.4 12 Nov re-mark at $173.73 (11 Nov close) on the CEO board meeting, second-affair report and remote-access rule: Base 20.9% → 19.8%, P_k $212.2, margin +22.1%, clears; Base kept (no board decision); CEO sensitivity at exit 13: 11.4% (marginal); after hours $158.78 memo (23.5%). v1.3 11 Nov re-mark at $168.89 (10 Nov close) after the CEO board review and China-diversion reports: Base 17.9% → 20.9%, P_k $212.1, margin +25.6%, clears (≤ $208.0; fails ≥ $216.5); Bear −5.7%, Bull 36.3%; E / R 0.300 vs 0.254; k at 0.78× Base; Base kept (China already excluded; customer financing not cut in Base); sensitivities: CEO de-rating (k down to exit 12.8×), export rules beyond China (5–8% of revenue exposed: Base 18.5%) |
+| nvda | docs/nvda-analysis.md | iaf-valuation | company | 2026-11-12 | 2026-11-12 | ai, dnbtek, equity, global-index | 2026-11-17 | 2026-11-12.1 | v1.5 12 Nov news update at $165.82 (13:25 ET): Huang resigned (8-K), Kress interim CEO, Jones first chair; AI BBB 11 Nov path taken in: Base 17.8%, P_k $192.5, +16.1%, clears (≤ $188.7, fails ≥ $196.4); Bear −5.4% (cross-funding costs), Bull 37.2%; E / R 0.289; cross-funding is equity plus contingent credit, NVIDIA money ~3–5% of DC revenue; sensitivities: funding stop 17.1%, diversion closure 16.6%, CEO de-rating exit 15 13.8% / 13 9.5%, all three 12.1% marginal; Step 7 layout, 107 → 51 KB |
 | skh | docs/skhynix-analysis.md | iaf-valuation | company | 2026-11-04 | 2026-10-28 | all | 2026-11-20 | 2026-11-01.1 | Version 2 (28 Oct, Q3 report): Seoul Base 21.1%, clears; ADR marginal at the post-report price; Seoul line and SKHY ADR line |
 | smsn | docs/samsung-analysis.md | iaf-valuation | company | 2026-11-04 | 2026-10-29 | all | 2026-11-28 | 2026-11-01.1 | Version 2 (29 Oct, Q3 report): common Base 26.9% → 23.3%, preference 29.5% → 25.6%, both clear; common, preference and GDR lines |
 | kospi | docs/kospi-analysis.md | iaf-valuation | fund | 2026-11-06 | 2026-11-06 | all | 2026-11-17 | 2026-11-01.1 | Version 1.8 (6 Nov): price re-mark on the 6 Nov Seoul close after the 5–6 Nov chip sell-off (look-through −10.5% in KRW; IQQK EUR 99.2 → 88.6); paths and company blocks unchanged; HY reference now from HY BBB (0.254); price implies 0.61× Base 2028–30 for k (0.80×); Base ~21% (16%), P_k ~EUR 110 (unchanged), margin +25% (+11%); capped Bear −8%/yr, 2027 −39%; E / R 0.249 vs 0.254 (reference only); neither reads nor writes the portfolio |
@@ -171,9 +171,9 @@ Kept by the `update-chain` skill; checked by
 | mu | hy | 2026-11-05 | main | NIBOR (E / R) |
 | mu | skh | 2026-10-22 | loop | Peer comparison (from the SK hynix analysis, not only market multiples; not yet read) |
 | mu | smsn | 2026-10-22 | loop | Peer comparison (from the Samsung analysis, not only market multiples; not yet read) |
-| nvda | ai | 2026-11-07 | main | H1 compute layer (11 Nov re-run held to the 17 Nov run, deferral rule) |
+| nvda | ai | 2026-11-11 | main | H1 compute layer (11 Nov re-run held to the 17 Nov run, deferral rule) |
 | nvda | equity | 2026-11-06 | main | Scenarios, NOK path |
-| nvda | hy | 2026-11-05 | main | NIBOR (E / R) |
+| nvda | hy | 2026-11-11 | main | NIBOR (E / R) |
 | skh | ai | 2026-11-01 | main | H2 memory layer: EPS path, exit P/E, scenarios |
 | skh | equity | 2026-10-18 | main | Scenarios, I-44 path (NOK memo), exit cross-check |
 | skh | hy | 2026-10-24 | main | NIBOR (E / R), HY reference E / R |
@@ -328,8 +328,12 @@ it to `open`.
 | 2026-11-16 | approx | SK hynix Q3 business report (6-K/DART): tax payable and bonus accrual at 30 Sep | skh, ai, kospi | open |
 | 2026-11-14 | approx | Samsung Q3 quarterly report on DART: LTA price ranges or floors | smsn, ai, kospi | open |
 | 2026-11-17 | yes | NVIDIA Q3 FY27 report. The full re-run also restructures the report to the iaf-valuation 2026-11-10.1 layout (structure review 10 Nov: scenario table, Bear driver breakdown, Base return bridge, history to the change log; fix the 30 Oct multiples left in the exit-anchor text and in For other modules) | nvda, ai, skh, smsn, kospi | open |
+| 2026-11-16 | approx | NVIDIA Q3 13F (public stakes at 30 Sep) | nvda, ai | watch |
+| 2026-11-18 | approx | Anthropic IPO pricing: marks NVIDIA's stake and its $10bn placement | nvda, ai | watch |
+| 2026-12-15 | approx | NDAA final text (AI Overwatch, Chip Security, MATCH Acts) | nvda, ai | watch |
+| 2027-02-28 | approx | NVIDIA permanent CEO named (3–4-month search) | nvda, ai | open |
 | 2026-11-18 | yes | House closed briefing on NVIDIA requested for 18 Nov (committee chairs Mast, Moolenaar, Crawford; letter 4 Nov); 11 Nov: House Republicans press Huang to testify, subpoena floated (daily news 12 Nov) | nvda, ai | watch |
-| 2026-11-12 | approx | NVIDIA board decision on CEO Jensen Huang (board met 11 Nov per WSJ; search firm hired, interim CEO considered, Kress named by Semafor `[E]`); nvda v1.4 kept Base, CEO sensitivity at exit 13 = 11.4% (daily news 12 Nov) | nvda, ai | open |
+| 2026-11-12 | approx | NVIDIA board decision on CEO: Huang resigned as CEO and director (8-K 12 Nov, effective 11 Nov); Colette Kress interim CEO and CFO; Harvey Jones first Chair; internal and external search | nvda, ai | done |
 | 2026-11-30 | approx | BIS rule blocking Chinese remote access to advanced AI chips via data centres abroad, seven more countries incl. Malaysia, Singapore, Thailand (The Information 11 Nov `[E]`; "could be announced this month") | nvda, ai | open |
 | 2026-11-18 | approx | Trump–Xi meeting (18–19 Nov): export policy for AI chips | nvda, ai | watch |
 | 2027-02-25 | approx | CoreWeave Q4 2026 report (date not announced): ~$9bn of prepayments received, financing; neocloud-funding signpost | ai | open |

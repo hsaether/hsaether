@@ -7,39 +7,35 @@ BBB 6 Nov, HY BBB 5 Nov values · **verdict: clears** (Base margin of safety +16
 ## Summary
 
 **The AI compute cycle** (read from the AI BBB's K1 capex cycle section and H1 rows; no own
-forecast). NVIDIA is an opportunistic single-stock position on the AI capex cycle (Track B while
-the build-out lasts), so the Summary leads with the cycle.
-- **Where:** the fourth year of the build. K1 (five platforms' capex) ~790bn in 2026; Base 1,120
-  in 2027 (contracted), then a **digestion plateau at 1,170 / 1,170** in 2028–29. H1 compute 730 /
-  750 / 745; NVIDIA's EPS path .92 / .91 / .88 and .87 for 2030 (× CY27 consensus $15.21).
-- **What turns it:** funding, not demand. The five spend ~116% of operating cash flow; the AI asset
-  base earns ~2.5% pre-tax in 2028 and ~0% in 2029 on Base (AI BBB return gauge). Two equity-funded
-  labs carry much of the backlog. The Bear (financing break, 2028 capex −16%) is the side the
-  signposts are closer to; the earliest Bear is H1 2027.
-- **What the price implies:** at $165.82 NVIDIA earns k if 2028–30 EPS is **0.85× the Base**
-  (.77 / .74 / .74 of CY27 consensus), and 0% at 0.58×. The price discounts a digestion ~15% deeper
-  than the AI BBB Base, not the Bear (≈ 0.55×).
+forecast; an opportunistic position on the cycle, Track B while the build-out lasts).
+- **Where:** the fourth year of the build. K1 ~790bn in 2026, 1,120 in 2027 (contracted), then a
+  **digestion plateau at 1,170 / 1,170**. H1 compute 730 / 750 / 745; NVIDIA's EPS path .92 / .91 /
+  .88, and .87 in 2030 (× CY27 consensus $15.21).
+- **What turns it:** funding, not demand. The five spend ~116% of operating cash flow, the AI asset
+  base earns ~2.5% pre-tax in 2028 and ~0% in 2029 on Base, and two equity-funded labs carry much
+  of the backlog. The signposts are closer to the Bear (financing break, 2028 capex −16%); earliest
+  H1 2027.
+- **What the price implies:** k at **0.85× the Base** 2028–30 EPS (.77 / .74 / .74 of CY27
+  consensus), 0% at 0.58×: a digestion ~15% deeper than Base, not the Bear (≈ 0.55×).
 
 **Verdict**
 - **Clears: Base 17.8% a year against k = 12%. P_k $192.5 against P $165.82: margin of safety
   +16.1%.** The +2% line is at $188.7.
-- The return is a re-rating on falling earnings: core P/E 11.4 today on Base 2027, exit 17. **k
-  needs an exit P/E of 14.1.** A lasting CEO de-rating to 15 still clears (+4.9%); to 13 it fails
-  (−6.3%).
-- **The three new risks together** (a funding stop, closed diversion channels and a de-rating to
-  15) leave Base at **12.1%, margin +0.2%: marginal**. Each alone clears.
+- The return is a re-rating on falling earnings (core P/E 11.4 today, exit 17); **k needs an exit
+  P/E of 14.1.** A lasting CEO de-rating to 15 still clears (+4.9%); to 13 it fails (−6.3%).
+- **The three new risks together** (funding stop, closed diversion channels, de-rating to 15) leave
+  Base at **12.1%, margin +0.2%: marginal**. Each alone clears.
 - **Bear −5.4% a year:** capital not preserved (−15%); the balance sheet is never at risk.
 
 **Base in brief**
-- EPS is the AI BBB H1 path: 0.92× CY27 consensus in 2027, then 0.91× / 0.88× (consensus has
-  FY28 +71%). Revenue $610 / 609 / 594bn. Exit P/E 17 (layer reference and World). Public stakes at
-  today's prices, private at book; no charge for guarantees.
-- The CEO change and NVIDIA's cross-funding are **not** in Base: no sourced earnings effect, a
-  funding cut worth < 2% of revenue, and a 2029 exit set after three years of a permanent CEO
-  (Scenarios, Company and status). They are sensitivities (a)–(d) and part of the Bear.
+- EPS on the AI BBB H1 path: 0.92× CY27 consensus in 2027, then 0.91× / 0.88× (consensus has FY28
+  +71%). Revenue $610 / 609 / 594bn. Exit 17. Public stakes at today's prices, private at book; no
+  guarantee charge.
+- The CEO change and cross-funding are **not** in Base: no sourced earnings effect, a funding cut
+  worth < 2% of revenue, and a 2029 exit after three years of a permanent CEO (Scenarios). They are
+  sensitivities (a)–(d) and part of the Bear.
 - **Where the return comes from:** of $104 per share, the multiple gives $74, cash $39 (23 paid,
-  15 retained), stakes $1; earnings −$9.
-- **Break-even:** exit P/E 14.1 on Base earnings, or 2028–30 EPS 0.85× Base at exit 17.
+  15 retained), stakes $1; earnings −$9. Break-even: exit 14.1, or 2028–30 EPS at 0.85× Base.
 
 **Bear in brief**
 - AI BBB financing break inside a recession (H1 2027): a lab misses commitments, neocloud contracts
@@ -94,8 +90,8 @@ Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed
 
 | Item | Value |
 |---|---|
-| Company | NVIDIA Corporation, Nasdaq: NVDA. Fiscal year ends late January (FY27 ends 31 Jan 2027). Q2 FY27 (to 26 Jul 2026): revenue $96.22bn, data center $89.0bn, gross margin 75.0%, non-GAAP EPS $2.22 `[F]`. Q3 FY27 report **17 Nov 2026**, 1:20 pm PT `[F]` (8-K Ex. 99.1) |
-| Price (P) | **$165.82**, 12 Nov 2026 13:25 ET (Yahoo, Nasdaq real-time; EODHD $165.35 at 13:12 ET) `[F]`. Day: previous close $173.73; after hours 11 Nov $158.78; pre-market $151.00; open $150.99; low **$148.80** (−14.3%); high $167.14; volume ~582m by 13:25 ET against a ~130m average. A 12 Nov close moves the result as the trigger prices show. 52-week range $148.80–243.37 |
+| Company | NVIDIA Corporation, Nasdaq: NVDA; fiscal year to late January. Last report Q2 FY27 (26 Jul); Q3 FY27 on **17 Nov 2026** `[F]` |
+| Price (P) | **$165.82**, 12 Nov 2026 13:25 ET intraday (Yahoo, Nasdaq real-time; EODHD $165.35 at 13:12 ET) `[F]`; previous close $173.73; the day's range and volume are in Company and status. A later close is placed by the trigger prices. 52-week range $148.80–243.37 |
 | Valuation / exit date | 12 Nov 2026 / 31 Dec 2029, **T = 3.135 years** |
 | Shares | **24.20bn diluted**, held flat (buybacks are D_t) `[C]`; 24.147bn outstanding (Yahoo). No issue since 26 Aug: EDGAR shows only Form 4s and the 8-K of 12 Nov |
 | Market cap / EV | $4.01tn diluted. Net cash **$33.9bn** ($1.40/share) at the valuation date `[A]`; equity stakes **$104.6bn** ($4.32/share) `[A]` (public stakes at today's prices, private at book). EV ex net cash and stakes $3.87tn |
@@ -105,14 +101,14 @@ Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed
 | FX | USD price and reporting. NOK memo at USD/NOK **9.5610** (EODHD, 18:25 UTC 12 Nov): P = NOK 1,585 |
 | Track and k | **Track B** (AI BBB: "H1 compute … Track B while the build-out lasts"). **k = 12%**, not raised: net cash, deep liquidity. Governance, customer funding and export risks sit in the Bear and the sensitivities |
 | Horizon | Stub 13 Nov–31 Dec 2026 (49 days; FQ3 ended 25 Oct, unreported), then 2027–2029 calendar years; exit on 2030 normalised EPS |
-| Not applicable | Rate-basis check (no JV or charter contracts); awarded-not-signed rule: the >$500bn financing MoUs and the 3.8 GW SB Energy option are not signed and are not counted |
-| Sector inputs | `docs/ai-market-bbb.md` (11 Nov re-run: K1, H1 path and exit P/E, scenarios, signposts) · `docs/equity-market-bbb.md` (6 Nov: macro scenarios, NOK path, World exit references) · `docs/hy-market-bbb.md` (5 Nov values: NIBOR window 4.38%, HY market 7.2%, reference E / R 0.254) |
+| Not applicable | Rate-basis check (no JV or charter contracts). Awarded-not-signed: the >$500bn MoUs and the 3.8 GW SB Energy option are not signed and not counted |
+| Sector inputs | AI BBB 11 Nov (K1, H1 path, exit P/E, scenarios, signposts) · Equity BBB 6 Nov (scenarios, NOK path, World exit references) · HY BBB 5 Nov values (NIBOR window 4.38%, HY market 7.2%, reference E / R 0.254) |
 
 ## Scenarios
 
 | | Bear | **Base** | Bull |
 |---|---|---|---|
-| Story and catalyst; earliest timing | AI BBB **financing break** (a lab misses commitments, neocloud and Oracle contracts renegotiated, NVIDIA's and third parties' support stops) inside the equity Bear (recession H1 2027 + oil Bear). Earliest H1 2027 | AI BBB contracted 2027 build, then a digestion plateau; inside the equity Base. NVIDIA's leadership change and cross-funding left out (reasons below) | AI BBB **agentic adoption** (lab revenue +130% in 2027, capex $1.3–1.7tn) inside the equity Bull (soft landing). Earliest Q2 2027 |
+| Story and catalyst; earliest timing | AI BBB **financing break** (a lab misses commitments, contracts renegotiated, NVIDIA's and third parties' support stops) in the equity Bear (recession H1 2027). Earliest H1 2027 | Contracted 2027 build, then a digestion plateau; equity Base. CEO change and cross-funding left out (below) | AI BBB **agentic adoption** (lab revenue +130% in 2027) in the equity Bull (soft landing). Earliest Q2 2027 |
 | Sector rows used | K1 950 / 800 / 820; H1 585 / 470 / 490; layer EPS .68 / .50 / .53 / .57 | K1 1,120 / 1,170 / 1,170; H1 730 / 750 / 745; layer EPS **.92 / .91 / .88 / .87** | K1 1,300 / 1,550 / 1,700; H1 820 / 985 / 1,080; layer EPS 1.00 / 1.15 / 1.25 / 1.30 |
 | Company driver: EPS ($; × CY27 consensus $15.21) | 10.34 / 7.61 / 8.06; 2030 8.67 | **13.99 / 13.84 / 13.38; 2030 13.23** | 15.21 / 17.49 / 19.01; 2030 19.77 |
 | Revenue / EBITDA ($bn) | 497 / 404 / 422; 308 / 231 / 246 | **610 / 609 / 594; 414 / 413 / 401** | 657 / 763 / 836; 450 / 519 / 565 |
@@ -121,19 +117,15 @@ Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed
 | Macro and NOK (Equity BBB, HY BBB) | Recession; USD/NOK +12% (2027), +9% | Base; NOK flat | Soft landing; NOK −3% |
 | **Result: IRR_T / P_k / capital** | **−5.4% / $100.7 / −15.2%** | **17.8% / $192.5 / +63.0%** | **37.2% / $304.9 / +159.3%** |
 
-**Why the CEO change and cross-funding stay out of Base** (Base = the most likely path from the
-sector baseline, Step 6):
-- **Exit multiple:** 17 is the AI BBB H1 reference and Equity BBB's World exit P/E; NVIDIA's own
-  five-year low is 16.3× forward `[C]`. None moved with the CEO. The exit is end-2029, after about
-  three years under a permanent CEO; the transition discount sits in today's price and the interim
-  marks. No source sizes a lasting discount. The de-rating is sensitivity (c) and the Bear's 13.
+**Why the CEO change and cross-funding stay out of Base** (Base = the most likely path, Step 6):
+- **Exit multiple:** 17 is the AI BBB H1 reference and World's exit P/E; NVIDIA's five-year low is
+  16.3× forward `[C]`. None moved with the CEO. The exit is end-2029, about three years under a
+  permanent CEO; the transition discount sits in today's price. No source sizes a lasting discount:
+  sensitivity (c) and the Bear's 13.
 - **Non-K1 demand share:** the H1 path is the AI BBB's. NVIDIA's direct support is ~3% of its data
-  center revenue, so a partial cut not replaced by third-party capital costs ~1–2% of revenue: below
-  the 5% minimum change. The direction is reported, not decided (Kress opposed the largest backstop;
-  backstop standards were tightened before the change `[E]`). Sensitivity (a); the full shortfall is
-  the Bear.
-- **Stakes:** public stakes are re-marked (a fact); private stakes stay at book until a price
-  exists (Anthropic prices ~18 Nov; Q3 10-Q on 17 Nov).
+  center revenue, so an unreplaced partial cut costs ~1–2% of revenue, below the 5% minimum change;
+  the direction is reported, not decided `[E]`. Sensitivity (a); the full shortfall is the Bear.
+- **Stakes:** public stakes re-marked (a fact); private at book until priced (Anthropic ~18 Nov).
 
 **Driver breakdown** (IRR_T after each step from Base; P_k in brackets):
 
@@ -163,19 +155,16 @@ sector baseline, Step 6):
 
 - **8-K, filed 12 Nov 08:52 ET (event 11 Nov)** `[F]`: the board "accepted the resignation of
   Jen-Hsun Huang, as NVIDIA's President, Chief Executive Officer and member of the Board, effective
-  immediately". **Colette Kress** (59, CFO since 2013) is **interim CEO** while the board searches,
-  and stays EVP and CFO. **Harvey C. Jones** (73, director since 1993, ex-CEO and executive chairman
-  of Synopsys) is **Chair of the Board**.
-- **Release (Ex. 99.1)** `[F]`: Jones is the "first-ever Chair"; the search covers internal and
-  external candidates; the board expects "operations, customer commitments and product roadmap to
-  continue without interruption"; Q3 is reported on 17 Nov as scheduled. No reason, no review
-  finding and no separation terms are given.
-- **Against the user's account:** Huang also left the board, not only the CEO post. NVIDIA had no
-  chair before: the 2026 proxy names an independent **Lead Director** (Stephen C. Neal), designated
-  by the independent directors each year, "rather than a chairperson" `[F]`.
+  immediately". **Colette Kress** (59, CFO since 2013) is **interim CEO** and stays CFO. **Harvey C.
+  Jones** (73, director since 1993) is the "first-ever" **Chair**. The release: the search covers
+  internal and external candidates; operations, customer commitments and the roadmap "continue
+  without interruption"; Q3 on 17 Nov as scheduled. No reason, finding or separation terms.
+- **Against the user's account:** Huang also left the board. Before, an independent **Lead
+  Director** (Stephen C. Neal), designated each year, served "rather than a chairperson" (2026
+  proxy) `[F]`.
 - **Background** `[E]` (CNBC, AP): the board decided on 11 Nov evening to remove him after the NYT
-  reported a second relationship, with a direct report (VP Kimberly Powell; not confirmed). Huang and
-  his wife's trusts hold ~870m shares (~3.6%).
+  reported a second relationship, with a direct report (not confirmed). Huang's family trusts hold
+  ~870m shares (~3.6%).
 - **Market** `[F]`: after hours 11 Nov $158.78; 12 Nov open $150.99, low $148.80 (−14.3%), $165.82
   at 13:25 ET (−4.6%) on ~582m shares (4.5× average); indices turned positive. AMD +4.7%, Broadcom
   +5.1%, Super Micro −12.6%, CoreWeave −6.7%, Nebius −16% (own Q3 guidance).
@@ -214,13 +203,11 @@ sector baseline, Step 6):
 
 ### The six questions (12 Nov)
 
-1. **"More than an affair." — Partly supported.** Disclosed: an admitted affair, a board review of
-   a possible intelligence operation, a resignation with no reason given. Alleged `[E]`: US
-   intelligence believes Alice Huang gathered information for Beijing; a second relationship with a
-   direct report (a conduct breach, and the reported trigger); NVIDIA's general counsel approached
-   Commerce investigators on Megaspeed in 2025. Investigated: FBI, DOJ, Singapore, Congress. Not
-   alleged: an export violation or a leak by NVIDIA or Huang. A national-security and conduct case
-   with NVIDIA's channel controls under scrutiny; no charge or finding touches earnings yet.
+1. **"More than an affair." — Partly supported.** Beyond the admitted affair: an alleged
+   intelligence link, a second relationship with a direct report (the reported trigger), NVIDIA's
+   2025 approach to Commerce on Megaspeed, and several investigations (above) `[E]`. Not alleged: an
+   export violation or a leak by NVIDIA or Huang. A national-security and conduct case with
+   NVIDIA's channel controls under scrutiny; no charge or finding touches earnings yet.
 2. **"Megaspeed is one of several leaks; all will be stopped." — Partly supported.** Several cases
    exist (table). "All stopped" is not supported: the rule is unpublished, its reach to existing
    contracts unclear, its authority disputed, enforcement weak. Sizing `[A]`: customers
@@ -236,19 +223,17 @@ sector baseline, Step 6):
    commitments are contractual and run for years, no lender or regulator demands a change, and the
    permanent CEO is not chosen.
 4. **"Shares or bonds? Riskier if shares. Sales drop when funding stops." — Shares: supported. Sales
-   drop: partly, smaller and later.** The funding is equity (common, preferred, warrants) plus
-   contingent credit (guarantees, buy-backs, leases); no loans or bonds are disclosed. Equity is junior
-   and falls with NVIDIA's own demand (wrong-way), as does the OpenAI guaranty. In value it is small:
-   stakes are $4.3 a share, and the Bear's stakes at 50% plus $40bn of costs take ~1 pp of IRR.
-   NVIDIA's money finances ~3% (direct) to ~5% (pro rata) of data-center revenue, and the 2027 build
-   is contracted and funded.
+   drop: partly, smaller and later.** Equity (common, preferred, warrants) plus contingent credit;
+   no loans or bonds (inventory below). Equity is junior and falls with NVIDIA's own demand
+   (wrong-way), as does the OpenAI guaranty, but stakes are $4.3 a share and the Bear's stake and
+   cost items take ~1 pp of IRR. NVIDIA's money finances ~3–5% of data-center revenue, and the 2027
+   build is contracted and funded.
 5. **"The new CEO makes little difference in the short run." — Supported for 2027 operations, not
-   beyond.** Rubin is in production `[F]`, $279bn of supply is contracted (under Kress as CFO), the
-   2027 build is contracted, and no engineering leader has left. Against: Huang ran customer and
-   supplier relationships himself (Bernstein `[E]`); customers can hedge 2028–29 designs (AMD and
-   Broadcom +5% on the day); one person holds the CEO and CFO roles through the search (3–4 months
-   `[E]`); the China policy channel is lost. The first independent chair lowers key-person and
-   governance risk. Earnings effect in Base: nil; medium-run effect: the exit multiple (c).
+   beyond.** Rubin is in production `[F]`, supply and the 2027 build are contracted, no engineering
+   leader has left. Against: Huang ran key relationships himself (Bernstein `[E]`), customers can
+   hedge 2028–29 designs (AMD, Broadcom +5%), one person is CEO and CFO through a 3–4-month search
+   `[E]`, and the China policy channel is lost. The first independent chair lowers key-person and
+   governance risk. Base earnings: no effect; the medium-run effect is the exit multiple (c).
 6. **"More information on report date." — Supported.** Checklist in Near term.
 
 ### Cross-funding inventory (10-Q of 26 Jul 2026 and filed agreements `[F]` unless tagged)
@@ -256,11 +241,10 @@ sector baseline, Step 6):
 | Item | Instrument; seniority | Amount $bn | Funded | Contractual? | If NVIDIA stops new funding | Balance-sheet risk |
 |---|---|---|---|---|---|---|
 | Public stakes, Level 1 | Common (13F, 30 Jun: Intel 214.8m sh, SpaceX/xAI 122.8m, CoreWeave 47.2m, Coherent, Nokia, Synopsys, Nebius); junior | 36.9 (26 Jul); ≈ 39 at 12 Nov prices on 30 Jun counts `[A]` | 100% | Held | No change | Marked through GAAP P&L: Intel 13.3 (−6.5 since 24 Jul), SpaceX 17.5 (+3.4), CoreWeave 2.7 `[A]`; 5.0 locked to Dec 2027 |
-| Public stakes, Level 2 | Unregistered warrants and convertible preferred in public companies; preferred above common | 10.8 | 100% | Held | — | Marks (−25% assumed since July `[A]`); names `[?]` |
-| Warrants received; equity forward | Equity derivatives (3–5-year warrants) | 4.8 notional (value 0.8); forward 1.0 | — | Yes | — | Marks |
+| Public stakes, Level 2; derivatives | Unregistered warrants and convertible preferred in public companies (preferred above common); warrants received (4.8 notional, value 0.8); equity forward 1.0 | 10.8 | 100% | Held | — | Marks (−25% assumed since July `[A]`); names `[?]` |
 | Private stakes | Preferred and common: OpenAI ~30 (March 2026 round) `[E]`; Anthropic, Mistral, neoclouds and others `[E]`/`[?]`; junior | 47.9 (incl. 9.1 gains) | 100% | Held | No new rounds (OpenAI's 2028 round) | Impairment in a down-round |
 | Equity-method stakes | "Infrastructure financiers" (VIEs) | 3.3 (max loss 4.7) | Mostly | Partly | — | Vehicles' losses |
-| Equity commitments | To "AI model makers, infrastructure financiers"; the $10bn Anthropic placement `[E]` inside or beyond `[?]` | 25 (18 to Jan 2027; 3 / 2 / 2 in FY28–30) | 0 | Yes, with contingencies | Runs on | Becomes stakes at cost |
+| Equity commitments | To "AI model makers, infrastructure financiers"; the $10bn Anthropic placement `[E]` may sit inside them `[?]` | 25 (18 to Jan 2027; 3 / 2 / 2 in FY28–30) | 0 | Yes, with contingencies | Runs on | Becomes stakes at cost |
 | Debt or convertibles | No loans or bonds to customers; convertible preferred inside Level 2 | — | — | — | — | — |
 | Trade credit | 90-day to 1-year terms for investment-grade buyers; senior unsecured | Receivables 63.1 (five customers 70%) | — | Per deal | Discretionary | IG receivables |
 | SB Energy guaranty (OpenAI, PORTS, 4.25 GW) | Credit support on defined lease and power payments; contingent | up to 105 | 0 | Yes, by phase from FY29; +3.8 GW option at NVIDIA's discretion | Phases run on; option lapses | Call on OpenAI default (wrong-way); OpenAI indemnifies; ends at an OpenAI rating |
@@ -284,32 +268,23 @@ sector baseline, Step 6):
 | **Part financed by NVIDIA's own money** (pro rata to NVIDIA's share of each buyer's funding) | **~4–7%, central ~5%** | NVIDIA ~25% of OpenAI's $122bn round; ~10–15% of the backed neoclouds' funding; ~2% of SpaceX's; ~5% of Anthropic's |
 | Direct support, dollar for dollar (buy-backs ~6, neocloud equity ~4, guarantees 3.5 a year) | **~3%** ($10–15bn) | H1 review 3.4: 5–8% of non-K1 H1 |
 
-- **Contractual flows run on:** the $25bn of commitments, the buy-backs (FY28–33), the guaranty
-  phases (from FY29) and the leases. The 2027 build is contracted, and the labs' 2027 money is raised
-  (Anthropic ~$214–220bn of liquidity after its IPO, SpaceX ~$90bn, OpenAI's cash into 2028).
-- **Discretionary new funding** (new rounds, buy-backs, guarantees, the 3.8 GW option, residual-value
-  support) matters **from 2028**: OpenAI needs a new round or an IPO, and neoclouds need new
-  contract-backed debt.
-- **Revenue effect of a stop:** 2027 ≤ $5bn (< 1%); 2028–29 ~$10bn a year (~1.6%) if the direct
-  support is not replaced; up to ~$25bn (~4%) if the pro-rata part (OpenAI's next round) is lost;
-  −7.8% if neoclouds lose financing broadly (non-K1 −20%, persistent). The full shortfall is the
-  Bear (non-K1 −27% / −50% / −47% in 2027–29).
-- **Cash:** Base already funds only the commitments and $2bn a year after 2027, so a stop saves
-  nothing in Base; stakes at book are value-neutral.
+- **Contractual flows run on** (commitments, buy-backs FY28–33, guaranty phases from FY29, leases),
+  and the 2027 build is contracted with the labs' 2027 money raised (Anthropic ~$214–220bn of
+  liquidity after its IPO, SpaceX ~$90bn, OpenAI's cash into 2028). **Discretionary new funding**
+  (rounds, buy-backs, guarantees, the 3.8 GW option) matters **from 2028**, when OpenAI needs a new
+  round and neoclouds new contract-backed debt.
+- **Revenue effect of a stop:** 2027 ≤ $5bn (< 1%); 2028–29 ~$10bn a year (~1.6%) if direct support
+  is not replaced; up to ~4% if the pro-rata part is lost; −7.8% if neoclouds lose financing broadly.
+  The full shortfall is the Bear (non-K1 −27% / −50% / −47%). Cash: Base already funds only the
+  commitments and $2bn a year, so a stop saves nothing in Base.
 
-### The build-out in numbers `[F]` (FY = year to late January)
+### The build-out in numbers
 
-| | Q2 FY27 (to 26 Jul) | Q3 FY27 guide / consensus | Q4 FY27 consensus | FY27 consensus | FY28 consensus |
-|---|---|---|---|---|---|
-| Revenue $bn | 96.2 (DC 89.0: Hyperscale 48.7, ACIE 40.3) | 108.0 ± 2% / 109.0 (45) | 124.9 (42) | 412.1 (54) | 692.3 (57) |
-| Non-GAAP EPS $ | 2.22 | 2.475 (44) | 2.755 (42) | 9.32 (51) | 15.93 (52) |
-| Gross margin | 75.0% | 74.0% ± 0.5 pp | | | |
-
-- Consensus: Yahoo, 12 Nov 2026 (analysts in brackets). Management (Q2 call `[E]`): FY28 growth
-  ~70%, supply-limited; Rubin ~$40bn of NVIDIA revenue per GW.
-- H1 FY27: operating cash flow $74.4bn, FCF $69.9bn; receivables +$24.6bn (longer terms),
-  inventory $31.6bn; equity purchases $42.4bn gross. Senior notes $33.5bn; buybacks $39.0bn
-  (authorisation $99.3bn); dividend $0.25 a quarter.
+- Q2 FY27 `[F]`: revenue $96.2bn, data center $89.0bn (Hyperscale 48.7, ACIE 40.3), GM 75.0%, EPS
+  $2.22. Consensus (Yahoo, 12 Nov): FY27 revenue $412.1bn (54) and EPS $9.32 (51); FY28 $692.3bn
+  (57) and $15.93 (52); quarters in Near term. Management `[E]`: FY28 ~70%, supply-limited.
+- H1 FY27 `[F]`: FCF $69.9bn; receivables +$24.6bn; equity purchases $42.4bn gross; buybacks
+  $39.0bn (authorisation $99.3bn); senior notes $33.5bn; dividend $0.25 a quarter.
 
 ## Near term: stub (all scenarios)
 
@@ -322,31 +297,28 @@ sector baseline, Step 6):
 | Net cash | | | $33.9bn at the valuation date; $41.8bn ($1.73/share) at 31 Dec `[C]` after D_t of $11.8bn |
 
 **What to look for on 17 Nov (Q3 FY27, 1:20 pm PT; call 2 pm PT):**
-1. **Q3 revenue** against $108bn ± 2% and the **Q4 guide** against Q3 (AI BBB lines: below Q3 =
-   Bear; > ~$124bn = Bull); gross margin ≥ 74%; any FY28 growth remark (~70%).
-2. **Data center by platform:** Hyperscale against ACIE (45.3% of data center in Q2; ACIE down q/q
-   is a leg of the non-K1 funding signpost); the company moved from ACIE to Hyperscale.
-3. **Supply commitments** (from $279bn; 87 / 88 in FY28–29): flat, cut or raised; excess-purchase
-   charges; inventory ($31.6bn) and DSO (60).
-4. **Equity stakes note:** carrying values (Level 1, Level 2, private, equity method), Q3 additions,
-   unrealised gains and losses, any impairment; equity commitments (from $25bn); whether the $10bn
-   Anthropic placement sits inside them. The Q3 13F (due 16 Nov) gives the public holdings at 30 Sep.
-5. **Guarantees and buy-backs:** SB Energy (phases, the 3.8 GW option), land, power and shell, AI
-   cloud agreements (from $36bn), third-party leases (from $20bn), and whether any MoU became a
-   definitive agreement. New items signed in Q3 show the run-rate of cross-funding.
-6. **Policy statement on customer financing** from the interim CEO; any review of commitments.
-7. **China and channel:** H200 charges, revenue reversals or channel adjustments, revenue by
-   customer headquarters (Singapore, Malaysia, Taiwan, other), comments on the remote-access rule
-   and compliance.
-8. **Legal proceedings note:** DOJ, Commerce, SEC or congressional inquiries; the class action; the
-   board review's scope and status; any accrual.
-9. **Leadership:** search timeline, retention awards for Alben, Buck, Dally, Kagan; separation terms
-   for Huang (8-K or 10-Q exhibit); a CFO successor while Kress holds both roles.
-10. **Concentration:** direct customers ≥ 10% of revenue (16% in Q2), the "AI research and
-    deployment company" (OpenAI) remark, receivables concentration (five customers 70%).
-11. **Capital returns:** Q3 buybacks, the dividend declaration, any new notes.
-12. **Around the report:** House testimony (18 Nov requested), Anthropic pricing (~18 Nov; the mark
-    on NVIDIA's stake and placement), Trump–Xi (18–19 Nov).
+1. **Q3 revenue** against $108bn ± 2%; **Q4 guide** against Q3 (below = Bear line; > ~$124bn =
+   Bull line); gross margin ≥ 74%; any FY28 remark (~70%).
+2. **Hyperscale against ACIE** (45.3% of data center in Q2; ACIE down q/q is a non-K1 funding leg).
+3. **Supply commitments** (from $279bn): flat, cut or raised; excess-purchase charges; inventory
+   ($31.6bn), DSO (60).
+4. **Stakes note:** Level 1, Level 2, private and equity-method values, Q3 additions, gains, losses,
+   impairments; commitments (from $25bn) and where the $10bn Anthropic placement sits. The Q3 13F
+   (due 16 Nov) gives the public holdings at 30 Sep.
+5. **Guarantees and buy-backs:** SB Energy phases and the 3.8 GW option; land, power and shell; AI
+   cloud agreements (from $36bn); third-party leases (from $20bn); any MoU made definitive. New
+   items signed in Q3 show the cross-funding run-rate.
+6. **The interim CEO's line on customer financing**; any review of commitments.
+7. **China and channel:** H200 charges, revenue reversals, revenue by customer headquarters,
+   comments on the remote-access rule and compliance.
+8. **Legal note:** DOJ, Commerce, SEC or congressional inquiries, the class action, the board
+   review's status, any accrual.
+9. **Leadership:** search timeline, retention awards (Alben, Buck, Dally, Kagan), Huang's separation
+   terms, a CFO successor.
+10. **Concentration:** customers ≥ 10% of revenue (16% in Q2), the OpenAI remark, receivables (five
+    customers 70%); buybacks and the dividend declaration.
+11. **Around the report:** House testimony (18 Nov requested), Anthropic pricing (~18 Nov),
+    Trump–Xi (18–19 Nov).
 
 ## Market input (AI Market BBB rows and how they enter)
 
@@ -361,21 +333,18 @@ sector baseline, Step 6):
   row (guidance `[E]`); custom-silicon share gains sit in the layer's margin give-back; the CEO
   change and a funding cut are below the minimum change (Scenarios).
 - **Calendarisation:** calendar quarter = 1/3 of the earlier fiscal quarter + 2/3 of the current
-  one: $15.21 against FY Jan-28 $15.93.
-- **Equity BBB:** in the recession Bear NVIDIA falls 33% in 2027 in USD (−25% in NOK) against
-  World's −18.3% in NOK.
+  one: $15.21 against FY Jan-28 $15.93. Equity BBB: NVIDIA's Bear 2027 (−25% in NOK) against
+  World's −18.3%.
 
 ## Common assumptions
 
-- **EPS basis:** non-GAAP, which since Q1 FY27 includes stock compensation; no add-back in FCF, all
-  buybacks are D_t at a flat 24.20bn shares. Gains on stakes are outside EPS; stakes are valued
-  separately.
-- **Net cash** `[A]`: $41.8bn at 31 Dec `[C]` (version 1's roll-forward), less the stub's FCF
-  $19.7bn net of D_t $11.8bn: **$33.9bn** at the valuation date.
-- **Equity stakes** `[A]`: book $115bn at 31 Dec `[C]` less the public re-mark of **−$6.5bn** since
-  the 26 Jul 10-Q (Intel 214.8m shares $92.32 → $61.87: −6.5; SpaceX 122.8m $115.07 → $142.74: +3.4;
-  other Level 1 −0.6; Level 2 −2.7 at −25%) = $108.5bn at 31 Dec, $104.6bn at the valuation date,
-  $129.4bn at exit (+$16.9bn in 2027, $2bn a year after). Factors 0.5 / 1.0 / 1.25.
+- **EPS basis:** non-GAAP, including stock compensation since Q1 FY27; no add-back; buybacks are D_t
+  at a flat 24.20bn shares; stake gains are outside EPS.
+- **Net cash** `[A]`: $41.8bn at 31 Dec `[C]` less the stub's retained FCF ($19.7bn − $11.8bn) =
+  **$33.9bn** at the valuation date.
+- **Equity stakes** `[A]`: book $115bn at 31 Dec `[C]` less the public re-mark since 26 Jul,
+  **−$6.5bn** (Intel $92.32 → $61.87: −6.5; SpaceX $115.07 → $142.74: +3.4; other Level 1 −0.6;
+  Level 2 −2.7): $104.6bn at the valuation date, $129.4bn at exit. Factors 0.5 / 1.0 / 1.25.
 - **Payout:** dividends ($1.00 a share a year) plus buybacks = 60% of FCF after growth and stakes
   (H1 FY27: 65%); the rest builds net cash at face value.
 - **Growth spending** `[A]` ($bn): capex 13 / 15 / 17 (Bear 12 / 11 / 11, Bull 14 / 17 / 19); D&A
@@ -477,22 +446,19 @@ Note maturities in 2028–29 are repaid from cash (net cash unchanged), so there
 | Buyer's return with World long-run growth (3.8 / 5.3 / 6.1%) / with zero growth | 10.8% / 7.0% | **11.1% / 5.8%** | 11.0% / 4.9% |
 | World mid-cycle return | 7.1% | **8.2%** | 8.7% |
 
-- Book `[A]`: ~$295bn at end-2026 less the stake re-mark, + net income − D_t − costs + ~$8bn a year
-  of stock compensation; the Bear writes stakes down to 50%.
-- The exit P/E equals World's; the P/B is 2.5× World's on an ROE 2.3× World's, so ROE explains it.
-  The buyer earns World's 8.2% if NVIDIA's earnings grow ~2.4% a year after 2030. That growth is the
-  stated reason for 17 and the largest assumption.
+- Book `[A]`: ~$295bn at end-2026 less the re-mark, + net income − D_t − costs + ~$8bn a year of
+  stock compensation; the Bear writes stakes down to 50%.
+- P/B is explained by ROE (2.5× and 2.3× World's). The buyer earns World's 8.2% only with ~2.4% growth
+  after 2030: the stated reason for 17, and the largest assumption.
 
 ## Growth capex test
 
-- **Base 2027–29:** physical growth capex $18.5bn ($0.76/share), working capital $45.6bn
-  ($1.88/share), stakes and Hugging Face $20.9bn ($0.86/share).
-- **Core business:** ~$64bn of growth capital carries ~$180bn of extra revenue ($412bn → $594bn) at
-  a ~55% net margin; TTM ROIC 83.5% (Zacks, 22 Sep `[C]`). **ROIC_g ≫ k**, and the value is inside
-  the EPS path.
-- **Stakes (vendor financing):** no sourced ROIC; held at cost in Base (ROIC_g = k), 50% in Bear,
-  125% in Bull. At zero they cost 0.8 pp. The contingent items ($164.5bn) enter only the Bear.
-- **Per share:** no new shares; growth is funded from FCF.
+- **Base 2027–29:** growth capex $18.5bn ($0.76/share), working capital $45.6bn ($1.88), stakes and
+  Hugging Face $20.9bn ($0.86). No new shares.
+- **Core:** ~$64bn of growth capital carries ~$180bn of extra revenue at a ~55% net margin; TTM ROIC
+  83.5% (Zacks `[C]`): **ROIC_g ≫ k**, inside the EPS path.
+- **Stakes:** no sourced ROIC; at cost in Base (ROIC_g = k), 50% in Bear, 125% in Bull; at zero
+  they cost 0.8 pp. The contingent items ($164.5bn) enter only the Bear.
 
 ## Results
 
@@ -509,18 +475,15 @@ Note maturities in 2028–29 are repaid from cash (net cash unchanged), so there
 | Capital preserved? ΣD_t + V_T vs P | **No, −15.2%** | Yes, +63.0% | Yes, +159.3% |
 
 - **Structural run:** EPS at the scenario's 2030 level from 2027 (revenue at its 2029 level). Base
-  has almost no cycle in the window (+0.3 pp); Bear and Bull are shifts of the mid-cycle itself.
-  The cycle question is the level at which compute earnings settle; the price-implied multiplier
-  answers it.
-- **FCF_normalised (Rule 3):** 2030 EPS with maintenance capex = D&A (the renewal charge) and no
-  working-capital growth = $13.23. **12.5× against a 12.3× ceiling: Rule 3 narrowly fails**; the
-  decision is on P_k.
-- **Scenario-weighted reference (convention, 25/50/25 on levels):** 18.8%. Never the decision.
-- **Share of Bull priced:** (165.82 − 192.5) / (304.9 − 192.5) = −23.7% (P is below the Base hurdle).
-- **Bear balance sheet:** net cash $42bn (end-2026) → $273bn (2029); FCF $178–205bn a year; notes
-  $33.5bn. No survival question; the loss is in value.
-- **Market check (not an input):** mean target $309.72 (56 analysts, Yahoo 12 Nov); the new targets
-  of Bernstein and Baird ($200) and Stifel ($205) sit above the hurdle, Cantor's $250 well above.
+  has almost no cycle in the window; Bear and Bull shift the mid-cycle itself.
+- **FCF_normalised (Rule 3):** 2030 EPS with maintenance capex = D&A and no working-capital growth
+  = $13.23: **12.5× against a 12.3× ceiling, Rule 3 narrowly fails**; the decision is on P_k.
+- **Scenario-weighted reference (25/50/25 on levels, convention):** 18.8%. **Share of Bull priced:**
+  −23.7% (P is below the Base hurdle).
+- **Bear balance sheet:** net cash $42bn → $273bn (2029); FCF $178–205bn a year. The loss is in
+  value, not survival.
+- **Market check (not an input):** mean target $309.72 (56); the new $200–205 targets (Bernstein,
+  Baird, Stifel) sit just above P_k.
 
 **Price-implied cycle** (multiplier m on Base 2028–30 EPS, 2027 at Base; at $165.82):
 
@@ -553,7 +516,6 @@ Note maturities in 2028–29 are repaid from cash (net cash unchanged), so there
 | 2030 EPS × 0.9 / × 1.1 | −8.0% / −2.9% | 14.4% / 20.9% | 33.2% / 41.0% |
 | Stakes at book (no re-mark) / worth zero at exit | — / −6.0% | 17.8% / 17.0% | — / 36.5% |
 | Bear cross-funding: $15bn and no exit liability / doubled with stakes at 25% / none, stakes at book | −5.1% / −6.1% / −4.4% | | |
-| FY Jan-28 as CY27 ($15.91) | | 19.5% ($201.0) | |
 | Payout 100% / 30% of FCF | −5.6% / −5.2% | 18.4% / 17.3% | 38.3% / 36.4% |
 
 - Revenue losses in (a), (b) and (d) reach EPS through the H1 link (1% of revenue ≈ 1.25% of EPS in
@@ -582,9 +544,6 @@ E / R against HY is a reference row for an opportunistic cyclical position, not 
 
 - **Band applied:** clears above +2%, marginal from −2% to +2%, fails below −2%; the verdict is in
   the Summary. What would flip it is listed under Sensitivities.
-- **Reading:** the price discounts a digestion ~15% deeper than the AI BBB Base, not the Bear. The
-  CEO change, a funding stop and closed diversion channels each leave the verdict at clears; only
-  together, or with a de-rating to 13–14×, do they reach marginal or fail.
 - **Caveat:** a margin-of-safety screen, not an intrinsic value, a price target or advice. The
   compute path is the AI BBB's; exit multiples, payout, stake factors, cross-funding costs and the
   revenue-loss sizes are own assumptions, and the sensitivities show their weight.
@@ -599,19 +558,16 @@ E / R against HY is a reference row for an opportunistic cyclical position, not 
 
 | Signpost | Bear / Bull line | Now (12 Nov) | Source |
 |---|---|---|---|
-| NVDA price (triggers) | ≥ $196.4 fails; CEO hurdles $173.9 (exit 15) / $155.4 (exit 13) / ≤ $172.1 E / R reference | $165.82 (13:25 ET), low $148.80 | Yahoo, EODHD |
 | Q3 FY27 (17 Nov) | Q4 guide below Q3 or GM < 73% / Q4 guide > ~$124bn | Guide $108bn, GM 74%; Q4 consensus $124.9bn | NVIDIA, AI BBB |
-| Non-K1 compute funding (AI BBB) | Two of: ACIE down q/q twice; named non-K1 capex down; neocloud distress / ACIE ≥ 50% with non-K1 capex +50% | ACIE 45.3% (Q2). Nebius Q3 (12 Nov): 2027 revenue $12–13bn, capex $40–45bn, some 2026 revenue slips into 2027 `[E]`. Neither line | AI BBB; Nebius `[E]` |
-| NVIDIA cross-funding (company) | A decision to cut new support, a guarantee called or a stake impaired (toward (a) and the Bear) / MoU platforms signed (third-party capital replaces NVIDIA) | No decision; tighter backstop standards reported `[E]`; public stakes −$6.5bn since July `[A]` | 10-Q, press |
-| Leadership | Further senior departures; an outsider without product depth / an internal successor or a strong outsider within ~4 months | Interim CEO-CFO; search open | 8-K, press `[E]` |
-| Investigations and Congress | A charge or adverse finding against NVIDIA or Huang; a penalty / review closes with no finding | FBI, DOJ (Megaspeed, SDNY), antitrust; testimony agreed, date open | Press `[E]` |
-| Export rules beyond China | Remote-access rule published, AI Overwatch Act enacted / reports closed | Not published; NDAA in the lame duck | Press `[E]` |
-| Hyperscaler 2027 capex (late Jan–early Feb) | < 1,000 or a platform flat / > 1,300 | ~1,120 Base; no figures yet | AI BBB |
-| Lab financing (Anthropic IPO ~18 Nov; OpenAI 2028 round) | Pulled or below Series H / priced in range (Bull line) | Range $70–78; NVIDIA buys $10bn at the IPO `[E]` | AI BBB |
-| Supply commitments and working capital | Cut or charges; DSO > 70; inventory > $40bn / raised | $279bn; DSO 60; inventory $31.6bn | 10-Q |
-| Custom silicon share | NVIDIA data center growth below H1 for two quarters | AMD +4.7%, Broadcom +5.1% on 12 Nov | Market `[F]` |
-| TSMC monthly revenue (AI BBB) | < +25% y/y twice / > +45% into 2027 | October +59.7% | TSMC 6-K |
-| Taiwan | Escalation | Supply chain in Asia | Not modelled |
+| Non-K1 compute funding (AI BBB) | Two of: ACIE down q/q twice; named non-K1 capex down; neocloud distress / ACIE ≥ 50% with non-K1 capex +50% | ACIE 45.3% (Q2). Nebius (12 Nov): 2027 revenue $12–13bn, capex $40–45bn, some 2026 revenue slips `[E]`. Neither line | AI BBB; Nebius `[E]` |
+| NVIDIA cross-funding | A cut in new support, a guarantee called or a stake impaired / MoU platforms signed | No decision; tighter backstop standards `[E]`; public stakes −$6.5bn since July `[A]` | 10-Q, press |
+| Leadership | Further senior departures / a strong successor within ~4 months | Interim CEO-CFO; search open | 8-K, press `[E]` |
+| Investigations and Congress | A charge or adverse finding against NVIDIA or Huang / review closes clean | FBI, DOJ, antitrust; testimony agreed, date open | Press `[E]` |
+| Export rules beyond China | Remote-access rule published, AI Overwatch enacted / reports closed | Not published; NDAA in the lame duck | Press `[E]` |
+| Hyperscaler 2027 capex (late Jan–early Feb) | < 1,000 or a platform flat / > 1,300 | Base ~1,120; no figures | AI BBB |
+| Lab financing (Anthropic ~18 Nov; OpenAI 2028) | Pulled or below Series H / priced in range | Range $70–78; NVIDIA buys $10bn at the IPO `[E]` | AI BBB |
+| Supply commitments, working capital | Cut or charges; DSO > 70; inventory > $40bn / raised | $279bn; DSO 60; inventory $31.6bn | 10-Q |
+| Custom silicon; Taiwan | NVIDIA data center below H1 growth two quarters; escalation | AMD, Broadcom +5% on 12 Nov; Taiwan not modelled | Market `[F]` |
 
 ## For other modules
 
@@ -619,30 +575,24 @@ E / R against HY is a reference row for an opportunistic cyclical position, not 
   1. **Company-check row:** Base 17.8%, P_k $192.5, margin +16.1% at $165.82; Bear −5.4%; Bull
      37.2%; E / R 0.289. Price-implied k at **0.85×** Base 2028–30 (0% at 0.58×), which replaces
      the "~0.86×" in the K1 capex cycle section's price table.
-  2. **Non-K1 compute funding signpost:** NVIDIA's direct support is ~3% of its data-center revenue
-     (~5% pro rata, 30–45% of revenue goes to buyers it has funded). A cut matters from 2028, not
-     in the contracted 2027 build. Read a fall in NVIDIA's new commitments with care: on the
-     "Vendor financing" signpost it is the Bull side (less fragility), but for non-K1 demand it is a
-     Bear-side route unless third-party platforms replace it.
-  3. **H1 demand dependence on NVIDIA funding:** 2028–29 revenue −1.6% (direct, not replaced) to
-     −4% (pro rata, incl. OpenAI's next round); −7.8% only if neoclouds lose financing broadly. All
-     below the Bear's non-K1 −50%.
-  4. **Export:** Chinese-linked use ≈ 2–4% of NVIDIA revenue inside the 5–8% exposed beyond China;
-     the remote-access rule is unpublished; the NDAA carries AI Overwatch and the Chip Security Act.
-  5. **Stakes:** NVIDIA's public stakes fell ~$6.5bn in value since July (Intel −33%, CoreWeave
-     −21%, Nebius −31%; SpaceX +24%). Marks are not impairments; the Q3 10-Q is the test of the
-     "stake impaired" leg.
-  6. **H1 share:** AMD and Broadcom rose on the CEO news; a shift toward custom silicon is a share
-     question inside H1, not a layer change.
-- **`equity-market-bbb`** (World company block, loop): EPS .92 / .91 / .88 / .87 × $15.21 (the AI
-  BBB path), V_T Base 247.1, Bear 125.8, Bull 402.2; D_t as in the year-end path. At its next update.
-- **`docs/dnb-teknologi-analysis.md`, `docs/global-index-funds-analysis.md`** (company block): the
-  same block values.
-- **`docs/skhynix-analysis.md`, `docs/samsung-analysis.md`, `docs/kospi-analysis.md`:** supply
-  commitments ($279bn, mostly memory) and NVIDIA's role as main HBM buyer unchanged until 17 Nov; the
-  CEO change does not alter the contracted 2027 build.
-- **`docs/tsm-analysis.md`:** NVIDIA as main customer: Rubin in production, 2027 build contracted;
-  read the Q4 guide on 17 Nov.
+  2. **Non-K1 compute funding signpost:** NVIDIA's own money finances ~3% (direct) to ~5% (pro
+     rata) of its data-center revenue; 30–45% goes to buyers it has funded. A cut matters from
+     2028, not in the contracted 2027 build. A fall in NVIDIA's new commitments is the Bull side of
+     the "Vendor financing" signpost but a Bear-side route for non-K1 demand unless third-party
+     platforms replace it.
+  3. **H1 demand dependence:** 2028–29 revenue −1.6% (direct support not replaced) to −4% (pro
+     rata, incl. OpenAI's next round); −7.8% only if neoclouds lose financing broadly. All below the
+     Bear's non-K1 −50%.
+  4. **Export:** Chinese-linked use ≈ 2–4% of NVIDIA revenue, inside the 5–8% exposed beyond China;
+     rule unpublished.
+  5. **Stakes:** public stakes −$6.5bn since July (Intel −33%, CoreWeave −21%, Nebius −31%, SpaceX
+     +24%); marks, not impairments; the Q3 10-Q tests the "stake impaired" leg.
+- **`equity-market-bbb`** (World block, loop), **`docs/dnb-teknologi-analysis.md`,
+  `docs/global-index-funds-analysis.md`** (company block): EPS .92 / .91 / .88 / .87 × $15.21, V_T
+  Base 247.1, Bear 125.8, Bull 402.2; D_t as in the year-end path. At their next updates.
+- **`docs/skhynix-analysis.md`, `docs/samsung-analysis.md`, `docs/kospi-analysis.md`,
+  `docs/tsm-analysis.md`:** supply commitments ($279bn, mostly memory) and NVIDIA's role as main
+  customer unchanged until 17 Nov; the CEO change does not alter the contracted 2027 build.
 - **`docs/portfolio-overview.md`:** no input.
 
 ## Change log
@@ -661,13 +611,10 @@ E / R against HY is a reference row for an opportunistic cyclical position, not 
   | Company: public stakes re-marked (−$6.5bn) | 17.8% / $192.5 / +16.1% | −5.1% | 37.2% |
   | Company: Bear cross-funding rebuilt ($15bn → $20bn in window + $20bn at exit) | **17.8% / $192.5 / +16.1%** | **−5.4%** | **37.2%** |
 
-  - Other moves: E / R 0.278 → 0.289; clears line $208.0 → $188.7; fails $216.5 → $196.4; E / R
-    trigger $179.0 → $172.1; price-implied k 0.80× → 0.85× Base; exit P/E for k 13.3 → 14.1.
-  - New: the verified CEO change, investigations, export and diversion cases; the six questions;
-    the cross-funding inventory and demand dependence; sensitivities (a)–(d) replace the earlier
-    (a) CEO and (b) export cases.
-  - Layout: Step 7 in full (status line, verdict once, scenario table, driver breakdown, return
-    bridge). Superseded notes and dated history were dropped; git keeps versions 1.0–1.4.
+  - Also: E / R 0.278 → 0.289; clears line $208.0 → $188.7, fails $216.5 → $196.4; k at 0.80× →
+    0.85× Base; exit P/E for k 13.3 → 14.1. New: CEO change, investigations, six questions,
+    cross-funding inventory, sensitivities (a)–(d). Step 7 layout in full; superseded notes dropped
+    (git keeps 1.0–1.4).
 - **12 Nov 2026 — v1.4:** re-mark at $173.73 (11 Nov close) before the board decision: Base 19.8%,
   P_k $212.2, margin +22.1%.
 - **11 Nov 2026 — v1.3:** re-mark at $168.89 after the board review and China-diversion reports:
@@ -679,51 +626,30 @@ E / R against HY is a reference row for an opportunistic cyclical position, not 
 
 ## Appendix: own assumptions `[A]`
 
-By weight on the result:
-1. **Compute EPS path** = AI BBB H1 layer × calendarised CY27 consensus $15.21 (2030 $13.23).
-2. **Exit P/E 13 / 17 / 19** (AI BBB reference; cross-checked against World, NVIDIA's range and a
-   Gordon check); no CEO discount in Base.
-3. **Payout** 60% of FCF after growth and stakes; dividend $1.00 a year; the rest held as net cash.
-4. **Net cash** $33.9bn at the valuation date (version 1's roll-forward less the 49-day stub).
-5. **Stakes** $104.6bn at the valuation date (public re-marked −$6.5bn, private at book), $129.4bn
-   at exit; factors 0.5 / 1.0 / 1.25.
-6. **Bear cross-funding costs** $20bn in 2027–29 and $20bn at exit (table in Common assumptions).
-7. **Revenue-loss sizes:** funding stop $5 / 10 / 10 / 10bn (wide −3.9% / −7.8%); diversion −1.5% /
-   −3% (wide −6% and $5bn); H1 revenue-to-EPS link 1.25 / 1.0.
-8. **Demand dependence:** ~3% direct, ~5% pro rata, 30–45% gross of NVIDIA data-center revenue.
-9. **Revenue** for working capital (net margins 55.5 / 55 / 54.5%); working capital 25% of the change.
-10. **Capex** $13 / 15 / 17bn; D&A = maintenance capex $6.5 / 9 / 11bn; stub pro rata ($22.5bn of
-    FCF per 56 days, version 1 convention).
-11. Shares 24.20bn flat; book equity for the exit P/B; tax 17% for EBITDA only.
+By weight on the result (values in Common assumptions): (1) the H1 layer path × $15.21; (2) exit
+P/E 13 / 17 / 19, no CEO discount in Base; (3) payout 60% of FCF; (4) net cash $33.9bn at the
+valuation date; (5) stakes $104.6bn, factors 0.5 / 1.0 / 1.25; (6) Bear cross-funding costs $20bn +
+$20bn; (7) revenue-loss sizes in (a), (b), (d) and the H1 link 1.25 / 1.0; (8) demand dependence ~3%
+/ ~5% / 30–45%; (9) net margins and working capital for revenue; (10) capex and D&A; stub pro rata
+($22.5bn of FCF per 56 days, version 1 convention); (11) shares flat, book equity, tax 17%.
 
 ## Appendix: sources
 
 | # | Source | Content | As of |
 |---|---|---|---|
-| S1 | [NVIDIA 8-K and Ex. 99.1](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm) (EDGAR, accession 0001045810-26-000082) | Huang's resignation as President, CEO and director accepted 11 Nov; Kress interim CEO and CFO; Jones Chair ("first-ever"); search; Q3 date | Filed 12 Nov 2026, 13:52 UTC |
-| S2 | [NVIDIA 10-Q, Q2 FY27](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm) | Notes 5, 6, 8, 10: stakes (Level 1 36.9, Level 2 10.8, private 47.9, equity method 3.3), warrants, commitments ($366bn), additional commitments ($56bn), guarantees ($108.5bn), receivables, advances, customer HQ (38% outside the US), MoUs | Filed 26 Aug 2026 |
-| S3 | [NVIDIA 13F-HR](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000065/information_table.xml) | Public holdings at 30 Jun 2026 ($63.4bn): Intel, SpaceX, CoreWeave, Coherent, Nokia, Synopsys, Nebius | Filed 14 Aug 2026 |
-| S4 | NVIDIA 8-Ks of 17 Aug (SB Energy) and 2 Sep 2026 (Hugging Face); [NVIDIA DEF 14A](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000036/nvda-20260512.htm) | Guaranty terms; acquisition; Lead Director structure (Neal) | Aug–Sep 2026; 12 May 2026 |
-| S5 | [CoreWeave 8-K](https://www.sec.gov/Archives/edgar/data/1769628/000176962825000047/crwv-20250909.htm) | $6.3bn order; NVIDIA buys unsold capacity to 13 Apr 2032 | 9 Sep 2025 |
-| S6 | Yahoo `quoteSummary`, `get_chart`; EODHD live and extended quotes | NVDA $165.82 (18:25 UTC), open $150.99, low $148.80, high $167.14, volume ~582m; consensus FQ3 $2.475 (44), FQ4 $2.755 (42), FY28 $15.927 (52); targets $309.72 (56); Intel, SpaceX, CoreWeave, Nebius, Coherent, Nokia, Synopsys, AMD, Broadcom, Super Micro prices; USD/NOK 9.5610 | 12 Nov 2026, 18:00–18:26 UTC |
-| S7 | [CNBC live updates](https://www.cnbc.com/2026/11/12/nvidia-jensen-huang-ceo-live-updates.html); EODHD news (AP, Yahoo Finance, Investing.com, Seeking Alpha, GuruFocus) | Ouster decision, testimony, investigations, brokers, Kress's view on backstops (The Information), tighter standards, stakes, Singapore statement, SDNY probe, DeepSeek link, Nebius Q3 `[E]` | 12 Nov 2026, to 18:05 UTC |
-| S8 | [NYT via Yahoo: Commerce probe transfer](https://uk.finance.yahoo.com/news/nvidia-intervention-preceded-transfer-chip-165011159.html); Bloomberg via Investing.com; [mlq.ai on bills and rules](https://mlq.ai/news/speaker-johnson-sees-a-developing-consensus-in-congress-on-limiting-chip-exports-to-china-the-bills-and-rules-in-play/); The Information via Investing.com (remote-access rule) | Megaspeed DOJ investigation; NDAA provisions; rule scope (seven countries) `[E]` | 9–12 Nov 2026 |
-| S9 | Bloomberg, The Register, CNBC (diversion cases) | Super Micro co-founder case; G. Lui case `[E]` | Mar–Oct 2026 |
-| S10 | `docs/ai-market-bbb.md` (11 Nov re-run); `docs/review-ai-h1-non-k1-funding.md`; `docs/review-ai-k1-sustainability.md` | K1, H1, layer paths, exit P/E, signposts; non-K1 sizing (30–46%), NVIDIA's direct support (5–8% of non-K1), shock link | 11 Nov 2026 |
-| S11 | `docs/equity-market-bbb.md` (6 Nov); `docs/hy-market-bbb.md` (5 Nov values) | Scenarios, NOK path, World exit references; NIBOR 4.38%, HY reference 0.254 | 5–6 Nov 2026 |
-| S12 | Zacks research (22 Sep) `[C]` | ROIC 83.5%; five-year P/E low 16.3× | 22 Sep 2026 |
+| S1 | [NVIDIA 8-K and Ex. 99.1](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm) | Resignation, interim CEO, Chair, search, Q3 date | Filed 12 Nov 2026, 13:52 UTC |
+| S2 | [NVIDIA 10-Q, Q2 FY27](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm) | Notes 5–10: stakes, derivatives, commitments, guarantees, receivables, advances, customer HQ, MoUs | Filed 26 Aug 2026 |
+| S3 | [NVIDIA 13F-HR](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000065/information_table.xml); 8-Ks of 17 Aug and 2 Sep 2026; DEF 14A (12 May 2026) | Public holdings at 30 Jun ($63.4bn); SB Energy terms; Hugging Face; Lead Director structure | 12 May–3 Sep 2026 |
+| S4 | CoreWeave 8-K (9 Sep 2025) | $6.3bn order; NVIDIA buys unsold capacity to 13 Apr 2032 | 9 Sep 2025 |
+| S5 | Yahoo `quoteSummary`, `get_chart`; EODHD live and extended quotes | NVDA price, range, volume; consensus; targets; stake and peer prices; USD/NOK | 12 Nov 2026, 18:00–18:26 UTC |
+| S6 | [CNBC live updates](https://www.cnbc.com/2026/11/12/nvidia-jensen-huang-ceo-live-updates.html); EODHD news (AP, Yahoo Finance, Investing.com, Seeking Alpha); NYT via Yahoo; mlq.ai; Bloomberg, The Register | Ouster, testimony, investigations, brokers, Kress on backstops, Megaspeed, NDAA bills, remote-access rule, diversion cases, Nebius `[E]` | Mar–12 Nov 2026 |
+| S7 | `docs/ai-market-bbb.md` (11 Nov); `docs/review-ai-h1-non-k1-funding.md`; `docs/review-ai-k1-sustainability.md`; `docs/equity-market-bbb.md` (6 Nov); `docs/hy-market-bbb.md` (5 Nov values); Zacks (22 Sep `[C]`) | Paths, scenarios, signposts; non-K1 sizing; NOK path and World references; NIBOR, HY reference; ROIC, P/E range | 22 Sep–11 Nov 2026 |
 
-- **Validation notes (v1.5):**
-  - **Price:** $165.82 is an intraday print (13:25 ET), the latest at the run; the 12 Nov close is
-    not in this version. The trigger table places any later price.
-  - **Reproduction:** `v15.py` reproduces v1.4 exactly (19.76% / $212.19; Bear −6.58%; Bull 35.07%)
-    on v1.4's inputs before any change.
-  - **Stake re-mark** `[A]`: the 13F counts are at 30 Jun; Q3 trades are not known until the Q3 13F
-    and 10-Q. The 13F total ($63.4bn at 30 Jun) and the 10-Q's Level 1 ($36.9bn at 26 Jul) differ
-    by more than the July price moves explain; sales in July are possible `[?]`.
-  - **Not verified:** Kress's opposition to the $250bn backstop (The Information, read only through
-    CNBC and secondary); the House date; the Level 2 names; the size of the OpenAI stake (press);
-    the board review's status.
+- **Validation (v1.5):** P is an intraday print (13:25 ET), not the 12 Nov close. `v15.py`
+  reproduces v1.4 exactly (19.76% / $212.19; Bear −6.58%; Bull 35.07%) on its inputs. The stake
+  re-mark uses 30 Jun 13F counts; the 13F total ($63.4bn) and the 10-Q's Level 1 ($36.9bn, 26 Jul)
+  differ by more than July's prices explain, so July sales are possible `[?]`. Not verified: Kress's
+  opposition to the $250bn backstop (secondary), the House date, the Level 2 names, the OpenAI stake
+  size, the board review's status.
 - **Scripts:** `.claude/skills/iaf-valuation/references/models/nvda/v15.py` (model), `v15_run.py`
-  (decision figures, paths, triggers, implied multiplier), `v15_sens.py` (attribution,
-  sensitivities, driver breakdown, return bridge, exit cross-check); run from that folder with `py`.
+  (decision figures), `v15_sens.py` (attribution, sensitivities, bridges); run there with `py`.
