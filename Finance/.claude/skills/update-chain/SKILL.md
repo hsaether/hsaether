@@ -5,7 +5,7 @@ description: Update Chain — the orchestrator that keeps every document in docs
 
 # Update Chain
 
-**Revision:** 2026-11-12.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-12.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/update-chain/` in the Finance folder.
 
 The update chain keeps the documents in `docs/` current and in step with each other. It
@@ -153,8 +153,8 @@ Work through list 1 **one document at a time, in the script's order**. For each 
    - the **change gate**: first decide whether the change touches values this document reads. If
      it does not, follow the skill's own minimum-change rule: write a short dated note in the
      metadata ("kept unchanged; read X of date D") and change nothing else;
-   - the workspace rules in CLAUDE.md: write to the file, read it back, state the skill revisions,
-     never use git;
+   - the workspace rules in CLAUDE.md: write to the file, read it back, state the skill revisions;
+     the subagent never uses git (the orchestrating session commits);
    - what to return:
      - `changed: yes|no`: did a value other documents read move (path, scenario, mid-cycle,
        stub, verdict, decision figure)?
@@ -175,7 +175,10 @@ Work through list 1 **one document at a time, in the script's order**. For each 
      trim names whose read values did not move materially;
    - run `event-done` for each passed event the run dealt with;
    - add the new events the subagent returned to the Events table, so that every company ends up
-     with its next report date.
+     with its next report date;
+   - **commit** the files the run changed, by path (the document, the register, the register log,
+     any changed skill or script), with the message and attribution line CLAUDE.md gives. Before
+     briefing a run that will rewrite or compact a document with uncommitted changes, commit it.
 4. **Re-run the check** before the next item. A `changed: yes` adds to list 1 only the
    downstream documents named in `affects` that are not deferred or on hold. A `changed: no`
    leaves them all alone. This is how the cascade stops.
@@ -288,7 +291,8 @@ After any hand edit: run `lint` and the check, and read the register back.
   applied at the document's next run, or when the user asks.
 - Upstream before downstream, always. Never update a document while a `main` input of it is in
   list 1.
-- No git, as everywhere in this folder.
+- Git: the orchestrating session commits each run (CLAUDE.md); subagents never use git; never
+  push or rewrite history.
 
 ## Mode E — weekly run (scheduled, Saturday 09:00)
 
@@ -323,7 +327,7 @@ it never asks; anything that needs the user goes into the report under **Needs y
 
    Whatever does not fit goes into the report under **Left for next run**.
 5. **Run them as in Mode B** (effort by job, two in parallel at most, market baselines one at a
-   time), and record each one as soon as it is checked. Three unattended rules:
+   time), and record and commit each one as soon as it is checked. Three unattended rules:
    - If an update moves a Base path by more than its skill's recalibration trigger, record it, do
      **not** run its downstream documents, and put it under **Needs you**.
    - A subagent that fails or lacks a key input: record nothing for it, and put it under
@@ -396,7 +400,7 @@ rules apply.
    (they follow Mode E or the user), and when a baseline later changes, the change gate re-runs
    the company. Before running a US report, check that the call transcript or a call summary is
    out; if not, run on the release and add a same-day "call re-check" event. Never `portfolio`;
-   never Edge. Record each document as soon as it is checked.
+   never Edge. Record and commit each document as soon as it is checked.
 7. **Write a short entry at the top of `docs/weekly-update.md`,** headed "Daily news — <weekday>
    <date>". **It must be short: at most 12 lines and about 150 words.** The user reads it in the
    morning; the details belong in the documents, not here.
@@ -423,9 +427,9 @@ week again.
 
 ## Change log
 
+- **2026-11-12.2:** commits are part of the run (user): the orchestrating session commits each recorded run by path;
+  subagents never use git.
 - **2026-11-12.1:** lean documents (user): briefs read the upstream Interface section, not whole files; the register change
   log moves to docs/archive/register-log.md; weekly-update keeps 14 days; lint flags documents over budget. Older change-log
   entries removed (git keeps them).
 - **2026-11-09.1:** script fix only: documents on hold no longer appear in list 2 (re-check).
-- **2026-11-08.1:** script fix only. The 2026-11-07.1 edit had left the "method changed" check
-  inside the holds loop, so list 6 came out wrong or empty; it runs per document again.

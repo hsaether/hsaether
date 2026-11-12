@@ -94,5 +94,19 @@ Skills and the chain between them:
   - then `update_check.py lint`, which must show no structural error, with every hint judged.
 
   Say in the answer what was changed in the register.
-- Never use git for any work (no git mv, rm, add, commit, status, etc.) and never ask about
-  commits. The user handles all git transactions. Use plain file operations only.
+- **Git (user, 12 Nov 2026): commits are part of the work, nothing else.**
+  - Who commits: the orchestrating session (the chat running the update chain, or a scheduled
+    run). Subagents never use git.
+  - Allowed: `git status`, `git diff`, `git log`, `git show`, `git add <paths>`, `git commit`.
+    Never push, pull, fetch, merge, rebase, reset, checkout, switch, stash, restore, rm, mv,
+    branch, tag or amend; the user handles those. File moves and deletes stay plain file
+    operations.
+  - When: after each document's run is checked and recorded, commit the files that run changed
+    (the document, `docs/update-register.md`, `docs/archive/register-log.md`, and any skill or
+    script it changed). Add paths by name; never `git add -A` or `.`; never commit outside the
+    Finance folder. Before an agent rewrites or compacts a document that has uncommitted changes,
+    commit its current state first.
+  - Message: `<id>[, <id>]: <what changed>` in one line, then a blank line and the attribution
+    line `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
+  - Do not ask about commits; they are part of delivering a run. Report the commit hash in the
+    answer.
