@@ -319,3 +319,4 @@ Moved out of `docs/update-register.md` on 12 Nov 2026 (lean documents). New entr
 - **2026-11-13 (events, duplicates):** two duplicate events set to `dropped`: the DOF $0.40 ex-dividend `watch` row (the
   `open` row stays) and the Westwood October dashboard `open` row (the `watch` row with the MCU/backlog re-run test stays).
   The two Anthropic IPO rows are not duplicates (different documents and status) and stay.
+- **2026-11-13 (odl):** v2.1 ex-dividend re-mark, compacted 721 → 450 lines; Base IRR 8.1% → 9.0%, hurdle NOK 95.5 vs NOK 102.80, fails. `--changed yes --affects none`; event "ODL Q3 dividend ... goes ex" done.

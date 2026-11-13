@@ -52,7 +52,7 @@ Kept by the `update-chain` skill; checked by
 | plsv | docs/PLSV-analysis.md | - | static | - | - | - | - | - | No longer tracked (user, 25 Oct 2026). Last version 19 Oct; kept as a source (Fontis seller credit, Seagems fleet data cited by borr, rig and supply) |
 | sed | docs/SED-analysis.md | iaf-valuation | company | 2026-11-04 | 2026-10-18 | all | 2026-11-17 | 2026-11-01.1 | 27 Oct news update: T-16 award (Base 8.3% → 6.7%, still fails) |
 | borr | docs/borr-analysis.md | iaf-valuation | company | 2026-11-07 | 2026-11-07 | all | 2026-11-18 | 2026-11-01.1 | **HOLD (user, 7 Nov): only on request. Not interesting as an equity; its value is the credit read for the Borr bonds in hy-issuers.** v3 24 Oct: Base unchanged (no equity value), Bull 8.3% → 11.2%; Q3 date not announced (4–18 Nov expected) |
-| odl | docs/odl-analysis.md | iaf-valuation | company | 2026-11-04 | 2026-11-04 | all | 2026-12-04 | 2026-11-01.1 | v2 4 Nov (Q3 report): Base 6.3% → 8.1%, P_k $10.21 (NOK 94.9) vs $11.23 (NOK 104.40), fails; dividend $0.27, ex 12 Nov; cycle-first applied (price implies ~$413k through-life vs Base mid-cycle $400k) |
+| odl | docs/odl-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | none | 2026-12-13 | 2026-11-12.1 | v2.1 13 Nov (ex-dividend re-mark, compacted 721 → 450 lines): Base 8.1% → 9.0%, P_k $9.97 (NOK 95.5) vs $10.74 (NOK 102.80), margin −7%, fails; Deepsea Bergen contract signed 10 Nov (already firm in the model) |
 | scatec | docs/scatec-analysis.md | iaf-valuation | company | 2026-10-30 | 2026-10-30 | all | 2027-02-28 | 2026-10-29.1 | v2 30 Oct after Q3: clears (Base IRR 16.4%, P_k NOK 95.5 vs 84.65, +13%); Bear −17.9%, Bear corp. NIBD NOK 8.5bn by 2029; Q4 report 29 Jan 2027 |
 | capt | docs/capt-analysis.md | iaf-valuation | company | 2026-11-08 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 9 Nov): only on request. Position sold. 8 Nov news note: Amor 15-month TC (~$160–180k/day, $73.1–82.2m), ~+$14m in Base (+NOK 1/share), not modelled, verdict unchanged (fails); model on the 24 Oct inputs |
 | hafnia | docs/hafnia-analysis.md | iaf-valuation | company | 2026-11-05 | 2026-10-24 | all | 2026-11-18 | 2026-11-01.1 | v6 exit check on the v5 model of 17 Oct |
@@ -128,9 +128,9 @@ Kept by the `update-chain` skill; checked by
 | borr | rig | 2026-11-04 | main | Jackup rates, MCU, rig values |
 | borr | oil | 2026-11-04 | main | Background via rig scenarios |
 | borr | equity | 2026-11-06 | main | Exit cross-check, NOK path |
-| odl | rig | 2026-11-04 | main | HE semis (NCS) row: rates, MCU, mid-cycle, asset convention, fixtures |
-| odl | oil | 2026-10-31 | main | Background via rig scenarios |
-| odl | equity | 2026-10-18 | main | Exit cross-check, NOK path |
+| odl | rig | 2026-11-12 | main | HE semis (NCS) row: rates, MCU, mid-cycle, asset convention, fixtures |
+| odl | oil | 2026-11-11 | main | Background via rig scenarios |
+| odl | equity | 2026-11-06 | main | Exit cross-check, NOK path |
 | scatec | equity | 2026-10-18 | main | Exit cross-check, NOK path |
 | scatec | hy | 2026-10-24 | main | Bear refinancing spread (corporate bonds from 2028) |
 | capt | shipping | 2026-10-24 | main | VLCC and Aframax rows, stub, values |
@@ -390,7 +390,7 @@ it to `open`.
 | 2026-12-16 | yes | Micron Q1 FY27 report | mu, ai, skh, smsn, kospi | open |
 | 2026-12-31 | yes | Hofseth: first test of the 27.5% value-adjusted equity ratio covenant (EUR 300m bond); breach likely without the NOK 600m equity raise `[E]` | hy-issuers, hy-funds | open |
 | 2026-12-31 | approx | Deepsea Nordkapp 2028 rate set by two independent brokers (Aker BP; by end-2026): NCS HE market print for 2028 | odl, rig | open |
-| 2026-11-12 | yes | ODL Q3 dividend USD 0.27 goes ex (paid 25 Nov) | odl | open |
+| 2026-11-12 | yes | ODL Q3 dividend USD 0.27 goes ex (paid 25 Nov) | odl | done |
 | 2026-11-20 | yes | DOF Q3 dividend USD 0.40 goes ex (paid 30 Nov; Q3 report 12 Nov, daily news 12 Nov) | dof | open |
 | 2026-11-26 | yes | SSB Q3 national accounts (Norway mainland GDP) | hy | open |
 | 2026-11-30 | yes | Dooba and Point Properties deadlines | hy-issuers, hy | open |
