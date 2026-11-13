@@ -221,7 +221,6 @@ Kept by the `update-chain` skill; checked by
 | dnbtek | hy | 2026-11-05 | main | NIBOR (Base window 4.38%), HY market reference E / R (0.254 from 6 Nov) |
 | dnbtek | hy-funds | 2026-11-01 | main | Sissener R and E / R (the HY market reference comes from hy from 6 Nov) |
 | dnbtek | global-index | 2026-10-29 | main | DNB Global Indeks A as the World index-fund row |
-| equity | global-index | 2026-11-01 | loop | AI-split flags used for the 17 Oct World rebuild |
 | global-index | hy-funds | 2026-10-24 | main | HY market reference E / R 0.196 |
 | hy | hy-issuers | 2026-11-09 | loop | Held-company news screen behind the default log |
 | mu | hy-funds | 2026-11-01 | main | HY market reference E / R 0.196 |
