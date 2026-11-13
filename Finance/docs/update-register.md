@@ -65,6 +65,7 @@ Kept by the `update-chain` skill; checked by
 | msft | docs/msft-analysis.md | iaf-valuation | company | 2026-11-07 | 2026-10-28 | all | 2026-11-20 | 2026-11-01.1 | Version 3 (28 Oct, Q1 FY27 report and call): Base 8.8% → 9.5%, fails |
 | mu | docs/mu-analysis.md | iaf-valuation | company | 2026-11-05 | 2026-11-05 | none | 2026-11-17 | 2026-11-01.1 | v3 5 Nov price re-mark on the 5 Nov sell-off close $656.39 (was $856.49): Base 6.3% → 18.3%, P_k $751.6, margin −12.6% → +14.5%, fails → clears; Bear −1.7%, Bull 32.0%; E / R 0.616 vs HY BBB reference 0.254; model blocks kept; existing margin rule (not cycle-first); AI BBB layer method prices Micron at 1.05× Base 2028–30 (method gap) |
 | nvda | docs/nvda-analysis.md | iaf-valuation | company | 2026-11-12 | 2026-11-12 | ai, dnbtek, equity, global-index | 2026-11-17 | 2026-11-12.1 | v1.5 12 Nov news update at $165.82 (13:25 ET): Huang resigned (8-K), Kress interim CEO, Jones first chair; AI BBB 11 Nov path taken in: Base 17.8%, P_k $192.5, +16.1%, clears (≤ $188.7, fails ≥ $196.4); Bear −5.4% (cross-funding costs), Bull 37.2%; E / R 0.289; cross-funding is equity plus contingent credit, NVIDIA money ~3–5% of DC revenue; sensitivities: funding stop 17.1%, diversion closure 16.6%, CEO de-rating exit 15 13.8% / 13 9.5%, all three 12.1% marginal; Step 7 layout, 107 → 51 KB |
+| anthropic | docs/anthropic-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | none | 2026-11-19 | 2026-11-12.1 | v1.0 13 Nov (IPO, Bafin EU prospectus 11 Nov): range $70–78; Base IRR 5.5 / 3.8 / 2.2%, P_k $58.4, margin −21.1% at $74, fails (clears ≈ $57.5); Bear −38%, Bull +31%; fully diluted 18.14bn shares; 58% of E1; re-mark at the final price |
 | skh | docs/skhynix-analysis.md | iaf-valuation | company | 2026-11-04 | 2026-10-28 | all | 2026-11-20 | 2026-11-01.1 | Version 2 (28 Oct, Q3 report): Seoul Base 21.1%, clears; ADR marginal at the post-report price; Seoul line and SKHY ADR line |
 | smsn | docs/samsung-analysis.md | iaf-valuation | company | 2026-11-04 | 2026-10-29 | all | 2026-11-28 | 2026-11-01.1 | Version 2 (29 Oct, Q3 report): common Base 26.9% → 23.3%, preference 29.5% → 25.6%, both clear; common, preference and GDR lines |
 | kospi | docs/kospi-analysis.md | iaf-valuation | fund | 2026-11-06 | 2026-11-06 | all | 2026-11-17 | 2026-11-01.1 | Version 1.8 (6 Nov): price re-mark on the 6 Nov Seoul close after the 5–6 Nov chip sell-off (look-through −10.5% in KRW; IQQK EUR 99.2 → 88.6); paths and company blocks unchanged; HY reference now from HY BBB (0.254); price implies 0.61× Base 2028–30 for k (0.80×); Base ~21% (16%), P_k ~EUR 110 (unchanged), margin +25% (+11%); capped Bear −8%/yr, 2027 −39%; E / R 0.249 vs 0.254 (reference only); neither reads nor writes the portfolio |
@@ -174,6 +175,14 @@ Kept by the `update-chain` skill; checked by
 | nvda | ai | 2026-11-11 | main | H1 compute layer (11 Nov re-run held to the 17 Nov run, deferral rule) |
 | nvda | equity | 2026-11-06 | main | Scenarios, NOK path |
 | nvda | hy | 2026-11-11 | main | NIBOR (E / R) |
+| nvda | anthropic | 2026-11-12 | main | Value of the $10bn Class N placement (shares at the IPO price, value at P_k); not yet read |
+| anthropic | ai | 2026-11-11 | main | E1 frontier-lab revenue paths (Anthropic share set in the analysis), scenarios, lab-financing signposts |
+| anthropic | equity | 2026-11-06 | main | Scenarios, NOK path, exit cross-check |
+| anthropic | hy | 2026-11-05 | main | Rates context (NIBOR) |
+| ai | anthropic | 2026-11-12 | loop | Company check: Anthropic revenue and E1 share, contracted compute 2027–29, placement split; not yet read |
+| amzn | anthropic | 2026-11-11 | main | Anthropic stake (Class N plus rolled-over notes) at the IPO price and at P_k; not yet read |
+| googl | anthropic | 2026-11-11 | main | Anthropic stake at the IPO price and at P_k; not yet read |
+| msft | anthropic | 2026-11-07 | main | Anthropic Azure commitment (≥ $47.2–49.2bn, Nov 2026–Jun 2033) and the $1bn placement; not yet read |
 | skh | ai | 2026-11-01 | main | H2 memory layer: EPS path, exit P/E, scenarios |
 | skh | equity | 2026-10-18 | main | Scenarios, I-44 path (NOK memo), exit cross-check |
 | skh | hy | 2026-10-24 | main | NIBOR (E / R), HY reference E / R |
@@ -236,6 +245,12 @@ not an input; otherwise add an Inputs row.
 | odl | hy | Header states HY BBB is not used: fixed-rate USD bond, no maturity inside the horizon |
 | borr | hy-issuers | Credit signal only (Watch status, derived ~93): no figure in the IAF build reads it (7 Nov, weekly run) |
 | msft | googl | Method precedent for the re-mark layout only, no value read (7 Nov, weekly run) |
+| anthropic | amzn | Cross-check of the stake figures only (grep), no value read |
+| anthropic | googl | Cross-check of the stake figures only (grep), no value read |
+| anthropic | nvda | Cross-check only; USD/NOK 9.5610 taken from its 12 Nov header as the FX point |
+| anthropic | msft | Cross-check only, no value read |
+| tsm | anthropic | Placement stake ($0.5bn) immaterial to TSMC |
+| mu | anthropic | Placement stake ($1.0bn) immaterial to Micron |
 
 ## Events
 
@@ -354,7 +369,7 @@ it to `open`.
 | 2026-11-18 | yes | SED Q3 report | sed, rig | open |
 | 2026-11-12 | yes | SeaBird (SED) Fulmar Explorer OBN source contract, West Africa, ~6 months from Dec 2026 (supports the SeaBird Base 2027 contribution; read at the SED Q3 run) | sed | watch |
 | 2026-11-18 | approx | Borr Q3 report (Investing.com date `[E]`, not yet announced by Borr): first figures after the Prospector 5 loss, insurance position | borr, hy-issuers, rig | open |
-| 2026-11-18 | approx | Anthropic IPO pricing (S-1/A of 10 Nov: range $70–78; pricing 18 Nov and first trade ~19 Nov press-reported `[E]`); the $26bn Class N placement closes right after (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC): value of Amazon's and Alphabet's stakes, E1 lab revenue; re-mark only if priced outside the range | ai, amzn, googl, msft | open |
+| 2026-11-18 | approx | Anthropic IPO pricing (S-1/A of 10 Nov: range $70–78; pricing 18 Nov and first trade ~19 Nov press-reported `[E]`); the $26bn Class N placement closes right after (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC): value of Amazon's and Alphabet's stakes, E1 lab revenue; re-mark only if priced outside the range; first trade 19 Nov as "ANT", closing and placement 20 Nov | anthropic, ai, amzn, googl, msft | open |
 | 2026-11-10 | yes | TSMC November board (6-K 10 Nov): 3Q26 dividend NT$9.0 (model NT$8.0), capital appropriations $40.93bn, up to $0.5bn each of Anthropic common (IPO price) and OpenAI preferred | tsm, ai | done |
 | 2026-12-10 | approx | TSMC November revenue (monthly 6-K, ~10th; date not confirmed): signpost y/y < +25% / > +45% (Oct +59.7%) | tsm, ai | open |
 | 2026-12-10 | yes | TSMC 2Q26 dividend NT$7.0 goes ex (paid 7 Jan 2027) | tsm | watch |
@@ -436,6 +451,10 @@ it to `open`.
 | 2027-07-01 | approx | SED T-16 Phase 7 (CPOC, 30 months firm) starts (early Q3 2027) | sed | open |
 | 2026-11-18 | yes | Hafnia Q3 deck: product-tanker orderbook by year (Shipping BBB MR2 orderbook-trigger retest) | shipping | watch |
 | 2026-11-27 | approx | Frontline Q3 report (late Nov; date not confirmed): orderbook count by segment, company TCE | shipping | watch |
+| 2026-12-15 | yes | Anthropic staged lock-up releases begin (days 27 / 48 / 62 / 76: 15 Dec, 5 Jan, 19 Jan, 2 Feb); over-allotment option expires ~18 Dec | anthropic | watch |
+| 2026-12-31 | yes | Anthropic first test of the $5bn liquidity covenant | anthropic | watch |
+| 2027-03-15 | approx | Anthropic FY2026 results, first report as a listed company (date not given; likely Feb–Mar); staged lock-up steps tied to it | anthropic, ai, amzn, googl | open |
+| 2027-05-17 | yes | Anthropic general lock-up expiry (day 180; or Q1-27 results if earlier); founders may sell 29% | anthropic | watch |
 | 2027-01-10 | yes | USTR Section 301 port-fee suspension ends (23:59 ET 9 Jan) and China's special-port-fee suspension ends (10 Jan): Shipping BBB Bull signpost "fees return and split the fleet" | shipping | open |
 
 ## Change log
