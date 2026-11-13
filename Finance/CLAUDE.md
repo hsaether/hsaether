@@ -62,7 +62,7 @@ Skills and the chain between them:
   - A document is compacted to these rules at its next run; no separate rewrite run is needed.
 - Python: standard-library scripts (`update_check.py`, the model scripts) run with `py`. Scripts
   that import a package (`pypdf`, `numpy`, `openpyxl`, `pymupdf`) run with the workspace venv,
-  `C:/GitWork/hsaether/Finance/.venv/Scripts/python` (add `-I` when reading downloaded files).
+  `C:/GitWrk/hsaether/Finance/.venv/Scripts/python` (add `-I` when reading downloaded files).
   Packages are listed in `requirements.txt`. Installing outside the venv is denied in
   `.claude/settings.json`; if a package is missing, ask the user rather than work around it.
 - When asked to save or change a skill, do it without asking first.
