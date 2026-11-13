@@ -316,3 +316,6 @@ Moved out of `docs/update-register.md` on 12 Nov 2026 (lean documents). New entr
   docs/log/register-log.md to stay versioned; references updated (CLAUDE.md, update-chain, memory).
 - **2026-11-12 (ai, compaction):** AI BBB compacted to the lean rules (3,228 → 763 lines, Interface section first), `--changed no`.
   2,458 interface numbers checked (38 removed, all superseded); every script reproduces the figures. Old version in git.
+- **2026-11-13 (events, duplicates):** two duplicate events set to `dropped`: the DOF $0.40 ex-dividend `watch` row (the
+  `open` row stays) and the Westwood October dashboard `open` row (the `watch` row with the MCU/backlog re-run test stays).
+  The two Anthropic IPO rows are not duplicates (different documents and status) and stay.

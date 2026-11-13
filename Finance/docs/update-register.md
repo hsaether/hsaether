@@ -337,7 +337,7 @@ it to `open`.
 | 2026-11-30 | approx | BIS rule blocking Chinese remote access to advanced AI chips via data centres abroad, seven more countries incl. Malaysia, Singapore, Thailand (The Information 11 Nov `[E]`; "could be announced this month") | nvda, ai | open |
 | 2026-11-18 | approx | Trump–Xi meeting (18–19 Nov): export policy for AI chips | nvda, ai | watch |
 | 2027-02-25 | approx | CoreWeave Q4 2026 report (date not announced): ~$9bn of prepayments received, financing; neocloud-funding signpost | ai | open |
-| 2026-11-20 | yes | DOF Q3 dividend $0.40 goes ex (paid 30 Nov) | dof | watch |
+| 2026-11-20 | yes | DOF Q3 dividend $0.40 goes ex (paid 30 Nov); duplicate of the open row "DOF Q3 dividend USD 0.40 goes ex" (13 Nov) | dof | dropped |
 | 2027-02-18 | yes | DOF Q4 2026 report and Q4 dividend (paid ~5 Mar) | dof | open |
 | 2027-04-07 | yes | DOF annual report, with new broker fleet values | dof | open |
 | 2027-02-25 | approx | Tidewater Q4 2026 report (day rates, utilisation by region) | supply | open |
@@ -376,7 +376,7 @@ it to `open`.
 | 2027-03-31 | yes | Taptravel longstop: SEK 50m share issue (Ridge Capital) must close, or event of default | hy, hy-issuers | open |
 | 2026-11-29 | yes | OPEC+ meeting (2027 quotas expected) | oil | open |
 | 2026-11-30 | approx | Brent F27 15% front-month trigger: a settlement ≤ 96.42 by 30 Nov makes the oil follow-up a full update | oil | done |
-| 2026-11-27 | approx | Westwood October rig dashboard (late Nov) | rig | open |
+| 2026-11-27 | approx | Westwood October rig dashboard (late Nov); duplicate of the watch row with the re-run test (MCU 90–96%, backlog 150 rig-years) (13 Nov) | rig | dropped |
 | 2026-11-30 | yes | CAPT Q3 report | capt | open |
 | 2026-11-30 | yes | SK hynix Q3 dividend record date (KRW 20,000: 10,000 regular + 10,000 special) | skh, kospi | open |
 | 2026-12-11 | approx | FTSE December review (effective mid/late Dec): FLXK re-capped; FLXK no longer followed (no KID at Nordnet, 29 Oct) | kospi | dropped |
