@@ -39,7 +39,7 @@ Kept by the `update-chain` skill; checked by
 | id | file | skill | type | as of | last change | affects | stale after | rev used | note |
 |---|---|---|---|---|---|---|---|---|---|
 | oil | docs/oil-market-bbb.md | oil-market-bbb | market | 2026-11-11 | 2026-11-11 | none | 2026-11-30 | 2026-10-24.4 | 11 Nov full update (15% front trigger fired 4 Nov; stale): Base Brent 2027 88 → 84 (physical premium gone, faster recovery outside Iran, strip 81.2); 2028/29, mid-cycle, Bear/Bull and cracks unchanged; stub 104.3 → 97.1, crack 88.1 → 85.1; Russian refining trigger tested, no crack change |
-| shipping | docs/oil-shipping-bbb.md | oil-shipping-bbb | market | 2026-10-24 | 2026-10-24 | all | 2026-11-23 | 2026-10-24.1 | 24 Oct re-marked the stub (VLCC 850 → 700, Aframax 245 → 305); paths unchanged |
+| shipping | docs/oil-shipping-bbb.md | oil-shipping-bbb | market | 2026-11-13 | 2026-11-13 | none | 2026-12-04 | 2026-10-24.1 | 13 Nov update run: stub re-marked after the post-midterm crude correction (VLCC 700 → 630, Suezmax 465 → 400, Aframax 305 → 210, LR2 220 → 170, MR 55 → 62); "now" asset values +0–6%; 2027–29 paths, Year-1 quarters and mid-cycle unchanged (Year-1 FFA trigger fired, tested against the 1-yr TC, 2027 kept; VLCC and LR1 retest rules set); port fees suspended to 9/10 Jan 2027 |
 | rig | docs/rig-market-bbb.md | rig-market-bbb | market | 2026-11-12 | 2026-11-12 | none | 2026-12-12 | 2026-10-10.1 | 12 Nov full update: drillship Bull 2027 450→475, stub 420→455 (six-month rule 455 / 389–499 / 5 fixtures); Base 2027 420 kept (grouped ~438, +4% < 5%); all other paths, MCU, mid-cycle and values kept; SE Asia / ME ranges widened; triggers: stale, Beacon Pacific (stranded HE semi, Serica UK Q3-27), Bull signpost; oil 84 not material; Hercules corrected to Canada |
 | supply | docs/supply-market-bbb.md | supply-market-bbb | market | 2026-11-12 | 2026-11-12 | none | 2026-12-12 | 2026-11-12.1 | 12 Nov full update: NS PSV spot Base 2027 £16.5k→£18.5k (75%); PLSV Bear 2028–29 255/250→270/265, Bull mid-cycle 285→300 (2028 round $295–309k confirms Base 295/300); AHTS £75k kept, cut to ~£60–65k if Nov Seabreeze <£50k; Paratus not tracked; affects none |
 | hy | docs/hy-market-bbb.md | hy-market-bbb | market | 2026-11-11 | 2026-11-05 | hy-issuers, global-index | 2026-12-05 | 2026-11-08.1 | 11 Nov note: Taptravel vote approved (re-default, no new FTD; longstop 31 Mar 2027); Oct CPI 3.6 / CPI-ATE 2.7 vs MPR 3.8 / 2.7; Riksbank minutes confirm ~2 more hikes; oil Base 2027 84 not material for E&P; DNB CMD noted ([E]); market path +0.17/+0.33/+0.69; all paths and E / R 0.254 kept |
@@ -87,7 +87,7 @@ Kept by the `update-chain` skill; checked by
 
 | document | reads | input as of | link | reads what |
 |---|---|---|---|---|
-| shipping | oil | 2026-10-24 | main | Crude and product prices, volumes, disruptions |
+| shipping | oil | 2026-11-11 | main | Crude and product prices, volumes, disruptions |
 | rig | oil | 2026-11-11 | main | Brent path, long end, mid-cycle |
 | supply | oil | 2026-11-11 | main | Oil path (FID and tender logic) |
 | supply | rig | 2026-11-12 | main | Rig activity for OSV demand |
@@ -133,7 +133,7 @@ Kept by the `update-chain` skill; checked by
 | odl | equity | 2026-11-06 | main | Exit cross-check, NOK path |
 | scatec | equity | 2026-10-18 | main | Exit cross-check, NOK path |
 | scatec | hy | 2026-10-24 | main | Bear refinancing spread (corporate bonds from 2028) |
-| capt | shipping | 2026-10-24 | main | VLCC and Aframax rows, stub, values |
+| capt | shipping | 2026-10-24 | main | VLCC, Suezmax and Aframax/LR2 rows, stub, values (open days are Suezmax and Aframax/LR2; VLCCs on TC) |
 | capt | oil | 2026-10-24 | main | Background |
 | capt | equity | 2026-10-18 | main | Exit cross-check, NOK path |
 | capt | hy | 2026-10-24 | main | NIBOR, reference E / R (via equity) |
@@ -263,7 +263,7 @@ it to `open`.
 | 2026-11-08 | yes | NVIDIA board opens an independent probe into the CEO (reported intelligence link); no timeline; stock −4.3% 9 Nov, −6.1% 10 Nov. Read at the Q3 run (17 Nov) | nvda, ai | watch |
 | 2026-11-10 | approx | Possible new US export controls on NVIDIA AI chips to China (The Information, 10 Nov) and congressional briefing requests; China already excluded from NVIDIA Base | nvda, ai | watch |
 | 2026-11-06 | yes | CAPT: 15-month TC for the Suezmax Amor from Nov 2026, revenue $73.1–82.2m (~$160–180k/day gross), subject to vetting (capt news note 8 Nov) | capt | done |
-| 2026-11-06 | yes | Period-market data point: CAPT Amor (2026 dual-fuel Suezmax) 15-month TC at ~$160–180k/day gross; read at the shipping BBB's next run | shipping | watch |
+| 2026-11-06 | yes | Period-market data point: CAPT Amor (2026 dual-fuel Suezmax) 15-month TC at ~$160–180k/day gross; read at the shipping BBB's next run | shipping | done |
 | 2026-10-23 | yes | Intrum Q3 report: net loss SEK 1.49bn incl. SEK 1.52bn goodwill impairment (Germany); shares −39% intraday; servicing leverage 4.5x; bond price not found (daily news 26 Oct) (hy-issuers read 31 Oct) | hy-funds | done |
 | 2026-10-25 | yes | Brazil presidential runoff | supply | done |
 | 2026-10-26 | yes | Westwood weekly rig count, first after the Gulf escalation (not public by 28 Oct; the 2 Nov count covers it) | rig, borr | done |
@@ -308,7 +308,7 @@ it to `open`.
 | 2026-11-06 | yes | Pentagon Europe force-posture recommendation to Hegseth (date firm per defense 31 Oct; NDAA floor 76,000 US troops in Europe) | defense | open |
 | 2026-11-09 | yes | Tidewater Q3 report (after the US close; call 10 Nov) | supply | done |
 | 2026-11-07 | yes | Hofseth: value-adjusted equity ratio covenant on the EUR 300m bond tightens 25% → 27.5% (26.5% at 30 Jun); bond ~72 (Finansavisen via Salmon Business, 12 Oct [E]); NOK 600m equity raise still not closed (daily news 28 Oct) | hy-issuers, hy-funds | done |
-| 2026-11-09 | yes | USTR/China port-fee deadline (9–10 Nov) | shipping | open |
+| 2026-11-09 | yes | USTR/China port-fee deadline (9–10 Nov) | shipping | done |
 | 2026-11-09 | yes | Taptravel bondholder vote: both procedures approved; effective only when a SEK 50m share issue closes (hy and hy-issuers notes 11 Nov) | hy-issuers, hy | done |
 | 2026-11-10 | yes | DNB Capital Markets Day (London): update on financial targets (Newsweb 23 Oct) | dnb | done |
 | 2026-11-10 | approx | Fondsfinans October reports (Sissener's read 6 Nov): trigger for the full hy-funds re-run, with Heimdal's NOK report yields | hy-funds, hy-issuers | done |
@@ -335,7 +335,7 @@ it to `open`.
 | 2026-11-18 | yes | House closed briefing on NVIDIA requested for 18 Nov (committee chairs Mast, Moolenaar, Crawford; letter 4 Nov); 11 Nov: House Republicans press Huang to testify, subpoena floated (daily news 12 Nov) | nvda, ai | watch |
 | 2026-11-12 | approx | NVIDIA board decision on CEO: Huang resigned as CEO and director (8-K 12 Nov, effective 11 Nov); Colette Kress interim CEO and CFO; Harvey Jones first Chair; internal and external search | nvda, ai | done |
 | 2026-11-30 | approx | BIS rule blocking Chinese remote access to advanced AI chips via data centres abroad, seven more countries incl. Malaysia, Singapore, Thailand (The Information 11 Nov `[E]`; "could be announced this month") | nvda, ai | open |
-| 2026-11-18 | approx | Trump–Xi meeting (18–19 Nov): export policy for AI chips | nvda, ai | watch |
+| 2026-11-18 | approx | Trump–Xi meeting (18–19 Nov, APEC Shenzhen): export policy for AI chips; port-fee talks (USTR/China suspensions run to 9/10 Jan 2027) | nvda, ai, shipping | watch |
 | 2027-02-25 | approx | CoreWeave Q4 2026 report (date not announced): ~$9bn of prepayments received, financing; neocloud-funding signpost | ai | open |
 | 2026-11-20 | yes | DOF Q3 dividend $0.40 goes ex (paid 30 Nov); duplicate of the open row "DOF Q3 dividend USD 0.40 goes ex" (13 Nov) | dof | dropped |
 | 2027-02-18 | yes | DOF Q4 2026 report and Q4 dividend (paid ~5 Mar) | dof | open |
@@ -434,6 +434,9 @@ it to `open`.
 | 2027-06-30 | approx | Scatec repays SCATC05 (NOK 1,453m, due Q1 2028) in H1 2027 per the Q3 presentation | scatec, hy-funds | open |
 | 2027-06-30 | approx | UK 2027 Spending Review (date not set): funds or not the path to 3% / 3.5% of GDP | defense | open |
 | 2027-07-01 | approx | SED T-16 Phase 7 (CPOC, 30 months firm) starts (early Q3 2027) | sed | open |
+| 2026-11-18 | yes | Hafnia Q3 deck: product-tanker orderbook by year (Shipping BBB MR2 orderbook-trigger retest) | shipping | watch |
+| 2026-11-27 | approx | Frontline Q3 report (late Nov; date not confirmed): orderbook count by segment, company TCE | shipping | watch |
+| 2027-01-10 | yes | USTR Section 301 port-fee suspension ends (23:59 ET 9 Jan) and China's special-port-fee suspension ends (10 Jan): Shipping BBB Bull signpost "fees return and split the fleet" | shipping | open |
 
 ## Change log
 

@@ -320,3 +320,4 @@ Moved out of `docs/update-register.md` on 12 Nov 2026 (lean documents). New entr
   `open` row stays) and the Westwood October dashboard `open` row (the `watch` row with the MCU/backlog re-run test stays).
   The two Anthropic IPO rows are not duplicates (different documents and status) and stay.
 - **2026-11-13 (odl):** v2.1 ex-dividend re-mark, compacted 721 → 450 lines; Base IRR 8.1% → 9.0%, hurdle NOK 95.5 vs NOK 102.80, fails. `--changed yes --affects none`; event "ODL Q3 dividend ... goes ex" done.
+- **2026-11-13 (shipping):** update run; stub and "now" asset values re-marked, paths unchanged. `--changed yes --affects none`. Events: port-fee deadline and Amor watch done; Trump–Xi gets shipping; added Hafnia Q3 deck (watch), Frontline Q3 (watch), port-fee suspensions end 10 Jan 2027 (open). capt Inputs row: Suezmax added (header uses VLCC / Suezmax / Aframax-LR2).
