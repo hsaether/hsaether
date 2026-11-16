@@ -1,10 +1,10 @@
-# Supply Market BBB — 12 November 2026
+# Supply Market BBB — 16 November 2026
 
-**Status: Final** (full update, Update mode, Steps 0–11) · skill `supply-market-bbb` revision 2026-11-12.1, `iaf-valuation` 2026-11-10.1 · as of **12 Nov 2026** (information cut-off 12:00 Europe/Oslo) · **stale after 12 Dec 2026** · compacted 13 Nov 2026 (no value changed)
+**Status: Final** · full update 12 Nov 2026 (Steps 0–11; skill 2026-11-12.1) plus **small update 16 Nov 2026** (sector news: North Sea AHTS spot; skill `supply-market-bbb` revision 2026-11-12.2, `iaf-valuation` 2026-11-12.1) · as of **16 Nov 2026** (information cut-off 12:00 Europe/Oslo) · **stale after 12 Dec 2026**
 
 ## Interface (values other documents read)
 
-As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cells Bear / Base / Bull (point values; ranges under "Paths per row"). North Sea in GBP k/day, South America in USD k/day. The stub is identical across scenarios. Weights 25/50/25 are a convention, never a probability. Tags: `[F]` fact · `[E]` external forecast or secondary · `[A]` own assumption · `[?]` unknown.
+As of **16 Nov 2026** (NS AHTS row re-set; every other value as of 12 Nov). Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cells Bear / Base / Bull (point values; ranges under "Paths per row"). North Sea in GBP k/day, South America in USD k/day. The stub is identical across scenarios. Weights 25/50/25 are a convention, never a probability. Tags: `[F]` fact · `[E]` external forecast or secondary · `[A]` own assumption · `[?]` unknown.
 
 **Rates, k/day**
 
@@ -12,7 +12,7 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
 |---|---|---|---|---|---|---|
 | NS large PSV — spot | GBP | 16.4 / 16.4 / 16.4 | 11.0 / 18.5 / 21.0 | 10.0 / 16.5 / 23.0 | 10.0 / 16.5 / 22.0 | 11.0 / 14.0 / 17.0 |
 | NS large PSV — term | GBP | 18.3 / 18.3 / 18.3 | 16.5 / 19.5 / 21.0 | 15.0 / 19.0 / 22.0 | 14.5 / 19.5 / 23.0 | 14.5 / 17.0 / 19.5 |
-| NS AHTS — spot (> 22k bhp) | GBP | 66 / 66 / 66 | 45 / 75 / 120 | 38 / 65 / 110 | 35 / 60 / 100 | 30 / 38 / 50 |
+| NS AHTS — spot (> 22k bhp) | GBP | 43 / 43 / 43 | 45 / 60 / 120 | 38 / 65 / 110 | 35 / 60 / 100 | 30 / 38 / 50 |
 | NS subsea / CSV-IMR (vessel only) | GBP | 55 / 55 / 55 | 45 / 55 / 62 | 40 / 52 / 65 | 38 / 50 / 65 | 38 / 45 / 52 |
 | Brazil PSV (PSV 4500 class) | USD | 40 / 40 / 40 | 33 / 38 / 42 | 31 / 38 / 45 | 31 / 40 / 47 | 31 / 36 / 41 |
 | Brazil AHTS (15–18k bhp, vessel basis) | USD | 72 / 72 / 72 | 58 / 70 / 78 | 55 / 70 / 82 | 55 / 72 / 85 | 55 / 62 / 70 |
@@ -28,7 +28,7 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
 |---|---|---|---|---|---|---|
 | NS large PSV — spot | Seabrokers spot utilisation | 75 / 75 / 75 | 62 / 75 / 78 | 58 / 74 / 80 | 58 / 74 / 80 | 62 / 70 / 76 |
 | NS large PSV — term | Tidewater Europe/Med PSV > 900 active `[E]` | 93 / 93 / 93 | 84 / 88 / 91 | 82 / 89 / 92 | 80 / 89 / 92 | 83 / 87 / 90 |
-| NS AHTS — spot | Seabrokers spot utilisation | 55 / 55 / 55 | 52 / 62 / 70 | 50 / 64 / 72 | 50 / 65 / 72 | 52 / 60 / 66 |
+| NS AHTS — spot | Seabrokers spot utilisation | 48 / 48 / 48 | 52 / 62 / 70 | 50 / 64 / 72 | 50 / 65 / 72 | 52 / 60 / 66 |
 | NS subsea / CSV-IMR | Westwood ROVSV `[E]` + owner status `[A]` | 90 / 90 / 90 | 78 / 85 / 90 | 74 / 83 / 90 | 72 / 82 / 89 | 75 / 80 / 85 |
 | Brazil PSV | Spinergie S. America `[E]` | 84 / 84 / 84 | 80 / 84 / 87 | 77 / 83 / 89 | 77 / 85 / 90 | 78 / 83 / 87 |
 | Brazil AHTS | Spinergie S. America `[E]` | 84 / 84 / 84 | 80 / 84 / 87 | 78 / 84 / 88 | 78 / 85 / 89 | 78 / 83 / 87 |
@@ -37,11 +37,11 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
 
 **Year 1, anchors, scenarios, signposts and readers**
 
-| Item | Value (12 Nov 2026) |
+| Item | Value (12 Nov 2026; NS AHTS rows 16 Nov) |
 |---|---|
 | Conventions | NS spot rows: annual = arithmetic mean of the 12 Seabrokers monthly averages (Seabrokers' own fixture-weighted annual runs ~11% lower; IAF uses this convention). Brazil PLSV: 550 t class, vessel + crew, 100% vessel basis. Low confidence: NS CSV, Brazil AHTS, PLSV Bull 2028–29, secondary rows |
 | NS large PSV spot, Year 1 (Q1 / Q2 / Q3 / Q4-27, £k) | Bear 7.3 / 16.1 / 10.3 / 10.3 · Base 12.2 / 27.0 / 17.4 / 17.4 · Bull 13.9 / 30.7 / 19.7 / 19.7; Base utilization 69 / 81 / 75 / 75% |
-| NS AHTS spot, Year 1 (£k) | Bear 43.2 / 50.9 / 36.9 / 49.1 · Base 72.0 / 84.8 / 61.5 / 81.8 · Bull 115.2 / 135.6 / 98.4 / 130.8; Base utilization 60 / 66 / 60 / 62% (low confidence) |
+| NS AHTS spot, Year 1 (£k) | Bear 43.2 / 50.9 / 36.9 / 49.1 · Base 57.6 / 67.8 / 49.2 / 65.4 · Bull 115.2 / 135.6 / 98.4 / 130.8; Base utilization 60 / 66 / 60 / 62% (low confidence) |
 | Vessel value convention and life | Value = (rate × utilization × 365 − opex × 365 [− PLSV capex $5.8m/yr]) × PV annuity at 8% over the remaining life. Economic life **25 years for every row**; 27.5–30 years are sensitivities, not Base |
 | NS large PSV anchors | Mid-cycle value 11 / 19 / 27 $m (12-yr-old); cash floor £9.2k ($12.2k); newbuild parity £20.2k (convention) / £23–25k (Tidewater); reactivation parity `[?]`; asset-implied £17.7k (Bourbon auctions) and £19.3k (GEOS sales) |
 | NS large AHTS anchors | 14 / 37 / 70 $m (15-yr-old); floor £11.4k ($15.0k); newbuild parity £46.5k spot-average equivalent at 62% (at an assumed $90m); reactivation `[?]`; asset-implied ~£32k (alternative mid-cycle) |
@@ -53,28 +53,29 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
 | Bear (25%) | Oil Bear and rig Bear. Arrived AHTS supply stays in the North Sea; ~30 CSV newbuilds deliver 2027–28; Brazilian-built PSVs displace foreign tonnage; PN 2027–31 moves Petrobras capital toward refining; rest of the 2028 PLSV roll at ~$270k |
 | Base (50%) | NCS term demand absorbs PSVs into 2027; AHTS normalises but stays above 2022–25; Petrobras 2027 plateau with OSV tendering restarted, 2028–29 FPSO recovery; the 2028 PLSV round prices at ~$300k |
 | Bull (25%) | PN 2027–31 confirms ~200 OSVs and newbuild tenders; North Sea tonnage pulled to Brazil, Guyana and West Africa; attrition, no orders; rest of the PLSV roll ≥ $330k |
-| Recalibration triggers | Fired: PLSV tender awarded (assessed; Base confirmed); Petrobras PSV tenders (bids 17 Nov, rates `[?]`); NS AHTS Q4 spot miss (Base kept under the rule below); staleness. Pending: NS PSV Q4 test (fires if the Nov–Dec average > £15.25k). Not fired: net spot-pool moves (−2 in October), newbuild orders, ownership changes at covered owners, strikes or force majeure, oil and rig baselines |
-| AHTS rule (November *Seabreeze*, ~4 Dec) | Large-AHTS average < £50k (month 2 of the Bear signpost) cuts Base 2027 to ~£60–65k at once, by small update. At £75k or above, the Q4 miss is October only and Base stands |
-| Signpost states | NS AHTS spot: Oct £43.8k at 42%, month 1 of 3, toward Bear · NS PSV spot: firm (Q3-26 £19.7k; Oct £19.5k at 82%) · NCS term PSV ~NOK 262k, up, no new print · PLSV 2028 round closed at Base ($295–309k) · Petrobras OSV tenders: Base met, Bull half-met · PN 2027–31, Equinor AHTS award, rest of the PLSV roll: pending |
-| Dated events | **17 Nov** Petrobras PSV 4500 (5 lots) / PSV 3000 (2 lots) proposals open (Base signpost $36–42k; Bull > $42k); late Nov PN 2027–31 (date not announced); Equinor AHTS term award (bids due 3 Nov; none by 12 Nov); ~4 Dec November *Seabreeze*; signatures of the 2028 PLSV contracts |
-| Reader hy (Oil Service row, OSV and subsea) | Direction unchanged or firmer: NS PSV firmer (spot Base 2027 £18.5k); NS AHTS kept but under test (October at Bear); Brazil PLSV re-priced up for four vessels to 2031. Nothing points to higher OSV default risk in Base |
-| Reader dof (NS and Brazil rows, anchors, economic life) | Rows and anchors above. Company items from this run: the DOFCON 2028 PLSV round at the vessels' own rates ($305k / $295k / $295k at 100%, 4 years from Jan 2028), not at a relative change of the row; Skandi Mariner firm to Q3 2028 ($15–25m); the 7-year smaller-CSV contract (~$110m); Skandi Constructor to Apr 2028 ($25–50m); the AHTS cover table; Q3 utilisation 86%. These are backlog, not market rates. Watch NS AHTS spot: the November rule can cut Base 2027 |
+| Recalibration triggers | Fired: PLSV tender awarded (assessed; Base confirmed); Petrobras PSV tenders (bids 17 Nov, rates `[?]`); NS AHTS Q4 spot miss (the rule below applied 16 Nov); staleness. Pending: NS AHTS Bear signpost (month 3 = December, *Seabreeze* early Jan; crossed → full update); NS PSV Q4 test (fires if the Nov–Dec average > £15.25k). Not fired: net spot-pool moves (−2 in October), newbuild orders, ownership changes at covered owners, strikes or force majeure, oil and rig baselines |
+| AHTS rule (applied 16 Nov) | Rule: a large-AHTS month 2 < £50k cuts Base 2027 to ~£60–65k at once. **Applied on Clarksons prints** (Finansavisen 2 and 16 Nov `[E]`, grade C): ~NOK 310k ≈ £24.5k at the turn of the month, then −40% in three weeks to the year's lowest NCS rate. A November mean ≥ £50k would need the second half at ≥ ~£75k. **Base 2027 £60k** (bottom of the band). The 4 Dec *Seabreeze* confirms: ≥ £75k restores £75k; anything lower keeps £60k |
+| Signpost states | NS AHTS spot: Oct £43.8k at 42% `[F]`, Nov ~£24.5k and falling `[E]`: month 2 of 3, toward Bear · NS PSV spot: firm (Q3-26 £19.7k; Oct £19.5k at 82%) · NCS term PSV ~NOK 262k, up, no new print · PLSV 2028 round closed at Base ($295–309k) · Petrobras OSV tenders: Base met, Bull half-met · PN 2027–31, Equinor AHTS award, rest of the PLSV roll: pending |
+| Dated events | **17 Nov** Petrobras PSV 4500 (5 lots) / PSV 3000 (2 lots) proposals open (Base signpost $36–42k; Bull > $42k); late Nov PN 2027–31 (date not announced); Equinor AHTS term award (bids due 3 Nov; none by 16 Nov); **~4 Dec** November *Seabreeze* (confirms AHTS month 2 and the stub; ≥ £75k restores Base 2027 £75k); **early Jan** December *Seabreeze* (AHTS month 3: < £50k crosses the Bear signpost → full update); signatures of the 2028 PLSV contracts |
+| Reader hy (Oil Service row, OSV and subsea) | NS PSV firmer (spot Base 2027 £18.5k; term £19.5k / 19.0k / 19.5k kept); NS AHTS spot weaker (Base 2027 £60k, a spot-pool row; AHTS term kept); Brazil PLSV re-priced up for four vessels to 2031. Nothing points to higher OSV default risk in Base |
+| Reader dof (NS and Brazil rows, anchors, economic life) | Rows and anchors above. Company items from this run: the DOFCON 2028 PLSV round at the vessels' own rates ($305k / $295k / $295k at 100%, 4 years from Jan 2028), not at a relative change of the row; Skandi Mariner firm to Q3 2028 ($15–25m); the 7-year smaller-CSV contract (~$110m); Skandi Constructor to Apr 2028 ($25–50m); the AHTS cover table; Q3 utilisation 86%. These are backlog, not market rates. NS AHTS spot (16 Nov): Base 2027 £60k, stub £43k, Year-1 quarters 57.6 / 67.8 / 49.2 / 65.4 for the open spot-pool days; 2028–29, mid-cycle, Bear and Bull unchanged |
 | Other owners (no analyses) | **Solstad:** NS AHTS spot (Solstad Maritime's Q3 record came from it); Brazil CSV terms $74–85k; Normand Maximus enters Solstad Offshore in Oct 2027 at $125m, debt-financed, firm with Saipem Mar 2027–May 2029: growth capex at a 2022 strike, tested against its charter, not the NS CSV row. **Tidewater:** Europe/Med PSV realised $24.9k (Q3) vs NS term Base 2027 £19.5k ($25.9k), a small positive mark-to-market; Brazil (WSUT) on the Brazil PSV row and the 17 Nov bids. **Golden Energy / Eidesvik / Havila:** NS PSV term row; GEOS fleet dayrate as a monthly check; the GEOS sales as value points. **Seagems** (not tracked): its Petrobras prints feed the PLSV row |
 
 ## Metadata
 
-- **Analysis date:** Thu 12 Nov 2026, Europe/Oslo; information cut-off 12 Nov 2026 12:00 (DOF's Q3 report was published that morning). **Status: Final.** Caveats (open checkpoints):
-  - no North Sea spot data after October (the November *Seabreeze* is due early December);
+- **Analysis date:** Mon 16 Nov 2026, Europe/Oslo (small update); full update Thu 12 Nov 2026 (cut-off 12:00, DOF's Q3 report that morning). **Status: Final.** Caveats (open checkpoints):
+  - November North Sea AHTS spot rests on two Clarksons prints via Finansavisen `[E]`, not the anchor series; the November *Seabreeze* (~4 Dec) confirms;
   - the Equinor AHTS term award is not announced;
   - contract cover outside Seagems, DOFCON and DOF's AHTS table is `[A]`.
-- **Skill revisions:** `supply-market-bbb` 2026-11-12.1 (Paratus not tracked; no row, path or method change); `iaf-valuation` 2026-11-10.1.
-- **Why this run:** stale after 9 Nov; triggers fired on 4 Nov (Petrobras PSV 4500 / PSV 3000 tenders published; NS AHTS Q4 spot quarter set to miss Base by > 15%) and on 9 Nov (Petrobras PLSV 2028 round final results). Events read: Tidewater Q3 (9 Nov, call 10 Nov), DOF Q3 (12 Nov), Equinor AHTS term tender bids (3 Nov).
+- **Skill revisions:** this small update `supply-market-bbb` 2026-11-12.2 (Paratus mentions neutralised; no row, path or method change) and `iaf-valuation` 2026-11-12.1; the 12 Nov full update ran under 2026-11-12.1 / 2026-11-10.1.
+- **Why this run (16 Nov):** sector news (Mode C): Finansavisen 16 Nov, "spot rates for large anchor handlers in the North Sea fell ~40% in three weeks; the year's lowest rate registered on the NCS" (lead only, paywalled), after Finansavisen/Clarksons 2 Nov ("from million rates to NOK 310,000 a day"). It is month 2 of the AHTS Bear signpost, so the pre-set AHTS rule was tested now rather than on 4 Dec. Only the NS AHTS spot row was re-tested; the rig input (12 Nov) was re-read for AHTS demand and is unchanged. The 12 Nov run was triggered by staleness (9 Nov), the Petrobras PSV tenders and the NS AHTS Q4 miss (4 Nov) and the PLSV 2028 round (9 Nov).
 - **Previous baseline:** 17 Oct 2026 (26 days). **Window:** stub Q4-26 + 2027–2029; no roll (that is in January).
 - **Stale after 12 Dec 2026** (30 days; the same date as the rig baseline). Planned checks that can force a small update earlier:
   - Petrobras PSV 4500 / PSV 3000 proposal opening, **17 Nov** (the first Brazil PSV rate print since Apr-25);
-  - the Equinor AHTS term award (bids were due 3 Nov; nothing announced by 12 Nov);
+  - the Equinor AHTS term award (bids were due 3 Nov; nothing announced by 16 Nov);
   - Petrobras PN 2027–31 (late Nov by the 2025 pattern; date not announced);
-  - the November *Seabreeze* (~4 Dec): month 2 of the AHTS test and the Q4 spot test;
+  - the November *Seabreeze* (~4 Dec): confirms AHTS month 2 and the Q4 stubs, and runs the PSV Q4 test;
+  - the December *Seabreeze* (early Jan): AHTS month 3 (Bear signpost);
   - signature of the 2028 PLSV contracts.
 - **Inputs (read only; no own oil or rig view):**
   - **Oil Market BBB, 11 Nov 2026** (Final, stale after 30 Nov).
@@ -104,29 +105,32 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
 - **FX** (AllRatesToday, **12 Nov 2026 07:48 UTC**): **GBP/USD 1.32675 · GBP/NOK 12.6808 · GBP/BRL 7.41381** (USD/BRL 5.588; USD/NOK 9.558).
   - The weaker BRL lowers the USD cost of Brazilian crew; rows are quoted in USD, so no rate moves.
   - No row is re-converted. Figures converted earlier keep their stated FX (17 Oct GBP/USD 1.33265; 10 Oct 1.3235; fixture dates as logged).
+  - **16 Nov conversions:** Norges Bank daily rate **GBP/NOK 12.6491 (13 Nov 2026**, the latest published at the cut-off; 12 Nov 12.6359), source S68. NOK 310,000 ≈ **£24.5k**; £50k ≈ NOK 632k; £75k ≈ NOK 949k.
 - **Oldest load-bearing inputs:** *Seabreeze* October 2026 (observed Oct, published early Nov; a monthly series, so the "> 1 week" staleness flag applies until the November report); the Fearnleys CSV orderbook (Dec 2025, stale); the Westwood global fleet count (Q4-25).
-- **Not read `[?]`:** North Sea spot for November (no broker month yet, and no public weekly series since SSY's PDFs went private); the Tidewater call transcript (10 Nov; the release and its fleet tables were read); Solstad Maritime's Q3 segment utilisation (release summary only); Newsweb via Edge (not used; owner releases came from Nordic Financial's Newsweb source).
+- **Not read `[?]`:** the North Sea spot month for November from any broker (Seabrokers still shows October on 16 Nov; Hagland's spotlist is dynamic; no Westshore or Fearnley November item found; SSY private), and the Finansavisen article bodies (paywalled: lead and caption only), so the "year's lowest" fixture's level and vessel are `[?]`; the Tidewater call transcript (10 Nov; the release and its fleet tables were read); Solstad Maritime's Q3 segment utilisation (release summary only); Newsweb via Edge (not used; owner releases came from Nordic Financial's Newsweb source).
 - **Tags:** `[F]` fact · `[E]` external forecast or secondary · `[A]` own assumption · `[?]` unknown. Fixture grades: A stated rate · B value ÷ days · C secondary · D unknown.
 
 ## Conclusion
 
-**Supply Market BBB changed in two rows on 12 Nov (detail in the change log); every other path is kept.**
+**Supply Market BBB changed in three rows: NS AHTS spot on 16 Nov (small update, the pre-set AHTS rule), NS large PSV spot and Brazil PLSV on 12 Nov (detail in the change log); every other path is kept.**
 
-1. **NS large PSV spot, Base 2027 £18.5k at 75%** (+12% on the annual average: above the 10% minimum change, below the 15% quarter trigger). Several independent points agree:
+1. **NS AHTS spot, Base 2027 £60k** (the AHTS rule, applied 16 Nov):
+   - Evidence: *Seabreeze* October £43.8k at 42% `[F]` (month 1). Clarksons via Finansavisen `[E]`, grade C: ~NOK 310k ≈ £24.5k a day at the turn of the month (week to ~1 Nov), with rates still falling (2 Nov); then −40% in three weeks to the year's lowest rate on the NCS (16 Nov). Both point the same way as October. Basis caveat: Clarksons quotes the Norwegian sector in NOK and *Seabreeze* is North Sea-wide. The sector spread in 2026 was ~30% (July, Hagland: Norway NOK 1.1m vs UK £115k `[E]`), far less than the ~3× a UK average would need to lift the pool to £50k.
+   - Test: the rule fires when month 2 (November) averages < £50k (≈ NOK 632k). With the first half near £25k, the month reaches £50k only if the second half averages ≥ ~£75k, three times the current level. The rig input (12 Nov, re-read) shows no extra rig-move cluster before Q1-27: beyond routine well-to-well moves, the next NCS moored-semi moves are the Hercules tow-out (Q1-27) and the Endurance arrival (Q2-27). **The rule fires on the evidence available now.**
+   - Point: **£60k**, the bottom of the ~£60–65k band. November is about half the threshold, not marginal; the departure side has not answered (October net −2, one of them an AHTS); the Equinor AHTS term award, the main near-term support, is still not announced. £60k still sits above the 2022–25 annual means (£36–50k) and newbuild parity (£46.5k spot-average equivalent), so the Base narrative "normalises but stays above 2022–25" holds.
+   - Not moved (no rule): utilisation 2027 62% (no November utilisation print; 3 pp minimum); 2028 £65k and 2029 £60k (the evidence is the Q4-26 spot pool; flattening 2028 to £60k is −7.7%, below the 10% minimum); mid-cycle (anchored on long-run averages and parity); Bear 2027 £45k (two winter months do not set an annual Bear level; a move needs ≤ £40.5k); Bull (a stress test; its signpost "> £100k through H1-27" moves away).
+2. **NS large PSV spot, Base 2027 £18.5k at 75%** (+12% on the annual average: above the 10% minimum change, below the 15% quarter trigger). Several independent points agree:
    - *Seabreeze* Jul–Oct: £15.3k / 21.4k / 22.3k / 19.5k at 62–82% utilisation `[F]`. The de-seasonalised H2-26 run-rate is ~£18–21k `[A]` (Jul–Oct ~£20.9k; May–Oct ~£17.8k on the 2023–25 factors), against a 2026 full-year mean of ~£17k.
    - Tidewater Europe/Med PSV > 900 m² (42 vessels, mostly North Sea): $24.9k at 92.6% in Q3, up from $23.8k at 88.5% in Q2 `[F]`. Tidewater's worldwide leading-edge term rate is $27.4k, +12.5% q/q `[F]`.
    - Term absorption takes PSVs out of the 2027 spot pool: Ross Offshore/Harbour's three PSVs from Jan 2027, seven Equinor extensions, and the NEO NEXT+ and EnQuest UK terms.
    - Rig input: NW Europe moored semis are up ~1 rig-year in 2027 vs 2026 (Endurance, Barents and Beacon Pacific in; Hercules out).
    - 2028–29 stay at £16.5k. The evidence concerns 2027. The fade comes from supply (Capital Offshore's 9 PSV deliveries in 2027, migration) and rig MCU easing (NCS HE 93% by 2029). Nothing moves 2028–29 by 10%.
-2. **Brazil PLSV, recalibrated on the 2028 tender round** (trigger: a large Petrobras tender awarded). Base 2028 295 and 2029 300 are confirmed by the round. Bear 2028 270 and 2029 265 (utilisation 86 and 84%); Bull mid-cycle 300; stub 300 (six-month leading edge, mechanical).
+3. **Brazil PLSV, recalibrated on the 2028 tender round** (trigger: a large Petrobras tender awarded). Base 2028 295 and 2029 300 are confirmed by the round. Bear 2028 270 and 2029 265 (utilisation 86 and 84%); Bull mid-cycle 300; stub 300 (six-month leading edge, mechanical).
 
-**Kept after testing:**
-- **NS AHTS spot, Base 2027 £75k.**
-  - October (£43.8k at 42%) is the only month since the supply arrived; November is not published.
-  - Other evidence points the other way or takes AHTS out of the spot pool: DOF reports "very strong" AHTS contract coverage for 2027–28, two term awards from Q1-27, and Skandi Mariner extended to Q3 2028; Solstad Maritime's record Q3 was driven by its North Sea AHTS spot/project fleet; the rig input has three moored semi arrivals and one departure in NW Europe in 2027.
-  - The evidence threshold for a cut is not met. The pre-set rule for the November *Seabreeze* is in the Interface.
+**Kept after testing (12 Nov):**
+- **NS AHTS term lock-ups** take tonnage out of the spot pool and are kept as support for 2028: DOF reports "very strong" AHTS contract coverage for 2027–28, two term awards from Q1-27 and Skandi Mariner extended to Q3 2028; the rig input has three moored semi arrivals and one departure in NW Europe in 2027.
 - **NS PSV term, £19.5k:** no priced term print since 17 Oct. Two benchmarks sit at the row: Tidewater's realised Europe/Med rate, ≈ £18.8k; two GEOS PSV sales at $27.25m and $28m, which capitalise ~£19.3k per paid day.
-- **Also kept:** the NS CSV, Brazil PSV (bids open 17 Nov), Brazil AHTS, Brazil RSV and secondary rows; every mid-cycle value except PLSV Bull; economic life (25 years), the Year-1 AHTS quarters and the 25/50/25 convention weights.
+- **Also kept:** the NS CSV, Brazil PSV (bids open 17 Nov), Brazil AHTS, Brazil RSV and secondary rows; every mid-cycle value except PLSV Bull; economic life (25 years), the AHTS seasonal factors and the 25/50/25 convention weights.
 
 **PLSV read (the 2028 round):**
 - **Final results** (Fearnley Securities via Infront TDN, 9 Nov; user input, `[E]`; Petrobras' own publication not seen). Four years from 1 Jan 2028; negotiated down 10–15% from the first published levels; signatures remain. DOFCON: **Skandi Buzios $305k**, **Skandi Recife and Skandi Olinda $295k**. Seagems: **Sapura Jade $309k**.
@@ -138,13 +142,13 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
 - **Verdict: the round confirms the Brazil PLSV Base row** (2028 295, 2029 300), and the signpost "PLSV 2028 lots at $270–310k" is met. It raises the floor for re-pricing (Bear) and re-anchors "today's level" (Bull mid-cycle and stub) at ~$300k. The rest of the 2028 roll still needs a later tender: five Seagems vessels (Apr–Sep 2028) and Subsea7's 2025 contracts.
 
 **Base in two sentences:**
-- **North Sea:** large PSV spot ~£18.5k in 2027, fading to £16.5k as supply responds, and term ~£19–19.5k on NCS well and P&A work. Large AHTS normalises from 2026 (~£100k) toward £60–75k as the arrived supply is absorbed; October is the warning month.
+- **North Sea:** large PSV spot ~£18.5k in 2027, fading to £16.5k as supply responds, and term ~£19–19.5k on NCS well and P&A work. Large AHTS falls from 2026 (~£96k) to £60k in 2027 as the arrived supply stays in the spot pool through the winter (October £43.8k, November ~£25k), then £65k / £60k in 2028–29 as rig moves and term lock-ups absorb it.
 - **South America:** Brazil PSV/AHTS hold a 2027 plateau with Petrobras tendering restarted (PSV bids 17 Nov), then recover in 2028–29 with FPSO start-ups. RSV (~$105k) and PLSV (~$285–300k) are long-contract markets, and PLSV's 2028 re-pricing has started at ~$300k.
 
 **Row ranking (strongest → weakest):**
 1. **Brazil PLSV / RSV:** the 2028 round at $295–309k for 4 years; no PLSV newbuilds.
 2. **NS PSV term and spot:** tight H2-26 and term absorption into 2027.
-3. **NS AHTS:** scarce high-end tonnage, but October showed the arrived supply.
+3. **NS AHTS:** scarce high-end tonnage, but October and November show the arrived supply.
 4. **Brazil PSV/AHTS:** plateau and local newbuilds; tenders restarted.
 5. **NS CSV:** ~30 speculative newbuild CSVs (150–250 t AHC crane, global, mostly China) deliver H2-26 to 2028, with a record year in 2027 (Fearnley Offshore Supply).
 
@@ -161,7 +165,7 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
 | NS large PSV — rate | Bull | 13.9 | 30.7 | 19.7 | 19.7 | 21.0 | same |
 | NS large PSV — utilization | Base | 69 | 81 | 75 | 75 | 75 | `[A]`, from the 2026 monthly pattern |
 | NS AHTS — rate | Bear | 43.2 | 50.9 | 36.9 | 49.1 | 45.0 | 0.96 / 1.13 / 0.82 / 1.09 (2023–2025) |
-| NS AHTS — rate | **Base** | 72.0 | 84.8 | 61.5 | 81.8 | 75.0 | same |
+| NS AHTS — rate | **Base** | 57.6 | 67.8 | 49.2 | 65.4 | 60.0 | same |
 | NS AHTS — rate | Bull | 115.2 | 135.6 | 98.4 | 130.8 | 120.0 | same |
 | NS AHTS — utilization | Base | 60 | 66 | 60 | 62 | 62 | `[A]` |
 
@@ -210,8 +214,8 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
 
 | Scenario | Weight (convention) | Oil BBB scenario | Rig BBB scenario | Catalyst(s) | Mechanism | Earliest | Signposts |
 |---|---|---|---|---|---|---|---|
-| **Bear** | 25% | Bear (Brent 65 / 60 / 60; mid-cycle 60) | Bear (FID deferrals; NCS HE MCU 92 / 88 / 83%; drillships 380 / 375 / 360) | **Demand:** oil Bear cuts UK drilling and late-window FIDs. PN 2027–31 moves capital toward refining and diesel self-sufficiency, so Petrobras OSV tendering thins out after the current PSV round (AHTS, RSV, OSRV), and the rest of the 2028 PLSV roll re-prices ~10% below the 2028 round. **Supply:** the AHTS tonnage that arrived in Jun–Sep 2026 stays in the North Sea; 12 Brazilian-built PSVs (local-content priority) displace foreign vessels back to the North Sea; ~30 CSV newbuilds deliver in 2027–28 | NS PSV spot back to the 2024–25 band (£10–11k); AHTS ~£35–45k (October 2026 is the template); CSV rates fall toward asset-implied levels; Brazil PSV/AHTS slip 10–20% on re-tenders; the rest of the PLSV roll at ~$270k | Q1 2027 (AHTS: under way) | Large AHTS monthly avg < £50k for 3 months (Oct = month 1) · NS large PSV spot < £12k in Q2/Q3 · ≥ 3 large PSVs return from Brazil in a quarter · PN 2027–31 postponed or E&P capex cut > 10% · no Petrobras OSV tender beyond the PSV round by Q2-27 · NCS HE rig MCU < 92% · rest of the PLSV roll < $270k |
-| **Base** | 50% | Base (84 / 77 / 72; mid-cycle 70) | Base (NCS HE 97 / 96 / 93%; Brazil flat at 35 drilling; drillships 420 / 455 / 470) | NCS well campaigns, Equinor/Aker BP/Vår term demand and Harbour's Norge campaign absorb PSVs into 2027; the UK is spot-heavy with rising P&A and its first multi-year terms. AHTS supply has answered the 2026 scarcity: rates normalise but stay above 2022–25. Petrobras has restarted OSV tendering (PSV 4500/3000, bids 17 Nov), with a 2027 plateau and 2028–29 FPSO recovery. The 2028 PLSV round prices at ~$300k | PSV spot ~£18.5k in 2027, then £16.5k; term ~£19–19.5k; AHTS £75k → £60k; Brazil PSV ~$38–40k; RSV/PLSV contracted | Ongoing | Q2-27 PSV spot avg £20–28k · H1-27 large AHTS avg £60–90k · NCS term PSV NOK 230–265k for 2027 starts · Petrobras PSV bids (17 Nov) at $36–42k · PN 2027–31 keeps E&P capex within ±10% |
+| **Bear** | 25% | Bear (Brent 65 / 60 / 60; mid-cycle 60) | Bear (FID deferrals; NCS HE MCU 92 / 88 / 83%; drillships 380 / 375 / 360) | **Demand:** oil Bear cuts UK drilling and late-window FIDs. PN 2027–31 moves capital toward refining and diesel self-sufficiency, so Petrobras OSV tendering thins out after the current PSV round (AHTS, RSV, OSRV), and the rest of the 2028 PLSV roll re-prices ~10% below the 2028 round. **Supply:** the AHTS tonnage that arrived in Jun–Sep 2026 stays in the North Sea; 12 Brazilian-built PSVs (local-content priority) displace foreign vessels back to the North Sea; ~30 CSV newbuilds deliver in 2027–28 | NS PSV spot back to the 2024–25 band (£10–11k); AHTS ~£35–45k (October 2026 is the template); CSV rates fall toward asset-implied levels; Brazil PSV/AHTS slip 10–20% on re-tenders; the rest of the PLSV roll at ~$270k | Q1 2027 (AHTS: under way) | Large AHTS monthly avg < £50k for 3 months (Oct = month 1; Nov = month 2 on Clarksons `[E]`) · NS large PSV spot < £12k in Q2/Q3 · ≥ 3 large PSVs return from Brazil in a quarter · PN 2027–31 postponed or E&P capex cut > 10% · no Petrobras OSV tender beyond the PSV round by Q2-27 · NCS HE rig MCU < 92% · rest of the PLSV roll < $270k |
+| **Base** | 50% | Base (84 / 77 / 72; mid-cycle 70) | Base (NCS HE 97 / 96 / 93%; Brazil flat at 35 drilling; drillships 420 / 455 / 470) | NCS well campaigns, Equinor/Aker BP/Vår term demand and Harbour's Norge campaign absorb PSVs into 2027; the UK is spot-heavy with rising P&A and its first multi-year terms. AHTS supply has answered the 2026 scarcity: rates normalise but stay above 2022–25. Petrobras has restarted OSV tendering (PSV 4500/3000, bids 17 Nov), with a 2027 plateau and 2028–29 FPSO recovery. The 2028 PLSV round prices at ~$300k | PSV spot ~£18.5k in 2027, then £16.5k; term ~£19–19.5k; AHTS £60k / £65k / £60k; Brazil PSV ~$38–40k; RSV/PLSV contracted | Ongoing | Q2-27 PSV spot avg £20–28k · H1-27 large AHTS avg £50–75k · NCS term PSV NOK 230–265k for 2027 starts · Petrobras PSV bids (17 Nov) at $36–42k · PN 2027–31 keeps E&P capex within ±10% |
 | **Bull** | 25% | Base or Bull (2027 84–118) | Bull (drillships 475 in 2027, MCU 97% by 2028; FIDs) | **Demand:** PN 2027–31 confirms ~200 OSVs and 52 newbuild tenders `[E]` and pushes Equatorial Margin exploration; Guyana/Suriname and West Africa grow; NCS well campaigns, rig moves and floating-wind mooring. **Supply:** no orders; attrition (fleet > 20 yrs from 25% to 31% of tonnage `[E]`); net departures from the North Sea, as the PSV 4500/3000 4-year terms pull PSVs to Brazil; no PLSV newbuilds | NS PSV spot toward newbuild parity (£21–23k); term £21–23k; AHTS stays > £100k; Brazil PSV $42–47k; the rest of the PLSV roll at ≥ $330k (the level of the 2028 round's first published bids) | Q1 2027 | PN 2027–31 confirms the OSV target · net departures ≥ 3 large PSVs per quarter · large AHTS > £100k through H1-27 · NCS term PSV > NOK 275k · rest of the PLSV roll > $320k · Petrobras PSV bids > $42k · first large AHTS or PSV order at > $45m by a North Sea owner |
 
 ## Paths per row — utilization % / rate k/day, point (range)
@@ -225,7 +229,7 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
 | **Base** | **NS large PSV — term (£)** | **88 (86–90) / 19.5 (18.0–21.0)** | **89 (86–91) / 19.0 (17.5–20.5)** | **89 (86–92) / 19.5 (17.5–21.5)** | **89 / 19.3** | **87 / 17.0** |
 | Bull | NS large PSV — term (£) | 91 (89–93) / 21.0 (20.0–22.0) | 92 (90–94) / 22.0 (20.5–23.5) | 92 (90–94) / 23.0 (21.0–25.0) | 92 / 22.0 | 90 / 19.5 |
 | Bear | NS AHTS — spot (£) | 52 (47–57) / 45 (35–55) | 50 (45–55) / 38 (30–46) | 50 (45–55) / 35 (28–42) | 51 / 39 | 52 / 30 |
-| **Base** | **NS AHTS — spot (£)** | **62 (57–67) / 75 (55–95)** | **64 (59–69) / 65 (48–82)** | **65 (60–70) / 60 (45–75)** | **64 / 67** | **60 / 38** |
+| **Base** | **NS AHTS — spot (£)** | **62 (57–67) / 60 (45–75)** | **64 (59–69) / 65 (48–82)** | **65 (60–70) / 60 (45–75)** | **64 / 62** | **60 / 38** |
 | Bull | NS AHTS — spot (£) | 70 (65–75) / 120 (100–145) | 72 (67–77) / 110 (90–135) | 72 (67–77) / 100 (80–125) | 71 / 110 | 66 / 50 |
 | Bear | NS CSV — vessel only (£) | 78 (74–82) / 45 (40–50) | 74 (70–78) / 40 (35–45) | 72 (68–76) / 38 (33–43) | 75 / 41 | 75 / 38 |
 | **Base** | **NS CSV — vessel only (£)** | **85 (82–88) / 55 (48–62)** | **83 (80–86) / 52 (45–59)** | **82 (78–86) / 50 (43–57)** | **83 / 52** | **80 / 45** |
@@ -244,10 +248,10 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
 | Bull | Brazil PLSV ($, 100%) | 96 (94–98) / 295 (285–305) | 96 (93–98) / 335 (305–365) | 95 (92–97) / 345 (305–385) | 96 / 325 | 92 / 300 |
 
 **Stubs (Q4-26, identical across scenarios):**
-- **NS spot rows:** October actual (*Seabreeze*) plus Nov–Dec at the Base winter level `[A]`, i.e. the mean of Base Q4-27 and Q1-27.
+- **NS spot rows:** October actual (*Seabreeze*) plus the rest of the quarter at the Base winter level `[A]` (the mean of Base Q4-27 and Q1-27); for AHTS, November is taken from the Clarksons print.
   - PSV rate (19.52 + 2 × 14.8) / 3 = **16.4**; utilisation (82 + 2 × 72) / 3 = **75**.
-  - AHTS rate (43.79 + 2 × 76.9) / 3 = **66**; utilisation (42 + 2 × 61) / 3 = **55**.
-  - Cross-checks: October × the 2025 Nov/Oct and Dec/Oct ratios (n = 1) give PSV 16.4 and AHTS 49. Stub ranges: PSV 15.3–16.4; AHTS 49–85. The November *Seabreeze* replaces the November estimate.
+  - AHTS rate (43.79 + 24.5 + 61.5) / 3 = **43** (November NOK 310k ≈ £24.5k `[E]`, held for the month as rates kept falling; December at the Base winter level, (65.4 + 57.6) / 2); utilisation (42 + 42 + 61) / 3 = **48** (November at the October level `[A]`; no print).
+  - Cross-checks: October × the 2025 Nov/Oct and Dec/Oct ratios (n = 1) give PSV 16.4. AHTS with December at the 2025 Dec/Nov ratio (1.22) on November gives 33. Stub ranges: PSV 15.3–16.4; AHTS 33–47. The November *Seabreeze* replaces the November estimates.
 - **NS PSV term:** rate **18.3** (no priced term print since 17 Oct; the six-month median is £18.4k). Utilisation **93** = the latest observed quarter, Tidewater Q3 92.6% `[F]`; Q3 is the seasonal high, Q4-25 was 87.7%.
 - **PLSV: 300** = the six-month Petrobras leading edge: the 2028 round's median, n = 4 ($295–309k; start Jan 2028, inside the ~18-month window). Mechanical; no Q4-26 PLSV day is open. The stub sits above Base 2027 (285) because 2027 has no new-start contracts: open 2027 PLSV days are bridges, such as Jade's gap from Jul 2027 to its new contract in Jan 2028, and Petrobras has priced such bridges as extensions at in-force levels (Buzios, Recife and Olinda were extended to Jan 2028; rates undisclosed).
 - **PLSV utilisation:** 2027 Seagems firm cover is ~92%, because Jade's contract ends in Jul 2027; Base 95% assumes Jade is bridged at least half the gap, as Petrobras did for DOFCON; Bear has Jade idle. 2028–29: Jade is booked from Jan 2028 for 4 years (subject to signature), so Bear carries signature and mobilisation risk and the five Seagems re-contracts (Apr–Sep 2028) with gaps.
@@ -292,11 +296,11 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
   - The five-year Equinor terms, at NOK 230–240k (£18.0–18.8k), carry a duration discount.
   - Cross-checks: Tidewater Europe/Med PSV > 900 realised $24.9k ≈ £18.8k in Q3 (fleet average incl. older contracts); GEOS PSV sales capitalise ~£19.3k.
   - Weighting 2027 starts over five-year terms gives **£19.5k**.
-- **NS AHTS spot, £75k:**
-  - 2026 Jan–Oct mean £106.6k, inflated by the Rosebank hook-up and the Q1 rig-move cluster. October £43.8k at 42%.
+- **NS AHTS spot, £60k:**
+  - 2026 Jan–Oct mean £106.6k, inflated by the Rosebank hook-up and the Q1 rig-move cluster. October £43.8k at 42% `[F]`; November ~£24.5k and falling (Clarksons `[E]`).
   - 2027 demand: three moored-semi arrivals (Endurance Q2, Barents Jun, Beacon Pacific Q3, ~3 AHTS × 3–5 days each), the Hercules tow-out (Q1) and well-to-well moves.
-  - Supply: the 9 Jun–Sep arrivals, partly offset by term lock-ups (DOF; Equinor tender pending).
-  - Result: **£75k**, the test case of this baseline (rule in the Interface).
+  - Supply: the 9 Jun–Sep arrivals are still in the pool (October net −2, one AHTS); term lock-ups (DOF; Equinor tender pending) are the offset.
+  - Result: **£60k** under the AHTS rule (Interface): the bottom of the £60–65k band, because November is about half the £50k threshold. Q1-27 at £57.6k needs the winter rig moves to lift rates from ~£25k; that is the next test.
 - **NS CSV:** **£55k ($73k)**, low confidence.
 - **Brazil PSV, $38k:** Petrobras reference $40.7k (Apr-25); Tidewater "> $42k" medium `[E]`. The 17 Nov bid opening is the first print.
 - **Brazil AHTS, $70k:** DOF $82.2k blended incl. ROV; the Petrobras AHTS newbuild tender was cancelled 19 Jun 2026 `[F]`, so there is no new Brazilian-built AHTS supply.
@@ -320,7 +324,7 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
 - **Solstad Maritime:** "well positioned for 2027" `[E]`.
 - Base is set from cover, tenders and fixtures, not from guidance.
 
-**Forecast vs actual (2026, partly observed):** large PSV Jan–Oct mean £17.5k; with Nov–Dec at the Base winter level (14.8) the year is ~£17.1k (17 Oct estimate ~£16.6k). Large AHTS Jan–Oct mean £106.6k; ~£101.7k for the year with Nov–Dec at £76.9k (with Nov–Dec at the 2025 Nov/Oct and Dec/Oct ratios on October, ~£97.5k).
+**Forecast vs actual (2026, partly observed):** large PSV Jan–Oct mean £17.5k; with Nov–Dec at the Base winter level (14.8) the year is ~£17.1k (17 Oct estimate ~£16.6k). Large AHTS Jan–Oct mean £106.6k; **~£96.0k** for the year with November at £24.5k `[E]` and December at £61.5k (~£93.4k with December at £29.9k).
 
 ## Market check
 
@@ -328,7 +332,7 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
 |---|---|---|---|---|---|
 | NS large PSV — spot | **82% (Oct)**; Sep 80, Aug 79, Jul 62, Jun 65, May 68 (Seabrokers) | Monthly avgs May–Oct: median £20.0k; Oct £19.5k (fixtures £11.9–41.3k); Sep £22.3k | 2026 Jan–Oct mean £17.5k, +56% vs 2025 same months; H2 firmer than Q2 | spot pool — | 18.5 vs Jan–Oct mean 17.5 (+6%); vs Jul–Oct 19.6 (−6%) |
 | NS large PSV — term | Tidewater Eur/Med PSV > 900: **92.6% (Q3)**, 88.5% (Q2); GEOS fleet 94.3% (Sep) | 2027 starts: £20.6k (n = 1, B); all terms: median £18.4k / £18.0–20.6k / n = 3. No priced print since 17 Oct (extensions all D). Tidewater Eur/Med realised $24.9k ≈ £18.8k (Q3) | Firming; one-well 2027 terms on the NCS; first multi-year UK terms | 71 / 50 / 35 `[A]` | 19.5 vs 20.6 (−5%) |
-| NS AHTS — spot | **42% (Oct)**; Sep 61, Aug 73, Jul 55, Jun 80, May 53 | Monthly avgs May–Oct: median £106.4k; Oct £43.8k (fixtures £21.9–71.6k), lowest since Sep 2025. Term context (D/B): DOF AHTS > 1-year terms from Q1-27 at ~$41–68k; Skandi Mariner ~$33–55k (Q2-27 to Q3-28) | Record H1; sharp break in Oct as arrivals land; Nov `[?]` | ~0 (DOF's AHTS mostly termed out) | 75 vs Jan–Oct 106.6 (−30%); vs Oct 43.8 (+71%) |
+| NS AHTS — spot | **42% (Oct)**; Sep 61, Aug 73, Jul 55, Jun 80, May 53; Nov `[?]` | Monthly avgs May–Oct: median £106.4k; Oct £43.8k (fixtures £21.9–71.6k), lowest since Sep 2025. Nov: ~NOK 310k ≈ £24.5k (Clarksons, early Nov, C), then the year's lowest NCS rate (16 Nov, level `[?]`). Term context (D/B): DOF AHTS > 1-year terms from Q1-27 at ~$41–68k; Skandi Mariner ~$33–55k (Q2-27 to Q3-28) | Record H1; break in Oct as arrivals landed; −40% in three weeks to mid-Nov | ~0 (DOF's AHTS mostly termed out) | 60 vs Jan–Oct 106.6 (−44%); vs Oct 43.8 (+37%); vs Nov ~24.5 (+145%) |
 | NS CSV | Sea1 subsea 100% (Q2); Westwood ROVSV 75% (2025); DOF fleet 86% (Q3, all segments) | No 2026 NS vessel-only fixture with a disclosed rate (n = 0). H1-25 class levels (Fearnley Offshore Supply) `[E]`: 150 t AHC often > $60k (≈ £45k), 250 t AHC often > $80k (≈ £60k) | Softening into the newbuild wave; high-end employed (Normand Maximus with Saipem from Mar 2027) | 70 / 45 / 25 `[A]` | 55 vs ~45–60 (grade C): inside the band |
 | Brazil PSV | Low-to-mid 80s `[E]` | Ref. $40.7k (Apr-25); Tidewater > $42k (medium) `[E]`; n < 3. **Bids open 17 Nov** | Plateau; tenders restarted (PSV 4500 × 5 lots, PSV 3000 × 2) | 75 / 55 / 35 `[A]` | 38 vs ~40 (−5%) |
 | Brazil AHTS | Low-to-mid 80s `[E]` | $82.2k blended incl. WROV (May-25 `[B]`); Westhon $49.5k / $65.1k (`[C]`, undated) | Firm; DOF's 5 new 4-year contracts from 1Q27 "at better terms" | 75 / 55 / 35 `[A]` | 70 vs ~75 vessel-equivalent |
@@ -374,7 +378,7 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
   - Jackdaw has production approval; the Rosebank decision is expected by end-2026 `[E]`.
 - **AHTS (North Sea):** lumpy (rig moves, hook-ups).
   - 2027 rig moves: Hercules tow-out (Q1), Endurance (Q2), Barents (Jun) and Beacon Pacific (Q3), plus moored well-to-well moves.
-  - Equinor's AHTS term tender (1/3/5 years, start Jan-27 or Q3/Q4-27) had bids due 3 Nov; nothing was awarded by 12 Nov. An award of several vessels would take high-end units out of the spot pool and is the main near-term support for the spot row.
+  - Equinor's AHTS term tender (1/3/5 years, start Jan-27 or Q3/Q4-27) had bids due 3 Nov; nothing was awarded by 16 Nov. An award of several vessels would take high-end units out of the spot pool and is the main near-term support for the spot row.
   - DOF has locked AHTS into term: Skandi Mariner to Q3 2028; two AHTS > 1 year from Q1-27; Skandi Vega to Q3 2029 `[F]`. Solstad Maritime's Q3 record came from its NS AHTS spot/project fleet `[F]`, i.e. from the strong Jul–Sep spot months.
 - **Subsea/CSV:**
   - DOF: LOI for an I-class vessel in H1-28 ($50–100m incl. project services; full award due mid-Nov); North Sea decommissioning campaign in Q1-27 on one CSV ($15–25m integrated); Skandi Nomad to Nov 2027; Skandi Constructor to Apr 2028 ($25–50m; region `[?]`); a 7-year contract for one smaller CSV incl. ROV (~$110m ≈ $43k/day over 7 years, below the row class) `[F]`.
@@ -401,7 +405,7 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
   - MH Monsoon to Guyana (Nov-26). Migration pull: the Petrobras PSV 4500/3000 tenders (4-year terms from mid-2027, vessels up to 20 years old) can draw North Sea PSVs to Brazil.
 - **North Sea AHTS:**
   - Arrivals Jun–Sep: 9 vessels (Aurora Challenger, Bear, Boka Fulmar, Boulder, Fram Prince, Olympic Zeus, Sea Banckert, Sea Evertsen, Skandi Laser); departures 3 in Sep and 1 in Oct (Sea Evertsen) `[F]`.
-  - October spot utilisation fell to 42% at £43.8k; Seabrokers cites "a long list" of arrivals after project charters elsewhere ended.
+  - October spot utilisation fell to 42% at £43.8k; Seabrokers cites "a long list" of arrivals after project charters elsewhere ended. Rates fell a further ~40% in the three weeks to mid-November (Clarksons `[E]`); no departure that would answer it is reported.
   - Ownership consolidation only, no new capacity: 2020 Bulkers (15 large AHTS); DDW Offshore's exit.
   - No AHTS newbuild for the North Sea; nobody builds > 300 t BP units ("prohibitive newbuilding costs", DOF).
 - **CSV:**
@@ -432,7 +436,7 @@ As of **12 Nov 2026**. Inputs: Oil Market BBB 11 Nov, Rig Market BBB 12 Nov. Cel
 | NCS PSV | Term-heavy; one-well 2027 terms (Harbour/Norge ×3); GEOS fleet 94% (Sep) | 2027 starts ~£20.6k (Energy Swan); 5-yr Equinor NOK 230–240k; well option ~£25k (100 days) | Firming; the net semi count is +1 in 2027 (Hercules out) | Low (sanctioned) | Medium |
 | UK PSV | Spot-heavy but with term appetite (NEO NEXT+ 3 yrs; EnQuest 1 yr) | Rates `[?]` (all D) | Up in 2026; P&A growth; Beacon Pacific from Q3-27 | Medium–high | Medium |
 | North Sea PSV (pool) | Spot 82% (Oct); Tidewater Eur/Med PSV > 900 92.6% (Q3) | £19.5k (Oct); Tidewater realised $24.9k (Q3) | Tight H2-26 | Low–medium | Medium–high (data) |
-| North Sea AHTS | 42% spot (Oct) | £43.8k (Oct), after £110.7k (Sep); term ~$41–68k (DOF, B/D) | Broke in Oct as arrivals landed; Nov `[?]`; Equinor term tender pending | Low (rig/FPSO-driven) | High (data), low (direction) |
+| North Sea AHTS | 42% spot (Oct) | £43.8k (Oct), after £110.7k (Sep); Nov ~£24.5k (Clarksons, C); term ~$41–68k (DOF, B/D) | Broke in Oct as arrivals landed; year's lowest NCS rate in mid-Nov; Equinor term tender pending | Low (rig/FPSO-driven) | High (data), low (direction) |
 | North Sea CSV | High (Sea1 100%, Q2) | Solstad 3 CSVs ~$143k incl. services (Dec-25/Jan-26) | Softening; high-end employed | Medium | Low |
 | Brazil PSV | Low-to-mid 80s `[E]` | Ref. $40.7k; > $42k medium (Tidewater); bids open 17 Nov | Plateau; tenders restarted | Low (policy) | Medium–low |
 | Brazil AHTS | Low-to-mid 80s `[E]` | DOF $82k blended; 5 DOF AHTS start 1Q27 "at better terms" | Firm; no Brazilian-built additions | Low | Low |
@@ -466,10 +470,10 @@ Not assessed: other North Sea (DK/NL), Argentina, Trinidad, Colombia, Falklands.
   - Base spot 2027 £18.5k at 75% with term at £19.5k. **Consistent:** term absorption (three Norge PSVs, Equinor extensions, UK terms) shrinks the spot pool in 2027. Demand rises a little (NW Europe moored semis +~1 rig-year), and supply adds mainly global newbuilds not assigned to the North Sea.
   - Spot fades to £16.5k at 74% in 2028–29 while term holds at £19.0–19.5k. **Explained:** the spot average includes the winter trough (Q1 factor 0.66), and newbuild deliveries and possible returns from Brazil loosen the spot pool first. A term premium over the annual spot mean is normal.
 - **NS AHTS:**
-  - Base holds utilisation ~62–65% while the rate falls ~20% from 2027 to 2029. The rate is set by peak-day scarcity; more vessels remove the extreme days.
+  - Base holds utilisation ~62–65% with the rate at £60–65k in 2027–29, ~40% below 2026. The rate is set by peak-day scarcity; more vessels remove the extreme days.
   - October (42%, £43.8k) is the first month where supply clearly exceeded spot demand: the Base mechanism, but faster and deeper.
-  - Base 2027 (62%, £75k) needs the winter rig moves, the 2027 semi arrivals and departures, and term lock-ups (DOF; the Equinor tender) to absorb the arrived tonnage.
-  - **One month is not enough to move 2027; the November report decides** (rule in the Interface).
+  - November (~£24.5k `[E]`) repeats it: the arrived tonnage has not left. Base 2027 (62%, £60k) still needs the winter rig moves, the 2027 semi arrivals and departures, and term lock-ups (DOF; the Equinor tender) to absorb part of it; Bear (£45k) is the case where none of that happens.
+  - 2028 (£65k) above 2027 (£60k) is +8%, inside the 10% minimum change: a full year of the three 2027 semi arrivals and more term lock-ups support it, and the gap is noise, not a call.
 - **Brazil PSV:** flat demand + 12 newbuilds − foreign departures ≈ flat utilisation in 2027–28. The PSV tenders (≥ 7 vessels from mid-2027) are mostly renewal `[?]`.
 - **PLSV:**
   - 2027 is ~92–95% covered (Jade's bridge is the gap).
@@ -484,10 +488,10 @@ Not assessed: other North Sea (DK/NL), Argentina, Trinidad, Colombia, Falklands.
 |---|---|---|---|
 | NS large PSV spot, quarterly avg | Q2/Q3 < £12k / > £22k | Q3-26 £19.7k; Oct £19.5k at 82%; Tidewater Eur/Med PSV > 900 92.6% (Q3) | Firm; Base 2027 £18.5k |
 | NS PSV Q4-26 spot test | Q4 > 15% from the 17 Oct Base quarter (£14.5k) | Fires if the Nov–Dec average > £15.25k; no November data | Pending (Nov *Seabreeze* ~4 Dec) |
-| NS large AHTS spot, monthly avg | < £50k for 3 months / > £100k through H1-27 | **Oct £43.8k at 42%: month 1 of 3**; Nov `[?]` | **Toward Bear**; November decides (rule in the Interface) |
+| NS large AHTS spot, monthly avg | < £50k for 3 months / > £100k through H1-27 | **Oct £43.8k at 42% (month 1); Nov ~£24.5k and falling, Clarksons `[E]` (month 2; *Seabreeze* ~4 Dec confirms)** | **Toward Bear**; the AHTS rule fired (Base 2027 £60k); December (early Jan) is month 3 |
 | NCS term PSV rate (2027 starts) | < NOK 215k / > NOK 275k | ~NOK 262k (Energy Swan, n = 1); no priced print since; GEOS sales capitalise ~£19.3k | Up; no new print |
 | UK PSV term appetite | UK operators back to spot only / multi-year UK terms spread to large PSVs | NEO NEXT+ 3-year terms (Havila Fanø, Herøy; medium); EnQuest 1-year (Falcon Tide, Forth Tide; large); Serica's Beacon Pacific campaign from Q3-27 | Towards Bull; not crossed |
-| Equinor AHTS term tender | No award / 5-year award above Base 2027 spot | Bids were due 3 Nov; **no award announced by 12 Nov** (Nordic Financial Newsweb source, web) | Pending; the main near-term AHTS support |
+| Equinor AHTS term tender | No award / 5-year award above Base 2027 spot | Bids were due 3 Nov; **no award announced by 16 Nov** (Nordic Financial Newsweb source to 12 Nov; web search 16 Nov) | Pending; the main near-term AHTS support |
 | Net large PSV/AHTS moves into the NS spot pool | ≥ +3 per quarter / ≤ −3 per quarter | AHTS ~+6 net (Jun–Sep); Oct net −2 (classes partly `[?]`); Aurora Galaxy (PSV) arrives Jan 2027 on term | AHTS supply arrived; Q4 so far −2 |
 | Petrobras Strategic Plan 2027–31 (late Nov) | E&P capex cut > 10% or OSV target cut / ~200 OSVs and newbuild tenders confirmed | Date and figures not announced; PN 2026–30 plans at $70 Brent for 2027–30 `[E]`; Lula re-elected (continuity) | Pending; the decisive Brazil signpost |
 | Petrobras OSV tenders | None beyond the PSV round by Q2-27 / ≥ 2 large tenders by Q1-27 | PSV 4500 (5 lots) and PSV 3000 (2 lots) out; proposals open **17 Nov**; PLSV 2028 round concluded | Base met; Bull half-met (2 PSV tenders, ~7 vessels) |
@@ -509,12 +513,12 @@ Not assessed: other North Sea (DK/NL), Argentina, Trinidad, Colombia, Falklands.
 - **10. Vessel-by-vessel cover.** Seagems and DOFCON done; DOF's AHTS table (S59) is a Gantt chart: only the 11 end dates beyond mid-2029 are readable as text, and the 2027–28 bars are not. NS term fleet, Brazil PSV/RSV and CSV still `[A]`.
 - **11. Energy Swan spec and leg split; the Viking Queen, Aurora Galaxy and Viking Avant rates.**
 - **12. PN 2027–31** (E&P capex vs PN 2026–30, OSV target, local-content terms, capital shift to refining); date not announced.
-- **13. Equinor AHTS term tender** (award, vessels, tenor, rate); nothing announced by 12 Nov. Watch DOF, Solstad, Siem, Island, Aurora and 2020 Bulkers releases and the November *Seabreeze*.
+- **13. Equinor AHTS term tender** (award, vessels, tenor, rate); nothing announced by 16 Nov. Watch DOF, Solstad, Siem, Island, Aurora and 2020 Bulkers releases and the November *Seabreeze*.
 - **14. Havila Fanø/Herøy spec and term rate.**
 - **16. Newsweb via Edge** was not used; owner releases came from Nordic Financial (Newsweb source). Method note.
 - **17. Post-election Petrobras measures** (CEO/board change, fuel-price intervention, dividend policy); none found to 12 Nov.
 - **18. Skandi Implementer buyer and price** (a 400 t CSV value point, above the row class; the DOF Q3 report gives no price); the Union Vega PSV price and option declarations. Skandi Nomad's crane class and region `[?]`.
-- **19. Q4 NS spot test:** the November *Seabreeze* (~4 Dec) replaces the November estimate in the stubs and is month 2 of the AHTS Bear signpost. The decisive observation for NS AHTS.
+- **19. Q4 NS spot test:** the November *Seabreeze* (~4 Dec) replaces the November estimates in the stubs and confirms AHTS month 2 on the anchor series (it must show < £75k for Base 2027 £60k to stand; ≥ £75k restores £75k). The December *Seabreeze* (early Jan) is month 3: < £50k crosses the Bear signpost and triggers a full update that tests AHTS 2028–29 and Bear. Also wanted: the Finansavisen 16 Nov body (the "year's lowest" fixture: vessel, rate, date) and Clarksons' class definition.
 - **20. Classes of the October spot movers** (Sar Brage, Island Challenger, Skandi Caledonia).
 - **22. Skandi Mariner's region and spec** (OE Digital tags "Europe"; a 2017 Salt 200 design is reported but unverified). It decides whether the ~$44k/day option is a North Sea AHTS term print.
 - **23. The GEOS PSV sales** (Energy Partner, Energy Passion): build years and buyers' regions, to place them as North Sea value points.
@@ -522,9 +526,9 @@ Not assessed: other North Sea (DK/NL), Argentina, Trinidad, Colombia, Falklands.
 
 ## Change log
 
+- **16 Nov 2026 — small update on news (skill 2026-11-12.2), NS AHTS spot changed under the pre-set AHTS rule:** Clarksons (Finansavisen 2 and 16 Nov, `[E]`) puts November at ~NOK 310k ≈ £24.5k and falling (month 2 < £50k). Base 2027 75 → 60 (range 55–95 → 45–75; Year-1 quarters 72.0 / 84.8 / 61.5 / 81.8 → 57.6 / 67.8 / 49.2 / 65.4, −20%); stub 66 → 43, utilisation 55 → 48; 2026 estimate ~£101.7k → ~£96.0k. 2028–29, utilisation, mid-cycle, Bear and Bull kept (no rule). Readers: dof yes (row it prices), hy no.
 - **13 Nov 2026 — compacted to the lean-document rules (985 → 715 lines, Interface section first); no value changed.**
 - **12 Nov 2026 — full update (skill 2026-11-12.1), BBB changed in two rows:** NS large PSV spot Base 2027 16.5 → 18.5 (utilisation 72 → 75%; stub 15.3 → 16.4, 73 → 75%; Year-1 quarters follow); Brazil PLSV Bear 2028–29 255 / 250 → 270 / 265 (utilisation 82 / 80 → 86 / 84), Bull mid-cycle 285 → 300 (value $470m → $512m), stub 285 → 300, Base 2028–29 ranges 280–325 / 280–335; NS PSV term utilisation stub 88 → 93%. All else kept (NS AHTS £75k under the November rule); no reader's value moved by more than its trigger.
-- **4 Nov 2026 — small update, kept unchanged:** Q4-26 NS spot stubs re-marked (PSV 14.5 → 15.3, AHTS 105 → 66; utilisation 68 → 73, 62 → 55); annual paths unchanged; the Petrobras PSV tenders and the NS AHTS Q4 miss fired the triggers for the 12 Nov full update.
 
 ## Appendix
 
@@ -552,6 +556,8 @@ Not assessed: other North Sea (DK/NL), Argentina, Trinidad, Colombia, Falklands.
 | Siem Opal | AHTS on supply duties | NCS | Equinor | Oct 2026 | spot | `[?]` | Supply duties (PSV shortage) | D | S53 |
 | Large PSV spot (Oct avg) | > 900 m² | North Sea | various | Oct 2026 | spot | **£19,519 (11,926–41,337)** | TC | A (broker avg) | S53 |
 | Large AHTS spot (Oct avg) | > 22k bhp | North Sea | various | Oct 2026 | spot | **£43,794 (21,864–71,555)** | TC | A (broker avg) | S53 |
+| Large AHTS spot (Clarksons, week to ~1 Nov) | AHTS (Clarksons class `[?]`) | North Sea (Norwegian NOK quote) | various | late Oct / early Nov 2026 | spot | **~NOK 310,000 ≈ £24.5k** (13 Nov FX 12.6491); "rates continue to fall" despite a small rise in fixtures | TC | C | S67 |
+| Large AHTS spot (Clarksons, to mid-Nov) | "store ankerhåndteringsskip" | NCS | `[?]` | mid-Nov 2026 | spot | −40% in three weeks; **the year's lowest NCS rate** (level and vessel `[?]`) | TC | C (claim; no number) | S67 |
 | Large AHTS spot (Sep avg) | > 22k bhp | North Sea | various | Sep 2026 | spot | £110.7k (70–145k) | TC | A (broker avg) | S1 |
 | FOSRV Purity | OSRV (fast) | Brazil | Petrobras | `[?]` | 4 yrs firm | `[?]` | TC | D | S56 |
 | Petrobras PSV 4500 (lots A–E) / PSV 3000 (lots A–B) tenders | PSV 4500 / PSV 3000 | Brazil | Petrobras | Jun–Oct 2027 | 4 yrs | `[?]` (proposals open 17 Nov 2026); 20-year age limit | TC | — (tender, no award) | S53, S54 |
@@ -633,6 +639,7 @@ Not assessed: other North Sea (DK/NL), Argentina, Trinidad, Colombia, Falklands.
 | 2024 | 12,346 | 39,691 | 11,570 / 39,956 |
 | 2025 | 10,691 | 49,820 | 9,567 / 44,526 |
 | 2026 Jan–Oct | 17,546 | 106,632 | 15,954 / 106,574 (YTD) |
+| Nov 2026 (not Seabrokers) | `[?]` | ~24,500 `[E]` (Clarksons NOK 310k, early Nov; S67) | — |
 
 - Monthly 2026, large PSV: 5,691 · 12,221 · 13,625 · 25,392 · 20,040 · 19,970 · 15,278 · 21,445 · 22,275 · **19,519 (Oct)**.
 - Monthly 2026, large AHTS: 90,283 · 127,966 · 91,116 · 117,150 · 131,234 · 155,875 · 102,188 · 96,015 · 110,702 · **43,794 (Oct)**.
@@ -700,13 +707,15 @@ Not assessed: other North Sea (DK/NL), Argentina, Trinidad, Colombia, Falklands.
 | S64 | AllRatesToday `get_rates_authenticated` | GBP/USD 1.32675, GBP/NOK 12.6808, GBP/BRL 7.41381 | Mid-market | 12 Nov 2026 07:48 UTC |
 | S65 | `docs/oil-market-bbb.md` (11 Nov 2026); `docs/rig-market-bbb.md` (12 Nov 2026) | Oil and rig inputs (downstream rows for supply; Hercules, Beacon Pacific, DS-18, Brazil counts) | Workspace baselines | 11–12 Nov 2026 |
 | S66 | Search summaries (Safras; Nord Investimentos) on PN 2026–30 | Petrobras plans with Brent $70 for 2027–30; capex $109bn | Press `[E]`, grade C | Nov 2025 (PN 2026–30) |
+| S67 | Finansavisen (F. H. Njøsen): [“Fra millionrater til 310.000 kroner dagen”](https://www.finansavisen.no/energi/2026/11/02/8392408/fra-millionrater-til-310.000-kroner-dagen) (2 Nov; headline, lead and caption read: Clarksons, "a small rise in AHTS fixture activity in the North Sea last week, but rates still fell"); "Ratene i Nordsjøen på bunnivåer: Har falt 40 prosent på tre uker" (16 Nov; lead pasted by the user and seen in search) | NS AHTS spot level (NOK) and direction; the year's lowest NCS rate | Press citing Clarksons `[E]`, grade C; NOK quote (Norwegian sector), Clarksons class `[?]`; not the anchor series | late Oct – mid-Nov 2026 / 2 and 16 Nov 2026 |
+| S68 | [Norges Bank exchange rates API](https://data.norges-bank.no/api/data/EXR/B.GBP+USD.NOK.SP?lastNObservations=3&format=csv&locale=en) | GBP/NOK 12.6491 (13 Nov), 12.6359 (12 Nov); USD/NOK 9.5634 (13 Nov) | Official daily rate | 11–13 Nov 2026 |
 
 Sources no longer cited by a current value (earlier oil/rig inputs, election-period price and poll data, superseded FX) are in git history.
 
 **Assessed and rejected / limited (standing):**
 - **PLSV round (user input):** used as `[E]`, grade C. DOF's Q3 report corroborates the three DOFCON qualifications, the Jan 2028 start and a backlog addition consistent with the rates, but not the rates themselves. The lot-5 rate is not in the input.
 - **Tidewater Q3:** an aggregator page (Panabee) gave the same headline figures with internal inconsistencies (13% vs 12.5%; a 226-vessel fleet). Rejected in favour of the 8-K tables. Q3-2025 Tidewater items surface in Q3-2026 searches and are rejected as the wrong year.
-- **November North Sea spot:** no public source found (Seabrokers still shows October; Riviera, Baird and SSY gave nothing dated November). The stubs keep the Base winter estimate for Nov–Dec.
+- **November North Sea spot (16 Nov):** Seabrokers still shows October; no Westshore, Fearnley, Hagland or Riviera item dated November 2026 was found. Clarksons via Finansavisen (S67) is used as `[E]`, grade C, for the AHTS rule: one source family (two prints), consistent in direction with the October *Seabreeze*. A Baird Maritime column with "NOK 2 million rates in October" and "< 50% utilisation" is dated **10 Nov 2025** (wrong year) and rejected; Riviera/TradeWinds AHTS items in the searches are 2023–2025.
 - **Skandi Mariner spec** (2017, Salt 200, 95 m, from an OE Digital page tagged "Europe"): unverified, and the region is not stated. The value is used as a D-grade range only.
 - **Equinor AHTS tender:** web results were 2018–2024 Equinor AHTS awards and 2019–2022 Solstad/Equinor items; nothing from Nov 2026 was found.
 - **Solstad Q3 segment utilisation:** a Quartr summary gave Q2 AHTS utilisation (63% → 88%) but no Q3 figure. Not used.
