@@ -72,7 +72,7 @@ Kept by the `update-chain` skill; checked by
 | stb | docs/storebrand-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-19 | all | 2026-11-23 | 2026-10-18.2 | Date from the file |
 | tsm | docs/tsm-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-11-11 | none | 2026-11-17 | 2026-11-10.1 | v1.2 11 Nov (daily run): October revenue +59.7% y/y (above the +45% signpost, not crossed: set into 2027) and November board; re-mark at $396.48 (10 Nov close): Base 13.7% → 9.5%, P_k $369.8, margin −6.7%, clears → fails on price |
 | global-index | docs/global-index-funds-analysis.md | iaf-valuation | fund | 2026-11-01 | 2026-10-29 | all | 2026-11-17 | 2026-10-29.1 | Re-mark 29 Oct (MSFT v3, GOOGL v2, AI Update 5): Base −0.08 pp (DNB Global Indeks A 4.58%, Nordnet Global Indeks 4.73%), both fail; NAV date kept at 15 Oct; AI E-layer .92 not stacked on the company blocks; from the next run DNB Global Indeks A only (Nordnet Global Indeks dropped, user 1 Nov) |
-| dnbtek | docs/dnb-teknologi-analysis.md | iaf-valuation | fund | 2026-11-06 | 2026-11-06 | none | 2026-11-17 | 2026-11-01.1 | 6 Nov re-run (NAV 7,381.56 on 4 Nov; 5 Nov est. ≈ 7,145): Base 8.6% (10.0% at 5 Nov est.), P_k NAV 6,721, margin −8.9% (−5.4%), fails; E / R 0.113 vs new HY ref 0.254 (trigger NAV 6,399); 30 Sep holdings (ASML in); NVDA v1.2, TSM v1.1, GOOGL re-mark |
+| dnbtek | docs/dnb-teknologi-analysis.md | iaf-valuation | fund | 2026-11-16 | 2026-11-16 | kospi | 2026-12-15 | 2026-11-12.1 | 6 Nov re-run (NAV 7,381.56 on 4 Nov; 5 Nov est. ≈ 7,145): Base 8.6% (10.0% at 5 Nov est.), P_k NAV 6,721, margin −8.9% (−5.4%), fails; E / R 0.113 vs new HY ref 0.254 (trigger NAV 6,399); 30 Sep holdings (ASML in); NVDA v1.2, TSM v1.1, GOOGL re-mark |
 | iaf-notes | docs/iaf-reference-notes.md | - | static | - | - | - | - | - | Background, not updated |
 | review-2029 | docs/review-2029-step-down.md | - | static | - | - | - | - | - | Review, not updated |
 | review-equity | docs/review-equity-market-bbb.md | - | static | - | - | - | - | - | Review, not updated |
@@ -150,16 +150,16 @@ Kept by the `update-chain` skill; checked by
 | amzn | hy | 2026-11-05 | main | NIBOR (E / R) |
 | dnb | equity | 2026-10-18 | main | Scenarios, Oslo financials block |
 | dnb | hy | 2026-10-17 | main | NIBOR path |
-| dnbtek | ai | 2026-11-05 | main | Layer EPS paths, exit P/Es |
+| dnbtek | ai | 2026-11-16 | main | Layer EPS paths, exit P/Es |
 | dnbtek | equity | 2026-11-06 | main | World scenarios, NOK path |
-| dnbtek | amzn | 2026-11-04 | main | Company block CA |
-| dnbtek | nvda | 2026-11-05 | main | Company block CN |
-| dnbtek | tsm | 2026-11-05 | main | Company block CT |
-| dnbtek | msft | 2026-11-04 | main | Company block CM |
-| dnbtek | googl | 2026-11-04 | main | Company block CG |
+| dnbtek | amzn | 2026-11-11 | main | Company block CA |
+| dnbtek | nvda | 2026-11-13 | main | Company block CN |
+| dnbtek | tsm | 2026-11-11 | main | Company block CT |
+| dnbtek | msft | 2026-11-07 | main | Company block CM |
+| dnbtek | googl | 2026-11-11 | main | Company block CG |
 | dnbtek | mu | 2026-11-05 | loop | Memory evidence (the fund holds no Micron) |
 | dnbtek | skh | 2026-11-04 | main | SK hynix company block (from 31 Oct; layer path only until 22 Oct) |
-| dnbtek | smsn | 2026-11-04 | main | Samsung company blocks, common and preference (from 31 Oct; layer path only until 22 Oct) |
+| dnbtek | smsn | 2026-11-16 | main | Samsung company blocks, common and preference (from 31 Oct; layer path only until 22 Oct) |
 | googl | ai | 2026-11-07 | main | E2 cloud row, K1 capex, E-layer EPS |
 | googl | equity | 2026-11-06 | main | Macro scenarios, NOK path |
 | googl | hy | 2026-11-05 | main | NIBOR (E / R) |
@@ -218,9 +218,9 @@ Kept by the `update-chain` skill; checked by
 | global-index | nvda | 2026-10-17 | main | Company block |
 | global-index | oil | 2026-10-24 | main | Energy block |
 | global-index | hy | 2026-10-24 | main | NIBOR (E / R) |
-| dnbtek | hy | 2026-11-05 | main | NIBOR (Base window 4.38%), HY market reference E / R (0.254 from 6 Nov) |
-| dnbtek | hy-funds | 2026-11-01 | main | Sissener R and E / R (the HY market reference comes from hy from 6 Nov) |
-| dnbtek | global-index | 2026-10-29 | main | DNB Global Indeks A as the World index-fund row |
+| dnbtek | hy | 2026-11-11 | main | NIBOR (Base window 4.38%), HY market reference E / R (0.254 from 6 Nov) |
+| dnbtek | hy-funds | 2026-11-09 | main | Sissener R and E / R (the HY market reference comes from hy from 6 Nov) |
+| dnbtek | global-index | 2026-11-01 | main | DNB Global Indeks A as the World index-fund row |
 | global-index | hy-funds | 2026-10-24 | main | HY market reference E / R 0.196 |
 | hy | hy-issuers | 2026-11-09 | loop | Held-company news screen behind the default log |
 | mu | hy-funds | 2026-11-01 | main | HY market reference E / R 0.196 |
@@ -361,7 +361,7 @@ it to `open`.
 | 2027-01-15 | approx | New Senate: Warren chairs Senate Banking; possible subpoena on NVIDIA's China exposure | nvda | watch |
 | 2027-03-15 | approx | Trial of the Supermicro co-founder (chip diversion case) | nvda | watch |
 | 2026-11-07 | approx | DNB Teknologi 5 Nov NAV published (first NAV with the 5 Nov sell-off; estimate ≈ 7,145): check against the estimate | dnbtek | watch |
-| 2026-11-15 | approx | DNB AM October monthly report for DNB Teknologi with 31 Oct holdings | dnbtek | open |
+| 2026-11-15 | approx | DNB AM October monthly report for DNB Teknologi with 31 Oct holdings | dnbtek | done |
 | 2026-11-19 | yes | SK hynix buyback window ends (24.07m shares for cancellation); finished early on 21 Oct (23.69m shares, KRW 40.0tn; Q3 report) | skh | done |
 | 2026-11-18 | yes | Hafnia Q3 report | hafnia | open |
 | 2026-11-16 | yes | TORM Q3 dividend USD 1.35 goes ex (Copenhagen 16 Nov, New York 17 Nov; paid 2 Dec) | hafnia | open |
@@ -455,6 +455,7 @@ it to `open`.
 | 2026-11-18 | yes | Samsung Electronics Investor Forum 2026 (Singapore, Morgan Stanley conference), memory session: 2027 HBM and LTA pricing comments | smsn, ai, kospi | watch |
 | 2026-11-25 | approx | NVIDIA Q3 FY27 10-Q (late Nov): guarantee calls, capacity buy-backs exercised, new guarantees and equity commitments in Q3 (vendor-financing flow and funded-customer credit signposts; cascade inventory) | ai, nvda | watch |
 | 2026-12-01 | approx | Silicon Data month-end GPU rental indices: B200 against its 2026 high $7.03 (Bear: −20% for three months), H100; price leg of the funded-customer credit signpost and the NVIDIA cascade | ai, nvda | watch |
+| 2026-12-07 | approx | DNB AM November factsheet for DNB Teknologi (holdings 30 Nov) | dnbtek | open |
 | 2026-12-15 | yes | Anthropic staged lock-up releases begin (days 27 / 48 / 62 / 76: 15 Dec, 5 Jan, 19 Jan, 2 Feb); over-allotment option expires ~18 Dec | anthropic | watch |
 | 2026-12-31 | yes | Anthropic first test of the $5bn liquidity covenant | anthropic | watch |
 | 2027-03-15 | approx | Anthropic FY2026 results, first report as a listed company (date not given; likely Feb–Mar); staged lock-up steps tied to it | anthropic, ai, amzn, googl | open |
