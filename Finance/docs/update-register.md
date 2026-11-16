@@ -48,7 +48,7 @@ Kept by the `update-chain` skill; checked by
 | defense | docs/defense-market-bbb.md | defense-market-bbb | market | 2026-10-31 | 2026-10-07 | all | 2027-01-04 | 2026-10-10.1 | **HOLD (user): no update until the user lifts it.** Initial baseline |
 | hy-issuers | docs/hy-issuers.md | hy-market-bbb | book | 2026-11-11 | 2026-11-09 | hy-funds | 2026-11-18 | 2026-11-08.1 | 9 Nov short update on Fondsfinans' October report and 31 Oct holdings: Sigma 79.2 Distressed, Foxway 93.7, Magnolia 88.0, Heimstaden hybrid new (84.7), Varel out [A], Hofseth ~72 confirmed; named loss HH 2.15, HH+ 2.06, FF 0.34, FFK 0.09, SIS 1.10; Stamdata screen not re-run |
 | hy-funds | docs/hy-funds-analysis.md | hy-market-bbb | book | 2026-11-09 | 2026-11-09 | none | 2026-12-05 | 2026-11-08.1 | 9 Nov full re-run on the October reports and 5 Nov HY BBB: all five Attractive; E / R FFK 0.520, FF 0.491, HH+ 0.422, SIS 0.343, HH N 0.340 (134% of 0.254; rests on the NOK report yield, 0.267 on the box yield); 6 Nov Marginal reading withdrawn; oil follow-up pending; Arctic Return L rerun (October report): E / R 0.119 → 0.109, 43% of 0.254, not graded |
-| dof | docs/DOF-analysis.md | iaf-valuation | company | 2026-11-12 | 2026-11-12 | none | 2026-12-12 | 2026-11-10.1 | 12 Nov full update after Q3 (iaf 2026-11-10.1 layout): Base 11.8%, P_k NOK 127.9 at NOK 128.60 / USD/NOK 9.552, margin −0.6% → marginal (was 9.0%, fails); PLSV $295–305k are Petrobras totals (charter + services), DOF basis flat (> $500m over 4,380 days ≈ extension level), no hidden upside; Implementer ~$133m and SALT ~$103m each from the Q3 chart; FX-sensitive (fails at 9.29, clears at 9.80) |
+| dof | docs/DOF-analysis.md | iaf-valuation | company | 2026-11-16 | 2026-11-16 | none | 2026-12-12 | 2026-11-12.1 | 12 Nov full update after Q3 (iaf 2026-11-10.1 layout): Base 11.8%, P_k NOK 127.9 at NOK 128.60 / USD/NOK 9.552, margin −0.6% → marginal (was 9.0%, fails); PLSV $295–305k are Petrobras totals (charter + services), DOF basis flat (> $500m over 4,380 days ≈ extension level), no hidden upside; Implementer ~$133m and SALT ~$103m each from the Q3 chart; FX-sensitive (fails at 9.29, clears at 9.80) |
 | plsv | docs/PLSV-analysis.md | - | static | - | - | - | - | - | No longer tracked (user, 25 Oct 2026). Last version 19 Oct; kept as a source (Fontis seller credit, Seagems fleet data cited by borr, rig and supply) |
 | sed | docs/SED-analysis.md | iaf-valuation | company | 2026-11-04 | 2026-10-18 | all | 2026-11-17 | 2026-11-01.1 | 27 Oct news update: T-16 award (Base 8.3% → 6.7%, still fails) |
 | borr | docs/borr-analysis.md | iaf-valuation | company | 2026-11-07 | 2026-11-07 | all | 2026-11-18 | 2026-11-01.1 | **HOLD (user, 7 Nov): only on request. Not interesting as an equity; its value is the credit read for the Borr bonds in hy-issuers.** v3 24 Oct: Base unchanged (no equity value), Bull 8.3% → 11.2%; Q3 date not announced (4–18 Nov expected) |
@@ -120,7 +120,7 @@ Kept by the `update-chain` skill; checked by
 | hy-funds | hy | 2026-11-05 | main | Market paths, NIBOR, reference E / R |
 | hy-funds | hy-issuers | 2026-11-09 | main | Named bond losses per fund |
 | hy-funds | scatec | 2026-10-30 | loop | Scatec bond holdings (Sissener Corporate Bond, Fondsfinans High Yield): issuer credit check (Bear corporate NIBD, 2028 refinancing); not yet read |
-| dof | supply | 2026-11-12 | main | NS and Brazil rows, anchors, economic life |
+| dof | supply | 2026-11-16 | main | NS and Brazil rows, anchors, economic life |
 | dof | equity | 2026-11-06 | main | Exit cross-check, NOK path |
 | dof | hy | 2026-11-11 | main | Bear HY spread (2030 refinancing) |
 | sed | rig | 2026-11-04 | main | Tender-assist row, rig values |
@@ -395,7 +395,7 @@ it to `open`.
 | 2026-11-30 | yes | CAPT Q3 report | capt | open |
 | 2026-11-30 | yes | SK hynix Q3 dividend record date (KRW 20,000: 10,000 regular + 10,000 special) | skh, kospi | open |
 | 2026-12-11 | approx | FTSE December review (effective mid/late Dec): FLXK re-capped; FLXK no longer followed (no KID at Nordnet, 29 Oct) | kospi | dropped |
-| 2026-12-04 | approx | Seabreeze November report: completes the Q4 North Sea spot test (AHTS Bear signpost month 2). AHTS rule applied early on 16 Nov from Clarksons via Finansavisen (Base 2027 £75k → £60k): ≥ £75k restores £75k, lower keeps £60k; also the PSV Q4 test | supply | open |
+| 2026-12-04 | approx | Seabreeze November report: completes the Q4 North Sea spot test (AHTS Bear signpost month 2). AHTS rule applied early on 16 Nov from Clarksons via Finansavisen (Base 2027 £75k → £60k): ≥ £75k restores £75k, lower keeps £60k; also the PSV Q4 test | supply, dof | open |
 | 2027-01-06 | approx | Seabreeze December report: AHTS Bear signpost month 3; below £50k crosses it and calls a full update testing AHTS 2028–29 and Bear | supply | open |
 | 2026-12-04 | approx | Heimdal November reports and holdings: second price signal for Borr and the HX super senior bonds; weights after the October outflow | hy-issuers, hy-funds, hy | open |
 | 2026-12-10 | approx | Oracle Q2 FY27 report (backlog, cloud infrastructure, capex) (mid-Dec) | ai | open |

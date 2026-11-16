@@ -1,9 +1,14 @@
-import copy, json
+"""DOF report: period tables, results, NAV_0, V_T bridge, cross-check, year-end path.
+docs/dof-analysis.md, 16 Nov 2026 (Supply BBB AHTS rule, re-mark, awarded-PLSV rule). Run: py report.py [step]
+(step from inputs_1116: 0 = 12 Nov, 1 = + re-mark, 2 = + AHTS row, 3/all = + awarded PLSV as firm). Writes results.json.
+"""
+import copy, json, sys
 from dof_model import *
 from inputs_new import *
+from inputs_1116 import inputs_1116
 
-I = new_inputs("all")
-I["struct_delta"] = struct_deltas(I)
+STEP = sys.argv[1] if len(sys.argv) > 1 else "all"
+I = inputs_1116(STEP if STEP == "all" else int(STEP))
 FX = I["fx"]; P = I["P"]; V0 = I["val_date"]
 nk = lambda x: x * FX / SH
 R = {s: run(I, s) for s in ("Bear", "Base", "Bull")}
@@ -57,16 +62,16 @@ for s in ("Bear", "Bull"):
     pr(f"NOK path {s}: IRR {r['irr']*100:.2f}  D+V {r['sumD']+r['VT_nok']:.1f}")
 
 # NAV_0 and today's-market NAV
-age0 = ann8(12.63) / ann8(13)
+age0 = ann8(13 - (V0 - D(2026, 6, 30)).days / 365) / ann8(13)   # broker marks 30 Jun, aged to the valuation date
 mid0 = {}
-prem0 = {"Bear": 559.0, "Base": 404.0, "Bull": 245.0}
+prem0 = {s: v + I["prem0_add"][s] for s, v in {"Bear": 559.0, "Base": 404.0, "Bull": 245.0}.items()}   # + awarded PLSV terms (step 3)
 fac = I["meta"]["fac"]; fmv = I["meta"]["fmv"]; ip = I["meta"]["impl_price"]
 for s in ("Bear", "Base", "Bull"):
     fleet0 = (fmv - ip) * fac[s] * age0
     nav0 = fleet0 + ip + prem0[s] + 155 + {"Bear": 270, "Base": 500, "Bull": 800}[s] - I["nibd0"]
     mid0[s] = dict(fleet0=fleet0, nav0=nav0, nav0_nok=nk(nav0))
     pr(f"NAV_0 {s}: fleet {fleet0:.0f} NAV {nav0:.0f} NOK {nk(nav0):.1f} P/NAV {P/nk(nav0):.2f}")
-navmkt = (fmv - ip) * age0 + ip + 404 + 155 + 500 - I["nibd0"]
+navmkt = (fmv - ip) * age0 + ip + prem0["Base"] + 155 + 500 - I["nibd0"]
 pr(f"NAV market marks: {navmkt:.0f} NOK {nk(navmkt):.1f} P/NAV {P/nk(navmkt):.2f}; age0 {age0:.4f}")
 for s in ("Bear", "Base", "Bull"):
     r = R[s]
@@ -136,7 +141,7 @@ out["weighted"] = (wi, wp)
 # year-end path with interim glide
 pr("\n=== Year-end path ===")
 age_e26 = ann8(12.5) / ann8(13)
-stub_assets = (fmv - ip) * age_e26 + ip + 390 + 170 + 500
+stub_assets = (fmv - ip) * age_e26 + ip + 390 + I["stub_prem_add"] + 170 + 500
 for s in ("Base", "Bear", "Bull"):
     r = R[s]
     exA = r["assets"] - r["exit"]["signed"] - r["exit"]["tail"]
@@ -160,4 +165,5 @@ for s in ("Base", "Bear", "Bull"):
         prevV = Vn
     pr(s, line)
     out[s]["path"] = line
-json.dump(out, open("results.json", "w"), default=str, indent=1)
+if STEP == "all":
+    json.dump(out, open("results.json", "w"), default=str, indent=1)
