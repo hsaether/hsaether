@@ -67,7 +67,7 @@ Kept by the `update-chain` skill; checked by
 | nvda | docs/nvda-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | ai, dnbtek, equity, global-index | 2026-11-17 | 2026-11-12.1 | v1.6 13 Nov (user: cascade stress test; re-mark at $166.19, 12 Nov close; compacted 655 → 440 lines): Base 17.7%, P_k $192.5, +15.8%, clears; Bear −5.4%, Bull 37.1%; E / R 0.287. Cascade (funding stop 2028, funded share 39% lost, GM 62%, exit 13): −20.8%, P_k $61.7, capital −49%; H2-27 start −24.3%; worst step price and margin; net cash never below $148bn. Keeping the buyers alive: bridge ≤ 1.4 pp; permanent subsidy reaches k at ~$94bn a year (half lost) |
 | anthropic | docs/anthropic-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | ai, amzn, googl, msft, nvda | 2026-11-19 | 2026-11-12.1 | v1.0 13 Nov (IPO, Bafin EU prospectus 11 Nov): range $70–78; Base IRR 5.5 / 3.8 / 2.2%, P_k $58.4, margin −21.1% at $74, fails (clears ≈ $57.5); Bear −38%, Bull +31%; fully diluted 18.14bn shares; 58% of E1; re-mark at the final price |
 | skh | docs/skhynix-analysis.md | iaf-valuation | company | 2026-11-04 | 2026-10-28 | all | 2026-11-20 | 2026-11-01.1 | Version 2 (28 Oct, Q3 report): Seoul Base 21.1%, clears; ADR marginal at the post-report price; Seoul line and SKHY ADR line |
-| smsn | docs/samsung-analysis.md | iaf-valuation | company | 2026-11-04 | 2026-10-29 | all | 2026-11-28 | 2026-11-01.1 | Version 2 (29 Oct, Q3 report): common Base 26.9% → 23.3%, preference 29.5% → 25.6%, both clear; common, preference and GDR lines |
+| smsn | docs/samsung-analysis.md | iaf-valuation | company | 2026-11-16 | 2026-11-16 | mu, skh | 2026-12-16 | 2026-11-12.1 | Version 2 (29 Oct, Q3 report): common Base 26.9% → 23.3%, preference 29.5% → 25.6%, both clear; common, preference and GDR lines |
 | kospi | docs/kospi-analysis.md | iaf-valuation | fund | 2026-11-06 | 2026-11-06 | all | 2026-11-17 | 2026-11-01.1 | Version 1.8 (6 Nov): price re-mark on the 6 Nov Seoul close after the 5–6 Nov chip sell-off (look-through −10.5% in KRW; IQQK EUR 99.2 → 88.6); paths and company blocks unchanged; HY reference now from HY BBB (0.254); price implies 0.61× Base 2028–30 for k (0.80×); Base ~21% (16%), P_k ~EUR 110 (unchanged), margin +25% (+11%); capped Bear −8%/yr, 2027 −39%; E / R 0.249 vs 0.254 (reference only); neither reads nor writes the portfolio |
 | stb | docs/storebrand-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-19 | all | 2026-11-23 | 2026-10-18.2 | Date from the file |
 | tsm | docs/tsm-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-11-11 | none | 2026-11-17 | 2026-11-10.1 | v1.2 11 Nov (daily run): October revenue +59.7% y/y (above the +45% signpost, not crossed: set into 2027) and November board; re-mark at $396.48 (10 Nov close): Base 13.7% → 9.5%, P_k $369.8, margin −6.7%, clears → fails on price |
@@ -189,12 +189,12 @@ Kept by the `update-chain` skill; checked by
 | skh | nvda | 2026-11-02 | main | NVIDIA as main HBM customer, supply commitments |
 | skh | mu | 2026-10-22 | main | Peer on the same H2 path |
 | skh | smsn | 2026-10-25 | loop | Peer comparison (Samsung analysis; not yet read) |
-| smsn | ai | 2026-11-01 | main | H2 memory layer: EPS path, exit P/E, revenue index, scenarios |
-| smsn | equity | 2026-10-18 | main | Scenarios, I-44 path (NOK memo), exit cross-check |
-| smsn | hy | 2026-10-24 | main | NIBOR (E / R), HY reference E / R |
-| smsn | nvda | 2026-11-02 | main | NVIDIA as main HBM customer, supply commitments |
-| smsn | mu | 2026-10-22 | main | Peer on the same H2 path |
-| smsn | skh | 2026-10-28 | main | Peer on the same H2 path; template for the build |
+| smsn | ai | 2026-11-16 | main | H2 memory layer: EPS path, exit P/E, revenue index, scenarios |
+| smsn | equity | 2026-11-06 | main | Scenarios, I-44 path (NOK memo), exit cross-check |
+| smsn | hy | 2026-11-11 | main | NIBOR (E / R), HY reference E / R |
+| smsn | nvda | 2026-11-13 | main | NVIDIA as main HBM customer, supply commitments |
+| smsn | mu | 2026-11-05 | main | Peer on the same H2 path |
+| smsn | skh | 2026-11-04 | main | Peer on the same H2 path; template for the build |
 | kospi | smsn | 2026-11-04 | main | Company blocks: Samsung common and preference (D_t, V_t, capped Bear) |
 | kospi | skh | 2026-11-04 | main | Company block: SK hynix, also driving the SK holdcos block |
 | kospi | ai | 2026-11-05 | main | H2 memory scenarios and catalysts, capped-Bear diagnostic, memory basket row |
@@ -431,7 +431,7 @@ it to `open`.
 | 2027-01-28 | approx | SK hynix Q4 report and the rest of the FY2026 return (~KRW 35tn: year-end dividend and Q4 buyback) (late Jan) | skh, ai, kospi | open |
 | 2027-01-27 | approx | Microsoft Q2 FY27 report (late Jan; Yahoo estimate) | msft, ai | open |
 | 2027-01-28 | approx | Meta Q4 report and first 2027 capex figure (late Jan; none given on 21 Oct): K1 2027 against 1,120 and the E-rest row | ai | open |
-| 2027-01-29 | approx | Samsung Q4 report and board decision on the rest of the 2026 return (KRW 60–80tn) and any 2027+ policy (late Jan) | smsn, ai, kospi | open |
+| 2027-01-27 | approx | Samsung Q4 report and board decision on the rest of the 2026 return (KRW 55–75tn) and any 2027+ policy (late Jan; Yahoo estimate 27 Jan) | smsn, ai, kospi | open |
 | 2027-01-29 | yes | Scatec Q4 report (first quarter without the Philippine reserve market against the 200–300 guide, any NGCP contract, 2027 guidance, net debt at 31 Dec) (Scatec financial calendar) | scatec | open |
 | 2027-02-02 | approx | Alphabet Q4 report and 2027 capex guide (early Feb) | googl, ai | open |
 | 2027-02-04 | approx | Amazon Q4 report and first 2027 capex figure (early Feb) | amzn, ai | open |
@@ -452,6 +452,7 @@ it to `open`.
 | 2027-07-01 | approx | SED T-16 Phase 7 (CPOC, 30 months firm) starts (early Q3 2027) | sed | open |
 | 2026-11-18 | yes | Hafnia Q3 deck: product-tanker orderbook by year (Shipping BBB MR2 orderbook-trigger retest) | shipping | watch |
 | 2026-11-27 | approx | Frontline Q3 report (late Nov; date not confirmed): orderbook count by segment, company TCE | shipping | watch |
+| 2026-11-18 | yes | Samsung Electronics Investor Forum 2026 (Singapore, Morgan Stanley conference), memory session: 2027 HBM and LTA pricing comments | smsn, ai, kospi | watch |
 | 2026-11-25 | approx | NVIDIA Q3 FY27 10-Q (late Nov): guarantee calls, capacity buy-backs exercised, new guarantees and equity commitments in Q3 (vendor-financing flow and funded-customer credit signposts; cascade inventory) | ai, nvda | watch |
 | 2026-12-01 | approx | Silicon Data month-end GPU rental indices: B200 against its 2026 high $7.03 (Bear: −20% for three months), H100; price leg of the funded-customer credit signpost and the NVIDIA cascade | ai, nvda | watch |
 | 2026-12-15 | yes | Anthropic staged lock-up releases begin (days 27 / 48 / 62 / 76: 15 Dec, 5 Jan, 19 Jan, 2 Feb); over-allotment option expires ~18 Dec | anthropic | watch |
