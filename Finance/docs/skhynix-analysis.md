@@ -1,921 +1,448 @@
 # SK hynix (KRX 000660; Nasdaq ADR SKHY) — IAF analysis, stub Q4 2026 + 2027–2029
 
-> **4 Nov 2026, kept unchanged (change gate):** read AI Market BBB Update 6 of 1 Nov (H2 path, exit P/E, revenue index and scenarios unchanged; the new Memory cycle section prices SK hynix at 0.77× Base 2028–30) and NVIDIA v1.1 of 2 Nov (its supply commitments are unchanged). At the next real run this analysis leads with the Memory cycle section (iaf-valuation 2026-11-01.1). No figure in this analysis changes.
-
-> **29 Oct 2026, kept unchanged (change gate):** read AI Market BBB Update 5 of 29 Oct; the H2 memory path, exit P/E, revenue index and scenarios are unchanged. No figure in this analysis changes.
-
-**Version 2 — 28 Oct 2026, Q3 report** (version 1: 25 Oct). Prices: **Seoul close Wed 28 Oct 2026**
-(after the report, released 08:29 KST); **ADR: last Nasdaq close Tue 27 Oct** (before it; the ADR has
-not traded a regular session since). Skill revisions used: **iaf-valuation 2026-10-18.2**. Trigger:
-the **Q3 2026 report and the shareholder-return decision of 28 Oct**. Sector inputs (headers read
-again on 28 Oct; no value has moved since version 1):
-- `docs/ai-market-bbb.md`, **Update 4 of 24 Oct 2026**, produced with ai-market-bbb rev
-  **2026-10-24.1**. It supplies:
-  - the **H2 memory layer**: EPS path (CY27 consensus = 1.00; unchanged since 12 Oct), exit P/E
-    reference 8 / 10 / 11, cash conversion (check only) and the Track B instruction;
-  - the scenarios and catalysts (financing break and memory overshoot / contracted build then
-    digestion / agentic adoption);
-  - the H2 revenue index (check), the H2 basket return and P/E, the layer-method company check for
-    SK hynix (19.9% Base, NOK, at KRW 1,277,000) and its warning that names priced below the Bear
-    exit multiple re-rate up in the Bear.
-
-  This analysis makes no memory market forecast of its own.
-- `docs/equity-market-bbb.md` (17 Oct 2026, amended 18 Oct; skill 2026-10-24.1; stale after
-  10 Nov). It supplies the macro scenarios, the **I-44 path** for non-USD foreign earnings (Bear
-  +8% / +6% / +6%, Base flat, Bull −2%; NOK memo only), World Base 5.2% and E / R 0.024, and the
-  exit anchors: World exit P/E 17 (15 / 18.5), exit P/B 3.14 (2.46 / 3.69), mid-cycle return 8.2%.
-- `docs/hy-market-bbb.md` (24 Oct 2026, kept unchanged; skill 2026-10-24.1): Base window NIBOR
-  **4.38%** (E / R), HY market Base **6.8%**, HY market reference E / R **0.196**. SK hynix has net
-  cash; no refinancing test applies.
-- Company analyses read: `docs/nvda-analysis.md` (v1, 17 Oct: NVIDIA as the main HBM buyer, its
-  supply commitments), `docs/mu-analysis.md` (v2, 22 Oct: the same layer path on the closest peer,
-  and the template for this build) and, **new in this version, `docs/samsung-analysis.md`** (v1,
-  25 Oct; peer comparison only). The oil, rig, supply, shipping and defense baselines are not used.
+**Version 3 — 16 Nov 2026** · Seoul close Mon 16 Nov **KRW 1,120,000**; ADR **$123.45** (Nasdaq, 16 Nov 14:56 UTC, intraday) · skills: iaf-valuation **2026-11-12.1**; inputs AI BBB 16 Nov note (paths of 11 Nov; ai-market-bbb 2026-11-11.2), Equity BBB 6 Nov (equity-market-bbb 2026-10-24.1), HY BBB 11 Nov (values of 5 Nov; hy-market-bbb 2026-11-08.1) · **verdict: clears** (Seoul Base margin of safety +92%; ADR +46%).
 
 ## Summary
 
+**The memory cycle** (read from `docs/ai-market-bbb.md`, H2 Memory cycle; no memory forecast is made here)
+- **Where:** late upcycle. Contract prices still rise (Q4-26 conventional DRAM +10–15%, ~+20% blended with HBM; Q1-27 +3–8%), but q/q growth has halved twice since Q2-26; mobile DRAM and most NAND are about flat; margins are records (SK hynix 80% operating in Q3); the shares peaked in June (SK hynix −62% from 2,919,000 on 22 Jun).
+- **What turns it:** new supply from 2H-27 into 2028 (SK hynix Yongin fab 1 in 2027, M17 Dec 2028, Y2 Jun 2029; Samsung's 2026 capex +60%; Micron 1δ / G11; CXMT +31% in wafers) meeting AI capex digestion after the contracted 2027 build (K1 Base 1,120 → 1,170 → 1,170bn). LTAs soften the fall for the leaders and cap the rise.
+- **How likely, when (AI BBB judgement): Base kept** — the turn in 2028; timing risk 1–2 quarters earlier for NAND and commodity DRAM; 2028 depth Base or shallower for the leaders; 2029–30 Base or deeper, the main risk.
+- **SK hynix's Q3 business report (6-K/DART, 16 Nov) changes none of it:** LTAs with major customers are stated, terms withheld as trade secrets; **no customer prepayments of note** (contract liabilities 0.52tn, advance receipts 0.03tn at 30 Sep, against Samsung's ~24tn and Micron's $12.75bn of deposits). The AI BBB memory-LTA signpost gets no further Bull-side support from SK hynix.
+- **What the price implies:** at KRW 1,120,000 this build earns k if 2028–30 earnings come in at **0.41× the Base path** (.24 / .16 / .14 of CY27 consensus) and 0% at 0.25×. A 2019-depth fall (.45 / .30 / .25) still returns ~31%. **The price discounts a cut from Base about twice that of a 2019-depth fall**, not a later or shallower turn. The AI BBB layer method gave 0.57× at 1,132,000 (6 Nov); this build is lower because net cash is ~15% of the price and the cash return is fast.
+
 **Verdict**
-- **The company still clears k, with about half the margin of version 1.** On the Seoul share
-  (KRW 1,487,000, +16.4% since 23 Oct, +10.9% on the report day) the Base IRR is **21.1% a year**
-  (KRW; NOK the same in Base) against k = 12%. Hurdle price **P_k ≈ KRW 1,836,000: margin of
-  safety +23.5%.**
-  - **The fall in the margin is the price, not the report.** The report leaves the hurdle where it
-    was (P_k 1,835,230 → 1,835,729): a Q3 beat (operating profit KRW 83.3tn against ~77tn
-    expected) and earlier cash returns are offset by an 11.6tn FX loss, the accrued profit-sharing
-    bonus now deducted from net cash and a smaller Kioxia value.
-  - SK hynix trades at **3.18× calendar-2027 consensus EPS** (KRW 467,761; 39 analysts; not yet
-    revised for Q3) and **2.88× after net cash and the Kioxia stake**. Samsung trades at ~3.35×,
-    Micron at ~5.0×.
-  - The AI baseline's memory path takes EPS to **0.90 of that consensus in 2027, then 0.60, 0.40
-    and 0.35 in 2030** (KRW 163,716; ~2.7× SK hynix's 2025 EPS). On that fall the price is **8.1×
-    the Base 2030 earnings after net cash** (version 1: 6.7×), against an exit P/E of 10.
-  - **Cash comes back fast:** KRW 34,181 a share by December (the KRW 20,000 Q3 dividend and the
-    10tn buyback for cancellation) and ~50,000 more by April 2027 (the rest of the ~KRW 100tn
-    FY2026 return): **5.7% of the price within six months.** Net cash after tax and bonus owed is
-    ~8% of the price at year-end (KRW ~125,000 a share); the Kioxia stake adds ~2%.
-  - **The margin now rests on the AI-era mid-cycle:** on its own mid-cycle (EPS at the 2030 level
-    from 2027) the Base gives **12.9%**, just above k (version 1: 18.9%); at today's multiple held to
-    exit, 15.7%; at a pre-AI-style 2030 EPS (×0.6), **8.8%: fails**.
-- **The line a Nordnet investor can buy is the Nasdaq ADR (SKHY), and it costs ~40% more.** The
-  hurdle is **$153.51 per ADR** (Base, premium falling from ~42% to 15% by end-2029).
-  - At the last close, **$145.36** (27 Oct, before the report): Base **14.2%**, margin of safety
-    **+5.6%: clears narrowly**.
-  - At the post-report overnight indication, **$156.37** (28 Oct, thin): Base 11.3%, margin
-    **−1.8%: marginal**.
-  - With the premium gone at exit: 9.7% (P_k $137.18): **fails**. The ADR premium was 43.6% on
-    27 Oct same-day closes (28–55% since mid-August); new ADRs need SK hynix's consent.
-- **Bear no longer re-rates the share up:**
-  - On the decision Bear (layer exit P/E 8 at the trough) the Seoul share returns **2.4%**, capital
-    only just preserved (+6.8%). The price is now ~9.5× Bear 2028 trough earnings after cash, so the
-    Bear's 2027 return is about flat (+1%; version 1 +18%).
-  - **Capped at today's multiple** (diagnostic, AI BBB method): **−14.7% a year**, −47% in 2027,
-    capital −34%. On the ADR with the premium gone: −7.0% (decision Bear) and −22.8% (capped).
-  - The catalyst is the AI BBB financing break and memory overshoot inside the equity recession.
-    The balance sheet is never at risk: net cash every year, FCF positive in every scenario.
-- **Bull: 33.7%** (P_k KRW 2,417,000). The price is below the Base hurdle, so none of the Bull is
-  priced.
-- **What the Seoul price needs for 12%** (any one): an exit P/E of **7.0** on 2030 EPS (Base 10);
-  or 2030 EPS of **KRW 113,700**, 0.24 of CY27 consensus and ~1.9× the 2025 EPS (Base 0.35); or the
-  whole Base EPS path **19% lower**.
-- **Against World, its layer and HY:** Base 21.1% against World 5.2%, the HY market 6.8% and the
-  H2 basket 12.5% (NOK, 23 Oct prices). **E / R = 0.215 on the capped Bear**, just above the HY
-  reference (0.196); 0.649 on the decision Bear.
-- **Ahead of the layer's starting point:** Q3 operating EPS ~5% above consensus, Q4 DRAM bits
-  guided +mid-20% q/q, 2027 HBM volumes and prices settled, LTAs on more than 50% of 2027–28
-  capacity. The AI BBB Base 2028 fall is not contradicted by numbers yet, but the company's
-  visibility leans against its steepness (a hint for the next AI BBB run; no path change here).
-- **Open:** the Q3 business report (6-K, ~mid-November: tax owed and the bonus accrual, both
-  estimated here), the Q3 buyback period, the rest of the FY2026 return (Q4 report, late January
-  2027), the 2027 consensus revisions, Samsung's Q3 (29 Oct).
+- **Clears, by a wide margin.** Seoul share KRW 1,120,000: Base **~44% a year** against k = 12%; **P_k ≈ KRW 2,145,000; margin of safety +92%.** The share trades at **2.08× CY27 consensus EPS** (537,911; 37 analysts) and 1.74× after net cash and the Kioxia stake.
+- **ADR (SKHY, the Nordnet line): clears.** At $123.45 (premium 47% over Seoul) Base ~29% with the premium falling to 15% at exit; **hurdle $179.79 per ADR, margin +46%**. With no premium at exit still ~24% (P_k $160.63).
+- **Bear:** the decision Bear (exit P/E 8 at the trough) returns ~21% and clears k, because the price is ~1.7× core earnings and re-rates up. **Capped at today's core multiple (1.73×): −4% a year, −33% in 2027, −10% of capital** — the realistic share-price stress. ADR in the capped Bear (premium gone): −18% a year, −39% of capital.
+- **What the price needs for 12%** (any one): an exit P/E of 2.2 on 2030 EPS (Base 10); 2030 EPS at 0.08 of CY27 consensus (42,000, below 2025's 60,372; Base 0.35); the whole path 48% lower; or 2028–30 at 0.41× Base.
+- **What moved since 28 Oct:** the price fell 25% (1,487,000 → 1,120,000; Kospi −15%); CY27 consensus rose 15% (+15.0% on P_k); the report's own items +1.5% on P_k (liquid investments outside the company's net cash +2.1%, tax owed −0.5%); Kioxia's fall −0.4% (Tracking).
 
-**Change since 25 Oct (version 1)** (Seoul share unless stated)
+**Base in brief**
+- EPS follows the AI BBB H2 path: 0.90 of CY27 consensus in 2027 (484,120), then .60 / .40 / .35: **2030 EPS 188,269, ~3.1× 2025's 60,372** — the AI-era mid-cycle (2023 was a loss year). Consensus has no turn: Q4-26 118,606 and Q1-27 118,446 (Yahoo, 16 Nov).
+- **Return bridge** (Scenarios): price 1,120,000 = core 935,334 (1.74× CY27 consensus) + net cash 165,934 + Kioxia 18,732. Base 2027 below consensus −93,533; the 2027 → 2030 fall at today's multiple −514,434; **the multiple to the exit P/E 10 +1,555,320**; net cash at exit 530,673; distributions 496,505. The return is the multiple and the cash, not earnings growth.
+- The market pays **5.0× Base 2030 earnings after end-2026 net cash and Kioxia**, against an exit P/E of 10. Distributions plus net cash at exit (1.03m a share) nearly repay the price on their own.
 
-| Step | Bear IRR / P_k / margin | **Base IRR / P_k / margin** | Bull IRR / P_k / margin |
-|---|---|---|---|
-| Version 1 (KRW 1,277,000, 23 Oct) | 8.4% / 1,167,280 / −8.6% | **27.7% / 1,835,230 / +43.7%** | 40.7% / 2,416,755 / +89.3% |
-| **Price and FX** (KRW 1,487,000, +16.4%; Kioxia ¥14,340, +12.4%, on the version-1 basis; three days) | 2.7% / 1,169,967 / −21.3% | **20.9% / 1,840,137 / +23.7%** | 33.3% / 2,422,844 / +62.9% |
-| **Report** (Q3 actuals, Q4 guide, net cash, bonus accrual, distributions, Kioxia basis) | 2.4% / 1,169,283 / −21.4% | **21.1% / 1,835,729 / +23.5%** | 33.7% / 2,416,951 / +62.5% |
-| ADR line, Base (version 1 $137.02 → $145.36) | | 17.1% / $155.34 / +13.4% → price and FX 14.4% / $154.28 / +6.1% → report **14.2% / $153.51 / +5.6%** | |
+**Bear in brief**
+- Story: the AI BBB financing break and memory overshoot in 2028 (a lab misses commitments, AI credit tightens, 2028 hyperscaler capex −16%, DRAM contract prices fall) inside the equity recession. Leading signpost: funded-customer credit stress (touched: CoreWeave unsecured ~15%, no default or guarantee call).
+- Worst year 2028 (EPS 161,373, a third of Base 2027). The H2 path does the damage (44.0% → 24.3%), then the exit multiple (→ 18.2%); the capex cut adds back.
+- Capital preserved on the decision Bear (+65%), lost on the capped Bear (−10%). The balance sheet is never at risk: net cash 119tn at end-2026 → 281tn at exit, FCF 206 / 104 / 85tn, borrowings 15.8tn against 162tn of liquid assets at 30 Sep.
 
-- **Price and FX:** −6.8 pp of Base IRR and −20 pp of margin, the whole change. The Seoul share
-  rose with the Kospi (+6.8% on 28 Oct); USD/KRW 1,325.4 → 1,338.2.
-- **Report** (Base P_k, cumulative, at the new price): net **−4,400 (−0.2%)**:
-  - earnings and cash actuals −9,400: Q3 and Q4 operating profit ~7tn above version 1, against the
-    11.6tn FX loss, the buyback at 40.0tn (not 36.6tn) and more working capital;
-  - 2027 working capital measured from the Q4-26 run-rate +21,000 (method fix: version 1 counted
-    the H2 receivables build twice);
-  - accrued profit-sharing bonus deducted from net cash −18,000 (18.2tn for 9M 2026, missing in
-    version 1);
-  - the new distributions +8,200 (24tn in the stub and ~35tn by April 2027 instead of a 2027
-    catch-up: the same cash, earlier);
-  - the Kioxia stake on the 14% look-through −6,200 (22.0tn after tax, not 28.2tn).
-
-**Decision table (Seoul share, KRW per share)**
+**Decision table** (Seoul share, KRW per share)
 
 | | Bear | **Base** | Bull |
 |---|---|---|---|
-| IRR_T (KRW) / NOK memo (I-44 path) | 2.4% / 4.7% | **21.1% / 21.1%** | 33.7% / 32.7% |
-| IRR_T, Bear capped at today's P/E (diagnostic) | −14.7% | | |
-| V_T (31 Dec 2029) | 1,264,700 | **2,088,422** | 2,841,287 |
-| P_k / margin of safety | 1,169,283 / −21.4% | **1,835,729 / +23.5%** | 2,416,951 / +62.5% |
-| Capital preserved? (ΣD + V_T vs P) | Yes: +6.8% (capped: **No, −33.7%**) | Yes: +69.4% | Yes: +124.6% |
-| Cumulative FCF per share 2027–29 (after growth capex) | 478,112 | **691,074** | 827,818 |
-| Net cash per share at exit | 313,579 | **420,060** | 488,432 |
-| Balance sheet | Net cash grows every year (88tn at end-2026 → 221tn); capex cut to 60 / 50 / 40tn | Net cash KRW 88tn at end-2026 → 296tn at exit after ~100tn for FY2026 and 50% of FCF | Capex 80–110tn still leaves FCF 117–263tn |
-| **ADR line (SKHY), last close $145.36: IRR / P_k per ADR / margin** | −7.0% / $87.38 / −39.9% (premium → 0) | **14.2% / $153.51 / +5.6%** (premium → 15%) | 34.1% / $242.82 / +67.0% (premium held) |
-| ADR at the overnight indication $156.37 | −9.4% / −44.1% | 11.3% / −1.8% (marginal) | 30.6% / +55.3% |
+| IRR_T (KRW) / NOK memo (I-44 path) | 21% / 24% | **44% / 44%** | 59% / 58% |
+| IRR_T, Bear capped at today's core P/E 1.73× (diagnostic) | −4% (capital −10%) | | |
+| V_T (31 Dec 2029) | 1,483,072 | **2,432,092** | 3,299,964 |
+| P_k / margin of safety | 1,364,252 / +22% | **2,145,028 / +92%** | 2,823,400 / +152% |
+| Capital preserved? (ΣD + V_T vs P) | Yes, +65% | Yes, +162% | Yes, +247% |
+| Cumulative FCF after growth capex per share, 2027–29 | 558,785 | **824,361** | 992,672 |
+| Net cash per share at exit | 397,885 | **530,673** | 614,828 |
+| Balance sheet | Net cash grows every year; capex cut to 60 / 50 / 40tn | 119tn (end-2026) → 374tn after 35tn in April 2027 and 50% of FCF | Capex 80–110tn still leaves FCF 145–313tn |
+| **ADR SKHY ($123.45): IRR / P_k per ADR / margin** | 4% / $102.16 / −17% (premium → 0) | **29% / $179.79 / +46%** (→ 15%) | 53% / $293.26 / +138% (held at 47%) |
+| E / R (NOK; reference only, not the gate) | capped Bear **0.349** (HY reference 0.254); decision Bear 2.46 | | |
 
-**Per-share path (KRW; calendar years; operating EPS, Kioxia gains and losses excluded)**
+**Per-share path** (KRW; calendar years; operating EPS, Kioxia gains and losses excluded)
 
-| | Stub Q4-26 (28 Oct–31 Dec) | 2027 | 2028 | 2029 | 2030 (exit-year EPS) |
+| | Stub (16 Nov–31 Dec) | 2027 | 2028 | 2029 | 2030 |
 |---|---|---|---|---|---|
-| Base revenue (KRW tn) | 83.0 (Q4E 119.3 × 64/92) | 491 | 420 | 366 | (≈ 359) |
-| Base EBITDA (≈; tn / per share) | ≈ 69 / ≈ 97,600 | 404 / 572,472 | 280 / 396,632 | 200 / 282,922 | |
-| Base EPS | 72,390 (Q4E 104,061 × 64/92) | 420,985 | 280,657 | 187,104 | **163,716** |
-| Base maintenance FCF per share (capex = D&A) | 52,452 (all FCF after capex, tax and the bonus accrual) | 418,045 | 295,794 | 198,457 | |
-| Base growth capex per share (capex − D&A) | (in the stub figure) | 69,486 | 80,831 | 70,905 | |
-| Base FCF after growth capex per share (no debt amortisation of note) | 52,452 | 348,559 | 214,963 | 127,553 | |
-| Base D_t (dividends + buybacks, paid) | 34,181 (Q3 dividend 20,000 + 10tn buyback) | 224,423 (incl. 50,144 rest of FY2026, April) | 107,481 | 63,776 | |
-| Base net cash per share (year-end) | 124,667 | 248,803 | 356,284 | 420,060 | |
-| Base V_t (year-end) | 1,505,271 (price flat + stub cash) | 1,807,139 | 1,832,050 | 2,088,422 | |
-| Bear EPS / FCF per share / V_t | | 280,657 / 249,754 / 1,348,025 | 140,328 / 126,068 / 1,218,755 | 116,940 / 102,289 / 1,264,700 | 116,940 |
-| Bull EPS / FCF per share / V_t | | 467,761 / 373,490 / 2,376,584 | 374,209 / 287,809 / 2,571,208 | 257,269 / 166,519 / 2,841,287 | 210,492 |
+| Base revenue, KRW tn | 58.4 (Q4E 119.3 × 45/92) | 491 | 420 | 366 | |
+| Base EBITDA ≈, KRW tn / per share | 48.4 / 68,600 | 464 / 658,507 | 324 / 458,858 | 232 / 329,067 | |
+| Base EPS | 50,899 | 484,120 | 322,746 | 215,164 | **188,269** |
+| Base maintenance FCF per share (capex = D&A) | 36,882 (all FCF) | 481,183 | 337,883 | 226,517 | |
+| Base growth capex per share | (in the stub) | 69,486 | 80,831 | 70,905 | |
+| Base FCF after growth capex per share (no debt amortisation of note) | 36,882 | 411,697 | 257,052 | 155,612 | |
+| Base D_t paid | 34,181 | 255,992 | 128,526 | 77,806 | |
+| Base net cash per share, year-end | 168,636 | 324,340 | 452,866 | 530,673 | |
+| Base V_t | 1,122,702 | 1,833,397 | 2,044,194 | 2,432,092 | |
+| Bear EPS / FCF after growth capex / V_t | | 322,746 / 291,846 / 1,571,011 | 161,373 / 147,112 / 1,426,280 | 134,478 / 119,827 / 1,483,072 | 134,478 |
+| Bull EPS / FCF after growth capex / V_t | | 537,911 / 443,643 / 2,435,569 | 430,329 / 343,928 / 2,874,063 | 295,851 / 205,101 / 3,299,964 | 242,060 |
 
-Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed contract value ·
-`[E]` external or secondary · `[C]` carried from an earlier version · `[A]` own assumption ·
-`[?]` not found or unverified.
+Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed contract value · `[E]` external or secondary · `[C]` carried from an earlier version · `[A]` own assumption · `[?]` not found or unverified.
 
 ## Header
 
 | Item | Value |
 |---|---|
-| Company | SK hynix Inc., KRX 000660 (Kospi). **ADR on Nasdaq: SKHY**, 10 ADRs = 1 common share, listed 10 Jul 2026 `[F]`. Fiscal year = calendar year; K-IFRS, KRW. 2025 revenue **KRW 97.15tn**, net income 42.92tn, EPS 60,372 `[F]` (Yahoo `earnings`; 424B4). H1 2026 revenue 131.90tn, operating profit 98.15tn `[F]` (semi-annual report). **Q3 2026: revenue 104.62tn, operating profit 83.33tn (80%), net income 39.78tn** `[F]` (release 28 Oct) |
-| Price (P) | **KRW 1,487,000**, Yahoo `000660.KS`, close 28 Oct 2026, 15:30 KST (+10.9% on the day; 27 Oct 1,341,000; 23 Oct 1,277,000; 52-week range 501,000–2,987,000; Kospi 6,024, +6.8%) `[F]`. **ADR: $145.36**, Yahoo `SKHY`, Nasdaq close 27 Oct (before the release at 19:29 EDT) `[F]`; post-market close $149.40 and overnight indication $156.37 on 28 Oct (thin) `[F]`. Same-day premium 27 Oct: **43.6%** |
-| Valuation date / exit date | 28 Oct 2026 / 31 Dec 2029, **T = 3.18 years** (stub 64 days) |
-| Shares | **705.17m used** = 730,492,365 issued less 25,319,041 treasury shares after the completed buyback (6-K, 26 Oct) `[F]`; Yahoo 705,173,324 `[F]`. The **23,693,272 shares bought for KRW 40.004tn** (20 Aug–21 Oct, average 1,688,426) are cancelled on **5 Nov** (6-K/A, 26 Oct) `[F]`, leaving 706.80m issued and 1.63m treasury. Later buybacks are D_t at this count (counted once); shares bought for employee pay (~10tn) go to staff and leave the count unchanged. EDGAR since 15 Jul: 6-Ks only, no share issue `[F]` |
-| Market cap / EV | **KRW 1,048.6tn** on 705.17m (USD 784bn). **Net cash at the valuation date ≈ KRW 75.0tn** `[A]` (106,396/share) after the tax still owed on 2026 profits and the accrued bonus (bridge in Near term). Kioxia stake ≈ 22.0tn after deferred tax `[A]`. **EV ≈ 952tn** |
-| P/E | 4.18× CY26 consensus (355,514; 40); **3.18× CY27 consensus (467,761; 39)**; core P/E (price less net cash and Kioxia) **2.88×**. Yahoo `earningsTrend`, 28 Oct, not yet revised for Q3 `[F]`. ADR line: 4.16× CY27 at $145.36 |
-| P/B | 4.03× book at 30 Jun (equity 262.4tn, 368,989/share on the 711.08m shares then outstanding) `[F]`; ~3.0× estimated end-2026 book (347tn, 492,078/share) `[A]` |
-| NAVs (Step 3) | Not applicable (no tradeable asset marks for fabs). V_T = normalised EPS × an independent exit P/E + net cash + the Kioxia stake, with the exit cross-check against the equity market |
-| FX | KRW reporting and KRW price: no conversion for the decision. **ADR at USD/KRW 1,338.2** (Yahoo `KRW=X`, 28 Oct 06:55 UTC). NOK memo on the Equity BBB **I-44 path** (KRW is a non-USD currency): factors Bear 1.08 / 1.06 / 1.06, Base 1, Bull 0.98. USD/NOK 9.3313 (Yahoo, 28 Oct 06:47 UTC): one ADR = NOK 1,356.4 at $145.36 |
-| Track | **B** (cyclical, capital-intensive memory; AI BBB Interface: "H2 memory is Track B (cyclical; normalise to mid-cycle)"). FCF build per year, V_T on normalised 2030 EPS, P_k |
-| k | **12%**, not raised: net cash, very liquid (~4.2m shares a day, KRW ~6tn). Customer concentration (largest customer 23.9% of 2025 revenue) is priced in the Bear; the ADR premium is priced in the ADR line, not through k |
-| Horizon | Stub 28 Oct–31 Dec 2026 + 2027–2029 annual; exit on 2030 normalised EPS |
+| Company | SK hynix Inc., KRX 000660 (Kospi). **ADR on Nasdaq: SKHY**, 10 ADRs = 1 share, listed 10 Jul 2026. Calendar fiscal year; K-IFRS consolidated, KRW. 2025 revenue 97.15tn, net income 42.92tn, EPS 60,372 `[F]`. **9M 2026: revenue 236.5tn, operating profit 181.5tn, net income 174.0tn (controlling 173.7), basic EPS 243,776; Q3 revenue 104.6tn, operating profit 83.3tn (80%), net income 39.8tn, EPS 54,773** `[F]` (quarterly report, 16 Nov) |
+| Price (P) | **KRW 1,120,000** (Yahoo `000660.KS`, close 16 Nov, 15:30 KST; −7.9% on the day; 13 Nov 1,216,000; 6 Nov 1,132,000; −24.7% since 28 Oct). Kospi 5,100.50 `[F]`. **ADR $123.45** (Yahoo `SKHY`, 16 Nov 14:56 UTC, intraday; close 13 Nov $131.79) `[F]` |
+| Valuation / exit date; horizon | 16 Nov 2026 / 31 Dec 2029; **T = 3.13 years**: stub 16 Nov–31 Dec (45 days) + 2027–2029; exit on 2030 normalised EPS |
+| Shares | **705.17m used** = 706,799,093 issued after the 5 Nov cancellation of 23,693,272 shares, less 1,625,769 treasury shares held for compensation `[F]` (report; Yahoo 705,173,324; Q3 dividend 14.1035tn ÷ 20,000). Buybacks for cancellation are D_t at this count; shares bought for staff settle the compensation owed |
+| Market cap / EV | **KRW 789.8tn** (USD 591bn). **Net cash at the valuation date ≈ 117.0tn** (165,934/share) after tax and 2026 staff compensation owed, incl. 47.9tn of long-term liquid investments the company leaves out of its own net cash (Near term). Kioxia stake 13.2tn after deferred tax (18,732/share). **EV ≈ 660tn** |
+| P/E | 3.11× CY26 consensus (360,170; 37); **2.08× CY27 consensus (537,911; 37; range 387,401–877,791; +15.0% since 28 Oct)**; core P/E (price less net cash and Kioxia) **1.74×** (Yahoo `earningsTrend`, 16 Nov `[F]`) |
+| P/B | 2.56× controlling equity at 30 Sep (308.5tn `[F]`; 437,480/share); ~2.37× estimated end-2026 book (333tn `[A]`) |
+| NAVs (Step 3) | Not applicable (no tradeable marks for fabs). V_T = normalised 2030 EPS × an independent exit P/E + net cash + the Kioxia stake, checked against the equity market |
+| FX | KRW price and reporting: no conversion for the decision. **ADR at USD/KRW 1,335.42**, USD/NOK 9.6341 (Yahoo, 16 Nov 14:55 UTC): one ADR = NOK 1,189. NOK memo on the Equity BBB I-44 path (Bear 1.08 / 1.06 / 1.06, Base 1, Bull 0.98). Kioxia ¥8,392 (close 16 Nov), JPY/KRW 8.349 |
+| Track | **B** (AI BBB: "H2 memory is Track B; normalise to mid-cycle"). FCF build per year, V_T on 2030 normalised EPS, P_k |
+| k | **12%**, not raised: net cash, very liquid. Customer concentration (largest customer 23.9% of 2025 revenue) sits in the Bear; the ADR premium in the ADR line, not in k |
 
-**Sources (connector · document · period):**
-- **SK hynix newsroom** `[F]`: "SK hynix Announces 3Q26 Financial Results" (28 Oct 2026, 08:29 KST):
-  Q3 revenue, operating profit, net income, cash and borrowings, LTAs, the shareholder-return plan
-  and the board decisions of 28 Oct.
-- **SEC EDGAR, SK hynix (CIK 2120882)** `[F]`: since version 1, the buyback completion report and
-  the amended cancellation decision (6-K and 6-K/A, 26 Oct) and the clarification on the Kioxia
-  special dividend report (6-K, 26 Oct). The Q3 results 6-K was not yet on EDGAR at 06:46 UTC on
-  28 Oct. Earlier: semi-annual business report H1 2026 (6-K, 18 Aug), Q2 results, ADR issue,
-  investments, Q2 dividend, buyback and return policy (19 Aug), Q3 call notice (14 Oct), Solidigm
-  (23 Oct), prospectus 424B4 (10 Jul).
-- **Earnings call** `[E]`: transcript via Investing.com (DRAM and NAND bits and prices, Q4 guide,
-  EBITDA, D&A, non-operating items, 2027 demand, HBM, LTAs, capex direction, return details); BigGo
-  Finance summary (EBITDA, basic EPS).
-- **Yahoo** (28 Oct 2026): `000660.KS`, `SKHY`, `KRW=X`, `NOK=X`, `285A.T`, `JPYKRW=X`, `^KS11`,
-  `005930.KS`, `MU` quotes and charts; `earningsTrend`, `financialData`, `calendarEvents`,
-  `earnings` for `000660.KS`.
-- **News** `[E]`: Korean press on the record date and the buyback split (Leaders Fact, Newsworks),
-  the Kioxia gain and the special dividend (Dong-A via Bloomberg and others), the profit-sharing
-  agreement (SBS Biz, Smart Today); version-1 sources in the appendix.
-- **Zacks and FinancialFilings:** not used (FinancialFilings quota until 1 Nov). EDGAR was used for
-  the filing check.
-- **Sector:** `docs/ai-market-bbb.md` (24 Oct), `docs/equity-market-bbb.md` (17/18 Oct),
-  `docs/hy-market-bbb.md` (24 Oct); company analyses `docs/nvda-analysis.md` (17 Oct),
-  `docs/mu-analysis.md` (22 Oct), `docs/samsung-analysis.md` (25 Oct).
+**Sources:** quarterly business report to 30 Sep 2026 (6-K, filed 16 Nov; English summary of the DART report: statements, notes on fair value, investment assets, payables, other liabilities, share-based payment, treasury shares, commitments, subsequent events; business sections on capacity, investment, orders) `[F]`; 6-Ks of 28–29 Oct (results, Q3 dividend, 20tn buyback, FY2026 return plan, Solidigm clarification) `[F]`; Q3 release and call (28 Oct) `[F]`/`[E]`; Yahoo prices, FX and consensus (16 Nov) `[F]`; `docs/ai-market-bbb.md` (16 Nov note), `docs/equity-market-bbb.md` (6 Nov), `docs/hy-market-bbb.md` (11 Nov), `docs/samsung-analysis.md` v3 (16 Nov), `docs/mu-analysis.md` v3 (5 Nov), `docs/nvda-analysis.md` v1.6 (13 Nov). Zacks and FinancialFilings not used (no Korean coverage); EDGAR for the filing check. Detail in Appendix: sources.
 
-## Scenario definitions (from AI Market BBB and Equity Market BBB)
+## Scenarios
 
-| Scenario | Catalyst | What it does to SK hynix |
+| | Bear (stress) | **Base (decision)** | Bull (stress) |
+|---|---|---|---|
+| Story and catalyst; earliest timing | AI BBB **financing break + memory overshoot 2028** inside the equity Bear (recession H1 2027 + oil Bear); H1 2027 | AI BBB **contracted 2027 build, then digestion**: memory up on price in 2027, down in 2028–29 as new capacity arrives (2017–19 analogue); equity Base | AI BBB **agentic adoption** (lab revenue +130% in 2027, capex $1.3–1.7tn) inside the equity Bull (soft landing); Q2 2027 |
+| Sector rows (AI BBB H2, unchanged since 12 Oct) | EPS .60 / .30 / .25 / .25; index 100 / 72 / 67 | **.90 / .60 / .40 / .35; 138 / 118 / 103** | 1.00 / .80 / .55 / .45; 150 / 133 / 118 |
+| EPS 2027–29; 2030 (× CY27 consensus 537,911) | 322,746 / 161,373 / 134,478; 134,478 | **484,120 / 322,746 / 215,164; 188,269** | 537,911 / 430,329 / 295,851; 242,060 |
+| Revenue; EBITDA ≈, KRW tn | 356 / 256 / 238; 316 / 173 / 150 | **491 / 420 / 366; 464 / 324 / 232** | 534 / 473 / 420; 515 / 424 / 309 |
+| Exit P/E on 2030 EPS | 8, from end-2027 (capped diagnostic: today's 1.73×) | **10** (glide 1.93 → 4.62 → 7.31 → 10) | 11 (glide 1.73 → 4.82 → 7.91 → 11) |
+| Company items | Capex 60 / 50 / 40tn; Kioxia stake halves | **Capex 70 / 85 / 85tn; Kioxia flat** | Capex 80 / 100 / 110tn; Kioxia +20% |
+| Macro and NOK | Equity Bear; I-44 +8 / +6 / +6% | Equity Base; NOK flat | Equity Bull; I-44 −2% |
+| Result: IRR / P_k / capital | 20.9% / 1,364,252 / +65% (capped −4.4%, −10%) | **44.0% / 2,145,028 / +162%** | 59.4% / 2,823,400 / +247% |
+
+Common to all: the stub (Q4E at flat USD prices), the Q3 dividend and the 10tn buyback for cancellation, the rest of the ~100tn FY2026 return (35.4tn, paid ~1 Apr 2027), then 50% of FCF. ADR exit premium: 15% (Base), 0% (Bear), today's 47% held (Bull) `[A]`.
+
+**Driver breakdown** (one driver at a time from Base; KRW P_k)
+
+| Step | Bear | Bull |
 |---|---|---|
-| **Base** (decision) | AI BBB: contracted 2027 build, then digestion; memory "2027 up on price, 2028–29 down as new capacity arrives (2017–19 analogue)". Inside the equity Base (AI boom slows to trend) | EPS on the H2 path × CY27 consensus (467,761): **420,985 / 280,657 / 187,104** (2027–29) and **163,716** in 2030. Revenue 491 / 420 / 366tn `[A]`. Capex 70 / 85 / 85tn. FY2026 return ~100tn, then 50% of FCF. Exit P/E 10 |
-| **Bear** (stress) | AI BBB **financing break + memory overshoot 2028** (a lab misses commitments, AI credit tightens, 2028 hyperscaler capex −16%, DRAM contract prices fall) inside the equity Bear (recession H1 2027 + oil Bear). Earliest H1 2027 | EPS 280,657 / 140,328 / 116,940 and 116,940 in 2030 (layer .60 / .30 / .25 / .25). Revenue 356 / 256 / 238tn; capex cut to 60 / 50 / 40tn. Exit P/E 8, reached at end-2027. Kioxia stake halves. Diagnostic: P/E capped at today's 2.85× |
-| **Bull** (stress) | AI BBB **agentic adoption** (lab revenue +130% in 2027, capex to $1.3–1.7tn) inside the equity Bull (soft landing). Earliest Q2 2027 | EPS at consensus in 2027 (467,761), then 374,209 / 257,269 and 210,492 in 2030 (layer 1.00 / .80 / .55 / .45). Capex 80 / 100 / 110tn. Exit P/E 11 |
+| Base | 44.0% (2,145,028) | 44.0% (2,145,028) |
+| 1. H2 EPS path and revenue index | 24.3% (1,476,433) | 57.2% (2,698,012) |
+| 2. + exit P/E (8 from end-2027 / 11) | 18.2% (1,287,711) | 60.6% (2,867,863) |
+| 3. + capex = scenario | 21.1% | 59.4% |
+| 4. + Kioxia stake = scenario | **20.9% (1,364,252)** | **59.4% (2,823,400)** |
 
-The stub (28 Oct–31 Dec 2026) is the same in all scenarios: Q4E from the guidance × 64/92, the
-declared Q3 dividend and buyback, price flat by convention. Bear and Bull diverge from 1 Jan 2027;
-the year-end dividend and Q4 buyback that complete the FY2026 return (paid ~April 2027) are the same
-in all three. **ADR line:** the ADR premium (~42% today) ends at 15% in Base, 0% in Bear
-and 42% in Bull at exit `[A]`.
+**Base return bridge** (KRW per share)
+
+| Step | Per share |
+|---|---|
+| Price today | **1,120,000** = core 935,334 + net cash at the valuation date 165,934 + Kioxia 18,732 |
+| Base 2027 EPS below consensus (×0.90) at today's core 1.74× | −93,533 → 841,801 |
+| Earnings normalisation 2027 → 2030 (484,120 → 188,269) at today's multiple | −514,434 → 327,367 |
+| Re-rating to the exit P/E 10 | **+1,555,320** → 1,882,687 core |
+| + net cash at exit (165,934 + stub 2,702 + retained 2027–29 362,037) + Kioxia 18,732 | +549,405 → **V_T 2,432,092** |
+| + distributions (ΣD, stub to 2029) | 496,505 → ΣD + V_T = 2,928,597 (2.61× P) |
 
 ## Company and status
 
-- **The cycle in numbers** `[F]` (KRW tn; EPS in KRW):
+- **The cycle in numbers** `[F]` (KRW tn): revenue 44.65 (2022), 32.77 (2023), 66.19 (2024), 97.15 (2025), **236.5 in 9M 2026** (Q1 52.6, Q2 79.3, Q3 104.6); net income 2.43 / −9.11 / 19.80 / 42.92, 9M 2026 174.0 (incl. Kioxia gains). Consensus revenue CY26 364.3tn (39), CY27 584.7tn (46).
+- **Q3 2026** `[F]` (release 28 Oct; report 16 Nov): revenue 104.6tn (DRAM 78.2, NAND 26.0; US 63.2, China 23.7); operating profit 83.3tn (80%); finance result −32.6tn (Kioxia valuation loss −22.9tn, FX −11.6tn); net income 39.8tn. DRAM bits ~+10% q/q, ASP high-20s%; NAND bits slightly down, ASP mid-20s% `[E]` (call). Fabs at 100% utilisation (report).
+- **Q3 report (6-K/DART, 16 Nov)** `[F]`:
+  - **Liquidity:** cash 38.3 + short-term financial instruments 37.9 + short-term investment assets 38.2 = 114.5tn (the company's "cash and others"); borrowings 15.8tn. **Long-term investment assets 84.0tn:** the Kioxia-related asset 36.3tn (moved from Level 3 to Level 2), **44.4tn of other Level 2 investments** (debt instruments held through the consolidated Money Market Trust, parent book value 65.8tn, and 8.5tn bought by the parent in 2026; "for liquidity management") and 3.3tn Level 3 strategic stakes. Long-term deposits 3.5tn. The 44.4tn is left out of the company's net cash (98.7tn); here it counts as cash `[A]` (sensitivity: −1.1 pp).
+  - **Tax and staff:** current tax liabilities **27.6tn** (Q3 tax paid 17.2tn); employee-benefit payables 15.7tn (end-2025 4.7tn, the 2025 profit share) plus a 2026 equity-settled share-compensation accrual of 3.6tn (share options line in equity, 0.06 → 3.65tn).
+  - **Working capital and capex:** trade receivables 59.1tn (18.2), inventories 19.4tn (14.3); PP&E acquisitions 9M 31.0tn (Q3 12.7tn); depreciation 9M 11.5tn; **PP&E commitments 42.7tn** (end-2025 6.7tn).
+  - **Kioxia:** finance income 9M includes 40.3tn of valuation gains (39.4tn Level 3), 14.0tn of dividends received and 10.7tn of disposal proceeds; holding capped and no board seat for a set period (note 29). **Subsequent:** 23,693,272 shares cancelled 5 Nov; Penguin Solutions convertible preferred bought for $377.2m (29 Oct); SK hynix NAND Product Solutions renamed HYAICO (30 Oct).
+- **Guidance and outlook** (call 28 Oct) `[E]`/`[F]`: Q4 DRAM bits +mid-20% q/q, NAND +mid-single digits, no price guide; 2027 HBM volumes and prices settled with major customers; customer HBM requests > 2× supply; demand above supply "through 2030"; DRAM and HBM "effectively sold out" through 2029 including volumes under negotiation; 2027 capex "expected to increase significantly". Management sits on the Bull side of the AI BBB, whose Base turns in 2028.
+- **Contracts and customers** `[F]`: LTAs with 14 customers on more than 50% of 2027–28 capacity, prices "within a price range agreed upon with customers" (release); largest customer 23.9% of 2025 revenue (424B4); NVIDIA reported as the largest `[E]`. No RPO, floor or deposit amount (Micron: RPO ~$150bn, floors on > 35% of revenue). Report: "long-term supply agreements for memory semiconductors with major customers", total amount and duration withheld as trade secrets. Contract liabilities 0.52tn (0.47 at end-2025), advance receipts 0.03tn: no prepayments of note.
+- **Capacity:** M15X (HBM DRAM) at maximum capacity by end-2026; Yongin fab 1 from Feb 2027 `[E]`; P&T7 7.09tn; M17 19.10tn (first cleanroom Dec 2028 `[E]`); Y2 phases 1–6 35.22tn (first cleanroom Jun 2029 `[E]`) `[F]`. Solidigm's reported ~KRW 60tn US NAND fab: "no matters have been determined", further disclosure within a month of 29 Oct `[F]`.
+- **Capital** `[F]`: ADR issue 17.79m shares, 39.9tn (Jul). August buyback 23.69m shares for 40.0tn, cancelled 5 Nov. **FY2026 return ≈ KRW 100tn** (cash dividends ≥ 30tn, buybacks and cancellations ≥ 60tn incl. the August 40tn; "sequentially through the payment date of annual dividends"); most of the Kioxia gains returned as special dividends in two instalments (Q3 and year-end). **Board 28 Oct:** Q3 dividend **KRW 20,000** (10,000 + 10,000 Kioxia special; 14.10tn; record 30 Nov, paid within a month); **buyback of 20tn (14.92m shares at 1,341,000), 29 Oct–28 Jan 2027**, ~10tn for cancellation and ~10tn for staff compensation. Later buybacks set quarterly. Profit share: 10% of operating profit (2025 agreement), part paid in treasury shares `[E]`.
 
-| Calendar year | 2022 | 2023 | 2024 | 2025 | H1 2026 | Q3 2026 | CY26 consensus | CY27 consensus |
-|---|---|---|---|---|---|---|---|---|
-| Revenue | 44.65 | 32.77 | 66.19 | 97.15 | 131.90 | **104.62** | 343.9 (45) | 530.6 (46) |
-| Operating profit | | | | | 98.15 | **83.33** | | ~392 (FnGuide, pre-report) `[E]` |
-| Net income | 2.43 | −9.11 | 19.80 | 42.92 | 134.27 (incl. ~77 of Kioxia-related finance income) | 39.78 (after −22.9 valuation loss, −11.6 FX) | | |
-| EPS | | | | 60,372 | | 54,773 basic `[E]`; ~90,400 operating `[A]` | 355,514 (40) | 467,761 (39) |
+### The ADR premium
 
-  2022–25 from Yahoo `earnings`; H1 2026 from the semi-annual report; Q3 from the release and the
-  call; consensus from Yahoo `earningsTrend` (28 Oct; analysts in brackets; not yet revised for Q3)
-  and FnGuide via Korean press. 2023 was a loss year: the cycle is real.
-- **Q3 2026 (Jul–Sep), reported 28 Oct** `[F]` unless noted:
-  - Revenue **104.62tn** (+32% q/q, +328% y/y), the first quarter above 100tn; about 75% DRAM and
-    24% NAND `[E]`.
-  - Operating profit **83.33tn (80% margin)**, against ~77.0tn expected (FnGuide 76.96tn) `[E]`;
-    EBITDA 87.7tn (84%), D&A 4.3tn `[E]` (call).
-  - **DRAM:** bits up ~10% q/q (server DDR5 +40%+), ASP up high-20s%. **NAND:** bits slightly down
-    (mix to 321-layer eSSD), ASP up mid-20s% `[E]` (call).
-  - Non-operating −32.6tn: **FX net loss 11.6tn** (the won's rise) and **valuation losses on
-    investment assets 22.9tn** (Kioxia); pre-tax 50.7tn, tax 10.9tn, **net income 39.78tn** `[E]`
-    (call) / `[F]`.
-  - **Cash and equivalents 114.5tn, borrowings 15.8tn, net cash 98.7tn** (+29.3tn in the quarter
-    after the 39.9tn ADR proceeds and 28.8tn of buyback settlements) `[F]`.
-  - HBM4 in full-scale mass production and shipment; yields above plan; HBM4 to pass HBM3E in
-    shipments and revenue in Q4; M15X to maximum capacity by year-end `[F]`.
-- **Guidance and outlook:**
-  - Q4: DRAM bits up **mid-20% q/q** (1z expansion, HBM4 via M15X), NAND bits up mid-single digits;
-    no price guidance `[E]` (call).
-  - 2027: revenue and profit "one step further" `[F]`; achievable demand growth ~mid-20% for DRAM
-    and high-teens for NAND `[E]`; **2027 HBM volumes and prices with major customers finalised**
-    (no figures; the terms "faithfully reflect the increased product value of HBM4") `[E]`;
-    customer HBM requests exceed supply more than 2× `[E]`.
-  - Demand exceeds supply **through 2030** `[F]`; DRAM and HBM "effectively sold out" through 2029
-    counting LTAs and demand under discussion `[E]`.
-  - **Capex:** 2026 not quantified (earlier "high-40 trillion won" `[E]`); **2027 "expected to
-    increase significantly"** with Yongin phase 1 in full operation; scale and timing flexible
-    `[F]`.
-- **Contracts** `[F]`: long-term agreements with **14 customers** (version 1: ~10), including the
-  large cloud providers, typically five years, longer terms under discussion. **LTA volume covers
-  more than 50% of total 2027 and 2028 production capacity.** Prices are set "within a price range
-  agreed upon with customers" that reflects market conditions; deposits are among the safeguards
-  (amounts not disclosed `[?]`). No RPO or floor is disclosed, unlike Micron's (RPO ~$150bn, floors
-  on > 35% of revenue).
-- **Customers and market** `[F]` (424B4): largest customer 23.9% of 2025 revenue; the two largest
-  14.8% and 12.4% in Q1 2026 (US and China). DRAM share 29.1% in Q1 2026 (#2; IDC). SK hynix's
-  share of NVIDIA's HBM4 is reported at ~50–70% `[E]`.
-- **Capacity** `[F]` unless noted:
-
-  | Project | Size | First output |
-  |---|---|---|
-  | M15X (Cheongju), HBM DRAM | in 2026 capex | **maximum capacity by end-2026** (HBM4) `[F]` |
-  | Yongin cluster fab 1 | in 2026–27 capex | **Feb 2027** `[E]`; full-scale operation in 2027 `[F]` |
-  | P&T7 advanced packaging (Cheongju) | 7.09tn (board 22 Jul) | `[?]` |
-  | M17 NAND fab (Cheongju) | 19.10tn (board 7 Aug) | first cleanroom Dec 2028 `[E]`; shell accelerated, cleanrooms phased `[E]` (call) |
-  | Y2 Yongin fab 2, phases 1–6 | 35.22tn (board 7 Aug) | ground July 2027, first cleanroom June 2029 `[E]`; shells accelerated `[E]` |
-  | 2026 capex | "high-40 trillion won" `[E]` (not updated) | |
-
-  Management: adding fabs does not add supply in proportion; investment is staged and can be
-  adjusted `[E]` (call). Reviews (no decision): a fab in Japan, a stake sale in the Chongqing
-  packaging plant `[F]`.
-- **Capital** `[F]`:
-  - ADR issue: 17.79m new shares for KRW 39.89tn (closed 15 Jul).
-  - **August buyback completed:** 23,693,272 shares for KRW 40.004tn (20 Aug–21 Oct; average
-    1,688,426), cancellation on 5 Nov. Version 1 assumed 24.07m shares for 36.6tn.
-  - **FY2026 return ≈ KRW 100tn** (cash dividends ≥ 30tn, buybacks and cancellations ≥ 60tn
-    including the August 40tn), "to fulfil its commitment to return 50% or more of free cash
-    flow". Principles: dividends set on operating results; significant investment gains returned
-    as special dividends; buybacks every quarter, sized by the board on price, market and cash
-    flow.
-  - **Board, 28 Oct:** Q3 cash dividend **KRW 20,000 a share** (10,000 on earnings + 10,000 special
-    from the Kioxia gains; 14.10tn), **record date 30 Nov**, paid within one month `[E]` (Korean
-    press). **Buyback of 20tn:** 10tn for shareholder returns, cancelled in full; ~10tn for employee
-    compensation, outside the return total. Period not disclosed `[?]`.
-  - The rest of the Kioxia gain goes into the year-end dividend once FY2026 is closed `[F]`.
-  - Fixed dividend was KRW 375 a quarter in Q1–Q2 (Q2 record date 31 Aug).
-  - **Kioxia:** SK hynix gained about KRW 20tn selling down Kioxia in H1 and was reported to plan a
-    ~16tn special dividend from it (Dong-A, 26 Oct, via Bloomberg) `[E]`; SK hynix replied that
-    nothing was decided (6-K, 26 Oct) `[F]`. It still holds convertible bonds for ~14% of Kioxia
-    `[E]`.
-  - **Profit sharing:** 10% of operating profit for ten years (2025 agreement); the 2026 wage deal
-    pays 60% of it in treasury shares `[E]` (SBS Biz, Smart Today). The ~10tn employee buyback is
-    the share part of that bonus.
-  - Solidigm (US NAND subsidiary) dropped its IPO (6-K, 23 Oct; CEO on 28 Oct: it would not have
-    achieved its aim in these markets).
-
-### The ADR premium (new listing, July 2026)
-
-| | Seoul share | ADR (per share, 10 ADRs) | Premium |
+| | Seoul share | ADR × 10 (KRW) | Premium |
 |---|---|---|---|
-| 9 Jul pricing | — | $1,490 | +2.7% to the three-day local average `[E]` |
-| 30 Sep close | KRW 1,776,000 | $1,841.5 (KRW 2,498,500) | +40.7% |
-| 23 Oct close | KRW 1,277,000 | $1,370.2 (KRW 1,816,063) | +42.2% |
-| **27 Oct close** (before the report) | **KRW 1,341,000** | **$1,453.6 (KRW 1,925,686 at 1,324.77)** | **+43.6%** |
-| 28 Oct (Seoul close; ADR overnight indication, thin) | KRW 1,487,000 | $1,563.7 (KRW 2,092,543 at 1,338.2) | +40.7% |
-| Range of same-day closes, 18 Aug–27 Oct | | | 28–55% (mean ~39%) |
+| 27 Oct close (before the Q3 report) | 1,341,000 | 1,925,686 | +43.6% |
+| 13 Nov close | 1,216,000 | 1,757,779 | +44.6% |
+| **16 Nov** (Seoul close; ADR intraday 14:56 UTC) | **1,120,000** | **1,648,576** | **+47.2%** |
+| Same-day closes 18 Aug–13 Nov | | | 28–61% (mean 41%) |
 
-- **Why it persists** `[F]` (424B4): "the depositary is required to obtain our prior consent to any
-  such deposit if … the total number of our common shares represented by ADSs exceeds … a specified
-  maximum that we may establish from time to time". Local shares cannot freely become ADRs, so the
-  arbitrage that would close the gap is in SK hynix's hands. Same-day closes are 13 hours apart
-  (Seoul 15:30, New York 16:00), so a single day's premium is noisy. On 28 Oct the ADR's last
-  close predates the report and the Seoul close follows it, so the 30.8% "premium" at those two
-  prints is a timing artefact, not a narrowing.
-- **Which line is reachable:** Nordnet lists Norway, Sweden, Denmark, Finland, Germany, England,
-  USA, Canada, France, Belgium, the Netherlands, Portugal, Ireland, Italy, Switzerland, Austria,
-  Poland and Spain; **no Korea** `[E]` (nordnet.no, searched 25 Oct; confirm in the price list).
-  The reachable line is SKHY.
-- **What it means:** an ADR buyer pays ~4.2–4.5× CY27 consensus, not 3.2×. If SK hynix lets more
-  ADRs be created (a second ADR issue at today's premium would be very attractive for it), the
-  premium can close quickly. The ADR line is therefore modelled with the premium falling to 15% at
-  exit in Base (about TSMC's ADR premium: 10.6% on 23 Oct, two-year mean 19.5%, AI BBB signpost),
-  to 0% in Bear, and held in Bull `[A]`.
+- **Why it persists** `[F]` (424B4): new ADR deposits above a maximum need SK hynix's consent, so the arbitrage is in the company's hands; closes are 13 hours apart, so one day's premium is noisy (31–61% in November).
+- **Reachable line:** Nordnet offers no Korean market `[E]` (searched 25 Oct); SKHY is the line. It is modelled with the premium at 15% at exit in Base (about TSMC's ADR premium), 0% in Bear and today's 47% held in Bull `[A]`.
 
 ## Near term: stub (all scenarios)
 
-| KRW | Q3-26 (Jul–Sep), actual | Q4-26E | Stub (28 Oct–31 Dec, 64/92 of Q4) |
+| KRW | Q3-26 actual | Q4-26E | Stub (16 Nov–31 Dec, 45/92) |
 |---|---|---|---|
-| Revenue, tn | **104.62** `[F]` (version 1: consensus 99.7) | **119.3** `[A]` (pre-report consensus 113.4; 36) | 83.0 |
-| Operating profit, tn | **83.33** `[F]`, margin 80% (version 1: ~77.0) | ≈ 94.3 `[A]` | ≈ 65.6 |
-| EBITDA, tn | 87.68 `[E]` (call) | ≈ 98.9 `[A]` | ≈ 68.8 |
-| EPS (operating) | ≈ 90,400 `[A]` (consensus 86,312; 12) | ≈ 104,100 `[A]` (consensus 100,775; 12) | 72,390 |
-| Kioxia and FX (non-operating) | valuation loss −22.9tn, FX −11.6tn `[E]`; net income 39.78tn `[F]` | Kioxia ¥18,095 (30 Sep) → ¥14,340 (28 Oct) | not in the model's EPS |
-| FCF, tn | not reported (business report ~mid-Nov) | ≈ 53.2 `[A]` | ≈ 37.0 (52,452/share) after capex, tax and the bonus accrual |
-| D_t | Q2 KRW 375 paid | Q3 dividend **20,000** (record 30 Nov, paid in December) and the **10tn** buyback for cancellation `[F]` | **34,181** a share (20,000 + 14,181) |
+| Revenue, tn | **104.62** `[F]` | **119.3** `[A]` (consensus 130.7; 27) | 58.4 |
+| Operating profit, tn | **83.33** `[F]` (80%) | ≈ 94.3 `[A]` | ≈ 46.1 |
+| EBITDA, tn | 87.7 `[E]` (call) | ≈ 98.9 `[A]` | ≈ 48.4 |
+| EPS (operating) | ≈ 90,400 `[A]` (basic 54,773 after Kioxia and FX) | ≈ 104,100 `[A]` (consensus 118,606; 11) | 50,899 |
+| FCF, tn | OCF 53.9 − PP&E 12.7 ≈ 41.2 `[F]` (incl. 17.2 tax paid) | ≈ 53.2 `[A]` | ≈ 26.0 (36,882/share) |
+| D_t | Q2 KRW 375 paid | Q3 dividend **20,000** (record 30 Nov, ex 27 Nov; paid ~20 Dec) and the **10tn** buyback for cancellation (29 Oct–28 Jan) `[F]` | **34,181** a share (20,000 + 14,181) |
 
-- **Q4E build** `[A]`: DRAM bits +25% and NAND bits +5% q/q (the guided mid-20% and mid-single
-  digits) at **flat USD prices** and the won at ~1,334 against ~1,402 on average in Q3 (−4.9%):
-  revenue ≈ 104.6 × (0.75 × 1.25 + 0.24 × 1.05 + 0.01) × 0.951 = 119.3tn. Cost of sales +20% with
-  bits and SG&A incl. the bonus ≈ 7.0tn give operating profit ≈ 94.3tn (79%). The AI BBB has DRAM
-  contract prices +15–20% in Q4, so flat USD prices are conservative; ±10% on Q4 prices moves the
-  Base by ±0.2 pp (Sensitivities).
-- **Next:** Samsung Q3 (29 Oct), Kioxia results (30 Oct), cancellation of the August shares
-  (5 Nov), Q3 business report (6-K, ~mid-November), NVIDIA Q3 FY27 (17 Nov), Q3 dividend record date
-  (30 Nov; payment in December), Micron FQ1 (mid/late December), Q4 report with the rest of the
-  FY2026 return (late January 2027).
+- **Q4E** `[A]` (unchanged from version 2): DRAM bits +25%, NAND +5% q/q at **flat USD prices**, the won ~5% stronger than the Q3 average: revenue 119.3tn; cost of sales +20% with bits, SG&A incl. the profit share ≈ 7.0tn: operating profit ≈ 94.3tn. FCF = 94.3 + D&A 4.6 + interest 1.0 − tax 21.9 − capex 16.0 − working capital 8.8. The AI BBB's Q4 contract prices (+10–15%) and consensus (130.7tn) are higher: Q4 prices +10% add +0.3 pp. **Dates:** ex-dividend 27 Nov, record 30 Nov; Q3 buyback 29 Oct–28 Jan (placed at its mid-point, 13 Dec); Q4 report and the rest of the FY2026 return ~27–28 Jan 2027; annual dividend paid ~April 2027 (placed 1 Apr).
 
-**Net cash bridge, 30 Sep → 31 Dec 2026** (KRW tn) `[A]` except where marked `[F]`; net cash is
-taken **after all 2026 tax and the accrued bonus**, so later years are on accrual:
+**Net cash bridge, 30 Sep → 31 Dec 2026** (KRW tn; after all 2026 tax and the 2026 staff compensation; `[F]` unless marked)
 
 | Step | KRW tn |
 |---|---|
-| Net cash 30 Sep, company definition (cash and equivalents 114.5 − borrowings 15.8) `[F]` | 98.70 |
-| + long-term deposits (30 Jun figure, assumed unchanged) | +7.10 |
-| − tax still owed on 2026 profit at 30 Sep: 30 Jun liability 31.96 + Q3 current tax 16.93 − ~31.25 paid in Q3 (the August interim payment the Q3 cash flow implies, below) | −17.64 |
-| − accrued profit-sharing bonus for 9M 2026 (10% of operating profit 37.61 + 60.54 + 83.33; paid early 2027, 60% in shares) | −18.15 |
-| **= net cash after tax and bonus owed, 30 Sep** | **70.01** |
-| − buyback trades settled in October (trades 29 Sep–21 Oct) `[F]` | −11.17 |
-| + Q4 FCF to the valuation date (28/92 × 53.17) | +16.18 |
-| **= at the valuation date** | **≈ 75.0** (106,396/share) |
-| + Q4 FCF 28 Oct–31 Dec (64/92): operating profit 94.3 + D&A 4.6 + interest 1.0 − tax 21.9 − capex 16.0 − working capital 8.8 | +36.99 |
-| − Q3 dividend, KRW 20,000 × 705.17m `[F]` | −14.10 |
-| − Q3 buyback for cancellation `[F]` | −10.00 |
-| (employee-pay buyback ~10tn: settles part of the bonus accrual already deducted; no further effect) | 0 |
-| **Net cash 31 Dec 2026** | **≈ 87.9** (124,667/share) |
-| Rest of the FY2026 return (≈ 35.4tn: year-end dividend ≥ 15.4tn incl. the rest of the Kioxia special, Q4 buyback ≥ 10tn), paid ~1 April 2027 | in 2027 D_t (50,144/share) |
+| Cash 38.32 + short-term financial instruments 37.93 + short-term investment assets 38.21 − borrowings 15.80 (company definition) | 98.66 |
+| + long-term liquid investments: Level 2 long-term investment assets 80.65 less the Kioxia-related asset 36.27 `[A]` reading | +44.39 |
+| + long-term deposits (non-current other financial assets at amortised cost) | +3.52 |
+| − current tax liabilities, net of current tax assets | −27.55 |
+| − 2026 staff compensation owed: employee-benefit payables 15.73 + equity-settled accrual 3.59 less the 1.63m treasury shares held for it (1.82 at the price) | −17.50 |
+| **= net cash after tax and compensation owed, 30 Sep** | **101.52** |
+| − August buyback trades settled in October | −11.17 |
+| − Penguin Solutions preferred (USD 377.2m, 29 Oct) | −0.50 |
+| + Q4E FCF to the valuation date (47/92 × 53.17) `[A]` | +27.16 |
+| **= at the valuation date** | **≈ 117.0** (165,934/share) |
+| + Q4E FCF 16 Nov–31 Dec (45/92) `[A]` | +26.01 |
+| − Q3 dividend (KRW 20,000 × 705.17m) and the 10tn buyback for cancellation | −24.10 |
+| **Net cash 31 Dec 2026** | **≈ 118.9** (168,636/share) |
+| Rest of the FY2026 return (≈ 35.4tn: year-end dividend ≥ 15.4tn incl. the rest of the Kioxia special, Q4 buyback ≥ 10tn), paid ~1 Apr 2027 | in 2027 D_t (50,144/share) |
 
-- **Q3 cash-flow check:** net cash rose 29.3tn in Q3 (69.4 → 98.7) `[F]`. With EBITDA 87.7, other
-  non-operating income 1.9, the ADR proceeds 39.9, the buyback settlements 28.8 `[F]`, the Q2
-  dividend 0.3, the FX loss 11.6 (taken as a loss of KRW value on dollar assets), capex ~13.0 and
-  working capital ~15.2 `[A]`, the residual is **~31tn of tax paid in Q3**: about all of the
-  31.96tn owed at 30 Jun, which fits an August interim payment on H1 profits. Tax owed at 30 Sep is
-  therefore ~17.6tn; ±10tn on it (or on the capex and working-capital split) moves the Base by
-  ±0.2–0.3 pp.
-- **Bonus accrual** `[A]`: SK hynix accrues the profit-sharing bonus (10% of operating profit) in
-  operating costs and pays it early in the next year; the 9M 2026 accrual is cash the company owes
-  its staff, so it is deducted like tax owed. Version 1 left out the H1 part (~9.8tn). Without the
-  deduction the Base is 21.5%. To be checked against "other payables" in the Q3 business report.
-- **Version 1 comparison:** version 1 had 139.3tn at 31 Dec on its own basis. The difference is
-  the stub return now paid (−23.8tn net of the 375 dividend version 1 had), the bonus accrual
-  (−18.2tn), the FX loss (−11.6tn), the larger buyback (−3.4tn) and working capital (−3.6tn),
-  against higher operating profit (+7.1tn) and smaller items (D&A, interest, tax; +2.1tn).
-- Tax is 23% on accrual from 2027 (effective rate 23.0% in H1; Q3 21.5% incl. a deferred-tax
-  benefit on the valuation loss) `[F]`.
+- **Liquidity check:** 9M operating cash flow 145.6tn, capex 32.0tn, Kioxia disposals 10.7tn, ADR 39.1tn, buybacks 28.8tn and debt repaid 4.9tn explain the 126tn rise in liquid assets incl. the 44.4tn: they are the 2026 cash surplus, not a new business.
+- **Not counted:** Level 3 strategic stakes (3.3tn), the Kioxia stake (valued apart), lease liabilities (2.3tn). Customer prepayments: none of note, so nothing is deducted (Samsung deducts 10.2tn). The staff buyback (~10tn) and the cash part of the profit share settle the compensation already deducted.
 
 ## Market input (AI Market BBB rows used and how they enter)
 
 | SK hynix item | AI BBB row | Bear / **Base** / Bull | Company adjustment |
 |---|---|---|---|
-| **EPS** (CY27 consensus = 1.00 = **KRW 467,761**) | **H2 layer EPS path** (unchanged since 12 Oct) | 2027: .60 / **.90** / 1.00 · 2028: .30 / **.60** / .80 · 2029: .25 / **.40** / .55 · 2030: .25 / **.35** / .45 | None. The Q3 beat, the Q4 bit guide, the settled 2027 HBM terms and the LTAs on > 50% of 2027–28 capacity argue up; Samsung's HBM4 entry, the 2027 capex step-up and customer concentration argue down. No disclosed price floor lets a sourced reason move a Base point by ≥ 0.05; flagged to the AI BBB (For other modules) |
-| **Exit P/E** on 2030 EPS | H2 reference 8 / **10** / 11 | Used as the exit multiple, cross-checked against World (V_T bridge) | Bear capped at today's 2.85× as a diagnostic |
-| Cash conversion (check) | H2 c, Base .70 / .65 / .60 | Own build .83 / .77 / .68 (Base) | Lower capex intensity than Micron and a working-capital release in 2027 (sensitivity on the layer's c: 19.0%) |
-| Revenue (working capital, margins) | H2 index (2026 average = 100): 100 / **138** / 150 · 72 / **118** / 133 · 67 / **103** / 118 | × SK hynix 2026 revenue 355.8tn (Q1–Q3 actual + Q4E): Base 491 / 420 / 366tn | Net margin 60% → 47% → 36% (2030 ≈ 32%) |
-| Comparison | H2 basket Base 12.5% (NOK), P/E 3.3, margin of safety +1.4%; layer-method check for SK hynix **19.9%** (Bear 4.0%, Bull 31.5%), all at 23 Oct prices | | At today's price the layer method would be several points lower; the company build adds net cash, Kioxia and the front-loaded payout. See Results |
+| **EPS** (1.00 = CY27 consensus **KRW 537,911**, 37, Yahoo 16 Nov; the AI BBB used 529,348 of 7 Nov) | **H2 layer EPS path** (unchanged since 12 Oct) | 2027 .60 / **.90** / 1.00 · 2028 .30 / **.60** / .80 · 2029 .25 / **.40** / .55 · 2030 .25 / **.35** / .45 | None. The Q3 beat, the settled 2027 HBM terms and LTAs on > 50% of 2027–28 capacity argue up; no floor or prepayment, the 2027 capex step-up and Samsung's HBM4 entry argue down. No sourced reason moves a Base point by ≥ 0.05 |
+| **Exit P/E** on 2030 EPS | H2 reference 8 / **10** / 11 | Exit multiple, cross-checked against World | Bear capped at today's 1.73× as a diagnostic |
+| Cash conversion (check) | H2 c, Base .70 / .65 / .60 | Own build .85 / .80 / .72 (Base FCF ÷ NI) | Lower capex intensity than Micron; sensitivity on the layer's c: 40.3% |
+| Revenue (working capital, margin check) | H2 index (2026 = 100): 100 / **138** / 150 · 72 / **118** / 133 · 67 / **103** / 118 | × 2026 revenue 355.8tn (9M actual + Q4E) | Net margin 70% → 54% → 41% (2030 ≈ 37%) |
+| Comparison | H2 basket Base 21.6% (NOK, 6 Nov), P/E 2.64; layer check for SK hynix **30.5%** at 1,132,000 (Bear 12.8%, Bull 43.3%); price-implied 0.57× | | The company build adds net cash (~15% of the price), Kioxia and the front-loaded payout (Results); World Base 6.6% (Korea is not in MSCI World) |
 
-- **Calendarisation:** none needed (calendar fiscal year). Year 1 by quarter uses an assumed
-  quarterly split of CY27 consensus (110,000 / 115,000 / 119,000 / 124,000) `[A]`; Yahoo's Q1-27
-  consensus is 106,721 (12).
-- **Consensus validation:**
-  - **Not yet revised for Q3:** Yahoo CY27 EPS 467,761 (39) is unchanged from 24 Oct; Q4 100,775
-    (12) and CY26 355,514 (40) moved by < 1% (28 Oct). Revisions after the beat are a signpost;
-    EPS ×1.05 on all years gives Base 23.3%.
-  - Yahoo CY27 EPS against **FnGuide 2027 operating profit 391.8tn** (pre-report) `[E]`, which gives
-    ~430,000 EPS: **a ~8% gap**, not explained. Sensitivity: Base 17.4%.
-  - **FX:** USD/KRW 1,338 against 1,442 on 29 Jul (−7%); SK hynix sells in USD. Q3 already carried
-    an 11.6tn FX loss on dollar assets, and Q4 revenue loses ~5% to the won. Sensitivity: EPS −5%
-    gives Base 18.8%.
-  - Q3 check: consensus EPS 86,312 × 728.9m = 62.9tn ≈ 77–80tn operating profit, in line with
-    FnGuide (76.96tn); the actual operating EPS (~90,400) beat it by ~5%.
-- **NVIDIA link** (`docs/nvda-analysis.md`, 17 Oct) `[F]`:
-  - NVIDIA's supply commitments are **$279bn, "primarily memory"**, flat at ~$87–88bn a year in
-    FY28–29: a contracted 2027 and a plateau. That fits the Base (memory up on price in 2027, down
-    on new capacity in 2028–29), and now SK hynix's settled 2027 HBM terms, not a volume collapse.
-  - NVIDIA's own Base (compute +55% in 2027, then +10% and +3%) is the volume behind the H2 layer;
-    its Q3 (17 Nov) and the hyperscalers' 2027 capex (28–29 Oct) are SK hynix signposts.
-  - SK hynix's largest customer took 23.9% of 2025 revenue (424B4, unnamed); NVIDIA is widely
-    reported as that customer `[E]`.
-- **Peers:**
-  - **Micron** (`docs/mu-analysis.md` v2): the same layer path and exit P/E give Micron 6.3% at
-    $856 (fails; 4.6× CY27, net cash ~7.5% of the price). At $928.76 (27 Oct) it trades at ~5.0×
-    `[A]` (scaled).
-  - **Samsung** (`docs/samsung-analysis.md` v1, 25 Oct, KRW 215,500): Base 26.9%, P_k 308,799,
-    margin +43.3%, 2.98× CY27, net cash ~11% of the price; preference line +50.3%. At today's
-    242,250 (+12.4%) its unrevised hurdle leaves ~+27% and ~3.35× CY27 `[A]`; it reports on 29 Oct.
-    SK hynix and Samsung now sit close on margin (+23.5% against ~+27%); SK hynix's cash return is
-    faster, Samsung's preference line is cheaper.
-- **Equity Market BBB:** the Bear is the recession world. **Korea is not in MSCI World** (emerging
-  market), so SK hynix is not in the World blocks; World Base 5.2% is the comparison.
+- **Consensus validation:** CY27 EPS 537,911 (37; 30 days ago 466,736): the post-Q3 revisions; the share basis may still be the pre-buyback count (~3% conservative). Q4-26 consensus 118,606 against own Q4E ~104,100 (flat prices). Back at 467,761 the Base is 36.3% (Sensitivities).
+- **NVIDIA** (`docs/nvda-analysis.md` v1.6, 13 Nov): supply commitments $279bn, "primarily memory", flat in FY28–29 — a contracted 2027 and a plateau, as the Base. Its Q3 FY27 (17 Nov) is the next signpost.
+- **Peers:** Samsung v3 (16 Nov): Base 34.2% at 196,800, P_k 327,423, +66.4%, 2.55× CY27, net cash 17% of the price, ~10tn of customer prepayments. Micron v3 (5 Nov): 18.3% at $656.39, P_k ~$752; at $737 (16 Nov, intraday) the margin is ≈ +2%; price-implied 1.08×. SK hynix is the cheapest of the three on CY27 earnings.
 
 ## Common assumptions
 
-- **EPS basis:** operating earnings per share (consensus basis, after tax). Kioxia valuation gains
-  and losses and FX gains and losses are left out of EPS; Kioxia is carried as a separate stake,
-  the Q3 FX loss sits in the net cash bridge.
-- **Shares:** 705.17m, held flat. Buybacks for cancellation are D_t (cash returned per share at this
-  count), so retained cash is counted once. Shares bought for employee pay settle the bonus
-  accrual and are not D_t. The consensus share basis may still be the pre-buyback count (728.9m):
-  if so, EPS per share is ~3% understated (conservative).
-- **Payout** `[A]` on SK hynix's announced plan:
-  - **FY2026 ≈ 100tn** as announced `[F]`: decided so far 64.6tn (Q1–Q2 dividends 0.54, the August
-    buyback 40.0, the Q3 dividend 14.1, the Q3 buyback for cancellation 10.0); **the rest, ≈ 35.4tn**
-    (year-end dividend ≥ 15.4tn including the rest of the Kioxia special, Q4 buyback ≥ 10tn), is
-    paid ~1 April 2027 in all scenarios. At the floor (25.4tn) the Base is 20.9%.
-  - **FY2027–29: 50% of FCF** ("over 50% of FCF" is the stated floor; the policy runs 2025–27 and
-    is assumed to continue), placed at 1 July of each year. The 2025–27 cumulative floor (50% of
-    cumulative FCF) is met without a catch-up, because FY2026 alone returns ~100tn against ~145–155tn
-    of FCF `[A]`. The rest stays as net cash at face value. Retaining everything from FY2027
-    changes Base by −2.3 pp; paying 100% by +2.7 pp.
-- **Capex** `[A]` (2026 "high-40tn"; **2027 "expected to increase significantly"** `[F]`; capex
-  commitments 61.5tn at 30 Jun; P&T7, M17 and Y2 approved; Samsung + SK hynix + Micron 2027 capex
-  reported at $146bn `[E]`). Unchanged from version 1; Base 2027 (70tn) is ~+45% on 2026:
+- **EPS basis:** operating EPS on the consensus basis (after tax); Kioxia and FX gains and losses left out; Kioxia carried as a stake. Net income = EPS × 705.17m; no interest on net cash beyond consensus.
+- **Shares:** 705.17m held flat; buybacks for cancellation are D_t; staff buybacks settle the compensation owed (not D_t).
+- **Payout** `[A]`: FY2026 ≈ 100tn as announced; decided 64.6tn (Q1–Q2 dividends 0.54, August buyback 40.0, Q3 dividend 14.1, Q3 buyback for cancellation 10.0); **the rest ≈ 35.4tn paid ~1 Apr 2027** in all scenarios (at the floor, 25.4tn: −0.4 pp). **FY2027–29: 50% of FCF** ("50% or more", the 2025–27 policy assumed to continue), at 1 July; the rest stays as net cash at face value.
+- **Capex** `[A]` (unchanged; 2026 "high-40tn", 9M 31.0tn; 2027 "significantly" higher; PP&E commitments 42.7tn):
 
-  | Capex, KRW tn | 2027 | 2028 | 2029 | D&A (Base) | Basis |
+  | Capex, KRW tn | 2027 | 2028 | 2029 | D&A | Basis |
   |---|---|---|---|---|---|
-  | Base | 70 | 85 | 85 | 21 / 28 / 35 | Yongin fab 1 ramp from Feb 2027, M15X, P&T7, M17 equipment, Y2 construction |
+  | Base | 70 | 85 | 85 | 21 / 28 / 35 | Yongin fab 1 ramp, M15X, P&T7, M17 equipment, Y2 construction |
   | Bear | 60 | 50 | 40 | 20 / 25 / 27 | Equipment cut; construction continues |
   | Bull | 80 | 100 | 110 | 22 / 30 / 38 | Y2 and M17 pulled forward |
 
-  - **Maintenance capex = D&A** (4.3tn in Q3, ~17tn in 2026, rising with the build-out); the rest
-    is growth capex. Stub capex 16tn (Q4), 13tn assumed in Q3 `[A]`.
-- **Working capital:** 15% of the revenue change (receivables are ~60% of a quarter's revenue). The
-  stub uses the annualised quarterly change; **2027 is measured from the Q4-26 run-rate (4 × 119.3
-  = 477tn)**, 2028–29 year on year. Version 1 measured 2027 from the 2026 average and so counted
-  the H2 build twice. In Bear the 2027 revenue fall releases ~18tn.
-- **Tax:** 23% on accrual from 2027 (H1 2026 effective rate 23.0%).
-- **Revenue path** (working capital and margin check only): H2 index × 2026 revenue 355.8tn. Base
-  2030 ≈ 359tn at a ~32% net margin, ~2.7× the 2025 EPS. **That mid-cycle is the AI BBB's
-  structural assumption**; 2018's peak EPS was far lower and 2023 was a loss.
-- **Exit P/E (independent of the IAF ceiling):** Base **10**, Bear **8**, Bull **11** on 2030
-  normalised EPS (AI BBB H2 reference). SK hynix's own P/E history was not fetched `[?]`; the exit
-  cross-check (P/B, buyer's return) stands in for it.
-- **Interim V_t:** P/E on next-year EPS glides from today's core 3.16× (price less end-2026 net cash
-  and Kioxia, on Base 2027 EPS) to 10 at exit (5.44× at end-2027, 7.72× at end-2028); Bear at 8 from
-  end-2027; Bull to 11. Plus net cash and the Kioxia stake. Path diagnostic only.
-- **Kioxia stake** `[A]`: convertible bonds for ~14% of Kioxia `[E]` × Kioxia's market value
-  (1,597.9m shares × ¥14,340, 28 Oct) × JPY/KRW 8.454 = **27.1tn pre-tax**; less deferred tax as in
-  version 1 (×0.81), **22.0tn** (31,198/share). Version 1 marked the 82tn H1 carrying amount
-  (25tn); the Q3 loss (22.9tn, against ~37tn on version 1's basis) shows that most of that
-  carrying amount was not Kioxia-sensitive, and the H1 realised gain (~20tn `[E]`) is cash already
-  in net cash and being paid out as special dividends. Books-implied alternative: 17.4tn (Base
-  20.9%). Held flat in Base, halved in Bear, +20% in Bull. Its sale is restricted (CBs in BCPE
-  Pangea SPC2; voting stake capped at 15% through 2028 `[E]`). At zero: Base 20.5%.
-- **NOK memo:** I-44 path relative to its start (the decision is in KRW at spot).
-- **ADR line:** price = ADR in KRW at today's USD/KRW; D_t as for the local share (dividends and
-  buybacks at local value); V_T × (1 + exit premium): 15% / 0% / 42% `[A]`. P_k per ADR = the KRW
-  hurdle ÷ 1,338.2 ÷ 10.
+  Maintenance capex = D&A; the rest is growth capex. A Solidigm US NAND fab (~60tn reported) would sit above Base.
+- **Working capital:** 15% of the revenue change; 2027 from the Q4-26 run-rate (4 × 119.3 = 477tn); in Bear the 2027 fall releases ~18tn.
+- **Tax:** 23% on accrual (9M 2026 effective 22.7%).
+- **Exit P/E (independent of the IAF ceiling):** 10 / 8 / 11 on 2030 EPS (AI BBB H2 reference); the exit cross-check stands in for SK hynix's own P/E history `[?]`.
+- **Interim V_t:** P/E on next-year EPS glides from today's core P/E (price less end-2026 net cash and Kioxia, on the scenario's 2027 EPS) to the exit P/E; Bear at 8 from end-2027; plus net cash and Kioxia. Path diagnostic only.
+- **Kioxia stake** `[A]`: 30 Sep carrying amount 36.27tn `[F]` (Kioxia ¥18,095, JPY/KRW 8.611) × ¥8,392/18,095 × 8.349/8.611 = **16.3tn pre-tax**, × 0.81 for deferred tax = **13.2tn** (18,732/share); the ~14% look-through gives 12.7tn. Flat in Base, halved in Bear, +20% in Bull (linear glide). Sale restricted for a set period. At zero: −0.3 pp.
+- **ADR line:** price = ADR × 10 × USD/KRW; D_t as for the share; V_T × (1 + exit premium); P_k per ADR = KRW hurdle ÷ 1,335.42 ÷ 10.
 
 ## Period tables and year-end path
 
-**Year 1 (2027) by quarter** (EPS, KRW; split of CY27 consensus `[A]`, haircuts as in the Micron
-analysis; unchanged, as consensus is not yet revised):
+**Year 1 (2027) by quarter** (EPS, KRW; consensus split `[A]` around Yahoo's Q1-27 118,446; haircuts as in version 2)
 
 | | Q1-27 | Q2-27 | Q3-27 | Q4-27 | CY27 |
 |---|---|---|---|---|---|
-| Consensus (assumed split) | 110,000 | 115,000 | 119,000 | 124,000 | 468,000 (467,761) |
-| **Base** (0.98 / 0.93 / 0.87 / 0.83: Q1 contracted, Q1 contract prices +3–8% per the AI BBB, then the turn) | 107,800 | 106,950 | 103,530 | 102,920 | **421,200** (0.90) |
-| Bear (0.85 / 0.62 / 0.50 / 0.46) | 93,500 | 71,300 | 59,500 | 57,040 | 281,340 (0.60) |
-| Bull (at consensus) | 110,000 | 115,000 | 119,000 | 124,000 | 468,000 |
+| Consensus = Bull (Q1 Yahoo; Q2–Q4 assumed) | 118,446 | 134,000 | 140,000 | 145,465 | 537,911 |
+| **Base** (.98 / .93 / .87 / .83: Q1 contracted, Q1 contract prices +3–8%, then the turn) | 116,077 | 124,620 | 121,800 | 120,736 | **483,233** (0.90) |
+| Bear (.85 / .62 / .50 / .46) | 100,679 | 83,080 | 70,000 | 66,914 | 320,673 (0.60) |
 
-- Against the Q4E operating EPS (~104,100), the Base Q1-27 (107,800) is flat to slightly up; the
-  Base turn comes in Q2–Q4 2027.
-
-**Base** (KRW tn unless per share):
+**Base** (KRW tn / per share)
 
 | | Stub | 2027 | 2028 | 2029 |
 |---|---|---|---|---|
-| Revenue | 83.0 | 491 | 420 | 366 |
-| Net income | ≈ 51.0 | 296.9 | 197.9 | 131.9 |
-| EBITDA (≈) | ≈ 69 | 404 | 280 | 200 |
-| Maintenance FCF / per share | 37.0 / 52,452 (all FCF) | 294.8 / 418,045 | 208.6 / 295,794 | 139.9 / 198,457 |
+| Revenue | 58.4 | 491 | 420 | 366 |
+| Net income | ≈ 35.9 | 341.4 | 227.6 | 151.7 |
+| EBITDA ≈ (NI ÷ 0.77 + D&A) | ≈ 48.4 | 464 | 324 | 232 |
+| Maintenance FCF / per share | 26.0 / 36,882 (all FCF) | 339.3 / 481,183 | 238.3 / 337,883 | 159.7 / 226,517 |
 | Growth capex / per share | — | 49 / 69,486 | 57 / 80,831 | 50 / 70,905 |
-| FCF after growth capex / per share | 37.0 / 52,452 | 245.8 / 348,559 | 151.6 / 214,963 | 89.9 / 127,553 |
-| D_t paid / per share | 24.1 / 34,181 | 158.3 / 224,423 (35.4 FY2026 rest + 122.9) | 75.8 / 107,481 | 45.0 / 63,776 |
-| Net cash / per share (year-end) | 87.9 / 124,667 | 175.4 / 248,803 | 251.2 / 356,284 | 296.2 / 420,060 |
-| Book equity (year-end) | 347.0 | 485.6 | 607.7 | 694.7 |
+| FCF after growth capex / per share | 26.0 / 36,882 | 290.3 / 411,697 | 181.3 / 257,052 | 109.7 / 155,612 |
+| D_t paid / per share | 24.1 / 34,181 | 180.5 / 255,992 (35.4 FY2026 rest + 145.2) | 90.6 / 128,526 | 54.9 / 77,806 |
+| Net cash / per share (year-end) | 118.9 / 168,636 | 228.7 / 324,340 | 319.3 / 452,866 | 374.2 / 530,673 |
+| Book equity (year-end) | 333.0 `[A]` | 493.9 | 630.8 | 727.7 |
 
-**Bear and Bull** (lines that differ from Base):
+**Bear and Bull** (lines that differ from Base)
 
 | | Bear 2027 | 2028 | 2029 | Bull 2027 | 2028 | 2029 |
 |---|---|---|---|---|---|---|
 | Revenue | 356 | 256 | 238 | 534 | 473 | 420 |
-| Net income | 197.9 | 99.0 | 82.5 | 329.9 | 263.9 | 181.4 |
-| EBITDA (≈) | 275 | 149 | 129 | 447 | 367 | 266 |
+| Net income | 227.6 | 113.8 | 94.8 | 379.3 | 303.5 | 208.6 |
 | Capex | 60 | 50 | 40 | 80 | 100 | 110 |
-| FCF after growth capex / per share | 176.1 / 249,754 | 88.9 / 126,068 | 72.1 / 102,289 | 263.4 / 373,490 | 203.0 / 287,809 | 117.4 / 166,519 |
-| D_t per share (paid; 2027 incl. 50,144) | 175,021 | 63,034 | 51,145 | 236,889 | 143,905 | 83,259 |
-| Net cash per share | 199,400 | 262,434 | 313,579 | 261,268 | 405,173 | 488,432 |
+| FCF after growth capex / per share | 205.8 / 291,846 | 103.7 / 147,112 | 84.5 / 119,827 | 312.8 / 443,643 | 242.5 / 343,928 | 144.6 / 205,101 |
+| D_t paid per share (2027 incl. 50,144) | 196,067 | 73,556 | 59,913 | 271,965 | 171,964 | 102,550 |
+| Net cash per share | 264,415 | 337,971 | 397,885 | 340,314 | 512,278 | 614,828 |
 
-**Year-end path** (KRW per share; r_t from the end-2026 mark 1,505,271; FY2027–29 D_t placed at
-1 July, the rest of FY2026 at 1 April 2027, the stub buyback at 30 Nov and the stub dividend at
-20 Dec):
+**Year-end path** (KRW per share; stub D_t at 13 Dec (buyback) and 20 Dec (dividend); FY2026 rest 1 Apr 2027; FY2027–29 D_t at 1 July; r_t from the end-2026 mark)
 
 | | End-2026 | 2027 | 2028 | 2029 (exit) |
 |---|---|---|---|---|
-| **Base** D_t / V_t | 34,181 / 1,505,271 | 224,423 / 1,807,139 | 107,481 / 1,832,050 | 63,776 / **2,088,422** |
-| Base r_t / IRR to year-end | | +35.0% / +35.2% | +7.3% / +22.4% | +17.5% / **+21.1%** |
-| **Bear** D_t / V_t | 34,181 / 1,505,271 | 175,021 / 1,348,025 | 63,034 / 1,218,755 | 51,145 / **1,264,700** |
-| Bear r_t / IRR to year-end | | +1.2% / +4.3% | −4.9% / +0.1% | +8.0% / **+2.4%** |
-| **Bull** D_t / V_t | 34,181 / 1,505,271 | 236,889 / 2,376,584 | 143,905 / 2,571,208 | 83,259 / **2,841,287** |
-| Bull r_t / IRR to year-end | | +73.6% / +68.9% | +14.2% / +42.7% | +13.7% / **+33.7%** |
+| **Base** D_t / V_t | 34,181 / 1,122,702 | 255,992 / 1,833,397 | 128,526 / 2,044,194 | 77,806 / **2,432,092** |
+| Base r_t / IRR to year-end | stub +3.3% (period) | +86.1% / 86.9% | +18.5% / 53.5% | +22.8% / **44.0%** |
+| **Bear** D_t / V_t | 34,181 / 1,122,702 | 196,067 / 1,571,011 | 73,556 / 1,426,280 | 59,913 / **1,483,072** |
+| Bear r_t / IRR to year-end | | +57.4% / 58.7% | −4.5% / 26.6% | +8.2% / **20.9%** |
+| **Bull** D_t / V_t | 34,181 / 1,122,702 | 271,965 / 2,435,569 | 171,964 / 2,874,063 | 102,550 / **3,299,964** |
+| Bull r_t / IRR to year-end | | +141.2% / 137.4% | +25.1% / 79.7% | +18.4% / **59.4%** |
+| Capped Bear V_t (1.73× next-year EPS + net cash + Kioxia) | 1,122,702 | 559,815 (2027 −32.7%) | 583,617 | 640,409 |
 
-- The Base 2027 return (+35%) is mostly the multiple gliding from 3.2× to 5.4× next-year EPS while
-  the FY2026 rest and the FY2027 payout come out. It is a path diagnostic, not a forecast of the
-  2027 share price.
-- **The Bear 2027 return is about flat (+1%)**, no longer positive by much: 8× on 2028 trough EPS
-  is now close to what the price already pays (~9.5× Bear 2028 EPS after cash). The capped
-  diagnostic (−47% in 2027; V_t 624,739 / 616,017 / 661,962) is the realistic stress for the share
-  price.
+- The 2027 returns are the multiple jumping from 1.7–1.9× to 4.6–8× next-year EPS while the FY2026 rest and the FY2027 payout come out: a diagnostic, not a forecast of the 2027 share price. **The decision Bear re-rates up (+57% in 2027)**; the capped diagnostic (−33%) is the realistic stress.
 
-## V_T bridge (Base, per share) and exit checks
+## V_T bridge, exit consistency and exit cross-check
 
-| Step | Per share |
-|---|---|
-| Price today | **1,487,000** = core 1,349,406 + net cash 106,396 + Kioxia 31,198 |
-| Core at today's P/E (2.88× CY27 consensus) | 1,349,406 |
-| − Base 2027 below consensus (×0.90) | −134,941 → 1,214,466 |
-| − normalisation 2027 → 2030 (420,985 → 163,716) at today's multiple | −742,174 → 472,292 |
-| + multiple to the exit P/E 10 (from 2.88×) | +1,164,872 → **1,637,164** core |
-| + net cash at exit (106,396 + stub 18,271 + retained 2027–29 295,394) | +420,060 |
-| + Kioxia stake (Base flat) | +31,198 |
-| **V_T** | **2,088,422** |
-| Distributions over the horizon (ΣD) | 429,862 |
+**Exit consistency** (Step 3; earnings basis = EPS; the V_T bridge is the Base return bridge under Scenarios: no NAV_0 for fabs)
 
-- **Reading:** the earnings fall from 2027 to 2030 (−742,000) is more than offset by the multiple
-  (+1,165,000), because today's multiple (2.88×) is far below any mid-cycle memory multiple. The
-  market pays **8.1× Base 2030 earnings after net cash** today (version 1: 6.7×); Micron's
-  equivalent was 11.8× at $856.
-
-**Exit consistency** (Step 3; earnings basis = EPS):
-
-| Row | Scenario | 2029 EPS | 2030 normalised EPS | Gap | Treatment | Tail per share |
+| Row | Scenario | 2029 EPS | 2030 normalised | Gap | Treatment | Tail per share |
 |---|---|---|---|---|---|---|
-| SK hynix EPS | Bear | 116,940 | 116,940 | 0% | Not material | 0 |
-| | **Base** | 187,104 | 163,716 | **+14.3%** | **Named reason:** the AI BBB H2 path reaches 0.35 in 2030 ("2028–29 down as new capacity arrives"; Interface — EPS paths). SK hynix's own supply lands in that window: Yongin fab 1 in full operation in 2027, M17's first cleanroom Dec 2028, Y2's June 2029, shells accelerated (6-Ks 7 Aug; release and call 28 Oct; press `[E]`); Micron's 1δ and G11 ramp from 2H 2027 (`docs/mu-analysis.md`). V_T is on the 2030 row | (21,121 as sensitivity) |
-| | Bull | 257,269 | 210,492 | +22.2% | Named reason (same; Bull path to 0.45) | (42,242 as sensitivity) |
+| SK hynix EPS | Bear | 134,478 | 134,478 | 0% | Not material | 0 |
+| | **Base** | 215,164 | 188,269 | **+14.3%** | **Named reason:** the AI BBB H2 path reaches 0.35 in 2030 ("2028–29 down as new capacity arrives"); SK hynix's own supply lands in the window (Yongin fab 1 2027, M17 Dec 2028, Y2 Jun 2029; 6-Ks 7 Aug), Micron's 1δ and G11 from 2H-27 | (24,288 as sensitivity) |
+| | Bull | 295,851 | 242,060 | +22.2% | Named reason (same; Bull path to 0.45) | (48,577 as sensitivity) |
 
-- With the 2-year reversion tail instead: Base 21.4% (P_k 1,850,462), Bull 34.2% (P_k 2,446,417).
+- With the 2-year reversion tail instead: Base 44.4% (P_k 2,162,071), Bull 60.1% (P_k 2,857,486).
 
-**Exit cross-check against the equity market** (World from `docs/equity-market-bbb.md`; SK hynix
-is not an Oslo listing):
+**Exit cross-check against the equity market** (World from `docs/equity-market-bbb.md`, 6 Nov)
 
 | | Bear | **Base** | Bull | World (Bear / **Base** / Bull) |
 |---|---|---|---|---|
-| Exit P/E on 2030 normalised EPS | 8.0 (EPS 116,940) | **10.0** (EPS 163,716) | 11.0 (EPS 210,492) | 15 / **17** / 18.5 |
-| Book at exit, KRW tn / per share | 522.4 / 740,803 | **694.7 / 985,143** | 794.9 / 1,127,263 | |
-| Exit P/B (V_T ÷ book, both incl. net cash) | 1.71 | **2.12** | 2.52 | 2.46 / **3.14** / 3.69 |
-| ROE 2030 on exit book | 15.8% | **16.6%** | 18.7% | 16.4 / **18.5** / 19.9% |
-| Net cash share of V_T | 25% | **20%** | 17% | |
-| Buyer's implied return at exit: core at c ÷ P/E + 4% growth `[A]` (c .70 / .60 / .55, H2 row), net cash at 2.5% | 10.2% | **8.5%** | 7.9% | mid-cycle return **8.2%** |
+| Exit P/E on 2030 EPS | 8.0 (134,478) | **10.0** (188,269) | 11.0 (242,060) | 15 / **17** / 18.5 |
+| Book at exit, KRW tn / per share | 536.8 / 761,285 | **727.7 / 1,031,930** | 839.0 / 1,189,835 | |
+| Exit P/B (V_T ÷ book, both incl. net cash) | 1.95 | **2.36** | 2.77 | 2.47 / **3.17** / 3.74 |
+| ROE 2030 on exit book | 17.7% | **18.2%** | 20.3% | |
+| Net cash share of V_T | 27% | **22%** | 19% | |
+| Buyer's implied return at exit: core at c ÷ P/E + 4% growth `[A]` (c .70 / .60 / .55), net cash at 2.5% | 10.0% | **8.4%** | 7.8% | mid-cycle return 7.1 / **8.2** / 8.7% |
 
-- **Reading:** the exit P/E is 7 points below World's, the exit P/B below World's at a slightly lower
-  ROE, and a buyer at exit earns about World's mid-cycle return. The exit is not generous; the
-  sensitivity at the index return is not needed (Base buyer's return 8.5% vs 8.2%).
-- **The cash in V_T is taken at face value.** 20% of the Base V_T is net cash. A Korean market that
-  values a cash pile at 50% gives Base 17.4% (Sensitivities).
-- **ROE 17% at exit** rests on the AI BBB's structural mid-cycle (net margin ~32%). On SK hynix's
-  pre-AI history (a loss in 2023) the same P/B would be too high; tested through 2030 EPS ×0.6
-  (Base 8.8%: fails).
+- **Reading:** the exit P/E is 7 points below World's, the exit P/B below World's, and a buyer at exit earns about World's mid-cycle return: the exit is not generous. The re-discount sensitivity is not needed. 22% of the Base V_T is net cash at face value; at 50% (a Korea cash discount) the Base is 39.4%. ROE 18% rests on the AI BBB's structural mid-cycle (net margin ~37%); on a pre-AI-style mid-cycle (2030 EPS ×0.6) the Base is 29.8%.
 
 ## Growth capex test (Step 4)
 
-- **Amount:** Base capex 2027–29 is 240tn against D&A of 84tn, so **growth capex ≈ 156tn** (Bear
-  78tn, Bull 200tn), mostly Yongin fab 1, M15X, P&T7, M17 and the start of Y2, plus HBM packaging.
-  The report's "significant increase" in 2027 capex fits the Base 70tn.
-- **ROIC_g, evidence:**
-  1. **On the Base mid-cycle:** 2030 net income 115.4tn on invested capital at exit of ~377tn (book
-     695tn less net cash 296tn and the Kioxia stake 22tn) is **~31% after tax**; Bear ~28%, Bull
-     ~35%.
-  2. **Through-cycle history:** not computed here `[?]`. The 2022–23 losses and 2018–19 swing show
-     that memory capacity has often earned about its cost of capital over a full cycle (Micron's
-     10-year median ROIC 11.1%, Zacks, in `docs/mu-analysis.md`).
-  3. **Contracts:** LTAs with 14 customers on more than 50% of 2027–28 capacity, priced within agreed
-     ranges, with deposits `[F]`; 2027 HBM volumes and prices settled `[E]`. Better visibility than in
-     version 1, still no disclosed floor or RPO.
-- **Verdict:** accretive on the AI BBB's mid-cycle (ROIC_g ~31% > k); about value-neutral on memory's
-  through-cycle record. As for Micron, the test turns on the AI-era mid-cycle (EPS ~2.7× 2025). Its
-  value is already in the 2030 EPS, so it is not added again.
-- **Per share:** the ADR issue (17.79m new shares, +2.5%) was priced at a 2.7% premium and funded
-  capacity; it is more than offset by the 23.69m-share buyback. Growth is funded from FCF from here.
+- **Amount:** Base capex 2027–29 240tn against D&A 84tn: **growth capex ≈ 156tn** (Bear 78tn, Bull 200tn): Yongin fab 1, M15X, P&T7, M17 and the start of Y2.
+- **ROIC_g:** (1) on the Base mid-cycle, 2030 net income 132.8tn on invested capital at exit of ~340tn (book 727.7 less net cash 374.2 and Kioxia 13.2) is **~39% after tax** (Bear ~38%, Bull ~44%); (2) through the cycle, memory capacity has often earned about its cost of capital (2023 loss; Micron's 10-year median ROIC 11.1%, `docs/mu-analysis.md`) `[?]` for SK hynix itself; (3) contracts: LTAs with 14 customers on > 50% of 2027–28 capacity and settled 2027 HBM terms, but no floor, RPO or prepayment.
+- **Verdict:** accretive on the AI BBB mid-cycle (ROIC_g ~39% > k), about value-neutral on memory's through-cycle record. Its value is already in the 2030 EPS, so it is not added again. No share issuance since the ADR (17.79m shares), more than offset by the 23.69m cancelled.
 
 ## Results
 
 | | Bear | **Base** | Bull |
 |---|---|---|---|
-| IRR_T (KRW, Seoul share) | 2.4% | **21.1%** | 33.7% |
-| IRR_T in NOK (Equity BBB I-44 path) | 4.7% | **21.1%** | 32.7% |
-| IRR_T, ADR line (SKHY $145.36; exit premium 0 / 15 / 42%) | −7.0% | **14.2%** | 34.1% |
-| d / g / c | 6.8 / −5.0 / +0.6 | **9.1 / 11.3 / +0.7** | 10.5 / 22.6 / +0.5 |
-| g: earnings normalisation / multiple (no NAV; core P/E on 2030 EPS today 8.1) | EPS −25% a year from 2027; exit 8 | **EPS −27% a year from 2027; exit 10** | EPS −23% a year; exit 11 |
-| Structural IRR / cyclical (pp; Δd, Δg) | −2.1% / +4.5 (+2.0, +2.3) | **12.9% / +8.1 (+4.2, +3.4)** | 25.1% / +8.6 (+4.9, +3.3) |
-| ΣD_t / V_T | 323,380 / 1,264,700 | **429,862 / 2,088,422** | 498,234 / 2,841,287 |
-| P_k (hurdle price) / margin of safety | 1,169,283 / −21.4% | **1,835,729 / +23.5%** | 2,416,951 / +62.5% |
-| Rule 3: P/FCF normalised vs ceiling IRR_T/k² | 12.7× vs 1.7× | **9.1× vs 14.6×** | 7.1× vs 23.4× |
-| Capital preserved? ΣD_t + V_T vs P | Yes, +6.8% (capped: No, −33.7%) | Yes, +69.4% | Yes, +124.6% |
+| IRR_T (KRW, Seoul share) | 20.9% | **44.0%** | 59.4% |
+| IRR_T in NOK (Equity BBB I-44 path) | 23.8% | **44.0%** | 58.1% |
+| IRR_T, ADR line (SKHY $123.45; exit premium 0 / 15 / 47%) | 4.3% | **28.8%** | 53.1% |
+| d / g / c | 10.4 / 9.4 / +1.1 | **14.2 / 28.2 / +1.7** | 16.6 / 41.3 / +1.5 |
+| g: earnings normalisation / multiple (no NAV; core P/E 1.74× today) | EPS −25% a year 2027→30; exit 8 | **EPS −27% a year; exit 10** | EPS −23% a year; exit 11 |
+| Structural IRR / cyclical (pp; Δd, Δg) | 14.6% / +6.3 (+3.1, +2.6) | **32.3% / +11.7 (+6.5, +4.0)** | 46.8% / +12.6 (+7.7, +3.8) |
+| ΣD_t / V_T | 363,717 / 1,483,072 | **496,505 / 2,432,092** | 580,661 / 3,299,964 |
+| P_k (hurdle price) / margin of safety | 1,364,252 / +21.8% | **2,145,028 / +91.5%** | 2,823,400 / +152.1% |
+| Rule 3: P/FCF normalised vs ceiling IRR_T/k² | 8.3× vs 14.5× | **5.9× vs 30.6×** | 4.6× vs 41.3× |
+| Capital preserved? ΣD_t + V_T vs P | Yes, +64.9% (capped: No, −10.3%) | Yes, +161.5% | Yes, +246.5% |
 
-- **Structural run:** EPS at the scenario's own 2030 level from 2027 (revenue at the 2029 level).
-  **At its normalised earnings SK hynix returns 12.9% in Base**, just above k; the cycle adds
-  +8.1 pp, mostly through the FY2026 rest and the 2027 payout. The Bear's structural −2.1% is a
-  lower mid-cycle (0.25 of CY27), not the cycle.
-- **FCF_normalised (Rule 3):** Base 2030 net income with maintenance capex = D&A gives 163,716 a
-  share; P/FCF 9.1× against a ceiling of 14.6× passes. The decision is on P_k.
-- **Scenario-weighted reference (convention, 25/50/25 on levels):** 20.5%. It never replaces the
-  Base.
-- **Share of Bull already priced:** (1,487,000 − 1,835,729) ÷ (2,416,951 − 1,835,729) = **−60%**:
-  the price is below the Base hurdle.
-- **E / R (NOK):** E = 21.1 − 4.38 = 16.7 pp.
-  - Decision Bear: R = Base 2027 (+35.0%) − Bear 2027 (+9.3%, NOK) = 25.7 pp, **E / R 0.649**.
-  - **Capped Bear:** R = 77.6 pp, **E / R = 0.215**, just above the HY reference (0.196) and far
-    above World (0.024).
-- **Bear balance sheet:** net cash rises from 88tn to 221tn; FCF 176 / 89 / 72tn; borrowings
-  15.8tn at 30 Sep against 114.5tn of cash; no survival question. The loss, where there is one, is
-  in value: −47% in 2027 and −34% of capital on the capped Bear.
-- **Against the AI BBB company check (19.9% at KRW 1,277,000, layer method, NOK):** the company
-  build at the higher price (21.1%) is still above it; at the same price the gap would be ~8 pp as
-  in version 1: net cash, the Kioxia stake and the front-loaded payout (~100tn for FY2026 against
-  the layer's 15% payout); the paths and exit P/E are the same.
-- **Market check (not an input):** brokers' mean target KRW 3,096,288 (38; low 1,535,000, high
-  4,700,000), recommendation 1.35 (strong buy) (Yahoo `financialData`, 28 Oct, not yet revised).
-  **The IAF hurdle (1,835,729) lies between the lowest target and the mean**; the gap to the mean
-  is the normalisation the brokers do not price. (Version 1 said the hurdle was below the lowest
-  target; that was wrong: 1,835,230 > 1,535,000.)
+- **Structural run:** EPS at the scenario's own 2030 level from 2027 (revenue at the 2029 level). At its normalised earnings SK hynix returns 32.3% in Base; the cycle adds +11.7 pp, mostly through the FY2026 rest and the 2027 payout. The Bear's structural 14.6% is a lower mid-cycle (0.25 of CY27), not the cycle.
+- **FCF_normalised (Rule 3):** 2030 EPS with maintenance capex = D&A (188,269); P/FCF 5.9× passes. The decision is on P_k. **Scenario-weighted reference (convention, 25/50/25 on levels):** 43.1%. **Share of Bull already priced:** −151% (the price is below the Base hurdle).
+- **E / R (NOK; reference only):** E = 44.0 − 4.38 = 39.6 pp. Decision Bear: R = Base 2027 (+86.1%) − Bear 2027 (+70.0%, NOK) = 16.1 pp, E / R 2.46. **Capped Bear:** R = 113.4 pp, **E / R 0.349**, above the HY reference (0.254).
+- **Bear balance sheet:** net cash 119tn → 281tn; FCF 206 / 104 / 85tn; no survival question. The loss, where there is one, is in value: −33% in 2027 and −10% of capital on the capped Bear.
+- **Against the AI BBB company check (30.5% at 1,132,000, layer method, NOK):** the company build at about the same price is ~14 pp higher: net cash (~15% of the price, incl. the 44tn the company leaves out), the front-loaded payout (~100tn for FY2026 against the layer's 15%) and consensus up 1.6% since 7 Nov; same paths and exit P/E.
+- **Market check (not an input):** brokers' mean target KRW 3,056,127 (39; low 1,575,000, high 4,700,000), mean rating 1.34 (Yahoo, 16 Nov). The hurdle (2,145,028) lies between the lowest target and the mean; the gap to the mean is the normalisation the brokers do not price.
 
-**Sensitivities** (KRW IRR and P_k in thousands, Seoul share):
+**Sensitivities** (KRW IRR and P_k in thousands, Seoul share)
 
 | Change | Bear | **Base** | Bull |
 |---|---|---|---|
-| Model | 2.4% (1,169) | **21.1% (1,836)** | 33.7% (2,417) |
-| Exit P/E −2 / +2 | −3.4% / 7.6% | **15.3% / 26.2%** (1,607 / 2,064) | 27.7% / 39.1% |
-| 2030 normalised EPS ×0.8 / ×1.2 | −2.2% / 6.6% | **15.3% / 26.2%** | 27.1% / 39.6% |
-| 2030 normalised EPS ×0.6 (pre-AI-style mid-cycle) | −7.3% (908) | **8.8% (1,379): fails** | 19.6% |
-| Exit at today's core multiple on 2030 EPS (8.1×: price less end-2026 net cash and Kioxia) | | **15.7% (1,622)** | |
-| CY27 on FnGuide's 2027 operating profit (EPS ×0.92, all years) | −0.4% | **17.4% (1,689)** | 29.5% |
-| Consensus lagging the stronger won (EPS ×0.95, all years) | 0.7% | **18.8% (1,744)** | 31.1% |
-| Consensus revised up after Q3 (EPS ×1.05, all years) | 4.1% | **23.3% (1,927)** | 36.2% |
-| Capex ×1.2 / ×0.8 | 1.4% / 3.4% | **19.7% / 22.4%** | 32.3% / 35.1% |
-| AI BBB H2 cash conversion (capex back-solved: Base 108 / 108 / 96tn) | 0.2% | **19.0% (1,756)** | 31.9% |
-| Payout 0% / 100% of FCF from FY2027 (FY2026 plan kept) | 2.2% / 2.7% | **18.8% / 23.8%** | 30.1% / 38.0% |
-| Rest of FY2026 return at the floor (25.4tn, not 35.4tn) | 2.4% | **20.9% (1,832)** | 33.5% |
-| Net cash at exit valued at 50% (Korea cash discount) | −1.4% | **17.4% (1,689)** | 30.3% |
-| Net cash −10tn / +10tn (tax owed at 30 Sep, capex and working-capital split) | 2.1% / 2.8% | **20.8% / 21.3%** | 33.5% / 33.9% |
-| No bonus accrual deducted (version 1 basis) | 3.0% | **21.5% (1,854)** | 34.0% |
-| Q4 USD prices +10% / −10% | 2.7% / 2.2% | **21.2% / 20.9%** | 33.8% / 33.5% |
-| Kioxia stake at zero / on the books-implied basis (17.4tn) | 2.1% / 2.4% | **20.5% / 20.9%** | 33.2% / 33.6% |
-| With the 2-year reversion tail | 2.4% | **21.4% (1,850)** | 34.2% |
-| **Bear capped at today's core P/E 2.85** (AI BBB diagnostic; not the rule) | **−14.7% (749)**; 2027 −47%; capital −34% | | |
-| Bear at P/B 1.0 on exit book (own stress for a pre-AI-style trough `[A]`) | −12.0% (804); 2027 −49%; capital −28% | | |
+| Model | 20.9% (1,364) | **44.0% (2,145)** | 59.4% (2,823) |
+| Exit P/E −2 / +2 | 14.2% / 26.9% | **37.3% / 50.0%** (1,881 / 2,409) | 52.5% / 65.7% |
+| 2030 EPS ×0.8 / ×1.2 | 15.6% / 25.7% | **37.3% / 50.0%** | 51.8% / 66.3% |
+| 2030 EPS ×0.6 / ×0.5 / ×0.4 (pre-AI-style mid-cycle) | 9.6% (×0.6) | **29.8% / 25.6% / 21.1%** (1,617 / 1,485 / 1,352) | 43.1% (×0.6) |
+| CY27 consensus back to 467,761 (28 Oct) | 15.1% | **36.3% (1,869)** | 50.7% |
+| Consensus ×1.05 / ×0.95 | 23.0% / 18.7% | **46.8% / 41.1%** | 62.6% / 56.1% |
+| Capex ×1.2 / ×0.8 | 19.7% / 22.1% | **42.4% / 45.6%** | 57.7% / 61.1% |
+| AI BBB H2 cash conversion | 17.5% | **40.3% (2,030)** | 56.0% |
+| Payout 0% / 100% of FCF from FY2027 (FY2026 plan kept) | 18.4% / 24.1% | **37.9% / 52.1%** | 51.1% / 70.2% |
+| Rest of the FY2026 return at the floor (25.4tn) | 20.7% | **43.6% (2,141)** | 58.9% |
+| Net cash at exit valued at 50% (Korea cash discount) | 16.0% | **39.4% (1,959)** | 55.1% |
+| Long-term liquid investments (44.4tn) not counted as cash | 19.4% | **42.9% (2,101)** | 58.5% |
+| Net cash −10tn / +10tn | 20.6% / 21.2% | **43.8% / 44.2%** | 59.2% / 59.6% |
+| Kioxia stake at zero | 20.7% | **43.7% (2,132)** | 59.1% |
+| With the 2-year reversion tail | 20.9% | **44.4% (2,162)** | 60.1% |
+| Exit at today's core multiple on 2030 EPS (5.0×) | | **25.4% (1,478)** | |
+| Base on other turn paths: 2019-depth (.90 / .45 / .30 / .25) / earlier (.80 / .45 / .35 / .35) / later (.95 / .85 / .55 / .40) | | **31.0% / 40.1% / 53.4%** | |
+| **Bear capped at today's core P/E 1.73×** (diagnostic) | **−4.4% (773)**; 2027 −33%; capital −10% | | |
 
-**ADR line** (SKHY; P_k per ADR at USD/KRW 1,338.2; margins at the last close $145.36 and at the
-overnight indication $156.37):
+**ADR line** (SKHY at $123.45; P_k per ADR at USD/KRW 1,335.42)
 
-| Change | IRR at $145.36 / $156.37 | P_k per ADR | Margin of safety at $145.36 / $156.37 |
+| Case | IRR | P_k per ADR | Margin of safety |
 |---|---|---|---|
-| Base, premium ~42% → 15% at exit | **14.2% / 11.3%** | **$153.51** | **+5.6% / −1.8%** |
-| Base, premium → 0% | 9.7% / 6.8% | $137.18 | −5.6% / −12.3% (fails) |
-| Base, premium → 30% / held at 42% | 18.4% / 21.5% (at $145.36) | $169.84 / $182.90 | +16.8% / +25.8% |
-| Base, premium 15% and today's multiple held to exit | 9.1% / 6.2% | | fails |
-| Base structural (premium 15%) | 7.4% / 4.8% | | |
-| Bear (premium → 0) / capped | −7.0% / −22.8% (at $145.36) | $87.38 | −39.9%; capital −18% / −49% |
-| Bull (premium held) | 34.1% / 30.6% | $242.82 | +67.0% / +55.3% |
-| NOK path (Bear / Base / Bull, at $145.36) | −5.1% / 14.2% / 33.1% | | |
-| Exit premium needed for Base = 12% | 7.5% / 17.6% | | |
-
-- **What flips the verdict:**
-  - **Seoul share:** 2030 EPS below ~113,700 (0.24 of CY27, ~1.9× 2025), an exit P/E below ~7.0, the
-    whole path 19% lower, or a pre-AI-style mid-cycle (2030 EPS ×0.6: 8.8%).
-  - **ADR:** at the post-report price it is already marginal. A premium closing below ~15–18% at
-    exit, the FnGuide consensus or the won lag each turn it into a fail.
+| **Base, premium 47% → 15% at exit** | **28.8%** | **$179.79** | **+45.6%** |
+| Base, premium → 0% / → 30% / held at 47% | 23.6% / 33.5% / 38.5% | $160.63 / $198.96 / $220.94 | +30.1% / +61.2% / +79.0% |
+| Base, premium 15% and today's multiple held to exit | 11.6% | | fails |
+| Bear (premium → 0) / capped | 4.3% / −18.0% | $102.16 | −17.2%; capital +12% / −39% |
+| Bull (premium held) | 53.1% | $293.26 | +137.6% |
+| NOK path (Bear / Base / Bull) | 6.6% / 28.8% / 52.0% | | |
+| At the 13 Nov close $131.79 (Bear / Base / Bull) | 1.8% / 25.7% / 48.6% | | |
+| Exit premium needed for Base = 12% | a 29% discount | | |
 
 ## Verdict and caveat
 
-- **Verdict (Seoul share): clears.** Base margin of safety **+23.5%** (Base IRR 21.1% vs k 12%). It
-  only just survives the decision Bear (2.4%, capital +6.8%), and **not the capped Bear** (−14.7%,
-  −34% of capital, −47% in 2027). The balance sheet survives every scenario.
-- **Verdict (ADR, the Nordnet line): marginal at the post-report price.** The hurdle is **$153.51
-  per ADR**. At the last close ($145.36, before the report) it clears narrowly (+5.6%, Base
-  14.2%); at the overnight indication ($156.37) it is marginal (−1.8%, Base 11.3%). With no premium
-  at exit it fails (P_k $137.18); the ADR does not preserve capital in Bear (−18%; −49% capped).
-- **What the price needs:** nothing in Base for the Seoul share, which is 19% below its hurdle
-  (KRW 1,835,729). The ADR needs a price below $153.51, or the premium to stay above ~18% at exit.
-- **What would flip it:**
-  - the H2 mid-cycle being lower than the AI BBB's (2030 EPS ×0.6 already fails: memory's pre-AI
-    history);
-  - DRAM and HBM prices falling q/q in 2027 (financing break, capacity from Yongin, Samsung and
-    CXMT arriving early, the industry's 2027 capex step-up);
-  - for the ADR: SK hynix opening ADR creation or issuing more ADRs, closing the premium;
-  - a much higher price: Base = 12% at KRW 1,835,729 (+23%).
-- **Caveat:**
-  - This is a margin-of-safety screen, not an intrinsic valuation, a price target or personal
-    advice.
-  - The memory path is the AI BBB's. The Q4 estimate, the capex path, the payout timing, the net
-    cash bridge (tax owed and the bonus accrual at 30 Sep), the Kioxia value and the ADR premium
-    path are own assumptions; the sensitivities show their weight.
-  - The ADR price is pre-report; today's US session will reprice it.
+- **Band applied:** clears above +2% Base margin of safety, marginal −2% to +2%, fails below −2% (verdict in the Summary). Seoul share +91.5%; ADR +45.6%.
+- **What would flip it:** Seoul share — an exit P/E below ~2.2, 2030 EPS below ~42,000 (0.08 of CY27, below 2025's), the whole path 48% lower, or 2028–30 below 0.41× Base; a price above ~KRW 2,145,000. ADR — a price above $179.79, or today's multiple held to exit with the premium closing (11.6%).
+- **Caveat:** a margin-of-safety screen, not an intrinsic valuation, a price target or personal advice. The memory path is the AI BBB's. Own assumptions: the Q4 estimate, capex, the payout after FY2026, the net cash bridge (the 44.4tn of long-term liquid investments read as cash, compensation owed, buyback timing), the Kioxia value and the ADR premium path; the sensitivities show their weight. The ADR price is an intraday print.
 
 ## Tracking
 
-**Q3 2026, reported 28 Oct: actual against version 1**
+**Q3 business report (16 Nov) against version 2's estimates**
 
-| Item | Version 1 (25 Oct) | Actual | Gap |
+| Item | Version 2 (28 Oct) | Report | Effect on Base P_k |
 |---|---|---|---|
-| Revenue | 99.7tn (consensus; FnGuide 98.2) | **104.62tn** `[F]` | +4.9% |
-| Operating profit / margin | ~77.0tn / ~77% | **83.33tn / 80%** `[F]` | +8.3% |
-| Operating EPS | 86,312 (consensus) | ≈ 90,400 `[A]` | +4.7% |
-| Kioxia mark (non-operating) | ≈ −37tn pre-tax `[A]` | −22.9tn valuation loss `[E]` | smaller; most of the carrying amount was not Kioxia-sensitive |
-| FX on dollar assets | not modelled | −11.6tn `[E]` | new |
-| Net cash | 31 Dec 139.3tn (own bridge, after tax) | 30 Sep 98.7tn company definition `[F]`; ~70tn after tax and bonus owed `[A]` | see bridge |
-| August buyback | 24.07m shares, 36.6tn in H2 | 23.69m shares, 40.0tn, done 21 Oct `[F]` | −3.4tn of cash; count 705.17m (not 704.80m) |
-| Q3 dividend | KRW 375 | **KRW 20,000** + 10tn buyback for cancellation `[F]` | +24tn returned in the stub |
-| FY2026 return | 50% of cumulative 2025–27 FCF, catch-up in 2027 | **≈ 100tn for FY2026** `[F]` | earlier cash |
-| Q4 guide | Q4 consensus (OP ≈ 93.5tn) | DRAM bits +mid-20%, NAND +mid-single digits `[E]` | Q4E OP ≈ 94.3tn at flat USD prices |
+| Liquid assets outside the company's net cash | long-term deposits 7.1tn (30 Jun) | long-term Level 2 investments ex Kioxia **44.4tn** + deposits 3.5tn | **+40,601** |
+| Tax owed at 30 Sep | ~17.6tn (inferred; Q3 tax paid ~31tn) | **27.6tn** (Q3 tax paid 17.2tn) | **−9,857** |
+| 2026 staff compensation owed | 18.15tn (10% of 9M operating profit) | 15.7tn payables + 3.6tn equity-settled − 1.8tn treasury shares held = 17.5tn | +648 |
+| Kioxia | 22.0tn after tax (look-through, ¥14,340) | carrying 36.3tn at 30 Sep (¥18,095); 13.2tn after tax at ¥8,392 (16 Nov) | −8,747 (market) |
+| Q3 buyback | 10tn at 30 Nov | 20tn program 29 Oct–28 Jan (10tn cancelled) | −555 (with Penguin 0.5tn) |
+| Customer prepayments | not disclosed `[?]` | contract liabilities 0.52tn: none of note | 0 |
+| Q3 capex | 13.0tn `[A]` | 12.7tn `[F]` | — |
 
-- **Base P_k:** 1,835,230 → **1,835,729** (+0.0%); the report alone −4,400 (−0.2%) after the price
-  step (1,840,137). Base IRR 27.7% → 21.1%, all but +0.2 pp of it from the price.
-- **Ahead of or behind the Base path:** **ahead at the start.** Q3 operating EPS ~5% and operating
-  profit ~8% above consensus, the Q4 bit guide strong, 2027 HBM volumes and prices settled and LTAs
-  on more than 50% of 2027–28 capacity. The Base 2027 (0.90 of a CY27 consensus not yet revised)
-  is not tested by actuals yet; the Base 2028–29 fall (.60 / .40) is the AI BBB's capacity call,
-  which management's "sold out through 2029" and the LTA price ranges lean against, while the
-  industry's 2027 capex step-up supports it. Hint for the next AI BBB run; nothing is changed here.
+**Attribution, version 2 → version 3** (Bear / Base / Bull; IRR, P_k, margin)
+
+| Step | Bear | **Base** | Bull |
+|---|---|---|---|
+| Version 2 (1,487,000, 28 Oct) | 2.4% / 1,169,282 / −21.4% | **21.1% / 1,835,728 / +23.5%** | 33.7% / 2,416,950 / +62.5% |
+| Price and date (1,120,000, 16 Nov) | 14.1% / 1,176,200 / +5.0% | **35.7% / 1,846,590 / +64.9%** | 50.2% / 2,431,251 / +117.1% |
+| + CY27 consensus 467,761 → 537,911 | 20.0% / 1,337,828 / +19.4% | **43.5% / 2,122,978 / +89.6%** | 59.0% / 2,803,099 / +150.3% |
+| + report (liquid investments, deposits, tax, compensation) | 21.1% / 1,369,180 / +22.2% | **44.2% / 2,154,330 / +92.4%** | 59.6% / 2,834,451 / +153.1% |
+| + Kioxia, Penguin, buyback timing (= version 3) | 20.9% / 1,364,252 / +21.8% | **44.0% / 2,145,028 / +91.5%** | 59.4% / 2,823,400 / +152.1% |
+
+- **Ahead of or behind the Base path: ahead, on the numbers that exist.** Q3 operating profit ~8% above consensus; consensus for CY27 up 15% and for Q4 up 18% since the report; the report adds liquidity, not earnings. The Base 2027 (0.90 of consensus) is untested; the 2028–29 fall is the AI BBB's capacity call, which management's "sold out through 2029" leans against and the industry's 2027 capex step-up supports.
 
 ## Risks and signposts
 
 | Signpost | Bear / Bull threshold | Now | Source |
 |---|---|---|---|
-| SK hynix price (triggers) | ≥ KRW 1,835,729 Base = k; Base = HY market 6.8% at 2,093,527; = World 5.2% at 2,183,545 | KRW 1,487,000 (28 Oct) | Yahoo |
-| **SKHY ADR price and premium** | ADR above P_k $153.51; premium < 15% (ADR creation opened, new ADR issue) / > 50% | $145.36 (27 Oct close), $156.37 overnight 28 Oct; premium 43.6% (27 Oct); 28–55% since 18 Aug | Yahoo; 424B4 deposit limit |
-| **CY27 consensus after Q3** | cut / raised ≥ 5% (Base 23.3% at ×1.05) | 467,761 (39), unchanged on 28 Oct | Yahoo `earningsTrend` |
-| Q3 business report (~mid-Nov): tax owed, bonus accrual, Kioxia carrying amount | net cash after tax and bonus owed < 60tn at 30 Sep / > 80tn | ~70tn `[A]` | 6-K |
-| Shareholder return: Q3 buyback execution; rest of FY2026 (late Jan 2027) | below the ~100tn plan / special dividend beyond the Kioxia gain or a new 2027–29 policy above 50% of FCF | 64.6tn decided; ~35tn to come | Release 28 Oct |
-| Q4 report (late Jan 2027): operating profit, 2027 capex figure | OP < 85tn or 2027 capex > 100tn / OP > 105tn | Q4E ≈ 94tn `[A]` | SK hynix |
-| DRAM contract prices (incl. HBM) | fall q/q / > +10% q/q into 2027 | Q4-26 +15–20%; Q1-27 +3–8% | AI BBB (TrendForce via Goldman `[E]`) |
-| HBM4 2027 terms and share at NVIDIA | price cut or share < 50% / price > +50% with share ≥ 60% | 2027 volumes and prices settled (no figures) `[E]`; SK hynix share 50–70% `[E]` | Call; press |
-| LTAs | price floors disclosed or LTA share > 60% / customers renegotiating ranges down | 14 customers, > 50% of 2027–28 capacity, price ranges | Release 28 Oct |
-| Customer concentration | largest customer > 30% with a capex pause | 23.9% (2025) | 424B4 |
-| Capacity: Yongin fab 1 (2027), M17 (Dec 2028), Y2 (June 2029); Samsung, Micron, CXMT | pulled forward industry-wide (earlier 2028 fall) / delayed | Shells accelerated, cleanrooms phased; 2027 capex "significantly" higher | Release, call; AI BBB |
-| Hyperscaler 2027 capex (28–29 Oct); NVIDIA Q3 FY27 (17 Nov) | flat or down / 2027 consensus > USD 1.3tn | ~USD 1.1tn; NVIDIA supply commitments $279bn, mostly memory | AI BBB; `docs/nvda-analysis.md` |
-| Lab and neocloud financing | missed payment, distressed raise / Anthropic IPO above its marks | Huang: neoclouds lack working capital (22 Oct) | AI BBB |
-| Won | USD/KRW < 1,250 (EPS −6%+, more FX losses) / > 1,450 | 1,338.2 | Yahoo |
-| Kioxia (results 30 Oct) | further fall (stake value) / recovery | ¥14,340 (28 Oct) | Yahoo |
-| Korea flows | foreign net selling > USD 20bn a quarter with DRAM prices falling | > USD 10bn sold in October | AI BBB |
-| Taiwan, export controls, China plants (Wuxi DRAM, Dalian NAND) | escalation | US and China are the two largest customer regions | Not modelled |
+| SK hynix price (triggers) | ≥ KRW 2,145,028 Base = k; = HY market Base 7.2% at 2,416,601; = World 6.6% at 2,454,062 | KRW 1,120,000 (16 Nov) | Yahoo |
+| **SKHY ADR price and premium** | ADR above $179.79; premium < 15% (ADR creation opened) / > 60% | $123.45; premium 47%; 28–61% since 18 Aug | Yahoo; 424B4 |
+| CY27 consensus | cut ≥ 5% / raised ≥ 5% (Base 41.1% / 46.8%) | 537,911 (37), +15% since 28 Oct | Yahoo `earningsTrend` |
+| Shareholder return: Q3 buyback (to 28 Jan); rest of FY2026 (late Jan) | below the ~100tn plan / a 2027 policy above 50% of FCF | 64.6tn decided; ~35tn to come | 6-Ks 28 Oct |
+| Q4 report (~27–28 Jan 2027): operating profit, 2027 capex | OP < 85tn or 2027 capex > 100tn / OP > 105tn | Q4E ≈ 94tn `[A]`; consensus EPS 118,606 (11) | SK hynix |
+| **Solidigm US NAND fab** (re-disclosure due ~29 Nov) | ~60tn approved on top of Base capex (Bear-side for supply) / not pursued | "no matters have been determined" | 6-K 29 Oct |
+| DRAM contract prices (incl. HBM) | fall q/q / > +10% q/q into 2027 | Q4-26 +10–15%; Q1-27 +3–8% | AI BBB |
+| HBM 2028 terms (mid-2027); share at NVIDIA | price cut or share < 50% / sold out at higher prices | 2027 settled; share 50–70% `[E]` | Call; press |
+| Memory LTAs (AI BBB signpost) | ranges renegotiated down / floors, prepayments or take-or-pay disclosed | Bull-side at the AI BBB; SK hynix: LTAs stated, no prepayments (0.52tn contract liabilities) | Report 16 Nov |
+| NVIDIA Q3 FY27 (17 Nov); hyperscaler 2027 capex (late Jan) | commitments cut, 8-Hi for 12-Hi / commitments raised beyond FY29 | $279bn, mostly memory | `docs/nvda-analysis.md` |
+| Funded-customer credit stress | a backed neocloud default, waiver or guarantee call (Bear) | touched (credit pricing), no event | AI BBB |
+| Capacity: Yongin fab 1, M17, Y2; Samsung, Micron, CXMT | pulled forward industry-wide / delayed | shells accelerated, cleanrooms phased; PP&E commitments 42.7tn | Report; AI BBB |
+| Won; Kioxia | USD/KRW < 1,250 / > 1,450; Kioxia further fall / recovery | 1,335; ¥8,392 (−54% since 30 Sep) | Yahoo |
+| Korea flows; Taiwan, export controls, China plants | foreign net selling > USD 20bn a quarter with DRAM falling; escalation | Kospi −44% from June; US and China the largest regions | AI BBB; not modelled |
 
 ## For other modules
 
-- **`ai-market-bbb`** (input; no path set here; **no path change requested**: nothing moves a Base
-  EPS point by ≥ 0.05 on disclosed numbers):
-  1. **Company check updated:** SK hynix Base **21.1%** (KRW = NOK in Base) at KRW 1,487,000, margin
-     of safety +23.5% (v1 27.7%, +43.7% at 1,277,000); decision Bear 2.4% (no longer a re-rating
-     up), capped −14.7%, E / R 0.215. The report moved the hurdle by −0.2%; the price did the rest.
-  2. **Running ahead of the layer's starting point:** Q3 operating EPS ~5% above consensus (OP +8%),
-     Q4 DRAM bits +mid-20%, 2027 HBM volumes and prices settled, LTAs with 14 customers on > 50% of
-     2027–28 capacity within agreed price ranges, "sold out" through 2029. CY27 consensus has not
-     moved yet: re-read it at the next run. The LTA ranges lean against the steepness of the Base
-     2028 fall (.60) for SK hynix; worth testing when the price ranges or floors are disclosed.
-  3. **Q3 headline:** net income 39.8tn after a 22.9tn Kioxia valuation loss and an 11.6tn FX loss;
-     the layer should read operating profit (83.3tn). The won's rise also costs ~5% of Q4 revenue.
-  4. **Capital return:** ~KRW 100tn for FY2026 (cash ≥ 30tn, buybacks ≥ 60tn), quarterly buybacks,
-     special dividends from investment gains: far above the layer's 15% payout.
-  5. **ADR premium:** SKHY 43.6% above Seoul on 27 Oct (28–55% since 18 Aug); keep the suggested
-     "SKHY ADR premium" mood signpost beside the TSMC one.
-- **`docs/dnb-teknologi-analysis.md`:** SK hynix is ~1.97% of NAV. At the next re-run, take SK hynix
-  as a company block at **Base 21.1%** (v1 27.7%) at KRW 1,487,000; the open memory question for
-  SK hynix: Base 8.8% at 2030 EPS ×0.6 (v1 15.3%), i.e. it now fails on a pre-AI-style mid-cycle.
-- **`docs/kospi-analysis.md`** (Block H reads the paths): D_t paid 34,181 (stub, all scenarios);
-  Base 224,423 / 107,481 / 63,776 and V_t 1,807,139 / 1,832,050 / 2,088,422; Bear 175,021 / 63,034
-  / 51,145 and 1,348,025 / 1,218,755 / 1,264,700; Bull 236,889 / 143,905 / 83,259 and 2,376,584 /
-  2,571,208 / 2,841,287; capped Bear V_t 624,739 / 616,017 / 661,962 (P/E 2.85). End-2026 mark
-  1,505,271. SKHY: Base 14.2% at $145.36, P_k $153.51.
-- **`docs/samsung-analysis.md`, `docs/mu-analysis.md`:** peer check: SK hynix 21.1% at 3.18× CY27
-  (net cash ~8% of the price at year-end; ~5.7% of the price returned by April 2027). SK hynix's
-  report is evidence for the H2 layer, not a Samsung or Micron input.
-- **`equity-market-bbb`, `docs/global-index-funds-analysis.md`:** no input (Korea is not in MSCI
-  World).
-- **`docs/portfolio-overview.md`:** not held directly; held only through DNB Teknologi. A direct
-  position from Nordnet would be the SKHY ADR: hurdle **$153.51**, marginal at the post-report
-  price (Base 11–14%, Bear −7.0% / capped −22.8%).
+- **`ai-market-bbb`** (no path set here; **no path change requested**: nothing moves a Base EPS point by ≥ 0.05 on disclosed numbers):
+  1. **Company check:** Base **44.0%** (KRW = NOK in Base) at KRW 1,120,000, P_k 2,145,028, margin +91.5%; decision Bear 20.9% (re-rates up), capped −4.4% (1.73×), E / R 0.349. Own price-implied multiplier: **k at 0.41× Base 2028–30, 0% at 0.25×** (layer method 0.57× / 0.37× at 1,132,000).
+  2. **Q3 report, for the memory-LTA signpost:** LTAs with major customers stated, terms withheld; **contract liabilities 0.52tn and advance receipts 0.03tn: no prepayments of note** (Samsung ~24tn, Micron $12.75bn). PP&E commitments 42.7tn; inventories 19.4tn (+35% since end-2025); fabs at 100%; Q3 DRAM 78.2tn, NAND 26.0tn; US 60% of Q3 revenue.
+  3. **Net cash basis for the layer method:** SK hynix holds 44.4tn of long-term liquid investments outside its stated net cash (98.7tn at 30 Sep); liquid assets total ~162tn against 15.8tn of borrowings.
+  4. **Capex signpost:** Solidigm's reported ~60tn US NAND fab (re-disclosure due ~29 Nov) would add NAND supply from ~2029.
+- **`docs/kospi-analysis.md`** (company block; SK Square follows it). KRW per share on 705.17m shares; exit 31 Dec 2029; Seoul close 16 Nov:
+  - **Dated D_t:** stub 14,181 (13 Dec) + 20,000 (20 Dec), all scenarios; 1 Apr 2027 50,144, all scenarios; 1 Jul 2027 / 2028 / 2029: Base 205,848 / 128,526 / 77,806; Bear 145,923 / 73,556 / 59,913; Bull 221,822 / 171,964 / 102,550.
+  - **V_t** (end-2027 / 2028 / 2029): Base 1,833,397 / 2,044,194 / 2,432,092; Bear 1,571,011 / 1,426,280 / 1,483,072; Bull 2,435,569 / 2,874,063 / 3,299,964; **capped Bear** 559,815 / 583,617 / 640,409 (1.73× next-year EPS + net cash + Kioxia; the multiple moves with the price). End-2026 mark 1,122,702.
+  - Results: Base 44.0% / P_k 2,145,028; Bear 20.9%; capped −4.4%; SKHY Base 28.8% at $123.45, P_k $179.79. Of the change, consensus is +15.0% on P_k, the report +1.5%, Kioxia −0.4%.
+- **`docs/dnb-teknologi-analysis.md`:** take SK hynix as a company block at **Base 44.0%** (16 Nov price); the memory question: 29.8% at 2030 EPS ×0.6, 25.6% at ×0.5.
+- **`docs/samsung-analysis.md`, `docs/mu-analysis.md`:** peer check only, no input. SK hynix 44.0% at 2.08× CY27 (margin +91.5%), net cash ~15% of the price; unlike Samsung and Micron, no customer prepayments on its balance sheet.
+- **`equity-market-bbb`, `docs/global-index-funds-analysis.md`:** no input (Korea is not in MSCI World). **`docs/portfolio-overview.md`:** not held directly; held through DNB Teknologi. A Nordnet position would be the SKHY ADR: hurdle **$179.79**, clears at $123.45 (Base ~29%, capped Bear −18%).
 
 ## Change log
 
-- **28 Oct 2026 — version 2** (iaf-valuation 2026-10-18.2; inputs unchanged: ai-market-bbb Update 4
-  of 24 Oct, rev 2026-10-24.1; equity-market-bbb 17/18 Oct; hy-market-bbb 24 Oct; nvda v1, mu v2;
-  **samsung v1 read for the first time**, peer only). Trigger: the Q3 report and the board's
-  shareholder-return decisions of 28 Oct.
-  - Price 1,277,000 → **1,487,000** (Seoul close 28 Oct); ADR $137.02 → $145.36 (27 Oct close,
-    pre-report); USD/KRW 1,325.4 → 1,338.2; Kioxia ¥12,755 → ¥14,340; valuation date 28 Oct, T 3.18.
-  - Q3 actuals in (revenue 104.6tn, operating profit 83.3tn, EBITDA 87.7tn, net cash 98.7tn); Q4
-    estimated from the bit guidance at flat USD prices (119.3tn / 94.3tn) instead of consensus.
-  - Net cash rebuilt from the 30 Sep figure: tax owed (~17.6tn, from the Q3 cash flow), the
-    accrued profit-sharing bonus (18.2tn; **missing in version 1**), the 11.6tn FX loss, the
-    buyback completed at 40.0tn; shares 705.17m.
-  - Distributions on the announced plan: stub D_t 34,181 (Q3 dividend 20,000 and the 10tn
-    buyback), the rest of the ~100tn FY2026 return in April 2027, then 50% of FCF (version 1: a
-    2027 catch-up on 50% of cumulative 2025–27 FCF).
-  - Kioxia on the 14% look-through, 22.0tn (version 1: 25tn on the H1 carrying amount).
-  - **Method fixes:** 2027 working capital from the Q4-26 run-rate (version 1 counted the H2
-    receivables build twice); 2026 revenue base 344.9 → 355.8tn for the H2 index.
-  - **Correction:** version 1 said the hurdle was below the lowest broker target; it was above it.
-  - Result: Base 27.7% → 21.1%, P_k 1,835,230 → 1,835,729, margin +43.7% → +23.5% (price −20 pp,
-    report −0.2 pp); Bear 8.4% → 2.4%; Bull 40.7% → 33.7%; ADR Base 17.1% → 14.2% at $145.36
-    (P_k $155.34 → $153.51).
-  - New section: Tracking.
-- **25 Oct 2026 — version 1** (iaf-valuation 2026-10-18.2; ai-market-bbb document Update 4 of 24 Oct,
-  rev 2026-10-24.1; equity-market-bbb document of 17/18 Oct, skill 2026-10-24.1; hy-market-bbb 24 Oct,
-  skill 2026-10-24.1; `docs/nvda-analysis.md` v1 and `docs/mu-analysis.md` v2 read). No previous
-  version. Built before the Q3 report of 28 Oct.
+- **16 Nov 2026 — version 3** (iaf-valuation 2026-11-12.1): Q3 business report (6-K/DART, 16 Nov) read; re-mark at 1,120,000 and ADR $123.45; CY27 consensus 537,911; net cash rebuilt from the report (long-term liquid investments +44.4tn, deposits 3.5tn, tax owed 27.6tn, compensation 17.5tn), Kioxia on its 30 Sep carrying amount; model rebuilt in `references/models/skh/`; compacted 921 → 448 lines, cycle-first summary. Base 21.1% → 44.0%, P_k 1,835,729 → 2,145,028, margin +23.5% → +91.5%; Bear 2.4% → 20.9%; capped −14.7% → −4.4%; ADR marginal → clears (P_k $153.51 → $179.79).
+- **28 Oct 2026 — version 2** (iaf-valuation 2026-10-18.2): Q3 report and the ~100tn FY2026 return at 1,487,000; bonus accrual and tax owed deducted; Base 27.7% → 21.1%, P_k 1,835,230 → 1,835,729. Kept unchanged at the change gate on 29 Oct and 4 Nov (AI BBB Updates 5–6, NVIDIA v1.1).
+- **25 Oct 2026 — version 1** (iaf-valuation 2026-10-18.2): first build at 1,277,000 before the Q3 report; Base 27.7%, P_k 1,835,230.
 
 ## Appendix: own assumptions `[A]`
 
 By weight on the result:
-1. **Memory EPS path** = AI BBB H2 layer × Yahoo CY27 consensus (467,761, not yet revised for Q3);
-   2030 normalised 163,716.
-2. **Exit P/E 10 / 8 / 11** on 2030 EPS (AI BBB reference), cross-checked against World's exit P/E,
-   P/B and mid-cycle return. Bear capped at today's 2.85× as a diagnostic.
-3. **Net cash at end-2026 ≈ 87.9tn** after all 2026 tax, the accrued bonus and the stub returns
-   (bridge in Near term): tax owed at 30 Sep ~17.6tn (from the Q3 cash flow, with Q3 capex 13tn and
-   working capital 15.2tn), bonus 10% of operating profit, LT deposits 7.1tn, Q4E operating profit
-   94.3tn, Q4 capex 16tn.
-4. **Payout:** FY2026 ≈ 100tn as announced (rest ≈ 35.4tn paid ~1 April 2027); 50% of FCF in
-   FY2027–29 at 1 July; net cash at face value.
-5. **ADR premium path:** ~42% → 15% (Base), 0% (Bear), 42% (Bull) at exit.
+1. **Memory EPS path** = AI BBB H2 layer × Yahoo CY27 consensus 537,911 (16 Nov); 2030 normalised 188,269.
+2. **Exit P/E 10 / 8 / 11** on 2030 EPS (AI BBB reference), checked against World; Bear capped at today's 1.73× as a diagnostic.
+3. **Net cash at end-2026 ≈ 118.9tn:** the 44.4tn of Level 2 long-term investments other than Kioxia read as liquid investments (Money Market Trust and parent debt instruments); tax and 2026 staff compensation owed as reported; Q4E operating profit 94.3tn, capex 16tn, working capital 8.8tn.
+4. **Payout:** FY2026 ≈ 100tn as announced (rest ≈ 35.4tn at 1 Apr 2027); 50% of FCF in FY2027–29 at 1 July; net cash at face value.
+5. **ADR premium path:** 47% → 15% (Base), 0% (Bear), held (Bull).
 6. **Capex** 70 / 85 / 85tn (Base); maintenance capex = D&A 21 / 28 / 35tn.
-7. **Kioxia stake** 22.0tn after deferred tax (~14% look-through at 28 Oct, ×0.81); Bear ×0.5,
-   Bull ×1.2.
-8. **Q4-26:** DRAM bits +25%, NAND +5%, flat USD prices, won −4.9% against Q3.
-9. **Revenue path** (H2 index × 2026 revenue 355.8tn) and working capital at 15% of the revenue
-   change, 2027 from the Q4-26 run-rate.
-10. Tax 23% on accrual; Year-1 quarterly split and haircuts; Q3 dividend paid 20 Dec, Q3 buyback
-    at 30 Nov.
-11. **Long-run growth 4%** and 2.5% on net cash in the buyer's implied return at exit (cross-check
-    only).
+7. **Kioxia stake** 13.2tn after deferred tax (30 Sep carrying amount × the price and FX moves since, × 0.81); Bear ×0.5, Bull ×1.2.
+8. **Q4-26:** DRAM bits +25%, NAND +5%, flat USD prices; Q3 buyback at its mid-point (13 Dec), Q3 dividend paid 20 Dec.
+9. **Revenue path** (H2 index × 355.8tn) and working capital at 15% of the revenue change; tax 23%; end-2026 book 333tn. Year-1 quarterly split; long-run growth 4% and 2.5% on net cash in the buyer's return (cross-check only).
 
 ## Appendix: sources
 
 | # | Source | Content | As of |
 |---|---|---|---|
-| S1 | [SK hynix semi-annual business report H1 2026 (6-K)](https://www.sec.gov/Archives/edgar/data/2120882/000119312526354777/d147827d6k.htm) | Statements and notes: revenue 131,895,033m (Q2 79,318,746m; DRAM 56,982,743m, NAND 21,959,898m); OP 98,152,891m; finance income (valuation gains 63,178,974m, dividends 13,979,567m); OCF 91,742,501m; PP&E capex 18,328,836m; tax paid 7,704,636m vs 40,056,711m accrued; cash etc. 87,957,923m; LT deposits 7,101,803m; borrowings 18,586,634m; current tax liabilities 31,958,025m; LT investment assets 85,309,524m (Level 2 82,041,303m); equity 262,380,610m; capex commitments 61,484,533m; shares 711,075,500 outstanding, 1,626,865 treasury | Period to 30 Jun 2026; filed 18 Aug |
-| S2 | [Preliminary Q2 results (6-K)](https://www.sec.gov/Archives/edgar/data/2120882/000119312526321989/d115239d6k.htm) | Revenue, OP, pre-tax, net income Q2 and H1 | 29 Jul 2026 |
-| S3 | [ADR share issue result (6-K)](https://www.sec.gov/Archives/edgar/data/2120882/000119312526303972/d143606d6k.htm) | 17,790,000 new shares; KRW 39,890,534,790,000 | 15 Jul 2026 |
-| S4 | [Treasury share purchase](https://www.sec.gov/Archives/edgar/data/2120882/000119312526356133/d428222d6k.htm), [cancellation](https://www.sec.gov/Archives/edgar/data/2120882/000119312526356141/d436722d6k.htm), [shareholder return policy](https://www.sec.gov/Archives/edgar/data/2120882/000119312526356139/d425596d6k.htm) (6-Ks) | 24,070,000 shares, KRW 40,004,340,000,000, 20 Aug–19 Nov; issued shares 730,492,365; "over 50% of cumulative Free Cash Flow" 2025–27; details with Q3 | 19 Aug 2026 |
-| S5 | 6-Ks: [P&T7](https://www.sec.gov/Archives/edgar/data/2120882/000119312526311230/d121520d6k.htm), [M17](https://www.sec.gov/Archives/edgar/data/2120882/000119312526339011/d140960d6k.htm), [Y2](https://www.sec.gov/Archives/edgar/data/2120882/000119312526339024/d13432d6k.htm), [Q2 dividend](https://www.sec.gov/Archives/edgar/data/2120882/000119312526339031/d123529d6k.htm), [EB loss](https://www.sec.gov/Archives/edgar/data/2120882/000119312526350177/d158635d6k.htm), [Q3 call](https://www.sec.gov/Archives/edgar/data/2120882/000119312526420934/d413172d6k.htm), [Solidigm](https://www.sec.gov/Archives/edgar/data/2120882/000119312526429184/d159239d6k.htm) | Investments 7.09 / 19.10 / 35.22tn; dividend 375, record 31 Aug; EB loss 3.98tn; Q3 call 28 Oct 9:00 KST; Solidigm IPO dropped | 22 Jul–23 Oct 2026 |
-| S6 | [Prospectus 424B4](https://www.sec.gov/Archives/edgar/data/2120882/000119312526299963/d32785d424b4.htm) | Customer concentration (23.9% in 2025; 14.8% / 12.4% in Q1 2026); DRAM share 29.1% (IDC); ADR deposit limit | 10 Jul 2026 |
-| S7 | [SEC EDGAR submissions, CIK 2120882](https://data.sec.gov/submissions/CIK0002120882.json) | Filing list to 26 Oct (three 6-Ks on 26 Oct; no Q3 results 6-K at 06:46 UTC 28 Oct) | 28 Oct 2026 |
-| S8 | Yahoo quotes, charts and quoteSummary (`000660.KS`, `SKHY`, `005930.KS`, `MU`, `^KS11`, `KRW=X`, `NOK=X`, `285A.T`, `JPYKRW=X`) | Seoul close 1,487,000 (28 Oct 06:30 UTC); SKHY close $145.36 (27 Oct), post-market $149.40, overnight $156.37; USD/KRW 1,338.2, USD/NOK 9.3313; Kioxia ¥14,340; JPY/KRW 8.454; Kospi 6,023.73; Samsung 242,250; MU $928.76; shares 705,173,324; consensus CY26 355,514 (40), CY27 467,761 (39), Q4 100,775 (12), Q1-27 106,721 (12), revenue Q4 113.4tn (36); targets mean 3,096,288 (38); USD/KRW weekly closes Jul–Oct (Q3 average ~1,402) | 23–28 Oct 2026 |
-| S9 | [S&P Global: Q2 profit beat offsets revenue miss](https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/08/sk-hynix-postq-profit-beat-offsets-revenue-miss); [Korea JoongAng Daily](https://www.koreajoongangdaily.com/business/sk-hynix-posts-record-q2-profit-on-ai-demand-but-shares-slide-on-growth-doubts/12796737); [Quartr Q2 summary](https://quartr.com/events/sk-hynix-inc-000660-q2-2026_F9ec0iAC) | Q2 OP vs consensus; net cash 69.4tn; capex "high-40tn"; HBM4 shipments; ~10 LTAs | Jul–Aug 2026 `[E]` |
-| S10 | [Money Today (FnGuide Q3 consensus)](https://www.mt.co.kr/en/industry/2026/10/19/2026101913371799572); [Market Insight via search](https://www.mt.co.kr/article/2026101913371799572); [Daum: 2027 OP consensus, return expectations](https://v.daum.net/v/50COd4sAC9) | Q3 OP 76.96tn; Hana 77.9tn, Citi 74.0tn, DS 70tn; 2027 OP 391.8tn; return range 40–100tn | Sep–Oct 2026 `[E]` |
-| S11 | [Korea Herald: five-year supply deals](https://www.koreaherald.com/article/10823621); [Reuters via Yahoo: Yongin fab pulled forward](https://finance.yahoo.com/news/exclusive-sk-hynix-speeds-chip-220217637.html); [Motley Fool: M17 and Y2 timing](https://www.fool.com/investing/2026/08/15/sk-hynix-approved-38-billion-of-new-memory-fabs-th/) | ~10 LTAs; capex guide; Yongin fab 1 Feb 2027; M17 cleanroom Dec 2028; Y2 June 2029 | Jan–Aug 2026 `[E]` |
-| S12 | [Reuters via NST: ADR pricing](https://www.nst.com.my/amp/business/corporate/2026/07/1484990/sk-hynix-raises-us265-billion-us-offering-after-pricing-adrs); [Edaily](https://en.edaily.co.kr/news/eda202607105468/) | $149 an ADR, 2.7% premium, ~$26.5bn | 9–10 Jul 2026 `[E]` |
-| S13 | [Tiger: Kioxia shareholders](https://www.itiger.com/news/2658096609); [Edaily](https://en.edaily.co.kr/news/eda202608115365/) | SPC2 14.19% of Kioxia; 15% voting cap to 2028; Bain exit | Jul–Sep 2026 `[E]` |
-| S14 | [Sammy Fans (Chosun Biz): Samsung HBM4 2027 talks](https://sammyfans.com/2026/10/06/samsung-hbm4-price-talks-enter-final-stage); [TrendForce](https://www.trendforce.com/news/?p=63081) | 2027 HBM4 price talks; +100–121% forecasts | Aug–Oct 2026 `[E]` |
-| S15 | [Nordnet: markets](https://www.nordnet.no/aksjer) (via search) | Markets listed; no Korea | 25 Oct 2026 `[E]` |
-| S16 | `docs/ai-market-bbb.md` (Update 4), `docs/equity-market-bbb.md`, `docs/hy-market-bbb.md`, `docs/nvda-analysis.md`, `docs/mu-analysis.md`, `docs/samsung-analysis.md` | H2 path, exit P/E, index, basket, company check, scenarios; I-44 path, World anchors; NIBOR, HY reference; NVIDIA supply commitments; Micron and Samsung peers | 17–25 Oct 2026 |
-| S17 | [SK hynix newsroom: "SK hynix Announces 3Q26 Financial Results"](https://news.skhynix.com/en/q3-2026-business-results/) (also [PR Newswire via TradingView](https://www.tradingview.com/news/prnewswire:10159c85e082e:0-sk-hynix-announces-3q26-financial-results/)) | Revenue 104,615.5bn, OP 83,333.8bn (80%), net income 39,775.6bn (Q2 79,318.7 / 60,542.6 / 93,922.6); cash 114.5tn, borrowings 15.8tn, net cash 98.7tn; LTAs with 14 customers > 50% of 2027–28 capacity; demand > supply through 2030; 2027 investment up significantly; FY2026 return ~100tn (dividends ≥ 30tn, buybacks ≥ 60tn); Q3 dividend 14tn = 20,000/share (10,000 + 10,000 Kioxia special); buyback 20tn (10tn cancelled, ~10tn employee pay) | 28 Oct 2026, 08:29 KST |
-| S18 | 6-Ks of 26 Oct: [treasury share acquisition report](https://www.sec.gov/Archives/edgar/data/2120882/000119312526430986/d370650d6k.htm), [cancellation amendment (6-K/A)](https://www.sec.gov/Archives/edgar/data/2120882/000119312526430987/d377510d6ka.htm), [clarification of media reports](https://www.sec.gov/Archives/edgar/data/2120882/000119312526430985/d132707d6k.htm) | 23,693,272 shares for 40,004,339,063,500 (average 1,688,426), trades 20 Aug–21 Oct, 28.84tn settled by 30 Sep and 11.17tn in October (own sum of the daily table); treasury 25,319,041 (3.47%); cancellation 5 Nov; Dong-A report of a ~16tn Kioxia special dividend, "no matters have been determined" | 26 Oct 2026 |
-| S19 | [Earnings call transcript (Investing.com)](https://www.investing.com/news/transcripts/earnings-call-transcript-sk-hynix-posts-record-q3-2026-results-shares-jump-after-hours-93CH-4977343); [BigGo Finance summary](https://finance.biggo.com/news/KR_000660.KS_2026-10-28) | DRAM bits ~+10%, ASP high-20s%; NAND bits slightly down, ASP mid-20s%; Q4 DRAM bits +mid-20%, NAND +mid-single digits; EBITDA 87.7tn, D&A 4.3tn; pre-tax 50.7tn; FX −11.6tn, valuation loss −22.9tn; 2027 HBM terms finalised; 2027 DRAM demand ~mid-20%, NAND high-teens; 2027 capex up significantly; Q3 return 24tn; basic EPS 54,773 | 28 Oct 2026 `[E]` |
-| S20 | [Leaders Fact](http://www.leadersfact.co.kr/news/articleView.html?idxno=23690); [Newsworks (call)](https://www.newsworks.co.kr/news/articleView.html?idxno=901054) | Record date 30 Nov, paid within one month; total 14.1035tn; 20tn buyback split 10 / 10; ≥ 50% of FCF; quarterly buybacks | 28 Oct 2026 `[E]` |
-| S21 | [Yahoo Finance: SK hynix gains on reported $12bn special dividend](https://finance.yahoo.com/markets/stocks/articles/sk-hynix-gains-3-reported-132303191.html); [GuruFocus](https://www.gurufocus.com/news/9141510/sk-hynix-skhy-announces-12-billion-special-dividend-following-kioxia-stake-sale) | ~KRW 20tn gain from selling down Kioxia in H1; ~16tn special dividend reported (Dong-A via Bloomberg); CBs for ~14% of Kioxia still held | 26–27 Oct 2026 `[E]` |
-| S22 | [SBS Biz: wage deal, PS 60% in shares](https://biz.sbs.co.kr/amp/article/20000329754); [Smart Today](https://www.smarttoday.co.kr/ko-kr/articles/110640) | PS = 10% of operating profit (ten years); 2026 deal pays 60% of PS in treasury shares | Aug 2026 `[E]` |
+| S1 | [SK hynix quarterly business report, 1 Jan–30 Sep 2026 (6-K, English summary of the DART report)](https://www.sec.gov/Archives/edgar/data/2120882/000119312526461909/d166755d6k.htm) | KRW m. Balance sheet 30 Sep: cash 38,324,414; ST financial instruments 37,925,282; ST investment assets 38,209,906; receivables 59,115,844; inventories 19,355,772; LT investment assets 83,998,379 (Level 2 80,652,706, Level 3 3,345,673; Level 3 roll: 14,547,099 + 2,424,097 − 10,656,042 + 39,425,459 − 6,128,819 − 36,266,121 transferred to Level 2); other financial assets (non-current, amortised cost) 3,516,600; PP&E 97,211,093; other non-trade payables 17,551,507 (financial-instrument part 1,819,358); borrowings 4,555,314 + 11,244,276; current tax liabilities 27,571,406; deferred tax liabilities 5,728,690; contract liabilities 520,765; advance receipts 29,732; controlling equity 308,494,939; share options in equity 3,652,549 (64,018). P&L Q3 / 9M: revenue 104,615,483 / 236,510,516 (DRAM 78,228,825 / 175,870,204); OP 83,333,818 / 181,486,709; finance income −20,429,273 / 62,485,891; tax 10,932,907 / 50,989,618; NI 39,775,593 / 174,044,095; EPS 54,773 / 243,776. Cash flow 9M: OCF 145,634,314 (tax paid 24,902,334; dividends received 14,017,349); PP&E 30,998,642; LT investment assets bought 38,396,681, sold 10,699,796; ADR 39,142,782; treasury shares 28,841,739; share-based payments (non-cash) 3,648,396. Parent: MMT book value 65,767,780 (11,296,700); LT investment assets 44,945,876 (Level 2 44,812,914). Notes: PP&E commitments 42,706,201 (6,667,863); LTAs "omitted as trade secrets"; treasury 19,375,769 (trade date) incl. 17,750,000 for cancellation, 1,625,769 kept; 23,693,272 cancelled 5 Nov (706,799,093 issued); 20tn buyback to 28 Jan 2027; Penguin $377,162,666 (29 Oct); utilisation 100% | 30 Sep 2026; filed 16 Nov `[F]` |
+| S2 | 6-Ks of 28–29 Oct: [preliminary results](https://www.sec.gov/Archives/edgar/data/2120882/000119312526434994/d162547d6k.htm), [FY2026 return plan](https://www.sec.gov/Archives/edgar/data/2120882/000119312526435008/d236990d6k.htm), [Q3 dividend](https://www.sec.gov/Archives/edgar/data/2120882/000119312526435015/d236994d6k.htm), [treasury share acquisition](https://www.sec.gov/Archives/edgar/data/2120882/000119312526435019/d165312d6k.htm), [Solidigm clarification](https://www.sec.gov/Archives/edgar/data/2120882/000119312526436872/d183583d6k.htm) | Q3 revenue, OP, pre-tax 50,708,500, NI; ~100tn FY2026 return (dividends ≥ 30tn, buybacks ≥ 60tn incl. 40tn); Kioxia gains returned in two special instalments; dividend 20,000, total 14,103,466,480,000, record 30 Nov; 14,920,000 shares / 20,007,720,000,000, 29 Oct–28 Jan, ~10tn cancellation + ~10tn compensation; Solidigm ~60tn US NAND report, "no matters determined" | 28–29 Oct 2026 `[F]` |
+| S3 | Version-2 sources carried `[C]` | H1 semi-annual report (6-K, 18 Aug: OCF 91,742,501m, PP&E 18,328,836m, tax paid 7,704,636m), 424B4 (customer concentration 23.9%; ADR deposit limit), capacity 6-Ks (P&T7, M17, Y2), August buyback and cancellation 6-Ks (26 Oct), Q3 release and call (28 Oct; Investing.com transcript), Korean press on the profit share and Kioxia, Nordnet market list | Jul–Oct 2026 |
+| S4 | [SEC EDGAR submissions, CIK 2120882](https://data.sec.gov/submissions/CIK0002120882.json) | Filings since 26 Oct: 6-Ks 28 Oct (four), 29 Oct, 16 Nov; Schedule 13D (3 Nov) and 13G (13 Nov); no share issue | 16 Nov 2026 |
+| S5 | Yahoo chart and quoteSummary (`000660.KS`, `SKHY`, `KRW=X`, `NOK=X`, `JPYKRW=X`, `285A.T`, `^KS11`, `005930.KS`, `MU`) | Seoul close 1,120,000 (16 Nov 06:30 UTC; 13 Nov 1,216,000); SKHY $123.45 (14:56 UTC), close 13 Nov $131.79; same-day premia 18 Aug–16 Nov; USD/KRW 1,335.42, USD/NOK 9.6341 (14:55 UTC); Kioxia ¥8,392 (30 Sep 18,095); JPY/KRW 8.349 (30 Sep 8.611); Kospi 5,100.50; consensus CY26 360,170 (37), CY27 537,911 (37; 30 days ago 466,736), Q4-26 118,606 (11), Q1-27 118,446 (12), Q4 revenue 130.7tn (27); targets mean 3,056,127 (39), rating 1.34; shares 705,173,324; next report 27 Jan 2027 (estimate) | 16 Nov 2026 `[F]` |
+| S6 | `docs/ai-market-bbb.md` (16 Nov note), `docs/equity-market-bbb.md` (6 Nov), `docs/hy-market-bbb.md` (11 Nov), `docs/samsung-analysis.md` v3, `docs/mu-analysis.md` v3, `docs/nvda-analysis.md` v1.6 | H2 path, exit P/E, index, memory cycle, company check, signposts; I-44 path, World anchors; NIBOR 4.38%, HY reference 0.254, HY Base 7.2%; peers; NVIDIA supply commitments | 5–16 Nov 2026 |
 
-- **Validation notes:**
-  - **Share count:** 730,492,365 issued − 25,319,041 treasury (6-K, 26 Oct) = 705,173,324, matching
-    Yahoo exactly; the Q3 dividend total (14.1035tn ÷ 20,000 = 705.18m) agrees. The daily buyback
-    table sums to 40.004tn and 23,693,272 shares, matching the 6-K total.
-  - **Q3 net income:** company 39.78tn; Yahoo 39.53tn (probably attributable to owners). The
-    non-operating items named on the call (−11.6, −22.9) sum to −34.5tn against −32.6tn reported:
-    +1.9tn of other items (interest, other) is inferred, not reported `[?]`.
-  - **Q3 consensus:** Yahoo revenue 99.7tn (37) against FnGuide 98.23tn; both beaten.
-  - **Net cash after tax and bonus owed** at 30 Sep is a derived figure `[A]`: the tax paid in Q3
-    (~31tn) is inferred from the cash flow with assumed capex and working capital, and the bonus
-    accrual (10% of operating profit) is not in the release `[?]`. Both are checked against the Q3
-    business report (~mid-November). The company's 98.7tn excludes long-term deposits (7.1tn at
-    30 Jun) and ignores tax and bonus owed.
-  - **Kioxia:** the Q3 valuation loss (22.9tn) is far below version 1's ~37tn estimate on the H1
-    carrying amount; the stake is now valued on the ~14% look-through `[E]`. The size of the H1
-    realised gain (~20tn) comes from press reports, not from SK hynix.
-  - **ADR price:** the last regular close predates the report; the overnight print ($156.37) is
-    thin and the after-hours prints disagree ($149.40 Yahoo post-market close, $154.24 per
-    Investing.com). Both margins are shown.
-  - **Record date** (30 Nov) and the buyback split are from Korean press summaries of the DART
-    filings `[E]`; the DART filings themselves were not read, and the Q3 results 6-K was not yet on
-    EDGAR. The Q3 buyback period is not disclosed `[?]`.
-  - **Consensus** on 28 Oct is pre-report for CY27 (unchanged since 24 Oct); a staleness flag, not a
-    fix.
-- **Scripts:** `skh2.py` (model; version-1 mode reproduces version 1 exactly) and `skh2sens.py`
-  (sensitivities, ADR line, break-evens, the change split) were run in the session scratchpad. As
-  for the other IAF analyses, they are not stored in the skill; every input is in Common
-  assumptions, the Near-term bridge and Appendix: own assumptions, so the build can be reproduced.
+- **Validation:** share count 706,799,093 − 1,625,769 = 705,173,324 = Yahoo = the Q3 dividend total ÷ 20,000. The company's "cash and others" (114,459,602m) equals the three current lines. The Kioxia-related asset (36.27tn) is consistent with the ~14% look-through at ¥18,095 (34.9tn) and with the parent's own Level 2 (44.8tn = 36.3 + 8.5 bought in 2026); the Q3 valuation loss (63.2tn H1 gains − 40.3tn 9M = 22.9tn) matches the call. The split of the 44.4tn by instrument and maturity is not disclosed `[?]`; the liquidity check (sources and uses of 9M cash) supports reading it as cash. The 3.6tn equity-settled accrual is not itemised in the share-based payment note (its listed plans cost 0.13tn) `[?]`. The ADR price is intraday. **Scripts:** `references/models/skh/` (skh_model.py reproduces version 2 exactly with `V2`; skh_run.py prints every figure; skh_extra.py the triggers).
