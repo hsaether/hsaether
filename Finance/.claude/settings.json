@@ -24,7 +24,7 @@
       "mcp__03a8e4e1-2147-4d03-b116-215980434e32__get_exchange_rate",
       "mcp__03a8e4e1-2147-4d03-b116-215980434e32__get_reference_rate",
 	  "Bash(.venv/Scripts/python *)",
-	  "Bash(C:/GitWork/hsaether/Finance/.venv/Scripts/python *)",	  
+	  "Bash(C:/GitWrk/hsaether/Finance/.venv/Scripts/python *)",	  
       "Bash(py .claude/skills/update-chain/references/update_check.py *)",
       "PowerShell(py .claude/skills/update-chain/references/update_check.py *)",
       "WebSearch",
