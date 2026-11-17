@@ -4,6 +4,18 @@ The running report of the update chain (`update-chain` skill): the weekly run on
 and the daily company news search on weekdays (Mode F). Newest entry first. The bookkeeping is in
 `docs/update-register.md`; the numbers are in the documents themselves.
 
+## Daily news — Tuesday 17 Nov 2026
+
+- **Updated:** none. No tracked company reported or had material news since the 16 Nov runs.
+- NVIDIA (nvda): Q3 FY27 out tonight ~22:20 CET, call 23:00; consensus revenue ~$108.8bn against the $108bn guide; runs tomorrow `[F]`.
+- Anthropic (anthropic, amzn, googl): book ~6× covered, bankers weigh pricing above $70–78; pricing 18 Nov, so a re-mark is likely `[E]`.
+- Borr (borr, on hold; hy-issuers): Q3 confirmed for 18 Nov after the NYSE close, call 19 Nov `[F]`.
+- Minor: fund-house forum posts unchanged since 10 Nov; Hafnia and SED report tomorrow morning.
+
+**Needs you:** `hafnia` is in list 1 only for TORM's ex-dividend; left for tomorrow's Q3 run. Petrobras PSV tender opens today (`supply`, weekly run).
+
+**Register:** Borr Q3 date set firm (18 Nov). No events added.
+
 ## Daily news — Thursday 12 Nov 2026
 
 - **Updated:** `nvda` Base 20.9% → 19.8%, clears (re-mark at $173.73; Base kept, no board decision yet).

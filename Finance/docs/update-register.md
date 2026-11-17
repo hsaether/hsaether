@@ -368,7 +368,7 @@ it to `open`.
 | 2026-11-17 | yes | Petrobras PSV 4500 (5 lots) and PSV 3000 (2 lots) tender proposals open: 4-year firm from Jun–Oct 2027 | supply, dof | open |
 | 2026-11-18 | yes | SED Q3 report | sed, rig | open |
 | 2026-11-12 | yes | SeaBird (SED) Fulmar Explorer OBN source contract, West Africa, ~6 months from Dec 2026 (supports the SeaBird Base 2027 contribution; read at the SED Q3 run) | sed | watch |
-| 2026-11-18 | approx | Borr Q3 report (Investing.com date `[E]`, not yet announced by Borr): first figures after the Prospector 5 loss, insurance position | borr, hy-issuers, rig | open |
+| 2026-11-18 | yes | Borr Q3 report (Borr release 13 Nov: after the NYSE close 18 Nov, call 19 Nov 15:00 CET): first figures after the Prospector 5 loss, insurance position | borr, hy-issuers, rig | open |
 | 2026-11-18 | approx | Anthropic IPO pricing (S-1/A of 10 Nov: range $70–78; pricing 18 Nov and first trade ~19 Nov press-reported `[E]`); the $26bn Class N placement closes right after (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC): value of Amazon's and Alphabet's stakes, E1 lab revenue; re-mark only if priced outside the range; first trade 19 Nov as "ANT", closing and placement 20 Nov | anthropic, ai, amzn, googl, msft | open |
 | 2026-11-10 | yes | TSMC November board (6-K 10 Nov): 3Q26 dividend NT$9.0 (model NT$8.0), capital appropriations $40.93bn, up to $0.5bn each of Anthropic common (IPO price) and OpenAI preferred | tsm, ai | done |
 | 2026-12-10 | approx | TSMC November revenue (monthly 6-K, ~10th; date not confirmed): signpost y/y < +25% / > +45% (Oct +59.7%) | tsm, ai | open |
