@@ -5,15 +5,17 @@ description: Supply Market BBB (Supply BBB) — the offshore supply vessel (OSV)
 
 # Supply Market BBB
 
-**Revision:** 2026-11-12.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-18.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/supply-market-bbb/` in the Finance folder.
 
-Change note 2026-11-12.2: the remaining Paratus mentions (data sources, JV example, Step 4) neutralised to Seagems prints only.
+Change note 2026-11-18.1 (user, 18 Nov 2026: "forecast changes to market conditions BEFORE they
+have solid proof"): new **Leading view** section, Step 3a and output sections (Turn calls,
+Scorecard). Base is now a forecast set on the turn call; leading indicators (tenders, contract
+length, term premium, charterer and owner behaviour, sector share prices) can move it before
+fixtures confirm, each move with a dated reversal signpost. Minimum change governs size, not
+timing. Method change; first applied at the 18 Nov run.
 
-Change note 2026-11-12.1: Paratus is no longer tracked (user); its company note is replaced by a
-market-data-only line. If a second covered owner is needed to broaden the North Sea and subsea
-base, the user's preferred candidate is Solstad Offshore (SOFF), with Subsea 7 (SUBC) as the
-alternative. No row, path or method change.
+Change note 2026-11-12.2: the remaining Paratus mentions (data sources, JV example, Step 4) neutralised to Seagems prints only.
 
 A Bear/Base/Bull baseline for the offshore supply vessel market. It answers one question: **what
 market rates, paid days and vessel values should an OSV-owner valuation use, year by year, per
@@ -64,8 +66,11 @@ only as demand that competes for CSVs, PSVs and AHTS.
   measures and stay separate.
 - **Point value + range** for every scenario rate, utilization and value. IAF uses the point value;
   the range shows uncertainty inside the scenario.
-- **Base = the decision case.** Bear and Bull are stress tests tied to named catalysts.
-  **25/50/25** is a labelled convention for optional weighted figures — never a probability.
+- **Base = the decision case, and it is a forecast.** It is set on the turn call (see Leading
+  view), not on the last print: where leading indicators call a turn, Base moves before fixtures
+  confirm it. Bear and Bull are stress tests tied to named catalysts. **25/50/25** is a labelled
+  convention for optional weighted figures — never a probability. The turn-call probability (Leading
+  view) is a real, stated probability and is kept apart from the convention.
 - **Stub has no scenario spread** (IAF rule): the same value in all three scenarios. North Sea spot
   stub = quarter-to-date average plus the seasonal-normal rest of the quarter `[A]`; term and
   contract rows = the six-month leading-edge. Scenarios diverge from Year 1.
@@ -77,6 +82,8 @@ only as demand that competes for CSVs, PSVs and AHTS.
 - **Minimum change (convention):** a point value moves only if the evidence moves it by at least
   10% (North Sea spot annual average), 5% (term, contract or PLSV/RSV rate, vessel value) or
   2 percentage points (utilization; 3 pp for spot utilization). Smaller moves are noted, not applied.
+  The threshold governs the **size** of a move, not its **timing**: a move called on leading
+  indicators is applied now if it clears the size, without waiting for fixtures.
 - **Staleness:** the baseline is stale after 30 days, or earlier if a recalibration trigger fires,
   or `docs/oil-market-bbb.md` or `docs/rig-market-bbb.md` gets a newer baseline date whose
   downstream section flags a supply-relevant change. IAF treats a stale baseline as provisional.
@@ -358,6 +365,44 @@ Bull are not percentiles.
   extreme spot rates for a few days. Keep the paid rate and the paid days apart; the annual average
   is what IAF uses.
 
+## Leading view (turn calls)
+
+Rates are the last thing to move. By the time fixtures prove a turn, owners' share prices have
+priced it. The baseline's value is in calling the turn first, so every run forms a forward view
+from indicators that lead rates, and Base follows it.
+
+**Indicator families** (score each per row: +1 tightening, 0 neutral, −1 loosening, against the
+current Base path; tag and date each reading):
+
+| Family | Examples | Typical lead on rates |
+|---|---|---|
+| L1 Charterer demand | Tender and RFQ volume and term length (Petrobras, Equinor, Aker BP, UK operators); frame-agreement call-offs; rig contract backlog and rig tenders (from the rig baseline) | 6–18 months |
+| L2 Contract behaviour | Term premium over spot; longer firm terms; early extensions, options declared early, re-contracts "in direct continuation"; term lock-ups that take vessels out of the spot pool | 3–9 months |
+| L3 Project pipeline | FIDs, subsea and SURF awards (TechnipFMC, Subsea7, Saipem inbound), FPSO and hook-up schedules, decommissioning programmes | 12–24 months |
+| L4 Owner and capital behaviour | Insider and major-holder buying or selling at covered owners, buybacks, owners withdrawing vessels from sale, secondhand prices vs model values, newbuild orders (or their absence) and yard slots, reactivations | 3–12 months |
+| L5 Market pricing | Covered owners' share prices vs OSEBX and vs NAV (P/NAV), broker target moves, what the price implies for rates (from the IAF break-even of each covered owner) | the market's own forecast |
+| L6 Supply movement | Announced migration into or out of the region, vessels mobilising for Brazil or West Africa, wind conversions | 1–6 months |
+
+**Turn call per core row:** direction (up / flat / down vs Base), size, timing (quarter it shows
+in rates), a **stated probability** (our own estimate, e.g. 65%), the families behind it, and a
+**dated reversal signpost** (what we would see by a set date if the call is wrong).
+
+**Rule to move Base:** Base moves to the turn call when **two or more independent families** point
+the same way (L5 alone never moves it: the market can be wrong) and the call's probability is
+**≥ 60%**, provided the move clears the minimum-change size. One family, or a probability of 50–60%,
+is a **watch call**: logged with its signpost, Base unchanged. A call against the market (L5
+pointing the other way) needs a named reason the market is missing.
+
+**Market-implied check:** state per row whether the covered owners' prices imply rates above or
+below Base (from the IAF analyses' break-even marks and P/NAV). Our edge is the gap between our
+turn call and what the price implies, not the gap between Base and the last print.
+
+**Scorecard:** every turn call and watch call gets a dated line (row, call, probability, horizon,
+reversal signpost). At each run, mark each open call **hit / miss / open** against the realised
+series, and keep the running hit rate. Calls are judged on their own terms (direction and timing),
+never re-written after the fact. Two misses in a row on the same family halve that family's weight
+in the next call (state it).
+
 ## Procedure
 
 Two modes, one procedure:
@@ -411,6 +456,13 @@ A–D. Mark spot vs term. For converted contract values, show vessels, firm cale
 convention, options, escalation and services. Per row: leading-edge median, range and n over six
 months, and the 6–12 month trend. Selective and late publication means no new fixtures is not
 "unchanged".
+
+**Step 3a — Leading indicators and turn calls.** Read every family L1–L6 for every core row (see
+Leading view), including covered owners' share prices over 1 and 3 months vs OSEBX, insider and
+major-holder notices, and the IAF break-even of each covered owner. Score the families, set or
+update each row's turn call (direction, size, timing, probability, reversal signpost), mark the open
+scorecard calls hit / miss / open, and state the market-implied check. Do this before the balance
+work, so Steps 4–10 test the call rather than only the last print.
 
 **Step 4 — Contract cover.** From owner fleet lists and announcements (DOF, Solstad, Tidewater,
 Havila, Eidesvik, OceanPact, CBO, Seagems (prints only) and other owners — ownership as checked in
@@ -493,9 +545,11 @@ mark the rest "not assessed".
 - **Bear / Bull:** are the catalysts still the right ones? Has one come closer, been triggered, or
   become irrelevant? Has a signpost been crossed? Is a demand or supply catalyst missing? Have the
   North Sea and Brazil diverged?
-- **Evidence threshold:** change a scenario, catalyst or path only when several independent data
+- **Evidence threshold:** change a scenario, catalyst or path when several independent data
   points point the same way, or one event materially changes vessel-day demand, effective supply or
-  cover — and only by more than the minimum change.
+  cover — and only by more than the minimum change. **Leading indicators count as data points:** a
+  turn call that meets the Leading-view rule (≥ 2 families, ≥ 60%) moves Base now. "No fixture yet"
+  is not a reason to keep Base when the leads have turned.
 - Record market event, re-publication of an older observation, correction and method change
   separately. Explain unchanged load-bearing assumptions and persistent data gaps.
 
@@ -542,6 +596,9 @@ A full update is due when any of these occurs:
 - A merger or fleet sale changes ownership for a covered owner
 - A strike, force majeure or regulatory stop takes vessels off hire in a focus region
 - A Bear or Bull catalyst is triggered or a signpost is crossed
+- A turn call's reversal signpost is hit, or a watch call gains its second family
+- A covered owner's share moves ≥ 15% vs OSEBX within a month without row news, or insiders or
+  major holders buy or sell materially (run Step 3a at least)
 - The baseline is older than 30 days
 
 ## Output: `docs/supply-market-bbb.md`
@@ -565,6 +622,15 @@ appendix.
 - Base in two sentences (North Sea; South America)
 - Row ranking (strongest → weakest) with the main reason
 - Main Bear catalyst and main Bull catalyst
+
+## Turn calls (in the Interface block; one line per core row)
+| Row | Call vs Base (direction, size, quarter) | Probability | Families (L1–L6, score) | Base moved? | Market-implied (above / below Base) | Reversal signpost (date) |
+|---|---|---|---|---|---|---|
+
+## Scorecard
+| Date | Row | Call | Prob. | Horizon | Signpost | Status (hit / miss / open) |
+|---|---|---|---|---|---|---|
+- Running hit rate; family weights changed after misses
 
 ## Interface — rates, k/day (point values; ranges below). North Sea GBP, South America USD
 | Row Bear / Base / Bull | Currency | Stub Q4-26 | 2027 | 2028 | 2029 | Mid-cycle |
@@ -698,7 +764,10 @@ rate and payable days → cost and capacity risk.**
   to zero; no double counting); balance check consistent with each path.
 - Paid days and rates kept apart; no average across currencies, classes or service scopes.
 - Bear and Bull each tied to named catalysts with signposts and oil and rig scenarios; no
-  probability language.
+  probability language for them (the 25/50/25 convention).
+- Every core row has a turn call with a stated probability, its families and a dated reversal
+  signpost; Base follows every call that meets the rule; the scorecard is marked; the
+  market-implied check is stated.
 - Change log complete (previous → new) or explicit "kept unchanged".
 - Every fetched value has source, as-of date and unit; raw kept beside derived; validation
   checks run and failures flagged in the text.
