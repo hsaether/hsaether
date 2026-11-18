@@ -1,14 +1,15 @@
 """DOF report: period tables, results, NAV_0, V_T bridge, cross-check, year-end path.
-docs/dof-analysis.md, 16 Nov 2026 (Supply BBB AHTS rule, re-mark, awarded-PLSV rule). Run: py report.py [step]
-(step from inputs_1116: 0 = 12 Nov, 1 = + re-mark, 2 = + AHTS row, 3/all = + awarded PLSV as firm). Writes results.json.
+docs/DOF-analysis.md, 18 Nov 2026 (Supply BBB turn call, re-mark, Skandi Seven/Africa). Run: py report.py [step]
+(step from inputs_1118: 0 = 12 Nov, 1 = + re-mark 16 Nov, 2 = + AHTS row 16 Nov, 3 = + awarded PLSV as firm (16 Nov),
+4 = + re-mark 18 Nov, 5 = + AHTS turn call 18 Nov, 6/all = + Skandi Seven/Africa firm). Writes results.json.
 """
 import copy, json, sys
 from dof_model import *
 from inputs_new import *
-from inputs_1116 import inputs_1116
+from inputs_1118 import inputs_1118
 
 STEP = sys.argv[1] if len(sys.argv) > 1 else "all"
-I = inputs_1116(STEP if STEP == "all" else int(STEP))
+I = inputs_1118(STEP if STEP == "all" else int(STEP))
 FX = I["fx"]; P = I["P"]; V0 = I["val_date"]
 nk = lambda x: x * FX / SH
 R = {s: run(I, s) for s in ("Bear", "Base", "Bull")}

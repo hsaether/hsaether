@@ -1,10 +1,12 @@
-"""DOF sensitivities, driver breakdown, break-evens. docs/dof-analysis.md, 16 Nov 2026. Run: py sens.py"""
+"""DOF sensitivities, driver breakdown, break-evens. docs/DOF-analysis.md, 18 Nov 2026. Run: py sens.py"""
 import copy
 from dof_model import *
 from inputs_new import *
 from inputs_1116 import inputs_1116, ahts_delta, Q27, QDAYS
+import inputs_1118 as i18
+from inputs_1118 import inputs_1118, AHTS_1116, AHTS_1118
 
-BASE = inputs_1116("all")
+BASE = inputs_1118("all")
 P = BASE["P"]
 
 def res(I, s="Base", **kw):
@@ -61,7 +63,7 @@ I = copy.deepcopy(BASE); I["tax"] = 0.095
 show("Tax payable 9.5% of EBITDA (previous guide) instead of 8.6%", I)
 # FX 9.29
 I = copy.deepcopy(BASE); I["fx"] = 9.2944
-show("USD/NOK 9.29 (Equity BBB spot, 5 Nov) instead of 9.550", I)
+show("USD/NOK 9.29 (Equity BBB spot, 5 Nov) instead of 9.705", I)
 I = copy.deepcopy(BASE); I["fx"] = 9.80
 show("USD/NOK 9.80", I)
 # exit fleet
@@ -168,18 +170,22 @@ for s in ("Bear", "Bull"):
     for lab, (i, pk, vt) in steps:
         print(f"   {lab:40s} IRR {i:6.2f} Pk {pk:6.1f} VT {vt:6.1f}")
 
-print("=== AHTS row (Supply BBB 16 Nov) ===")
-for st, lab in ((0, "12 Nov inputs"), (1, "+ re-mark 13 Nov close / 9.550 / 16 Nov"), (2, "+ NS AHTS Base 2027 GBP 75k -> 60k"), (3, "+ awarded PLSV terms as firm today")):
-    J = inputs_1116(st)
-    for s in ("Bear", "Base", "Bull"):
-        r = run(J, s)
-        print(f"   step {st} {s:4s} IRR {r['irr']*100:7.3f} Pk {r['Pk']:7.2f} MoS {(r['Pk']/J['P']-1)*100:6.2f}% VT {r['VT_nok']:6.2f}")
+print("=== Attribution 16 -> 18 Nov ===")
+for st, lab in ((3, "16 Nov (all)"), (4, "+ re-mark 18 Nov close 128.30 / 9.705"), (5, "+ NS AHTS Base 2027 GBP 60k -> 52k (turn call)"), (6, "+ Skandi Seven / Skandi Africa firm (CSV $70m/yr)")):
+    J = inputs_1118(st)
+    for s_ in ("Bear", "Base", "Bull"):
+        r = run(J, s_)
+        print(f"   step {st} {s_:4s} IRR {r['irr']*100:7.3f} Pk {r['Pk']:7.2f} MoS {(r['Pk']/J['P']-1)*100:6.2f}% VT {r['VT_nok']:6.2f}")
 J = copy.deepcopy(BASE)
-for q, v in BASE["ahts_delta"].items(): J["ebitda"]["Base"][q] -= v
-show("NS AHTS Base 2027 back at GBP 75k (Seabreeze >= 75k restores it)", J)
-I = copy.deepcopy(BASE)
-for q, v in ahts_delta(new=(43.2, 50.9, 36.9, 49.1)).items(): I["ebitda"]["Base"][q] += v - BASE["ahts_delta"][q]
-show("NS AHTS 2027 at the Bear quarters (GBP 45k; Base utilisation)", I)
+for q, v in BASE["ahts_delta_1118"].items(): J["ebitda"]["Base"][q] -= v
+show("NS AHTS Base 2027 back at GBP 60k (turn call reversed)", J)
+for cf in (35.0, 105.0):
+    i18.CSV_FIRM = cf
+    show(f"CSV vessel revenue moved to firm ${cf:.0f}m/yr (Base $70m)", inputs_1118("all"))
+i18.CSV_FIRM = 70.0
+for fx in (9.55, 9.29, 9.80):
+    J = copy.deepcopy(BASE); J["fx"] = fx
+    show(f"USD/NOK {fx}", J)
 I = copy.deepcopy(BASE); I["ebitda"]["Base"]["Q4-26"] -= 10
 for s in ("Bear", "Bull"): I["ebitda"][s]["Q4-26"] -= 10
 show("Q4-26 at the guidance low end (2026 EBITDA $830m, Q4 $198m)", I)
