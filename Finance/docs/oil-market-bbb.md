@@ -1,6 +1,6 @@
-# Oil Market BBB — 11 November 2026
+# Oil Market BBB — 11 November 2026 (leading-view note 18 Nov: kept unchanged)
 
-**Status:** Final · full update 11 Nov 2026 (Update mode, Steps 0–11), as of the **Tue 10 Nov** settlements · skill `oil-market-bbb` revision 2026-10-24.4 · **stale after 30 Nov 2026** · compacted 13 Nov 2026 (no value changed).
+**Status:** Final · full update 11 Nov 2026 (Update mode, Steps 0–11), as of the **Tue 10 Nov** settlements · **18 Nov 2026 leading-view note** (skill `oil-market-bbb` **2026-11-18.1**, Step 1b; no call met the rule; values kept) · **stale after 30 Nov 2026** (OPEC+ 29 Nov).
 
 ## Interface (values other documents read)
 
@@ -19,6 +19,19 @@ As of **11 Nov 2026** (paths) and the **10 Nov 2026 settlements** (stub, forward
 | European diesel: gasoil crack vs ULSD crack | −9.3 | about −11 (2027–28) | about −11 | — | — |
 | Forward curve, 10 Nov (Brent / diesel crack) | 97.1 / 85.1 | 81.2 / 67.8 | 73.9 / 45.2 | 71.2 / 37.7 | — |
 | Long end, 10 Nov (Brent Dec contract; last column Dec-30 to Dec-34) | | Dec-27 77.64 | Dec-28 72.76 | Dec-29 70.58 | Dec-30 69.06 · Dec-31 67.70 · Dec-34 64.24 |
+
+**Turn calls (18 Nov 2026; Leading view, Step 1b; probabilities are our own estimates, not the 25/50/25 convention). No call met the rule (≥ 2 families, ≥ 60%): Base kept.**
+
+| Path | Call vs Base | Prob. | Families | Base moved? | Curve vs Base | Reversal / confirmation (date) |
+|---|---|---|---|---|---|---|
+| Brent 2027 (Base 84) | Flat | 60% | L5 0 (18 Nov intraday: F27 91.44 vs 91.49 settled 10 Nov; 2027 strip ~82.0 vs 81.2; M1−M4 ~+6.5, still tight) · L1 0 (no deal: Iran denies talks, Trump "we don't need a deal"; an unconfirmed Saudi report of resumed nuclear talks) | No (no move) | Strip ~2 below Base, inside the retest band | Strip < 79 for a week without a deal (Bear side) or > 90 with a Bull flow signpost |
+| Brent 2027 tail (Bull) | Higher risk of renewed strikes | 50% | L1 +1 (Israel reportedly readying to strike, 12 Nov; ADNOC tanker attacked; analysts: the status quo "could break out into war", 18 Nov) · L2/L5 0 (no premium in the strip) | No (watch) | — | Strikes on Gulf energy infrastructure, or Hormuz < 8 mb/d for two weeks (Bull signposts); window to 3 Jan |
+| Brent 2028–29 (Base 77 / 72) | Lower (market-share quotas) | 50% | L1 −1 (OPEC+ sets 2027 quotas on 29 Nov; capacity review pending; UAE presses for more; IEA warns of a 2027 surplus if Gulf flows normalise) · L5 −1 (Dec-27 76.05 vs 77.64, Dec-28 71.83 vs 72.76: within the minimum) | No (watch; the decision is 11 days away and the curve moved < $3) | Dec-28 ~5 below Base 2028 | OPEC+ 29 Nov: quotas that add > 1 mb/d in 2027 confirm (then move 2028 toward 72) |
+| Diesel crack 2027 (Base 70) | Lower | 50% | L5 −1 (crack strip ~71 Jan-27 and ~57 Dec-27, ~64 on average vs 67.8 on 10 Nov) · L3 0 (no new stock data read) | No (watch: one family; −$6 to the strip, but Base already sits above the strip by design) | ~6 below Base | ARA and US distillate stocks into December; Russian diesel export quota |
+| Mid-cycle (70) | Flat | 65% | Long end steady (Dec-29 70.0) | No | At Base | — |
+
+- **Since 10 Nov the leads are flat.** The large fall in Brent (from ~$117 in late October to ~$91 for January) came before the 11 Nov full update, which cut Base 2027 from 88 to 84 on it. Downstream readers (HY, equity) should not count it twice.
+- **Scorecard:** five calls opened 18 Nov; none closed; hit rate n/a.
 
 **Scenarios, disruption status and triggers**
 
@@ -349,7 +362,7 @@ Shape from the **10 Nov** forward, rescaled (multiplicatively) to each scenario'
 
 ## Change log
 
-- **13 Nov 2026 — compacted to the lean-document rules (703 → 392 lines, Interface section first); no value changed.**
+- **18 Nov 2026 — leading-view note (skill 2026-11-18.1), kept unchanged:** five calls, none met the rule; the strip, front and long end are within $2 of 10 Nov. Watch: renewed-strike tail, 2028–29 lower on OPEC+ quotas (29 Nov), diesel crack 2027 lower.
 - **11 Nov 2026 — full update (skill 2026-10-24.4), BBB changed:** Base Brent 2027 88 → 84 (range 77–91; physical premium gone, faster recovery outside Iran, strip 81.2); stub 104.3 → 97.1, crack 88.1 → 85.1, Brent–WTI 8.0 → 7.0; Year-1 Base 89/85/82/80. All other paths, mid-cycle, cracks and weights kept; Russian refining trigger tested, no crack change. Changed yes, `affects` none.
 - **4 Nov 2026 — small update (OPEC+ 1 Nov hold, US midterms), kept unchanged:** stub re-marked (Brent 110.4 → 104.3, crack 86.2 → 88.1); Bull window to 3 Jan; Bear enabler a Democratic Congress; new signposts (US Congress, downside retest, 15% front trigger).
 

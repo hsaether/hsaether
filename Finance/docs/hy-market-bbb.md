@@ -11,13 +11,13 @@ As of **18 Nov 2026** (values of 5 Nov, kept on 11 and 18 Nov). Cells Bear / **B
 | Row | Call vs Base | Prob. | Families | Base moved? | Market vs Base | Reversal / confirmation (date) |
 |---|---|---|---|---|---|---|
 | Nordic spread 2027 (Base 490) | Wider, ~+50 bp | 50% | L2 −1 (CCC yield 12.97% → 13.29%, 4 → 17 Nov; 10.1% in mid-Aug; US HY OAS 332 → 343 bp, Euro HY 345 → 337 bp since 4 Nov: flat) · L1 0 (October new-issue spreads 589 bp vs 582 YTD, volume EUR 1.9bn vs 2.5bn; HedgeNordic 12 Nov: new issues "mid-to-high 500s") · L6 0 | No (watch) | ~At Base | November anchor (early Dec): ≥ 540 bp confirms (and tests the 550 Bear signpost); ≤ 460 reverses |
-| Energy rows (E&P, Oil Service) 2027–28 | Higher FTD if oil keeps falling | 50% | L5 −1 (Brent front month ~117 → 88.8 from late Oct to 18 Nov, −25%) · L6 0 (Oil BBB 11 Nov, Base 2027 84, still below spot; no oil turn call yet; Supply AHTS turn call is small for issuers) | No (watch) | — | Oil BBB leading-view run (before 30 Nov): an oil Base cut toward the Bear (65) gives the second family |
+| Energy rows (E&P, Oil Service) 2027–28 | Flat (no energy call) | 60% | L6 0 (Oil BBB 18 Nov note: kept, leads flat since 10 Nov; the late-October fall from ~$117 to ~$91 was already in its 11 Nov Base 2027 cut, 88 → 84, which this baseline read on 11 Nov) · L5 0 (F27 91.44 vs 91.49 on 10 Nov) | No | — | An oil turn call (OPEC+ 29 Nov quotas; renewed strikes) |
 | FTD market 2027 (Base 3.0%) | Higher, toward 4% | 50% | L4 −1 (distress notices ~8 issuers in October, rising; November not scanned) · L2 −1 (CCC stress) — magnitude short of the 1.0 pp minimum on current evidence | No (watch) | — | Stamdata November scan (with the December anchor): > 10 notices a month for 3 months is the Bear signpost |
 | NIBOR path 2028–29 | Higher for longer (toward the market path) | 55% | Step 3b test met (market path +0.33 / +0.69 pp above Base, 10 Nov) · L3 +1 (krone weaker: USD/NOK 9.55 → 9.70, 13 → 18 Nov) · CPI-ATE 2.7% (Oct) on path | No (the MPR 4/26 on 17 Dec decides within four weeks; the default is Norges Bank's path) | Market above Base | MPR 4/26 (17 Dec): path ≥ 0.25 pp above Base in a window year moves Base |
 | Swedish real estate (secondary) | Weaker | 50% | L3 −1 (Riksbank 2.00% from 11 Nov, more hikes signalled) · L5 0 | No (watch) | — | Riksbank (Dec) and Q4 property values |
 
-- **Scorecard:** five calls opened 18 Nov; none closed; hit rate n/a.
-- **For fund analyses:** no input moved; the E / R reference 0.254 stands. The watch calls lean to the Bear side (spread, energy, FTD); the fund verdicts should read "Base kept, risks leaning Bear" until the December anchor.
+- **Scorecard:** five calls opened 18 Nov (four watch, one flat); none closed; hit rate n/a.
+- **For fund analyses:** no input moved; the E / R reference 0.254 stands. The watch calls lean to the Bear side (spread, FTD); the fund verdicts should read "Base kept, risks leaning Bear" until the December anchor.
 
 **Rates and macro** (annual averages, %)
 
@@ -657,8 +657,9 @@ table 14706. NB: MPR 3/26 Table 3 and the NIBOR path above `[F/E]`. Earlier year
 
 ## Change log
 
-- **18 Nov 2026** — kept unchanged (skill 2026-11-18.1, first Leading view): five watch calls, none met
-  the rule (spread 2027 wider, energy FTD on the oil drop, FTD 2027, NIBOR higher for longer, Swedish real estate).
+- **18 Nov 2026** — kept unchanged (skill 2026-11-18.1, first Leading view): four watch calls, none met
+  the rule (spread 2027 wider, FTD 2027, NIBOR higher for longer, Swedish real estate); energy rows flat (corrected the
+  same evening: the Brent fall was already in the 11 Nov oil baseline).
 - **11 Nov 2026** — kept unchanged: October CPI, Riksbank minutes, Taptravel vote, oil Base 2027
   88 → 84, DNB CMD and the 10 Nov market path move no value; E / R 0.254 kept.
 - **5 Nov 2026** — changed: October anchor 430 → 490 bp re-marked spreads (Base 490 / 490 / 490 / 495),
