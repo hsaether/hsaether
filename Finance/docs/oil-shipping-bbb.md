@@ -1,6 +1,6 @@
 # Oil Shipping BBB — 13 November 2026
 
-**Status: Final** (update run) · skill `oil-shipping-bbb` revision **2026-10-24.1** · as of **13 Nov 2026** (market data to 6–12 Nov) · **stale after 4 Dec 2026**
+**Status: Final** (update run 13 Nov) · **18 Nov leading-view note** (skill `oil-shipping-bbb` **2026-11-18.1**; no call met the rule; values kept) · as of **13 Nov 2026** (market data to 6–12 Nov; shares 18 Nov) · **stale after 4 Dec 2026**
 
 ## Interface (values other documents read)
 
@@ -19,6 +19,19 @@ As of 13 Nov 2026. Spot TCE in $k/day, market segment average (modern eco, non-s
 | Period market (6–11 Nov) | 1-yr TC: VLCC 210–270, Suezmax 155–170 (Amor 15-month 160–180), Aframax 86–100, LR1 67–68.5, MR 39.5–43 · 3-yr: VLCC 125, Suezmax 77.25, Aframax 53.25, LR1 39.5, MR 27.75 | — | — | — | — | — |
 | Anchors | Newbuild-parity TCE: VLCC 44, Suezmax 33, Aframax 29, LR2 30, LR1 25, MR 21 · opex floor 8–10.5 | — | — | — | — | — |
 | Signpost states | TD3C Q1-27 paper ~$417k (Base signpost < $0.7m met; Bear < $300k not) · VLCC 1-yr > $250k on 2 of 3 sources · USTR/China port fees suspended to 9/10 Jan 2027 · Bab el-Mandeb 6.9 tankers/d · sanctioned-VLCC approvals: none (applications ~50 ships, all types) · Q4 VLCC contracting 2.3% of fleet (trigger 3%) | — | — | — | — | — |
+
+**Turn calls and market reads (18 Nov 2026; skill 2026-11-18.1, Leading view and market-first hierarchy; probabilities are our own estimates). No call met the rule: Base kept.**
+
+| Path | Call vs Base | Prob. | Families | Base moved? | Reversal / confirmation |
+|---|---|---|---|---|---|
+| VLCC 2027 (Base 180) | At the traded market | 60% | L2 traded: TD3C Q1-27 paper ~417 vs Base Q1 400 (13 Nov) · L2 assessed: 1-yr TC 99–128% of Base, the post-fall source (Fearnleys) at 99% · L5 −1 (Frontline −25%, DHT −22% from mid-October) | No (consistent) | TD3C Cal-27 paper or Q1 below $300k (Bear signpost) |
+| Suezmax, Aframax/LR2 2027 | Higher (assessed TC 118–136% of Base) | 40% | L2 assessed +1 (Fearnleys after the fall: Suezmax 118%, Aframax 130%) · L2 traded −1 (TD20 Q1 thin at ~84; spot down 30–50%) · L5 −1 (Teekay Tankers −21%, International Seaways −22%) | No: the traded market and the equities contradict the assessments (hierarchy) | Two updated TC sources ≥ 120% of Base with the FFA Q1 rising |
+| LR1 2027 (Base 45) | Higher (~52) | 55% | L2 assessed +1 (1-yr 67 / 68.5, 133–136% of Base, two sources) · L2 traded +1 (TC5 Q4 paper 184.75; TC5 spot ~$212–227k) · L5 −1 (product tanker shares −15 to −25%) | No (watch: the retest rule — 1-yr ≥ 65 on two sources and TC5 > $150k into December — stays the trigger) | December TC5 and 1-yr TC |
+| MR, product tankers | Flat | 55% | L6 (Oil BBB 18 Nov: 2027 diesel crack 70 → 64 to the strip; product flows unchanged) · L5 −1 | No | — |
+
+- **Market-first reading:** the traded freight market and the tanker shares have fallen with spot since mid-October, while the assessed period rates held. Under the hierarchy the traded market leads, so the assessed premium does not lift Base. VLCC Base sits at the traded paper.
+- **Data gap:** no FFA or broker report after 13 Nov was readable on 18 Nov (BWET holdings page empty; Fearnleys week 47 not online). The next run reads them first.
+- **Scorecard:** four calls opened 18 Nov; none closed.
 
 - Bold = stub changed at this run. "Now" asset values re-marked to Xclusiv 9 Nov (+0–6%). 2027–2029, Year-1 quarters, mid-cycle TCE and mid-cycle values are unchanged.
 - LR2 = Aframax from 2027 `[A]`. Product rows use labelled Baltic route proxies (see Metadata).
@@ -504,9 +517,9 @@ Inefficiency is counted only in demand (ton-days).
 
 ## Change log
 
+- **18 Nov 2026 — leading-view note (skill 2026-11-18.1, method change), kept unchanged:** market-first hierarchy (traded FFA, then assessed TC, then shares): the assessed TC premium is contradicted by the traded market and the shares (−15 to −25%); LR1 watch; Oil BBB 18 Nov (crack 2027 70 → 64) read.
 - **13 Nov 2026 (update; port-fee deadline, *Amor*):** stub re-marked after the post-midterm crude correction (VLCC 700 → 630, Suezmax 465 → 400, Aframax 305 → 210, LR2 220 → 170, MR 55 → 62; LR1 kept); "now" values re-marked; port fees suspended to 9/10 Jan 2027 (no effect). The Year-1 FFA trigger fired (TD3C Q1 −52%, TD20 −28%) and was tested: 2027–29 and mid-cycle kept because the period market (99–136% of Base) disagrees; retest rules for VLCC Q1 and LR1 set. No Base path moved.
 - **24 Oct 2026 (update):** stub re-marked (VLCC 850 → 700, Aframax 245 → 305) on the new stub method (October segment average + paper path); period market tested over the months a charter runs; paths kept.
-- **17 Oct 2026 (update):** stub re-marked; OFAC/sanctioned-tanker catalyst added to Bear; paths kept.
 
 ## Appendix: sources
 

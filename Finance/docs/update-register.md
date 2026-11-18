@@ -39,8 +39,8 @@ Kept by the `update-chain` skill; checked by
 | id | file | skill | type | as of | last change | affects | stale after | rev used | note |
 |---|---|---|---|---|---|---|---|---|---|
 | oil | docs/oil-market-bbb.md | oil-market-bbb | market | 2026-11-18 | 2026-11-18 | none | 2026-11-30 | 2026-11-18.2 | 18 Nov futures update (skill 2026-11-18.2: futures default + options odds): Base Brent 2027 84 → 80, 2028 77 → 73, crack 2027 70 → 64, jet 60 → 54; options: late-2027 Bear (65) ~37%, Bull (118) ~7%; 2029, mid-cycle, Bear, Bull kept |
-| shipping | docs/oil-shipping-bbb.md | oil-shipping-bbb | market | 2026-11-13 | 2026-11-13 | none | 2026-12-04 | 2026-10-24.1 | 13 Nov update run: stub re-marked after the post-midterm crude correction (VLCC 700 → 630, Suezmax 465 → 400, Aframax 305 → 210, LR2 220 → 170, MR 55 → 62); "now" asset values +0–6%; 2027–29 paths, Year-1 quarters and mid-cycle unchanged (Year-1 FFA trigger fired, tested against the 1-yr TC, 2027 kept; VLCC and LR1 retest rules set); port fees suspended to 9/10 Jan 2027 |
-| rig | docs/rig-market-bbb.md | rig-market-bbb | market | 2026-11-12 | 2026-11-12 | none | 2026-12-12 | 2026-10-10.1 | 12 Nov full update: drillship Bull 2027 450→475, stub 420→455 (six-month rule 455 / 389–499 / 5 fixtures); Base 2027 420 kept (grouped ~438, +4% < 5%); all other paths, MCU, mid-cycle and values kept; SE Asia / ME ranges widened; triggers: stale, Beacon Pacific (stranded HE semi, Serica UK Q3-27), Bull signpost; oil 84 not material; Hercules corrected to Canada |
+| shipping | docs/oil-shipping-bbb.md | oil-shipping-bbb | market | 2026-11-18 | 2026-11-13 | none | 2026-12-04 | 2026-11-18.1 | 18 Nov leading-view note (skill 2026-11-18.1): kept; traded FFA and shares (−15 to −25%) override the assessed TC premium; LR1 watch (retest rule). 13 Nov update |
+| rig | docs/rig-market-bbb.md | rig-market-bbb | market | 2026-11-18 | 2026-11-12 | none | 2026-12-12 | 2026-11-18.1 | 18 Nov leading-view note (skill 2026-11-18.1): kept; fixtures-as-forwards within the minimum; watch UDW 2028–29 and jackups (driller shares −20 to −34%). 12 Nov full update |
 | supply | docs/supply-market-bbb.md | supply-market-bbb | market | 2026-11-18 | 2026-11-18 | dof | 2026-12-12 | 2026-11-18.1 | 18 Nov leading-view update (skill 2026-11-18.1, first turn calls): NS AHTS spot Base 2027 £60k → £52k on the turn call (L1, L5, L6 down); watch calls on Brazil PSV (Petrobras TDA ceiling $35.45k vs Base $38k, basis check), NS CSV and NS PSV; OSV shares flat to down over 3 months. 16 Nov: AHTS rule £75k → £60k. 12 Nov full update |
 | hy | docs/hy-market-bbb.md | hy-market-bbb | market | 2026-11-18 | 2026-11-18 | ai, equity, global-index | 2026-12-05 | 2026-11-18.2 | 18 Nov (skill 2026-11-18.2): Base NIBOR = market path (NOK swaps, gov curve): 2028–29 4.39 / 3.86 → 4.78 / 4.58; NIBOR window 4.38 → 4.72; Base window return 7.2 → 7.5; excess and E / R 0.254 unchanged; credit watch calls lean Bear. Credit values of 5 Nov |
 | equity | docs/equity-market-bbb.md | equity-market-bbb | market | 2026-11-18 | 2026-11-18 | ai, global-index | 2026-12-06 | 2026-11-18.1 | 18 Nov leading-view note (skill 2026-11-18.1): Oslo re-run on Oil 18 Nov, market NIBOR, 18 Nov close and krone: Base 2.6 → 3.2% (kept, < 1 pp); trigger 1 → 1,551; World E / R 0.080 → 0.065 on the NIBOR window 4.72 (World not re-run); SPY options odds; watch: World de-rating. Values of 6 Nov otherwise |
@@ -88,8 +88,8 @@ Kept by the `update-chain` skill; checked by
 
 | document | reads | input as of | link | reads what |
 |---|---|---|---|---|
-| shipping | oil | 2026-11-11 | main | Crude and product prices, volumes, disruptions |
-| rig | oil | 2026-11-11 | main | Brent path, long end, mid-cycle |
+| shipping | oil | 2026-11-18 | main | Crude and product prices, volumes, disruptions |
+| rig | oil | 2026-11-18 | main | Brent path, long end, mid-cycle |
 | supply | oil | 2026-11-11 | main | Oil path (FID and tender logic) |
 | supply | rig | 2026-11-12 | main | Rig activity for OSV demand |
 | hy | oil | 2026-11-18 | main | E&P row; scenario mapping |

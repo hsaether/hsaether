@@ -1,6 +1,6 @@
 # Rig Market BBB — 12 November 2026
 
-**Status: Final** (full update) · skill `rig-market-bbb` revision **2026-10-10.1** · as of **12 Nov 2026** · **stale after 12 Dec 2026** · compacted 13 Nov 2026 (no value changed)
+**Status: Final** (full update 12 Nov) · **18 Nov leading-view note** (skill `rig-market-bbb` **2026-11-18.1**; no call met the rule; values kept) · as of **12 Nov 2026** · **stale after 12 Dec 2026**
 
 ## Interface (values other documents read)
 
@@ -28,6 +28,18 @@ As of **12 Nov 2026**. Oil input: Oil Market BBB 11 Nov. Cells Bear / **Base (Ba
 | High-spec jackups | 88 | 84 / **89 (87–91)** / 92 | 82 / **91 (88–93)** / 94 | 81 / **91 (88–94)** / 95 | 82 / **88** / 92 | ~70 / 45 / 25 |
 | Middle East jackups (committed, Base only) `[E/A]` | ~90 | 90 | 91 | 92 | 90 | — |
 | SE Asia jackups, tender-assist | `[?]` no series | — | — | — | — | — |
+
+**Turn calls and market reads (18 Nov 2026; skill 2026-11-18.1, Leading view; probabilities are our own estimates, not the 25/50/25 convention). No call met the rule: Base kept.**
+
+| Path | Call vs Base | Prob. | Families | Base moved? | Reversal / confirmation |
+|---|---|---|---|---|---|
+| UDW drillships 2028–29 (Base 455 / 470, rising) | Flatter or lower | 50% | L5 −1 (from the 30 Oct highs: Valaris −27%, Transocean −28%, Noble −20%, Seadrill −22%; S&P 500 −6%) · L6 0 (Oil BBB 18 Nov: Base 2027–28 −$4 to the strip; long end and mid-cycle unchanged, so the FID logic stands) · L2 0 (no term fixture read since 12 Nov) | No (watch) | 2027–28 UDW term fixtures below $420k, or Brazil awards below $430k |
+| High-spec jackups 2027–28 | Lower | 50% | L5 −1 (Borr −34% from its 12 Oct high) · L2 0 | No (watch) | Borr Q3 (18 Nov after the close; call 19 Nov): cover and rates |
+| HE semis (NCS) | Flat | 60% | L1 +1 (contracted moored-semi arrivals 2027) · L5 0 (Odfjell −8.5%) | No | — |
+
+- **Fixtures as forwards** (the market's forward dayrate, Market check): UDW 2027 starts 455 median, ~438 on the regional mix, against Base 420 (−4%, inside the 5% minimum; the composite includes NOC work at ~390–405); HE semis 2027 starts ~437 vs 425, 2028 starts ~452 vs 450; jackups ~115 vs the 105 composite (NW Europe/Australia skew). No forward contradicts Base beyond the minimum.
+- **Equity read (L5):** drillers fell 20–34% from late-October highs, more than Brent's 2027 strip (−2% since 10 Nov) and the S&P 500: the market prices lower dayrates or longer gaps than Base; one family, so a watch.
+- **Scorecard:** three calls opened 18 Nov; none closed.
 
 **Values, anchors, activity and signposts**
 
@@ -457,9 +469,9 @@ Not assessed: East Africa, Canada, Caspian.
 
 ## Change log
 
+- **18 Nov 2026 — leading-view note (skill 2026-11-18.1, method change), kept unchanged:** fixtures-as-forwards within the minimum; watch calls on UDW 2028–29 and jackups (driller shares −20 to −34% from late-October highs); Oil BBB 18 Nov (2027–28 −$4, long end unchanged) read, no rig effect.
 - **13 Nov 2026 — compacted to the lean-document rules (1,143 → 634 lines, Interface section first); no value changed.**
 - **12 Nov 2026 — full update (re-baseline; skill 2026-10-10.1):** fixed six-month leading-edge sample rule (checkpoint 18 closed); drillship Bull 2027 450 → 475 (450–500) and stub 420 → 455; Base 2027 kept at 420 (range 400–445 → 400–455); SE Asia Base 2027 range → 80–105, Middle East Base 2028 range → 85–110 (points kept). Beacon Pacific and Keppel stranded completions logged as supply; Hercules corrected to Canada; oil (Base 2027 88 → 84) not material. `affects` = none. Stale after 12 Dec 2026.
-- **4 Nov 2026 — small update (Q3 fleet status reports):** UDW drillships Base 2027 400 → 420, Bull 2027 430 → 450, stub 400 → 420, stub MCU 90 → 93 (Proteus $465k and Conqueror $499k, Noble Tier-1 range); jackup stub MCU 87 → 88. KG2 corrected to $389k, Corcovado to $392k, Norge to $517k. Everything else kept.
 
 ## Appendix
 
