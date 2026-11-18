@@ -1,37 +1,52 @@
-# Oil Market BBB — 11 November 2026 (leading-view note 18 Nov: kept unchanged)
+# Oil Market BBB — 18 November 2026 (futures default)
 
-**Status:** Final · full update 11 Nov 2026 (Update mode, Steps 0–11), as of the **Tue 10 Nov** settlements · **18 Nov 2026 leading-view note** (skill `oil-market-bbb` **2026-11-18.1**, Step 1b; no call met the rule; values kept) · **stale after 30 Nov 2026** (OPEC+ 29 Nov).
+**Status:** Final · **18 Nov 2026 futures update** (skill `oil-market-bbb` **2026-11-18.2**: futures default, options-implied odds, Steps 1b and 6, Step 9 for Base Brent and crack; other steps as of the 11 Nov full update) · strips as of **18 Nov ~21:20 UTC** (Yahoo, intraday; settlements not yet published) and Barchart ICE Brent options (18 Nov) · **stale after 30 Nov 2026** (OPEC+ 29 Nov; F27 expiry).
 
 ## Interface (values other documents read)
 
-As of **11 Nov 2026** (paths) and the **10 Nov 2026 settlements** (stub, forward, long end). Nominal USD, period averages. Weights 25/50/25 are a convention, never a probability. Tags: `[F]` fact · `[E]` external forecast or secondary · `[A]` own assumption · `[?]` unknown.
+As of **18 Nov 2026** (Base Brent 2027–28, Base crack 2027, jet 2027, Year-1 quarters; other paths 11 Nov) and the **18 Nov 2026 intraday strips** (forward, options); stub and long end of 10 Nov. Nominal USD, period averages. Weights 25/50/25 are a convention, never a probability. Tags: `[F]` fact · `[E]` external forecast or secondary · `[A]` own assumption · `[?]` unknown.
 
 **Paths and references** (point values; ranges in the sections below)
 
 | $/bbl, period average | Stub Q4-26 | 2027 | 2028 | 2029 | Mid-cycle |
 |---|---|---|---|---|---|
-| Brent Bear / Base / Bull | 97.1 / 97.1 / 97.1 | 65 / **84** / 118 | 60 / 77 / 102 | 60 / 72 / 90 | 60 / 70 / 82 |
-| Brent Base 2027 by quarter (Q1 / Q2 / Q3 / Q4) | | 89 / 85 / 82 / 80 | | | |
-| Diesel crack (ULSD − Brent) Bear / Base / Bull | 85.1 / 85.1 / 85.1 | 35 / 70 / 110 | 25 / 48 / 75 | 20 / 33 / 45 | 18 / 25 / 35 |
-| Diesel price Base ($/bbl; $/t) | 182.2; 1,357 | 154; 1,147 | 125; 931 | 105; 782 | 95; 708 |
-| Jet crack (NWE − Brent) Base | `[?]` | 60 | 40 | 28 | 22 |
+| Brent Bear / Base / Bull | 97.1 / 97.1 / 97.1 | 65 / **80** / 118 | 60 / **73** / 102 | 60 / 72 / 90 | 60 / 70 / 82 |
+| Brent Base 2027 by quarter (Q1 / Q2 / Q3 / Q4) | | 85 / 82 / 77 / 76 | | | |
+| Diesel crack (ULSD − Brent) Bear / Base / Bull | 85.1 / 85.1 / 85.1 | 35 / **64** / 110 | 25 / 48 / 75 | 20 / 33 / 45 | 18 / 25 / 35 |
+| Diesel price Base ($/bbl; $/t) | 182.2; 1,357 | 144; 1,073 | 121; 901 | 105; 782 | 95; 708 |
+| Jet crack (NWE − Brent) Base | `[?]` | 54 | 40 | 28 | 22 |
 | Brent–WTI Base | 7.0 | 6.0 | 5.0 | 4.5 | 4.0 |
 | European diesel: gasoil crack vs ULSD crack | −9.3 | about −11 (2027–28) | about −11 | — | — |
-| Forward curve, 10 Nov (Brent / diesel crack) | 97.1 / 85.1 | 81.2 / 67.8 | 73.9 / 45.2 | 71.2 / 37.7 | — |
+| Forward curve, 18 Nov (Brent / diesel crack; front-month basis) | 97.1 / 85.1 | 79.8 / 63.7 | 72.8 / 46.5 | ~70.5 `[A]` / n.a. | — |
 | Long end, 10 Nov (Brent Dec contract; last column Dec-30 to Dec-34) | | Dec-27 77.64 | Dec-28 72.76 | Dec-29 70.58 | Dec-30 69.06 · Dec-31 67.70 · Dec-34 64.24 |
 
-**Turn calls (18 Nov 2026; Leading view, Step 1b; probabilities are our own estimates, not the 25/50/25 convention). No call met the rule (≥ 2 families, ≥ 60%): Base kept.**
+**Futures read (18 Nov 2026; skill 2026-11-18.2, `references/futures.py`). The futures default sets Base 2027–28 Brent and the 2027 crack: Base = the strip unless a qualifying turn call names what the market is missing.**
 
-| Path | Call vs Base | Prob. | Families | Base moved? | Curve vs Base | Reversal / confirmation (date) |
-|---|---|---|---|---|---|---|
-| Brent 2027 (Base 84) | Flat | 60% | L5 0 (18 Nov intraday: F27 91.44 vs 91.49 settled 10 Nov; 2027 strip ~82.0 vs 81.2; M1−M4 ~+6.5, still tight) · L1 0 (no deal: Iran denies talks, Trump "we don't need a deal"; an unconfirmed Saudi report of resumed nuclear talks) | No (no move) | Strip ~2 below Base, inside the retest band | Strip < 79 for a week without a deal (Bear side) or > 90 with a Bull flow signpost |
-| Brent 2027 tail (Bull) | Higher risk of renewed strikes | 50% | L1 +1 (Israel reportedly readying to strike, 12 Nov; ADNOC tanker attacked; analysts: the status quo "could break out into war", 18 Nov) · L2/L5 0 (no premium in the strip) | No (watch) | — | Strikes on Gulf energy infrastructure, or Hormuz < 8 mb/d for two weeks (Bull signposts); window to 3 Jan |
-| Brent 2028–29 (Base 77 / 72) | Lower (market-share quotas) | 50% | L1 −1 (OPEC+ sets 2027 quotas on 29 Nov; capacity review pending; UAE presses for more; IEA warns of a 2027 surplus if Gulf flows normalise) · L5 −1 (Dec-27 76.05 vs 77.64, Dec-28 71.83 vs 72.76: within the minimum) | No (watch; the decision is 11 days away and the curve moved < $3) | Dec-28 ~5 below Base 2028 | OPEC+ 29 Nov: quotas that add > 1 mb/d in 2027 confirm (then move 2028 toward 72) |
-| Diesel crack 2027 (Base 70) | Lower | 50% | L5 −1 (crack strip ~71 Jan-27 and ~57 Dec-27, ~64 on average vs 67.8 on 10 Nov) · L3 0 (no new stock data read) | No (watch: one family; −$6 to the strip, but Base already sits above the strip by design) | ~6 below Base | ARA and US distillate stocks into December; Russian diesel export quota |
-| Mid-cycle (70) | Flat | 65% | Long end steady (Dec-29 70.0) | No | At Base | — |
+| Year | Brent strip (front-month basis) | Base | Gap | ULSD crack strip | Crack Base | Gap | Brent–WTI strip / Base |
+|---|---|---|---|---|---|---|---|
+| 2027 | **79.8** (Q 85.0 / 81.3 / 77.2 / 75.6) | **80** (was 84) | +0.2 | **63.7** (Q 70.8 / 63.7 / 62.1 / 58.0) | **64** (was 70) | +0.3 | 4.5 / 6.0 (gap < $3: kept) |
+| 2028 | **72.8** (live Jun-28 and Dec-28, interpolated `[A]`) | **73** (was 77) | +0.2 | 46.5 | 48 | +1.5 (kept) | 3.8 / 5.0 (kept) |
+| 2029 | ~70.5 (Dec-28 71.83 → Dec-29 70.0 → long end) `[A]` | 72 | +1.5 (kept) | n.a. (HO 2029 thin) | 33 | — | — |
 
-- **Since 10 Nov the leads are flat.** The large fall in Brent (from ~$117 in late October to ~$91 for January) came before the 11 Nov full update, which cut Base 2027 from 88 to 84 on it. Downstream readers (HY, equity) should not count it twice.
-- **Scorecard:** five calls opened 18 Nov; none closed; hit rate n/a.
+| Options on ICE Brent (Barchart, 18 Nov; Black-76 smile fitted to OTM prices) | Jun-27 (exp 27 Apr 27) | **Dec-27 (exp 26 Oct 27)** | Dec-28 (exp 26 Oct 28) |
+|---|---|---|---|
+| Futures / ATM vol (Barchart IV) | 81.88 / 43.1% (42.0%) | 76.15 / 36.3% (34.9%) | 71.82 / 30.0% (27.4%) |
+| Percentiles p10 / p25 / p50 / p75 / p90 | 55 / 66 / 78 / 93 / 111 | **45 / 58 / 73 / 90 / 110** | 37 / 52 / 70 / 89 / 110 |
+| Implied odds: ≤ Bear / ≤ Base / ≥ Bull (levels used) | 24% / 57% / 7% (65 / Q2 82 / 118) | **37% / 56% / 7%** (65 / Q4 76 / 118) | 36% / 55% / 14% (60 / 73 / 102) |
+| Skew (vol at 0.8F − 1.2F) / put-call premium | −1.8 pp / 1.20 (near term: upside tail paid) | **+1.2 pp / 1.38** (downside tail paid) | +3.9 pp / 1.10 |
+
+- **What the market says:** prompt tightness that fades (M1−M4 **+$7.3**, M1−M12 +$18.7; Dec-27 − Dec-28 +$4.2, Dec-28 − Dec-29 +$1.8: normalisation by about 2029). By late 2027 the options give the Bear level (65) about **37%** and the Bull level (118) about **7%**: the market leans to the Bear side, while 25/50/25 stays our labelled convention. Odds are risk-neutral (they include risk premia; put demand inflates the downside). ETF options (BNO, USO; front-month vol 43–51%) are wider and serve as a cross-check only. OVX 49.7.
+- **Base moved to the strip: 2027 84 → 80, 2028 77 → 73, crack 2027 70 → 64** (jet 60 → 54 with it). The 11 Nov case for sitting above the strip ("the strip prices part of a deal that Base excludes") has no qualifying turn call behind it: the no-deal leads (L1) are matched by Bear-leaning options and a falling strip (2027 −1.4 since 10 Nov), and the 2027 crack strip fell ~$4 while the product-shortage evidence (Gulf product exports ~half of normal, Russian refining ~30% down) is from before 11 Nov and priced since.
+
+**Turn calls (18 Nov; Leading view; probabilities are our own estimates). None met the rule: Base = strip.**
+
+| Path | Call vs strip | Prob. | Families | Base moved? | Reversal / confirmation (date) |
+|---|---|---|---|---|---|
+| Brent 2027 | Above the strip (no deal for longer than priced) | 50% | L1 +1 (Iran denies talks; Trump "we don't need a deal"; Israel reportedly readying strikes, 12 Nov) · L2 +1 (M1−M4 +7.3, widening from +6.7) · L5 −1 (options lean Bear; strip −1.4 since 10 Nov) | No (watch) | Strikes on Gulf energy infrastructure or Hormuz < 8 mb/d for two weeks (Bull signposts; window to 3 Jan) |
+| Brent 2028–29 | Below the strip (market-share quotas) | 50% | L1 −1 (OPEC+ 2027 quotas on 29 Nov; capacity review; UAE presses for more) · L5 −1 (Dec-28 skew +3.9 pp toward puts) | No (watch) | OPEC+ 29 Nov: quotas adding > 1 mb/d in 2027 confirm |
+| Diesel crack 2027 | Above the strip (products short longer) | 50% | L3 +1 (Gulf product loadings ~3 mb/d, Oct) · L4 +1 (Russian refining ~30% disrupted) — both pre-11 Nov and priced | No (watch) | US and ARA distillate stocks into December; Russia's diesel export quota |
+
+- **Scorecard:** six calls opened 18 Nov (three above, three watch); none closed; hit rate n/a. Earlier today's note (Base kept, "strip ~82") read the strip on delivery months; on the skill's front-month basis it is 79.8 — corrected here.
 
 **Scenarios, disruption status and triggers**
 
@@ -44,7 +59,7 @@ As of **11 Nov 2026** (paths) and the **10 Nov 2026 settlements** (stub, forward
 | Gulf export row (defense) | Gulf crude incl. pipelines 80–85% of pre-war, products 35–40% (FGE, early Nov); status unchanged: contested, no deal |
 | Front 15% trigger | Re-armed on 91.49 (10 Nov): full update if F27 settles ≤ 77.8 or ≥ 105.2 to 30 Nov, then G27 ≤ 76.0 or ≥ 102.9 to 10 Dec. Not fired |
 | Dec-27 15% trigger | Z27 ≤ 66.0 or ≥ 89.3 within a month of 10 Nov. Not fired (77.64) |
-| 2027 strip retest band (Base 84) | Down: strip > $5 below Base (< 79) for a week without a signed deal. Up: > $6 above (> 90) with a crossed Bull flow signpost. Now 81.2: inside |
+| 2027 strip vs Base (futures default) | Base follows the strip at each run; between runs a full update is due if the 2027 strip moves > $5 from Base (< 75 or > 85) for a week, or the options-implied odds of the Bear level (Dec-27) cross 50%, or Dec-27 implied vol moves ±10 pp (now 36%) |
 | Other triggers and signposts | M1−M4 < $5 for two weeks (now +6.70, clearly tight); agency demand revision > 0.5 mb/d for a year in the window (EIA 2027 −0.2); refining trigger > 0.5 mb/d **fired** (Russia), tested, no crack change; Hormuz < 8 mb/d for two weeks touched, not confirmed |
 
 **Readers** (each takes the 11 Nov values at its own next run; `affects` none)
@@ -54,8 +69,8 @@ As of **11 Nov 2026** (paths) and the **10 Nov 2026 settlements** (stub, forward
 | shipping | Crude and product prices, volumes, disruptions | Disruption and flow rows above; ARA gasoil imports 400 kb/d (35% Saudi); Russian diesel export plan 2.15 Mt (Nov); Brent–WTI narrowing (5.45 same-month, 2027 strip 3.9) |
 | rig | Brent path, long end, mid-cycle | Long end from Dec-31 flat, mid-cycle 70 unchanged: the FID logic stands |
 | supply | Oil path (FID and tender logic) | As for rig; rig activity reaches it through rig |
-| hy | E&P row; scenario mapping | E&P cash flow far above breakeven at Base 84; Bear 65 and mid-cycle 70; USD/NOK 9.4663 (10 Nov) |
-| equity | Oslo and World energy | Base 2027 84 cuts Oslo energy E 2027 ~7% on its (Brent − 30)/50 rule: ~0.3 pp or less on the Oslo Base IRR `[A]` |
+| hy | E&P row; scenario mapping | E&P cash flow far above breakeven at Base 80 / 73 (18 Nov); Bear 65 and mid-cycle 70; USD/NOK 9.4663 (10 Nov) |
+| equity | Oslo and World energy | Base 2027 80 / 2028 73 (18 Nov) cut Oslo energy E ~8% on its (Brent − 30)/50 rule: ~0.3–0.4 pp on the Oslo Base IRR `[A]`; options odds for its Bear |
 | defense | Gulf export row | Row above |
 | global-index | Energy block | World energy weight ~4.2%; the 2027 Base change is < 0.05 pp `[A]` |
 | sed, borr, odl, capt, hafnia, dof | Background via scenarios (rig, shipping, supply) | Nothing direct; crack paths unchanged for hafnia |
@@ -74,8 +89,9 @@ As of **11 Nov 2026** (paths) and the **10 Nov 2026 settlements** (stub, forward
 
 ## Conclusion
 
-- **Oil Market BBB changed on 11 Nov: Base Brent 2027 is 84 (cut $4, −4.5%: above the $3 minimum, below the 15% recalibration trigger).** Every other Bear, Base and Bull Brent and crack path, the mid-cycle values, jet, Brent–WTI from 2027 and the weights (25/50/25, convention) stay; the stub moves mechanically.
-- **Base in two sentences:** armed normalisation without a deal, with Brent **84 → 77 → 72** (mid-cycle 70), falling from ~89 in Q1-27 to ~80 in Q4-27. The ULSD crack stays at **70 → 48 → 33** (mid-cycle 25), because the product shortage outlasts the crude premium.
+- **Oil Market BBB changed on 18 Nov under the futures default: Base Brent 2027 84 → 80 and 2028 77 → 73, diesel crack 2027 70 → 64 (jet 60 → 54).** Base now equals the strip (front-month basis) in each year where the gap was $3 or more and no qualifying turn call carried it. 2029 (72 vs ~70.5), mid-cycle 70, the 2028–29 cracks, Bear, Bull and the weights (25/50/25, convention) stay; the stub is the 10 Nov value (≈ unchanged on 18 Nov prices).
+- **Base in two sentences:** armed normalisation without a deal at the market's pace, with Brent **80 → 73 → 72** (mid-cycle 70), falling from ~85 in Q1-27 to ~76 in Q4-27. The ULSD crack is **64 → 48 → 33** (mid-cycle 25): the product shortage eases through 2027 as the strip prices it.
+- **Market odds (options, 18 Nov):** by late 2027 Brent ≤ 65 (Bear) ~37%, ≥ 118 (Bull) ~7%; the market pays for the downside tail from Dec-27 on.
 - **Why 84 (several independent data points, mostly physical):** the physical premium is gone (Dated proxy − front +3.4 on 3 Nov, from +20.5 on 14 Oct); supply recovers faster under the same no-deal mechanism (EIA, HSBC, JPMorgan, Vortexa); the 2027 strip repriced and held (81.2 on 10 Nov); the EIA's comparable no-deal path is $86 spot ≈ $84 futures `[A]`. Detail under Brent.
 - **Why not more, and not Bear:** no deal is signed and Iran says it is not negotiating; the strait is still contested (Kpler 7.82 mb/d; ships hit 10 Nov; Houthi missiles on Riyadh 8 Nov); US commercial crude is 410 mb, the lowest end-October since 2014; the EIA raised its 2027 Brent by $2 and its 2027 diesel by 12%. The cut is front-loaded (Q1-27 89, Q4-27 80); 2028 and 2029 stay.
 - **Main Bear catalyst:** a durable Iran–USA deal plus OPEC+ market-share quotas — **closer, not triggered.** Trump held off new strikes on 9 Nov after appeals from Qatar's PM and called renewed war "highly unlikely" while talks progress; a Democratic Congress sits from 3 Jan; Russia–Ukraine talks resumed in Abu Dhabi on 10 Nov (sanctions relief would add Russian barrels).
@@ -97,7 +113,7 @@ Catalysts and mechanisms as tested on 11 Nov. Signpost status is in the monitori
 | Scenario | Stub | 2027 | 2028 | 2029 | 3-yr avg | Mid-cycle |
 |---|---|---|---|---|---|---|
 | Bear | 97.1 | 65 (60–70) | 60 (55–65) | 60 (55–65) | 61.7 | 60 (55–65) |
-| **Base** | **97.1** | **84 (77–91)** | **77 (70–85)** | **72 (65–80)** | **77.7** | **70 (65–75)** |
+| **Base** | **97.1** | **80 (74–87)** | **73 (66–80)** | **72 (65–80)** | **75.0** | **70 (65–75)** |
 | Bull | 97.1 | 118 (105–130) | 102 (90–115) | 90 (80–100) | 103.3 | 82 (75–90) |
 
 **Stub (10 Nov settlements), identical across scenarios:**
@@ -105,23 +121,15 @@ Catalysts and mechanisms as tested on 11 Nov. Signpost status is in the monitori
 - **Crack 85.1:** October 92.85 (actual); November 82.49 (daily HO Z26 − BZ F27 80.94 / 86.69 / 82.01 / 84.49 / 83.61 / 84.45 / 82.01, then 82.01); December 79.98 (HO F27 − BZ G27).
 - **Brent–WTI 7.0:** October 10.35; November 5.95 (daily BZ F27 − CL Z26, then 5.45); December 4.59 (BZ G27 − CL F27 84.86).
 
-**Anchors:**
-- **Forward (10 Nov settlements, full-year front mapping) `[F]`:** **81.2 / 73.9 / 71.2.** Base is $2.8, $3.1 and $0.8 above it; every gap is below $5. The 2027 quarters are 86.2 / 82.4 / 79.3 / 77.0, a $9.2 slope. The 2027 strip settled 82.9 / 83.6 / 85.0 / 82.4 / 81.2 on 4–10 Nov.
-- **EIA STEO (10 Nov; model completed 5 Nov; spot basis) `[E]`:** 2026 $97; **2027 $86**; about $100 for November–December; below $90 in Q2-27; **$77 in Q4-27**. Base 84 is $2 below; on a futures basis the EIA path is nearer $84 `[A]`, because the EIA's spot is a Dated-type assessment that carried a premium all autumn (October spot $124 against ~$108 futures).
-- **Other houses `[E]`:** JPMorgan sees a surplus since September, no new price forecast found; FGE (Fesharaki, 10 Nov) sees no deal; Goldman (17 Sep note, via search summary): 2027 about $87 in a disruption case and $64 in a peace case; older views HSBC $85 (Sep), Wood Mackenzie ~$78 (Jun), Citi $65 (undated).
+**Anchors (18 Nov):**
+- **Forward (front-month basis, `futures.py`, 18 Nov intraday) `[F]`:** **79.8 / 72.8 / ~70.5** (2029 interpolated `[A]`); 10 Nov settlements 81.2 / 73.9 / 71.2. The 2027 quarters are 85.0 / 81.3 / 77.2 / 75.6. BZV27 (82.14, out of line) was dropped as an outlier; 2028 months other than Jun and Dec were stale on Yahoo and the Barchart curve grid sat behind its sign-up wall, so 2028 is interpolated between live contracts `[A]`.
+- **Options (Barchart ICE Brent, 18 Nov) `[F]`, derived `[A]`:** see the Futures read in the Interface.
+- **EIA STEO (10 Nov; spot basis) `[E]`:** 2027 $86, Q4-27 $77; on a futures basis nearer $84 `[A]`. Base 80 is now below the EIA's no-deal path. **Other houses `[E]`:** Goldman (Sep) ~$87 disruption / $64 peace; HSBC $85 (Sep); Wood Mackenzie ~$78 (Jun).
 
-**Test of Base (Step 8):**
-- **Evidence for a lower Base, all seen and independent of each other (physical prices, agency, bank, futures):**
-  - Dated − futures +2.6 (2 Nov) and +3.4 (3 Nov), against +20.5 on 14 Oct and +9.2 on 27 Oct `[F, FRED/EIA spot vs Yahoo]`. A Q1-27 Base of 95 needed prompt tightness the physical market no longer shows.
-  - EIA (10 Nov): Middle East crude shut-ins 2.5 mb/d in October (10.9 at the May peak); Middle East output outside Iran back to pre-war by mid-2027.
-  - HSBC (4 Nov): Saudi crude 8.3 mb/d in Q4-26 and 9.8 in 2027, ~10 by mid-2027 (raised by 1–2 mb/d).
-  - JPMorgan (4 Nov): Middle East exports ~20.7 mb/d in October; market surplus 1.1 mb/d in September and 1.4 in October. Vortexa: Gulf product loadings ~3 mb/d in October, from ~1 in May.
-  - The forward sat at or near 83 for five sessions and closed at 81.2.
-- **Evidence against a lower Base (a renewed loss of barrels): not seen.** Kpler Hormuz oil 7.82 mb/d (week to 8 Nov) against 7.3 (crude, week to 28 Oct), no fall; no Saudi facility has lost output; US crude stocks low but no longer drawing (API +9 mb, unverified).
-- **Size:** −$4 to 84, set in H1-27 where the premium was. A larger cut (to the strip, 81) would price part of a deal into the no-deal case. 2028 (77, forward 73.9) and 2029 (72, forward 71.2) do not move: the only evidence is the curve, and the gaps (−3.1, −0.8) are below $5.
-- **Rules carried into this run:** the 31 Oct conditional up-rule (strip ≥ 93) is void; the downside retest rule (< 83 for a week without a signed deal) was not formally met (below 83 on 3 of 5 sessions, 4–10 Nov average 83.03), but the 10 Nov gap (−6.8) exceeded $5 and Base was retested in this full update; the Bear catalyst (a signed and holding deal) is not met, so Base stays the no-deal case. New retest rules are in the monitoring table.
-- **Why Base sits $2.8 above the strip `[A]`:** the strip blends outcomes; with strikes on hold and Qatar mediating it prices part of a Bear outcome, which Base excludes by definition. Base 84 is in line with the EIA's comparable no-deal path.
-- **Range 77–91:** a stop-start blockade with occasional hits (upper half) or quicker Gulf normalisation without a signed deal (lower half). The 10 Nov forward (81.2) is inside it.
+**Test of Base (18 Nov, futures default):**
+- **Base = strip** where no qualifying turn call carries a gap: 2027 84 → 80, 2028 77 → 73 (each −$4, above the $3 minimum). The 11 Nov evidence for a lower Base (the physical premium gone; faster recovery outside Iran: EIA, HSBC, JPMorgan; Vortexa) stands; the 11 Nov reason to stay above the strip did not survive the new rule (Futures read).
+- **Not moved:** 2029 (gap 1.5), mid-cycle, Bear and Bull (stress tests on their catalysts; placed against the options percentiles: late-2027 Bear 65 ≈ p30, Bull 118 ≈ p93).
+- **Range 74–87 (2027):** about the options p35–p65 band of the 2027 average `[A]` (an annual average moves less than a single contract).
 
 **Mid-cycle 70 `[A]`:**
 - **10 Nov settlements `[F, ICE via Barchart]`:** Dec-30 **69.06**, Dec-31 **67.70**, Dec-34 **64.24**, H35 64.05.
@@ -130,32 +138,32 @@ Catalysts and mechanisms as tested on 11 Nov. Signpost status is in the monitori
 
 ## Year 1 by quarter ($/bbl)
 
-Shape from the **10 Nov** forward, rescaled (multiplicatively) to each scenario's 2027 average: Brent 86.2 / 82.4 / 79.3 / 77.0; crack 76.3 / 68.9 / 65.2 / 60.7.
+Shape from the **18 Nov** forward (front-month basis), rescaled (multiplicatively) to each scenario's 2027 average: Brent 85.0 / 81.3 / 77.2 / 75.6; crack 70.8 / 63.7 / 62.1 / 58.0.
 
 | Scenario | Brent Q1 / Q2 / Q3 / Q4 | Diesel crack Q1 / Q2 / Q3 / Q4 |
 |---|---|---|
-| Bear | 69 / 66 / 63 / 62 | 39 / 36 / 34 / 31 |
-| **Base** | **89 / 85 / 82 / 80** | **79 / 71 / 67 / 63** |
-| Bull | 125 / 120 / 115 / 112 | 124 / 112 / 106 / 98 |
+| Bear | 69 / 66 / 63 / 62 | 39 / 35 / 34 / 32 |
+| **Base** | **85 / 82 / 77 / 76** | **71 / 64 / 63 / 58** |
+| Bull | 126 / 120 / 114 / 112 | 122 / 110 / 107 / 101 |
 
-- The quarters average to the annual values (65 / 84 / 118 and 35 / 70 / 110).
+- The quarters average to the annual values (65 / 80 / 118 and 35 / 64 / 110).
 
 ## Distillate cracks ($/bbl) — point (range)
 
 | Scenario | Diesel (ULSD−Brent) 27 / 28 / 29 / mid-cycle | Jet (NWE−Brent) 27 / 28 / 29 |
 |---|---|---|
 | Bear | 35 (25–45) / 25 (18–32) / 20 (15–25) / 18 (14–22) | 30 (20–40) / 21 (15–28) / 16 (12–22) |
-| **Base** | **70 (58–82) / 48 (38–58) / 33 (25–44) / 25 (20–30)** | **60 (45–75) / 40 (30–50) / 28 (20–35)** |
+| **Base** | **64 (52–76) / 48 (38–58) / 33 (25–44) / 25 (20–30)** | **54 (40–68) / 40 (30–50) / 28 (20–35)** |
 | Bull | 110 (90–130) / 75 (55–90) / 45 (35–55) / 35 (28–40) | 105 (80–130) / 70 (50–85) / 40 (30–50) |
 
 - **Historical band, ULSD−Brent (quarter-end 2015–2025) `[F]`:** median $18, interquartile range $14–24; the crisis years 2022–23 averaged $47.
-- **Forward vs Base (10 Nov settlements) `[F]`:** 2027 **67.8** vs 70 (−2.2; Q1 76.3 → Q4 60.7); 2028 45.2 vs 48 (−2.8); 2029 37.7 vs 33 (+4.7).
+- **Forward vs Base (18 Nov, front-month basis) `[F]`:** 2027 **63.7** vs 64 (Q1 70.8 → Q4 58.0; 10 Nov 67.8); 2028 46.5 vs 48 (−1.5, kept); 2029 n.a. (HO 2029 thin; 10 Nov 37.7).
   - The 2029 HO months have zero open interest except F29 (81 lots) and Z29 (64 lots), and on 10 Nov they all moved by the same −2.86 ¢/gal: the 2029 settlement is an extrapolated mark, so the gap does not move Base. The retest signpost (OI > 1,000 lots at > $40) is not met.
   - The front crack held while crude fell: HO Z26 − BZ F27 was 82.97 on 30 Oct and **82.01** on 10 Nov.
 - **Test of the crack path (Step 8):**
   - **For a higher crack:** the EIA (10 Nov) raised 2027 retail diesel from $4.49 to $5.03/gal (+12%) while raising Brent by only $2, and expects "wider product crack spreads in 2027" `[E]` — roughly +$20/bbl on its 2027 diesel margin `[A]`; Russian refining runs cut by up to ~1.5 mb/d (Refining below); Gulf product exports still ~half of normal.
   - **For a lower crack:** the traded 2027 crack fell 2.7 in the week to 10 Nov; Russia plans ~2.15 Mt of diesel exports in November (from ~0.5 Mt); ARA gasoil imports rose to 400 kb/d; the switching support faded (TTF −18%).
-  - **Result:** the evidence points both ways, and the forward sits within $3 of Base for 2027–28. The crack paths are kept.
+  - **Result (18 Nov, futures default):** the 2027 crack strip fell to 63.7, $6.3 below the old Base 70, and the evidence for a higher crack predates it: Base 2027 → **64**; 2028–29 kept (gap < $3).
 - **Gasoil cross-check (ICE gasoil, Barchart `LF*0`, settlements 10 Nov; mapping LF(m+1) ÷ 7.45 − BZ(m+2)) `[F]`:** front LFZ26 $1,227.75/t = $164.8/bbl, minus BZ F27 91.49 = **73.3**, vs ULSD 82.0 for the same month (Europe −8.7).
 
   | $/bbl | Nov–Dec 26 | Q1-27 | Q2-27 | Q3-27 | Q4-27 | 2027 | 2028 (Jan–Nov) |
@@ -164,7 +172,7 @@ Shape from the **10 Nov** forward, rescaled (multiplicatively) to each scenario'
   | ULSD − Brent | 81.0 | 76.3 | 68.9 | 65.2 | 60.7 | 67.8 | 45.7 |
   | Gap (Europe − US) | −9.3 | −10.8 | −10.8 | −12.7 | −13.5 | −12.0 | −10.1 |
 
-  - **Reading `[A]`:** the US is the tighter distillate market by $9–14 through 2028. Base 70 (ULSD basis) is $2 above the ULSD curve and $14 above gasoil. Downstream analyses that price European diesel apply about −$11 to the ULSD crack for 2027–28. The 2028 gasoil months are thin; V28 is interpolated.
+  - **Reading `[A]`:** the US is the tighter distillate market by $9–14 through 2028. Base 64 (ULSD basis, 18 Nov) is at the ULSD curve and ~$8 above the 10 Nov gasoil 2027 average. Downstream analyses that price European diesel apply about −$11 to the ULSD crack for 2027–28. The 2028 gasoil months are thin; V28 is interpolated.
 - **Gas-to-oil switching (context, extra support):** EEX TTF month futures, 10 Nov settlements `[F, Barchart]`: Dec-26 84.710, Jan-27 84.549, Feb 84.125, Mar 80.802, Apr 68.200, May 64.845, Jun 62.709, Jul 62.134, Aug 61.518, Sep 60.981, Oct 59.478, Nov 59.199, Dec-27 59.004 €/MWh. Q1, Summer and Cal-27 are month averages `[A]`. ICE gasoil 10 Nov `[F, Barchart]`; EUR/USD **1.1214** = EURNOK 10.6155 ÷ USDNOK 9.4663 `[F, Norges Bank, 10 Nov]`; 11.94 MWh/t; gasoil months mapped LF(m+1).
 
   | Period | Gasoil €/MWh | TTF €/MWh | Ratio | Band |
@@ -175,7 +183,7 @@ Shape from the **10 Nov** forward, rescaled (multiplicatively) to each scenario'
   | Cal-27 (LFG27–F28 vs TTF Jan–Dec) | 76.2 | 67.3 | 1.13 | Partial switching |
 
   - **Reading `[A]`:** TTF fell ~18% as the Hormuz risk to Qatari LNG eased, faster than gasoil; gas is no longer dearer than gasoil for the winter. The context signpost (ratio < 1.0) is not crossed, and the retest condition (ratio < 1.0 for two weeks while the ULSD Q1-27 forward is > 80) is not met (1.02; Q1 crack 76.3), so the H1-27 crack quarters do not lean higher. Switching volume is not quantified `[?]`; the EUA price is not sourced `[?]`.
-- **Jet:** 60 / 40 / 28, low confidence. S&P Global Platts (19 Oct, via search summary, not opened) `[E]`: the European jet crack moved above the diesel crack, by up to $11.75/bbl on 16 Oct (jet FOB FARAG barge vs ULSD FOB barge). Cross-check `[A]`: the 2027 European gasoil crack is 55.8, and a positive but fading regrade puts NWE jet near 60, consistent with Base. Russian jet exports are banned to 30 Nov.
+- **Jet:** 54 / 40 / 28 (2027 moved with diesel on 18 Nov), low confidence. S&P Global Platts (19 Oct, via search summary, not opened) `[E]`: the European jet crack moved above the diesel crack, by up to $11.75/bbl on 16 Oct (jet FOB FARAG barge vs ULSD FOB barge). Cross-check `[A]`: the 2027 European gasoil crack is 55.8, and a positive but fading regrade puts NWE jet near 60, consistent with Base. Russian jet exports are banned to 30 Nov.
 
 ## Distillate sensitivity
 
@@ -183,19 +191,19 @@ Shape from the **10 Nov** forward, rescaled (multiplicatively) to each scenario'
 
 2027:
 
-| Brent \ crack | Bear 35 | Base 70 | Bull 110 |
+| Brent \ crack | Bear 35 | Base 64 | Bull 110 |
 |---|---|---|---|
-| Bear 65 | 100 (745) | 135 (1,006) — *consistent: deal restores crude, products stay short* | 175 (1,304) — *plausible: product-led shortage* |
-| Base 84 | 119 (887) | **154 (1,147)** | 194 (1,445) |
-| Bull 118 | 153 (1,140) — *unlikely: crude shock without product shortage* | 188 (1,401) | 228 (1,699) |
+| Bear 65 | 100 (745) | 129 (961) — *consistent: deal restores crude, products stay short* | 175 (1,304) — *plausible: product-led shortage* |
+| Base 80 | 115 (857) | **144 (1,073)** | 190 (1,416) |
+| Bull 118 | 153 (1,140) — *unlikely: crude shock without product shortage* | 182 (1,356) | 228 (1,699) |
 
 3-year average 2027–2029:
 
-| Brent \ crack | Bear 26.7 | Base 50.3 | Bull 76.7 |
+| Brent \ crack | Bear 26.7 | Base 48.3 | Bull 76.7 |
 |---|---|---|---|
-| Bear 61.7 | 88 (658) | 112 (834) | 138 (1,031) |
-| Base 77.7 | 104 (777) | **128 (954)** | 154 (1,150) |
-| Bull 103.3 | 130 (968) — *unlikely* | 154 (1,145) | 180 (1,341) |
+| Bear 61.7 | 88 (658) | 110 (819) | 138 (1,031) |
+| Base 75.0 | 102 (758) | **123 (919)** | 152 (1,130) |
+| Bull 103.3 | 130 (968) — *unlikely* | 152 (1,129) | 180 (1,341) |
 
 **Decomposition of the ULSD price change** (front month, Yahoo settlements) `[F]`:
 
@@ -316,7 +324,7 @@ Shape from the **10 Nov** forward, rescaled (multiplicatively) to each scenario'
 | Bull | — | −1 to 0 | −0.5 to +0.5 | +0.5 | Low stocks force price rationing `[A]` |
 
 **Reading `[A]`:**
-- **Base 2027 +1.5 to +2.5 mb/d:** the faster recovery outside Iran (EIA, HSBC) adds ~0.5 mb/d of builds, ~180 mb over the year, consistent with Base 84. End-2027 stocks stay below pre-war (−509 mb hole plus ~1 bn bbl of strategic and commercial restocking), so Base keeps a backwardated, above-Bear path.
+- **Base 2027 +1.5 to +2.5 mb/d:** the faster recovery outside Iran (EIA, HSBC) adds ~0.5 mb/d of builds, ~180 mb over the year, consistent with Base 84 on 11 Nov; Base 80 (18 Nov, the strip) allows ~0.3 mb/d more builds `[A]`. End-2027 stocks stay below pre-war (−509 mb hole plus ~1 bn bbl of strategic and commercial restocking), so Base keeps a backwardated, above-Bear path.
 - **Base 2026 ~−1.5:** the EIA is at −0.7 and JPMorgan counts a surplus, against the IEA at −1.7.
 - **EIA 2027 surplus +4.0** (cut by 1.0 mb/d in the November STEO through supply, not demand, so no trigger). The EIA's +4.0 against its own $86 shows that the agency, too, expects most of the surplus to be absorbed by restocking.
 
@@ -341,7 +349,7 @@ Shape from the **10 Nov** forward, rescaled (multiplicatively) to each scenario'
 | ULSD−Brent crack (front) | Bull > $100 sustained · Base < $65 by mid-2027 | 82.0 (Nov, 10 Nov) | Base |
 | Gas-to-oil switching ratio | Bull crack: gasoil/TTF < 1.0 (energy basis) | Dec-26 1.05 · Q1-27 1.02 · Cal-27 1.13 | Not crossed |
 | ULSD 2029 forward | Retest Base 2029 if OI > 1,000 lots at a crack > $40, or the 2028 crack > $55 | 37.7, zero OI (mark); 2028 45.2 | Base |
-| Brent 2027 strip vs Base (armed on Base 84) | **Up:** retest if the strip is > $6 above Base (> 90) together with a crossed Bull flow signpost · **Down:** retest if the strip settles > $5 below Base (< 79) for a week without a signed deal | 81.2 (−2.8 vs 84) | Inside the band |
+| Brent 2027 strip vs Base (futures default, 18 Nov) | Full update if the strip sits > $5 from Base (< 75 or > 85) for a week; Dec-27 implied odds of the Bear level > 50%; Dec-27 implied vol ±10 pp | 79.8 vs 80; Bear odds ~37%; vol 36% | At Base |
 | Brent front 15% trigger (armed 11 Nov) | Full update if the front settles ≤ 77.8 or ≥ 105.2 (F27, ±15% vs 91.49 on 10 Nov) to 30 Nov, then G27 ≤ 76.0 or ≥ 102.9 to 10 Dec | 91.49 (10 Nov) | Armed |
 | Dec-27 15% trigger | Full update if Z27 settles ≤ 66.0 or ≥ 89.3 within a month of 10 Nov | 77.64 (10 Nov) | Not fired |
 | Brent–WTI (same month) | Stress > $12 | 5.45 (Nov, 10 Nov) | Normal |
@@ -362,7 +370,7 @@ Shape from the **10 Nov** forward, rescaled (multiplicatively) to each scenario'
 
 ## Change log
 
-- **18 Nov 2026 — leading-view note (skill 2026-11-18.1), kept unchanged:** five calls, none met the rule; the strip, front and long end are within $2 of 10 Nov. Watch: renewed-strike tail, 2028–29 lower on OPEC+ quotas (29 Nov), diesel crack 2027 lower.
+- **18 Nov 2026 — futures update (skill 2026-11-18.2, method change: futures default, options-implied odds; supersedes the same day's 2026-11-18.1 note, which read the strip on delivery months), BBB changed:** Base Brent 2027 84 → 80 (quarters 89 / 85 / 82 / 80 → 85 / 82 / 77 / 76), 2028 77 → 73; diesel crack 2027 70 → 64, jet 60 → 54; ranges re-set; options: late-2027 Bear odds ~37%, Bull ~7%. Readers take it at their next run (affects none: the E&P, Oslo energy and tanker effects are below their triggers).
 - **11 Nov 2026 — full update (skill 2026-10-24.4), BBB changed:** Base Brent 2027 88 → 84 (range 77–91; physical premium gone, faster recovery outside Iran, strip 81.2); stub 104.3 → 97.1, crack 88.1 → 85.1, Brent–WTI 8.0 → 7.0; Year-1 Base 89/85/82/80. All other paths, mid-cycle, cracks and weights kept; Russian refining trigger tested, no crack change. Changed yes, `affects` none.
 - **4 Nov 2026 — small update (OPEC+ 1 Nov hold, US midterms), kept unchanged:** stub re-marked (Brent 110.4 → 104.3, crack 86.2 → 88.1); Bull window to 3 Jan; Bear enabler a Democratic Congress; new signposts (US Congress, downside retest, 15% front trigger).
 
