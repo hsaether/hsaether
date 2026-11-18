@@ -4,6 +4,18 @@ The running report of the update chain (`update-chain` skill): the weekly run on
 and the daily company news search on weekdays (Mode F). Newest entry first. The bookkeeping is in
 `docs/update-register.md`; the numbers are in the documents themselves.
 
+## Daily news — Wednesday 18 Nov 2026
+
+- **Updated:** `nvda` Base 17.7% → 20.7%, clears (Q3 $115.8bn, Q4 guide $130bn; cascade −15.2%).
+- **Updated:** `hafnia` Base −0.5% → 7.4%, fails (Q3; P_k NOK 81.6 vs 90.00).
+- Hafnia (hafnia): TORM stake to be paid out as special dividend (~$1.28/share), else 90% cash; form set 25 Nov `[F]`.
+- NVIDIA (nvda, ai): GM guide 71–72%, supply commitments $390bn, $1.8bn stake impaired; BIS remote-access rule issued 16 Nov `[F]`.
+- Minor: Hofseth corrected Q3; Anthropic prices tonight; Trump–Xi in Shenzhen; fund-house forum posts unchanged.
+
+**Needs you:** `ai` is due its rebuild: NVIDIA's guide sits at its Bull row. SED Q3 not out yet; Petrobras PSV ranking not public. `supply`, `mu`, `tsm`, `global-index` left.
+
+**Register:** added NVIDIA Q4 (~24 Feb), Hugging Face closing, Hafnia dividend form (25 Nov), Hafnia Q4 (~26 Feb).
+
 ## Daily news — Tuesday 17 Nov 2026
 
 - **Updated:** none. No tracked company reported or had material news since the 16 Nov runs.
