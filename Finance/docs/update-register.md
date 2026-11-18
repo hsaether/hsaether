@@ -366,6 +366,7 @@ it to `open`.
 | 2026-11-18 | yes | Hafnia Q3 report | hafnia | done |
 | 2026-11-16 | yes | TORM Q3 dividend USD 1.35 goes ex (Copenhagen 16 Nov, New York 17 Nov; paid 2 Dec) | hafnia | done |
 | 2026-11-17 | yes | Petrobras PSV 4500 (5 lots) and PSV 3000 (2 lots) tender proposals open: 4-year firm from Jun–Oct 2027 (opened 17 Nov; ranking not public by 18 Nov 08:00, read at the supply run; PSV 3000 bareboat tender bids due 25 Nov) | supply, dof | open |
+| 2026-11-17 | yes | DOF: Skandi Africa (high-end flexlay CSV) "Very Large" award ($100–200m) from TechnipFMC in direct continuation of its current contract (Cision 17 Nov 07:13; user input 18 Nov; missed by the daily runs). Term, rate and start not given: read at the dof run (CSV open share 2027–29, premium on contracts firm today; verdict marginal +0.6%) | dof, supply | open |
 | 2026-11-18 | approx | SED Q3 report (MFN/Inderes calendar 18 Nov 06:00, not out by 08:00 18 Nov; TipRanks lists 27 Nov `[E]`) | sed, rig | open |
 | 2026-11-12 | yes | SeaBird (SED) Fulmar Explorer OBN source contract, West Africa, ~6 months from Dec 2026 (supports the SeaBird Base 2027 contribution; read at the SED Q3 run) | sed | watch |
 | 2026-11-18 | yes | Borr Q3 report (Borr release 13 Nov: after the NYSE close 18 Nov, call 19 Nov 15:00 CET): first figures after the Prospector 5 loss, insurance position | borr, hy-issuers, rig | open |
