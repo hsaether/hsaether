@@ -5,8 +5,18 @@ description: Rig Market BBB — the offshore drilling-rig market baseline for dr
 
 # Rig Market BBB
 
-**Revision:** 2026-10-10.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-18.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/rig-market-bbb/` in the Finance folder.
+
+Change note 2026-11-18.1 (user, 18 Nov 2026: "forecast changes to market conditions BEFORE they
+have solid proof", and use market-implied data for everything it is worth; same method as the oil,
+supply, AI, HY and equity skills): new **Leading view** section (families L1–L6 for drilling, turn
+calls with a stated probability and a dated reversal signpost, scorecard) and **market-implied
+reads**: multi-year fixtures are the drilling market's forward prices (a term contract starting in
+a window year is that year's market rate for its spec), and driller equity prices imply a dayrate
+(EV per marketed rig against asset-implied values). Base follows a turn call that meets the rule
+before utilisation or fixtures confirm it; the minimum change governs size, not timing. Step 1b,
+a trigger and a check added. Method change.
 
 A Bear/Base/Bull baseline for the offshore rig market. It answers one question: **what market
 dayrates, utilization and rig values should a drilling-contractor valuation use, year by year and
@@ -43,7 +53,8 @@ reads this baseline); onshore rigs, liftboats and seismic.
   source series per segment (see Definitions and Data sources).
 - **Point value + range** for every scenario rate, utilization and value. IAF uses the point value;
   the range shows uncertainty inside the scenario.
-- **Base = the decision case.** Bear and Bull are stress tests tied to named catalysts.
+- **Base = the decision case, and it is a forecast** set on the turn calls (Leading view), not on
+  the last print. Bear and Bull are stress tests tied to named catalysts.
   **25/50/25** is a labelled convention for optional weighted figures — never a probability.
 - **Stub has no scenario spread** (IAF rule): stub MCU is the latest observed month and the stub
   rate is the leading-edge from the last six months of fixtures, the same in all three scenarios.
@@ -55,6 +66,8 @@ reads this baseline); onshore rigs, liftboats and seismic.
 - **Minimum change (convention):** a point value moves only if the evidence moves it by at least
   5% (annual leading-edge rate or asset value) or 2 percentage points (annual MCU). Smaller moves
   are noted, not applied.
+  The threshold governs the **size** of a move, not its **timing**: a move called on leading
+  indicators is applied now if it clears it.
 - **Staleness:** the baseline is stale after 30 days, or earlier if a recalibration trigger fires
   or `docs/oil-market-bbb.md` gets a newer baseline date whose "For downstream skills" section
   flags a rig-relevant change. IAF treats a stale baseline as provisional.
@@ -265,6 +278,33 @@ not percentiles.
   in surplus rates sink towards cash breakeven. Reactivation parity is the practical ceiling while
   cold-stacked rigs exist; newbuild parity only once they are gone.
 
+## Leading view (turn calls)
+
+Utilisation, fixtures and company results confirm a turn after the market has priced it. Every run
+forms a forward view from indicators that lead the paths, and Base follows it.
+
+| Family | Examples | Typical lead |
+|---|---|---|
+| L1 Operator demand | Tenders and RFPs (count and term), FIDs, contract options declared early, direct awards, rig-years in tender | 6–18 months |
+| L2 Contract prices | Term fixtures by start year (the market's forward dayrate), the spread of term over spot, contract length, mobilisation fees paid | 3–12 months |
+| L3 Supply movement | Reactivation decisions and costs, cold-stacked rigs leaving the fleet, newbuild orders (or none), rigs moving region | 6–24 months |
+| L4 Contractor behaviour | Buybacks vs fleet capex, M&A, rig sales vs model values, insider dealings, guidance on contract coverage | 3–12 months |
+| L5 Market pricing | Driller shares (VAL, RIG, NE, SDRL, BORR, ODL) vs the S&P 500 and Brent; EV per rig against asset-implied values (the dayrate the price implies) | the market's own forecast |
+| L6 Upstream turn calls | Oil BBB futures default and turn calls (long end and mid-cycle for FIDs) | as the upstream call |
+
+- **Turn call** per core path (UDW drillships, HE semis, benign semis and high-spec jackups (rate and MCU)): direction vs Base, size, timing, a **stated
+  probability**, the families behind it, and a **dated reversal signpost**.
+- **Rule to move Base:** two or more independent families point the same way (L5 alone never moves
+  it) and the probability is ≥ 60%, and the move clears the minimum change. One family, or 50–60%,
+  is a **watch call**: logged, Base unchanged. A call against the market needs a named reason.
+- **Market-implied reads (every run):** (1) **fixtures as forwards**: per segment and start year,
+  the median term fixture is the market's forward dayrate; Base for that year follows it unless a
+  turn call names why the market is wrong; (2) **equity-implied dayrate**: EV per marketed rig of
+  the listed drillers against the asset-value convention gives the mid-cycle dayrate the price
+  implies (direction check, L5); (3) driller share momentum vs Brent and the S&P 500.
+- **Scorecard:** every call gets a dated line; each run marks open calls hit / miss / open and
+  keeps the hit rate. Two misses in a row on one family halve its weight in the next call.
+
 ## Procedure
 
 Two modes, one procedure:
@@ -300,6 +340,10 @@ material oil event, say so, mark this baseline **Provisional**, and get the oil 
 | Bear/Bull catalysts and timing | Which FIDs and exploration campaigns move, and with what lag |
 | Disruptions and war zones | Operational line per region: suspensions, force majeure, evacuation, tenders deferred |
 | Energy-security policy (strategic stocks, domestic gas) | NOC programmes and gas developments (SE Asia, Middle East, Norway) |
+
+**Step 1b — Leading indicators, market reads and turn calls** (before the paths are set): read
+families L1–L6, run the market-implied reads, score, set or update each turn call and mark the
+scorecard. Later steps test the calls; Step 9 applies those that meet the rule.
 
 **Step 2 — Utilization and fleet status.** From the Westwood dashboard (latest complete month,
 anchor), the weekly counts (fresh trend) and Petrodata (regional contracted counts): per class,
@@ -400,6 +444,8 @@ Value            = annual cash flow × annuity(8%, 30 − age), floored at the r
 - **Bear / Bull:** are the catalysts still the right ones? Has one come closer, been triggered, or
   become irrelevant? Has a signpost been crossed? Is a demand or supply catalyst missing? Have
   floaters and jackups diverged?
+- **Leading indicators count as data points** (Leading view): a turn call that meets the rule moves
+  Base now.
 - **Evidence threshold:** change a scenario, catalyst or path only when several independent data
   points point the same way, or one event materially changes demand in rig-years, competitive
   supply or cover — and only by more than the minimum change.
@@ -441,6 +487,8 @@ A full update is due when any of these occurs:
 - A merger or acquisition changes rig ownership for a covered contractor
 - A war or force majeure puts a region's rigs offhire or suspended
 - A Bear or Bull catalyst is triggered or a signpost is crossed
+- A turn call's reversal signpost is hit, or a watch call gains its second family
+- The listed peer shares move ≥ 15% against the S&P 500 within a month (run Step 1b at least)
 - The baseline is older than 30 days
 
 ## Output: `docs/rig-market-bbb.md`
@@ -459,6 +507,7 @@ appendix.
 
 ## Conclusion
 - BBB changed / kept unchanged — explicit
+- Turn calls (in the Interface block) with market reads; scorecard
 - Base in two sentences (floaters; jackups)
 - Segment ranking (strongest → weakest) with the main reason
 - Main Bear catalyst and main Bull catalyst
