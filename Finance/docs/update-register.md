@@ -43,7 +43,7 @@ Kept by the `update-chain` skill; checked by
 | rig | docs/rig-market-bbb.md | rig-market-bbb | market | 2026-11-12 | 2026-11-12 | none | 2026-12-12 | 2026-10-10.1 | 12 Nov full update: drillship Bull 2027 450→475, stub 420→455 (six-month rule 455 / 389–499 / 5 fixtures); Base 2027 420 kept (grouped ~438, +4% < 5%); all other paths, MCU, mid-cycle and values kept; SE Asia / ME ranges widened; triggers: stale, Beacon Pacific (stranded HE semi, Serica UK Q3-27), Bull signpost; oil 84 not material; Hercules corrected to Canada |
 | supply | docs/supply-market-bbb.md | supply-market-bbb | market | 2026-11-18 | 2026-11-18 | dof | 2026-12-12 | 2026-11-18.1 | 18 Nov leading-view update (skill 2026-11-18.1, first turn calls): NS AHTS spot Base 2027 £60k → £52k on the turn call (L1, L5, L6 down); watch calls on Brazil PSV (Petrobras TDA ceiling $35.45k vs Base $38k, basis check), NS CSV and NS PSV; OSV shares flat to down over 3 months. 16 Nov: AHTS rule £75k → £60k. 12 Nov full update |
 | hy | docs/hy-market-bbb.md | hy-market-bbb | market | 2026-11-18 | 2026-11-18 | ai, equity, global-index | 2026-12-05 | 2026-11-18.2 | 18 Nov (skill 2026-11-18.2): Base NIBOR = market path (NOK swaps, gov curve): 2028–29 4.39 / 3.86 → 4.78 / 4.58; NIBOR window 4.38 → 4.72; Base window return 7.2 → 7.5; excess and E / R 0.254 unchanged; credit watch calls lean Bear. Credit values of 5 Nov |
-| equity | docs/equity-market-bbb.md | equity-market-bbb | market | 2026-11-06 | 2026-11-06 | global-index | 2026-12-06 | 2026-10-24.1 | Update 2 (6 Nov): full update on 5 Nov closes after HY 5 Nov, midterms and Q3. World Base 5.2% → 6.6% (mostly the ~4% price fall; Amazon and Micron now company blocks), Oslo 2.5% → 2.6% (re-marked). E / R World 0.024 → 0.080, Oslo −0.06 vs HY ref 0.254. Trigger 1 World −14.3% (URTH NOK ≈ 1,590), Oslo 1,492. World 1.6% above its pre-alert (1,827). NOK Base spot flat at I-44 107.8 / USD/NOK 9.29 |
+| equity | docs/equity-market-bbb.md | equity-market-bbb | market | 2026-11-18 | 2026-11-18 | ai, global-index | 2026-12-06 | 2026-11-18.1 | 18 Nov leading-view note (skill 2026-11-18.1): Oslo re-run on Oil 18 Nov, market NIBOR, 18 Nov close and krone: Base 2.6 → 3.2% (kept, < 1 pp); trigger 1 → 1,551; World E / R 0.080 → 0.065 on the NIBOR window 4.72 (World not re-run); SPY options odds; watch: World de-rating. Values of 6 Nov otherwise |
 | ai | docs/ai-market-bbb.md | ai-market-bbb | market | 2026-11-18 | 2026-11-18 | amzn, dnbtek, equity, global-index, googl, kospi, msft, mu, nvda, skh, smsn, tsm | 2026-12-16 | 2026-11-18.1 | 18 Nov leading-view update (skill 2026-11-18.1): re-mark 18 Nov; turn calls H2 2028–30 EPS .60/.40/.35 → .50/.32/.28 and H1 2028–30 .91/.88/.87 → .85/.82/.81; all six 9.2% → 8.8%, memory 21.6% → 13.7% (k at 0.95× new Base), compute 7.5%. Watch: H1 2027 up, K1 2028, T, H3. 11 Nov: K1 Base 1,170 / 1,170 |
 | defense | docs/defense-market-bbb.md | defense-market-bbb | market | 2026-10-31 | 2026-10-07 | all | 2027-01-04 | 2026-10-10.1 | **HOLD (user): no update until the user lifts it.** Initial baseline |
 | hy-issuers | docs/hy-issuers.md | hy-market-bbb | book | 2026-11-11 | 2026-11-09 | hy-funds | 2026-11-18 | 2026-11-08.1 | 9 Nov short update on Fondsfinans' October report and 31 Oct holdings: Sigma 79.2 Distressed, Foxway 93.7, Magnolia 88.0, Heimstaden hybrid new (84.7), Varel out [A], Hofseth ~72 confirmed; named loss HH 2.15, HH+ 2.06, FF 0.34, FFK 0.09, SIS 1.10; Stamdata screen not re-run |
@@ -96,13 +96,13 @@ Kept by the `update-chain` skill; checked by
 | hy | rig | 2026-11-12 | main | Oil Service row (drillers) |
 | hy | supply | 2026-11-18 | main | Oil Service row (OSV, subsea) |
 | hy | shipping | 2026-11-13 | main | Shipping row (tankers) |
-| equity | oil | 2026-11-04 | main | Oslo and World energy |
-| equity | hy | 2026-11-05 | main | NIBOR path, Bear macro, HY return, reference E / R |
-| equity | ai | 2026-11-05 | loop | AI layer paths in World |
-| equity | msft | 2026-11-04 | loop | Company block in World |
-| equity | googl | 2026-11-04 | loop | Company block in World |
-| equity | nvda | 2026-11-05 | loop | Company block in World |
-| equity | amzn | 2026-11-04 | loop | Company block in World (from 6 Nov) |
+| equity | oil | 2026-11-18 | main | Oslo and World energy |
+| equity | hy | 2026-11-18 | main | NIBOR path, Bear macro, HY return, reference E / R |
+| equity | ai | 2026-11-18 | loop | AI layer paths in World |
+| equity | msft | 2026-11-07 | loop | Company block in World |
+| equity | googl | 2026-11-11 | loop | Company block in World |
+| equity | nvda | 2026-11-18 | loop | Company block in World |
+| equity | amzn | 2026-11-11 | loop | Company block in World (from 6 Nov) |
 | equity | mu | 2026-11-05 | loop | Company block in World (from 6 Nov) |
 | ai | equity | 2026-11-06 | main | Scenarios, NOK path, World |
 | ai | hy | 2026-11-11 | main | NIBOR, HY reference E / R |

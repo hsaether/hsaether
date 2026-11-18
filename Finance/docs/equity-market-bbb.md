@@ -1,8 +1,9 @@
-# Equity Market BBB — 6 November 2026
+# Equity Market BBB — 6 November 2026 (leading-view note 18 Nov)
 
-**Status: Update 2 (full update, Step 0–8); Equity Market BBB changed (World; triggers)** · skill
-`equity-market-bbb` revision 2026-10-24.1 · as of **6 Nov 2026** (prices: close Thu 5 Nov 2026) ·
-**stale after 6 Dec 2026** · compacted 13 Nov 2026 (no value changed)
+**Status: Update 2 (6 Nov) plus an 18 Nov leading-view note** (skill `equity-market-bbb` **2026-11-18.1**:
+Step 1c, turn calls, market-implied reads; Oslo re-run at the 18 Nov close with Oil BBB 18 Nov and the HY
+market NIBOR path: Base within the 1 pp minimum, kept; Oslo trigger 1 moved; World not re-run) · values as
+of **6 Nov 2026** (prices 5 Nov) unless marked 18 Nov · **stale after 6 Dec 2026**
 
 ## Interface (values other documents read)
 
@@ -17,8 +18,30 @@ never a probability. Market only: no named fund or single paper is analysed here
 | **Oslo (OSEBX)** | 0.8 / 0.8 / 0.8 | −27.8 / **2.2** / 6.6 | 12.0 / **1.7** / 6.3 | 9.5 / **3.4** / 5.7 | −4.2 / **2.6** / 6.3 | 8.0 / **8.9** / 9.2 |
 | **World (MSCI World, NOK unhedged)** | 0.3 / 0.3 / 0.3 | −18.3 / **7.7** / 15.8 | 8.6 / **6.2** / 10.9 | 10.3 / **6.5** / 10.2 | −0.8 / **6.6** / 11.9 | 7.1 / **8.2** / 8.7 |
 | World (USD, local) | 0.3 / 0.3 / 0.3 | −26.2 / **7.7** / 19.0 | 11.3 / **6.2** / 10.9 | 10.3 / **6.5** / 10.2 | −3.3 / **6.6** / 13.0 | 7.1 / **8.2** / 8.7 |
-| *Reference: Nordic HY (hy-market-bbb, 5 Nov)* | *1.1* | *−0.4 / 8.0 / 10.7* | *10.8 / 7.2 / 7.1* | *8.2 / 6.8 / 6.1* | *6.0 / 7.2 / 7.7* | *5.7 / 6.3 / 6.5* |
-| *Reference: 3M NIBOR (hy-market-bbb)* | *4.80 (ann.)* | *4.21 / 4.79 / 4.65* | *3.55 / 4.39 / 4.15* | *3.50 / 3.86 / 3.65* | *— / 4.37 / —* | *3.25 / 3.45 / 3.45* |
+| *Reference: Nordic HY (hy-market-bbb, 18 Nov)* | *1.1* | *−0.4 / 8.0 / 10.7* | *10.8 / 7.6 / 7.1* | *8.2 / 7.5 / 6.1* | *6.0 / 7.5 / 7.7* | *5.7 / 6.3 / 6.5* |
+| *Reference: 3M NIBOR (hy-market-bbb, 18 Nov market path)* | *4.80 (ann.)* | *4.21 / 4.79 / 4.65* | *3.55 / 4.78 / 4.15* | *3.50 / 4.58 / 3.65* | *— / 4.72 / —* | *3.25 / 3.45 / 3.45* |
+
+**Turn calls and market-implied reads (18 Nov 2026; skill 2026-11-18.1; probabilities are our own
+estimates, not the 25/50/25 convention). No call met the rule: Base kept.**
+
+| Path | Call vs Base | Prob. | Families | Base moved? | Reversal / confirmation |
+|---|---|---|---|---|---|
+| Oslo (re-run, 18 Nov inputs) | Window 2.6 → 3.2% at today's inputs (+0.6 pp, below the 1 pp minimum: kept). Up: krone weaker (USD/NOK 9.29 → 9.67, I-44 107.8 → 109.9) on energy earnings; bank margins on the market NIBOR path (block F 2028–29 .96 / .95 → .99 / .99 `[A]`). Down: Oil BBB Base 2027 84 → 80, 2028 77 → 73 | — | L6 (oil, HY) · L3 (NOK) | No (re-mark below the minimum) | Oslo full update with refreshed consensus |
+| World value multiple 2027–28 (Base 17.2 / 17.1) | Lower (de-rating from AI and credit stress) | 50% | L2 −1 (VIX 24.6 vs 17.7 50-day; VIX3M 24.3, VIX6M 24.8: flat curve) · L3 −1 (US HY OAS 343 bp, +83 from the August low; CCC 13.3%) · L5 −1 (AI hardware −25 to −41% from Oct highs; S&P 500 −6.6%) · L1 +1 (S&P 500 forward EPS +33.6% YTD; forward P/E 17.7, lowest since 2023) | No (watch: the earnings leg disagrees; World not re-run) | VIX > 30 for a week, or a CY27 consensus cut > 5% |
+| World AI block 2028–29 | Lower (AI BBB 18 Nov: H1 2028–30 −0.06, H2 deeper) | 60% | L6 (AI BBB turn calls) | Noted: ≈ −0.1 to −0.2% of World EPS (H1 and H2 names ≈ 3–4% of World earnings) `[A]`, below the minimum | World re-run with the company analyses |
+| NOK path | Spot flat (market-first: spot beats forwards; 1-year forward points ≈ +0.8% USD/NOK from the rate gap `[A]` = carry, not a forecast) | — | — | Base re-anchored at the 18 Nov spot for the Oslo run | — |
+
+| S&P 500 options (SPY, 18 Nov; smile fit, `futures.py`) | Jun-27 | **Dec-27** | Dec-28 |
+|---|---|---|---|
+| ATM vol / skew (vol at 0.8F − 1.2F) | 19.2% / +8.2 pp | **18.9% / +6.7 pp** | 19.1% / +5.5 pp |
+| Price change p10 / p25 / p50 / p75 / p90 | −17 / −7 / +3 / +12 / +20% | **−22 / −9 / +4 / +17 / +28%** | −30 / −11 / +8 / +26 / +42% |
+| Odds: ≤ −20% / ≤ −10% / ≤ 0% / ≥ +10% | 7 / 19 / 42 / 29% | **11 / 23 / 41 / 38%** | 17 / 26 / 39 / 46% |
+
+- **Reading:** the market gives our World Bear 2027 (USD price ≈ −27%) about 6–7% and our Base (price ≈ +6%) a
+  ~55th percentile; the Bull (price ≈ +17%) sits near the 75th. The options lean neither way beyond the usual
+  put premium; the stress is in vol (VIX 24.6) and in AI hardware, not in the index odds. Market odds include
+  the risk premium; 25/50/25 stays a convention. URTH options are too thin to read; Oslo has none.
+- **Scorecard:** three calls opened 18 Nov (World multiple watch, AI block noted, NOK flat); none closed.
 
 **Earnings, multiple and NOK paths** (EPS: annual; P/E and FX: year-end; the 2029 year-end P/E is the
 exit multiple)
@@ -46,14 +69,14 @@ exit multiple)
 | Level, 5 Nov 2026 | 2,080.59 `[F]`; MSCI Norway P/B ≈ 2.39, forward P/E ≈ 12.1 (30 Oct × OSEBX move since 30 Oct, −3.0%) | URTH 199.63 USD × 9.2944 = 1,855.4 NOK `[F]`; MSCI World forward P/E ≈ 16.95 (30 Oct 17.38 × URTH move since 30 Oct, −2.4%) |
 | Base window IRR | **2.6%** | **6.6%** |
 | P_k at k = 12% (hurdle level) / margin of safety | 1,617 / **−22.3% (fails)** | 1,601 / **−13.7% (fails)** |
-| E: Base excess over NIBOR after 0.20% fee | −1.92 pp | 2.08 pp |
+| E: Base excess over NIBOR after 0.20% fee (NIBOR window 4.72%, HY BBB 18 Nov; was 4.37%) | −2.27 pp (18 Nov re-run at today's inputs: −1.72) | 1.68 pp (was 2.08) |
 | R: Base 2027 − Bear 2027 | 29.9 pp | 25.9 pp |
-| **E / R** (HY market reference **0.254**) | **−0.06** | **0.080** |
+| **E / R** (HY market reference **0.254**) | **−0.08** (re-run −0.063) | **0.065** (was 0.080) |
 | Bear: capital kept (ΣD + V_T vs P) | −11.8% | −2.4% |
-| **Trigger 1:** E / R = 0.254 | **−28.3% → 1,492**; P/B ≈ 1.71, fwd P/E ≈ 8.7 | **−14.3% → 1,590** (URTH 171.1 USD); fwd P/E ≈ 14.5 |
+| **Trigger 1:** E / R = 0.254 | **−25.2% → 1,551** (18 Nov re-run; was 1,492); P/B ≈ 1.78, fwd P/E ≈ 9.0 | **−14.3% → 1,590** (URTH 171.1 USD); fwd P/E ≈ 14.5 |
 | Trigger 1, sensitivity: E / R = 0.216 (HY Bear read as a shock) | −24.5% → 1,570; P/B ≈ 1.80, fwd P/E ≈ 9.2 | −11.0% → 1,651 (177.6 USD); fwd P/E ≈ 15.1 |
 | **Trigger 2:** Base IRR = 12% (k) | −22.3% → 1,617; P/B ≈ 1.85, fwd P/E ≈ 9.4 | −13.7% → 1,601 (172.2 USD); fwd P/E ≈ 14.6 |
-| Pre-alert: Base IRR = HY market Base **7.2%** | −11.8% → 1,834; P/B ≈ 2.10, fwd P/E ≈ 10.7 | **−1.6% → 1,827** (196.5 USD); fwd P/E ≈ 16.7 |
+| Pre-alert: Base IRR = HY market Base **7.5%** (18 Nov; was 7.2%) | −11.1% → 1,844 (18 Nov re-run; within 3% of 1,834: kept 1,834) | **−1.6% → 1,827** (196.5 USD) at 7.2%; at 7.5% ≈ 194.5 USD `[A]` (World not re-run); fwd P/E ≈ 16.5 |
 | Trigger state | None crossed | None crossed; 1.6% above the pre-alert |
 | **Exit P/E** Bear / Base / Bull (World: mid-cycle P/E) | 10.5 / **11.5** / 12.5 | 15.0 / **17.0** / 18.5 |
 | **Exit P/B** Bear / Base / Bull | 1.48 / **1.74** / 1.95 | 2.47 / **3.17** / 3.74 |
@@ -68,7 +91,7 @@ exit multiple)
     market-share quotas) with a global recession in H1 2027 (HY Bear macro: NB cuts to 3.50% by
     Q4-27, mainland GDP −0.5% in 2027, Nordic spread YE-27 850 bp), and the AI BBB Bear inside
     World; NOK weaker. Earliest Q1 2027.
-  - **Base (50%):** oil Base (88 / 77 / 72; mid-cycle 70); Norges Bank on the MPR 3/26 path;
+  - **Base (50%):** oil Base (80 / 73 / 72 since 18 Nov; mid-cycle 70); NIBOR on the market path (HY BBB 18 Nov);
     mainland GDP ~1%; the AI earnings boom slows to trend; P/E drifts to its mid-cycle level; NOK
     spot flat.
   - **Bull (25%):** oil Base; soft landing (first NB cut Q3-27); earnings meet consensus; Oslo P/E
@@ -646,15 +669,13 @@ projection); the new US Congress (3 Jan 2027).
 
 ## Change log
 
-- **13 Nov 2026 — compacted to the lean-document rules (1,069 → 775 lines, Interface section
-  first); no value changed.**
+- **18 Nov 2026 — leading-view note (skill 2026-11-18.1, method change), kept unchanged:** Oslo re-run with Oil BBB 18 Nov,
+  the HY market NIBOR path and the 18 Nov close and krone: Base window 2.6 → 3.2% (below the 1 pp minimum, kept);
+  trigger 1 1,492 → 1,551; World not re-run (AI effect ≈ −0.1 to −0.2% of EPS, noted); SPY options odds added.
 - **6 Nov 2026 — Update 2 (full update, Step 0–8; skill 2026-10-24.1; 5 Nov close).** World Base
   window 5.2 → 6.6% (mostly price), Oslo 2.5 → 2.6% (re-mark); triggers moved with the HY
   reference 0.196 → 0.254; Oslo payouts re-set on post-Q3 EPS; Amazon and Micron became company
   blocks. Scenarios, P/E and rest paths and NOK relative moves kept.
-- **24 Oct 2026 — source of the HY reference** (skill 2026-10-24.1): read from
-  `docs/hy-market-bbb.md` instead of the HY fund analysis; no number changed.
-
 ## Appendix: raw values and sources
 
 ### Prints (Yahoo, close 5 Nov 2026 unless stated) `[F]`
