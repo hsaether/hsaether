@@ -5,8 +5,16 @@ description: AI Market BBB — the baseline for the AI value chain over the IAF 
 
 # AI Market BBB
 
-**Revision:** 2026-11-11.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-18.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/ai-market-bbb/` in the Finance folder.
+
+Change note 2026-11-18.1 (user, 18 Nov 2026: "forecast changes to market conditions BEFORE they
+have solid proof"; same method as supply-market-bbb 2026-11-18.1): new **Leading view** section
+(families L1–L6 for AI, turn calls with a stated probability and a dated reversal signpost,
+scorecard), **Step 1c**, Turn calls in the Interface, two triggers and a check. Base is a forecast
+set on the turn call; leading indicators can move it before earnings confirm. The old
+"market-mood" rule is replaced: a sell-off or rally is family L5 and never moves a path alone,
+but with a second family it can. The minimum change governs size, not timing. Method change.
 
 Change note 2026-11-11.2: **K1 capex cycle** section and **K1 return gauge** added (Step 1b,
 Definitions, Data discipline, Output, Checks; `references/k1ret.py`), from
@@ -87,15 +95,17 @@ domestic AI chain except as an export and competition row.
 - **Returns:** basket IRR in USD and in NOK (NOK path from [[equity-market-bbb]]), before fund
   fees and tax. EPS paths are relative to **CY27 consensus = 1.00**.
 - **Point value + range** for every scenario figure on core rows.
-- **Base = the decision case.** Bear and Bull are stress tests tied to named catalysts.
-  **25/50/25** is a labelled convention, never a probability.
+- **Base = the decision case, and it is a forecast** set on the turn calls (Leading view), not on
+  the last report. Bear and Bull are stress tests tied to named catalysts. **25/50/25** is a
+  labelled convention, never a probability; turn-call probabilities are our own stated estimates.
 - **Consistency with [[equity-market-bbb]]:** the AI Bear sits inside the equity Bear (recession
   and oil Bear) and adds the AI-specific mechanism; the AI Base sits inside the equity Base ("AI
   earnings boom slows to trend"); the AI Bull inside the equity Bull. The NOK path is never set
   here.
 - **Minimum change (convention):** a point value moves only if the evidence moves it by at least
   5% (capex level), 5 pp (a layer growth rate), 10% (lab revenue level), 0.05 (EPS path point) or
-  1 turn (exit P/E). Smaller moves are noted, not applied.
+  1 turn (exit P/E). Smaller moves are noted, not applied. The threshold governs the **size** of
+  a move, not its **timing**: a move called on leading indicators is applied now if it clears it.
 - **Staleness:** stale after **45 days**, after a hyperscaler capex guidance change of more than
   10% (quarterly reports: late Jan, late Apr, late Jul, late Oct), after NVIDIA's quarterly report,
   or after the equity baseline changes its scenarios. IAF treats a stale baseline as provisional.
@@ -251,10 +261,9 @@ Quirks (2026-10-12 run):
   in one and early October's 151 bp "highest since 2009" in another). Use one series per name
   (CNBC's for Oracle and CoreWeave) and say which. Meta's record CDS (114.79 bp) is undated in the
   page that carries it; date it from the Reuters story. Never mix a CDS level with a bond yield.
-- **Market-mood updates:** a sharp sell-off is a reason to re-run the baskets (prices,
-  `hist.py` table) and test the paths, not a reason to move them. Paths move only on evidence
-  that meets the minimum-change rule (earnings, guidance, prices of memory or compute, a
-  financing event).
+- **Market moves (18 Nov rule):** a sharp sell-off or rally is a reason to re-run the baskets
+  (prices, `hist.py` table) and Step 1c. It is family L5: alone it never moves a path; together
+  with a second, independent family (Leading view) it can, before earnings or guidance confirm.
 
 ## Data discipline
 
@@ -296,6 +305,34 @@ Quirks (2026-10-12 run):
 - Supply constraints cushion a Bear in the first year (projects stretch rather than stop) and cap
   volume in a Bull.
 
+## Leading view (turn calls)
+
+Reported capex, revenue and EPS are the last things to move; by the time a quarter proves a turn,
+the baskets have priced it. Every run forms a forward view from indicators that lead the rows, and
+Base follows it.
+
+| Family | Examples | Typical lead |
+|---|---|---|
+| L1 Orders and contracts | K4 backlog and RPO q/q; supplier commitments and prepayments (NVIDIA supply commitments, memory LTAs and deposits); lab and sovereign compute deals; TSMC monthly revenue; equipment orders | 6–24 months on H and K rows |
+| L2 Prices | GPU rental indices and their term curve; used-GPU resale; DRAM/NAND/HBM contract and spot prices and their momentum; price per token; cloud price changes | 1–6 months |
+| L3 Financing | Lab rounds and IPO pricing; neocloud and lab-adjacent debt yields and spreads; vendor-financing flow and calls; Oracle and hyperscaler credit; capex ÷ OCF and the debt share | 3–12 months |
+| L4 Capital and insider behaviour | Insider selling or buying; buybacks against capex; capex-guidance language ("increase significantly" vs "discipline"); supplier capex step-ups (future supply) | 3–12 months |
+| L5 Market pricing | Layer baskets vs consensus revisions; price-implied multipliers (`impl.py`); breadth (`hist.py`); foreign flows in Kospi and Taiwan; ADR premiums | the market's own forecast |
+| L6 Adoption and usage | Token volumes; paid seats; BTOS; enterprise surveys; agent usage; lab run-rate disclosures | 3–12 months on E and T rows |
+
+**Turn call per core row** (K1, H1, H2, H3, H4, E1, E2, T): direction vs Base, size, the year it
+shows, a **stated probability**, the families behind it, and a **dated reversal signpost**.
+
+**Rule to move Base:** two or more independent families point the same way (L5 alone never moves
+it) and the call's probability is ≥ 60%, and the move clears the minimum change. One family, or
+50–60%, is a **watch call**: logged, Base unchanged. A call against L5 needs a named reason the
+market is missing. The K1 cycle judgement (Step 1b) and the Memory cycle judgement (Step 2b) are
+turn calls for K1 and H2 and follow this rule.
+
+**Scorecard:** every call gets a dated line; each run marks the open ones hit / miss / open
+against the realised series and keeps the hit rate. Two misses in a row on one family halve its
+weight in the next call (state it).
+
 ## Procedure
 
 Two modes: **Initiate** (no `docs/ai-market-bbb.md`) and **Update** ("update AI Market BBB",
@@ -304,6 +341,11 @@ if the evidence is not strong enough, say **AI Market BBB kept unchanged**.
 
 **Step 0 — Setup.** State this skill's revision and the revisions/dates of the upstream baselines
 (equity, HY). Read the previous baseline and record its values and open checkpoints.
+
+**Step 1c — Leading indicators and turn calls (every run, before Steps 1–4 set paths).** Read
+families L1–L6 for every core row, score them, set or update each turn call, mark the open
+scorecard calls, and state per layer whether the price (L5, `impl.py`) sits above or below Base.
+Steps 1–4 then test the calls; Step 6 applies those that meet the rule.
 
 **Step 1 — Money in (K1–K4).** Latest quarter capex per hyperscaler, full-year guidance, next-year
 signals; consensus for the next two years (state source and date); capex ÷ OCF, FCF, debt and
@@ -413,6 +455,9 @@ a lead for company analyses, not a decision.
 - Oracle or a neocloud downgraded, a failed financing, or a contract cancellation
 - A model release that changes compute per task materially (efficiency shock)
 - A Bear or Bull signpost crossed; the equity baseline changes scenarios
+- A turn call's reversal signpost is hit, or a watch call gains its second family
+- A layer basket moves ≥ 15% against World within a month, or a large insider or holder move in a
+  basket name (run Step 1c at least)
 - The baseline is older than 45 days
 
 ## Output: `docs/ai-market-bbb.md`
@@ -422,6 +467,7 @@ a lead for company analyses, not a decision.
 
 ## Metadata
 ## Conclusion
+## Turn calls (in the Interface block): row, call vs Base, probability, families, Base moved?, price above/below Base, reversal signpost (date); scorecard
 ## Interface — money in (USD bn): K1 capex, K3 financing, K4 backlog
 ## K1 capex cycle (five lines; where; past cycles; return gauge; judgement; price-implied; dated signposts)
 ## Interface — hardware (USD bn or index 2026 = 100)
@@ -469,4 +515,6 @@ a lead for company analyses, not a decision.
 - K1 capex cycle updated: indicator table dated, the return gauge re-run when K1 or E2 moved, a
   judgement for the years after the contracted one, signposts with dates.
 - Bear and Bull tied to named catalysts with signposts; AI Bear consistent with the equity Bear.
+- Every core row has a turn call (probability, families, dated reversal signpost); Base follows
+  every call that meets the rule; the scorecard is marked.
 - Change log complete or explicit "kept unchanged". File written, read back, tables render.
