@@ -55,7 +55,7 @@ Kept by the `update-chain` skill; checked by
 | odl | docs/odl-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | none | 2026-12-13 | 2026-11-12.1 | v2.1 13 Nov (ex-dividend re-mark, compacted 721 → 450 lines): Base 8.1% → 9.0%, P_k $9.97 (NOK 95.5) vs $10.74 (NOK 102.80), margin −7%, fails; Deepsea Bergen contract signed 10 Nov (already firm in the model) |
 | scatec | docs/scatec-analysis.md | iaf-valuation | company | 2026-10-30 | 2026-10-30 | all | 2027-02-28 | 2026-10-29.1 | v2 30 Oct after Q3: clears (Base IRR 16.4%, P_k NOK 95.5 vs 84.65, +13%); Bear −17.9%, Bear corp. NIBD NOK 8.5bn by 2029; Q4 report 29 Jan 2027 |
 | capt | docs/capt-analysis.md | iaf-valuation | company | 2026-11-08 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 9 Nov): only on request. Position sold. 8 Nov news note: Amor 15-month TC (~$160–180k/day, $73.1–82.2m), ~+$14m in Base (+NOK 1/share), not modelled, verdict unchanged (fails); model on the 24 Oct inputs |
-| hafnia | docs/hafnia-analysis.md | iaf-valuation | company | 2026-11-05 | 2026-10-24 | all | 2026-11-18 | 2026-11-01.1 | v6 exit check on the v5 model of 17 Oct |
+| hafnia | docs/hafnia-analysis.md | iaf-valuation | company | 2026-11-18 | 2026-11-18 | none | 2026-12-04 | 2026-11-12.1 | v6 exit check on the v5 model of 17 Oct |
 | kog | docs/kongsberg-analysis.md | iaf-valuation | company | 2026-10-29 | 2026-10-29 | all | 2026-11-28 | 2026-10-18.2 | **HOLD (user): no update until the user lifts it.** Version 2 (29 Oct, Q3 report, method 2026-10-18.2): Base −19.9% → −16.2%, fails; record backlog NOK 174bn |
 | rhm | docs/rheinmetall-analysis.md | iaf-valuation | company | 2026-10-07 | 2026-10-07 | all | 2026-11-06 | 2026-10-07.1 | **HOLD (user): no update until the user lifts it.** |
 | amzn | docs/amzn-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-11-11 | ai, dnbtek, equity | 2026-11-20 | 2026-11-10.1 | Version 2 (30 Oct, Q3 report): Base 6.8% → 9.2%, P_k $221.5 vs $240.35, fails; OpenAI $50bn preferred added (missing in v1) |
@@ -138,9 +138,9 @@ Kept by the `update-chain` skill; checked by
 | capt | oil | 2026-10-24 | main | Background |
 | capt | equity | 2026-10-18 | main | Exit cross-check, NOK path |
 | capt | hy | 2026-10-24 | main | NIBOR, reference E / R (via equity) |
-| hafnia | shipping | 2026-10-24 | main | LR2, LR1, MR rows, stub, values |
-| hafnia | oil | 2026-11-04 | main | Background |
-| hafnia | equity | 2026-10-18 | main | Exit cross-check, NOK path |
+| hafnia | shipping | 2026-11-13 | main | LR2, LR1, MR rows, stub, values |
+| hafnia | oil | 2026-11-11 | main | Background |
+| hafnia | equity | 2026-11-06 | main | Exit cross-check, NOK path |
 | kog | defense | 2026-10-07 | main | Segment order and revenue paths |
 | kog | hy | 2026-10-24 | main | NIBOR on cash |
 | kog | equity | 2026-10-18 | main | Exit references (Oslo exit P/E, P/B, mid-cycle return) |
@@ -363,8 +363,8 @@ it to `open`.
 | 2026-11-07 | approx | DNB Teknologi 5 Nov NAV published (first NAV with the 5 Nov sell-off; estimate ≈ 7,145): check against the estimate | dnbtek | watch |
 | 2026-11-15 | approx | DNB AM October monthly report for DNB Teknologi with 31 Oct holdings | dnbtek | done |
 | 2026-11-19 | yes | SK hynix buyback window ends (24.07m shares for cancellation); finished early on 21 Oct (23.69m shares, KRW 40.0tn; Q3 report) | skh | done |
-| 2026-11-18 | yes | Hafnia Q3 report | hafnia | open |
-| 2026-11-16 | yes | TORM Q3 dividend USD 1.35 goes ex (Copenhagen 16 Nov, New York 17 Nov; paid 2 Dec) | hafnia | open |
+| 2026-11-18 | yes | Hafnia Q3 report | hafnia | done |
+| 2026-11-16 | yes | TORM Q3 dividend USD 1.35 goes ex (Copenhagen 16 Nov, New York 17 Nov; paid 2 Dec) | hafnia | done |
 | 2026-11-17 | yes | Petrobras PSV 4500 (5 lots) and PSV 3000 (2 lots) tender proposals open: 4-year firm from Jun–Oct 2027 (opened 17 Nov; ranking not public by 18 Nov 08:00, read at the supply run; PSV 3000 bareboat tender bids due 25 Nov) | supply, dof | open |
 | 2026-11-18 | approx | SED Q3 report (MFN/Inderes calendar 18 Nov 06:00, not out by 08:00 18 Nov; TipRanks lists 27 Nov `[E]`) | sed, rig | open |
 | 2026-11-12 | yes | SeaBird (SED) Fulmar Explorer OBN source contract, West Africa, ~6 months from Dec 2026 (supports the SeaBird Base 2027 contribution; read at the SED Q3 run) | sed | watch |
@@ -450,7 +450,7 @@ it to `open`.
 | 2027-06-30 | approx | Scatec repays SCATC05 (NOK 1,453m, due Q1 2028) in H1 2027 per the Q3 presentation | scatec, hy-funds | open |
 | 2027-06-30 | approx | UK 2027 Spending Review (date not set): funds or not the path to 3% / 3.5% of GDP | defense | open |
 | 2027-07-01 | approx | SED T-16 Phase 7 (CPOC, 30 months firm) starts (early Q3 2027) | sed | open |
-| 2026-11-18 | yes | Hafnia Q3 deck: product-tanker orderbook by year (Shipping BBB MR2 orderbook-trigger retest) | shipping | watch |
+| 2026-11-18 | yes | Hafnia Q3 deck: product-tanker orderbook by year (Shipping BBB MR2 orderbook-trigger retest). Outcome (deck p.21, Vortexa, read from chart): MR 6.4 / 5.1 / 5.4 / 0.8m dwt 2026–29 (~128 / 102 / 108 / 16 MR2), MR2 2028+ ~124 vs the baseline's ~165 `[A]` (different basis; retest with Frontline's count at the shipping run) | shipping | done |
 | 2026-11-27 | approx | Frontline Q3 report (late Nov; date not confirmed): orderbook count by segment, company TCE | shipping | watch |
 | 2026-11-18 | yes | Samsung Electronics Investor Forum 2026 (Singapore, Morgan Stanley conference), memory session: 2027 HBM and LTA pricing comments | smsn, ai, kospi | watch |
 | 2026-11-25 | approx | NVIDIA Q3 FY27 10-Q (late Nov): guarantee calls, capacity buy-backs exercised, new guarantees and equity commitments in Q3 (vendor-financing flow and funded-customer credit signposts; cascade inventory); also the impaired private stake ($1.8bn), $74bn uncommenced leases, $9.5bn power and systems support, Caprez (related party), buy-back obligations 36 → 32 (nvda v1.7) | ai, nvda, skh, smsn | watch |
@@ -465,6 +465,8 @@ it to `open`.
 | 2027-01-10 | yes | USTR Section 301 port-fee suspension ends (23:59 ET 9 Jan) and China's special-port-fee suspension ends (10 Jan): Shipping BBB Bull signpost "fees return and split the fleet" | shipping | open |
 | 2027-02-24 | approx | NVIDIA Q4 FY27 report (date not announced; Q4 guide $130bn ±3%, GM 71–72%) | nvda, ai, skh, smsn, kospi, tsm, dnbtek, global-index | open |
 | 2027-06-30 | approx | NVIDIA–Hugging Face closing ($12.93bn, H1 2027; DOJ review) | nvda | watch |
+| 2026-11-25 | yes | Hafnia Q3 dividend form: TORM-share special dividend (0.0380 TORM per share, ~$1.28) or, without third-party cooperation by 25 Nov, 90% of Q3 profit in cash; record and payment dates set then (v8 shows the verdict does not depend on the form) | hafnia | watch |
+| 2027-02-26 | approx | Hafnia Q4 2026 report (date not announced) | hafnia | open |
 
 ## Change log
 
