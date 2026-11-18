@@ -1,10 +1,10 @@
-# Nordic HY Market BBB — 5 November 2026 (notes 11 and 18 Nov: kept unchanged)
+# Nordic HY Market BBB — 18 November 2026 (market NIBOR path; credit values of 5 Nov)
 
-**Status:** Final · values set in the update of **5 Nov 2026** (spreads, expected returns and the market reference re-marked), checked **11 Nov** and **18 Nov 2026** (first Leading view, Step 4b: no call met the rule) and kept unchanged · as of **18 Nov 2026** · skill `hy-market-bbb` revision **2026-11-18.1** · **stale after 5 Dec 2026** (earlier on the triggers below) · compacted 13 Nov 2026 (no value changed).
+**Status:** Final · values set in the update of **5 Nov 2026** (spreads, expected returns and the market reference re-marked), checked 11 Nov; **18 Nov 2026: Leading view (Step 4b, no credit call met the rule) and the market NIBOR path (skill 2026-11-18.2): Base NIBOR 2028–29 and Base returns changed** · as of **18 Nov 2026** · skill `hy-market-bbb` revision **2026-11-18.2** · **stale after 5 Dec 2026** (earlier on the triggers below) · compacted 13 Nov 2026 (no value changed).
 
 ## Interface (values other documents read)
 
-As of **18 Nov 2026** (values of 5 Nov, kept on 11 and 18 Nov). Cells Bear / **Base** / Bull; one value = Base or common to all scenarios. Window = stub Q4-26 + 2027–2029 (T = 3.24 years from 1 Oct 2026). Returns in NOK, hedged, before fees. 25/50/25 is a labelled convention, never a probability. Ranges and method: "Paths: basis and ranges". Tags: `[F]` fact · `[E]` external forecast or secondary · `[A]` own assumption · `[?]` unknown.
+As of **18 Nov 2026** (NIBOR and policy Base 2028–29 and Base returns set 18 Nov on the market path; credit values of 5 Nov). Cells Bear / **Base** / Bull; one value = Base or common to all scenarios. Window = stub Q4-26 + 2027–2029 (T = 3.24 years from 1 Oct 2026). Returns in NOK, hedged, before fees. 25/50/25 is a labelled convention, never a probability. Ranges and method: "Paths: basis and ranges". Tags: `[F]` fact · `[E]` external forecast or secondary · `[A]` own assumption · `[?]` unknown.
 
 **Turn calls (18 Nov 2026; Leading view, Step 4b; probabilities are our own estimates, not the 25/50/25 convention). No call met the rule (≥ 2 families, ≥ 60%): Base kept.**
 
@@ -13,24 +13,25 @@ As of **18 Nov 2026** (values of 5 Nov, kept on 11 and 18 Nov). Cells Bear / **B
 | Nordic spread 2027 (Base 490) | Wider, ~+50 bp | 50% | L2 −1 (CCC yield 12.97% → 13.29%, 4 → 17 Nov; 10.1% in mid-Aug; US HY OAS 332 → 343 bp, Euro HY 345 → 337 bp since 4 Nov: flat) · L1 0 (October new-issue spreads 589 bp vs 582 YTD, volume EUR 1.9bn vs 2.5bn; HedgeNordic 12 Nov: new issues "mid-to-high 500s") · L6 0 | No (watch) | ~At Base | November anchor (early Dec): ≥ 540 bp confirms (and tests the 550 Bear signpost); ≤ 460 reverses |
 | Energy rows (E&P, Oil Service) 2027–28 | Flat (no energy call) | 60% | L6 0 (Oil BBB 18 Nov futures update: Base 2027 84 → 80, 2028 77 → 73 to the strip; E&P cash flow still far above breakeven, below the 2.0 pp sector minimum; the late-October fall was already in the 11 Nov oil Base) · L5 0 | No | — | An oil turn call (OPEC+ 29 Nov quotas; renewed strikes) |
 | FTD market 2027 (Base 3.0%) | Higher, toward 4% | 50% | L4 −1 (distress notices ~8 issuers in October, rising; November not scanned) · L2 −1 (CCC stress) — magnitude short of the 1.0 pp minimum on current evidence | No (watch) | — | Stamdata November scan (with the December anchor): > 10 notices a month for 3 months is the Bear signpost |
-| NIBOR path 2028–29 | Higher for longer (toward the market path) | 55% | Step 3b test met (market path +0.33 / +0.69 pp above Base, 10 Nov) · L3 +1 (krone weaker: USD/NOK 9.55 → 9.70, 13 → 18 Nov) · CPI-ATE 2.7% (Oct) on path | No (the MPR 4/26 on 17 Dec decides within four weeks; the default is Norges Bank's path) | Market above Base | MPR 4/26 (17 Dec): path ≥ 0.25 pp above Base in a window year moves Base |
+| NIBOR path (Base = market path, 18 Nov rule) | Market path applied: 2028 4.39 → 4.78, 2029 3.86 → 4.58; 2027 gap +0.18 below the 25 bp minimum (kept 4.79) | — | Market: NOK swaps vs 6M NIBOR 18 Nov (1Y 5.08, 2Y 4.99, 3Y 4.88, 4Y 4.77) and the government curve (17 Nov) agree within 0.1 pp · no turn call holds Base away (CPI-ATE 2.7% on path; krone weaker; Norges Bank's Sept path is 0.4–0.7 pp lower in 2028–29) | **Yes** | Market = Base | MPR 4/26 (17 Dec): read against the market path; a turn call needs two families |
 | Swedish real estate (secondary) | Weaker | 50% | L3 −1 (Riksbank 2.00% from 11 Nov, more hikes signalled) · L5 0 | No (watch) | — | Riksbank (Dec) and Q4 property values |
 
-- **Scorecard:** five calls opened 18 Nov (four watch, one flat); none closed; hit rate n/a.
+- **Scorecard:** five calls opened 18 Nov (three credit watch calls, energy flat, Swedish RE watch; the NIBOR call is replaced by the market path); none closed; hit rate n/a.
 - **For fund analyses:** no input moved; the E / R reference 0.254 stands. The watch calls lean to the Bear side (spread, FTD); the fund verdicts should read "Base kept, risks leaning Bear" until the December anchor.
 
 **Rates and macro** (annual averages, %)
 
 | Series Bear / Base / Bull | Stub Q4-26 | 2027 | 2028 | 2029 | Mid-cycle |
 |---|---|---|---|---|---|
-| Policy rate, annual avg (%) | 4.51 / 4.51 / 4.51 | 3.96 / **4.55** / 4.42 | 3.25 / **4.20** / 3.90 | 3.25 / **3.65** / 3.40 | 3.0 / 3.2 / 3.2 |
-| 3M NIBOR, annual avg (%) | 4.80 / 4.80 / 4.80 | 4.21 / **4.79** / 4.65 | 3.55 / **4.39** / 4.15 | 3.50 / **3.86** / 3.65 | 3.25 / 3.45 / 3.45 |
+| Policy rate, annual avg (%) | 4.51 / 4.51 / 4.51 | 3.96 / **4.55** / 4.42 | 3.25 / **4.53** / 3.90 | 3.25 / **4.33** / 3.40 | 3.0 / 3.2 / 3.2 |
+| 3M NIBOR, annual avg (%) | 4.80 / 4.80 / 4.80 | 4.21 / **4.79** / 4.65 | 3.55 / **4.78** / 4.15 | 3.50 / **4.58** / 3.65 | 3.25 / 3.45 / 3.45 |
 | Norway mainland GDP growth (%) | 0.9 / 0.9 / 0.9 (2026) | −0.5 / **1.0** / 1.5 | 0.5 / **1.0** / 1.8 | 1.5 / **1.3** / 1.8 | 1.3 |
 | Sweden GDP growth (%) | 2.8 / 2.8 / 2.8 (2026) | 0.0 / **2.4** / 2.8 | 1.0 / **1.3** / 2.0 | 2.0 / **1.6** / 1.8 | 1.5 |
 | Norway unemployment, registered NAV (%) | 2.1 / 2.1 / 2.1 | 2.6 / **2.3** / 2.1 | 3.0 / **2.4** / 2.2 | 2.9 / **2.4** / 2.3 | 2.4 |
 | Sweden unemployment, LFS (%) | 8.6 / 8.6 / 8.6 | 9.2 / **8.1** / 7.9 | 9.4 / **7.6** / 7.4 | 8.9 / **7.4** / 7.2 | 7.5 |
 | Fiscal (Base only): SOBU % of mainland trend GDP / withdrawal % of GPFG / budget indicator (pp) | 12.7 / 2.7 / +1.1 (2026) | 12.6 / 2.7 / 0.0 | `[?]` (next budget Oct 2027) | `[?]` | — |
-| Market path check: 1-year forwards from the zero curve + NIBOR–T-bill spread (10 Nov) | — | ~4.96 | ~4.72 | ~4.55 | — |
+| **Market NIBOR path, 18 Nov (= Base where the gap ≥ 25 bp)**: NOK swaps vs 6M NIBOR less 0.10 basis `[A]` / government forwards + 0.28 `[A]` | — | 4.97 / 4.97 | 4.78 / 4.77 | 4.54 / 4.63 | — |
+| Norges Bank MPR 3/26 path (reference; MPR 4/26 on 17 Dec) | — | 4.79 | 4.39 | 3.86 | — |
 
 **Credit and return** (FTD, LGD and EL in % a year; returns in %)
 
@@ -46,21 +47,21 @@ As of **18 Nov 2026** (values of 5 Nov, kept on 11 and 18 Nov). Cells Bear / **B
 | FTD Other non-energy (secondary, %) | — | 6 / **3.5** / 2.8 | 8 / **4.0** / 2.5 | 6 / **3.75** / 2.5 | — | — / 4.5 / — |
 | LGD Nordic HY (%) | 55 / 55 / 55 | 65 / **55** / 50 | 65 / **55** / 50 | 65 / **55** / 50 | — | 60 / 55 / 50 |
 | Expected loss Nordic HY (% p.a.) | 1.65 / 1.65 / 1.65 | 3.64 / **1.65** / 1.15 | 5.59 / **1.93** / 1.10 | 4.29 / **1.93** / 1.15 | — | 3.3 / 2.2 / 1.5 |
-| Nordic HY total return | 1.1 / 1.1 / 1.1 | −0.4 / **8.0** / 10.7 | 10.8 / **7.2** / 7.1 | 8.2 / **6.8** / 6.1 | 6.0 / **7.2** / 7.7 | 5.7 / 6.3 / 6.5 |
+| Nordic HY total return | 1.1 / 1.1 / 1.1 | −0.4 / **8.0** / 10.7 | 10.8 / **7.6** / 7.1 | 8.2 / **7.5** / 6.1 | 6.0 / **7.5** / 7.7 | 5.7 / 6.3 / 6.5 |
 | Nordic HY excess return over NIBOR | −0.1 / −0.1 / −0.1 | −4.6 / **3.25** / 6.05 | 7.2 / **2.84** / 2.95 | 4.7 / **2.9** / 2.45 | 2.1 / **2.75** / 3.5 | 2.5 / 2.8 / 3.0 |
-| Norway HY total return | 1.2 / 1.2 / 1.2 | −1.4 / **8.4** / 11.1 | 11.6 / **7.6** / 7.5 | 8.7 / **7.1** / 6.4 | 6.1 / **7.5** / 8.1 | 5.8 / 6.5 / 6.7 |
+| Norway HY total return | 1.2 / 1.2 / 1.2 | −1.4 / **8.4** / 11.1 | 11.6 / **8.0** / 7.5 | 8.7 / **7.8** / 6.4 | 6.1 / **7.8** / 8.1 | 5.8 / 6.5 / 6.7 |
 
 **References, scenarios, triggers and signposts**
 
 | Item | Value |
 |---|---|
 | HY market reference E / R (fund rule) | **0.254** (from 5 Nov) = E **2.15** pp ÷ R **8.47** pp. E = Base window excess 2.75 pp less the 0.6% fee convention; R = Base 2027 (8.04) − Bear 2027 (−0.43). Sensitivity with Bear read as a shock (+420 bp from the start, YE-27 910): R 9.97, E / R 0.216 |
-| NIBOR window for E / R | Base **4.38%**: the Base 3M NIBOR path (4.80 stub, 4.79 / 4.39 / 3.86) averaged over the 3.24-year window, stub weighted by its length `[A]`. Derived from the path, not a separate forecast. Base window return 7.2% = NIBOR + 2.75 pp |
+| NIBOR window for E / R | Base **4.72%** (was 4.38 until 18 Nov): the Base 3M NIBOR path (4.80 stub, 4.79 / 4.78 / 4.58) averaged over the 3.24-year window, stub weighted by its length `[A]`. Base window return 7.5% = NIBOR + 2.75 pp. **E / R 0.254 is unchanged** (excess returns do not depend on the NIBOR path in the return model) |
 | Bear macro | Global recession from H1 2027 on top of oil Bear (Brent 65 / 60 / 60): Norway mainland −0.5% (2027), NAV unemployment 3.0% (2028); Sweden GDP 0.0% (2027), unemployment 9.4% (2028); Norges Bank cuts from Q2-27 to 3.50% by Q4-27, 3.25% in 2028–29; new-issue window shut for 2–3 quarters |
 | Scenarios (25 / 50 / 25) | **Bear:** oil Bear (durable Iran–USA deal + OPEC+ market-share fight) + recession + global HY repricing; spreads YE-27 850 bp (mid-2027 peak ~900), FTD peak 8.6% (2028). **Base:** Norges Bank MPR 3/26 path; mainland GDP ~1%; oil Base (Brent 84 / 77 / 72); spreads near the 500 bp normal; FTD 3.0–3.5%. **Bull:** soft landing; first Norges Bank cut Q3-27; oil Base; spreads ~390–410 bp; FTD ~2.2% |
 | Bear refinancing (IAF; DOF, Scatec) | Add ~300 bp to the issuer's spread and assume no market access for 2–3 quarters in 2027. Nordic Bear spread year-end 850 / 650 / 520 bp (2027–29); Norway ~35 bp wider |
 | Norway HY | Spread ≈ Nordic + 35 bp (~525 bp now `[A]`). FTD on Norwegian sector weights: Base 2.9 / 3.3 / 3.35, Bear 5.5 / 9.0 / 7.0 |
-| Norges Bank | 4.50%, held 5 Nov ("elevated for a time", ready to hike); next decision and MPR 4/26 on 17 Dec 2026. Market path +0.17 / +0.33 / +0.69 pp above Base (10 Nov) |
+| Norges Bank | 4.50%, held 5 Nov ("elevated for a time", ready to hike); next decision and MPR 4/26 on 17 Dec 2026. Since 18 Nov Base is the market path; the MPR 3/26 path is 0.0 / 0.4 / 0.7 pp below it (2027–29) |
 | Riksbank (Swedish issuers) | 2.00% from 11 Nov 2026; further hikes likely over the coming year, ~2.4% by Q3-27 on the Riksbank's own path `[E]` (a reading, not a STIBOR path set here). Sweden HY (secondary, low confidence): Base FTD 3.0%, NOK-hedged return ≈ 7.5 / 7.1 / 6.6% |
 | New-issue spreads (IAF) | 2025 averages: E&P ~620 bp, Oil Service ~520 bp (Norway), Real Estate ~430 bp. The secondary market is ~60 bp wider than at end-September |
 | Status scale (watchlist; skill Definitions) | Watch · Stressed · Distressed · Vote or standstill · In restructuring. Year-1 status values used: Watch 5% · Stressed 10% · Distressed 20% · Vote or standstill 50% |
@@ -111,11 +112,11 @@ As of **18 Nov 2026** (values of 5 Nov, kept on 11 and 18 Nov). Cells Bear / **B
 
 ## Conclusion
 
-- **HY Market BBB kept unchanged on 11 Nov** (values of the 5 Nov update, which re-marked spreads,
-  returns and the market reference E / R and kept the NIBOR path, GDP and default rates).
-- **Base:** Nordic HY earns about **7.2% a year in NOK (2.75 pp over NIBOR) through 2029** (8.0 /
-  7.2 / 6.8% in 2027–29). The return falls as NIBOR follows Norges Bank's path down (4.8% → 3.9%),
-  while spreads hold near the 5.0% normal. First-time defaults rise from the 2025 low (2.6%) to
+- **HY Market BBB changed on 18 Nov: Base NIBOR 2028–29 moved to the market path** (4.39 / 3.86 → 4.78 / 4.58;
+  skill 2026-11-18.2), lifting Base returns; credit values (spreads, defaults, LGD, E / R) are those of 5 Nov.
+- **Base:** Nordic HY earns about **7.5% a year in NOK (2.75 pp over NIBOR) through 2029** (8.0 /
+  7.6 / 7.5% in 2027–29). NIBOR stays high on the market path (4.8% → 4.6%; Norges Bank's September
+  path fell to 3.9%), while spreads hold near the 5.0% normal. First-time defaults rise from the 2025 low (2.6%) to
   **3.0–3.5%**: energy issuers stay healthy on the upstream baselines; the risk sits in
   sponsor-backed continental and consumer issuers and Swedish finance and real estate.
 - **Rates:** Norges Bank held 4.50% on 5 Nov (a hawkish hold) with no material change in the
@@ -144,7 +145,9 @@ As of **18 Nov 2026** (values of 5 Nov, kept on 11 and 18 Nov). Cells Bear / **B
 
 **Rates and macro**
 
-- **Base = Norges Bank MPR 3/26** (24 Sep 2026) `[E]`: quarterly policy rate, 3M money-market rate
+- **Base NIBOR = the market path (18 Nov rule, skill 2026-11-18.2)** for 2028–29 (2027 within 25 bp: the
+  MPR 3/26 quarters kept); policy Base = NIBOR − 0.25. **Base GDP and unemployment = Norges Bank MPR 3/26**
+  (24 Sep 2026) `[E]`: quarterly policy rate, 3M money-market rate
   (NIBOR), mainland GDP and registered unemployment from the dataset; Sweden from the Riksbank MPR
   (Sep 2026), 2029 extended at potential `[A]`. Norwegian unemployment is registered (NAV), the
   measure Norges Bank projects (method logged in the skill). No new forecasts on 5 Nov, so MPR 3/26
@@ -153,11 +156,13 @@ As of **18 Nov 2026** (values of 5 Nov, kept on 11 and 18 Nov). Cells Bear / **B
   0.25 pp money-market premium = 3.45% `[E/A]`; neutral real rate 0.25–1.75% `[E]`; Bear 3.25% `[A]`.
 - Ranges: NIBOR Base ±0.3 pp in 2027 and ±0.5 pp in 2028–29; GDP ±0.7 pp. Denmark and Finland
   (≈ EUR 1bn and 3bn, 6% of the Nordic market) are not assessed.
-- **Market path check (10 Nov):** 1-year forwards from the government zero curve 4.68 / 4.44 / 4.27
-  (2027 / 28 / 29, linear zero interpolation) + NIBOR–T-bill ~0.28 pp `[A]` = **~4.96 / 4.72 /
-  4.55** `[F/A]`. The spread is kept from 22 Oct because the generic 3M T-bill changed reference bill
-  on 29 Oct (4.52 → 4.73 while NOWA stayed 4.50) `[A]`. Forwards include a term premium: a check,
-  never the path (skill Step 3b).
+- **Market path (18 Nov) `[F]`, derived `[A]`:** NOK swaps vs 6M NIBOR (bluegamma, 18 Nov 15:04 London): 1Y 5.08,
+  2Y 4.99, 3Y 4.88, 4Y 4.77, 5Y 4.68 → 6M forwards ~5.08 / 4.90 / 4.66 / 4.44 (Nov-to-Nov), calendar years
+  ~5.07 / 4.88 / 4.64, less a 3M/6M basis of ~0.10 `[A]` = **4.97 / 4.78 / 4.54**. Government zero curve (17 Nov:
+  12M 4.702, 2Y 4.606, 3Y 4.524, 4Y 4.468) → calendar forwards 4.69 / 4.49 / 4.35 + NIBOR–T-bill ~0.28 `[A]` =
+  **4.97 / 4.77 / 4.63**. Base uses the swap route, rounded with the government route: 4.97 / 4.78 / 4.58; 2027
+  is within 25 bp of the MPR path and stays 4.79. No term premium deducted; at −0.1 / −0.2 pp Base 2028–29
+  would be 4.68 / 4.48 and 4.58 / 4.38, and the window return 7.4 / 7.3% (excess unchanged).
 
 **Credit**
 
@@ -178,8 +183,8 @@ As of **18 Nov 2026** (values of 5 Nov, kept on 11 and 18 Nov). Cells Bear / **B
 - The stub is one quarter, not annualised: **October actual −0.2%** (DNB Carnegie Nordic HY, via
   Heimdal `[E]`) plus November–December carry at today's yield (NIBOR 4.80 + spread 4.90) less the
   Base EL pro rata = **+1.14%**. The window is geometric over 3.24 years, including the stub.
-  Cumulative: Bear +20.6%, Base +25.1%, Bull +27.2%.
-- Ranges (Base): 2027 6.5–9.0, 2028 5.5–8.5, 2029 5.0–8.0, window 6.2–8.0.
+  Cumulative: Bear +20.6%, Base +26.4% (25.1% before the 18 Nov NIBOR path), Bull +27.2%.
+- Ranges (Base): 2027 6.5–9.0, 2028 5.9–8.9, 2029 5.7–8.7, window 6.5–8.3.
 - Norway HY: spread +35 bp over Nordic; FTD on Norwegian sector weights; Bear spread moves × 1.15
   for the heavier energy weight `[A]`; the stub uses the Nordic October −0.2% (no Norway figure) `[A]`.
 - **Sweden HY (secondary, Base only, low confidence):** FTD 3.0% (Swedish 2025 year-end, 10.1% a
@@ -222,7 +227,7 @@ As of **18 Nov 2026** (values of 5 Nov, kept on 11 and 18 Nov). Cells Bear / **B
 
 Credit duration 2.5 years, rate duration 1.2 years `[A]` (funds report 1.9–2.3 and 1.1–1.3;
 FRN share 55% `[E]`, BNP AM Aug 2026). Spread MTM = −2.5 × change in year-end spread. Base has
-no rate MTM because the NB path is close to market pricing (MPR 3/26) `[E]`.
+no rate MTM because Base is the market path (18 Nov rule).
 
 | Scenario | Year | NIBOR | Spread carry | Expected loss | Spread MTM | Rate MTM | Total | Excess |
 |---|---|---|---|---|---|---|---|---|
@@ -233,8 +238,8 @@ no rate MTM because the NB path is close to market pricing (MPR 3/26) `[E]`.
 | Bear | 2028 | 3.55 | 7.20 | −5.59 | +5.00 | +0.60 | 10.76 | 7.21 |
 | Bear | 2029 | 3.50 | 5.70 | −4.29 | +3.25 | 0.00 | 8.16 | 4.66 |
 | **Base** | **2027** | **4.79** | **4.90** | **−1.65** | **0.00** | **0.00** | **8.04** | **3.25** |
-| **Base** | **2028** | **4.39** | **4.90** | **−1.93** | **−0.13** | **0.00** | **7.23** | **2.84** |
-| **Base** | **2029** | **3.86** | **4.95** | **−1.93** | **−0.13** | **0.00** | **6.76** | **2.90** |
+| **Base** | **2028** | **4.78** | **4.90** | **−1.93** | **−0.13** | **0.00** | **7.62** | **2.84** |
+| **Base** | **2029** | **4.58** | **4.95** | **−1.93** | **−0.13** | **0.00** | **7.48** | **2.90** |
 | Bull | 2027 | 4.65 | 4.40 | −1.15 | +2.50 | +0.30 | 10.70 | 6.05 |
 | Bull | 2028 | 4.15 | 4.00 | −1.10 | −0.25 | +0.30 | 7.10 | 2.95 |
 | Bull | 2029 | 3.65 | 4.10 | −1.15 | −0.50 | 0.00 | 6.10 | 2.45 |
@@ -420,16 +425,11 @@ after markdowns):
   (Governor Wolden Bache). Since September: **domestic inflation higher than projected**
   (CPI-ATE 3.0% in Sep), unemployment a bit lower, capacity utilisation slightly below normal,
   **the krone stronger than assumed**. No new forecasts; **MPR 4/26 and the next decision 17 Dec**.
-- **Base path decision `[A]`: keep the MPR 3/26 path.** The upward drivers (domestic inflation, the
-  labour market, foreign rates: Fed and ECB priced to hike in December) and the krone (~2–3%
-  stronger; in Data K an ~8% move took −0.18 pp off end-2027, so this is worth about −0.05 to
-  −0.1 pp) roughly offset. A December path within ±0.15 pp of September is the likeliest outcome,
-  below the 25 bp minimum change. The market leans higher (+0.17 / +0.33 / +0.69 pp, 10 Nov): the
-  2027 gap is below the 0.3 pp test; 2028–29 is partly term premium. Moving Base weeks before MPR
-  4/26 on a judgement path would risk a double move; the "higher for longer" risk stays in the
-  stagflation side case and the signposts (checkpoint 13). If Base took the market path, NOK carry
-  would rise about one for one (the ~45% fixed-rate part gives some back through rate MTM); the
-  excess return and E / R barely move.
+- **Base path decision (18 Nov, skill 2026-11-18.2): the market path.** Swaps and the government curve price
+  no cuts through 2028 and a slow decline in 2029 (4.97 / 4.78 / ~4.58), against the September MPR's cuts from
+  late 2027 (4.79 / 4.39 / 3.86). No turn call holds Base away from the market: domestic inflation above
+  projections, the weaker krone (USD/NOK 9.70) and foreign hikes all lean with the market. Base 2028–29 move
+  to 4.78 / 4.58; 2027 stays (gap 0.18 < 25 bp). MPR 4/26 (17 Dec) is read against this path.
   - **Cross-check, DNB Capital Markets Day (10 Nov; as briefed, not confirmed in a primary source
     `[E]`):** policy rate settles at 4.00% after two cuts in H2 2027, mainland GDP ~1.5% a year to
     2030. Implied 3M NIBOR ≈ 4.6 / 4.25 / 4.25 (2027–29, +0.25 premium `[A]`): −0.2 / −0.15 / +0.4 pp
@@ -644,7 +644,8 @@ table 14706. NB: MPR 3/26 Table 3 and the NIBOR path above `[F/E]`. Earlier year
 
 ## For fund analyses and IAF
 
-- **No material change since 5 Nov.** Funds use the Interface (Base window 7.2% before fees, R 8.47
+- **18 Nov: NIBOR path to the market** (total returns +0.4 / +0.7 pp in 2028–29; excess and E / R unchanged, so
+  fund verdicts on E / R do not move). Funds use the Interface (Base window 7.5% before fees, R 8.47
   pp, reference E / R 0.254) and are judged on their own E / R, not on yield alone (skill
   2026-10-06.2). β = 1 fund carry uses the Base spread path 490 / 490 / 490 / 495; the stub uses each
   fund's own October return. The Bear catalyst loss on the performing book uses the Bear − Base
@@ -657,11 +658,12 @@ table 14706. NB: MPR 3/26 Table 3 and the NIBOR path above `[F/E]`. Earlier year
 
 ## Change log
 
+- **18 Nov 2026 (evening) — changed (skill 2026-11-18.2, market NIBOR path):** Base NIBOR 2028–29 4.39 / 3.86 →
+  4.78 / 4.58 (policy 4.20 / 3.65 → 4.53 / 4.33); Base total return 2028–29 7.2 / 6.8 → 7.6 / 7.5, window 7.2 → 7.5
+  (Norway 7.5 → 7.8); NIBOR window 4.38 → 4.72; excess returns and E / R 0.254 unchanged.
 - **18 Nov 2026** — kept unchanged (skill 2026-11-18.1, first Leading view): four watch calls, none met
   the rule (spread 2027 wider, FTD 2027, NIBOR higher for longer, Swedish real estate); energy rows flat (corrected the
   same evening: the Brent fall was already in the 11 Nov oil baseline).
-- **11 Nov 2026** — kept unchanged: October CPI, Riksbank minutes, Taptravel vote, oil Base 2027
-  88 → 84, DNB CMD and the 10 Nov market path move no value; E / R 0.254 kept.
 - **5 Nov 2026** — changed: October anchor 430 → 490 bp re-marked spreads (Base 490 / 490 / 490 / 495),
   returns (Base window 6.8 → 7.2%) and E / R (0.196 → 0.254); NIBOR path, GDP and defaults kept.
 

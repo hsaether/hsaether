@@ -5,8 +5,16 @@ description: Nordic HY Market BBB (HY BBB) — the Nordic high-yield bond market
 
 # Nordic HY Market BBB
 
-**Revision:** 2026-11-18.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-18.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/hy-market-bbb/` in the Finance folder.
+
+Change note 2026-11-18.2 (user, 18 Nov 2026: market-first for NIBOR, as for oil futures): the
+**Base NIBOR path is the market path** (NOK swaps against NIBOR, cross-checked with the government
+zero curve plus the NIBOR–T-bill spread), unless a turn call that meets the Leading-view rule names
+what the market is missing; Norges Bank's published path becomes the reference and test, not the
+default. The policy-rate Base follows as NIBOR − the money-market premium. Gaps below 25 bp are
+noted, not applied. No term premium is deducted unless it is measured (sensitivity shown). Steps
+2 and 3b, Data sources, the Leading view and the Interface row changed. Method change.
 
 Change note 2026-11-18.1 (user, 18 Nov 2026: "forecast changes to market conditions BEFORE they
 have solid proof"; same method as supply-market-bbb and ai-market-bbb 2026-11-18.1): new
@@ -297,7 +305,7 @@ gap with an invented number.
 | Issuer announcements: results, refinancing, bondholder meetings, standstills | **Nordic Financial** `search_filings` with `source="newsweb"` + `ticker` + `fiscal_year` (Oslo-listed issuers and Nordic ABM bonds) | FinancialFilings `filings_list`; issuer IR; Swedish issuers via MFN / Cision |
 | Issuer financials (leverage, liquidity, maturities) for watchlist names | **Nordic Financial** `company_research` / `parse_pdf_to_text` on the IR PDF | FinancialFilings `companies_financials_retrieve` |
 | Policy rate, NOWA, T-bill and government yields | **Norges Bank API** `https://data.norges-bank.no/api/data/<flow>/<key>?format=csv&lastNObservations=N&locale=en` (`IR/B.KPRA.SD.R`, `SHORT_RATES/B.NOWA.ON.R`, `GOVT_GENERIC_RATES/B.3M.TBIL`, `B.10Y.GBON`) | FRED `IR3TIB01NOM156N` (3M interbank, OECD monthly), `IRLTLT01NOM156N` |
-| Market check on the rate path (what the bond market prices against the Norges Bank path) | **Norges Bank API** `GOVT_ZEROCOUPON/B.<tenor>` (government zero-coupon 6M–10Y, daily): 1-year forwards from the zero curve + the NIBOR–T-bill spread (3M) ≈ market NIBOR path `[A]`; includes a term premium, so it is a check, never the path | FRED `IRLTLT01NOM156N` |
+| **Market NIBOR path (the Base NIBOR path, 18 Nov rule)** | **NOK swaps against 6M NIBOR**, 1Y–5Y (bluegamma.io `nok-swap-rates`, live, tested 18 Nov 2026; Cbonds IRS pages mask the values): year-k forward ≈ k × S(k) − (k−1) × S(k−1); shift to calendar years by weight; 3M = 6M − the 3M/6M basis (~0.10 pp `[A]` until a basis quote is read) | **Norges Bank API** `GOVT_ZEROCOUPON/B.<tenor>` (6M–10Y, daily): 1-year forwards between calendar year-ends + the NIBOR–T-bill spread (3M) `[A]`. Use the average of the two routes when they differ by < 0.15 pp; otherwise explain |
 | Financial conditions (signpost) | **Norges Bank API** `FINANCIAL_INDICATORS/D.FCI_TOTAL` and subcomponents (`FCI_STOCK`, `FCI_FEX`, `FCI_LENDINGRATES`, `FCI_HOUSING`); positive = tighter (2008 +7, Mar 2020 +4, mean +0.5 since 2007) | — |
 | Norwegian activity by sector (signpost for energy and non-energy issuers) | **Norges Bank API** `REGNET` (Regional Network, quarterly: output, employment plans, capacity, by sector incl. `OLJE_TOT` oil services) | Regional Network report |
 | Fiscal policy: SOBU (NOK bn, % of mainland trend GDP), withdrawal rate vs 3%, budget indicator, fund share of state spending | **Nasjonalbudsjettet** chapter 3 figure data on regjeringen.no: `…/kap_3_nb_<year>-filer/sheet002.htm` (SOBU % of trend GDP, 2001–), `sheet003.htm` (budget indicator), `sheet004.htm` (withdrawal rate vs expected real return), `sheet005.htm` (fund share of state spending), `sheet006.htm` (GPFG value, weekly). HTML tables, Windows-1252, decimal comma; read with `py` | Revidert nasjonalbudsjett (May); Prop. 1 S; NBIM for the live fund value |
@@ -603,9 +611,8 @@ signpost**.
 
 **Rule to move Base:** two or more independent families point the same way (L5 alone never moves
 it) and the call's probability is ≥ 60%, and the move clears the minimum change. One family, or
-50–60%, is a **watch call**: logged, Base unchanged. The NIBOR path still defaults to Norges Bank's
-published path; a turn call can move it only under Step 3b's test (market path ≥ 0.3 pp away) plus
-a second family. A call against L5 needs a named reason the market is missing.
+50–60%, is a **watch call**: logged, Base unchanged. The NIBOR path defaults to the market path (Step 2, 18 Nov
+rule); a turn call can hold Base away from it only with two families and a named reason. A call against L5 needs a named reason the market is missing.
 
 **Scorecard:** every call gets a dated line; each run marks open calls hit / miss / open against
 the realised series (anchor spread, NT FTD, index return, NIBOR fixings) and keeps the hit rate.
@@ -647,9 +654,13 @@ first when the HY conclusion depends on it. Translate, do not re-analyse:
 
 **Step 2 — Rates block.** Policy rate and 3M NIBOR now (dated); the latest Norges Bank decision,
 MPR path and its date; NIBOR–policy spread; NOK swap rates at the market's fixed-rate duration;
-STIBOR, EURIBOR and SOFR for hedge carry. Base path = Norges Bank's published path `[E]`, adjusted
-only with a stated reason (newer data, market pricing that clearly differs). Bear and Bull rate
-paths follow the scenario catalysts. Year-1 by quarter for policy rate and NIBOR; annual averages
+STIBOR, EURIBOR and SOFR for hedge carry. **Base NIBOR path = the market path** (Data sources: NOK
+swaps vs NIBOR, cross-checked with the government curve), per calendar year; move a window year only
+when the gap is ≥ 25 bp; keep a gap only through a qualifying turn call (Leading view) with the
+reason the market is wrong. No term premium is deducted unless measured; show Base at −0.1 and
+−0.2 pp as a sensitivity. **Policy-rate Base = NIBOR − the money-market premium** (0.25 pp, Norges
+Bank's assumption). Norges Bank's published path is the reference: show its gap to Base per year.
+Bear and Bull rate paths follow the scenario catalysts. Year-1 by quarter for policy rate and NIBOR; annual averages
 for the rest of the window; neutral nominal rate for mid-cycle (Norges Bank's estimate + 2%
 inflation target; state it).
 
@@ -680,10 +691,10 @@ the Base rate path, never to build an own rate forecast.
   from output gap, exchange rate, inflation, wage costs, foreign rates) to see what moved the
   path, and the **market path** (Norges Bank API zero-coupon curve, 1-year forwards + NIBOR–T-bill
   spread; Step 2).
-- **Test:** if the fiscal impulse for Year 1 is above +0.5 pp, or the market path is more than
-  0.3 pp above the Norges Bank path in a window year, state a "higher for longer" reading and
-  decide whether Base keeps the Norges Bank path (default) or moves toward the market path, with
-  the reason. Fiscal expansion with rising rates is the stagflation side case's mechanism; keep
+- **Test (18 Nov rule):** Base is the market path. If the fiscal impulse for Year 1 is above
+  +0.5 pp, or Norges Bank's published path sits more than 0.3 pp from the market path in a window
+  year, state the reading ("higher for longer" or "cuts sooner") and whether a turn call should
+  hold Base away from the market (≥ 2 families, ≥ 60%), with the reason. Fiscal expansion with rising rates is the stagflation side case's mechanism; keep
   the two consistent.
 - User views on fiscal policy are input, not a reference: test them against the series above.
 
