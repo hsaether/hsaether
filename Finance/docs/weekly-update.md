@@ -10,6 +10,7 @@ and the daily company news search on weekdays (Mode F). Newest entry first. The 
 - **Updated:** `hafnia` Base −0.5% → 7.4%, fails (Q3; P_k NOK 81.6 vs 90.00).
 - Hafnia (hafnia): TORM stake to be paid out as special dividend (~$1.28/share), else 90% cash; form set 25 Nov `[F]`.
 - NVIDIA (nvda, ai): GM guide 71–72%, supply commitments $390bn, $1.8bn stake impaired; BIS remote-access rule issued 16 Nov `[F]`.
+- DOF (dof, supply): Skandi Africa re-contracted by TechnipFMC, "Very Large" ($100–200m), in direct continuation; term not given (17 Nov, added from user input) `[F]`.
 - Minor: Hofseth corrected Q3; Anthropic prices tonight; Trump–Xi in Shenzhen; fund-house forum posts unchanged.
 
 **Needs you:** `ai` is due its rebuild: NVIDIA's guide sits at its Bull row. SED Q3 not out yet; Petrobras PSV ranking not public. `supply`, `mu`, `tsm`, `global-index` left.
