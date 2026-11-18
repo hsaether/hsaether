@@ -1,10 +1,24 @@
-# AI Market BBB — baseline 1 Nov 2026; K1 capex cycle re-run 11 Nov 2026; news note 16 Nov
+# AI Market BBB — baseline 1 Nov 2026; K1 capex cycle re-run 11 Nov 2026; leading-view update 18 Nov 2026
 
-**Status (as of 16 Nov 2026):** skill `ai-market-bbb` 2026-11-11.2. Last value change, 11 Nov (Option D of `docs/review-ai-k1-sustainability.md`): K1 Base 2028–29 set to a digestion plateau (1,170 / 1,170) and carried into H1, H4, the E cash conversion and the monetisation ratio. 16 Nov note (no path moved): Samsung's and SK hynix's Q3 business reports read against the memory rows; new signpost "Funded-customer credit stress"; GPU rental and resale readings. Prices are the 6 Nov close, not re-marked; full rebuild after NVIDIA (17 Nov) and Anthropic's pricing (18 Nov).
+**Status (as of 18 Nov 2026):** skill `ai-market-bbb` **2026-11-18.1** (first run of the Leading view). **18 Nov leading-view update:** baskets re-marked to the 18 Nov close; two turn calls met the rule and moved Base: **H2 memory 2028–30 deeper** (EPS .60 / .40 / .35 → .50 / .32 / .28) and **H1 compute 2028–30 lower** (.91 / .88 / .87 → .85 / .82 / .81); watch calls on H1 2027 (up, NVIDIA Q3), K1 2028, T software and H3. K1, E and T paths are as of 11 Nov; consensus is the 7 Nov basis (re-checked 18 Nov: within the minimum change except NVIDIA FY Jan-28 +4%). Open: Anthropic's pricing (18 Nov evening; first trade 19 Nov) for E1.
 
 ## Interface (values other documents read)
 
-As of **11 Nov 2026** (paths) and the **6 Nov 2026 close** (prices; consensus 7 Nov, calendarised; stub 54 days, 7 Nov–31 Dec; exit 31 Dec 2029). USD bn unless stated; cells Bear / **Base** / Bull; 2026 is the same in every scenario. Tags: `[F]` fact · `[E]` external forecast or secondary · `[A]` own assumption · `[?]` unknown.
+As of **18 Nov 2026** (H1 and H2 paths; other paths 11 Nov) and the **18 Nov 2026 close** (prices; consensus 7 Nov basis, calendarised; stub 43 days, 18 Nov–31 Dec; exit 31 Dec 2029). USD bn unless stated; cells Bear / **Base** / Bull; 2026 is the same in every scenario. Tags: `[F]` fact · `[E]` external forecast or secondary · `[A]` own assumption · `[?]` unknown.
+
+**Turn calls (18 Nov 2026; Leading view, families L1–L6 scored +1 / 0 / −1 against Base; probabilities are our own estimates, not the 25/50/25 convention)**
+
+| Row | Call vs Base | Prob. | Families | Base moved? | Price vs Base | Reversal signpost (date) |
+|---|---|---|---|---|---|---|
+| **H2 Memory** | **Turn deeper: EPS 2028–30 .60 / .40 / .35 → .50 / .32 / .28**; 2027 kept (.90) | 60% | L2 −1 (Q4 DRAM contract +10–15% but PC DRAM "slower than last quarter", TrendForce 11 Nov; DDR5 16Gb spot −0.8% on 6 Nov) · L4 −1 (supplier capex step-up: Micron > $25bn; the 2028–29 fab wave) · L5 −1 (MU −36%, SK hynix −41%, Samsung −33% from highs; Kospi −30%) · L1 +1 (HBM4 2027 reported sold out; LTAs) | **Yes** | At Base: basket k at **0.95×** the new Base | Q1-27 DRAM contract ≥ +10% q/q (TrendForce, early Jan) with spot above contract → restore .60 / .40 / .35 |
+| **H1 Compute 2028–30** | **Lower: .91 / .88 / .87 → .85 / .82 / .81** (non-K1 funded demand short; revenue ~705 / 695) | 60% | L3 −1 (CoreWeave 2032s 15–16% YTW, CDS > 1,289 bp, 6–11 Nov; NVIDIA "disciplined and selective" on neocloud funding) · L5 −1 (NVIDIA −37%, SOX −27% from 6 Oct highs, consensus up) · L2 0 (B200 rental ~$6.2 settled 17 Nov against $5.6–5.9 in Sep–Oct; H100 ~$3.0) | **Yes** | Above Base: basket k at **1.14×** the new Base; NVIDIA at 0.87× | Neocloud yields back < 10% and no stress event by NVIDIA's Q4 (late Feb 2027) → restore |
+| H1 Compute 2027 | Up (NVIDIA Q4 guide $130bn, above the $124bn Bull line; FY28 ~+75%; supply commitments $390bn) | 55% | L1 +1 · L2 +1 (rental firm) · L5 −1 | No (watch; 2027 is contract-driven and the call's second family is weak) | — | TSMC monthly revenue and NVIDIA's Q4 guide (late Feb) |
+| K1 2028 | Lower than the 1,170 plateau (financing) | 50% | L3 −1 (neocloud and Oracle credit; capex ÷ OCF ~116%) · L5 −1 (Oracle −30%, Meta −21%, Alphabet −20% from highs) · L1 +1 (backlog, "increase significantly" language) | No (watch) | — | First 2027 capex figures (late Jan–early Feb 2027) |
+| T Software | Lower 2028–30 (agent seat compression) | 50% | L5 −1 (ServiceNow −43%, Salesforce −28% from highs) · L1 0 (consensus unchanged since 7 Nov) | No (watch: one family) | Below Base | Q4 reports (Jan–Feb 2027): seat-based guidance cuts |
+| H3 Foundry and equipment; H4; E platforms; E1 | Flat | 55% | L5 −1 (TSMC −26%, ASML −25%) against L1 +1 (TSMC monthly Bull-side; memory capex is equipment demand); E1 pending Anthropic's pricing | No | H3 at 1.07× (TSMC) | TSMC Q4 (mid-Jan); Anthropic first trade (19 Nov) |
+
+- **What the market prices (L5):** AI hardware is down 25–41% from its October highs while consensus EPS is flat or up and World (URTH) is only −6% and the S&P 500 −6%. The market prices a turn that consensus does not show. Memory is now priced at our new Base; the compute basket is priced above it (k needs 1.14× Base 2028–30), except NVIDIA alone, which is priced below it (0.87×).
+- **Scorecard:** six calls opened 18 Nov; none closed; hit rate n/a.
 
 **Paths**
 
@@ -13,9 +27,9 @@ As of **11 Nov 2026** (paths) and the **6 Nov 2026 close** (prices; consensus 7 
 | **K1** Hyperscaler capex (MSFT, GOOGL, AMZN, META, ORCL) | ~435 `[A]` | **790** `[E]` | 950 / **1,120** / 1,300 | 800 / **1,170** / 1,550 | 820 / **1,170** / 1,700 |
 | K1 growth y/y | | ~+84% | +20% / **+42%** / +65% | −16% / **+4.5%** / +19% | +3% / **0%** / +10% |
 | K1 Base range | | 770–810 | 1,050–1,200 | 1,000–1,350 | 950–1,400 |
-| **H1** Compute (accelerators + AI networking silicon) | | **~470** `[A]` (440–490) | 585 / **730** / 820 | 470 / **750** / 985 | 490 / **745** / 1,080 |
+| **H1** Compute (accelerators + AI networking silicon) | | **~470** `[A]` (440–490) | 585 / **730** / 820 | 470 / **705** / 985 | 490 / **695** / 1,080 |
 | H1 growth y/y | | | +25% / **+55%** / +75% | −20% / **+3%** / +20% | +5% / **−1%** / +10% |
-| **H2** Memory revenue, index (2026 average = 100; Q4-26 run-rate ≈ 130) | | 100 | 100 / **138** / 150 | 72 / **118** / 133 | 67 / **103** / 118 |
+| **H2** Memory revenue, index (2026 average = 100; Q4-26 run-rate ≈ 130) | | 100 | 100 / **138** / 150 | 72 / **108** / 133 | 67 / **95** / 118 |
 | **H3** Foundry, packaging, equipment, index (TSMC Q4-26 run-rate ≈ 121) | | 100 | 110 / **125** / 132 | 99 / **140** / 156 | 104 / **151** / 175 |
 | **H4** Networking and DC infrastructure, index | | 100 | 110 / **125** / 135 | 88 / **129** / 159 | 88 / **130** / 175 |
 | **H5** Power: a constraint row, no path | | US needs ~68 GW new 2026–28, ~30 GW covered `[E]` | — | — | — |
@@ -34,27 +48,27 @@ As of **11 Nov 2026** (paths) and the **6 Nov 2026 close** (prices; consensus 7 
 
 | Layer | Bear 2027 / 28 / 29 / 2030 norm | **Base** | Bull | Exit P/E Bear / **Base** / Bull | Payout | Cash conversion c 2027 / 28 / 29, Base (Bear; Bull) |
 |---|---|---|---|---|---|---|
-| H1 Compute | .68 / .50 / .53 / .57 | **.92 / .91 / .88 / .87** | 1.00 / 1.15 / 1.25 / 1.30 | 13 / **17** / 19 | 25% | .80 / .90 / .90 (.85 / .95 / .95; .75 / .85 / .90) |
-| H2 Memory | .60 / .30 / .25 / .25 | **.90 / .60 / .40 / .35** | 1.00 / .80 / .55 / .45 | 8 / **10** / 11 | 15% | .70 / .65 / .60 (.70 / .75 / .70; .70 / .70 / .55) |
+| H1 Compute | .68 / .50 / .53 / .57 | **.92 / .85 / .82 / .81** | 1.00 / 1.15 / 1.25 / 1.30 | 13 / **17** / 19 | 25% | .80 / .90 / .90 (.85 / .95 / .95; .75 / .85 / .90) |
+| H2 Memory | .60 / .30 / .25 / .25 | **.90 / .50 / .32 / .28** | 1.00 / .80 / .55 / .45 | 8 / **10** / 11 | 15% | .70 / .65 / .60 (.70 / .75 / .70; .70 / .70 / .55) |
 | H3 Foundry and equipment | .76 / .63 / .67 / .71 | **.95 / 1.03 / 1.10 / 1.16** | 1.00 / 1.15 / 1.28 / 1.40 | 14 / **18** / 21 | 45% | .75 / .80 / .82 (.75 / .90 / .95; .70 / .72 / .78) |
 | H4 Networking and DC infra | .75 / .54 / .56 / .65 | **.95 / .94 / .94 / .99** | 1.00 / 1.12 / 1.22 / 1.30 | 15 / **20** / 24 | 35% | .90 all |
 | E Platforms | .82 / .75 / .82 / .91 | **.92 / 1.07 / 1.17 / 1.27** | 1.00 / 1.19 / 1.37 / 1.54 | 17 / **21** / 23.5 | 34% | **−.20 / .11 / .36** (−.10 / .30 / .50; −.30 / −.20 / .00) |
 | *E rest: Meta, Oracle (memo; 17% of E on 30 Oct)* | *.88 / .88 / .97 / 1.05* | *.97 / 1.07 / 1.17 / 1.27* | *1.00 / 1.13 / 1.27 / 1.41* | | | *used for the unanalysed share* |
 | T Software | .88 / .85 / .93 / 1.00 | **.95 / 1.03 / 1.11 / 1.19** | 1.00 / 1.10 / 1.20 / 1.30 | 15 / **20** / 24 | 45% | .80 all |
 
-**Layer baskets** (IAF at index level, before fees and tax; NOK unless stated; method v2.1; E / R against the HY market reference 0.254; reproduced by `references/model.py`)
+**Layer baskets** (IAF at index level, before fees and tax; NOK unless stated; method v2.1; 18 Nov close; E / R against the HY market reference 0.254; reproduced by `references/model.py`)
 
 | Basket | Mcap USD tn | P/E CY27 | Cons. EPS CY26→27 | IRR NOK Bear / **Base** / Bull | Base USD | 2027 return NOK Bear / Base / Bull | Hurdle P/E / MoS | E / R / **ratio** | Implied EPS growth 2028–30 for 12% |
 |---|---|---|---|---|---|---|---|---|---|
-| H1 Compute | 6.77 | 13.7 | +74% | -10.3 / **7.5** / 24.1 | 7.5 | -42.1 / 3.7 / 31.3 | 12.1 / -11.8% | 3.13 / 45.8 / **0.068** | 3% |
-| H2 Memory | 2.27 | 2.64 | +55% | 5.3 / **21.6** / 33.5 | 21.6 | 19.9 / 39.8 / 85.6 | 3.38 / **+28.1%** | 17.24 / 19.9 / **0.867** | -35% |
-| H3 Foundry and equipment | 3.01 | 17.3 | +34% | -9.5 / **10.2** / 20.9 | 10.2 | -39.2 / 8.5 / 23.5 | 16.5 / -4.7% | 5.87 / 47.7 / **0.123** | 9% |
-| H4 Networking and DC infrastructure | 0.42 | 24.3 | +29% | -19.5 / **-2.7** / 10.6 | -2.7 | -59.5 / -8.0 / 11.9 | 15.8 / -35.1% | -7.04 / 51.5 / **-0.137** | 18% |
-| E Engines and cloud platforms | 12.17 | 21.0 | +18% | -5.7 / **8.6** / 17.6 | 8.6 | -32.3 / 6.2 / 18.8 | 19.1 / -9.1% | 4.21 / 38.5 / **0.110** | 15% |
-| T Tools and application software | 1.29 | 23.5 | +26% | -7.2 / **3.7** / 11.5 | 3.7 | -35.9 / 1.1 / 10.8 | 18.6 / -21.1% | -0.71 / 37.0 / **-0.019** | 17% |
-| **All six, cap-weighted** | 25.92 | | | ≈ -6.7 / **≈9.2** / ≈20.7 | 9.2 | ≈ -31.7 (Bear 2027) | | | |
+| H1 Compute | 6.35 | 12.8 | +75% | -8.5 / **7.5** / 27.1 | 7.5 | -38.2 / -0.1 / 35.2 | 11.3 / -11.7% | 3.13 / 38.1 / **0.082** | 0% |
+| H2 Memory | 2.36 | 2.69 | +55% | 4.6 / **13.7** / 33.0 | 13.7 | 17.3 / 18.6 / 82.8 | 2.8 / **+4.5%** | 9.30 / 1.3 / **n.m.** (R ≈ 0: the 2027 Bear and Base ends both price 2028 low) | -35% |
+| H3 Foundry and equipment | 2.96 | 17.0 | +34% | -9.1 / **10.9** / 21.8 | 10.9 | -38.3 / 9.1 / 24.3 | 16.6 / -2.9% | 6.54 / 47.4 / **0.138** | 8% |
+| H4 Networking and DC infrastructure | 0.45 | 26.3 | +29% | -21.7 / **-5.1** / 8.0 | -5.1 | -62.6 / -10.2 / 9.0 | 15.8 / -39.7% | -9.53 / 52.3 / **-0.182** | 21% |
+| E Engines and cloud platforms | 12.09 | 20.8 | +18% | -5.5 / **8.9** / 18.1 | 8.9 | -31.8 / 6.4 / 19.1 | 19.1 / -8.1% | 4.54 / 38.2 / **0.119** | 15% |
+| T Tools and application software | 1.21 | 22.1 | +26% | -5.4 / **5.8** / 13.9 | 5.8 | -31.9 / 3.1 / 13.3 | 18.6 / -15.8% | 1.44 / 35.0 / **0.041** | 15% |
+| **All six, cap-weighted** | 25.41 | | | ≈ -6.0 / **≈8.8** / ≈21.8 | 8.8 | ≈ -30.1 (Bear 2027) | | | |
 
-Weights: E 47%, H1 26%, H3 12%, H2 9%, T 5%, H4 2%. Base USD = NOK in Base (flat USD/NOK path).
+Weights: E 48%, H1 25%, H3 12%, H2 9%, T 5%, H4 2%. Base USD = NOK in Base (flat USD/NOK path). Re-mark alone (old paths, 18 Nov prices): all six 10.1%, H1 9.9%, H2 21.0%; the turn calls take H1 to 7.5% and H2 to 13.7%.
 
 **References, gauges and price-implied paths**
 
@@ -64,9 +78,9 @@ Weights: E 47%, H1 26%, H3 12%, H2 9%, T 5%, H4 2%. Base USD = NOK in Base (flat
 | Nordic HY market Base / Bear 2027; NIBOR window | 7.2% / −0.4%; NIBOR **4.38%** | HY BBB 5 Nov |
 | MSCI World Base / Bear 2027 / E / R; exit P/E, mid-cycle return, long-run growth | 6.6% / −18.3% / 0.080; 17, 8.2%, 5.3% | Equity BBB 6 Nov |
 | USD/NOK path | Base 9.29 flat; Bear 10.41 / 10.14 / 10.14 (+12 / +9 / +9%); Bull 9.02 (−3%) | Equity BBB 6 Nov |
-| **Memory (H2) price-implied path** | Basket earns k at **0.75×** Base 2028–30 (.45 / .30 / .26), 0% at 0.49×. SK hynix **0.57×** (0% at 0.37×), Samsung **0.68×** (0.44×), Micron **1.08×** (0.72×) | `impl.py` |
+| **Memory (H2) price-implied path** | Basket earns k at **0.95×** the new Base 2028–30 (.47 / .30 / .27), 0% at 0.62×. SK hynix **0.72×** (0% at 0.46×), Samsung **0.87×** (0.57×), Micron **1.37×** (0.92×) | `impl.py` (18 Nov) |
 | Memory capped-Bear diagnostic | H2 Bear −15.2% a year, Bear 2027 −48.5%, E / R **0.195**; all six Bear −8.5%, Bear 2027 −37.7% | `model.py BEARCAP` |
-| Compute and platform price-implied paths | H1 basket k at **1.14×** Base 2028–30 (1.04 / 1.00 / .99), 0% at 0.79×; E basket **1.10×** (1.18 / 1.29 / 1.40), 0% at 0.78× | `impl.py H1`, `impl.py E` |
+| Compute and platform price-implied paths | H1 basket k at **1.14×** the new Base 2028–30 (.97 / .93 / .92), 0% at 0.79×; NVIDIA 0.87× (.74 / .71 / .70); E basket **1.09×** (1.16 / 1.27 / 1.38), 0% at 0.77× | `impl.py H1`, `impl.py E` (18 Nov) |
 | K1 return gauge range | Coverage 2028 / 2029 51–79% across the sensitivities; Bear K1 81% / 79%, Bull K1 61% / 50% | `k1ret.py` |
 
 **Signpost states** (as of 16 Nov; neither = no line met; touched = one leg met; Bull-side = leaning, not crossed; pending = dated read-out ahead; detail under Signposts and monitoring)
@@ -85,7 +99,7 @@ Weights: E 47%, H1 26%, H3 12%, H2 9%, T 5%, H4 2%. Base USD = NOK in Base (flat
 | Non-K1 compute funding | neither | DRAM contract prices | neither |
 | DRAM contract prices in 2H-27 | pending | NAND contract prices | neither |
 | Micron SCAs and commitments | neither | Memory LTAs (SK hynix, Samsung; Q3 reports 16 Nov) | Bull-side (Samsung floor stated, no level) |
-| **Funded-customer credit stress** (16 Nov) | **touched** (credit pricing; no event) | | |
+| **Funded-customer credit stress** (16 Nov) | **touched** (CoreWeave 2032s 15–16%, CDS > 1,289 bp; no event); now in the H1 turn call | | |
 | CXMT 4F² DRAM | neither | US data-center siting policy | neither |
 | Federal AI and data-center law | neither | M365 Copilot seats | neither |
 | BTOS AI use | neither | Basket P/E triggers | memory cleared; others not |
@@ -94,8 +108,8 @@ Weights: E 47%, H1 26%, H3 12%, H2 9%, T 5%, H4 2%. Base USD = NOK in Base (flat
 ## Metadata
 
 - **Runs behind the current values:** baseline 1 Nov 2026 (Europe/Oslo); price re-mark 7 Nov (Update 7: Yahoo regular close Fri 6 Nov for the US, Europe and Korea; consensus Yahoo `earningsTrend` 7 Nov, calendarised); K1 capex cycle re-run 11 Nov (method effect only, no re-mark: the skill re-marks on a sharp sell-off or at a recalibration trigger, and NVIDIA's Q3 on 17 Nov is the next one). **16 Nov note** (small update on news, minimum-change rule): the Q3 business reports (DART, filed 16 Nov, not ~14 Nov) give no LTA price, range, floor level or order value, so no H2 point moves; the "Funded-customer credit stress" signpost added (user, 13 Nov) with the readings of `docs/nvda-analysis.md` v1.6, refreshed where newer. `docs/nvda-analysis.md` v1.6 and `docs/anthropic-analysis.md` (13 Nov; Anthropic 2026 revenue $54.7bn, ~58% of E1) read as company checks only; their rows are refreshed at the rebuild.
-- **Stale after 16 Dec 2026** (45 days from 1 Nov; a re-mark does not restart the clock), or earlier at NVIDIA Q3 FY27 (**17 Nov**) or when the Equity BBB changes its scenarios (stale after 6 Dec). Micron FQ1-27 (16 Dec) is a memory recalibration trigger.
-- **Skills:** `ai-market-bbb` 2026-11-11.2; `iaf-valuation` 2026-11-10.1 (method only, read through the company analyses).
+- **Stale after 16 Dec 2026** (45 days from 1 Nov; a re-mark does not restart the clock), or earlier when the Equity BBB changes its scenarios (stale after 6 Dec). NVIDIA Q3 FY27 (17 Nov) was read in the 18 Nov leading-view update (H1 2027 watch call); Anthropic's pricing (18 Nov evening) and first trade (19 Nov) are read at the next run for E1. Micron FQ1-27 (16 Dec) is a memory recalibration trigger.
+- **Skills:** `ai-market-bbb` 2026-11-18.1 (18 Nov run; 2026-11-11.2 before); `iaf-valuation` 2026-11-18.1 (method only, read through the company analyses).
 - **Source quality:** company figures from their releases and filings, directly or via the company analyses `[F]`; call statements through third-party transcripts `[E]`; memory prices from TrendForce and press coverage of TrendForce, DRAMeXchange, brokers and Korean media `[E]` (no TrendForce report read in full); past-cycle share prices Yahoo and Micron's quarters Alpha Vantage `[F]`.
 - **Market only:** compares with World and the Nordic HY market; no portfolio, HY book or fund document is read.
 
@@ -115,7 +129,8 @@ Weights: E 47%, H1 26%, H3 12%, H2 9%, T 5%, H4 2%. Base USD = NOK in Base (flat
 - **The layers:** compute +55% in 2027, then +3% and −1%; memory peaks in 2027 and turns in 2028; frontier-lab revenue ~100bn (2026) → 360bn (2029); AI-native tools and copilots grow while seat-based software slows to high single digits.
 - **Durability:** the monetisation ratio rises in every scenario (Base 0.13 → 0.31), so it cannot tell a sustainable path from an unsustainable one; the K1 return gauge can (~12% pre-tax in 2026, ~6% in 2027, ~2.5% in 2028, ~0% in 2029). Capex is three to eight times lab revenue and increasingly debt-financed (new debt 32% of capex, LTM); FCF is near zero for three of five. **The main risk is financing, not demand.**
 - **Catalysts:** Bear = a financing break (a lab short of its commitments, Oracle and neoclouds renegotiate, AI credit tightens) on top of the equity Bear. Bull = agentic adoption that doubles lab revenue again in 2027 and takes capex to the brokers' upside (~USD 1.4tn).
-- **Baskets (Base NOK, 6 Nov prices):** all six **9.2%** (Bear −6.7%, Bull 20.7%). Memory **21.6%** clears its hurdle P/E (+28.1%); for memory the cycle is the gate, and the price discounts a turn ~25% deeper or earlier than Base (k at 0.75×). Foundry 10.2%, platforms 8.6% and compute 7.5% are above World (6.6%); none reaches the HY reference (0.254). Compute earns k only at 1.14× its Base 2028–30, platforms at 1.10×. Networking −2.7%, software 3.7%.
+- **Baskets (Base NOK, 18 Nov prices, turn calls applied):** all six **8.8%** (Bear −6.0%, Bull 21.8%). Memory **13.7%** still clears its hurdle P/E (+4.5%), but only just: with Base moved deeper the price now sits on it (k at 0.95×). Foundry 10.9%, platforms 8.9% and compute 7.5% are above World (6.6%); none reaches the HY reference (0.254). Compute earns k only at 1.14× its new Base 2028–30, platforms at 1.09×. Networking −5.1%, software 5.8%.
+- **Leading view (18 Nov):** the AI hardware sell-off (−25% to −41% from October highs, consensus unchanged) plus neocloud credit stress and slowing memory-price momentum moved two Base paths ahead of the reports: memory 2028–30 deeper, compute 2028–30 lower. NVIDIA's Q3 points the other way for 2027 (watch call).
 - **Company analyses (own builds, their run prices):** NVIDIA, Micron, SK hynix and Samsung clear; TSMC, Microsoft, Alphabet and Amazon fail (Against World and high yield).
 
 ## Money in: K1 notes, K3 financing, K4 backlog
@@ -262,12 +277,13 @@ Basket method (each layer's Base exit P/E, payout and cash conversion; 6 Nov pri
 
 | Basket or name | P/E CY27 | Base IRR (NOK) | 2028–30 × Base for **k = 12%** (path) | for **0%** (path) | Source |
 |---|---|---|---|---|---|
-| **H1 compute basket** | 13.71 | 7.5% | **1.14** (1.04 / 1.00 / .99) | 0.79 (.72 / .70 / .69) | `impl.py H1` |
-| **E platform basket** | 20.95 | 8.6% | **1.10** (1.18 / 1.29 / 1.40) | 0.78 (.83 / .91 / .99) | `impl.py E` |
+| **H1 compute basket** (18 Nov; new Base) | 12.84 | 7.5% | **1.14** (.97 / .93 / .92) | 0.79 (.67 / .65 / .64) | `impl.py H1` |
+| NVIDIA (basket method, 18 Nov) | 9.92 | — | **0.87** (.74 / .71 / .70) | 0.60 | `impl.py H1` |
+| **E platform basket** (18 Nov) | 20.81 | 8.9% | **1.09** (1.16 / 1.27 / 1.38) | 0.77 (.83 / .90 / .98) | `impl.py E` |
 | NVIDIA, own build (v1.3, $168.89) | — | — | k-path .76 / .78 / .75 of CY27 consensus = **~0.86×** the Base `[A]` | — | `docs/nvda-analysis.md`; restated at its 17 Nov run |
 | TSMC, own build (v1.2, $396.48) | — | — | **1.07×** its H3 path | 0.76× | `docs/tsm-analysis.md` |
 
-**Reading:** the compute price needs H1 EPS to hold at about the CY27 consensus level through 2030 (1.04 / 1.00 / .99), i.e. no digestion; on Base it digests to .91 / .88 / .87. NVIDIA's own build is cheaper (its k-path ~14% below Base). The platforms need ~10% more than Base 2028–30.
+**Reading (18 Nov):** the compute basket still needs H1 EPS near .93–.97 of CY27 consensus through 2030, above the new Base (.85 / .82 / .81); NVIDIA alone is priced below Base (0.87×), the rest of the basket far above it (AMD 2.9×, Broadcom 1.6×). NVIDIA's own build is cheaper (its k-path ~14% below Base). The platforms need ~10% more than Base 2028–30.
 
 ### 6. Signposts with dates
 
@@ -370,42 +386,39 @@ Basket method (each layer's Base exit P/E, payout and cash conversion; 6 Nov pri
 
 ### 4. How likely, and when: the judgement against Base
 
-| Dimension | Base (EPS path unchanged since 12 Oct) | Judgement | For the judgement | Against it |
+| Dimension | Base (18 Nov: EPS .90 / .50 / .32 / .28) | Judgement | For the judgement | Against it |
 |---|---|---|---|---|
 | **Timing of the turn** | 2027 up on price but flat from the Q4-26 run-rate (index 138 against ~130); EPS .90 of CY27 consensus; the fall in 2028 | **About Base; risk 1–2 quarters earlier.** First q/q declines may come in 2H-27 for NAND and commodity and mobile DRAM; HBM and LTA server DRAM follow in 2028 | q/q growth halved twice; mobile 0–5% and NAND flat; the 2021 pattern; customer stock at the edges; UBS's NAND peak in CQ3-27; looser NAND in 2H-27; IDC: prices "stabilise by mid-2027"; NAND wafer spot −4.3% (4 Nov) | LTAs on > 50–75% of output; 2027 HBM settled; supplier stock < 2 weeks; TrendForce: DRAM up "through 2027"; new fabs only from 2H-27 |
-| **Depth in 2028** | EPS .60 (−33%); revenue −14% (≈ −30% per bit) | **Base or shallower for the three leaders** | Micron's floors and > 75% committed; settled HBM; capacity staged in shells; AI inference demand | No floor levels at SK hynix or Samsung (Samsung's hedges investment, not margins); ranges follow the market; a weaker consumer floor than in 2018 |
-| **Depth 2029–30 (mid-cycle)** | .40 / .35 (2030 ≈ 2.7× SK hynix's 2025 EPS and ~4× Samsung's 2025 net income: the AI-era structural assumption) | **Base or deeper: the main risk** | The 2028–29 supply wave (Yongin, P5, ID2, Japan, M17, Y2, CXMT toward 500k, 1δ, G11) lands while AI capex is flat (2029, K1 Base); HBM wafers can return to DRAM | More AI content per system; oligopoly discipline and LTAs; 1δ cost per bit supports margins |
-| **Overall** | | **Base kept.** The evidence moves the timing risk slightly earlier and the 2029–30 risk deeper, and holds the 2028 point. No independent figure (a floor, a price decline, a capex figure) meets a minimum change. 25/50/25 is a convention, not a probability | | |
+| **Depth in 2028** | EPS .50 (−44%); revenue −22% (index 108) `[A]` | **Base or shallower for the three leaders** | Micron's floors and > 75% committed; settled HBM; capacity staged in shells; AI inference demand | No floor levels at SK hynix or Samsung (Samsung's hedges investment, not margins); ranges follow the market; a weaker consumer floor than in 2018 |
+| **Depth 2029–30 (mid-cycle)** | .32 / .28 (was .40 / .35; 2030 still ≈ 2.2× SK hynix's 2025 EPS: an AI-era mid-cycle, lower) | **Base or deeper: the main risk** | The 2028–29 supply wave (Yongin, P5, ID2, Japan, M17, Y2, CXMT toward 500k, 1δ, G11) lands while AI capex is flat (2029, K1 Base); HBM wafers can return to DRAM | More AI content per system; oligopoly discipline and LTAs; 1δ cost per bit supports margins |
+| **Overall (18 Nov turn call)** | | **Base moved deeper on 2028–30** (.60 / .40 / .35 → .50 / .32 / .28), 60%: three lead families down (slowing contract-price momentum and softer DDR5 spot; the supplier capex step-up; memory shares −33% to −41%) against one up (HBM4 2027 sold out, LTAs). 2027 kept. Reversal: Q1-27 DRAM contract ≥ +10% q/q with spot above contract (early Jan) | | |
 
 ### 5. What the price implies
 
-Basket method: Base exit P/E 10, payout 15%, cash conversion .70 / .65 / .60, Base FX; 6 Nov closes (Seoul before the US rebound), 7 Nov consensus; 2027 held at .90 and 2028–30 scaled on .60 / .40 / .35. `references/impl.py` reproduces every figure.
+Basket method: Base exit P/E 10, payout 15%, cash conversion .70 / .65 / .60, Base FX; 18 Nov closes, 7 Nov consensus basis; 2027 held at .90 and 2028–30 scaled on the **new Base .50 / .32 / .28**. `references/impl.py` reproduces every figure.
 
-| | P/E CY27 | Base IRR (NOK) | 2028–30 × Base for **k = 12%** (path) | for **0%** (path) | Flat 2028–30 level for k / 0% |
-|---|---|---|---|---|---|
-| **Memory basket** | 2.64 | 21.6% | **0.75** (.45 / .30 / .26) | **0.49** (.29 / .19 / .17) | .27 / .18 |
-| SK hynix | 2.14 | 30.5% | 0.57 (.34 / .23 / .20) | 0.37 (.22 / .15 / .13) | .21 / .13 |
-| Samsung | 2.44 | 24.8% | 0.68 (.41 / .27 / .24) | 0.44 (.26 / .18 / .15) | .25 / .16 |
-| Micron | 3.60 | 9.7% | 1.08 (.65 / .43 / .38) | 0.72 (.43 / .29 / .25) | .40 / .26 |
+| | P/E CY27 | 2028–30 × new Base for **k = 12%** (path) | for **0%** (path) | Flat 2028–30 level for k / 0% |
+|---|---|---|---|---|
+| **Memory basket** (Base IRR 13.7%) | 2.69 | **0.95** (.47 / .30 / .27) | **0.62** (.31 / .20 / .17) | .28 / .18 |
+| SK hynix | 2.16 | 0.72 (.36 / .23 / .20) | 0.46 (.23 / .15 / .13) | .21 / .14 |
+| Samsung | 2.52 | 0.87 (.44 / .28 / .24) | 0.57 (.28 / .18 / .16) | .26 / .17 |
+| Micron | 3.69 | 1.37 (.69 / .44 / .38) | 0.92 (.46 / .29 / .26) | .41 / .27 |
 
 | Basket path (EPS 2027 / 28 / 29 / 2030, CY27 consensus = 1) | IRR, exit P/E 10 | IRR, exit P/E 8 |
 |---|---|---|
-| **Base: turn in 2028 (2017–19 analogue)** (.90 / .60 / .40 / .35) | **21.6%** | 15.5% |
-| Earlier turn: prices fall from 2H-27 (.80 / .45 / .35 / .35) | 19.8% | 13.5% |
-| Later turn: prices hold through 2028, fall in 2029 (.95 / .85 / .55 / .40) | 28.0% | 21.7% |
-| Shallower: LTA floors hold, higher mid-cycle (.90 / .70 / .55 / .45) | 30.6% | 23.8% |
-| Deeper: a 2019-depth fall, pre-AI-style mid-cycle (.90 / .45 / .30 / .25) | 10.9% | 5.6% |
-| Bull path (1.00 / .80 / .55 / .45) | 31.7% | 25.0% |
-| Bear path at the Base exit P/E (.60 / .30 / .25 / .25) | 7.3% | 1.6% |
-
-Exit P/E sensitivity of the basket multiplier for k: 0.90 at exit P/E 8, 0.75 at 10, 0.69 at 11.
+| **New Base: turn in 2028, deeper** (.90 / .50 / .32 / .28) | **13.7%** | 8.0% |
+| Old Base (.90 / .60 / .40 / .35) | 21.0% (re-mark only) | — |
+| Prices fall from 2H-27 (.80 / .45 / .35 / .35) | 19.2% | 12.8% |
+| Later turn: prices hold through 2028 (.95 / .85 / .55 / .40) | 27.4% | 21.0% |
+| Shallower: LTA floors hold (.90 / .70 / .55 / .45) | 30.0% | 23.1% |
+| Deeper: a 2019-depth fall (.90 / .45 / .30 / .25) | 10.3% | 4.9% |
+| Bull path (1.00 / .80 / .55 / .45) | 31.1% | 24.4% |
+| Bear path at the Base exit P/E (.60 / .30 / .25 / .25) | 6.6% | 0.9% |
 
 **Reading:**
-- **The price discounts a turn about 25% deeper or earlier than Base on 2028–30.** The earlier-turn path returns 19.8% and the 2019-depth path 10.9%; only a 2019-depth fall, or the Bear, fails k.
-- **Timing is mostly priced; depth is not.** The mid-cycle and the exit multiple dominate.
-- **The Korean names price a deeper turn than the basket** (SK hynix 0.57×, Samsung 0.68×); from the June highs they are beyond both past full downturns (−39% / −49% and −35% / −42%). Micron (−43%) is inside its own (−54% / −50%) and prices about Base.
-- **The company analyses imply a deeper discount still:** they carry net cash, the fast cash return and the preference line, which this method leaves out (SK hynix and Samsung failed k only at 2030 EPS ×0.6 and ×0.5 in their v2 runs).
-- **Basis caveat (checkpoint 4):** the multipliers are on today's consensus; under the layer method a rise in peak-year consensus lifts 2028–30 one for one.
+- **The price now sits on the new Base** (k at 0.95×): our call moved to where the market already was on 6 Nov (0.75× the old Base ≈ .45 / .30 / .26). On memory we are **with the market**, not ahead of it. The edge left is the reversal test in early January.
+- **SK hynix prices a turn ~28% deeper than the new Base, Samsung ~13%; Micron ~37% shallower.** The Korean discount is wider than their own analyses' net cash and cash return explain.
+- Only a 2019-depth fall or the Bear fails k at the basket level; at exit P/E 8 the new Base returns 8.0%.
 
 ### 6. Signposts with dates
 
@@ -615,7 +628,7 @@ Exit P/E sensitivity of the basket multiplier for k: 0.90 at exit P/E 8, 0.75 at
 | Federal AI and data-center law | A moratorium or binding siting limit signed into law, or export rules beyond China / a bipartisan law setting cost allocation and permitting terms | Nothing before the new Congress (3 Jan 2027); no export rule published (NVIDIA puts its exposure beyond China at ≈ 5–8% of revenue `[A]`); House briefing 18 Nov, Trump–Xi 18–19 Nov; FY28 NDAA the likely vehicle | IAPP, Al Jazeera, Bloomberg `[E]` |
 | M365 Copilot seats | < 45m mid-2027 / > 70m | 30m (Jul); no count since (premium seats "millions") | Microsoft `[E]` |
 | BTOS AI use | < 22% mid-2027 / > 30% | 17–20% (May), 21.7% (Jul) | Census `[F]`/`[E]` |
-| Basket P/E CY27: compute / platforms / foundry / memory | ≤ 12.1 / ≤ 19.1 / ≤ 16.5 / ≤ 3.38 (k trigger) | 13.7 / 21.0 / 17.3 / 2.64 (6 Nov): compute −11.8%, platforms −9.1%, foundry −4.7% from their triggers; memory through its trigger (read with the multiplier, 0.75×). NVIDIA alone at $168.89 would put compute at ~12.9 `[A]` | This baseline |
+| Basket P/E CY27: compute / platforms / foundry / memory | ≤ 12.1 / ≤ 19.1 / ≤ 16.5 / ≤ 3.38 (k trigger) | 12.8 / 20.8 / 17.0 / 2.69 (18 Nov): compute −11.7%, platforms −8.1%, foundry −2.9% from their triggers (compute and memory triggers on the new Base: 11.3 and 2.8); memory still through its trigger (+4.5%; k at 0.95×) | This baseline |
 | Lab financing: Anthropic IPO, OpenAI raises | IPO pulled or priced below the Series H (USD 965bn post-money, May 2026); OpenAI raise fails or misses SB Energy lease payments / IPO above those marks, OpenAI rated | **Pending:** S-1/A range $70–78, ×1.19–1.32 the Series H per common share ($58.90). Read per share: the 965bn post-money and the $0.92–1.02tn post-deal value count different share bases. A pricing inside the range (~18 Nov) crosses the Bull line and triggers a re-test. Amazon carries Anthropic at an implied ~1.16tn | S-1, S-1/A `[F]`; Reuters, Bloomberg `[E]` |
 | Vendor financing (flow) | New loans, guarantees or equity commitments to AI customers > USD 50bn in a quarter, or any guarantee called or stake impaired / commitments falling | Level ≥ USD 270bn (up to ~286bn). New supplier equity in the Class N placement ≤ ~16.5bn in Q4: below the flow line | 8-K, 10-Q, S-1/A `[F]`; Reuters `[E]` |
 | **Funded-customer credit stress** (user, 13 Nov): NVIDIA-backed neoclouds (CoreWeave, Nebius, Nscale, Lambda, Crusoe and peers) and OpenAI. Read with the GPU rental and resale line (its price leg). **Links:** a crossing is the **financing-break Bear** (non-K1 H1 −25 to −30% in 2027; Hardware notes) and meets leg (c) of Non-K1 compute funding; in NVIDIA's cascade test (`docs/nvda-analysis.md` v1.6) it is steps 2–3 (neoclouds fail; OpenAI misses its 2028 round, guaranty phases called) and the price leg is step 5: −20.8% a year, P_k $61.7, the price leg the largest driver | **Bear (crossed), any one:** (a) a backed neocloud misses a payment, defaults or needs a covenant waiver or amendment for a lease, offtake or coverage shortfall; (b) an NVIDIA guarantee called or a capacity buy-back exercised for a customer's shortfall (10-Q); (c) OpenAI's 2028 round fails, is cut, or SB Energy lease payments are missed; (d) CoreWeave unsecured > 20% or 5-year CDS > 2,000 bp for four weeks, or a secured financing pulled. **Touched:** CoreWeave unsecured > 15% or CDS > 1,000 bp. **Bull:** CoreWeave unsecured < 10% or CDS < 500 bp, or backed-neocloud debt at IG-like terms | **Touched (credit pricing), no event.** CoreWeave 2032 notes > 16% (6 Nov), 2031 at 79.5; 5-year CDS 1,289 bp (5 Nov) → ~1,155 (6 Nov); after Q3, yield to worst 14.7–15.3% (11 Nov; 2032 14.99% at 79.9); debt ~$46.9bn, Q4 interest $1.05–1.15bn, no unsecured issue "at current yields"; shares $48.73 → $56.60 (10–12 Nov). Microsoft stepping back from neocloud leases (5 Nov: Nscale Texas option declined, ~$3bn UK deal cancelled, 1.35 GW West Virginia LOI dropped; IREN timeline revised). NVIDIA in talks to guarantee Nscale's West Virginia build for Anthropic (6 Nov); new NVIDIA financing deals paused after August under review (WSJ, 13 Nov). **No default, waiver, missed payment, guarantee call or buy-back exercise found** at a backed neocloud (Fermi paid $25m on 16 Oct to drop a 400 MW lease covenant: a developer, no NVIDIA backing found). OpenAI 2028 round: no terms yet. Next: NVIDIA 10-Q (late Nov), Anthropic pricing (~18 Nov), CoreWeave Q4 (~late Feb) | CNBC, 24/7 Wall St., Bond Terminal, Bloomberg via Let's Data Science, The Information via BI, WSJ `[E]`; Yahoo `[F]` |
@@ -663,8 +676,8 @@ Exit P/E sensitivity of the basket multiplier for k: 0.90 at exit P/E 8, 0.75 at
 
 ## Change log
 
+- **18 Nov 2026 — leading-view update (skill 2026-11-18.1, method change):** re-mark to the 18 Nov close (all six 9.2% → 10.1% at old paths); turn calls H2 2028–30 .60 / .40 / .35 → .50 / .32 / .28 (revenue index 118 / 103 → 108 / 95) and H1 2028–30 .91 / .88 / .87 → .85 / .82 / .81 (revenue 750 / 745 → 705 / 695): all six → **8.8%**, memory 21.0% → 13.7%, compute 9.9% → 7.5%. Watch calls: H1 2027 up, K1 2028, T, H3. Readers: mu, smsn, skh, kospi, dnbtek (memory), nvda, tsm, global-index (compute); hy no.
 - **16 Nov 2026 — note, kept unchanged:** Samsung's and SK hynix's Q3 reports (DART, 16 Nov) give no LTA price, range or floor level (Samsung states a commodity floor on its calls): no H2 point moves. New signpost "Funded-customer credit stress" (touched, no event), read with GPU rental and resale prices (Bull-side). No value moved.
-- **12 Nov 2026 — compacted to the lean-document rules (CLAUDE.md, 12 Nov):** no value, path, method or verdict changed. Earlier versions are in git.
 - **11 Nov 2026 (evening) — K1 Base 2028–29 re-set (skill 2026-11-11.2, Option D):** K1 1,250 / 1,300 → 1,170 / 1,170, carried into H1, H4, the E cash conversion and the monetisation ratio; new K1 capex cycle section. Base NOK at the same prices: all six 10.0% → 9.2%, compute 11.2% → 7.5%.
 
 ## Appendix: market prints and sources
