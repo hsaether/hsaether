@@ -5,8 +5,17 @@ description: Equity Market BBB — the equity index baseline for Oslo (OSEBX) an
 
 # Equity Market BBB
 
-**Revision:** 2026-11-08.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-18.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/equity-market-bbb/` in the Finance folder.
+
+Change note 2026-11-18.1 (user, 18 Nov 2026: forecast before solid proof, and use market-implied data
+for everything it is worth; same method as the oil, AI, HY and supply skills): new **Leading view**
+section (families L1–L6 for equity indices, turn calls, scorecard) and **Market-implied reads** (index
+options: implied odds and percentiles against each scenario's Year-1 and window levels from S&P 500
+options (SPY, liquid; URTH options are too thin); VIX term structure; consensus revision momentum;
+FX forwards shown as carry, not as a forecast). Base stays a forecast set on the turn calls; the NOK
+Base stays spot flat, now stated as the market-first choice (spot beats forwards as an FX forecast).
+Step 1c added; Interface gets a Turn calls and market block; one trigger and a check. Method change.
 
 An index-level baseline for Oslo and global equities. It answers one question: **what total
 return can an index investor in NOK expect, year by year, from today's price, and at what index
@@ -46,13 +55,17 @@ makes them. ETFs (OBXD, URTH, NORW, IXC) are used only as data proxies for their
 - **Annual paths only.** An index has no booked days, so there is no Year-1 quarterly split.
 - **Stub has no scenario spread** (IAF rule): price flat by convention, dividend accrual only,
   identical in all scenarios. Scenarios diverge from Year 1.
-- **Base = the decision case.** Bear and Bull are stress tests tied to named catalysts, the same
+- **Base = the decision case, and it is a forecast** set on the turn calls (Leading view), not on
+  the last consensus print. Bear and Bull are stress tests tied to named catalysts, the same
   macro catalysts as [[hy-market-bbb]] so that equity and HY are stressed in the same world.
-  **25/50/25** is a labelled convention, never a probability.
+  **25/50/25** is a labelled convention, never a probability; options-implied odds are shown as the
+  market's odds beside it.
 - **k = 12%** (IAF) is reported as the index hurdle. It is a single-stock hurdle; for an index the
   allocation test is the HY comparison (see Decision rules). Neither ever lowers k for IAF.
 - **Minimum change (convention):** a Base window return changes only if the evidence moves it by
   at least 1.0 pp a year; a trigger level only if it moves by at least 3%. Smaller moves are noted.
+  The threshold governs the size of a move, not its timing: a move called on leading indicators is
+  applied now if it clears it.
 - **Staleness:** stale after 30 days, after an update of the oil or HY baseline that flags a
   change, or after an index move of more than 10% within a month.
 
@@ -366,6 +379,28 @@ years, plus rolling 36-month correlations at each September:
   say why the side case is not the Bear.
 - Each tail names catalysts, mechanism, earliest timing and signposts. No probability language.
 
+## Leading view and market-implied reads
+
+| Family | Examples | Typical lead |
+|---|---|---|
+| L1 Earnings revisions | Consensus CY+1 and CY+2 EPS momentum (S&P 500 via FactSet, Oslo bottom-up), revision breadth, guidance tone | 1–3 quarters on EPS paths |
+| L2 Volatility and options | VIX and its term structure (VIX, VIX3M, VIX6M), S&P 500 option skew, implied odds of the scenario levels | weeks to 2 quarters |
+| L3 Credit and rates | US and Euro HY OAS, CCC yields, real yields, the HY baseline's turn calls, NIBOR path | 1–3 quarters on multiples |
+| L4 Corporate behaviour | Buybacks vs capex, insider selling or buying in aggregate, IPO and issuance windows | 1–4 quarters |
+| L5 Market pricing and breadth | Index vs equal-weight, sector leadership (AI hardware), drawdown from highs, flows | the market's own forecast |
+| L6 Upstream turn calls | Oil (Oslo energy), AI (World AI layers), HY (macro scenario, NIBOR) | as the upstream call |
+
+- **Turn calls** per path (Oslo EPS by block, World EPS by block, the P/E or value-multiple path, the
+  NOK path): direction, size, timing, stated probability, families, dated reversal signpost. **Rule:**
+  two or more independent families and ≥ 60% move Base (L5 alone never does); otherwise a watch call.
+  Scorecard as in the other baselines.
+- **Market-implied reads (every run):** S&P 500 options (SPY chains, Yahoo; `oil-market-bbb/references/futures.py`
+  `chain()` and `dist()`) for the December expiry of Year 1 and the window end: percentiles and the
+  odds of the Bear, Base and Bull price levels (total return less dividends), stated as market odds
+  that include the risk premium. VIX term structure. Oslo has no liquid index options: read NORW and
+  OBX ETF prices only. **NOK:** Base stays spot flat; forward points (rate differential) are shown as
+  carry, not as a forecast, because spot has beaten forwards as an FX forecast.
+
 ## Decision rules (equity mirror of the HY trigger)
 
 All per index, in NOK, before tax, after an index-fund fee of **0.20%** `[A]`:
@@ -401,6 +436,10 @@ kept unchanged**.
 **Step 0 — Setup.** State this skill's revision and the revisions behind each upstream document.
 Note dates, days since the previous baseline, and whether the oil and HY baselines are fresh. Read
 the previous baseline and record its point values, triggers and signposts.
+
+**Step 1c — Leading indicators, turn calls and market-implied reads** (before Step 5 sets paths):
+read families L1–L6, score them, set or update each turn call, mark the scorecard, and run the
+market-implied reads.
 
 **Step 1 — Market snapshot.** OSEBX, URTH, ACWI, S&P 500, USD/NOK, EUR/NOK, Brent: last close
 with time stamp. MSCI Norway and MSCI World fundamentals (month-end). US 10-year, US HY OAS,
@@ -447,6 +486,8 @@ paths), and is it visible? Are the catalysts still right? Has a signpost been cr
   supports Bull only if earnings rise with it.
 - USD/NOK moves more than 7% within a month
 - A Bear or Bull signpost is crossed; the baseline is older than 30 days
+- A turn call's reversal signpost is hit; VIX closes above 30 for a week; or the options-implied odds
+  of a 20% fall by the Year-1 December expiry exceed 20%
 
 ## Output: `docs/equity-market-bbb.md`
 
