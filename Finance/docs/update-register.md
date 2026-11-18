@@ -98,10 +98,10 @@ Kept by the `update-chain` skill; checked by
 | hy | shipping | 2026-11-13 | main | Shipping row (tankers) |
 | equity | oil | 2026-11-18 | main | Oslo and World energy |
 | equity | hy | 2026-11-18 | main | NIBOR path, Bear macro, HY return, reference E / R |
-| equity | ai | 2026-11-18 | loop | AI layer paths in World |
+| equity | ai | 2026-11-05 | loop | AI layer paths in World (World not re-run 18 Nov; Oslo only) |
 | equity | msft | 2026-11-07 | loop | Company block in World |
 | equity | googl | 2026-11-11 | loop | Company block in World |
-| equity | nvda | 2026-11-18 | loop | Company block in World |
+| equity | nvda | 2026-11-05 | loop | Company block in World (v1.2; World not re-run 18 Nov) |
 | equity | amzn | 2026-11-11 | loop | Company block in World (from 6 Nov) |
 | equity | mu | 2026-11-05 | loop | Company block in World (from 6 Nov) |
 | ai | equity | 2026-11-06 | main | Scenarios, NOK path, World |
