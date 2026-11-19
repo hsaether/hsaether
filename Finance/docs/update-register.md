@@ -72,7 +72,7 @@ Kept by the `update-chain` skill; checked by
 | stb | docs/storebrand-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-19 | all | 2026-11-23 | 2026-10-18.2 | Date from the file |
 | tsm | docs/tsm-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-11-11 | none | 2026-11-17 | 2026-11-10.1 | v1.2 11 Nov (daily run): October revenue +59.7% y/y (above the +45% signpost, not crossed: set into 2027) and November board; re-mark at $396.48 (10 Nov close): Base 13.7% → 9.5%, P_k $369.8, margin −6.7%, clears → fails on price |
 | global-index | docs/global-index-funds-analysis.md | iaf-valuation | fund | 2026-11-01 | 2026-10-29 | all | 2026-11-17 | 2026-10-29.1 | Re-mark 29 Oct (MSFT v3, GOOGL v2, AI Update 5): Base −0.08 pp (DNB Global Indeks A 4.58%, Nordnet Global Indeks 4.73%), both fail; NAV date kept at 15 Oct; AI E-layer .92 not stacked on the company blocks; from the next run DNB Global Indeks A only (Nordnet Global Indeks dropped, user 1 Nov) |
-| dnbtek | docs/dnb-teknologi-analysis.md | iaf-valuation | fund | 2026-11-16 | 2026-11-16 | kospi | 2026-12-15 | 2026-11-12.1 | 6 Nov re-run (NAV 7,381.56 on 4 Nov; 5 Nov est. ≈ 7,145): Base 8.6% (10.0% at 5 Nov est.), P_k NAV 6,721, margin −8.9% (−5.4%), fails; E / R 0.113 vs new HY ref 0.254 (trigger NAV 6,399); 30 Sep holdings (ASML in); NVDA v1.2, TSM v1.1, GOOGL re-mark |
+| dnbtek | docs/dnb-teknologi-analysis.md | iaf-valuation | fund | 2026-11-19 | 2026-11-19 | none | 2026-12-15 | 2026-11-18.1 | v9 19 Nov (NAV 17 Nov 7,282.87; NVIDIA v1.8, SK hynix v3, AI BBB 18 Nov H1 and the H2 turn call applied to the memory blocks' Base [A] until skh/smsn re-run; market NIBOR): Base 10.3%, P_k 6,955, −4.5%, fails; E / R 0.159; Bear 2027 −23.5%. Model v9 (fundmodel.py; data v9) |
 | iaf-notes | docs/iaf-reference-notes.md | - | static | - | - | - | - | - | Background, not updated |
 | review-2029 | docs/review-2029-step-down.md | - | static | - | - | - | - | - | Review, not updated |
 | review-equity | docs/review-equity-market-bbb.md | - | static | - | - | - | - | - | Review, not updated |
@@ -150,15 +150,15 @@ Kept by the `update-chain` skill; checked by
 | amzn | hy | 2026-11-05 | main | NIBOR (E / R) |
 | dnb | equity | 2026-10-18 | main | Scenarios, Oslo financials block |
 | dnb | hy | 2026-10-17 | main | NIBOR path |
-| dnbtek | ai | 2026-11-16 | main | Layer EPS paths, exit P/Es |
-| dnbtek | equity | 2026-11-06 | main | World scenarios, NOK path |
+| dnbtek | ai | 2026-11-18 | main | Layer EPS paths, exit P/Es |
+| dnbtek | equity | 2026-11-18 | main | World scenarios, NOK path |
 | dnbtek | amzn | 2026-11-11 | main | Company block CA |
-| dnbtek | nvda | 2026-11-13 | main | Company block CN |
+| dnbtek | nvda | 2026-11-19 | main | Company block CN |
 | dnbtek | tsm | 2026-11-11 | main | Company block CT |
 | dnbtek | msft | 2026-11-07 | main | Company block CM |
 | dnbtek | googl | 2026-11-11 | main | Company block CG |
-| dnbtek | mu | 2026-11-05 | loop | Memory evidence (the fund holds no Micron) |
-| dnbtek | skh | 2026-11-04 | main | SK hynix company block (from 31 Oct; layer path only until 22 Oct) |
+| dnbtek | mu | 2026-11-19 | loop | Memory evidence (the fund holds no Micron) |
+| dnbtek | skh | 2026-11-16 | main | SK hynix company block (from 31 Oct; layer path only until 22 Oct) |
 | dnbtek | smsn | 2026-11-16 | main | Samsung company blocks, common and preference (from 31 Oct; layer path only until 22 Oct) |
 | googl | ai | 2026-11-07 | main | E2 cloud row, K1 capex, E-layer EPS |
 | googl | equity | 2026-11-06 | main | Macro scenarios, NOK path |
@@ -218,7 +218,7 @@ Kept by the `update-chain` skill; checked by
 | global-index | nvda | 2026-10-17 | main | Company block |
 | global-index | oil | 2026-10-24 | main | Energy block |
 | global-index | hy | 2026-10-24 | main | NIBOR (E / R) |
-| dnbtek | hy | 2026-11-11 | main | NIBOR (Base window 4.38%), HY market reference E / R (0.254 from 6 Nov) |
+| dnbtek | hy | 2026-11-18 | main | NIBOR (Base window 4.72%, market path from 18 Nov), HY market reference E / R (0.254 from 6 Nov) |
 | dnbtek | hy-funds | 2026-11-09 | main | Sissener R and E / R (the HY market reference comes from hy from 6 Nov) |
 | dnbtek | global-index | 2026-11-01 | main | DNB Global Indeks A as the World index-fund row |
 | global-index | hy-funds | 2026-10-24 | main | HY market reference E / R 0.196 |

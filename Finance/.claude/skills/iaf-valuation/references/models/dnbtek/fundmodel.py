@@ -1,4 +1,6 @@
-# DNB Teknologi A — look-through scenario model (docs/dnb-teknologi-analysis.md) under iaf-valuation, version 8 (16 Nov 2026;
+# DNB Teknologi A — look-through scenario model (docs/dnb-teknologi-analysis.md) under iaf-valuation, version 9 (19 Nov 2026:
+# NVIDIA v1.8 (18 Nov, $150.96), SK hynix v3 (16 Nov), AI BBB 18 Nov H1 .92/.85/.82/.81 and the H2 memory turn call applied to
+# the memory company blocks' Base [A] (option MEMOLD = the blocks as analysed), HY BBB 18 Nov market NIBOR path) — version 8 (16 Nov 2026;
 # v7 6 Nov, v6 30 Oct). v8: company blocks NVIDIA v1.6 (13 Nov, $166.19), TSMC v1.2 (11 Nov, $396.48), Amazon's 11 Nov re-mark
 # ($270.87, re-glided interim V_t), Samsung v3 (16 Nov, 196,800 / 161,300, preference discount 18.0%), Microsoft's 7 Nov re-mark
 # ($530.61) and Alphabet's 7 Nov block ($284.78); AI BBB 11 Nov: H1 Base .92 / .91 / .88 / .87 and the E cash conversion
@@ -11,12 +13,12 @@ import json, sys, os, copy
 K=0.12
 BL={}; META={}; CL={}; STUB=T=NAV=USD=OTH=None; PXKEY="14"; V7F="V7CO" in sys.argv; V7AIF="V7AI" in sys.argv
 RET=True                         # retained cash on
-NIB={"stub":4.80,"2027":4.79,"2028":4.39,"2029":3.86}   # Base NIBOR, hy-market-bbb (5 Nov, kept 11 Nov)
+NIB={"stub":4.80,"2027":4.79,"2028":4.78,"2029":4.58}   # Base NIBOR, hy-market-bbb 18 Nov (market path; was 4.80/4.79/4.39/3.86)
 def nibw(): return ((1+NIB["stub"]/100)**STUB*(1+NIB["2027"]/100)*(1+NIB["2028"]/100)*(1+NIB["2029"]/100))**(1/T)-1
 SC=["Bear","Base","Bull"]
 # EPS paths rel. to block CY27 consensus = 1.00: [2027, 2028, 2029, 2030 normalised] — AI BBB Interface (11 Nov paths)
 EPS={"E": {"Bear":[.88,.88,.97,1.05],"Base":[.97,1.07,1.17,1.27],"Bull":[1.00,1.13,1.27,1.41]},   # AI BBB "E rest" row (Meta, Oracle)
-     "H1":{"Bear":[.68,.50,.53,.57],"Base":[.92,.91,.88,.87],"Bull":[1.00,1.15,1.25,1.30]},   # 11 Nov: K1 plateau (was .92/.98/1.00/.97)
+     "H1":{"Bear":[.68,.50,.53,.57],"Base":[.92,.85,.82,.81],"Bull":[1.00,1.15,1.25,1.30]},   # 18 Nov turn call (11 Nov .92/.91/.88/.87)
      "H3":{"Bear":[.76,.63,.67,.71],"Base":[.95,1.03,1.10,1.16],"Bull":[1.00,1.15,1.28,1.40]},
      "T": {"Bear":[.88,.85,.93,1.00],"Base":[.95,1.03,1.11,1.19],"Bull":[1.00,1.10,1.20,1.30]},
      "X": {"Bear":[.85,.85,.93,1.00],"Base":[.97,1.05,1.13,1.21],"Bull":[1.00,1.09,1.18,1.27]}}
@@ -44,11 +46,11 @@ COMP={
    Bear=dict(V=[160.3,179.3,202.9],D=[0.88,0.88,0.88],EPS=[10.47,9.83,11.01,12.34]),
    Base=dict(V=[310.4,339.9,371.3],D=[0.91,0.96,1.01],EPS=[12.67,14.29,15.90,17.45]),
    Bull=dict(V=[377.3,441.8,515.9],D=[0.95,1.04,1.14],EPS=[13.81,16.67,18.98,21.40])),
- # docs/nvda-analysis.md v1.6 (13 Nov, $166.19): AI BBB 11 Nov H1 path (.92/.91/.88/.87 x $15.21), exit 17, stub $0.49
- "CN":dict(TK="NVDA",PA=166.19,CA_=15.21,DST=0.49,
-   Bear=dict(V=[106.6,115.8,125.8],D=[5.07,4.86,4.41],EPS=[10.34,7.61,8.06,8.67]),
-   Base=dict(V=[195.5,219.6,247.1],D=[6.59,8.11,7.92],EPS=[13.99,13.84,13.38,13.23]),
-   Bull=dict(V=[256.5,332.4,402.2],D=[7.00,9.59,10.70],EPS=[15.21,17.49,19.01,19.77])),
+ # docs/nvda-analysis.md v1.8 (19 Nov, $150.96): AI BBB 18 Nov H1 path (.92/.85/.82/.81 x $15.21), exit 17, payout 80%, stub $0.81
+ "CN":dict(TK="NVDA",PA=150.96,CA_=15.21,DST=0.81,
+   Bear=dict(V=[103.9,111.4,119.9],D=[6.72,6.25,5.77],EPS=[10.34,7.61,8.06,8.67]),
+   Base=dict(V=[171.3,195.6,223.0],D=[8.57,10.23,9.69],EPS=[13.99,12.93,12.47,12.32]),
+   Bull=dict(V=[241.0,319.5,392.6],D=[9.07,12.67,14.13],EPS=[15.21,17.49,19.01,19.77])),
  # docs/tsm-analysis.md v1.2 (11 Nov, $396.48; CY27 basis $23.43; dividends NT$35/44/52, the 2Q26 NT$7 paid 7 Jan 2027)
  "CT":dict(TK="TSM",PA=396.48,CA_=23.43,DST=0.0,
    Bear=dict(V=[218.2,233.9,250.9],D=[5.18,5.79,6.40],EPS=[17.81,14.76,15.70,16.64]),
@@ -71,13 +73,24 @@ COMP={
    Base=dict(V=[248367,269562,317431],D=[18815,27658,20099],EPS=[68045,47438,33469,28366]),
    Bull=dict(V=[330830,378348,433345],D=[19503,30999,25230],EPS=[75428,62009,44554,35634]),
    Cap=dict(V=[76808,77342,84755])),
- # docs/skhynix-analysis.md v2 (28 Oct, Q3; kept 4 Nov): stub 34,181 (Q3 dividend 20,000, record 30 Nov, + the 10tn buyback);
- # 2027 D_t incl. the FY2026 rest 50,144; V_t incl. net cash and the Kioxia stake
- "CH":dict(TK="000660.KS",PA=1487000,CA_=467761,DST=34181,
-   Bear=dict(V=[1348025,1218755,1264700],D=[175021,63034,51145],EPS=[280657,140328,116940,116940]),
-   Base=dict(V=[1807139,1832050,2088422],D=[224423,107481,63776],EPS=[420985,280657,187104,163716]),
-   Bull=dict(V=[2376584,2571208,2841287],D=[236889,143905,83259],EPS=[467761,374209,257269,210492]),
-   Cap=dict(V=[624739,616017,661962]))}
+ # docs/skhynix-analysis.md v3 (16 Nov, KRW 1,120,000; CY27 basis 537,911): stub 34,181 (Q3 dividend 20,000 + the 10tn
+ # buyback); 2027 D_t incl. the FY2026 rest 50,144; V_t incl. net cash and the Kioxia stake; Cap = 1.73x next-year EPS
+ "CH":dict(TK="000660.KS",PA=1120000,CA_=537911,DST=34181,
+   Bear=dict(V=[1571011,1426280,1483072],D=[196067,73556,59913],EPS=[322746,161373,134478,134478]),
+   Base=dict(V=[1833397,2044194,2432092],D=[255992,128526,77806],EPS=[484120,322746,215164,188269]),
+   Bull=dict(V=[2435569,2874063,3299964],D=[271965,171964,102550],EPS=[537911,430329,295851,242060]),
+   Cap=dict(V=[559815,583617,640409]))}
+# v9 [A]: the AI BBB 18 Nov H2 turn call (Base 2028-30 .60/.40/.35 -> .50/.32/.28) applied to the memory blocks' Base until their
+# analyses are re-run: EPS 2028-30 x the path ratio; V_t lowered by the analysis' P/E glide x the next-year EPS change (preference
+# at its Base discount); D_t 2028-29 x that year's ratio. Bear and Bull paths did not change. MEMOLD keeps the blocks as analysed.
+H2R=[1.0,.50/.60,.32/.40,.28/.35]
+MEMGLIDE={"CH":[4.62,7.31,10.0],"CS":[5.1,7.5,10.0],"CP":[5.1,7.5,10.0]}
+if "MEMOLD" not in sys.argv:
+    for c,gl in MEMGLIDE.items():
+        y=COMP[c]["Base"]; e0=list(y["EPS"]); f=1-COMP[c].get("DISC",{}).get("Base",0.0)
+        y["EPS"]=[e*r for e,r in zip(e0,H2R)]
+        y["V"]=[y["V"][i]-gl[i]*(e0[i+1]-y["EPS"][i+1])*f for i in range(3)]
+        y["D"]=[y["D"][0],y["D"][1]*H2R[1],y["D"][2]*H2R[2]]
 # v7 company values (6 Nov version) of the blocks that moved in v8, for the attribution
 V7={"CM":dict(PA=531.01,Base=dict(V=[585.8,643.2,692.1],D=[4.01,4.37,4.76],EPS=[20.77,23.40,26.11,28.39]),
               Bull=dict(V=[681.6,806.0,921.4],D=[4.02,4.42,4.86],EPS=[22.03,26.26,30.37,33.80])),
@@ -125,7 +138,7 @@ def use_company(v7=None,only=None):
     setup()
 def use_ai(v7):
     """AI BBB Base rows: v7 (5 Nov check) or v8 (11 Nov)"""
-    EPS["H1"]["Base"]=list(AI7["H1"]) if v7 else [.92,.91,.88,.87]
+    EPS["H1"]["Base"]=list(AI7["H1"]) if v7 else [.92,.85,.82,.81]
     CONV["E"]["Base"]=list(AI7["E"]) if v7 else [-.20,.11,.36]
 def load(folder="."):
     """read blocks.json (with NAV, stub days and currency mix) and closes.json from a working folder"""
@@ -133,7 +146,7 @@ def load(folder="."):
     b=json.load(open(os.path.join(folder,"blocks.json"))); META=b.pop("_meta",{})
     BL.clear(); BL.update(b); CL=json.load(open(os.path.join(folder,"closes.json")))
     STUB=META.get("stub",48)/365; T=STUB+3          # stub = valuation date (day after the NAV date) -> 31 Dec 2026
-    NAV=META.get("nav",7603.41)
+    NAV=META.get("nav",7282.87)
     USD,OTH=META.get("usd",0.6283),META.get("oth",0.3514)   # DNB AM currency mix (30 Oct 2026: USD 62.83, other foreign 35.14)
     PXKEY="last" if META.get("prices")=="last" else "14"
     use_company()
