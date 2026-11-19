@@ -63,7 +63,7 @@ Kept by the `update-chain` skill; checked by
 | googl | docs/googl-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-10-28 | all | 2026-11-20 | 2026-11-10.1 | Version 2 (28 Oct) + price re-mark 1 Nov at the 30 Oct close $279.84: Base 4.6% → 9.6%, P_k $261.6 (−6.5%), fails; E / R 0.116; triggers: k $261.6, HY E / R $256.1 |
 | shb | docs/handelsbanken-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 12 Nov): no update until 3 Feb 2027 (year-end report). Version 2 |
 | msft | docs/msft-analysis.md | iaf-valuation | company | 2026-11-07 | 2026-10-28 | all | 2026-11-20 | 2026-11-01.1 | Version 3 (28 Oct, Q1 FY27 report and call): Base 8.8% → 9.5%, fails |
-| mu | docs/mu-analysis.md | iaf-valuation | company | 2026-11-05 | 2026-11-05 | none | 2026-11-17 | 2026-11-01.1 | v3 5 Nov price re-mark on the 5 Nov sell-off close $656.39 (was $856.49): Base 6.3% → 18.3%, P_k $751.6, margin −12.6% → +14.5%, fails → clears; Bear −1.7%, Bull 32.0%; E / R 0.616 vs HY BBB reference 0.254; model blocks kept; existing margin rule (not cycle-first); AI BBB layer method prices Micron at 1.05× Base 2028–30 (method gap) |
+| mu | docs/mu-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | none | 2026-12-18 | 2026-11-18.1 | v4 19 Nov (AI BBB 18 Nov H2 2028–30 .50 / .32 / .28; $705.27, 18 Nov close; cycle-first, Step 6b; compacted 840 → 294 lines; model mu/v4.py): Base 7.2%, P_k $634.7, −10.0%, **fails** (was clears); Bear −4.4%, Bull 28.7%. Price implies k at 1.14× the new Base (a trough ~14% shallower); ahead of the price on the negative side. Next: FQ1-27 16 Dec |
 | nvda | docs/nvda-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | dnbtek, equity, global-index | 2026-12-18 | 2026-11-18.1 | v1.8 19 Nov (AI BBB 18 Nov H1 2028–30 .85 / .82 / .81; $150.96, 18 Nov close; Step 6b): Base 19.3%, P_k $181.0, +19.9%, clears; Bear −2.7%, Bull 42.4%; E / R 0.392 (NIBOR 4.72). Price implies k at 0.815× the new Base 2028–30; with the market on the cycle, ahead on 2027. Cascade −16.1%, P_k $67.9. Next: 10-Q ~25 Nov; Anthropic price for the $10bn placement |
 | anthropic | docs/anthropic-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | ai, amzn, googl, msft, nvda | 2026-11-19 | 2026-11-12.1 | v1.0 13 Nov (IPO, Bafin EU prospectus 11 Nov): range $70–78; Base IRR 5.5 / 3.8 / 2.2%, P_k $58.4, margin −21.1% at $74, fails (clears ≈ $57.5); Bear −38%, Bull +31%; fully diluted 18.14bn shares; 58% of E1; re-mark at the final price |
 | skh | docs/skhynix-analysis.md | iaf-valuation | company | 2026-11-16 | 2026-11-16 | ai, kospi, mu | 2026-12-16 | 2026-11-12.1 | Version 2 (28 Oct, Q3 report): Seoul Base 21.1%, clears; ADR marginal at the post-report price; Seoul line and SKHY ADR line |
@@ -167,9 +167,9 @@ Kept by the `update-chain` skill; checked by
 | shb | hy | 2026-10-24 | main | Sweden GDP, Riksbank, NIBOR |
 | msft | ai | 2026-11-07 | main | E2, T1, T3 rows, K1 capex |
 | msft | equity | 2026-11-06 | main | Macro scenarios, NOK path |
-| mu | ai | 2026-11-05 | main | H2 memory layer |
-| mu | equity | 2026-10-18 | main | Scenarios, exit cross-check |
-| mu | hy | 2026-11-05 | main | NIBOR (E / R) |
+| mu | ai | 2026-11-18 | main | H2 memory layer |
+| mu | equity | 2026-11-18 | main | Scenarios, exit cross-check |
+| mu | hy | 2026-11-18 | main | NIBOR (E / R) |
 | mu | skh | 2026-10-22 | loop | Peer comparison (from the SK hynix analysis, not only market multiples; not yet read) |
 | mu | smsn | 2026-10-22 | loop | Peer comparison (from the Samsung analysis, not only market multiples; not yet read) |
 | nvda | ai | 2026-11-18 | main | H1 compute layer (11 Nov re-run held to the 17 Nov run, deferral rule) |
@@ -223,7 +223,6 @@ Kept by the `update-chain` skill; checked by
 | dnbtek | global-index | 2026-11-01 | main | DNB Global Indeks A as the World index-fund row |
 | global-index | hy-funds | 2026-10-24 | main | HY market reference E / R 0.196 |
 | hy | hy-issuers | 2026-11-11 | loop | Held-company news screen behind the default log |
-| mu | hy-funds | 2026-11-01 | main | HY market reference E / R 0.196 |
 | msft | hy | 2026-11-05 | main | NIBOR (E / R) |
 
 ## Not links
