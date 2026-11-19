@@ -14,6 +14,7 @@
 - **Clears: Base 19.3% a year against k = 12%. P_k $181.0 against P $150.96: margin of safety +19.9%.** The +2% line is at $177.5. From v1.7: the price (−2.9%) +1.2 pp, the AI BBB path −2.6 pp; P_k $193.0 → $181.0.
 - The return is a re-rating on falling earnings (core P/E 10.4 today, exit 17). **k needs an exit P/E of 13.5**. A lasting CEO de-rating to 15 clears (+8.5%); to 13 it fails (−3.0%).
 - **The three new risks together** (funding stop, closed diversion channels, exit 15) leave **13.4%, margin +3.6%: clears**. In their wide form with exit 13 they give 5.3% (fails).
+- **The user's funding-loss case (19 Nov; sensitivity (e), not Base):** customer funding continues at $75bn a year, the funded book is worth half at exit, $30bn of guarantees are called and the market de-rates to 15×: **13.3%, P_k $156.1, +3.4%: still clears, just**. The losses alone cost ~2 pp; the de-rating ~4 pp. **It fails once the funded buyers also cut orders** (2028–30 EPS ×0.9): 9.6%, P_k $141.6 (−6.2%); break-even at EPS ×0.96. The full version is the cascade test below.
 - **Bear −2.7% a year:** capital not preserved (−7.6%); the balance sheet is never at risk.
 - **Cascade stress test** (beside Base and Bear, not Base): NVIDIA stops new funding from 2028, funded buyers fail and the price breaks: **−16.1% a year, P_k $67.9, capital −39%**; net cash stays positive. Keeping the buyers alive with a two-year bridge costs ≤ 0.9 pp of Base.
 - **Price versus our call (Step 6b): with the market on the cycle, ahead on the 2027 earnings.** The price implies a digestion ~19% deeper than our (already lowered) Base; Q3 and the guide point to 2027 above Base. Signals: L1 +1 (Q4 guide, supply commitments), L3 −1 (neocloud credit), L5 −1 (−38% from the high, consensus up), L4 0. The named reason the market may be missing: 2027 is contracted (K4 backlog, supply commitments) while the price discounts the 2028–29 digestion at once.
@@ -352,9 +353,10 @@ Variant H2 2027: half a year of effects in 2027 (backfill 50% in the supply-limi
 | **(b) Full closure of diversion channels** (BIS rule 16 Nov), central: revenue −1.5% in 2027, −3% from 2028 | | **18.1% ($175.8, +16.5%)** | |
 | (b) wide: −6% from 2027 and a $5bn penalty in 2027 (Base = k at a 16.6% loss, fails at 18.2%) | | 16.7% ($170.0, +12.6%) | |
 | **(c) CEO-transition de-rating:** exit 16 / **15** / 13 | | 17.3% / **15.2% ($163.7, +8.5%)** / 10.8% ($146.4, −3.0%: fails) | |
-| (c) exit 15 and 2029–30 EPS × 0.95 (customers hedge 2028–29 designs) | | 13.5% ($157.0, +4.0%) | |
 | **(d) All three, central:** (a) + (b) central, exit 15 | | **13.4% ($156.4, +3.6%)** | |
 | (d) all three, wide: (a) + (b) wide, exit 13 | | 5.3% ($126.6, −16.2%: fails) | |
+| **(e) User's funding-loss case** (19 Nov, `v18_userfund.py`): funding $75bn a year from 2027 / + stakes at 50% / + guarantees called $15bn 2028–29 and $30bn at exit / + exit 15 | | 18.9% / 17.8% / 17.4% / **13.3% ($156.1, +3.4%)** | |
+| (e) + funded customers cut orders (2028–30 EPS ×0.9) / + funding needs $100bn a year | | **9.6% ($141.6, −6.2%: fails)** / 9.2% ($140.1) | |
 | Exit P/E −2 / +2 | −7.1% / 1.3% | 15.2% / 23.0% | 38.0% / 46.6% |
 | Exit at today's core 10.40 (no re-rating) | −8.5% | 4.5% ($124.0) | 20.6% |
 | 2030 EPS × 0.9 / × 1.1 | −5.5% / −0.1% | 15.8% / 22.5% | 38.2% / 46.4% |
@@ -393,8 +395,7 @@ Variant H2 2027: half a year of effects in 2027 (backfill 50% in the supply-limi
 
 ## Tracking
 
-- **Base P_k $193.0 → $181.0 (v1.8):** the AI BBB's 18 Nov cut to H1 2028–30 (.91 / .88 / .87 → .85 / .82 / .81) on neocloud credit stress and the hardware sell-off; the price fell 2.9% after the report. The company stays **ahead of the Base path** on 2027 revenue (management ≈ the Bull row) and behind on margin (72–73%). Cascade −15.2% → −16.1% (lower 2028–29 starting point).
-- **First day after the report (18 Nov):** −2.9% on 343m shares despite the $130bn guide: the market weighed the margin guide, the financing review and the CEO search over the revenue beat (L5).
+- **Base P_k $193.0 → $181.0 (v1.8):** the AI BBB's 18 Nov cut to H1 2028–30 (.91 / .88 / .87 → .85 / .82 / .81) on neocloud credit stress and the hardware sell-off; the price fell 2.9% after the report. The company stays **ahead of the Base path** on 2027 revenue (management ≈ the Bull row) and behind on margin (72–73%). Cascade −15.2% → −16.1% (lower 2028–29 starting point). **First day after the report (18 Nov):** −2.9% on 343m shares despite the $130bn guide: the market weighed the margin guide, the financing review and the CEO search over the revenue beat (L5).
 
 ## Risks and signposts
 
@@ -417,15 +418,13 @@ Variant H2 2027: half a year of effects in 2027 (backfill 50% in the supply-limi
 
 - **`ai-market-bbb`** (no path set here; the 18 Nov note read Q3):
   1. **Company-check row:** Base 19.3%, P_k $181.0, margin +19.9% at $150.96 (18 Nov close); Bear −2.7%; Bull 42.4%; E / R 0.392; price-implied k at **0.815×** the 18 Nov Base 2028–30 (0% at 0.56×).
-  2. **Q3 readings for H1** `[F]`/`[E]`: Q4 guide $130bn (14 weeks; the Bull line crossed) and FY28 ~+75%, which equals the H1 Bull 2027 row (NVIDIA's Base 2027 revenue $626bn ≈ 0.84× management); GM guide 71–72% (Bear leg) on supply costs, 72–73% in FY28: the layer's margin give-back has started; hyperscale $60.1bn / ACIE $47.5bn (44.1%); frontier labs ~15% of FY27 data center; Vera Rubin ~$20bn.
-  3. **For H2/H3 and the memory signposts:** supply commitments **$279bn → $390bn**, "mainly multi-year memory procurement" (the "commitments raised" leg), within total commitments of $518bn (FY28 222, FY29 103, FY30+ 111, leases included); suppliers' prepays are NVIDIA's first use of capital; new substrate and packaging agreements (Kinsus, Samsung Electro-Mechanics, SPIL).
-  4. **Vendor financing and credit stress:** Q3 flow guarantees +$9.5bn (power and systems), leases and cloud +$28bn, equity purchases $15.7bn: loans, guarantees and equity ~$25bn, below the $50bn line, but **a stake was impaired ($1.8bn)**. Guarantees $118bn, no payments; neocloud agreements $32bn. Cascade −16.1% (P_k $67.9); a bridge costs ≤ 0.9 pp; a permanent subsidy reaches k at ~$107bn a year (half lost).
+  2. **Q3 readings** (read by the AI BBB on 18 Nov): Q4 guide $130bn, FY28 ~+75%, GM guide 71–72% then 72–73%; supply commitments $279bn → **$390bn**, mainly multi-year memory; guarantees +$9.5bn to $118bn, equity purchases $15.7bn, a $1.8bn stake impaired. Cascade −16.1% (P_k $67.9); a permanent subsidy reaches k at ~$107bn a year (half lost); the user's funding-loss case 13.3% (fails with an order cut).
 - **`equity-market-bbb`** (World block, loop), **`docs/dnb-teknologi-analysis.md`, `docs/global-index-funds-analysis.md`** (company block): EPS .92 / .85 / .82 / .81 × $15.21 (AI BBB 18 Nov); V_T Base 223.0, Bear 119.9, Bull 392.6. D_t paid (Base) 0.81 / 8.57 / 10.23 / 9.69 on the 80% payout.
 - **`docs/skhynix-analysis.md`, `docs/samsung-analysis.md`, `docs/kospi-analysis.md`, `docs/tsm-analysis.md`:** supply commitments $390bn (from $279bn), mostly multi-year memory: the "commitments raised" leg of their NVIDIA signpost; the split beyond FY29 comes with the 10-Q. NVIDIA's Q4 margin dips on "a significant change in the cost of supply". In the cascade the commitments turn into $28 / 11bn of excess-purchase charges in 2028–29, a memory Bear signal. **`docs/portfolio-overview.md`:** no input.
 
 ## Change log
 
-- **19 Nov 2026 — v1.8 (AI BBB 18 Nov; $150.96, 18 Nov close):** Base 19.3%, P_k $181.0, +19.9%; Bear −2.7%, Bull 42.4%; E / R 0.392 (NIBOR 4.72). H1 2028–30 .85 / .82 / .81 (was .91 / .88 / .87); Step 6b added (with the market on the cycle, ahead on 2027). Cascade −16.1%, P_k $67.9.
+- **19 Nov 2026 — v1.8 (AI BBB 18 Nov; $150.96, 18 Nov close; the user's funding-loss case added as sensitivity (e) the same day):** Base 19.3%, P_k $181.0, +19.9%; Bear −2.7%, Bull 42.4%; E / R 0.392 (NIBOR 4.72). H1 2028–30 .85 / .82 / .81 (was .91 / .88 / .87); Step 6b added (with the market on the cycle, ahead on 2027). Cascade −16.1%, P_k $67.9.
 - **18 Nov 2026 — v1.7 (Q3 FY27; $155.46, 17 Nov close):** Base 20.7%, P_k $193.0, +24.2%; Bear −3.7%, Bull 41.0%; E / R 0.360. Stub from the 25 Oct balance sheet, stakes re-marked (13F), payout 80% (buyback plan), revenue on the FY28 GM guide, capex at the Q3 run-rate; AI BBB path unchanged. Cascade on the Q3 inventory: −15.2%, P_k $71.9; volume now the worst step.
 - **13 Nov 2026 — v1.6:** cascade stress test (user; not Base) −20.8%, P_k $61.7. Re-mark at $166.19: Base 17.7%, P_k $192.5, +15.8%; Bear −5.4%; Bull 37.1%. Compacted to the lean rules.
 
@@ -447,4 +446,4 @@ By weight on the result (values in Common assumptions): (1) the H1 layer path ×
 | S8 | NVIDIA 8-K Q4 FY19, Q2 FY23 preliminary; Cisco FY01 10-K Ex. 13; Lucent FY01 10-K405 | Down-cycle revenue, gross margin, charges, customer financing | 2001–2022 filings |
 
 - **Validation (v1.8):** P is the 18 Nov regular close, the first full session after the report; the model keeps the 17 Nov valuation date and stub (one day, below rounding). v1.7: P the 17 Nov close (after hours ~$162 not used). The Q3 figures match between the release and the CFO commentary; supply commitments +40% and leases and cloud +38% q/q are confirmed by the call as a second source. Stakes are re-marked on the 30 Sep 13F counts (Q4 trades unknown); other marketable items of $4.1bn are not re-marked `[?]`. Not verified: the WSJ items (deals paused, the Caprez-led credit support: not in the release, the commentary or the call), the OpenAI stake size, the impaired stake, the customer share of the $74bn of leases, whether the Anthropic placement sits in the $20bn of commitments. Post-report FY Jan-28 consensus $16.61 (+4%); the AI BBB basis stays $15.21 (CY27, 7 Nov). Silicon Data returned HTTP 500 on 18 Nov.
-- **Scripts:** `.claude/skills/iaf-valuation/references/models/nvda/v18.py` (model: v17 with the 18 Nov H1 path), `v18_run.py` (decision figures, tables, sensitivities, driver breakdown, bridge, exit cross-check; `py v18_run.py 150.96`) and `v18_cascade.py` (cascade test). `v17.py` / `v17_run.py 155.46` reproduce v1.7. Run there with `py`.
+- **Scripts:** `.claude/skills/iaf-valuation/references/models/nvda/v18.py` (model: v17 with the 18 Nov H1 path), `v18_run.py` (decision figures, tables, sensitivities, driver breakdown, bridge, exit cross-check; `py v18_run.py 150.96`) `v18_cascade.py` (cascade test) and `v18_userfund.py` (the user's funding-loss case). `v17.py` / `v17_run.py 155.46` reproduce v1.7. Run there with `py`.
