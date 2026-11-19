@@ -64,7 +64,7 @@ Kept by the `update-chain` skill; checked by
 | shb | docs/handelsbanken-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 12 Nov): no update until 3 Feb 2027 (year-end report). Version 2 |
 | msft | docs/msft-analysis.md | iaf-valuation | company | 2026-11-07 | 2026-10-28 | all | 2026-11-20 | 2026-11-01.1 | Version 3 (28 Oct, Q1 FY27 report and call): Base 8.8% → 9.5%, fails |
 | mu | docs/mu-analysis.md | iaf-valuation | company | 2026-11-05 | 2026-11-05 | none | 2026-11-17 | 2026-11-01.1 | v3 5 Nov price re-mark on the 5 Nov sell-off close $656.39 (was $856.49): Base 6.3% → 18.3%, P_k $751.6, margin −12.6% → +14.5%, fails → clears; Bear −1.7%, Bull 32.0%; E / R 0.616 vs HY BBB reference 0.254; model blocks kept; existing margin rule (not cycle-first); AI BBB layer method prices Micron at 1.05× Base 2028–30 (method gap) |
-| nvda | docs/nvda-analysis.md | iaf-valuation | company | 2026-11-18 | 2026-11-18 | ai, equity, global-index | 2026-12-18 | 2026-11-12.1 | v1.6 13 Nov (user: cascade stress test; re-mark at $166.19, 12 Nov close; compacted 655 → 440 lines): Base 17.7%, P_k $192.5, +15.8%, clears; Bear −5.4%, Bull 37.1%; E / R 0.287. Cascade (funding stop 2028, funded share 39% lost, GM 62%, exit 13): −20.8%, P_k $61.7, capital −49%; H2-27 start −24.3%; worst step price and margin; net cash never below $148bn. Keeping the buyers alive: bridge ≤ 1.4 pp; permanent subsidy reaches k at ~$94bn a year (half lost) |
+| nvda | docs/nvda-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | dnbtek, equity, global-index | 2026-12-18 | 2026-11-18.1 | v1.8 19 Nov (AI BBB 18 Nov H1 2028–30 .85 / .82 / .81; $150.96, 18 Nov close; Step 6b): Base 19.3%, P_k $181.0, +19.9%, clears; Bear −2.7%, Bull 42.4%; E / R 0.392 (NIBOR 4.72). Price implies k at 0.815× the new Base 2028–30; with the market on the cycle, ahead on 2027. Cascade −16.1%, P_k $67.9. Next: 10-Q ~25 Nov; Anthropic price for the $10bn placement |
 | anthropic | docs/anthropic-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | ai, amzn, googl, msft, nvda | 2026-11-19 | 2026-11-12.1 | v1.0 13 Nov (IPO, Bafin EU prospectus 11 Nov): range $70–78; Base IRR 5.5 / 3.8 / 2.2%, P_k $58.4, margin −21.1% at $74, fails (clears ≈ $57.5); Bear −38%, Bull +31%; fully diluted 18.14bn shares; 58% of E1; re-mark at the final price |
 | skh | docs/skhynix-analysis.md | iaf-valuation | company | 2026-11-16 | 2026-11-16 | ai, kospi, mu | 2026-12-16 | 2026-11-12.1 | Version 2 (28 Oct, Q3 report): Seoul Base 21.1%, clears; ADR marginal at the post-report price; Seoul line and SKHY ADR line |
 | smsn | docs/samsung-analysis.md | iaf-valuation | company | 2026-11-16 | 2026-11-16 | mu, skh | 2026-12-16 | 2026-11-12.1 | Version 2 (29 Oct, Q3 report): common Base 26.9% → 23.3%, preference 29.5% → 25.6%, both clear; common, preference and GDR lines |
@@ -172,9 +172,9 @@ Kept by the `update-chain` skill; checked by
 | mu | hy | 2026-11-05 | main | NIBOR (E / R) |
 | mu | skh | 2026-10-22 | loop | Peer comparison (from the SK hynix analysis, not only market multiples; not yet read) |
 | mu | smsn | 2026-10-22 | loop | Peer comparison (from the Samsung analysis, not only market multiples; not yet read) |
-| nvda | ai | 2026-11-16 | main | H1 compute layer (11 Nov re-run held to the 17 Nov run, deferral rule) |
-| nvda | equity | 2026-11-06 | main | Scenarios, NOK path |
-| nvda | hy | 2026-11-11 | main | NIBOR (E / R) |
+| nvda | ai | 2026-11-18 | main | H1 compute layer (11 Nov re-run held to the 17 Nov run, deferral rule) |
+| nvda | equity | 2026-11-18 | main | Scenarios, NOK path |
+| nvda | hy | 2026-11-18 | main | NIBOR (E / R) |
 | nvda | anthropic | 2026-11-13 | main | Value of the $10bn Class N placement (shares at the IPO price, value at P_k); not yet read |
 | anthropic | ai | 2026-11-11 | main | E1 frontier-lab revenue paths (Anthropic share set in the analysis), scenarios, lab-financing signposts |
 | anthropic | equity | 2026-11-06 | main | Scenarios, NOK path, exit cross-check |
