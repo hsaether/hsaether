@@ -1,6 +1,6 @@
 # DNB Teknologi A — IAF fund analysis on the Equity and AI Market BBBs
 
-**Version 9 — 19 Nov 2026** · NAV **NOK 7,282.87 (17 Nov 2026)**, holdings at their 17 Nov closes, weights of the DNB AM factsheet of 30 Oct · skills: iaf-valuation **2026-11-18.1**; inputs AI BBB 18 Nov (ai-market-bbb 2026-11-18.1: H1 2028–30 lower, H2 memory 2028–30 deeper), NVIDIA v1.8 (19 Nov), SK hynix v3 (16 Nov), Equity BBB 18 Nov note (values of 6 Nov), HY BBB 18 Nov (market NIBOR path; values of 5 Nov) · **verdict: fails** (Base margin of safety −4.5%).
+**Version 9 — 19 Nov 2026** · NAV **NOK 7,282.87 (17 Nov 2026)**, holdings at their 17 Nov closes, weights of the DNB AM factsheet of 30 Oct · skills: iaf-valuation **2026-11-18.1**; inputs AI BBB 18 Nov (ai-market-bbb 2026-11-18.1: H1 2028–30 lower, H2 memory 2028–30 deeper), NVIDIA v1.8, SK hynix v4 and Samsung v4 (19 Nov, on the deeper memory path), Equity BBB 18 Nov note (values of 6 Nov), HY BBB 18 Nov (market NIBOR path; values of 5 Nov) · **verdict: fails** (Base margin of safety −4.6%).
 
 ## Summary
 
@@ -9,24 +9,24 @@
 - **What turns it:** new supply from 2H-27 into 2028 (node ramps, the 2028 fab wave, Samsung capex +60% in 2026 and higher in 2027) meets AI capex digestion (K1 plateau 1,170 / 1,170bn). LTAs soften a fall for the leaders; no floor levels are disclosed in Korea.
 - **The AI BBB's call (18 Nov, 60%, moved Base):** 2027 kept (.90); **2028–30 deeper: .50 / .32 / .28** (was .60 / .40 / .35). Reversal signpost: Q1-27 DRAM contract ≥ +10% q/q with spot above contract (early Jan).
 - **What the price implies:** the memory basket earns k at **0.95×** the new Base 2028–30; SK hynix 0.72×, Samsung 0.87× (layer method). The Korean prices still discount a turn deeper than the (already deeper) Base.
-- **In the fund:** memory is **7.0% of the model and 38% of its 2027 consensus earnings** at P/E 2.2. Its Base return is ~33% a year before cost (on the new path, `[A]` until the Samsung and SK hynix analyses are re-run), ~21% on the decision Bear (8× trough exit) and −29% in 2027 capped at today's multiple. **The turn call cost the fund 0.7 pp of Base; memory 2030 at a further 0.6× takes the Base from 10.3% to 9.4%.** It fails k either way.
+- **In the fund:** memory is **7.0% of the model and 38% of its 2027 consensus earnings** at P/E 2.2. Its Base return is ~32% a year before cost (Samsung and SK hynix v4, 19 Nov, on the new path), ~21% on the decision Bear (8× trough exit) and −28% in 2027 capped at today's multiple. **The turn call cost the fund ~0.7 pp of Base; memory 2030 at a further 0.6× takes the Base from 10.3% to 9.3%.** It fails k either way.
 
 **Verdict**
-- **Fails the IAF hurdle.** Base return to end-2029 is **10.3% a year in NOK after the 1.14% all-in cost**. **NAV NOK 7,282.87 (17 Nov) against a Base hurdle NAV P_k of NOK 6,955: margin of safety −4.5%.** Bear P_k NOK 4,729; Bull P_k NOK 9,011 (Bull clears: 20.2%, +23.7%).
-- **From v8 (−7.6%):** the NAV fell 4.2% (12 → 17 Nov) +1.9 pp of Base; NVIDIA v1.8, the H1 path and SK hynix v3 net −0.05 pp; the memory turn call −0.7 pp.
-- **What the price needs:** a NAV of **≈ 6,955** for k, **≈ 6,675** for E / R to reach the HY reference 0.254, or exit multiples **~1 turn higher** across all blocks at today's NAV (+1 turn: 12.1%).
-- **E / R 0.159** (memory-stressed 0.136) against the HY market reference **0.254**. The Base (10.3%) beats HY after fee (6.9%) and World (6.4%).
-- **Bear breaks capital:** −23.5% in 2027 (≈ −NOK 37k on the position; −29.3% ≈ −NOK 47k memory-stressed); −3.2% a year; capital −9.1% at exit.
+- **Fails the IAF hurdle.** Base return to end-2029 is **10.3% a year in NOK after the 1.14% all-in cost**. **NAV NOK 7,282.87 (17 Nov) against a Base hurdle NAV P_k of NOK 6,950: margin of safety −4.6%.** Bear P_k NOK 4,731; Bull P_k NOK 9,015 (Bull clears: 20.2%, +23.8%).
+- **From v8 (−7.6%):** the NAV fell 4.2% (12 → 17 Nov) +1.9 pp of Base; NVIDIA v1.8, the H1 path and SK hynix's 16 Nov re-run net −0.05 pp; the memory turn call, through the Samsung and SK hynix v4 analyses, −0.7 pp.
+- **What the price needs:** a NAV of **≈ 6,950** for k, **≈ 6,669** for E / R to reach the HY reference 0.254, or exit multiples **~1 turn higher** across all blocks at today's NAV (+1 turn: 12.1%).
+- **E / R 0.158** (memory-stressed 0.135) against the HY market reference **0.254**. The Base (10.3%) beats HY after fee (6.9%) and World (6.4%).
+- **Bear breaks capital:** −23.4% in 2027 (≈ −NOK 37k on the position; −29.3% ≈ −NOK 47k memory-stressed); −3.1% a year; capital −9.1% at exit.
 
 **Base in brief**
 - Look-through EPS at **0.92× CY27 consensus in 2027 and 0.82× in 2030**: the AI layers on the AI BBB 18 Nov paths, company blocks on their analyses, memory falling to its new, deeper mid-cycle; the rest of the fund grows.
-- **Where the return comes from** (per 100 of NAV): non-memory earnings **+12.8** and value multiple **+11.8** (retained cash 2.9, company net cash and stakes); memory earnings **−5.0** and memory re-rating **+10.6**; distributions **+8.7**; cost **−4.6** → ΣD + V_T **134.2**.
-- **Break-even:** k at NAV ≈ 6,955, or at the 17 Nov NAV with exit multiples ~+1 turn; the manager's 10-year alpha (+2.0 pp) alone gives 12.5% (clears).
-- **The manager's AI selection still shows:** the fund's AI holdings return **12.9%** before cost (17 Nov prices) against **8.8%** for the six AI baskets (AI BBB, 18 Nov prices).
+- **Where the return comes from** (per 100 of NAV): non-memory earnings **+12.8** and value multiple **+11.8** (retained cash 2.9, company net cash and stakes); memory earnings **−4.9** and memory re-rating **+10.3**; distributions **+8.8**; cost **−4.6** → ΣD + V_T **134.1**.
+- **Break-even:** k at NAV ≈ 6,950, or at the 17 Nov NAV with exit multiples ~+1 turn; the manager's 10-year alpha (+2.0 pp) alone gives 12.5% (clears).
+- **The manager's AI selection still shows:** the fund's AI holdings return **12.8%** before cost (17 Nov prices) against **8.8%** for the six AI baskets (AI BBB, 18 Nov prices).
 
 **Bear in brief**
 - **Story:** World recession in H1 2027 plus the AI BBB financing break (a lab misses commitments, 2028 hyperscaler capex −16%); memory overshoots in 2028. Earliest H1 2027.
-- **Worst year 2027: −23.5%.** The AI blocks alone give −19.2%; the non-AI block adds the rest; the weaker krone of the Bear cushions it (−30.6% at spot FX).
+- **Worst year 2027: −23.4%.** The AI blocks alone give −19.2%; the non-AI block adds the rest; the weaker krone of the Bear cushions it (−30.5% at spot FX).
 - **Damage by block (2027, NOK, before cost):** Broadcom −56%, Amazon −55%, ASML −53%, Alphabet −37%, TSMC −32%, Microsoft −26%, NVIDIA −22%, X −23%, software −21%, Meta −10%. Memory rises on the analyses' 8× trough exit; capped at today's multiple it falls ~29%.
 - **Capital −9.1% at exit** (−13.9% memory-stressed). A daily-liquid UCITS fund with no leverage: no balance-sheet risk.
 
@@ -35,31 +35,31 @@
 | | Bear | Base | Bull |
 |---|---|---|---|
 | **Price P: NAV (17 Nov 2026, Nordnet)** | NOK 7,282.87 | **NOK 7,282.87** | NOK 7,282.87 |
-| **P_k: hurdle NAV (k = 12%) / margin of safety** | **NOK 4,729 / −35.1%** | **NOK 6,955 / −4.5%** | **NOK 9,011 / +23.7%** |
-| IRR_T to 31 Dec 2029 (NOK path, Equity BBB) | **−3.2%** (memory-stressed −4.9%) | **10.3%** | **20.2%** |
-| IRR_T / P_k at spot FX held flat (IAF FX rule) | −5.5% / NOK 4,389 | 10.3% / NOK 6,955 | 21.3% / NOK 9,259 |
-| 2027 return (Year 1) | −23.5% (stressed −29.3%) | +11.6% | +29.0% |
-| NAV equivalent at exit (look-through cash reinvested) | NOK 6,674 | NOK 9,848 | NOK 12,824 |
-| Capital preserved? ΣD + V_T vs P | **No, −9.1%** | Yes, +34.2% | Yes, +74.3% |
-| Position (21.874 units = NOK 159.3k at the 17 Nov NAV) at end-2029 `[C]` | ≈ 144.8k | ≈ 213.8k | ≈ 277.7k |
-| E / R (HY rule; reference **0.254**) | | **0.159** (stressed 0.136) | |
-| Memo: estimated 18 Nov NAV ≈ NOK 7,270 `[A]` (−0.2%) | | Margin ≈ −4.3% | |
+| **P_k: hurdle NAV (k = 12%) / margin of safety** | **NOK 4,731 / −35.0%** | **NOK 6,950 / −4.6%** | **NOK 9,015 / +23.8%** |
+| IRR_T to 31 Dec 2029 (NOK path, Equity BBB) | **−3.1%** (memory-stressed −4.9%) | **10.3%** | **20.2%** |
+| IRR_T / P_k at spot FX held flat (IAF FX rule) | −5.5% / NOK 4,391 | 10.3% / NOK 6,950 | 21.3% / NOK 9,263 |
+| 2027 return (Year 1) | −23.4% (stressed −29.3%) | +11.6% | +29.0% |
+| NAV equivalent at exit (look-through cash reinvested) | NOK 6,677 | NOK 9,840 | NOK 12,830 |
+| Capital preserved? ΣD + V_T vs P | **No, −9.1%** | Yes, +34.1% | Yes, +74.4% |
+| Position (21.874 units = NOK 159.3k at the 17 Nov NAV) at end-2029 `[C]` | ≈ 144.8k | ≈ 213.6k | ≈ 277.8k |
+| E / R (HY rule; reference **0.254**) | | **0.158** (stressed 0.135) | |
+| Memo: estimated 18 Nov NAV ≈ NOK 7,270 `[A]` (−0.2%) | | Margin ≈ −4.4% | |
 
 - **FX:** the Base is the same on the NOK path and at spot FX. Bear, Bull and E / R stay on the Equity BBB NOK path so they compare with the HY and World rows; on that path the krone weakens in the Bear, which cushions a NOK holder.
-- **NAV triggers** (unchanged earnings, composition and upstream paths): k at **6,955**; E / R 0.254 at **6,675** (6,379 on the memory-stressed Bear); 0.216 at 6,908; Base = HY market after fee (6.9%) at 7,997.
+- **NAV triggers** (unchanged earnings, composition and upstream paths): k at **6,950**; E / R 0.254 at **6,669** (6,371 on the memory-stressed Bear); 0.216 at 6,902; Base = HY market after fee (6.9%) at 7,991.
 
 **Per-year path** (look-through, index P = 100 at the 17 Nov NAV; NOK after cost)
 
 | | Stub 18 Nov–31 Dec 2026 | 2027 | 2028 | 2029 | 2030 (normalised) |
 |---|---|---|---|---|---|
-| Base EPS (CY27 consensus = 1.00) | — | 0.919 | 0.813 | 0.790 | 0.815 |
-| Base value ÷ next-year EPS at year-end (incl. retained cash) | 11.7 now | 15.8 | 17.6 | 18.7 | — |
-| Base return / IRR to year-end | +0.2% | +11.6% / 10.4% | +9.9% / 10.2% | +10.1% / 10.2% | |
-| Base NAV equivalent, year-end (NOK) | 7,295 | 8,138 | 8,946 | 9,848 | |
-| Bear EPS / return | — / +0.2% | 0.715 / −23.5% | 0.573 / +7.7% | 0.598 / +11.1% | 0.636 |
-| Bear NAV equivalent (NOK) | 7,295 | 5,582 | 6,010 | 6,674 | |
-| Bull EPS / return | — / +0.2% | 0.988 / +29.0% | 1.002 / +18.0% | 0.986 / +15.5% | 1.010 |
-| Bull NAV equivalent (NOK) | 7,295 | 9,410 | 11,105 | 12,824 | |
+| Base EPS (CY27 consensus = 1.00) | — | 0.920 | 0.815 | 0.793 | 0.817 |
+| Base value ÷ next-year EPS at year-end (incl. retained cash) | 11.7 now | 15.8 | 17.6 | 18.6 | — |
+| Base return / IRR to year-end | +0.2% | +11.6% / 10.5% | +9.9% / 10.2% | +10.0% / 10.1% | |
+| Base NAV equivalent, year-end (NOK) | 7,295 | 8,144 | 8,948 | 9,840 | |
+| Bear EPS / return | — / +0.2% | 0.716 / −23.4% | 0.574 / +7.7% | 0.598 / +11.1% | 0.636 |
+| Bear NAV equivalent (NOK) | 7,295 | 5,584 | 6,012 | 6,677 | |
+| Bull EPS / return | — / +0.2% | 0.990 / +29.0% | 1.003 / +18.0% | 0.987 / +15.5% | 1.011 |
+| Bull NAV equivalent (NOK) | 7,295 | 9,411 | 11,108 | 12,830 | |
 
 - Base EPS falls 2027–29 because memory (37% of Base 2027 earnings, 13% of 2030) falls to its mid-cycle and H1 (Broadcom) plateaus lower. The value multiple rises because memory re-rates as its earnings fall (with its net cash) and the layer, X and company blocks build cash and stakes.
 
@@ -93,21 +93,21 @@ The Equity BBB World scenarios carry the macro; the AI BBB supplies the mechanis
 |---|---|---|---|
 | Story and catalyst | World recession H1 2027 + oil Bear; AI financing break and monetisation disappointment (2028 capex −16%); memory overshoots in 2028. Earliest H1 2027 | World Base (AI boom slows to trend); contracted 2027 build (K1 +42%), then a digestion plateau; memory turns in 2028, deeper than 2017–19 | World soft landing; agentic adoption (lab revenue +130% in 2027; K1 to 1.3–1.7tn) |
 | AI BBB rows (18 Nov) | K1 950 / 800 / 820; H1 .68 / .50 / .53 / .57; H2 .60 / .30 / .25 / .25 | **K1 1,120 / 1,170 / 1,170; H1 .92 / .85 / .82 / .81; H2 .90 / .50 / .32 / .28** | K1 1,300 / 1,550 / 1,700; H1 1.00 / 1.15 / 1.25 / 1.30; H2 1.00 / .80 / .55 / .45 |
-| Company blocks | Their revenue-consistent Bears; memory on the 8× trough exit (capped Bear as the stress) | Their Bases; memory Base on the 18 Nov H2 path `[A]` (Common assumptions) | Their Bulls |
-| Look-through EPS 2027 / 2030 (CY27 consensus = 1.00) | 0.715 / 0.636 | **0.919 / 0.815** | 0.988 / 1.010 |
-| Exit value multiple (incl. retained cash and company net cash) | 14.7 | **18.7** | 20.3 |
+| Company blocks | Their revenue-consistent Bears; memory on the 8× trough exit (capped Bear as the stress) | Their Bases (Samsung and SK hynix v4 on the 18 Nov H2 path) | Their Bulls |
+| Look-through EPS 2027 / 2030 (CY27 consensus = 1.00) | 0.716 / 0.636 | **0.920 / 0.817** | 0.990 / 1.011 |
+| Exit value multiple (incl. retained cash and company net cash) | 14.7 | **18.6** | 20.3 |
 | Non-AI block (X) | −15% in 2027; exit 13.5 | −3% in 2027, then ~8% a year; exit 16.5 | Consensus met, then 8–9%; exit 18 |
 | Macro and NOK (Equity BBB, HY BBB) | World 2027 −18.5%; USD/NOK +12 / +9 / +9%, I-44 +7.6 / +5.8 / +5.8% | NOK spot flat; NIBOR 4.80 / 4.79 / 4.78 / 4.58 (market path) | USD/NOK −3%, I-44 −2.3% |
-| **Result: IRR_T / P_k NAV / capital preserved** | **−3.2% / 4,729 / No (−9.1%)** | **10.3% / 6,955 / Yes (+34.2%)** | **20.2% / 9,011 / Yes (+74.3%)** |
+| **Result: IRR_T / P_k NAV / capital preserved** | **−3.1% / 4,731 / No (−9.1%)** | **10.3% / 6,950 / Yes (+34.1%)** | **20.2% / 9,015 / Yes (+74.4%)** |
 
 **Driver breakdown** (one driver at a time from Base; IRR_T after cost, Bear 2027 in brackets)
 
 | Step | Bear | Bull |
 |---|---|---|
 | Base | 10.3% (+11.6%) | 10.3% |
-| AI blocks to the scenario (X and NOK on Base) | −1.0% (−19.2%) | 20.1% |
-| + X block to the scenario, spot FX | −5.5% (−30.6%) | 21.3% |
-| + NOK path of the scenario (= the scenario) | **−3.2% (−23.5%)** | **20.2%** |
+| AI blocks to the scenario (X and NOK on Base) | −0.9% (−19.2%) | 20.1% |
+| + X block to the scenario, spot FX | −5.5% (−30.5%) | 21.3% |
+| + NOK path of the scenario (= the scenario) | **−3.1% (−23.4%)** | **20.2%** |
 | + memory capped at today's multiple (stress) | −4.9% (−29.3%) | |
 
 - The Bear is mostly the AI Bear; the krone path takes back ~2.4 pp a year of it.
@@ -116,11 +116,11 @@ The Equity BBB World scenarios carry the macro; the AI BBB supplies the mechanis
 
 | Item | Memory blocks (7.0) | Rest (93.0) | Fund |
 |---|---|---|---|
-| Earnings growth at today's P/E (CY27 consensus → 2030) | −5.0 | +12.8 | +7.8 |
-| Value multiple to exit (re-rating, retained cash, net cash, stakes) | +10.6 | +11.8 | +22.4 |
+| Earnings growth at today's P/E (CY27 consensus → 2030) | −4.9 | +12.8 | +7.9 |
+| Value multiple to exit (re-rating, retained cash, net cash, stakes) | +10.3 | +11.8 | +22.1 |
 | Fund cost on V_T | | | −4.6 |
-| Distributions ΣD (look-through) | | | +8.7 |
-| **ΣD + V_T** | | | **134.2** |
+| Distributions ΣD (look-through) | | | +8.8 |
+| **ΣD + V_T** | | | **134.1** |
 
 ## Fund and status
 
@@ -164,8 +164,8 @@ The Equity BBB World scenarios carry the macro; the AI BBB supplies the mechanis
 
 | Input | From | Used as |
 |---|---|---|
-| AI layer method v2.1: EPS paths, exit P/E, payout, cash conversion; "E rest" row; memory cycle section and turn calls | `docs/ai-market-bbb.md` (18 Nov) | Blocks E (Meta, E rest row, E cash conversion **−.20 / .11 / .36**), H1 (Broadcom, **.92 / .85 / .82 / .81**), H3 (ASML), T (software); the H2 ratio for the memory blocks; the memory view |
-| Company blocks: per-share V_t, D_t, EPS | `docs/msft-analysis.md` v3 (7 Nov, $530.61), `docs/googl-analysis.md` v2 (7 Nov, $284.78), **`docs/nvda-analysis.md` v1.8** (19 Nov, $150.96), `docs/amzn-analysis.md` v2 (11 Nov, $270.87), `docs/tsm-analysis.md` v1.2 (11 Nov, $396.48), `docs/samsung-analysis.md` v3 (16 Nov, 196,800 / 161,300), **`docs/skhynix-analysis.md` v3** (16 Nov, 1,120,000) | Blocks CM, CG, CN, CA, CT, CS, CP, CH at the 17 Nov closes |
+| AI layer method v2.1: EPS paths, exit P/E, payout, cash conversion; "E rest" row; memory cycle section and turn calls | `docs/ai-market-bbb.md` (18 Nov) | Blocks E (Meta, E rest row, E cash conversion **−.20 / .11 / .36**), H1 (Broadcom, **.92 / .85 / .82 / .81**), H3 (ASML), T (software); the memory view |
+| Company blocks: per-share V_t, D_t, EPS | `docs/msft-analysis.md` v3 (7 Nov, $530.61), `docs/googl-analysis.md` v2 (7 Nov, $284.78), **`docs/nvda-analysis.md` v1.8** (19 Nov, $150.96), `docs/amzn-analysis.md` v2 (11 Nov, $270.87), `docs/tsm-analysis.md` v1.2 (11 Nov, $396.48), **`docs/samsung-analysis.md` v4** (19 Nov, 195,000 / 155,900), **`docs/skhynix-analysis.md` v4** (19 Nov, 1,173,000) | Blocks CM, CG, CN, CA, CT, CS, CP, CH at the 17 Nov closes |
 | World scenarios; USD/NOK and I-44 relative paths; World exit P/E 17, mid-cycle return 8.2%, growth 5.3%; World row | `docs/equity-market-bbb.md` (18 Nov note; values of 6 Nov; World E / R 0.065 on the market NIBOR) | Macro, NOK translation (USD 62.83%, other foreign 35.14%), exit cross-check, comparison |
 | NIBOR 4.80 / 4.79 / 4.78 / 4.58 (window 4.72%); **HY reference E / R 0.254**; HY market Base 7.5% (6.9% after fee) | `docs/hy-market-bbb.md` (18 Nov) | Decision rule, triggers |
 | Sissener Corporate Bond R: Base 6.3%, E / R 0.343, Bear 2027 +0.8% | `docs/hy-funds-analysis.md` (9 Nov; before the 18 Nov NIBOR path, which lifts HY totals by +0.4 / +0.7 pp in 2028–29) | Switch check |
@@ -173,7 +173,7 @@ The Equity BBB World scenarios carry the macro; the AI BBB supplies the mechanis
 | Block | Holdings | Path source |
 |---|---|---|
 | **CM / CG / CN / CA / CT** | Microsoft / Alphabet / NVIDIA / Amazon / TSMC | Company analyses |
-| **CS / CP / CH** — memory | Samsung common / preference / SK hynix | Company analyses; Base on the 18 Nov H2 path `[A]`; decision Bear 8× trough exit; capped Bear = stress |
+| **CS / CP / CH** — memory | Samsung common / preference / SK hynix | Company analyses (v4, on the 18 Nov H2 path); decision Bear 8× trough exit; capped Bear = stress |
 | **E** — other platforms | Meta | AI BBB "E rest" row |
 | **H1** / **H3** | Broadcom / ASML | AI BBB H1 / H3 |
 | **T** — software | SAP, Atlassian, Dassault, Intuit | AI BBB T |
@@ -192,8 +192,8 @@ Model holdings (77.3% of NAV), prices at the 17 Nov close, Yahoo consensus of 19
 | **CN** — NVIDIA | 7.3% | 10.2 | 8.3% | 19.3% at $150.96 (P_k $181.0) |
 | **CA** — Amazon | 6.3% | 24.2 | 3.0% | 5.2% at $270.87 (P_k $222.2) |
 | **CT** — TSMC | 3.4% | 15.4 | 2.6% | 9.5% at $396.48 (P_k $369.8) |
-| **CS** / **CP** — Samsung common / preference | 2.7% / 1.8% | 2.4 / 1.9 | 12.7% / 11.0% | 34.2% / 36.6% at 196,800 / 161,300 (old H2 path) |
-| **CH** — SK hynix | 2.5% | 2.0 | 14.2% | ~44% at 1,120,000 (old H2 path); AI BBB 0.72× new Base |
+| **CS** / **CP** — Samsung common / preference | 2.7% / 1.8% | 2.4 / 1.9 | 12.7% / 11.0% | 28.2% / 30.8% at 195,000 / 155,900 (P_k 283,748) |
+| **CH** — SK hynix | 2.5% | 2.0 | 14.2% | 32.9% at 1,173,000 (P_k 1,814,729); price implies 0.54× Base |
 | *Memory together* | **7.0%** | **2.2** | **37.9%** | Memory basket Base 13.7%, k at 0.95× (18 Nov) |
 | **E** — Meta | 4.6% | 18.3 | 2.9% | E rest row |
 | **H1** — Broadcom | 5.9% | 17.6 | 3.9% | Compute basket 7.5% (18 Nov) |
@@ -230,11 +230,11 @@ Model holdings (77.3% of NAV), prices at the 17 Nov close, Yahoo consensus of 19
 | CN | nvda v1.8 ($150.96) | 171.3 / 195.6 / 223.0 | 119.9 / 392.6 | 8.57 / 10.23 / 9.69 (0.81) | 13.99 / 12.32 |
 | CA | amzn v2, re-mark 11 Nov ($270.87) | 291.0 / 305.4 / 317.3 | 141.4 / 432.1 | 0 | 9.69 / 14.00 |
 | CT | tsm v1.2 ($396.48) | 436.8 / 472.0 / 504.4 | 250.9 / 698.9 | 5.34 / 6.71 / 7.93 (0) | 22.26 / 27.18 |
-| CS | samsung v3 (196,800); Base on the 18 Nov H2 path `[A]` | 262,707 / 278,686 / 330,562 | 238,354 / 509,818 (121,079) | 18,815 / 23,048 / 16,079 (0) | 68,045 / 22,693 |
-| CP | samsung v3 (161,300; discount 18.0%, Bear 30%, Bull → 15%); as CS `[A]` | 215,303 / 228,395 / 270,911 | 166,848 / 433,345 (84,755) | as CS | as CS |
-| CH | skhynix v3 (1,120,000); Base on the 18 Nov H2 path `[A]` | 1,584,883 / 1,729,624 / 2,055,554 | 1,483,072 / 3,299,964 (640,409) | 255,992 / 107,105 / 62,245 (34,181) | 484,120 / 150,615 |
+| CS | samsung v4 (195,000) | 266,829 / 280,389 / 328,689 | 239,507 / 512,603 (120,878) | 18,875 / 26,889 / 17,063 (0) | 68,445 / 23,311 |
+| CP | samsung v4 (155,900; discount 20.1%, Bear 30%, Bull → 15%) | 213,327 / 224,167 / 262,783 | 167,655 / 435,712 (84,615) | as CS | as CS |
+| CH | skhynix v4 (1,173,000) | 1,604,492 / 1,712,639 / 2,009,935 | 1,483,016 / 3,299,659 (653,661) | 255,992 / 105,415 / 55,533 (34,181) | 484,120 / 150,615 |
 
-- **Memory Base on the 18 Nov H2 path `[A]`** (until the Samsung and SK hynix analyses are re-run): EPS 2028 / 29 / 30 × .833 / .80 / .80 (.50 / .60, .32 / .40, .28 / .35); V_t lowered by the analysis' P/E glide (SK hynix 4.62 / 7.31 / 10; Samsung ~5.1 / 7.5 / 10) × the next-year EPS change, the preference at its 18% discount; D_t 2028 / 29 × the same ratios. Bear and Bull paths did not change. `py ../fundmodel.py MEMOLD` keeps the blocks as analysed (Base 10.95%).
+- **Memory blocks** are the Samsung and SK hynix v4 analyses (19 Nov), both on the AI BBB 18 Nov H2 path. A first pass the same day applied the path by ratio to their v3 blocks (`MEMRATIO`): Base 10.29%, within 0.03 pp of the analyses.
 - Fund cost 1.14% all-in; manager alpha 0 in Base. NOK: USD 62.83% × the USD/NOK path, other foreign 35.14% × the I-44 path, NOK 2.03% flat `[A]`.
 - Capped memory Bear: the analyses' capped V_t re-priced by (close − analysis price) ÷ the analysis' consensus × next-year EPS `[A]`.
 
@@ -242,19 +242,19 @@ Model holdings (77.3% of NAV), prices at the 17 Nov close, Yahoo consensus of 19
 
 | Window, % a year | Bear | Base | Bull |
 |---|---|---|---|
-| IRR_T (after cost) | −3.2 | **10.3** | 20.2 |
+| IRR_T (after cost) | −3.1 | **10.3** | 20.2 |
 | d (look-through cash yield) | 2.4 | 2.8 | 3.1 |
-| g (value growth, P → V_T) | −5.7 | **7.6** | 17.3 |
-| — normalised EPS growth (CY27 consensus → 2030) | −13.5 | **−6.4** | +0.3 |
-| — value multiple (11.7 now → exit, incl. retained cash and company net cash) | +7.7 | **+16.2** | +19.3 |
+| g (value growth, P → V_T) | −5.7 | **7.5** | 17.3 |
+| — normalised EPS growth (CY27 consensus → 2030) | −13.5 | **−6.3** | +0.3 |
+| — value multiple (11.7 now → exit, incl. retained cash and company net cash) | +7.7 | **+16.1** | +19.3 |
 | — FX (NOK path) | +2.4 | 0 | −0.9 |
 | — fund cost | −1.1 | −1.1 | −1.1 |
 | c (timing) | 0.1 | −0.1 | −0.2 |
-| Structural IRR (layer blocks at normalised EPS from 2027; company blocks as analysed) | −2.9 | 10.6 | 20.5 |
-| Cyclical (pp) | −0.3 | −0.3 | −0.3 |
+| Structural IRR (layer blocks at normalised EPS from 2027; company blocks as analysed) | −2.9 | 10.5 | 20.6 |
+| Cyclical (pp) | −0.2 | −0.2 | −0.4 |
 
 - The g components compound. **The +16% a year value multiple in Base is not a re-rating of the same earnings:** memory's multiple rises from 2.2 as its earnings fall to mid-cycle (with its net cash), the layer and X blocks retain 2.9 points by 2029, and the company blocks carry net cash and stakes. Without memory the exit multiple is 19.5 against 17.5 now.
-- **Exit cross-check (Track A):** exit value multiple 18.7 (19.5 without memory); earnings-weighted cash conversion in 2029 **0.67** (0.63 without memory). Cash yield 3.6% + World long-run growth 5.3% = buyer's return **8.9%**, against World's mid-cycle return 8.2% and exit P/E 17.0: **the exit is not generous against the market.**
+- **Exit cross-check (Track A):** exit value multiple 18.6 (19.5 without memory); earnings-weighted cash conversion in 2029 **0.67** (0.63 without memory). Cash yield 3.6% + World long-run growth 5.3% = buyer's return **8.9%**, against World's mid-cycle return 8.2% and exit P/E 17.0: **the exit is not generous against the market.**
 
 **By block** (each block alone, before cost, NOK; 17 Nov prices):
 
@@ -265,12 +265,12 @@ Model holdings (77.3% of NAV), prices at the 17 Nov close, Yahoo consensus of 19
 | CN — NVIDIA | 7.3% | 10.2 | −1.2 / **18.1** / 39.7 | −21.6% | Company 19.3% (at $150.96) |
 | CA — Amazon | 6.3% | 24.2 | −15.5 / **6.9** / 17.0 | **−54.7%** | Company 5.2% (at $270.87) |
 | CT — TSMC | 3.4% | 15.4 | −7.0 / **13.1** / 24.3 | −31.6% | Company 9.5% (at $396.48) |
-| CS / CP / CH — memory (whole points; cycle rule) | 7.0% | 2.2 | ~21 / **~33** / ~52 | ~+56% (capped ~−29%) | Memory basket 13.7% (18 Nov); price implies 0.72–0.95× the new Base |
+| CS / CP / CH — memory (whole points; cycle rule) | 7.0% | 2.2 | ~21 / **~32** / ~53 | ~+57% (capped ~−28%) | Memory basket 13.7% (18 Nov); the analyses: k at 0.54× the new Base |
 | E — Meta | 4.6% | 18.3 | 3.0 / **13.8** / 19.9 | −10.2% | E rest row |
 | H1 — Broadcom | 5.9% | 17.6 | −17.8 / **−3.0** / 14.8 | −55.7% | Compute basket 7.5% (18 Nov) |
 | H3 — ASML | 1.5% | 21.9 | −16.7 / **2.2** / 12.2 | −52.8% | Foundry basket 10.9% (18 Nov) |
 | T — software | 10.9% | 18.7 | −0.3 / **12.0** / 20.6 | −20.6% | Software basket 5.8% (18 Nov) |
-| **AI blocks together** | **66.5%** | 10.0 | −2.5 / **12.9** / 25.7 | −22.4% (capped −31.4%) | **All six baskets 8.8% (18 Nov)** |
+| **AI blocks together** | **66.5%** | 10.0 | −2.5 / **12.8** / 25.8 | −22.4% (capped −31.3%) | **All six baskets 8.8% (18 Nov)** |
 | X — not AI-led | 33.5% | 17.3 | −1.2 / **8.9** / 12.5 | −22.9% | — |
 
 - **Broadcom** on the lower H1 path at 17.6× returns −3% in Base; **ASML** at 22× on the H3 path ~2%. Together 7.4% of the model, they cost the fund ~1 pp against an average block.
@@ -282,19 +282,19 @@ Base unless stated; 17 Nov NAV; scripts `sens.py` and `fundmodel.py` options.
 
 | Change | Bear IRR | Base IRR | Bull IRR | Bear 2027 | E / R |
 |---|---|---|---|---|---|
-| Model as above | −3.2 | **10.3** | 20.2 | −23.5 | 0.159 |
-| **Memory-stressed Bear:** memory capped at today's multiple | −4.9 | 10.3 | 20.2 | **−29.3** | **0.136** |
-| Memory Bear exit P/E 6 / 4 (analyses 8) | −3.7 / −4.3 | 10.3 | 20.2 | −25.5 / −27.4 | 0.150 / 0.143 |
-| Memory blocks as analysed (old H2 path; `MEMOLD`) | −3.2 | 11.0 | 20.2 | −23.5 | 0.171 |
-| Memory Base exit P/E 8 (analyses 10) | | 9.8 | | | 0.150 |
-| **Memory 2030 EPS a further ×0.8 / ×0.6 in Base** | | 9.8 / 9.4 | | | 0.148 / 0.137 |
-| Cost at 0.20% (the same portfolio at index cost) | −2.2 | 11.3 | 21.4 | −22.8 | 0.187 |
-| Manager alpha +1.14 pp / +2.0 pp (10-year record) | −2.0 / −1.2 | 11.5 / **12.5** | 21.6 / 22.6 | −22.6 / −22.0 | 0.193 / 0.218 |
-| Exit P/E −1 / +1 (all blocks) | −5.2 / −1.2 | 8.4 / 12.1 | 18.4 / 22.0 | −28.8 / −18.1 | 0.097 / 0.230 |
-| 2027 consensus −5% for all blocks | −4.8 | 8.4 | 18.2 | −27.3 | 0.111 |
-| Bear and Bull at spot FX held flat (IAF FX rule) | −5.5 | 10.3 | 21.3 | −30.6 | 0.132 |
+| Model as above | −3.1 | **10.3** | 20.2 | −23.4 | 0.158 |
+| **Memory-stressed Bear:** memory capped at today's multiple | −4.9 | 10.3 | 20.2 | **−29.3** | **0.135** |
+| Memory Bear exit P/E 6 / 4 (analyses 8) | −3.7 / −4.3 | 10.3 | 20.2 | −25.4 / −27.4 | 0.150 / 0.142 |
+| First pass: v3 memory blocks with the 18 Nov path by ratio (`MEMRATIO`) | −3.2 | 10.3 | 20.2 | −23.5 | 0.159 |
+| Memory Base exit P/E 8 (analyses 10) | | 9.8 | | | 0.149 |
+| **Memory 2030 EPS a further ×0.8 / ×0.6 in Base** | | 9.8 / 9.3 | | | 0.147 / 0.136 |
+| Cost at 0.20% (the same portfolio at index cost) | −2.2 | 11.3 | 21.4 | −22.7 | 0.186 |
+| Manager alpha +1.14 pp / +2.0 pp (10-year record) | −2.0 / −1.2 | 11.5 / **12.5** | 21.6 / 22.6 | −22.6 / −21.9 | 0.192 / 0.217 |
+| Exit P/E −1 / +1 (all blocks) | −5.2 / −1.2 | 8.4 / 12.1 | 18.4 / 22.0 | −28.8 / −18.1 | 0.096 / 0.229 |
+| 2027 consensus −5% for all blocks | −4.8 | 8.4 | 18.2 | −27.3 | 0.110 |
+| Bear and Bull at spot FX held flat (IAF FX rule) | −5.5 | 10.3 | 21.3 | −30.5 | 0.131 |
 
-- **Two plausible single inputs reach k at the 17 Nov NAV:** the 10-year alpha record (12.5%) and exit multiples one turn higher (12.1%). **E / R never reaches 0.254**; the best case is 0.230.
+- **Two plausible single inputs reach k at the 17 Nov NAV:** the 10-year alpha record (12.5%) and exit multiples one turn higher (12.1%). **E / R never reaches 0.254**; the best case is 0.229.
 - **Memory moves the fund by about half a point to a point either way:** the largest single assumption inside the fund, not the reason it fails.
 
 ## Results
@@ -302,19 +302,19 @@ Base unless stated; 17 Nov NAV; scripts `sens.py` and `fundmodel.py` options.
 | | Bear | Base | Bull |
 |---|---|---|---|
 | Price P (NAV, NOK, 17 Nov) | 7,282.87 | **7,282.87** | 7,282.87 |
-| IRR_T (Track A, dated, after cost; NOK path) | −3.2% (stressed −4.9%) | **10.3%** | 20.2% |
+| IRR_T (Track A, dated, after cost; NOK path) | −3.1% (stressed −4.9%) | **10.3%** | 20.2% |
 | IRR_T at spot FX held flat (memo) | −5.5% | 10.3% | 21.3% |
 | Rule 1 screen d + EPS CAGR (assumes today's P/E holds) | −11.1% | −3.6% | +3.4% |
-| d / g / c | 2.4 / −5.7 / 0.1 | 2.8 / 7.6 / −0.1 | 3.1 / 17.3 / −0.2 |
-| Structural IRR / cyclical (pp) | −2.9 / −0.3 | 10.6 / −0.3 | 20.5 / −0.3 |
-| ΣD / V_T (P = 100) | 7.6 / 83.3 | 8.7 / 125.6 | 9.7 / 164.5 |
-| **P_k (hurdle NAV, NOK) / margin of safety** | **4,729 / −35.1%** | **6,955 / −4.5%** | **9,011 / +23.7%** |
+| d / g / c | 2.4 / −5.7 / 0.1 | 2.8 / 7.5 / −0.1 | 3.1 / 17.3 / −0.2 |
+| Structural IRR / cyclical (pp) | −2.9 / −0.2 | 10.5 / −0.2 | 20.6 / −0.4 |
+| ΣD / V_T (P = 100) | 7.6 / 83.3 | 8.8 / 125.3 | 9.7 / 164.6 |
+| **P_k (hurdle NAV, NOK) / margin of safety** | **4,731 / −35.0%** | **6,950 / −4.6%** | **9,015 / +23.8%** |
 | Rule 3: P/E vs ceiling (IRR before cost)/k² | 11.7 vs < 0 | **11.7 vs 8.0** | 11.7 vs 15.0 |
 | Exit cross-check (buyer's return at exit) | | 8.9% vs World mid-cycle 8.2% | |
-| Capital preserved? ΣD + V_T vs P | **No, −9.1%** | Yes, +34.2% | Yes, +74.3% |
+| Capital preserved? ΣD + V_T vs P | **No, −9.1%** | Yes, +34.1% | Yes, +74.4% |
 
 - The Rule 1 screen at constant P/E is meaningless here: more than a third of 2027 earnings is memory at its peak. The dated IRR decides.
-- **Share of Bull already priced:** (100 − 95.5) / (123.7 − 95.5) = **16%**.
+- **Share of Bull already priced:** (100 − 95.4) / (123.8 − 95.4) = **16%**.
 
 ## Against high yield and World
 
@@ -324,27 +324,27 @@ Base unless stated; 17 Nov NAV; scripts `sens.py` and `fundmodel.py` options.
 | **Sissener Corporate Bond R** (hy-funds 9 Nov; before Nordnet's 0.19% platform fee) | 6.3 | 1.87 | 5.45 | **0.343** | +0.8 |
 | World (Equity BBB 18 Nov note; E after a 0.20% fee) | 6.4 | 1.68 | 25.9 | 0.065 | −18.5 |
 | All six AI baskets (AI BBB, 18 Nov prices, before fees) | 8.8 | — | — | — | — |
-| **DNB Teknologi A (after 1.14%; 17 Nov NAV)** | **10.3** | **5.57** | **35.0** | **0.159** | **−23.5** |
-| DNB Teknologi A, memory-stressed Bear | 10.3 | 5.57 | 41.0 | 0.136 | −29.3 |
+| **DNB Teknologi A (after 1.14%; 17 Nov NAV)** | **10.3** | **5.54** | **35.1** | **0.158** | **−23.4** |
+| DNB Teknologi A, memory-stressed Bear | 10.3 | 5.54 | 41.0 | 0.135 | −29.3 |
 
 **Triggers** (NAV levels in NOK; unchanged earnings, composition and upstream paths; from the 17 Nov NAV of 7,282.87):
 
 | Trigger | NAV change | **NAV level (NOK)** | Look-through P/E CY27 (ex memory) |
 |---|---|---|---|
-| Base = HY market after fee (6.9%) | +9.8% | ≈ 7,997 (the NAV is below it) | 12.8 (19.2) |
-| **Base IRR = k = 12% (P_k)** | **−4.5%** | **≈ 6,955** (E / R there 0.209) | 11.2 (16.7) |
-| E / R = 0.216 (the reference with the HY Bear read as a shock) | −5.1% | ≈ 6,908 | 11.1 (16.6) |
-| **E / R = HY market reference 0.254** | **−8.3%** | **≈ 6,675** | 10.7 (16.1) |
-| E / R = 0.254 on the memory-stressed Bear | −12.4% | ≈ 6,379 | |
+| Base = HY market after fee (6.9%) | +9.7% | ≈ 7,991 (the NAV is below it) | 12.8 (19.2) |
+| **Base IRR = k = 12% (P_k)** | **−4.6%** | **≈ 6,950** (E / R there 0.208) | 11.2 (16.7) |
+| E / R = 0.216 (the reference with the HY Bear read as a shock) | −5.2% | ≈ 6,902 | 11.1 (16.6) |
+| **E / R = HY market reference 0.254** | **−8.4%** | **≈ 6,669** | 10.7 (16.0) |
+| E / R = 0.254 on the memory-stressed Bear | −12.5% | ≈ 6,371 | |
 
-- **Company triggers** (their analyses; 17 Nov close): NVIDIA P_k $181.0 ($155.46: clears); TSMC $369.8 ($359.69: clears, +2.8%); Microsoft $495.9 ($506.24), Alphabet $262.3 ($280.20), Amazon $222.2 ($257.89): all above; Samsung 327,423 (190,300) and SK hynix ~2,145,000 (1,098,000): far below, on the old H2 path.
+- **Company triggers** (their analyses; 17 Nov close): NVIDIA P_k $181.0 ($155.46: clears); TSMC $369.8 ($359.69: clears, +2.8%); Microsoft $495.9 ($506.24), Alphabet $262.3 ($280.20), Amazon $222.2 ($257.89): all above; Samsung 283,748 (190,300) and SK hynix 1,814,729 (1,098,000): far below, on the new H2 path (v4).
 
 **The planned switch (DNB Teknologi → Sissener R)**, on the agreed rule (E / R, Base, Bear 2027):
 
 | | DNB Teknologi A | Sissener R | Switch passes? |
 |---|---|---|---|
-| E / R | 0.159 (stressed 0.136) | 0.343 | **Yes** (×2.2) |
-| Bear 2027 | −23.5% (stressed −29.3%) | +0.8% | **Yes** (≈ 24 pp better) |
+| E / R | 0.158 (stressed 0.135) | 0.343 | **Yes** (×2.2) |
+| Bear 2027 | −23.4% (stressed −29.3%) | +0.8% | **Yes** (≈ 24 pp better) |
 | Base window | **10.3%** (after all-in cost) | 6.3% (≈ 6.1% after Nordnet's 0.19%; before the 18 Nov NIBOR path) | **No: about −4 pp** |
 
 - **Mixed:** the switch wins on E / R and Bear and gives up ~4 pp a year of Base return. Under the user's rule this is a choice, not a clear pass. **The user's call.** Sissener R's Base rises a little on the 18 Nov NIBOR path at its next run.
@@ -352,20 +352,20 @@ Base unless stated; 17 Nov NAV; scripts `sens.py` and `fundmodel.py` options.
 ## Verdict and caveat
 
 - **Band applied:** clears above +2%, marginal from −2% to +2%, fails below −2% (Base margin of safety P_k / P − 1); the verdict is in the Summary.
-- **What would flip it:** a NAV at ≈ 6,955 (−4.5%; marginal from ≈ 7,097); exit multiples ~+1 turn across the blocks; the manager's 10-year alpha; the memory Base back to the old path (+0.7 pp). E / R reaches 0.254 only near a NAV of 6,675.
+- **What would flip it:** a NAV at ≈ 6,950 (−4.6%; marginal from ≈ 7,092); exit multiples ~+1 turn across the blocks; the manager's 10-year alpha; the memory Base back to the old path (+0.7 pp). E / R reaches 0.254 only near a NAV of 6,669.
 - **For the position:** the switch to Sissener R stays a trade-off (better E / R and Bear, ~4 pp lower Base), not a dominance.
-- **Caveat:** a margin-of-safety screen on a look-through model, not an intrinsic valuation, a price target or personal advice. The paths are the AI BBB's and the company analyses' assumptions. Own assumptions: the X block, its cash conversion, the 30 Oct weights outside the top 10, the Samsung split, the ~23% of NAV outside the model, the memory Base adjustment and the 18 Nov NAV estimate.
+- **Caveat:** a margin-of-safety screen on a look-through model, not an intrinsic valuation, a price target or personal advice. The paths are the AI BBB's and the company analyses' assumptions. Own assumptions: the X block, its cash conversion, the 30 Oct weights outside the top 10, the Samsung split, the ~23% of NAV outside the model and the 18 Nov NAV estimate.
 
 ## Tracking
 
-- The look-through model has no reported quarter to track; the fund's monthly report replaces the estimate of its holdings. The Base stub path (+0.2% to year-end, price flat) is a convention. The NAV fell 4.2% from 12 to 17 Nov while Base P_k NAV fell 1.1% (7,029 → 6,955: the NVIDIA and memory paths): the margin improved from −7.6% to −4.5%.
-- **Step 6b (fund level, memory part):** the AI BBB's call is deeper than Base was; the Korean prices discount deeper still (0.72–0.87×). With the market on memory; ahead of it on NVIDIA's 2027 (`docs/nvda-analysis.md`). No fund-level call of its own.
+- The look-through model has no reported quarter to track; the fund's monthly report replaces the estimate of its holdings. The Base stub path (+0.2% to year-end, price flat) is a convention. The NAV fell 4.2% from 12 to 17 Nov while Base P_k NAV fell 1.1% (7,029 → 6,950: the NVIDIA and memory paths): the margin improved from −7.6% to −4.6%.
+- **Step 6b (fund level, memory part):** the AI BBB's call is deeper than Base was; the Korean prices discount deeper still (k at 0.54× the new Base on the Samsung and SK hynix analyses). With the market on memory; ahead of it on NVIDIA's 2027 (`docs/nvda-analysis.md`). No fund-level call of its own.
 
 ## Risks and signposts
 
 | Signpost | Threshold (Bear / Bull) | Now | Source |
 |---|---|---|---|
-| Fund NAV (triggers) | ≤ 6,955 k; ≤ 6,675 E / R 0.254 / ≥ 9,410 (Bull end-2027) | 7,282.87 (17 Nov); 18 Nov ≈ 7,270 `[A]` | Nordnet, DNB AM |
+| Fund NAV (triggers) | ≤ 6,950 k; ≤ 6,669 E / R 0.254 / ≥ 9,411 (Bull end-2027) | 7,282.87 (17 Nov); 18 Nov ≈ 7,270 `[A]` | Nordnet, DNB AM |
 | Memory: contract prints (~30 Nov, ~31 Dec) | Q1-27 DRAM flat or down / ≥ +10% q/q with spot above contract (the turn call's reversal) | Q4 +10–15%; Q1-27 +3–8% guided; momentum slowing | AI BBB memory cycle section |
 | Micron FQ1-27 (16 Dec) | Flat FQ2 price guide / prices still rising, RPO up | Guide $61.5bn, GM 86.25% | `docs/mu-analysis.md` |
 | NVIDIA 10-Q (~25 Nov) | Guarantee called, buy-back payments / neocloud commitments cut cleanly | $150.96; P_k $181.0 | `docs/nvda-analysis.md` |
@@ -379,20 +379,20 @@ Base unless stated; 17 Nov NAV; scripts `sens.py` and `fundmodel.py` options.
 
 ## For other modules
 
-- **`docs/kospi-analysis.md`** (DNB Teknologi comparison row): Base **10.3%**, E **5.57**, R **35.0**, E / R **0.159**, Bear 2027 **−23.5%** (17 Nov NAV; after 1.14%); memory 7.0% of the model and 38% of its 2027 earnings; Samsung 3.48% + SK hynix 1.92% of NAV (30 Oct). A comparison row only.
-- **`docs/skhynix-analysis.md`, `docs/samsung-analysis.md`** (next runs): this fund applies the AI BBB 18 Nov H2 path to their Bases by ratio `[A]` until they are re-run; their own re-run replaces it.
-- **`ai-market-bbb`** (no row asked to move): the fund's AI holdings return 12.9% before cost (17 Nov prices) against the six baskets' 8.8% (18 Nov prices); Broadcom on the new H1 path at 17.6× returns −3.0%.
+- **`docs/kospi-analysis.md`** (DNB Teknologi comparison row): Base **10.3%**, E **5.54**, R **35.1**, E / R **0.158**, Bear 2027 **−23.4%** (17 Nov NAV; after 1.14%); memory 7.0% of the model and 38% of its 2027 earnings; Samsung 3.48% + SK hynix 1.92% of NAV (30 Oct). A comparison row only.
+- **`docs/skhynix-analysis.md`, `docs/samsung-analysis.md`** (next runs): their v4 company blocks (19 Nov, on the 18 Nov H2 path) are used here.
+- **`ai-market-bbb`** (no row asked to move): the fund's AI holdings return 12.8% before cost (17 Nov prices) against the six baskets' 8.8% (18 Nov prices); Broadcom on the new H1 path at 17.6× returns −3.0%.
 - **`equity-market-bbb`, `docs/global-index-funds-analysis.md`:** no input.
 
 ## Change log
 
-- **19 Nov 2026 — v9** (iaf-valuation 2026-11-18.1): NAV 17 Nov 7,282.87 (−4.2%), 17 Nov closes; NVIDIA v1.8, SK hynix v3, AI BBB 18 Nov (H1 .85 / .82 / .81; H2 turn call applied to the memory blocks' Base `[A]`), HY BBB market NIBOR path, HY after fee 6.9%. Base 9.1% → **10.3%** (price +1.9, company and H1 −0.05, memory −0.7 pp), P_k 7,029 → **6,955**, margin −7.6% → **−4.5%**, E / R 0.126 → 0.159, Bear 2027 −27.7% → −23.5%; fails.
+- **19 Nov 2026 — v9** (iaf-valuation 2026-11-18.1): NAV 17 Nov 7,282.87 (−4.2%), 17 Nov closes; NVIDIA v1.8, AI BBB 18 Nov (H1 .85 / .82 / .81), SK hynix v4 and Samsung v4 on the deeper H2 path (same day; a first pass by ratio gave −4.5%), HY BBB market NIBOR path, HY after fee 6.9%. Base 9.1% → **10.3%** (price +1.9, company and H1 −0.05, memory −0.7 pp), P_k 7,029 → **6,950**, margin −7.6% → **−4.6%**, E / R 0.126 → 0.158, Bear 2027 −27.7% → −23.4%; fails.
 - **16 Nov 2026 — v8** (iaf-valuation 2026-11-12.1): October factsheet (holdings 30 Oct), NAV 12 Nov 7,603.41; NVIDIA v1.6, TSMC v1.2, Samsung v3; AI BBB 11 Nov; Visa/Skyworks FY fix; compacted. Base 8.6% → 9.1%, P_k 7,029, margin −7.6%, E / R 0.126; fails.
 - **6 Nov 2026 — v7** (iaf-valuation 2026-11-01.1): Equity Update 2, HY reference 0.254, NAV 4 Nov 7,381.56: Base 8.6%, P_k 6,721 (−8.9%), E / R 0.113; fails.
 
 ## Appendix: own assumptions
 
-1. **Memory** on the SK hynix (v3) and Samsung (v3) analyses, their Base moved to the AI BBB 18 Nov H2 path by ratio (Common assumptions) until they are re-run; judged on the AI BBB memory cycle section; the memory-stressed Bear is the analyses' capped Bear, re-priced to the close.
+1. **Memory** on the SK hynix (v4) and Samsung (v4) analyses, both on the AI BBB 18 Nov H2 path; judged on the AI BBB memory cycle section; the memory-stressed Bear is the analyses' capped Bear, re-priced to the close.
 2. **Company blocks** use the analyses' V_t, D_t and EPS at the 17 Nov close; their interim V_t glide from each analysis' own price.
 3. **Meta** on the AI BBB "E rest" row with the E layer's cash conversion.
 4. **The X block:** Base −3% then ~8% a year, exit P/E 16.5, cash conversion 0.75.
@@ -410,7 +410,7 @@ Base unless stated; 17 Nov NAV; scripts `sens.py` and `fundmodel.py` options.
 | S3 | DNB AM holdings report "Beholdningsoversikt 25.09.2026" (`…/FUNDHOLDINGS-NO-NO-NO0010337678.pdf`) | All 65 lines; used for the country-derived lines | 16 Nov 2026 |
 | S4 | [DNB Asset Management, DNB Teknologi](https://dnbam.com/vare-fond/fond/dnb-teknologi) | NAV 7,603.41 (12 Nov) | 16 Nov 2026 |
 | S5 | Yahoo chart and quoteSummary API | Closes 17 and 18 Nov; consensus EPS (19 Nov); USD/NOK, USD/KRW, EUR/NOK, SEK/NOK, JPY/NOK | 19 Nov 2026 |
-| S6 | `docs/nvda-analysis.md` v1.8, `docs/skhynix-analysis.md` v3, `docs/samsung-analysis.md` v3, `docs/tsm-analysis.md` v1.2, `docs/amzn-analysis.md` v2 (11 Nov), `docs/msft-analysis.md` v3 (7 Nov), `docs/googl-analysis.md` v2 (7 Nov), `docs/mu-analysis.md` v4 | Company paths, capped Bears, triggers | 7–19 Nov 2026 |
+| S6 | `docs/nvda-analysis.md` v1.8, `docs/skhynix-analysis.md` v4, `docs/samsung-analysis.md` v4, `docs/tsm-analysis.md` v1.2, `docs/amzn-analysis.md` v2 (11 Nov), `docs/msft-analysis.md` v3 (7 Nov), `docs/googl-analysis.md` v2 (7 Nov), `docs/mu-analysis.md` v4 | Company paths, capped Bears, triggers | 7–19 Nov 2026 |
 | S7 | `docs/ai-market-bbb.md` (18 Nov) | Layer paths, turn calls, E rest row, cash conversion, memory cycle section, baskets at 18 Nov prices, signposts | 18 Nov 2026 |
 | S8 | `docs/equity-market-bbb.md` (18 Nov note); `docs/hy-market-bbb.md` (18 Nov); `docs/hy-funds-analysis.md` (9 Nov) | World and NOK paths, exit references, World E / R; NIBOR, HY reference 0.254; Sissener R | 9–18 Nov 2026 |
 
@@ -429,4 +429,4 @@ Base unless stated; 17 Nov NAV; scripts `sens.py` and `fundmodel.py` options.
 | SAP / TEAM / DSY / INTU | T | 201.50 / 140.98 / 24.40 / 320.79 | 8.49 / fwd P/E / 1.45 / CY blend | 18.7 (block) |
 | X (11 names) | X | V 416.77, MA 645.73, ADYEN 837.70, BKNG 154.46, TMUS 167.90, Sony 4,271, LOGI 99.26, HPQ 28.71, ERIC 104.15, SWKS 85.93, NOD 177.50 | Visa FY Sep-27 15.03, Skyworks FY Sep-27 5.71 | blend 17.3 |
 
-**Scripts** (model v9): `.claude/skills/iaf-valuation/references/models/dnbtek/` — `hold.py` (consensus), `close.py` (closes: `close.py <NAV date>,<last date> <tickers>`), `blocks.py` (weights, blocks, P/E; `NAV=`, `STUB=`), `fundmodel.py` (model; `MEMOLD` = memory blocks as analysed; `V7CO`, `V7AI` for v7), `detail.py` (path, g split, return bridge, exit cross-check, structural), `sens.py` (sensitivities, triggers), `aisplit.py` (blocks alone, driver breakdown inputs), `navest.py` (next-NAV estimate), `attrib8.py` (v7 → v8 attribution). Data: `v9` (this version: `py ../blocks.py NAV=7282.87 STUB=43`, then `py ../fundmodel.py`), `v8`, `v8last`, `v8w`, `v8wfy`, `v7`. The v8 model is reproduced from git (`fundmodel.py` at the v8 commit) on `v8`.
+**Scripts** (model v9): `.claude/skills/iaf-valuation/references/models/dnbtek/` — `hold.py` (consensus), `close.py` (closes: `close.py <NAV date>,<last date> <tickers>`), `blocks.py` (weights, blocks, P/E; `NAV=`, `STUB=`), `fundmodel.py` (model; `MEMRATIO` = the first-pass ratio method, not for v4 blocks; `V7CO`, `V7AI` for v7), `detail.py` (path, g split, return bridge, exit cross-check, structural), `sens.py` (sensitivities, triggers), `aisplit.py` (blocks alone, driver breakdown inputs), `navest.py` (next-NAV estimate), `attrib8.py` (v7 → v8 attribution). Data: `v9` (this version: `py ../blocks.py NAV=7282.87 STUB=43`, then `py ../fundmodel.py`), `v8`, `v8last`, `v8w`, `v8wfy`, `v7`. The v8 model is reproduced from git (`fundmodel.py` at the v8 commit) on `v8`.

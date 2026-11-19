@@ -66,13 +66,13 @@ Kept by the `update-chain` skill; checked by
 | mu | docs/mu-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | none | 2026-12-18 | 2026-11-18.1 | v4 19 Nov (AI BBB 18 Nov H2 2028–30 .50 / .32 / .28; $705.27, 18 Nov close; cycle-first, Step 6b; compacted 840 → 294 lines; model mu/v4.py): Base 7.2%, P_k $634.7, −10.0%, **fails** (was clears); Bear −4.4%, Bull 28.7%. Price implies k at 1.14× the new Base (a trough ~14% shallower); ahead of the price on the negative side. Next: FQ1-27 16 Dec |
 | nvda | docs/nvda-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | dnbtek, equity, global-index | 2026-12-18 | 2026-11-18.1 | v1.8 19 Nov (AI BBB 18 Nov H1 2028–30 .85 / .82 / .81; $150.96, 18 Nov close; Step 6b): Base 19.3%, P_k $181.0, +19.9%, clears; Bear −2.7%, Bull 42.4%; E / R 0.392 (NIBOR 4.72). Price implies k at 0.815× the new Base 2028–30; with the market on the cycle, ahead on 2027. Cascade −16.1%, P_k $67.9. Next: 10-Q ~25 Nov; Anthropic price for the $10bn placement |
 | anthropic | docs/anthropic-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | ai, amzn, googl, msft, nvda | 2026-11-19 | 2026-11-12.1 | v1.0 13 Nov (IPO, Bafin EU prospectus 11 Nov): range $70–78; Base IRR 5.5 / 3.8 / 2.2%, P_k $58.4, margin −21.1% at $74, fails (clears ≈ $57.5); Bear −38%, Bull +31%; fully diluted 18.14bn shares; 58% of E1; re-mark at the final price |
-| skh | docs/skhynix-analysis.md | iaf-valuation | company | 2026-11-16 | 2026-11-16 | ai, kospi, mu | 2026-12-16 | 2026-11-12.1 | Version 2 (28 Oct, Q3 report): Seoul Base 21.1%, clears; ADR marginal at the post-report price; Seoul line and SKHY ADR line |
-| smsn | docs/samsung-analysis.md | iaf-valuation | company | 2026-11-16 | 2026-11-16 | mu, skh | 2026-12-16 | 2026-11-12.1 | Version 2 (29 Oct, Q3 report): common Base 26.9% → 23.3%, preference 29.5% → 25.6%, both clear; common, preference and GDR lines |
+| skh | docs/skhynix-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | dnbtek, kospi, mu | 2026-12-18 | 2026-11-18.1 | v4 19 Nov (AI BBB 18 Nov H2 2028–30 .50 / .32 / .28; KRW 1,173,000; Step 6b): Base 32.9%, P_k 1,814,729, +54.7%, clears; Bear 18.8%, capped −5.7%; ADR $122.47 P_k $152.44 (+24.5%); price implies k at 0.54× the new Base. Model V4 (skh_run4.py) |
+| smsn | docs/samsung-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | dnbtek, kospi, mu | 2026-12-18 | 2026-11-18.1 | v4 19 Nov (AI BBB 18 Nov H2 path; 195,000 / 155,900; consensus 77,775; Step 6b): Base 28.2%, P_k 283,748, +45.5%, clears; preference 30.8% (+52.3%); Bear 14.9%, capped −5.1%; price implies k at 0.54× the new Base. Model V4 (smsn_run4.py) |
 | kospi | docs/kospi-analysis.md | iaf-valuation | fund | 2026-11-16 | 2026-11-16 | none | 2026-11-30 | 2026-11-12.1 | Version 1.8 (6 Nov): price re-mark on the 6 Nov Seoul close after the 5–6 Nov chip sell-off (look-through −10.5% in KRW; IQQK EUR 99.2 → 88.6); paths and company blocks unchanged; HY reference now from HY BBB (0.254); price implies 0.61× Base 2028–30 for k (0.80×); Base ~21% (16%), P_k ~EUR 110 (unchanged), margin +25% (+11%); capped Bear −8%/yr, 2027 −39%; E / R 0.249 vs 0.254 (reference only); neither reads nor writes the portfolio |
 | stb | docs/storebrand-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-19 | all | 2026-11-23 | 2026-10-18.2 | Date from the file |
 | tsm | docs/tsm-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-11-11 | none | 2026-11-17 | 2026-11-10.1 | v1.2 11 Nov (daily run): October revenue +59.7% y/y (above the +45% signpost, not crossed: set into 2027) and November board; re-mark at $396.48 (10 Nov close): Base 13.7% → 9.5%, P_k $369.8, margin −6.7%, clears → fails on price |
 | global-index | docs/global-index-funds-analysis.md | iaf-valuation | fund | 2026-11-01 | 2026-10-29 | all | 2026-11-17 | 2026-10-29.1 | Re-mark 29 Oct (MSFT v3, GOOGL v2, AI Update 5): Base −0.08 pp (DNB Global Indeks A 4.58%, Nordnet Global Indeks 4.73%), both fail; NAV date kept at 15 Oct; AI E-layer .92 not stacked on the company blocks; from the next run DNB Global Indeks A only (Nordnet Global Indeks dropped, user 1 Nov) |
-| dnbtek | docs/dnb-teknologi-analysis.md | iaf-valuation | fund | 2026-11-19 | 2026-11-19 | none | 2026-12-15 | 2026-11-18.1 | v9 19 Nov (NAV 17 Nov 7,282.87; NVIDIA v1.8, SK hynix v3, AI BBB 18 Nov H1 and the H2 turn call applied to the memory blocks' Base [A] until skh/smsn re-run; market NIBOR): Base 10.3%, P_k 6,955, −4.5%, fails; E / R 0.159; Bear 2027 −23.5%. Model v9 (fundmodel.py; data v9) |
+| dnbtek | docs/dnb-teknologi-analysis.md | iaf-valuation | fund | 2026-11-19 | 2026-11-19 | none | 2026-12-15 | 2026-11-18.1 | v9 19 Nov (NAV 17 Nov 7,282.87; NVIDIA v1.8, SK hynix v4 and Samsung v4 on the 18 Nov H2 path, AI BBB 18 Nov H1, market NIBOR): Base 10.3%, P_k 6,950, −4.6%, fails; E / R 0.158; Bear 2027 −23.4%. Model v9 (fundmodel.py; data v9) |
 | iaf-notes | docs/iaf-reference-notes.md | - | static | - | - | - | - | - | Background, not updated |
 | review-2029 | docs/review-2029-step-down.md | - | static | - | - | - | - | - | Review, not updated |
 | review-equity | docs/review-equity-market-bbb.md | - | static | - | - | - | - | - | Review, not updated |
@@ -158,8 +158,8 @@ Kept by the `update-chain` skill; checked by
 | dnbtek | msft | 2026-11-07 | main | Company block CM |
 | dnbtek | googl | 2026-11-11 | main | Company block CG |
 | dnbtek | mu | 2026-11-19 | loop | Memory evidence (the fund holds no Micron) |
-| dnbtek | skh | 2026-11-16 | main | SK hynix company block (from 31 Oct; layer path only until 22 Oct) |
-| dnbtek | smsn | 2026-11-16 | main | Samsung company blocks, common and preference (from 31 Oct; layer path only until 22 Oct) |
+| dnbtek | skh | 2026-11-19 | main | SK hynix company block (from 31 Oct; layer path only until 22 Oct) |
+| dnbtek | smsn | 2026-11-19 | main | Samsung company blocks, common and preference (from 31 Oct; layer path only until 22 Oct) |
 | googl | ai | 2026-11-07 | main | E2 cloud row, K1 capex, E-layer EPS |
 | googl | equity | 2026-11-06 | main | Macro scenarios, NOK path |
 | googl | hy | 2026-11-05 | main | NIBOR (E / R) |
@@ -183,18 +183,18 @@ Kept by the `update-chain` skill; checked by
 | amzn | anthropic | 2026-11-11 | main | Anthropic stake (Class N plus rolled-over notes) at the IPO price and at P_k; not yet read |
 | googl | anthropic | 2026-11-11 | main | Anthropic stake at the IPO price and at P_k; not yet read |
 | msft | anthropic | 2026-11-07 | main | Anthropic Azure commitment (≥ $47.2–49.2bn, Nov 2026–Jun 2033) and the $1bn placement; not yet read |
-| skh | ai | 2026-11-16 | main | H2 memory layer: EPS path, exit P/E, scenarios |
-| skh | equity | 2026-11-06 | main | Scenarios, I-44 path (NOK memo), exit cross-check |
-| skh | hy | 2026-11-11 | main | NIBOR (E / R), HY reference E / R |
-| skh | nvda | 2026-11-13 | main | NVIDIA as main HBM customer, supply commitments |
-| skh | mu | 2026-11-05 | main | Peer on the same H2 path |
+| skh | ai | 2026-11-18 | main | H2 memory layer: EPS path, exit P/E, scenarios |
+| skh | equity | 2026-11-18 | main | Scenarios, I-44 path (NOK memo), exit cross-check |
+| skh | hy | 2026-11-18 | main | NIBOR (E / R), HY reference E / R |
+| skh | nvda | 2026-11-19 | main | NVIDIA as main HBM customer, supply commitments |
+| skh | mu | 2026-11-19 | main | Peer on the same H2 path |
 | skh | smsn | 2026-11-16 | loop | Peer comparison (Samsung analysis; not yet read) |
-| smsn | ai | 2026-11-16 | main | H2 memory layer: EPS path, exit P/E, revenue index, scenarios |
-| smsn | equity | 2026-11-06 | main | Scenarios, I-44 path (NOK memo), exit cross-check |
-| smsn | hy | 2026-11-11 | main | NIBOR (E / R), HY reference E / R |
-| smsn | nvda | 2026-11-13 | main | NVIDIA as main HBM customer, supply commitments |
-| smsn | mu | 2026-11-05 | main | Peer on the same H2 path |
-| smsn | skh | 2026-11-04 | main | Peer on the same H2 path; template for the build |
+| smsn | ai | 2026-11-18 | main | H2 memory layer: EPS path, exit P/E, revenue index, scenarios |
+| smsn | equity | 2026-11-18 | main | Scenarios, I-44 path (NOK memo), exit cross-check |
+| smsn | hy | 2026-11-18 | main | NIBOR (E / R), HY reference E / R |
+| smsn | nvda | 2026-11-19 | main | NVIDIA as main HBM customer, supply commitments |
+| smsn | mu | 2026-11-19 | main | Peer on the same H2 path |
+| smsn | skh | 2026-11-19 | main | Peer on the same H2 path; template for the build |
 | kospi | smsn | 2026-11-16 | main | Company blocks: Samsung common and preference (D_t, V_t, capped Bear) |
 | kospi | skh | 2026-11-16 | main | Company block: SK hynix, also driving the SK holdcos block |
 | kospi | ai | 2026-11-16 | main | H2 memory scenarios and catalysts, capped-Bear diagnostic, memory basket row |

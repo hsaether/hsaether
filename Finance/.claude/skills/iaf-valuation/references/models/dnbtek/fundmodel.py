@@ -1,6 +1,6 @@
 # DNB Teknologi A — look-through scenario model (docs/dnb-teknologi-analysis.md) under iaf-valuation, version 9 (19 Nov 2026:
-# NVIDIA v1.8 (18 Nov, $150.96), SK hynix v3 (16 Nov), AI BBB 18 Nov H1 .92/.85/.82/.81 and the H2 memory turn call applied to
-# the memory company blocks' Base [A] (option MEMOLD = the blocks as analysed), HY BBB 18 Nov market NIBOR path) — version 8 (16 Nov 2026;
+# NVIDIA v1.8 (18 Nov, $150.96), AI BBB 18 Nov H1 .92/.85/.82/.81,
+# Samsung v4 and SK hynix v4 (19 Nov, on the 18 Nov H2 path), HY BBB 18 Nov market NIBOR path) — version 8 (16 Nov 2026;
 # v7 6 Nov, v6 30 Oct). v8: company blocks NVIDIA v1.6 (13 Nov, $166.19), TSMC v1.2 (11 Nov, $396.48), Amazon's 11 Nov re-mark
 # ($270.87, re-glided interim V_t), Samsung v3 (16 Nov, 196,800 / 161,300, preference discount 18.0%), Microsoft's 7 Nov re-mark
 # ($530.61) and Alphabet's 7 Nov block ($284.78); AI BBB 11 Nov: H1 Base .92 / .91 / .88 / .87 and the E cash conversion
@@ -61,31 +61,31 @@ COMP={
    Bear=dict(V=[105.9,119.6,141.4],D=[0,0,0],EPS=[7.54,6.23,7.05,8.22]),
    Base=dict(V=[291.0,305.4,317.3],D=[0,0,0],EPS=[9.69,11.28,12.68,14.00]),
    Bull=dict(V=[344.5,387.2,432.1],D=[0,0,0],EPS=[10.51,13.07,15.35,17.73])),
- # docs/samsung-analysis.md v3 (16 Nov, Q3 DART report), its "For other modules": stub 0; EPS incl. interest, 2030 core;
- # preference discount 18.0% held in Base, 30% from end-2027 in Bear and capped, 18.0% -> 15% in Bull
- "CS":dict(TK="005930.KS",PA=196800,CA_=77324,DST=0,
-   Bear=dict(V=[244346,226416,238354],D=[16344,19338,12803],EPS=[44914,23995,20967,19881]),
-   Base=dict(V=[303029,328889,387294],D=[18815,27658,20099],EPS=[68045,47438,33469,28366]),
-   Bull=dict(V=[398714,450483,509818],D=[19503,30999,25230],EPS=[75428,62009,44554,35634]),
-   Cap=dict(V=[109725,110489,121079])),
- "CP":dict(TK="005935.KS",PA=161300,CA_=77324,DST=0,CAPF=0.70/(1-0.180),DISC={"Bear":0.30,"Base":0.180,"Bull":0.15},
-   Bear=dict(V=[171042,158491,166848],D=[16344,19338,12803],EPS=[44914,23995,20967,19881]),
-   Base=dict(V=[248367,269562,317431],D=[18815,27658,20099],EPS=[68045,47438,33469,28366]),
-   Bull=dict(V=[330830,378348,433345],D=[19503,30999,25230],EPS=[75428,62009,44554,35634]),
-   Cap=dict(V=[76808,77342,84755])),
- # docs/skhynix-analysis.md v3 (16 Nov, KRW 1,120,000; CY27 basis 537,911): stub 34,181 (Q3 dividend 20,000 + the 10tn
- # buyback); 2027 D_t incl. the FY2026 rest 50,144; V_t incl. net cash and the Kioxia stake; Cap = 1.73x next-year EPS
- "CH":dict(TK="000660.KS",PA=1120000,CA_=537911,DST=34181,
-   Bear=dict(V=[1571011,1426280,1483072],D=[196067,73556,59913],EPS=[322746,161373,134478,134478]),
-   Base=dict(V=[1833397,2044194,2432092],D=[255992,128526,77806],EPS=[484120,322746,215164,188269]),
-   Bull=dict(V=[2435569,2874063,3299964],D=[271965,171964,102550],EPS=[537911,430329,295851,242060]),
-   Cap=dict(V=[559815,583617,640409]))}
-# v9 [A]: the AI BBB 18 Nov H2 turn call (Base 2028-30 .60/.40/.35 -> .50/.32/.28) applied to the memory blocks' Base until their
-# analyses are re-run: EPS 2028-30 x the path ratio; V_t lowered by the analysis' P/E glide x the next-year EPS change (preference
-# at its Base discount); D_t 2028-29 x that year's ratio. Bear and Bull paths did not change. MEMOLD keeps the blocks as analysed.
+ # docs/samsung-analysis.md v4 (19 Nov, 195,000 / 155,900; AI BBB 18 Nov H2 path), its "For other modules": stub 0; EPS incl.
+ # interest, 2030 core; preference discount 20.1% held in Base, 30% from end-2027 in Bear and capped, -> 15% in Bull
+ "CS":dict(TK="005930.KS",PA=195000,CA_=77775,DST=0,
+   Bear=dict(V=[245603,227519,239507],D=[16384,19452,12868],EPS=[45181,24132,21082,19992]),
+   Base=dict(V=[266829,280389,328689],D=[18875,26889,17063],EPS=[68445,40266,27597,23311]),
+   Bull=dict(V=[399299,452393,512603],D=[19570,31209,25395],EPS=[75872,62371,44808,35835]),
+   Cap=dict(V=[109395,110247,120878])),
+ "CP":dict(TK="005935.KS",PA=155900,CA_=77775,DST=0,CAPF=0.70/(1-0.201),DISC={"Bear":0.30,"Base":0.201,"Bull":0.15},
+   Bear=dict(V=[171922,159263,167655],D=[16384,19452,12868],EPS=[45181,24132,21082,19992]),
+   Base=dict(V=[213327,224167,262783],D=[18875,26889,17063],EPS=[68445,40266,27597,23311]),
+   Bull=dict(V=[325958,376917,435712],D=[19570,31209,25395],EPS=[75872,62371,44808,35835]),
+   Cap=dict(V=[76576,77173,84615])),
+ # docs/skhynix-analysis.md v4 (19 Nov, KRW 1,173,000; AI BBB 18 Nov H2 path; CY27 basis 537,911): stub 34,181; 2027 D_t incl.
+ # the FY2026 rest 50,144; V_t incl. net cash and the Kioxia stake; Cap = 1.83x next-year EPS
+ "CH":dict(TK="000660.KS",PA=1173000,CA_=537911,DST=34181,
+   Bear=dict(V=[1570836,1426165,1483016],D=[196067,73556,59913],EPS=[322746,161373,134478,134478]),
+   Base=dict(V=[1604492,1712639,2009935],D=[255992,105415,55533],EPS=[484120,268955,172131,150615]),
+   Bull=dict(V=[2463703,2883541,3299659],D=[271965,171964,102550],EPS=[537911,430329,295851,242060]),
+   Cap=dict(V=[575610,596810,653661]))}
+# v9 first pass (superseded the same day by the Samsung and SK hynix v4 blocks above): the H2 turn call applied by ratio to the
+# v3 blocks' Base; kept as MEMRATIO for the record (on v4 blocks it would double-count): EPS 2028-30 x the path ratio; V_t lowered by the analysis' P/E glide x the next-year EPS change (preference
+# at its Base discount); D_t 2028-29 x that year's ratio.
 H2R=[1.0,.50/.60,.32/.40,.28/.35]
 MEMGLIDE={"CH":[4.62,7.31,10.0],"CS":[5.1,7.5,10.0],"CP":[5.1,7.5,10.0]}
-if "MEMOLD" not in sys.argv:
+if "MEMRATIO" in sys.argv:   # 19 Nov first pass only: v4 blocks are already on the 18 Nov path (now a no-op check)
     for c,gl in MEMGLIDE.items():
         y=COMP[c]["Base"]; e0=list(y["EPS"]); f=1-COMP[c].get("DISC",{}).get("Base",0.0)
         y["EPS"]=[e*r for e,r in zip(e0,H2R)]
