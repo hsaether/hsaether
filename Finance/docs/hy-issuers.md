@@ -1,7 +1,8 @@
-# Nordic HY — master watchlist and company bond assessment — 9 November 2026
+# Nordic HY — master watchlist and company bond assessment — 9 November 2026 (Borr Q3 note 19 Nov)
 
 ## Metadata
 
+- **19 Nov 2026 note: Borr Q3** (skill `hy-market-bbb` 2026-11-18.2; partial: the full refresh, the Stamdata screen and the compaction to the lean rules are still due). **Borr kept Watch** at ~93 derived (no note quote found); Base PD 7.3%, Base 8.7%, Bear −13.8% unchanged. Q3 (6-K, 18 Nov `[F]`): revenue $263.1m (+13% q/q); adjusted EBITDA ~$79m derived from the 9M $211.2m (Q2 $43.8m); cash $202.6m; debt $2,534m, only $50.9m due within a year; 2027 backlog $596m. **Prospector 5:** declared a total loss; the claims leader has recommended payment of the $200m hull cover (book value $94.8m; no loss-of-hire cover): if paid, cash roughly doubles. Against it: net debt ~$2.33bn is ~7.4× annualised Q3 EBITDA, and the shares fell 9% in Oslo on the day (NOK 31.0; market cap ~$1.0bn, ~30% of EV). Høyrente's second-largest issuer (HH 5.6%, HH+ 4.4%): no fund figure moves. Next price signal: Heimdal's November report (~4 Dec).
 - **9 Nov 2026 update** (Monday, Europe/Oslo; skill `hy-market-bbb` **2026-11-08.1**). A short
   update on **Fondsfinans' October report and its 31 Oct holdings**, so that the funds re-run of
   9 Nov reads current prices. The Stamdata screen was not re-run.
@@ -306,8 +307,8 @@
   HH+ 4.4%, fifth). The October reports give the first price signal after the Prospector 5 loss:
   −0.21 / −0.18 pp, a price fall of ~4–5% in the month. That puts the notes at ~93 `[A]`, so they
   are Watch, not Stressed. On Heimdal's marks the rig loss is a dent, not a solvency event: one
-  rig of 29, probably insured. Borr has said nothing yet on insurance; its Q3 report (~18 Nov
-  `[E]`) is the next test.
+  rig of 29, probably insured. Q3 (19 Nov read): the $200m hull cover is recommended for payment and EBITDA recovered from Q2's
+  trough (~$79m); leverage is high (~7.4× annualised) but no maturity is near. Kept Watch.
 - **Heimdal's two largest Distressed names** (Intrum and Trustly, 30 Oct) are confirmed by the
   October reports. Intrum fell ~93 → 73.75 in October, and both funds bought more. Trustly
   **rose** ~70 → 79 on the owners' equity commitment. Each carries a Base PD of ~23–24% and pays

@@ -34,12 +34,12 @@ As of **12 Nov 2026**. Oil input: Oil Market BBB 11 Nov. Cells Bear / **Base (Ba
 | Path | Call vs Base | Prob. | Families | Base moved? | Reversal / confirmation |
 |---|---|---|---|---|---|
 | UDW drillships 2028–29 (Base 455 / 470, rising) | Flatter or lower | 50% | L5 −1 (from the 30 Oct highs: Valaris −27%, Transocean −28%, Noble −20%, Seadrill −22%; S&P 500 −6%) · L6 0 (Oil BBB 18 Nov: Base 2027–28 −$4 to the strip; long end and mid-cycle unchanged, so the FID logic stands) · L2 0 (no term fixture read since 12 Nov) | No (watch) | 2027–28 UDW term fixtures below $420k, or Brazil awards below $430k |
-| High-spec jackups 2027–28 | Lower | 50% | L5 −1 (Borr −34% from its 12 Oct high) · L2 0 | No (watch) | Borr Q3 (18 Nov after the close; call 19 Nov): cover and rates |
+| High-spec jackups 2027–28 | Lower | 50% | L5 −1 (Borr −34% from its 12 Oct high; −9% in Oslo on the Q3 day, NOK 31.0) · L2 0 (Borr Q3, 6-K 18 Nov: revenue $263.1m, +13% q/q; adj. EBITDA ~$79m derived, Q2 $43.8m; 2027 backlog $596m, ~60% of the 2026 revenue run-rate; utilisation and rates not in the filing `[?]`) | No (watch; Q3 neither confirms nor reverses) | Borr's Q4 (17 Feb 2027) and 2027 fixtures in the Arabian Gulf and West Africa |
 | HE semis (NCS) | Flat | 60% | L1 +1 (contracted moored-semi arrivals 2027) · L5 0 (Odfjell −8.5%) | No | — |
 
 - **Fixtures as forwards** (the market's forward dayrate, Market check): UDW 2027 starts 455 median, ~438 on the regional mix, against Base 420 (−4%, inside the 5% minimum; the composite includes NOC work at ~390–405); HE semis 2027 starts ~437 vs 425, 2028 starts ~452 vs 450; jackups ~115 vs the 105 composite (NW Europe/Australia skew). No forward contradicts Base beyond the minimum.
 - **Equity read (L5):** drillers fell 20–34% from late-October highs, more than Brent's 2027 strip (−2% since 10 Nov) and the S&P 500: the market prices lower dayrates or longer gaps than Base; one family, so a watch.
-- **Scorecard:** three calls opened 18 Nov; none closed.
+- **Scorecard:** three calls opened 18 Nov; none closed. The jackup call's 18 Nov checkpoint (Borr Q3) passed without a decision: the quarter recovered from Q2's trough, and the share fell again.
 
 **Values, anchors, activity and signposts**
 
@@ -469,9 +469,9 @@ Not assessed: East Africa, Canada, Caspian.
 
 ## Change log
 
+- **19 Nov 2026 — Borr Q3 read (note, kept unchanged):** revenue +13% q/q, EBITDA ~$79m (derived), 2027 backlog $596m, Prospector 5 hull insurance $200m recommended for payment (no loss of hire); jackup watch call kept at 50%. SED Q3 moved to 27 Nov.
 - **18 Nov 2026 — leading-view note (skill 2026-11-18.1, method change), kept unchanged:** fixtures-as-forwards within the minimum; watch calls on UDW 2028–29 and jackups (driller shares −20 to −34% from late-October highs); Oil BBB 18 Nov (2027–28 −$4, long end unchanged) read, no rig effect.
 - **13 Nov 2026 — compacted to the lean-document rules (1,143 → 634 lines, Interface section first); no value changed.**
-- **12 Nov 2026 — full update (re-baseline; skill 2026-10-10.1):** fixed six-month leading-edge sample rule (checkpoint 18 closed); drillship Bull 2027 450 → 475 (450–500) and stub 420 → 455; Base 2027 kept at 420 (range 400–445 → 400–455); SE Asia Base 2027 range → 80–105, Middle East Base 2028 range → 85–110 (points kept). Beacon Pacific and Keppel stranded completions logged as supply; Hercules corrected to Canada; oil (Base 2027 88 → 84) not material. `affects` = none. Stale after 12 Dec 2026.
 
 ## Appendix
 
