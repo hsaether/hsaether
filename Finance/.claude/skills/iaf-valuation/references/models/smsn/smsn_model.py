@@ -1,4 +1,5 @@
-# Samsung Electronics (docs/samsung-analysis.md) -- IAF model, version 3 (16 Nov 2026).
+# Samsung Electronics (docs/samsung-analysis.md) -- IAF model, version 4 (19 Nov 2026; V4: AI BBB 18 Nov H2 turn call,
+# Base .90/.50/.32/.28, index 1.38/1.08/0.95; Seoul close 19 Nov; consensus 77,775); version 3 (16 Nov 2026).
 # Rebuilt from version 2's published inputs (29 Oct 2026; the v2 scripts were not kept): with
 # V2 settings it reproduces v2 (Base 23.3%, P_k 306,225). iaf-valuation 2026-11-12.1.
 # Track B: memory = AI BBB H2 EPS path x memory share of CY27 consensus; non-memory own [A];
@@ -10,6 +11,8 @@ TAX = 0.24
 
 MEM = {'Bear': [.60, .30, .25, .25], 'Base': [.90, .60, .40, .35], 'Bull': [1.00, .80, .55, .45]}
 IDX = {'Bear': [1.00, .72, .67], 'Base': [1.38, 1.18, 1.03], 'Bull': [1.50, 1.33, 1.18]}
+MEM18 = dict(MEM, Base=[.90, .50, .32, .28])     # AI BBB 18 Nov turn call (60%)
+IDX18 = dict(IDX, Base=[1.38, 1.08, 0.95])
 NMREV = {'Bear': [-15, -20, -15], 'Base': [0, 0, 0], 'Bull': [5, 10, 15]}
 DX = {'Bear': [-2, 4, 7, 8], 'Base': [2, 7, 10, 12], 'Bull': [0, 2, 5, 8]}
 SDC = {'Bear': [2, 2.5, 3, 3], 'Base': [3.5, 4, 4, 4], 'Bull': [4, 4.5, 4.5, 4.5]}
@@ -38,6 +41,9 @@ V2 = dict(P=232000.0, vdate=date(2026, 10, 29), shares=6.569, eps_basis=6.569, c
 V3 = dict(V2, P=196800.0, vdate=date(2026, 11, 16), shares=6.64865, eps_basis=6.5596, cons27=77323.65,
           sdc_own=0.892, bridge='v3', ltdep=34.73, prepay=10.17, opi9m=3.74, buyq4=2.47,
           sbp30sep=27.21, sbpq4oth=0.30, treas=136.722, book26=662.3, Ppref=161300.0)
+# V4: Seoul close 19 Nov (common 195,000, preference 155,900); Yahoo CY27 consensus 77,774.66 (34; 19 Nov);
+# AI BBB 18 Nov H2 Base path. Bridge as V3 (no new report).
+V4 = dict(V3, P=195000.0, vdate=date(2026, 11, 19), cons27=77774.66, Ppref=155900.0, mem_tab=MEM18, idx_tab=IDX18)
 # V3 sources: DART quarterly report (filed 16 Nov 2026) for the 30 Sep balance sheet, the 2026
 # long-term financial products (net 34.73), contract liabilities (24.15 vs 13.98), treasury shares
 # (127.67m at 30 Sep + 9.06m bought after), the share-based payment reserve (27.21) and the
@@ -87,7 +93,7 @@ def build(s, I, **ov):
     sh = I['shares'] / 1000.0          # bn shares / 1000: KRW tn / sh = KRW per share
     br = bridge(I)
     M1 = mem1(I) * ov.get('cons_mult', 1.0)
-    mem = list(ov.get('mem', MEM[s]))
+    mem = list(ov.get('mem', I.get('mem_tab', MEM)[s]))
     if 'mem30_mult' in ov:
         mem[3] *= ov['mem30_mult']
     if 'mem2830_mult' in ov:
@@ -98,7 +104,7 @@ def build(s, I, **ov):
         mem[3] = ov['mem30']
     sn = ov.get('nm_s', s)
     nm = nonmem(sn, I, ov)
-    idx = ov.get('idx', IDX[s])
+    idx = ov.get('idx', I.get('idx_tab', IDX)[s])
     nmrev = NMREV[ov.get('nmrev_s', s)]
     sc = ov.get('capex_s', s)
     capex = [c * ov.get('capex_mult', 1.0) for c in CAPEX[sc]]
@@ -148,7 +154,7 @@ def build(s, I, **ov):
     pe = ov.get('pe', EXPE[s])
     P = I['P']
     nc_e_sh = br['nc_e'] / sh
-    core27b = (MEM['Base'][0] * M1 + nonmem('Base', I, ov)[0] * (1 - TAX)) / sh
+    core27b = (I.get('mem_tab', MEM)['Base'][0] * M1 + nonmem('Base', I, ov)[0] * (1 - TAX)) / sh
     core_pe0 = (P - nc_e_sh) / core27b                                 # today's core P/E (Base 2027)
     cash_w = 0.5 if ov.get('cash50') else 1.0
     if ov.get('capped'):
