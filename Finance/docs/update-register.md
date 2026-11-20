@@ -70,7 +70,7 @@ Kept by the `update-chain` skill; checked by
 | smsn | docs/samsung-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | dnbtek, kospi, mu | 2026-12-18 | 2026-11-18.1 | v4 19 Nov (AI BBB 18 Nov H2 path; 195,000 / 155,900; consensus 77,775; Step 6b): Base 28.2%, P_k 283,748, +45.5%, clears; preference 30.8% (+52.3%); Bear 14.9%, capped −5.1%; price implies k at 0.54× the new Base. Model V4 (smsn_run4.py) |
 | kospi | docs/kospi-analysis.md | iaf-valuation | fund | 2026-11-16 | 2026-11-16 | none | 2026-11-30 | 2026-11-12.1 | Version 1.8 (6 Nov): price re-mark on the 6 Nov Seoul close after the 5–6 Nov chip sell-off (look-through −10.5% in KRW; IQQK EUR 99.2 → 88.6); paths and company blocks unchanged; HY reference now from HY BBB (0.254); price implies 0.61× Base 2028–30 for k (0.80×); Base ~21% (16%), P_k ~EUR 110 (unchanged), margin +25% (+11%); capped Bear −8%/yr, 2027 −39%; E / R 0.249 vs 0.254 (reference only); neither reads nor writes the portfolio |
 | stb | docs/storebrand-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-19 | all | 2026-11-23 | 2026-10-18.2 | Date from the file |
-| tsm | docs/tsm-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-11-11 | none | 2026-11-17 | 2026-11-10.1 | v1.2 11 Nov (daily run): October revenue +59.7% y/y (above the +45% signpost, not crossed: set into 2027) and November board; re-mark at $396.48 (10 Nov close): Base 13.7% → 9.5%, P_k $369.8, margin −6.7%, clears → fails on price |
+| tsm | docs/tsm-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-11 | 2026-11-18.1 | v1.3 20 Nov (price re-mark at $318.71 after the chip sell-off; no path moved; compacted 1,393 → 300 lines; model rebuilt as tsm/v13.py): Base 9.5% → 17.5%, P_k $369.2, +15.8%: fails → clears; Bear −5.7%, Bull 30.4%; price implies k at 0.84× Base 2030. Next: November revenue (~10 Dec), Q4 report (~14 Jan) |
 | global-index | docs/global-index-funds-analysis.md | iaf-valuation | fund | 2026-11-01 | 2026-10-29 | all | 2026-11-17 | 2026-10-29.1 | Re-mark 29 Oct (MSFT v3, GOOGL v2, AI Update 5): Base −0.08 pp (DNB Global Indeks A 4.58%, Nordnet Global Indeks 4.73%), both fail; NAV date kept at 15 Oct; AI E-layer .92 not stacked on the company blocks; from the next run DNB Global Indeks A only (Nordnet Global Indeks dropped, user 1 Nov) |
 | dnbtek | docs/dnb-teknologi-analysis.md | iaf-valuation | fund | 2026-11-20 | 2026-11-20 | none | 2026-12-15 | 2026-11-18.1 | v9 19 Nov (NAV 17 Nov 7,282.87; NVIDIA v1.8, SK hynix v4 and Samsung v4 on the 18 Nov H2 path, AI BBB 18 Nov H1, market NIBOR): Base 10.3%, P_k 6,950, −4.6%, fails; E / R 0.158; Bear 2027 −23.4%. Model v9 (fundmodel.py; data v9) |
 | iaf-notes | docs/iaf-reference-notes.md | - | static | - | - | - | - | - | Background, not updated |
@@ -207,10 +207,10 @@ Kept by the `update-chain` skill; checked by
 | kospi | dnbtek | 2026-11-16 | main | DNB Teknologi comparison row |
 | stb | equity | 2026-10-18 | main | Scenarios, Oslo block F, exit references |
 | stb | hy | 2026-10-24 | main | NIBOR path, GDP, HY return |
-| tsm | ai | 2026-11-07 | main | H3 foundry layer |
-| tsm | nvda | 2026-11-05 | main | NVIDIA as TSMC's main customer |
-| tsm | equity | 2026-11-06 | main | Scenarios, NOK path |
-| tsm | hy | 2026-11-05 | main | NIBOR (E / R) |
+| tsm | ai | 2026-11-20 | main | H3 foundry layer |
+| tsm | nvda | 2026-11-20 | main | NVIDIA as TSMC's main customer |
+| tsm | equity | 2026-11-20 | main | Scenarios, NOK path |
+| tsm | hy | 2026-11-18 | main | NIBOR (E / R) |
 | global-index | equity | 2026-10-18 | main | World blocks, scenarios, NOK path |
 | global-index | ai | 2026-10-29 | main | Layer paths |
 | global-index | msft | 2026-10-29 | main | Company block |
