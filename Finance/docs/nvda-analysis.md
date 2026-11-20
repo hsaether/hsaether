@@ -1,6 +1,6 @@
 # NVIDIA (NVDA) — IAF analysis, stub Nov–Dec 2026 + 2027–2029
 
-**Version 1.9 — 19 Nov 2026** (funding-loss turn call in Base, user 19 Nov; v1.8 the same morning) · price **$150.96** (Nasdaq close 18 Nov 2026) · skills: iaf-valuation **2026-11-18.1** (Step 6b, Leading view); inputs AI BBB 18 Nov (ai-market-bbb 2026-11-18.1: H1 2028–30 lowered; order-cut watch call 19 Nov), Equity BBB 18 Nov note (values of 6 Nov), HY BBB 18 Nov (NIBOR window 4.72%, HY market 7.5%, E / R 0.254) · **verdict: clears, narrowly** (Base margin of safety +3.4%; the +2% line is $153.0).
+**Version 2.0 — 20 Nov 2026** (re-mark after the 20 Nov fall; SEC accounting-probe sensitivity (g); the v1.9 funding-loss Base kept) · price **$125.53** (Nasdaq close 20 Nov 2026) · skills: iaf-valuation **2026-11-18.1** (Step 6b, Leading view); inputs AI BBB 20 Nov note (ai-market-bbb 2026-11-18.1: paths of 18 Nov; order-cut watch kept), Equity BBB 18 Nov note (values of 6 Nov), HY BBB 18 Nov (NIBOR window 4.72%, HY market 7.5%, E / R 0.254) · **verdict: clears** (Base margin of safety +24.3%).
 
 ## Summary
 
@@ -9,36 +9,34 @@
 - **What Q3 said (17 Nov):** 2027 runs ahead of Base on revenue (Q4 guide $130bn, above the $124bn Bull line; FY28 ~+75%), behind on cash: free cash flow $43.8bn on ~$65bn of net income (receivables, inventory, supplier prepays), plus $15.7bn of equity purchases: **~40% of the quarter's earnings reached shareholders**; net cash fell to $21.1bn. Guarantees +$9.5bn to $118bn; a $1.8bn stake impaired.
 - **The funding turn call (v1.9, in Base; user 19 Nov):** NVIDIA keeps funding its buyers and takes losses on it. Families: **L4 capital allocation −1** (equity purchases $58bn in 9M FY27, guarantees rising, cash conversion ~40%), **L3 customer credit −1** (neocloud debt at junk prices: CoreWeave 2032s 15–16%, CDS > 1,289 bp; the impairment), **L5 market pricing −1** (−38% from the high; −2.9% after a beat) against **L1 guidance +1**; ~65%. Base now carries $75bn a year of funding (2027–29), the funded book worth half at exit, $30bn of guarantee calls in 2028–29 and $30bn more owed at exit, and an exit P/E of 15. **Reversal signpost:** the 10-Q (~25 Nov) and Q4 (late Feb) show new equity, loans and guarantees below $10bn a quarter with no further impairment (a clean stop from 2028 gives 18.4%).
 - **What turns the cycle:** funding, not demand. The funded buyers (neoclouds, labs) are 30–45% of data-center demand; **an order cut by them is the AI BBB's watch call (19 Nov)**, not in Base here: 2028–30 EPS ×0.9 gives 9.6% (fails).
-- **What the price implies:** at exit 15, k at **0.965× Base** 2028–30 EPS (.82 / .79 / .78 of CY27 consensus), 0% at 0.67×: the price holds the funding losses and a digestion ~4% deeper than Base.
+- **20 Nov: −14% to $125.53** (seventh straight fall; −47.5% from the 6 Oct high): Reuters reported that SEC enforcement staff are examining "potential accounting issues" (no practice named; the WSJ first reported a federal probe on 17 Nov; NVIDIA did not comment) `[E]`, on top of the funding worries; SOX −10.7%, VIX 37. **What the price implies:** at exit 15, k at **0.79× Base** 2028–30 EPS (.67 / .65 / .64 of CY27 consensus), 0% at 0.55×: with the funding losses already in Base, the price discounts a further ~21% cut, about halfway to the AI BBB Bear path (.50 / .53 / .57).
 
 **Verdict**
-- **Clears, narrowly: Base 13.3% a year against k = 12%. P_k $156.1 against P $150.96: margin of safety +3.4%.** Marginal from $153.0, fails above $159.2. From v1.8 (19.3%, $181.0): funding −0.4 pp, the funded book at half −1.1 pp, guarantees called −0.4 pp, exit 15 −4.1 pp.
-- **What fails it:** the funded buyers cutting orders (2028–30 EPS ×0.9: 9.6%, P_k $141.6, −6.2%); break-even at EPS ×0.965 or an exit P/E of 14.4. Funding at $100bn a year alone: 12.9% (+2.4%).
-- **Bear −2.7% a year** (financing break: the funding stops and the costs land): capital not preserved (−7.6%); the balance sheet is never at risk.
-- **Cascade stress test** (beside Base and Bear): NVIDIA stops new funding from 2028, funded buyers fail and the price breaks: **−16.1% a year, P_k $67.9**; net cash stays positive.
-- **Price versus our call (Step 6b): with the market.** Our Base now holds the losses the market fears; the market's next leg (the order cut) is our watch call. Signals: L4 −1, L3 −1, L5 −1, L1 +1.
+- **Clears: Base 20.7% a year against k = 12%. P_k $156.1 against P $125.53: margin of safety +24.3%.** Clears up to $153.0; fails above $159.2. From v1.9 (13.3%, +3.4% at $150.96): the price alone (−16.8%); no path, funding or exit input moved.
+- **The user's negative case still clears at this price:** funding losses (in Base) plus the funded buyers cutting orders (2028–30 EPS ×0.9): **16.7%, P_k $141.6, +12.8%**.
+- **SEC probe (sensitivity (g), not Base):** central ($10bn a year of revenue restated as consideration paid to funded customers, a $10bn penalty, exit 14) **17.3%, P_k $143.5, +14.3%**; wide ($25bn restated, $25bn penalty, exit 13) **13.2%, +3.2%**; **wide plus the order cut 9.2%, P_k $116.7, −7.0%: fails**. A restatement or a fine alone is small against ~$300bn of yearly cash flow; the probe fails the case only when it comes with a demand break or a lasting multiple of ≤ 11.5.
+- **Bear 3.7% a year** (financing break; capital +11%); the balance sheet is never at risk. **Cascade** (funding stop, funded buyers fail, price breaks): **−10.5% a year, P_k $67.9**, capital −27%.
+- **Price versus our call (Step 6b): ahead of the price, on the positive side.** Our Base already holds the funding losses; the price discounts about half of the AI BBB Bear on top. What the market may be missing: the funding losses and a probe of this size cost less than the de-rating already in the price. What we may be missing: a restatement that reveals weaker funded demand (the order cut), which the 10-Q (~25 Nov) tests.
 
 **Base in brief**
-- EPS on the AI BBB H1 path: 0.92× CY27 consensus in 2027, then **0.85× / 0.82×**. Revenue $626 / 591 / 579bn on the FY28 gross-margin guide (72.5%). **Customer funding $75bn a year**; the funded book at cost $346bn by 2029, valued at half at exit; guarantees called $15bn in 2028 and 2029, $30bn owed at exit; payout 80% of FCF after funding (FCF to holders $203 / 221 / 205bn, ~65% of net income); exit 15.
-- **Where the return comes from:** of $67 per share (ΣD + V_T $218.0 against $150.96), the multiple gives $57 and cash $26 (21.6 paid, 4.7 retained); stakes $2.7 net of losses, the exit liability −$1.2, earnings −$17. Break-even: exit 14.4, or 2028–30 EPS at 0.965× Base.
+- EPS on the AI BBB H1 path: 0.92× CY27 consensus in 2027, then **0.85× / 0.82×**. Revenue $626 / 591 / 579bn on the FY28 gross-margin guide (72.5%). **Customer funding $75bn a year**; the funded book at cost $346bn by 2029, valued at half at exit; guarantees called $15bn in 2028 and 2029, $30bn owed at exit; payout 80% of FCF after funding (FCF to holders $203 / 221 / 205bn, ~65% of net income); exit 15. **Where the return comes from:** of $92 per share (ΣD + V_T $218.0 against $125.53), the multiple gives $79 (8.6× today → 15) and cash $26 (21.6 paid, 4.7 retained); stakes $2.7 net of losses, the exit liability −$1.2, earnings −$14. Break-even: exit 11.5, or 2028–30 EPS at 0.79× Base.
 
 **Bear in brief**
-- AI BBB financing break inside a recession (H1 2027): a lab misses commitments, neocloud contracts are renegotiated, and NVIDIA's and third parties' funding stops. 2028 capex −16%, H1 −20%.
-- Worst year 2027 (−27% in USD, −18% in NOK). EPS $10.34 / 7.61 / 8.06, exit 13, stakes at 50%, cross-funding costs $46bn. Capital not preserved (−7.6%); net cash still $125bn by 2029. Damage: the layer path (13.3% → 0.2%), then the exit multiple (→ −3.8%); the stop in funding gives back +1.1 pp.
+- AI BBB financing break inside a recession (H1 2027): a lab misses commitments, neocloud contracts are renegotiated, and NVIDIA's and third parties' funding stops. 2028 capex −16%, H1 −20%. Worst year 2027 (−12% in USD, −1% in NOK). EPS $10.34 / 7.61 / 8.06, exit 13, stakes at 50%, cross-funding costs $46bn. Capital preserved (+11%); net cash still $125bn by 2029. Damage: the layer path (20.7% → 6.7%), then the exit multiple (→ 2.4%); the stop in funding gives back +1.3 pp.
 
-**Decision table (USD per share; P = $150.96, 18 Nov 2026 close)**
+**Decision table (USD per share; P = $125.53, 20 Nov 2026 close)**
 
 | | Bear | **Base** | Bull |
 |---|---|---|---|
-| IRR_T (USD) / NOK path (Equity BBB) | −2.7% / 0.3% | **13.3% / 13.3%** | 42.4% / 41.0% |
+| IRR_T (USD) / NOK path (Equity BBB) | 3.7% / 6.9% | **20.7% / 20.7%** | 51.9% / 50.3% |
 | V_T (31 Dec 2029) | 119.9 | **196.4** | 392.6 |
-| **P_k / margin of safety** | 100.7 / −33.3% | **156.1 / +3.4%** | 305.9 / +102.6% |
-| Capital preserved? (ΣD + V_T vs P) | No, −7.6% | Yes, +44.4% | Yes, +184.3% |
+| **P_k / margin of safety** | 100.7 / −19.7% | **156.1 / +24.3%** | 305.9 / +143.7% |
+| Capital preserved? (ΣD + V_T vs P) | Yes, +11.1% | Yes, +73.7% | Yes, +241.9% |
 | Cumulative FCF per share 2027–29 (after growth, working capital, funding, charges) | 23.4 | **26.0** | 44.8 |
 | Net cash per share at exit | 5.17 | **5.68** | 9.45 |
 | Balance sheet | Net cash $52bn (2027) → $125bn; stakes at 50%; costs $24bn in the window + $22bn at exit | Net cash $137bn at exit; funded book $346bn at cost (half at exit); guarantees $30bn called + $30bn owed | FCF $274–427bn a year |
 
-**Trigger prices (USD; unchanged earnings and paths):** clears below **$153.0** · marginal $153.0–159.2 · fails above **$159.2** · Base = k at **$156.1** · E / R = HY reference 0.254 at **$153.7** (reference only) · Base = HY market 7.5% at $176.0 · with the order cut (AI BBB watch) k at **$141.6** · exit 13 k at $138.8 · Bull hurdle $305.9 · Bear hurdle $100.7 · cascade hurdle $67.9.
+**Trigger prices (USD; unchanged earnings and paths):** clears below **$153.0** · marginal $153.0–159.2 · fails above **$159.2** · Base = k at **$156.1** · E / R = HY reference 0.254 at **$153.7** (reference only) · Base = HY market 7.5% at $176.0 · with the order cut (AI BBB watch) k at **$141.6** · SEC probe central $143.5, wide $129.5, wide plus the order cut **$116.7** · exit 13 k at $138.8 · Bull hurdle $305.9 · Bear hurdle $100.7 · cascade hurdle $67.9.
 
 **Per-share path (USD; calendar years; non-GAAP EPS after stock compensation)**
 
@@ -51,7 +49,7 @@
 | Base FCF to holders per share (no amortisation of notes) | 0.30 | 8.39 | 9.15 | 8.47 | |
 | Base D_t paid (dividends + buybacks) | 0.81 (incl. $0.25 dividend, 23 Dec) | 6.71 | 7.32 | 6.78 | |
 | Base net cash per share (year-end) | 0.48 | 2.16 | 3.99 | 5.68 | |
-| Base V_t (year-end) | 151.0 | 163.2 | 179.4 | 196.4 | |
+| Base V_t (year-end) | 125.6 | 147.5 | 171.8 | 196.4 | |
 | Bear EPS / FCF per share / V_t | | 10.34 / 8.40 / 103.9 | 7.61 / 7.82 / 111.4 | 8.06 / 7.21 / 119.9 | 8.67 |
 | Bull EPS / FCF per share / V_t | | 15.21 / 11.34 / 241.0 | 17.49 / 15.84 / 319.5 | 19.01 / 17.66 / 392.6 | 19.77 |
 | Cascade EPS / FCF per share (V_T 73.0) | | 13.99 / 10.71 | 6.41 / 7.55 | 4.70 / 4.79 | 4.97 |
@@ -63,14 +61,14 @@ Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed
 | Item | Value |
 |---|---|
 | Company | NVIDIA Corporation, Nasdaq: NVDA; fiscal year to late January. Last report **Q3 FY27** (quarter to 25 Oct 2026; 8-K and CFO commentary 17 Nov `[F]`); 10-Q expected ~25 Nov; Q4 FY27 ~late Feb 2027 `[A]` |
-| Price (P) | **$150.96**, Nasdaq close 18 Nov 2026 (Yahoo `[F]`); day range $150.40–159.70 on 343m shares, the first session after the Q3 report (17 Nov close $155.46; after hours on 17 Nov ~$162). 52-week range $148.80–243.37 |
-| Valuation / exit date | 17 Nov 2026 model date (stub cash flows of v1.7; the one-day shift to the 18 Nov price is below rounding) / 31 Dec 2029, **T = 3.121 years** |
+| Price (P) | **$125.53**, Nasdaq close 20 Nov 2026 (Yahoo `[F]`); −14.0% on the day (range $124.50–143.73; 19 Nov $145.98; 18 Nov $150.96), the seventh straight fall, on the Reuters report of an SEC accounting probe. 52-week high $243.37 (6 Oct close $239.24) |
+| Valuation / exit date | 17 Nov 2026 model date (stub cash flows of v1.7; the three-day shift to the 20 Nov price is below rounding) / 31 Dec 2029, **T = 3.121 years** |
 | Shares | **24.19bn diluted** (Q3 non-GAAP diluted 24,186m `[F]`), held flat (buybacks are D_t). EDGAR (18 Nov): 8-K 17 Nov, 13F 16 Nov, 8-K 12 Nov; no share issue; 10-Q not yet filed |
-| Market cap / EV | $3.65tn diluted (18 Nov). Net cash **$24.0bn** ($0.99/share) at the valuation date `[A]` ($21.1bn at 25 Oct `[F]`); equity stakes **$107.6bn** ($4.45/share) `[A]` (public at 17 Nov prices, private at book). EV ex net cash and stakes $3.63tn |
-| P/E | 9.93× calendarised CY27 consensus ($15.21, the AI BBB basis); 9.09× FY Jan-28 ($16.61, refreshed after the report, +4%); core 10.40× Base 2027 ($13.99) and 11.81× Base 2030 ($12.32) |
-| P/B | 14.1× equity of 25 Oct ($266.7bn) `[F]`; ~13.3× end-2026 book ($282bn) `[A]` |
+| Market cap / EV | $3.04tn diluted (20 Nov). Net cash **$24.0bn** ($0.99/share) at the valuation date `[A]` ($21.1bn at 25 Oct `[F]`); equity stakes **$107.6bn** ($4.45/share) `[A]` (public at 17 Nov prices, private at book). EV ex net cash and stakes $3.63tn |
+| P/E | 8.25× calendarised CY27 consensus ($15.21, the AI BBB basis); 7.59× FY Jan-28 ($16.54); core 8.58× Base 2027 ($13.99) and 9.75× Base 2030 ($12.32) |
+| P/B | 11.4× equity of 25 Oct ($266.7bn) `[F]`; ~10.8× end-2026 book ($282bn) `[A]` |
 | NAVs (Step 3) | Not applicable (no asset marks). V_T = 2030 EPS × exit P/E + net cash + stakes × scenario factor − liabilities left at exit. Also not applicable: rate-basis check (no JV or charter contracts). Awarded-not-signed: the >$500bn MoUs and the 3.8 GW SB Energy option are not signed and not counted |
-| FX | USD price and reporting. NOK memo at USD/NOK **9.6686** (Norges Bank, 18 Nov): P = NOK 1,460 |
+| FX | USD price and reporting. NOK memo at USD/NOK **9.78** (Yahoo, 20 Nov close): P = NOK 1,228 |
 | Track and k | **Track B** (AI BBB: "H1 compute … Track B while the build-out lasts"). **k = 12%**, not raised: net cash, deep liquidity. Governance, customer funding and export risks sit in the Bear, the sensitivities and the cascade test |
 | Horizon | Stub 18 Nov–31 Dec 2026 (44 days of the 98-day, 14-week FQ4 to 31 Jan), then 2027–2029 calendar years; exit on 2030 normalised EPS |
 | Sector inputs | **AI BBB 18 Nov** (H1 path .92 / .85 / .82 / .81; turn calls; K1, exit P/E, scenarios) · Equity BBB 18 Nov note (values of 6 Nov: scenarios, NOK path, World exit references) · **HY BBB 18 Nov** (NIBOR window 4.72%, HY market 7.5%, reference E / R 0.254) · `docs/anthropic-analysis.md` 13 Nov (placement; listed 19 Nov, price not out at this run) |
@@ -86,7 +84,7 @@ Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed
 | Exit P/E (2030 EPS) | 13, reached at end-2027 | **15** (losses priced) | 19 |
 | Company-specific items | Stakes × 0.5; cross-funding costs $1.8 / 11.1 / 11.1bn (2027–29) + $22.2bn liability at exit `[A]` | Customer funding $75bn a year 2027–29 (incl. Hugging Face and the Anthropic placement); the book at 50% at exit (glided); guarantees called $15bn in 2028 and 2029, $30bn owed at exit | Stakes × 1.25 |
 | Macro and NOK (Equity BBB, HY BBB) | Recession; USD/NOK +12% (2027), +9% | Base; NOK flat | Soft landing; NOK −3% |
-| **Result: IRR_T / P_k / capital** | **−2.7% / $100.7 / −7.6%** | **13.3% / $156.1 / +44.4%** | **42.4% / $305.9 / +184.3%** |
+| **Result: IRR_T / P_k / capital** | **3.7% / $100.7 / +11.1%** | **20.7% / $156.1 / +73.7%** | **51.9% / $305.9 / +241.9%** |
 
 **Why the funding losses are in Base (v1.9) and the order cut is not:**
 - **The call meets the rule** (Leading view: three independent families point down, ~65%): the cash is already going out (Q3: ~40% of earnings reached holders; $58bn of equity purchases in 9M), the funded credit is priced as junk, and the market has de-rated the share. Sizes `[A]`: $75bn a year is the 2026 pace (equity purchases plus new loans and support); half the book lost matches junk recovery; $60bn of guarantees is half of the $118bn maximum outside the OpenAI-linked SB Energy phases' first years; exit 15 (H1 reference 17) prices recurring vendor-financing losses, as for a lender with a bad book.
@@ -96,18 +94,18 @@ Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed
 
 | Step | Bear | Bull |
 |---|---|---|
-| Base | 13.3% ($156.1) | 13.3% ($156.1) |
-| 1. Sector path (EPS, revenue, capex) | 0.2% ($108.7) | 31.4% ($241.6) |
-| 2. Exit P/E (13 / 19) | −3.8% ($96.6) | 40.7% ($297.2) |
-| 3. Funding and costs (Bear: the funding stops, cross-funding costs $24bn + $22bn; Bull: its own pace, no losses, stakes × 1.25) | **−2.7% ($100.7)** | **42.4% ($305.9)** |
+| Base | 20.7% ($156.1) | 20.7% ($156.1) |
+| 1. Sector path (EPS, revenue, capex) | 6.7% ($108.7) | 40.0% ($241.6) |
+| 2. Exit P/E (13 / 19) | 2.4% ($96.6) | 49.8% ($297.2) |
+| 3. Funding and costs (Bear: the funding stops, cross-funding costs $24bn + $22bn; Bull: its own pace, no losses, stakes × 1.25) | **3.7% ($100.7)** | **51.9% ($305.9)** |
 
-**Base return bridge** (USD per share, P = $150.96 → ΣD + V_T = $218.0):
+**Base return bridge** (USD per share, P = $125.53 → ΣD + V_T = $218.0):
 
 | Item | Per share |
 |---|---|
-| Price today = core 145.52 + net cash 0.99 + stakes 4.45 | 150.96 |
-| Earnings: Base EPS 2027 → 2030 ($13.99 → $12.32) at today's core 10.40× | −17.4 |
-| Re-rating: core multiple 10.40× → exit 15× on 2030 EPS | +56.7 |
+| Price today = core 120.09 + net cash 0.99 + stakes 4.45 | 125.53 |
+| Earnings: Base EPS 2027 → 2030 ($13.99 → $12.32) at today's core 8.58× | −14.4 |
+| Re-rating: core multiple 8.58× → exit 15× on 2030 EPS | +79.1 |
 | Cash retained (net cash $0.99 → $5.68) | +4.7 |
 | Cash distributed (ΣD_t) | +21.6 |
 | Funded book: stakes $4.45 → $14.29 at cost, $7.14 at exit (half lost) | +2.7 |
@@ -116,7 +114,7 @@ Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed
 
 ## Cascade stress test (user, 13 Nov 2026; refreshed with Q3 FY27; beside Base and Bear, not Base)
 
-The user's argument has two parts. (1) Customers use NVIDIA as a bank because other money is dearer or absent. If NVIDIA stops, funded customers fail, the book comes into view and the share falls, so NVIDIA keeps financing (a Minsky loop). (2) Funded buyers are the marginal bidders in a supply-limited market, so a stop hits price as well as volume. Built as specified on the Q3 inventory (Company and status). Parameters are `[A]`, steps are cumulative, and the exit P/E stays at 17 until step 6 (`v18_cascade.py`, on the v1.8 Base: the cascade's premise is that the funding stops, so v1.9's funding flows do not enter it).
+The user's argument has two parts. (1) Customers use NVIDIA as a bank because other money is dearer or absent. If NVIDIA stops, funded customers fail, the book comes into view and the share falls, so NVIDIA keeps financing (a Minsky loop). (2) Funded buyers are the marginal bidders in a supply-limited market, so a stop hits price as well as volume. Built as specified on the Q3 inventory (Company and status). Parameters are `[A]`, steps are cumulative, and the exit P/E stays at 17 until step 6 (`v18_cascade.py`, on the v1.8 Base: the cascade's premise is that the funding stops, so v1.9's funding flows do not enter it). **IRRs in this section are at $150.96 (18 Nov); the P_k values do not depend on the price. At $125.53 the cascade (step 6, from 2028) gives −10.5% a year, capital −26.5%.**
 
 | Step | Assumption | From 2028: IRR_T / P_k | From H2 2027 |
 |---|---|---|---|
@@ -213,7 +211,7 @@ Variant H2 2027: half a year of effects in 2027 (backfill 50% in the supply-limi
 | EPS (calendar years; CY27 consensus calendarised = 1.00 = **$15.21**) | H1 layer EPS path | 2027 .68 / **.92** / 1.00 · 2028 .50 / **.85** / 1.15 · 2029 .53 / **.82** / 1.25 · 2030 .57 / **.81** / 1.30 (AI BBB 18 Nov) | None (below) |
 | Exit P/E on 2030 EPS | H1 reference 13 / **17** / 19 | IAF exit multiple, cross-checked against Equity BBB | — |
 | Revenue | H1 path (Scenarios) | NVIDIA ≈ 86% of H1 in Base 2027 | Base and Bull: (net income ÷ (1 − tax) + opex) ÷ GM 72.5%, for working capital only; Bear: the layer's Bear revenue |
-| Comparison | H1 compute basket Base 7.5% (NOK; 18 Nov prices), k at 1.14× its Base 2028–30 | — | NVIDIA 9.93× calendarised CY27; k at 0.965× (exit 15) |
+| Comparison | H1 compute basket Base 14.1% (NOK; 20 Nov prices), k at 0.94× its Base 2028–30 | — | NVIDIA 8.25× calendarised CY27; k at 0.79× (exit 15) |
 
 - **No company adjustment to the path.** Management's FY28 ~75% is a layer-level reading (it is the AI BBB's Bull row, and H1 Base 2027 is +55%), not an NVIDIA share change. Custom-silicon share sits in the layer's margin give-back, and the CEO change is below the minimum change; the funding losses are company items (v1.9), and the order cut by funded buyers is the AI BBB's watch call. The AI BBB read Q3 on 18 Nov (2027 a watch call up; 2028–30 cut). Calendarisation: calendar quarter = 1/3 of the earlier fiscal quarter + 2/3 of the current one.
 
@@ -270,21 +268,21 @@ Variant H2 2027: half a year of effects in 2027 (backfill 50% in the supply-limi
 | Net cash per share | 2.16 | 3.72 | 5.17 | 2.75 | 5.92 | 9.45 |
 | Stakes factor in V_t | 0.5 | 0.5 | 0.5 | 1.08 | 1.17 | 1.25 |
 
-**Year-end path** (USD per share; P $150.96; r_t from the end-2026 mark $151.0):
+**Year-end path** (USD per share; P $125.53; r_t from the end-2026 mark $125.6):
 
 | | End-2026 | 2027 | 2028 | 2029 (exit) |
 |---|---|---|---|---|
-| **Base** D_t / V_t | 0.81 / 151.0 | 6.71 / 163.2 | 7.32 / 179.4 | 6.78 / **196.4** |
-| Base r_t / IRR to year-end | +0.6% (stub) | +12.5% / 11.9% | +14.4% / 13.2% | +13.2% / **13.3%** |
-| **Bear** D_t / V_t | 0.81 / 151.0 | 6.72 / 103.9 | 6.25 / 111.4 | 5.77 / **119.9** |
-| Bear r_t / IRR to year-end | +0.6% | −26.7% / −24.4% | +13.3% / −8.9% | +12.8% / **−2.7%** |
-| Bear r_t in NOK (NOK path) | | −17.9% | +10.2% | +12.8% |
-| **Bull** D_t / V_t | 0.81 / 151.0 | 9.07 / 241.0 | 12.67 / 319.5 | 14.13 / **392.6** |
-| Bull r_t / IRR to year-end | +0.6% | +65.6% / 59.0% | +37.8% / 49.3% | +27.3% / **42.4%** |
+| **Base** D_t / V_t | 0.81 / 125.6 | 6.71 / 147.5 | 7.32 / 171.8 | 6.78 / **196.4** |
+| Base r_t / IRR to year-end | +0.7% (stub) | +22.8% / 21.3% | +21.5% / 21.6% | +18.2% / **20.7%** |
+| **Bear** D_t / V_t | 0.81 / 125.6 | 6.72 / 103.9 | 6.25 / 111.4 | 5.77 / **119.9** |
+| Bear r_t / IRR to year-end | +0.7% | −11.9% / −10.4% | +13.3% / −0.1% | +12.8% / **3.7%** |
+| Bear r_t in NOK (NOK path) | | −1.3% | +10.2% | +12.8% |
+| **Bull** D_t / V_t | 0.81 / 125.6 | 9.07 / 219.8 | 12.67 / 308.0 | 14.13 / **392.6** |
+| Bull r_t / IRR to year-end | +0.7% | +82.3% / 73.9% | +45.9% / 61.0% | +32.1% / **51.9%** |
 
 ## V_T bridge and exit checks
 
-- **V_T bridge (Base, per share):** core today 145.5 (10.40× Base 2027) → earnings to 2030 at today's multiple −17.4 → multiple to 15 +56.7 → core at exit 184.8 → + net cash 5.7 + funded book 7.1 (half of 14.3) − guarantees owed 1.2 = **V_T 196.4**. Backlog at exit and holdco items: not applicable (contracts are inside the EPS path).
+- **V_T bridge (Base, per share):** core today 120.1 (8.58× Base 2027) → earnings to 2030 at today's multiple −14.4 → multiple to 15 +79.1 → core at exit 184.8 → + net cash 5.7 + funded book 7.1 (half of 14.3) − guarantees owed 1.2 = **V_T 196.4**. Backlog at exit and holdco items: not applicable (contracts are inside the EPS path).
 
 **Exit consistency** (earnings basis = EPS; threshold 10%):
 
@@ -318,66 +316,68 @@ Variant H2 2027: half a year of effects in 2027 (backfill 50% in the supply-limi
 
 | | Bear | **Base** | Bull |
 |---|---|---|---|
-| IRR_T (USD, dated, to the exit value) | −2.7% | **13.3%** | 42.4% |
-| IRR_T in NOK on the Equity BBB NOK path | 0.3% | **13.3%** | 41.0% |
-| d / g / c (pp) | 4.1 / −7.1 / +0.3 | **4.6 / 8.8 / −0.1** | 7.8 / 35.8 / −1.2 |
-| g: core P/E on 2030 EPS today → exit (a year) / cash and stakes | 16.8 → 13 (−7.9%) / + | **11.81 → 15 (+8.0%) / net cash $0.99 → $5.68, funded book $4.45 → $7.14 at exit** | 7.36 → 19 (+35.5%) / + |
-| Structural IRR / cyclical (pp; Δd, Δg) | −2.7% / 0.0 (0.0, 0.0) | **12.8% / +0.5 (+0.4, +0.1)** | 43.8% / −1.4 (−1.3, −0.2) |
+| IRR_T (USD, dated, to the exit value) | 3.7% | **20.7%** | 51.9% |
+| IRR_T in NOK on the Equity BBB NOK path | 6.9% | **20.7%** | 50.3% |
+| d / g / c (pp) | 4.1 / −7.1 / +0.3 | **5.5 / 15.4 / −0.3** | 7.8 / 35.8 / −1.2 |
+| g: core P/E on 2030 EPS today → exit (a year) / cash and stakes | 16.8 → 13 (−7.9%) / + | **9.75 → 15 (+14.8%) / net cash $0.99 → $5.68, funded book $4.45 → $7.14 at exit** | 7.36 → 19 (+35.5%) / + |
+| Structural IRR / cyclical (pp; Δd, Δg) | 3.7% / 0.0 (0.0, 0.0) | **20.1% / +0.6 (+0.5, +0.1)** | 53.5% / −1.7 (−1.6, −0.2) |
 | ΣD_t / V_T | 19.6 / 119.9 | **21.6 / 196.4** | 36.7 / 392.6 |
-| P_k (USD) / margin of safety | 100.7 / −33.3% | **156.1 / +3.4%** | 305.9 / +102.6% |
-| Rule 3: P/FCF normalised vs ceiling IRR_T/k² | 17.4× vs n/m | **12.3× vs 9.2×: fails** | 7.6× vs 29.5× |
-| Capital preserved? ΣD_t + V_T vs P | **No, −7.6%** | Yes, +44.4% | Yes, +184.3% |
+| P_k (USD) / margin of safety | 100.7 / −19.7% | **156.1 / +24.3%** | 305.9 / +143.7% |
+| Rule 3: P/FCF normalised vs ceiling IRR_T/k² | 17.4× vs n/m | **10.2× vs 14.4×: passes** | 7.6× vs 29.5× |
+| Capital preserved? ΣD_t + V_T vs P | **Yes, +11.1%** | Yes, +73.7% | Yes, +241.9% |
 
-- **Structural run:** EPS at the scenario's 2030 level from 2027 (revenue at its 2029 level). Base has almost no cycle in the window; Bear and Bull shift the mid-cycle itself. **FCF_normalised (Rule 3):** 2030 EPS with maintenance capex = D&A and no working-capital growth = $12.32: **12.3× against a 9.2× ceiling: fails** (the funding keeps FCF to holders below EPS); the decision is on P_k, at +3.4%.
-- **Scenario-weighted reference (25/50/25 on levels, convention):** 18.9%. **Share of Bull priced:** −3.4% (P is just below the Base hurdle). **Bear balance sheet:** net cash $52bn (2027) → $125bn (2029); FCF $174–203bn a year: the loss is in value, not survival. **Market check (not an input):** mean target ~$265 (55; not refreshed after the report).
+- **Structural run:** EPS at the scenario's 2030 level from 2027 (revenue at its 2029 level). Base has almost no cycle in the window; Bear and Bull shift the mid-cycle itself. **FCF_normalised (Rule 3):** 2030 EPS with maintenance capex = D&A and no working-capital growth = $12.32: **10.2× against a 14.4× ceiling: passes**; the decision is on P_k, at +24.3%.
+- **Scenario-weighted reference (25/50/25 on levels, convention):** 26.7%. **Share of Bull priced:** −20.4% (P is below the Base hurdle). **Bear balance sheet:** net cash $52bn (2027) → $125bn (2029); FCF $174–203bn a year: the loss is in value, not survival. **Market check (not an input):** mean target ~$265 (55; not refreshed after the report).
 
-**Price-implied cycle** (multiplier m on Base 2028–30 EPS, 2027 at Base, Base funding and losses; at $150.96):
+**Price-implied cycle** (multiplier m on Base 2028–30 EPS, 2027 at Base, Base funding and losses; at $125.53):
 
 | Case (exit P/E 15 unless stated) | 2028 / 2029 / 2030 EPS × CY27 consensus | IRR_T |
 |---|---|---|
-| **k at m = 0.965** | .82 / .79 / .78 | 12.0% |
-| 0% at m = 0.67 | .57 / .55 / .55 | 0% |
-| Base (m = 1) | .85 / .82 / .81 | 13.3% |
-| **Order cut by funded buyers (AI BBB watch, m = 0.9)** | .77 / .74 / .73 | **9.6% ($141.6)** |
-| AI BBB Bear path at the Base exit, funding and losses | .50 / .53 / .57 | 0.1% |
-| Management's FY28 ~75% (2027 1.11×), then the AI BBB digestion | 1.03 / .99 / .98 | 20.8% ($188.3) |
-| m for k at exit 13 / 17 / 19 | 1.095 / 0.86 / 0.78 × Base | 12.0% |
+| **k at m = 0.79** | .67 / .65 / .64 | 12.0% |
+| 0% at m = 0.55 | .47 / .45 / .44 | 0% |
+| Base (m = 1) | .85 / .82 / .81 | 20.7% |
+| **Order cut by funded buyers (AI BBB watch, m = 0.9)** | .77 / .74 / .73 | **16.7% ($141.6)** |
+| AI BBB Bear path at the Base exit, funding and losses | .50 / .53 / .57 | 6.5% |
+| Management's FY28 ~75% (2027 1.11×), then the AI BBB digestion | 1.03 / .99 / .98 | 28.8% ($188.3) |
+| m for k at exit 13 / 17 / 19 | 0.90 / 0.71 / 0.64 × Base | 12.0% |
 
-**Sensitivities** (USD IRR_T; P_k and margin for Base; at $150.96):
+**Sensitivities** (USD IRR_T; P_k and margin for Base; at $125.53):
 
 | Change | Bear | **Base** | Bull |
 |---|---|---|---|
-| Model | −2.7% | **13.3% ($156.1, +3.4%)** | 42.4% |
-| **(a) Stop to new discretionary funding**, central: lost revenue $5 / 10 / 10 / 10bn (2027–30), no new stakes | | **13.3% ($156.0, +3.3%)** | |
-| (a) wide: neoclouds lose financing broadly (revenue −3.9% in 2027, −7.8% from 2028) | | 10.8% ($146.4, −3.0%: fails) | |
-| (a) cascade: the whole funded share and the price (section above) | | −16.1% ($67.9, −55.0%) | |
-| **(b) Full closure of diversion channels** (BIS rule 16 Nov), central: revenue −1.5% in 2027, −3% from 2028 | | **12.1% ($151.4, +0.3%: marginal)** | |
-| (b) wide: −6% from 2027 and a $5bn penalty in 2027 (Base = k at a 3.1% loss, fails at 4.9%) | | 10.7% ($146.0, −3.3%: fails) | |
-| **(c) Exit multiple:** 17 (AI BBB reference, no losses priced) / 16 / **15 (Base)** / 13 | | 17.4% / 15.4% ($164.7) / **13.3%** / 8.8% ($138.8, −8.1%: fails) | |
-| **(d) All three, central:** (a) + (b) central, exit 15 | | **12.1% ($151.3, +0.2%: marginal)** | |
-| (d) all three, wide: (a) + (b) wide, exit 13 | | 3.9% ($121.5, −19.5%: fails) | |
-| **(e) Funding variants** (in Base since v1.9): $50bn / $100bn a year; the book at 25% / at cost; a clean stop from 2028 (exit 17) | | 13.6% / 12.9% ($154.6, +2.4%); 12.7% ($153.6, +1.7%: marginal) / 14.5%; 18.4% ($177.7) | |
-| **(e) Order cut by funded buyers** (AI BBB watch call): 2028–30 EPS ×0.9 | | **9.6% ($141.6, −6.2%: fails)** | |
-| Exit P/E −2 / +2 | −7.1% / 1.3% | 8.8% / 17.4% | 38.0% / 46.6% |
-| Exit at today's core 10.40 (no re-rating) | −8.5% | 2.3% ($116.3) | 20.6% |
-| 2030 EPS × 0.9 / × 1.1 | −5.5% / −0.1% | 10.0% / 16.4% | 38.2% / 46.4% |
-| Stakes worth zero at exit; Bear cross-funding none (stakes at book) / doubled (stakes 25%) / all $74bn of leases at risk | −3.4%; −1.5% / −3.5% / −2.8% | 12.0% | 41.6% |
-| Payout 100% / 60% of FCF | −2.7% / −2.6% | 13.5% / 13.1% | 43.1% / 41.8% |
+| Model | 3.7% | **20.7% ($156.1, +24.3%)** | 51.9% |
+| **(a) Stop to new discretionary funding**, central: lost revenue $5 / 10 / 10 / 10bn (2027–30), no new stakes | | **20.7% ($156.0, +24.2%)** | |
+| (a) wide: neoclouds lose financing broadly (revenue −3.9% in 2027, −7.8% from 2028) | | 18.1% ($146.4, +16.6%) | |
+| (a) cascade: the whole funded share and the price (section above) | | −10.5% ($67.9, −45.9%) | |
+| **(b) Full closure of diversion channels** (BIS rule 16 Nov), central: revenue −1.5% in 2027, −3% from 2028 | | **19.4% ($151.4, +20.6%)** | |
+| (b) wide: −6% from 2027 and a $5bn penalty in 2027 (Base = k at an 18.6% loss, fails at 20.1%) | | 17.9% ($146.0, +16.3%) | |
+| **(c) Exit multiple:** 17 (AI BBB reference, no losses priced) / 16 / **15 (Base)** / 13 | | 25.0% / 22.9% ($164.7) / **20.7%** / 15.9% ($138.8, +10.5%) | |
+| **(d) All three, central:** (a) + (b) central, exit 15 | | **19.5% ($151.3, +20.5%)** | |
+| (d) all three, wide: (a) + (b) wide, exit 13 | | 10.7% ($121.5, −3.2%: fails) | |
+| **(e) Funding variants** (in Base since v1.9): $50bn / $100bn a year; the book at 25% / at cost; a clean stop from 2028 (exit 17) | | 21.1% / 20.2% ($154.6, +23.2%); 20.0% ($153.6, +22.3%) / 22.0%; 26.2% ($177.7) | |
+| **(e) Order cut by funded buyers** (AI BBB watch call): 2028–30 EPS ×0.9 | | **16.7% ($141.6, +12.8%)** | |
+| **(g) SEC accounting probe** (Reuters 20 Nov; scope not named; `v20_probe.py`): revenue restated as consideration paid to funded customers $5 / 10 / 20bn a year (cash neutral) | | 20.2% / 19.7% / 18.6%;  central ($10bn restated + $10bn penalty in 2028 + exit 14) / wide ($25bn + $25bn + exit 13) / wide plus the order cut: **17.3% ($143.5, +14.3%)** / 13.2% ($129.5, +3.2%) / **9.2% ($116.7, −7.0%: fails)** | |
+| Exit P/E −2 / +2 | −1.0% / 8.0% | 15.9% / 25.0% | 47.2% / 56.2% |
+| Exit at today's core 8.58 (no re-rating) | −7.3% | 3.6% ($100.6) | 22.4% |
+| 2030 EPS × 0.9 / × 1.1 | 0.7% / 6.5% | 17.2% / 24.0% | 47.4% / 56.0% |
+| Stakes worth zero at exit; Bear cross-funding none (stakes at book) / doubled (stakes 25%) / all $74bn of leases at risk | 2.9%; 5.0% / 2.8% / 3.6% | 19.3% | 51.0% |
+| Payout 100% / 60% of FCF | 3.8% / 3.6% | 21.0% / 20.4% | 52.8% / 51.0% |
 
-- Revenue losses in (a), (b) and (d) reach EPS through the H1 link (1% of revenue ≈ 1.25% of EPS in 2027–29, 1.0% in 2030; H1 review 4.4), with working capital on the lower revenue. (c) moves the exit multiple only, except its execution case. **What flips the verdict** (at $150.96): an exit below 14.4×; 2028–30 EPS below 0.965× Base (the order cut); a revenue loss above ~3% (diversion channels); funding above ~$110bn a year; the cascade; the price above $153.0 (marginal) or $159.2 (fails). The margin is thin: most single risks at their central size take it to marginal.
+- Revenue losses in (a), (b) and (d) reach EPS through the H1 link (1% of revenue ≈ 1.25% of EPS in 2027–29, 1.0% in 2030; H1 review 4.4), with working capital on the lower revenue. (c) moves the exit multiple only, except its execution case. **What flips the verdict** (at $125.53): an exit below 11.5×; 2028–30 EPS below 0.79× Base; a revenue loss above ~19% (diversion channels); the AI BBB Bear path; the cascade; the SEC probe in its wide form together with the order cut; the price above $153.0 (marginal) or $159.2 (fails). Every single risk at its central size, the order cut included, clears.
 
 ## Price versus our call (Step 6b)
 
-| Item | Reading (18–19 Nov) | Score |
+| Item | Reading (18–20 Nov) | Score |
 |---|---|---|
-| **What the price implies** | IRR_T = k at $150.96 needs 2028–30 EPS at **0.965×** the v1.9 Base (.82 / .79 / .78 × CY27 consensus), or an exit P/E of 14.4, with the funding losses in Base | — |
+| **What the price implies** | IRR_T = k at $125.53 needs 2028–30 EPS at **0.79×** the v1.9 Base (.67 / .65 / .64 × CY27 consensus), or an exit P/E of 11.5, with the funding losses in Base | — |
 | Sector turn calls (AI BBB 18 Nov) | H1 2028–30 lower: in Base (−2.6 pp). Watch, H1 2027 up: 2027 at 1.00× gives 19.5% (+0.2 pp; 2027 adds little because it is mostly in the price). Watch, K1 2028 lower: 2028–30 × 0.95 gives 17.4% ($172.9, +14.5%), × 0.90 15.5% (+9.2%) | 0 |
 | Guidance and order book (L1) | Q4 guide $130bn (above the Bull line); FY28 ~+75%; supply commitments $390bn | +1 |
 | Customer credit (L3) | CoreWeave notes 15–16%, CDS > 1,289 bp; a $1.8bn stake impaired; "disciplined and selective" with neoclouds | −1 |
 | Capital allocation (L4) | ~40% of Q3 earnings reached holders; equity purchases $58bn in 9M; $10bn into the Anthropic IPO; guarantees +$9.5bn to $118bn (re-scored 19 Nov, user) | −1 |
-| Market pricing (L5) | −38% from the high; −2.9% on the first day after a beat; FY Jan-28 consensus +4% | −1 |
+| Market pricing (L5) | −47.5% from the high; −14% on 20 Nov on the SEC-probe report; consensus not cut | −1 |
+| Regulatory and governance (new 20 Nov) | SEC enforcement probe of "potential accounting issues" (Reuters; WSJ 17 Nov); scope not named; CEO search open | −1 |
 
-- **Verdict line: with the market.** v1.8 scored capital allocation 0 and kept the funding losses out of Base: behind the price (corrected 19 Nov, user). v1.9 holds the losses (three families down); the price implies only ~4% more digestion on top. The open leg is the order cut (AI BBB watch). **Scorecard:** v1.8's call ("with the market on the cycle, ahead on 2027", 19 Nov, $150.96) closed the same day as a **miss** (re-scored); v1.9 opened 19 Nov at $150.96 (+3.4%): hit if NVDA underperforms the H1 compute basket by > 10% before the Q4 report with funding still above $10bn a quarter; miss if it outperforms by > 10%.
+- **Verdict line: ahead of the price, on the positive side** (20 Nov). The Base holds the funding losses; the price discounts a further ~21% cut on top, about half the AI BBB Bear. The two negative legs not in Base, the order cut and the SEC probe, each clear on their own at this price (16.7% and 17.3%); together in their wide form they fail (9.2%). **Scorecard:** v1.9's call ("with the market", 19 Nov, $150.96) is marked open: the price fell 17% in a day on a new fact (the probe), not on the funding call. v2.0 opened 20 Nov at $125.53 (+24.3%): hit if NVDA outperforms the H1 compute basket by > 10% before the Q4 report with the probe not naming customer-financed revenue; miss if it underperforms by > 10% or the probe does name it.
 
 ## Against World, layer and HY (reference)
 
@@ -385,10 +385,10 @@ Variant H2 2027: half a year of effects in 2027 (backfill 50% in the supply-limi
 |---|---|---|---|
 | Nordic HY market reference (`docs/hy-market-bbb.md`, 18 Nov) | 6.9% (7.5% before the 0.6% fee) | −1.0% | **0.254** |
 | MSCI World (Equity BBB, 18 Nov note) | 6.4% (after 0.20% fee) | −18.5% | 0.065 |
-| AI H1 compute basket (AI BBB 18 Nov prices) | 7.5% | not restated | — |
-| **NVIDIA ($150.96)** | **13.3%** | **−17.9%** | **0.281** |
+| AI H1 compute basket (AI BBB 20 Nov prices) | 14.1% | −26.0% (USD 2027) | 0.273 |
+| **NVIDIA ($125.53)** | **20.7%** | **−1.3%** | **0.661** |
 
-- A reference row for an opportunistic cyclical position, not the gate. E / R = (13.3% − NIBOR 4.72%) ÷ (Base 2027 +12.5% − Bear 2027 −17.9%) = 8.6 ÷ 30.4 = 0.281. It passes 0.254 below $153.7.
+- A reference row for an opportunistic cyclical position, not the gate. E / R = (20.7% − NIBOR 4.72%) ÷ (Base 2027 +22.8% − Bear 2027 −1.3%) = 16.0 ÷ 24.1 = 0.661; R is small because the Bear's end-2027 mark (13 × 2028 EPS + cash) is close to today's price. It passes 0.254 below $153.7.
 
 ## Verdict and caveat
 
@@ -418,15 +418,15 @@ Variant H2 2027: half a year of effects in 2027 (backfill 50% in the supply-limi
 ## For other modules
 
 - **`ai-market-bbb`** (no path set here; the 18 Nov note read Q3):
-  1. **Company-check row (v1.9):** Base 13.3%, P_k $156.1, +3.4% at $150.96; Bear −2.7%; Bull 42.4%; E / R 0.281; k at 0.965× Base 2028–30 at exit 15. **Input for the H1 order-cut watch call (19 Nov):** NVIDIA's funding of its buyers ($58bn of equity in 9M, guarantees $118bn, ~40% cash conversion to holders) is evidence that non-K1 demand is vendor-financed (L4); 2028–30 ×0.9 gives 9.6% here.
+  1. **Company-check row (v2.0):** Base 20.7%, P_k $156.1, +24.3% at $125.53; Bear 3.7%; Bull 51.9%; E / R 0.661; k at 0.79× Base 2028–30 at exit 15; SEC probe central 17.3%, wide plus the order cut 9.2%. **Input for the H1 order-cut watch call (19 Nov):** NVIDIA's funding of its buyers ($58bn of equity in 9M, guarantees $118bn, ~40% cash conversion to holders) is evidence that non-K1 demand is vendor-financed (L4); 2028–30 ×0.9 gives 9.6% here.
   2. **Q3 readings** (read by the AI BBB on 18 Nov): Q4 guide $130bn, FY28 ~+75%, GM guide 71–72% then 72–73%; supply commitments $279bn → **$390bn**, mainly multi-year memory; guarantees +$9.5bn to $118bn, equity purchases $15.7bn, a $1.8bn stake impaired. Cascade −16.1% (P_k $67.9); a permanent subsidy reaches k at ~$107bn a year (half lost); the user's funding-loss case 13.3% (fails with an order cut).
-- **`equity-market-bbb`** (World block, loop), **`docs/dnb-teknologi-analysis.md`, `docs/global-index-funds-analysis.md`** (company block): EPS .92 / .85 / .82 / .81 × $15.21 (AI BBB 18 Nov); V_T Base 196.4, Bear 119.9, Bull 392.6. D_t paid (Base) 0.81 / 6.71 / 7.32 / 6.78 on the 80% payout after funding. Interim V_t Base 163.2 / 179.4.
+- **`equity-market-bbb`** (World block, loop), **`docs/dnb-teknologi-analysis.md`, `docs/global-index-funds-analysis.md`** (company block): EPS .92 / .85 / .82 / .81 × $15.21 (AI BBB 18 Nov); V_T Base 196.4, Bear 119.9, Bull 392.6. D_t paid (Base) 0.81 / 6.71 / 7.32 / 6.78 on the 80% payout after funding. Interim V_t Base 147.5 / 171.8 at $125.53 (the glide starts at today's multiple; V_T and D_t do not depend on the price).
 - **`docs/skhynix-analysis.md`, `docs/samsung-analysis.md`, `docs/kospi-analysis.md`, `docs/tsm-analysis.md`:** supply commitments $390bn (from $279bn), mostly multi-year memory: the "commitments raised" leg of their NVIDIA signpost; the split beyond FY29 comes with the 10-Q. NVIDIA's Q4 margin dips on "a significant change in the cost of supply". In the cascade the commitments turn into $28 / 11bn of excess-purchase charges in 2028–29, a memory Bear signal. **`docs/portfolio-overview.md`:** no input.
 
 ## Change log
 
+- **20 Nov 2026 — v2.0 (re-mark at $125.53 after −14% on the Reuters SEC-probe report):** Base 13.3% → **20.7%**, P_k $156.1, margin +3.4% → **+24.3%**; Bear −2.7% → 3.7%; Bull 51.9%; E / R 0.661. New sensitivity (g), the SEC probe: central 17.3%, wide 13.2%, wide plus the order cut 9.2% (fails). Paths, funding and exit unchanged.
 - **19 Nov 2026 — v1.9 (funding-loss turn call in Base; user):** customer funding $75bn a year, the book at half, guarantees $30bn + $30bn, exit 15: Base 19.3% → 13.3%, P_k $181.0 → $156.1, +3.4% (clears, narrowly); E / R 0.281. L4 re-scored −1; the order cut sent to the AI BBB (watch). Bear, Bull and the cascade unchanged.
-- **19 Nov 2026 — v1.8 (AI BBB 18 Nov; $150.96, 18 Nov close):** Base 19.3%, P_k $181.0, +19.9%; Bear −2.7%, Bull 42.4%; E / R 0.392 (NIBOR 4.72). H1 2028–30 .85 / .82 / .81 (was .91 / .88 / .87); Step 6b added (with the market on the cycle, ahead on 2027). Cascade −16.1%, P_k $67.9.
 - **18 Nov 2026 — v1.7 (Q3 FY27; $155.46, 17 Nov close):** Base 20.7%, P_k $193.0, +24.2%; Bear −3.7%, Bull 41.0%; E / R 0.360. Stub from the 25 Oct balance sheet, stakes re-marked (13F), payout 80% (buyback plan), revenue on the FY28 GM guide, capex at the Q3 run-rate; AI BBB path unchanged. Cascade on the Q3 inventory: −15.2%, P_k $71.9; volume now the worst step.
 
 ## Appendix: own assumptions `[A]`
@@ -440,11 +440,11 @@ By weight on the result (values in Common assumptions): (1) the H1 layer path ×
 | S1 | [NVIDIA 8-K, Q3 FY27 press release](https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000088/q3fy27pr.htm) and [CFO commentary](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000088/q3fy27cfocommentary.htm) | Q3 results, Q4 outlook, balance sheet, cash flow, commitments ($518bn), guarantees ($118bn), equity securities, capital return, dividend dates | Filed 17 Nov 2026 |
 | S2 | Call transcripts: [StockAnalysis](https://stockanalysis.com/stocks/nvda/transcripts/739383-q3-2027/), [SingjuPost](https://singjupost.com/nvidia-q3-fy27-earnings-call-transcript/) | FY28 ~75%, GM bottom and FY28 72–73%, financing review, guarantees, leadership, China, capital priorities `[E]` | 17 Nov 2026 |
 | S3 | [NVIDIA 13F-HR (30 Sep)](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000084/information_table.xml); [8-K 12 Nov](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm); [10-Q Q2 FY27](https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm); EDGAR submissions | Public holdings; CEO change; Q2 inventory; filing list (no 10-Q yet) | 26 Aug–18 Nov 2026 |
-| S4 | Yahoo chart and quoteSummary (NVDA, INTC, SPCX, CRWV, COHR, NOK, SNPS, NBIS); Norges Bank USD/NOK | Close $150.96 (18 Nov), $155.46 (17 Nov) and after hours; USD/NOK 9.6686 (18 Nov); stake prices 23 Oct and 17 Nov; FY Jan-28 consensus $16.61 (post-report) | 17–19 Nov 2026 |
+| S4 | Yahoo chart and quoteSummary (NVDA, INTC, SPCX, CRWV, COHR, NOK, SNPS, NBIS); Norges Bank USD/NOK; Reuters via 24/7 Wall St and Mediaite (20 Nov, SEC probe) | Close $125.53 (20 Nov), $150.96 (18 Nov), $155.46 (17 Nov) and after hours; USD/NOK 9.6686 (18 Nov); stake prices 23 Oct and 17 Nov; FY Jan-28 consensus $16.61 (post-report) | 17–19 Nov 2026 |
 | S5 | [BIS remote-access IFR](https://bis.gov/press-release/bis-issues-rule-addressing-remote-access-american-super-intelligence-technology); NPR/WYPR, TechCrunch coverage; [Hugging Face terms](https://thenewstack.io/nvidia-acquires-hugging-face/) | Rule of 16 Nov, countries added `[E]`; $12.93bn, closing H1 2027 `[E]` | Sep–16 Nov 2026 |
 | S6 | `docs/ai-market-bbb.md` (18 Nov); `docs/review-ai-h1-non-k1-funding.md`; `docs/equity-market-bbb.md` (18 Nov note); `docs/hy-market-bbb.md` (18 Nov); `docs/anthropic-analysis.md` (13 Nov); Zacks (22 Sep `[C]`) | Paths, scenarios, signposts; non-K1 sizing; NOK path, World references; NIBOR, HY reference; placement value | 22 Sep–16 Nov 2026 |
 | S7 | [Silicon Data](https://www.silicondata.com/products/silicon-index/b200) indices; [American Compute H100 appraisal](https://www.amcompute.com/appraisals/h100); CoreWeave credit (TRACE via FourWeekMBA, CNBC) | Rental indices to 12 Nov; used H100 prices; neocloud credit `[E]` | 6–12 Nov 2026 |
 | S8 | NVIDIA 8-K Q4 FY19, Q2 FY23 preliminary; Cisco FY01 10-K Ex. 13; Lucent FY01 10-K405 | Down-cycle revenue, gross margin, charges, customer financing | 2001–2022 filings |
 
 - **Validation (v1.8):** P is the 18 Nov regular close, the first full session after the report; the model keeps the 17 Nov valuation date and stub (one day, below rounding). v1.7: P the 17 Nov close (after hours ~$162 not used). The Q3 figures match between the release and the CFO commentary; supply commitments +40% and leases and cloud +38% q/q are confirmed by the call as a second source. Stakes are re-marked on the 30 Sep 13F counts (Q4 trades unknown); other marketable items of $4.1bn are not re-marked `[?]`. Not verified: the WSJ items (deals paused, the Caprez-led credit support: not in the release, the commentary or the call), the OpenAI stake size, the impaired stake, the customer share of the $74bn of leases, whether the Anthropic placement sits in the $20bn of commitments. Post-report FY Jan-28 consensus $16.61 (+4%); the AI BBB basis stays $15.21 (CY27, 7 Nov). Silicon Data returned HTTP 500 on 18 Nov.
-- **Scripts:** `.claude/skills/iaf-valuation/references/models/nvda/v18.py` (model: v17 with the 18 Nov H1 path), `v18_run.py` (decision figures, tables, sensitivities, driver breakdown, bridge, exit cross-check; `py v18_run.py 150.96`) `v18_cascade.py` (cascade test), `v18_userfund.py` (the funding-loss build-up), **`v19.py`, `v19_run.py`, `v19_extra.py`** (v1.9 Base, all figures; `py v19_run.py 150.96`). `v17.py` / `v17_run.py 155.46` reproduce v1.7. Run there with `py`.
+- **Scripts:** `.claude/skills/iaf-valuation/references/models/nvda/v18.py` (model: v17 with the 18 Nov H1 path), `v18_run.py` (decision figures, tables, sensitivities, driver breakdown, bridge, exit cross-check; `py v18_run.py 150.96`) `v18_cascade.py` (cascade test), `v18_userfund.py` (the funding-loss build-up), **`v19.py`, `v19_run.py`, `v19_extra.py`** (v1.9 Base, all figures; `py v19_run.py 125.53`), **`v20_probe.py`** (the SEC-probe sensitivity (g)). `v17.py` / `v17_run.py 155.46` reproduce v1.7. Run there with `py`.
