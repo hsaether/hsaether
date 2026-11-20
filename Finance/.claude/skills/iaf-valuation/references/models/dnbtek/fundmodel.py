@@ -1,5 +1,5 @@
 # DNB Teknologi A — look-through scenario model (docs/dnb-teknologi-analysis.md) under iaf-valuation, version 9 (19 Nov 2026:
-# NVIDIA v1.8 (18 Nov, $150.96), AI BBB 18 Nov H1 .92/.85/.82/.81,
+# version 10 (20 Nov 2026: NVIDIA v2.0 at $125.53, closes of 20 Nov, NAV estimate) — version 9 (19 Nov: NVIDIA v1.8, AI BBB 18 Nov H1 .92/.85/.82/.81,
 # Samsung v4 and SK hynix v4 (19 Nov, on the 18 Nov H2 path), HY BBB 18 Nov market NIBOR path) — version 8 (16 Nov 2026;
 # v7 6 Nov, v6 30 Oct). v8: company blocks NVIDIA v1.6 (13 Nov, $166.19), TSMC v1.2 (11 Nov, $396.48), Amazon's 11 Nov re-mark
 # ($270.87, re-glided interim V_t), Samsung v3 (16 Nov, 196,800 / 161,300, preference discount 18.0%), Microsoft's 7 Nov re-mark
@@ -38,29 +38,33 @@ if V7AIF: EPS["H1"]["Base"]=list(AI7["H1"]); CONV["E"]["Base"]=list(AI7["E"])
 # Cap = memory Bear capped at today's multiple (the analyses' diagnostic V_t; D_t as Bear), re-priced: + (P - PA) / CA_ x EPS(t+1).
 # DISC (CP) = the preference discount by scenario in the Samsung analysis.
 COMP={
- "CM":dict(TK="MSFT",PA=530.61,CA_=21.72,DST=0.98,             # docs/msft-analysis.md v3, re-mark 7 Nov (6 Nov close; interim V_t re-glided)
-   Bear=dict(V=[337.7,368.8,404.5],D=[3.97,4.17,4.38],EPS=[18.18,17.84,19.16,20.61]),
-   Base=dict(V=[585.4,643.1,692.1],D=[4.01,4.37,4.76],EPS=[20.77,23.40,26.11,28.39]),
-   Bull=dict(V=[681.3,805.8,921.4],D=[4.02,4.42,4.86],EPS=[22.03,26.26,30.37,33.80])),
- "CG":dict(TK="GOOGL",PA=284.78,CA_=15.17,DST=0.22,            # docs/googl-analysis.md v2, 7 Nov block (6 Nov close; 10-Q net cash)
-   Bear=dict(V=[160.3,179.3,202.9],D=[0.88,0.88,0.88],EPS=[10.47,9.83,11.01,12.34]),
-   Base=dict(V=[310.4,339.9,371.3],D=[0.91,0.96,1.01],EPS=[12.67,14.29,15.90,17.45]),
-   Bull=dict(V=[377.3,441.8,515.9],D=[0.95,1.04,1.14],EPS=[13.81,16.67,18.98,21.40])),
- # docs/nvda-analysis.md v1.8 (19 Nov, $150.96): AI BBB 18 Nov H1 path (.92/.85/.82/.81 x $15.21), exit 17, payout 80%, stub $0.81
- "CN":dict(TK="NVDA",PA=150.96,CA_=15.21,DST=0.81,
+ # docs/msft-analysis.md v3.2 (20 Nov re-mark, $498.30; ex-dividend 19 Nov, Anthropic placement): interim V_t re-glided;
+ # the $0.98 December dividend is out of the stream (ex 19 Nov)
+ "CM":dict(TK="MSFT",PA=498.30,CA_=21.72,DST=0.0,
+   Bear=dict(V=[337.7,368.8,404.3],D=[3.97,4.17,4.38],EPS=[18.18,17.84,19.16,20.61]),
+   Base=dict(V=[561.1,629.5,692.1],D=[4.01,4.37,4.76],EPS=[20.77,23.40,26.11,28.39]),
+   Bull=dict(V=[654.0,790.0,921.4],D=[4.02,4.42,4.86],EPS=[22.03,26.26,30.37,33.80])),
+ # docs/googl-analysis.md v2.2 (20 Nov re-mark, $272.66; Anthropic and SpaceX marks, $10bn placement)
+ "CG":dict(TK="GOOGL",PA=272.66,CA_=15.17,DST=0.22,
+   Bear=dict(V=[160.6,179.5,203.0],D=[0.88,0.88,0.88],EPS=[10.44,9.80,10.98,12.31]),
+   Base=dict(V=[301.7,335.8,372.9],D=[0.91,0.96,1.01],EPS=[12.64,14.26,15.87,17.42]),
+   Bull=dict(V=[367.3,437.4,518.9],D=[0.95,1.04,1.14],EPS=[13.78,16.64,18.95,21.37])),
+ # docs/nvda-analysis.md v2.0 (20 Nov, $125.53): v1.9 funding-loss Base (funding $75bn a year, book at half, guarantees,
+ # exit 15) on the AI BBB 18 Nov H1 path; interim V_t glided from the 20 Nov price; stub $0.81
+ "CN":dict(TK="NVDA",PA=125.53,CA_=15.21,DST=0.81,
    Bear=dict(V=[103.9,111.4,119.9],D=[6.72,6.25,5.77],EPS=[10.34,7.61,8.06,8.67]),
-   Base=dict(V=[171.3,195.6,223.0],D=[8.57,10.23,9.69],EPS=[13.99,12.93,12.47,12.32]),
-   Bull=dict(V=[241.0,319.5,392.6],D=[9.07,12.67,14.13],EPS=[15.21,17.49,19.01,19.77])),
+   Base=dict(V=[147.5,171.8,196.4],D=[6.71,7.32,6.78],EPS=[13.99,12.93,12.47,12.32]),
+   Bull=dict(V=[219.8,308.0,392.6],D=[9.07,12.67,14.13],EPS=[15.21,17.49,19.01,19.77])),
  # docs/tsm-analysis.md v1.2 (11 Nov, $396.48; CY27 basis $23.43; dividends NT$35/44/52, the 2Q26 NT$7 paid 7 Jan 2027)
  "CT":dict(TK="TSM",PA=396.48,CA_=23.43,DST=0.0,
    Bear=dict(V=[218.2,233.9,250.9],D=[5.18,5.79,6.40],EPS=[17.81,14.76,15.70,16.64]),
    Base=dict(V=[436.8,472.0,504.4],D=[5.34,6.71,7.93],EPS=[22.26,24.14,25.78,27.18]),
    Bull=dict(V=[477.2,585.1,698.9],D=[5.41,7.32,9.15],EPS=[23.43,26.95,30.00,32.81])),
- # docs/amzn-analysis.md v2, re-mark 11 Nov ($270.87): core EPS, no dividends; V_t incl. the AI stakes after tax, net debt
- "CA":dict(TK="AMZN",PA=270.87,CA_=10.67,DST=0.0,
-   Bear=dict(V=[105.9,119.6,141.4],D=[0,0,0],EPS=[7.54,6.23,7.05,8.22]),
-   Base=dict(V=[291.0,305.4,317.3],D=[0,0,0],EPS=[9.69,11.28,12.68,14.00]),
-   Bull=dict(V=[344.5,387.2,432.1],D=[0,0,0],EPS=[10.51,13.07,15.35,17.73])),
+ # docs/amzn-analysis.md v2.1 (20 Nov re-mark, $257.37; Anthropic stake at market): core EPS, no dividends
+ "CA":dict(TK="AMZN",PA=257.37,CA_=10.66,DST=0.0,
+   Bear=dict(V=[109.5,123.2,144.9],D=[0,0,0],EPS=[7.54,6.23,7.05,8.22]),
+   Base=dict(V=[282.0,303.4,324.3],D=[0,0,0],EPS=[9.69,11.28,12.68,14.00]),
+   Bull=dict(V=[334.1,385.6,442.6],D=[0,0,0],EPS=[10.51,13.07,15.35,17.73])),
  # docs/samsung-analysis.md v4 (19 Nov, 195,000 / 155,900; AI BBB 18 Nov H2 path), its "For other modules": stub 0; EPS incl.
  # interest, 2030 core; preference discount 20.1% held in Base, 30% from end-2027 in Bear and capped, -> 15% in Bull
  "CS":dict(TK="005930.KS",PA=195000,CA_=77775,DST=0,

@@ -72,7 +72,7 @@ Kept by the `update-chain` skill; checked by
 | stb | docs/storebrand-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-19 | all | 2026-11-23 | 2026-10-18.2 | Date from the file |
 | tsm | docs/tsm-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-11-11 | none | 2026-11-17 | 2026-11-10.1 | v1.2 11 Nov (daily run): October revenue +59.7% y/y (above the +45% signpost, not crossed: set into 2027) and November board; re-mark at $396.48 (10 Nov close): Base 13.7% → 9.5%, P_k $369.8, margin −6.7%, clears → fails on price |
 | global-index | docs/global-index-funds-analysis.md | iaf-valuation | fund | 2026-11-01 | 2026-10-29 | all | 2026-11-17 | 2026-10-29.1 | Re-mark 29 Oct (MSFT v3, GOOGL v2, AI Update 5): Base −0.08 pp (DNB Global Indeks A 4.58%, Nordnet Global Indeks 4.73%), both fail; NAV date kept at 15 Oct; AI E-layer .92 not stacked on the company blocks; from the next run DNB Global Indeks A only (Nordnet Global Indeks dropped, user 1 Nov) |
-| dnbtek | docs/dnb-teknologi-analysis.md | iaf-valuation | fund | 2026-11-19 | 2026-11-19 | none | 2026-12-15 | 2026-11-18.1 | v9 19 Nov (NAV 17 Nov 7,282.87; NVIDIA v1.8, SK hynix v4 and Samsung v4 on the 18 Nov H2 path, AI BBB 18 Nov H1, market NIBOR): Base 10.3%, P_k 6,950, −4.6%, fails; E / R 0.158; Bear 2027 −23.4%. Model v9 (fundmodel.py; data v9) |
+| dnbtek | docs/dnb-teknologi-analysis.md | iaf-valuation | fund | 2026-11-20 | 2026-11-20 | none | 2026-12-15 | 2026-11-18.1 | v9 19 Nov (NAV 17 Nov 7,282.87; NVIDIA v1.8, SK hynix v4 and Samsung v4 on the 18 Nov H2 path, AI BBB 18 Nov H1, market NIBOR): Base 10.3%, P_k 6,950, −4.6%, fails; E / R 0.158; Bear 2027 −23.4%. Model v9 (fundmodel.py; data v9) |
 | iaf-notes | docs/iaf-reference-notes.md | - | static | - | - | - | - | - | Background, not updated |
 | review-2029 | docs/review-2029-step-down.md | - | static | - | - | - | - | - | Review, not updated |
 | review-equity | docs/review-equity-market-bbb.md | - | static | - | - | - | - | - | Review, not updated |
@@ -150,13 +150,13 @@ Kept by the `update-chain` skill; checked by
 | amzn | hy | 2026-11-18 | main | NIBOR (E / R) |
 | dnb | equity | 2026-10-18 | main | Scenarios, Oslo financials block |
 | dnb | hy | 2026-10-17 | main | NIBOR path |
-| dnbtek | ai | 2026-11-18 | main | Layer EPS paths, exit P/Es |
+| dnbtek | ai | 2026-11-20 | main | Layer EPS paths, exit P/Es |
 | dnbtek | equity | 2026-11-18 | main | World scenarios, NOK path |
-| dnbtek | amzn | 2026-11-11 | main | Company block CA |
-| dnbtek | nvda | 2026-11-19 | main | Company block CN |
+| dnbtek | amzn | 2026-11-20 | main | Company block CA |
+| dnbtek | nvda | 2026-11-20 | main | Company block CN |
 | dnbtek | tsm | 2026-11-11 | main | Company block CT |
-| dnbtek | msft | 2026-11-07 | main | Company block CM |
-| dnbtek | googl | 2026-11-11 | main | Company block CG |
+| dnbtek | msft | 2026-11-20 | main | Company block CM |
+| dnbtek | googl | 2026-11-20 | main | Company block CG |
 | dnbtek | mu | 2026-11-19 | loop | Memory evidence (the fund holds no Micron) |
 | dnbtek | skh | 2026-11-19 | main | SK hynix company block (from 31 Oct; layer path only until 22 Oct) |
 | dnbtek | smsn | 2026-11-19 | main | Samsung company blocks, common and preference (from 31 Oct; layer path only until 22 Oct) |
