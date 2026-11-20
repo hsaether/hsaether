@@ -60,7 +60,7 @@ Kept by the `update-chain` skill; checked by
 | rhm | docs/rheinmetall-analysis.md | iaf-valuation | company | 2026-10-07 | 2026-10-07 | all | 2026-11-06 | 2026-10-07.1 | **HOLD (user): no update until the user lifts it.** |
 | amzn | docs/amzn-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-16 | 2026-11-18.1 | Version 2 (30 Oct, Q3 report): Base 6.8% → 9.2%, P_k $221.5 vs $240.35, fails; OpenAI $50bn preferred added (missing in v1) |
 | dnb | docs/dnb-analysis.md | iaf-valuation | company | 2026-11-10 | 2026-10-22 | all | 2026-11-21 | 2026-10-18.2 | Update 1 after Q3, amended 22 Oct; 10 Nov note: CMD targets (ROE > 15% and C/I < 38% towards end-2028; payout and CET1 unchanged), ~0.5 pp above Base ROE 2028, verdict unchanged |
-| googl | docs/googl-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-10-28 | all | 2026-11-20 | 2026-11-10.1 | Version 2 (28 Oct) + price re-mark 1 Nov at the 30 Oct close $279.84: Base 4.6% → 9.6%, P_k $261.6 (−6.5%), fails; E / R 0.116; triggers: k $261.6, HY E / R $256.1 |
+| googl | docs/googl-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-18 | 2026-11-18.1 | Version 2 (28 Oct) + price re-mark 1 Nov at the 30 Oct close $279.84: Base 4.6% → 9.6%, P_k $261.6 (−6.5%), fails; E / R 0.116; triggers: k $261.6, HY E / R $256.1 |
 | shb | docs/handelsbanken-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 12 Nov): no update until 3 Feb 2027 (year-end report). Version 2 |
 | msft | docs/msft-analysis.md | iaf-valuation | company | 2026-11-07 | 2026-10-28 | all | 2026-11-20 | 2026-11-01.1 | Version 3 (28 Oct, Q1 FY27 report and call): Base 8.8% → 9.5%, fails |
 | mu | docs/mu-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | none | 2026-12-18 | 2026-11-18.1 | v4 19 Nov (AI BBB 18 Nov H2 2028–30 .50 / .32 / .28; $705.27, 18 Nov close; cycle-first, Step 6b; compacted 840 → 294 lines; model mu/v4.py): Base 7.2%, P_k $634.7, −10.0%, **fails** (was clears); Bear −4.4%, Bull 28.7%. Price implies k at 1.14× the new Base (a trough ~14% shallower); ahead of the price on the negative side. Next: FQ1-27 16 Dec |
@@ -160,9 +160,9 @@ Kept by the `update-chain` skill; checked by
 | dnbtek | mu | 2026-11-19 | loop | Memory evidence (the fund holds no Micron) |
 | dnbtek | skh | 2026-11-19 | main | SK hynix company block (from 31 Oct; layer path only until 22 Oct) |
 | dnbtek | smsn | 2026-11-19 | main | Samsung company blocks, common and preference (from 31 Oct; layer path only until 22 Oct) |
-| googl | ai | 2026-11-07 | main | E2 cloud row, K1 capex, E-layer EPS |
-| googl | equity | 2026-11-06 | main | Macro scenarios, NOK path |
-| googl | hy | 2026-11-05 | main | NIBOR (E / R) |
+| googl | ai | 2026-11-19 | main | E2 cloud row, K1 capex, E-layer EPS |
+| googl | equity | 2026-11-18 | main | Macro scenarios, NOK path |
+| googl | hy | 2026-11-18 | main | NIBOR (E / R) |
 | shb | equity | 2026-10-18 | main | Scenarios, Oslo financials block, NOK path |
 | shb | hy | 2026-10-24 | main | Sweden GDP, Riksbank, NIBOR |
 | msft | ai | 2026-11-07 | main | E2, T1, T3 rows, K1 capex |
@@ -181,7 +181,7 @@ Kept by the `update-chain` skill; checked by
 | anthropic | hy | 2026-11-18 | main | Rates context (NIBOR) |
 | ai | anthropic | 2026-11-13 | loop | Company check: Anthropic revenue and E1 share, contracted compute 2027–29, placement split; not yet read |
 | amzn | anthropic | 2026-11-20 | main | Anthropic stake (Class N plus rolled-over notes) at the IPO price and at P_k; not yet read |
-| googl | anthropic | 2026-11-11 | main | Anthropic stake at the IPO price and at P_k; not yet read |
+| googl | anthropic | 2026-11-20 | main | Anthropic stake at the IPO price and at P_k; not yet read |
 | msft | anthropic | 2026-11-07 | main | Anthropic Azure commitment (≥ $47.2–49.2bn, Nov 2026–Jun 2033) and the $1bn placement; not yet read |
 | skh | ai | 2026-11-18 | main | H2 memory layer: EPS path, exit P/E, scenarios |
 | skh | equity | 2026-11-18 | main | Scenarios, I-44 path (NOK memo), exit cross-check |
@@ -474,6 +474,7 @@ it to `open`.
 | 2026-11-25 | approx | Anthropic closing 8-K: confirms the $26bn Class N placement (Google and NVIDIA 120.48m each, Microsoft 12.05m) and the 147.0m over-allotment exercise (anthropic v1.1 assumes exercised) | anthropic, amzn, googl, nvda | watch |
 | 2026-12-14 | approx | Anthropic research quiet period ends (~25 days after first trade, convention): first broker ratings and consensus | anthropic, ai | watch |
 | 2027-11-18 | yes | Anthropic one-year lock-up ends for co-founders and holders above 0.5% (or after the Q3-27 results if earlier) | anthropic | watch |
+| 2026-12-07 | yes | Alphabet $0.22 dividend goes ex (paid 14 Dec): re-mark point; re-mark earlier if GOOGL closes at or below $269.9 (marginal band, googl v2.2) | googl | watch |
 | 2027-01-10 | yes | USTR Section 301 port-fee suspension ends (23:59 ET 9 Jan) and China's special-port-fee suspension ends (10 Jan): Shipping BBB Bull signpost "fees return and split the fleet" | shipping | open |
 | 2027-02-24 | approx | NVIDIA Q4 FY27 report (date not announced; Q4 guide $130bn ±3%, GM 71–72%) | nvda, ai, skh, smsn, kospi, tsm, dnbtek, global-index | open |
 | 2027-06-30 | approx | NVIDIA–Hugging Face closing ($12.93bn, H1 2027; DOJ review) | nvda | watch |
