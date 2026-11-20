@@ -58,7 +58,7 @@ Kept by the `update-chain` skill; checked by
 | hafnia | docs/hafnia-analysis.md | iaf-valuation | company | 2026-11-18 | 2026-11-18 | none | 2026-12-04 | 2026-11-12.1 | v6 exit check on the v5 model of 17 Oct |
 | kog | docs/kongsberg-analysis.md | iaf-valuation | company | 2026-10-29 | 2026-10-29 | all | 2026-11-28 | 2026-10-18.2 | **HOLD (user): no update until the user lifts it.** Version 2 (29 Oct, Q3 report, method 2026-10-18.2): Base −19.9% → −16.2%, fails; record backlog NOK 174bn |
 | rhm | docs/rheinmetall-analysis.md | iaf-valuation | company | 2026-10-07 | 2026-10-07 | all | 2026-11-06 | 2026-10-07.1 | **HOLD (user): no update until the user lifts it.** |
-| amzn | docs/amzn-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-11-11 | ai, dnbtek, equity | 2026-11-20 | 2026-11-10.1 | Version 2 (30 Oct, Q3 report): Base 6.8% → 9.2%, P_k $221.5 vs $240.35, fails; OpenAI $50bn preferred added (missing in v1) |
+| amzn | docs/amzn-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-16 | 2026-11-18.1 | Version 2 (30 Oct, Q3 report): Base 6.8% → 9.2%, P_k $221.5 vs $240.35, fails; OpenAI $50bn preferred added (missing in v1) |
 | dnb | docs/dnb-analysis.md | iaf-valuation | company | 2026-11-10 | 2026-10-22 | all | 2026-11-21 | 2026-10-18.2 | Update 1 after Q3, amended 22 Oct; 10 Nov note: CMD targets (ROE > 15% and C/I < 38% towards end-2028; payout and CET1 unchanged), ~0.5 pp above Base ROE 2028, verdict unchanged |
 | googl | docs/googl-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-10-28 | all | 2026-11-20 | 2026-11-10.1 | Version 2 (28 Oct) + price re-mark 1 Nov at the 30 Oct close $279.84: Base 4.6% → 9.6%, P_k $261.6 (−6.5%), fails; E / R 0.116; triggers: k $261.6, HY E / R $256.1 |
 | shb | docs/handelsbanken-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 12 Nov): no update until 3 Feb 2027 (year-end report). Version 2 |
@@ -145,9 +145,9 @@ Kept by the `update-chain` skill; checked by
 | kog | hy | 2026-10-24 | main | NIBOR on cash |
 | kog | equity | 2026-10-18 | main | Exit references (Oslo exit P/E, P/B, mid-cycle return) |
 | rhm | defense | 2026-10-07 | main | Segment order and revenue paths |
-| amzn | ai | 2026-11-07 | main | E2 cloud row, K1 capex, E-layer EPS and exit P/E |
+| amzn | ai | 2026-11-19 | main | E2 cloud row, K1 capex, E-layer EPS and exit P/E |
 | amzn | equity | 2026-11-06 | main | Macro scenarios, NOK path |
-| amzn | hy | 2026-11-05 | main | NIBOR (E / R) |
+| amzn | hy | 2026-11-18 | main | NIBOR (E / R) |
 | dnb | equity | 2026-10-18 | main | Scenarios, Oslo financials block |
 | dnb | hy | 2026-10-17 | main | NIBOR path |
 | dnbtek | ai | 2026-11-18 | main | Layer EPS paths, exit P/Es |
@@ -180,7 +180,7 @@ Kept by the `update-chain` skill; checked by
 | anthropic | equity | 2026-11-18 | main | Scenarios, NOK path, exit cross-check |
 | anthropic | hy | 2026-11-18 | main | Rates context (NIBOR) |
 | ai | anthropic | 2026-11-13 | loop | Company check: Anthropic revenue and E1 share, contracted compute 2027–29, placement split; not yet read |
-| amzn | anthropic | 2026-11-11 | main | Anthropic stake (Class N plus rolled-over notes) at the IPO price and at P_k; not yet read |
+| amzn | anthropic | 2026-11-20 | main | Anthropic stake (Class N plus rolled-over notes) at the IPO price and at P_k; not yet read |
 | googl | anthropic | 2026-11-11 | main | Anthropic stake at the IPO price and at P_k; not yet read |
 | msft | anthropic | 2026-11-07 | main | Anthropic Azure commitment (≥ $47.2–49.2bn, Nov 2026–Jun 2033) and the $1bn placement; not yet read |
 | skh | ai | 2026-11-18 | main | H2 memory layer: EPS path, exit P/E, scenarios |
@@ -467,11 +467,11 @@ it to `open`.
 | 2026-11-29 | approx | SK hynix: Solidigm re-disclosure on the reported ~KRW 60tn US NAND fab (promised within a month of the 29 Oct 6-K) | skh, ai | watch |
 | 2026-12-01 | approx | Silicon Data month-end GPU rental indices: B200 against its 2026 high $7.03 (Bear: −20% for three months), H100; price leg of the funded-customer credit signpost and the NVIDIA cascade | ai, nvda | watch |
 | 2026-12-07 | approx | DNB AM November factsheet for DNB Teknologi (holdings 30 Nov) | dnbtek | open |
-| 2026-12-15 | yes | Anthropic staged lock-up releases begin (days 27 / 48 / 62 / 76: 15 Dec, 5 Jan, 19 Jan, 2 Feb); over-allotment option expires ~18 Dec | anthropic | watch |
+| 2026-12-15 | yes | Anthropic staged lock-up releases begin (days 27 / 48 / 62 / 76: 15 Dec, 5 Jan, 19 Jan, 2 Feb); over-allotment option expires ~18 Dec | anthropic, amzn | watch |
 | 2026-12-31 | yes | Anthropic first test of the $5bn liquidity covenant | anthropic | watch |
 | 2027-03-15 | approx | Anthropic FY2026 results, first report as a listed company (date not given; likely Feb–Mar); staged lock-up steps tied to it | anthropic, ai, amzn, googl | open |
 | 2027-05-17 | yes | Anthropic general lock-up expiry (day 180; or Q1-27 results if earlier); founders may sell 29% | anthropic | watch |
-| 2026-11-25 | approx | Anthropic closing 8-K: confirms the $26bn Class N placement (Google and NVIDIA 120.48m each, Microsoft 12.05m) and the 147.0m over-allotment exercise (anthropic v1.1 assumes exercised) | anthropic, googl, nvda | watch |
+| 2026-11-25 | approx | Anthropic closing 8-K: confirms the $26bn Class N placement (Google and NVIDIA 120.48m each, Microsoft 12.05m) and the 147.0m over-allotment exercise (anthropic v1.1 assumes exercised) | anthropic, amzn, googl, nvda | watch |
 | 2026-12-14 | approx | Anthropic research quiet period ends (~25 days after first trade, convention): first broker ratings and consensus | anthropic, ai | watch |
 | 2027-11-18 | yes | Anthropic one-year lock-up ends for co-founders and holders above 0.5% (or after the Q3-27 results if earlier) | anthropic | watch |
 | 2027-01-10 | yes | USTR Section 301 port-fee suspension ends (23:59 ET 9 Jan) and China's special-port-fee suspension ends (10 Jan): Shipping BBB Bull signpost "fees return and split the fleet" | shipping | open |
