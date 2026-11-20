@@ -4,6 +4,19 @@ The running report of the update chain (`update-chain` skill): the weekly run on
 and the daily company news search on weekdays (Mode F). Newest entry first. The bookkeeping is in
 `docs/update-register.md`; the numbers are in the documents themselves.
 
+## Daily news — Friday 20 Nov 2026
+
+- **Updated:** `anthropic` Base 3.8% → −4.6%, fails (re-mark at the $97.17 first close; P_k $58.9).
+- **Updated:** `amzn` Base 5.2% → 7.7%, fails (Anthropic stake at market, $338.6bn).
+- **Updated:** `googl` Base 9.1% → 10.9%, fails narrowly (margin −3.0%).
+- **Updated:** `msft` Base 9.6% → 11.9%, **marginal (flipped)**, from the price alone.
+- Anthropic (anthropic, amzn, googl, msft): IPO priced at $83, above the $70–78 range; upsized to 980m shares (~$81bn); first close $97.17 (+17%) `[F]`.
+- Minor: no new fund-house forum posts; DOF $0.40 goes ex today; Alphabet C$ notes; Microsoft Ignite (products only).
+
+**Needs you:** `msft` flipped to marginal. Subsea7's Q3 (19 Nov) is not read yet. Left for Saturday's weekly run: `supply`, `dof`, `tsm`, `global-index`.
+
+**Register:** added Anthropic closing 8-K (~25 Nov), quiet-period end (~14 Dec) and one-year lock-up (18 Nov 2027); Alphabet ex-dividend (7 Dec); Microsoft AGM (8 Dec) and dividend declaration (~15 Dec).
+
 ## Daily news — Wednesday 18 Nov 2026
 
 - **Updated:** `nvda` Base 17.7% → 20.7%, clears (Q3 $115.8bn, Q4 guide $130bn; cascade −15.2%).
