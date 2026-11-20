@@ -63,7 +63,7 @@ Kept by the `update-chain` skill; checked by
 | googl | docs/googl-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-18 | 2026-11-18.1 | Version 2 (28 Oct) + price re-mark 1 Nov at the 30 Oct close $279.84: Base 4.6% → 9.6%, P_k $261.6 (−6.5%), fails; E / R 0.116; triggers: k $261.6, HY E / R $256.1 |
 | shb | docs/handelsbanken-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 12 Nov): no update until 3 Feb 2027 (year-end report). Version 2 |
 | msft | docs/msft-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-18 | 2026-11-18.1 | Version 3 (28 Oct, Q1 FY27 report and call): Base 8.8% → 9.5%, fails |
-| mu | docs/mu-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | none | 2026-12-18 | 2026-11-18.1 | v4 19 Nov (AI BBB 18 Nov H2 2028–30 .50 / .32 / .28; $705.27, 18 Nov close; cycle-first, Step 6b; compacted 840 → 294 lines; model mu/v4.py): Base 7.2%, P_k $634.7, −10.0%, **fails** (was clears); Bear −4.4%, Bull 28.7%. Price implies k at 1.14× the new Base (a trough ~14% shallower); ahead of the price on the negative side. Next: FQ1-27 16 Dec |
+| mu | docs/mu-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-18 | 2026-11-18.1 | v4.1 20 Nov (price re-mark at $594.51 after the chip sell-off; no model input moved): Base 7.2% → 15.2%, P_k $635.0, +6.8%: fails → clears; Bear 2.2%, Bull 38.4%; price implies k at 0.92× the Base (1.14× on 18 Nov). Next: FQ1-27 (16 / 23 Dec) |
 | nvda | docs/nvda-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | dnbtek, equity, global-index | 2026-12-18 | 2026-11-18.1 | v2.0 20 Nov (re-mark at $125.53 after −14% on the Reuters SEC-probe report; v1.9 funding-loss Base kept): Base 20.7%, P_k $156.1, +24.3%, clears; Bear 3.7%, Bull 51.9%; E / R 0.661. Order cut 16.7% (clears); SEC probe (g) central 17.3%, wide 13.2%, wide + order cut 9.2% (fails). Next: 10-Q ~25 Nov |
 | anthropic | docs/anthropic-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | amzn, googl, msft | 2026-12-15 | 2026-11-18.1 | v1.0 13 Nov (IPO, Bafin EU prospectus 11 Nov): range $70–78; Base IRR 5.5 / 3.8 / 2.2%, P_k $58.4, margin −21.1% at $74, fails (clears ≈ $57.5); Bear −38%, Bull +31%; fully diluted 18.14bn shares; 58% of E1; re-mark at the final price |
 | skh | docs/skhynix-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | dnbtek, kospi, mu | 2026-12-18 | 2026-11-18.1 | v4 19 Nov (AI BBB 18 Nov H2 2028–30 .50 / .32 / .28; KRW 1,173,000; Step 6b): Base 32.9%, P_k 1,814,729, +54.7%, clears; Bear 18.8%, capped −5.7%; ADR $122.47 P_k $152.44 (+24.5%); price implies k at 0.54× the new Base. Model V4 (skh_run4.py) |
@@ -167,11 +167,11 @@ Kept by the `update-chain` skill; checked by
 | shb | hy | 2026-10-24 | main | Sweden GDP, Riksbank, NIBOR |
 | msft | ai | 2026-11-19 | main | E2, T1, T3 rows, K1 capex |
 | msft | equity | 2026-11-18 | main | Macro scenarios, NOK path |
-| mu | ai | 2026-11-18 | main | H2 memory layer |
-| mu | equity | 2026-11-18 | main | Scenarios, exit cross-check |
+| mu | ai | 2026-11-20 | main | H2 memory layer |
+| mu | equity | 2026-11-20 | main | Scenarios, exit cross-check |
 | mu | hy | 2026-11-18 | main | NIBOR (E / R) |
-| mu | skh | 2026-10-22 | loop | Peer comparison (from the SK hynix analysis, not only market multiples; not yet read) |
-| mu | smsn | 2026-10-22 | loop | Peer comparison (from the Samsung analysis, not only market multiples; not yet read) |
+| mu | skh | 2026-11-19 | loop | Peer comparison (from the SK hynix analysis, not only market multiples; not yet read) |
+| mu | smsn | 2026-11-19 | loop | Peer comparison (from the Samsung analysis, not only market multiples; not yet read) |
 | nvda | ai | 2026-11-20 | main | H1 compute layer (11 Nov re-run held to the 17 Nov run, deferral rule) |
 | nvda | equity | 2026-11-18 | main | Scenarios, NOK path |
 | nvda | hy | 2026-11-18 | main | NIBOR (E / R) |

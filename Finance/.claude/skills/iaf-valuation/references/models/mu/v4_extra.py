@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import v4
 from datetime import date
 P = float(sys.argv[1]) if len(sys.argv) > 1 else 705.27
-d0 = date(2026, 11, 18)
+d0 = date.fromisoformat(sys.argv[2]) if len(sys.argv) > 2 else date(2026, 11, 18)
 F = {'Bear': [1.12, 1.09, 1.09], 'Base': [1, 1, 1], 'Bull': [0.97, 0.97, 0.97]}
 R = {n: v4.build(s, P, d0) for n, s in v4.SCEN.items()}
 for n, r in R.items():
