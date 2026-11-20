@@ -1,7 +1,7 @@
 # AI Market BBB — scripts (initial run 12 Oct 2026; updates 15, 16, 17, 22, 24 and 29 Oct, 1, 5, 7, 11 and 18 Nov 2026)
 
 Copy to the scratchpad, create `data/`, and run with `py -I` from there. The stored `model.py` and
-`impl.py` carry the inputs of the 18 Nov run (prices 18 Nov close, consensus 7 Nov basis, K1 re-set, switch `L18` = the 18 Nov turn calls on H2 and H1 Base 2028-30; run without `L18` for the re-mark-only attribution).
+`impl.py` carry the inputs of the 20 Nov run (prices 20 Nov close; NIBOR 4.72, consensus 7 Nov basis, K1 re-set, switch `L18` = the 18 Nov turn calls on H2 and H1 Base 2028-30; run without `L18` for the re-mark-only attribution).
 
 | Step | Script | Does |
 |---|---|---|

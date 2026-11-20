@@ -21,7 +21,7 @@ ARGS = set(sys.argv[1:]) or {'CAL', 'RET', 'PATH', 'AMZN', 'U5', 'K1D', 'L18'}
 if ARGS == {'BEARCAP'}: ARGS = {'CAL', 'RET', 'PATH', 'AMZN', 'U5', 'K1D', 'L18', 'BEARCAP'}
 CAL, RET, PATH, AMZN, U5, BEARCAP = 'CAL' in ARGS, 'RET' in ARGS, 'PATH' in ARGS, 'AMZN' in ARGS, 'U5' in ARGS, 'BEARCAP' in ARGS
 K1D = 'K1D' in ARGS
-KRW = 1332.44; EUR = 1.09794   # Yahoo KRW=X, EURUSD=X, 18 Nov 2026 ~21:10 UTC (18 Nov run; Korea: KRX close 18 Nov)
+KRW = 1345.95; EUR = 1.09649   # Yahoo KRW=X, EURUSD=X, 20 Nov 2026 ~21:20 UTC (20 Nov run; Korea: KRX close 20 Nov, before the US fall)
 q = {r['symbol']: r for r in json.load(open('data/q.json'))}
 def mc(s):
     r = q[s]; m = r.get('marketCap') or 0
@@ -134,7 +134,7 @@ L = {
  'E':  ('E Engines and cloud platforms (MSFT GOOGL AMZN META ORCL)', ['MSFT','GOOGL','AMZN','META','ORCL'], (17,21,23.5), .34),
  'T':  ('T Tools and application software (NOW CRM ADBE PLTR SAP INTU SNOW DDOG)', ['NOW','CRM','ADBE','PLTR','SAP.DE','INTU','SNOW','DDOG'], (15,20,24), .45)}
 FX = dict(Bear=(10.41,10.14,10.14), Base=(9.29,9.29,9.29), Bull=(9.02,9.02,9.02)); FX0 = 9.29  # Equity BBB 6 Nov (spot 9.29; relative moves +12/+9/+9%, -3% unchanged)
-NIB = 4.38; T0 = 43/365  # 18 Nov -> 31 Dec (prices 18 Nov close); NIBOR window from HY BBB 5 Nov (path unchanged)
+NIB = 4.72; T0 = 41/365  # 20 Nov -> 31 Dec (prices 20 Nov close); NIBOR window 4.72 (HY BBB 18 Nov market path)
 def irr(fl):
     lo, hi = -0.9, 2.0
     for _ in range(200):
