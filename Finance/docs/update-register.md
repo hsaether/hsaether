@@ -43,7 +43,7 @@ Kept by the `update-chain` skill; checked by
 | rig | docs/rig-market-bbb.md | rig-market-bbb | market | 2026-11-12 | 2026-11-12 | none | 2026-12-12 | 2026-11-18.1 | 18 Nov leading-view note (skill 2026-11-18.1): kept; fixtures-as-forwards within the minimum; watch UDW 2028–29 and jackups (driller shares −20 to −34%). 12 Nov full update |
 | supply | docs/supply-market-bbb.md | supply-market-bbb | market | 2026-11-18 | 2026-11-18 | dof | 2026-12-12 | 2026-11-18.1 | 18 Nov leading-view update (skill 2026-11-18.1, first turn calls): NS AHTS spot Base 2027 £60k → £52k on the turn call (L1, L5, L6 down); watch calls on Brazil PSV (Petrobras TDA ceiling $35.45k vs Base $38k, basis check), NS CSV and NS PSV; OSV shares flat to down over 3 months. 16 Nov: AHTS rule £75k → £60k. 12 Nov full update |
 | hy | docs/hy-market-bbb.md | hy-market-bbb | market | 2026-11-18 | 2026-11-18 | ai, equity, global-index | 2026-12-05 | 2026-11-18.2 | 18 Nov (skill 2026-11-18.2): Base NIBOR = market path (NOK swaps, gov curve): 2028–29 4.39 / 3.86 → 4.78 / 4.58; NIBOR window 4.38 → 4.72; Base window return 7.2 → 7.5; excess and E / R 0.254 unchanged; credit watch calls lean Bear. Credit values of 5 Nov |
-| equity | docs/equity-market-bbb.md | equity-market-bbb | market | 2026-11-18 | 2026-11-18 | ai, global-index | 2026-12-06 | 2026-11-18.1 | 18 Nov leading-view note (skill 2026-11-18.1): Oslo re-run on Oil 18 Nov, market NIBOR, 18 Nov close and krone: Base 2.6 → 3.2% (kept, < 1 pp); trigger 1 → 1,551; World E / R 0.080 → 0.065 on the NIBOR window 4.72 (World not re-run); SPY options odds; watch: World de-rating. Values of 6 Nov otherwise |
+| equity | docs/equity-market-bbb.md | equity-market-bbb | market | 2026-11-20 | 2026-11-20 | global-index | 2026-12-06 | 2026-11-18.1 | 20 Nov leading-view note after the AI sell-off: World re-run (company analyses 19–20 Nov, AI BBB 18 Nov rows) Base 6.6 → 8.2%, E / R 0.065 → 0.137, pre-alert crossed (URTH 187.43 < 190.9 USD); Oslo 2.6 → 4.0% (price and krone); multiple watch 55%; SPY Dec-27 odds of ≤ −20% 14%. Full update with refreshed consensus by 6 Dec |
 | ai | docs/ai-market-bbb.md | ai-market-bbb | market | 2026-11-20 | 2026-11-18 | amzn, dnbtek, equity, global-index, googl, kospi, msft, mu, nvda, skh, smsn, tsm | 2026-12-16 | 2026-11-18.1 | 20 Nov leading-view note (kept unchanged): re-mark after the AI sell-off: all six 12.7%, compute 14.1% (clears), memory 17.2%; price below Base for compute (k at 0.94×) and memory (0.85×); order-cut watch 45% (only L5 new); Anthropic IPO above range (Bull-side); NVIDIA SEC probe signpost. 19 Nov note (kept unchanged): watch call H1 2028–30 order cut by funded buyers ×0.9 (45%; L4 new, L3/L5 spent on 18 Nov, L1/L2 against). 18 Nov leading-view update (skill 2026-11-18.1): re-mark 18 Nov; turn calls H2 2028–30 EPS .60/.40/.35 → .50/.32/.28 and H1 2028–30 .91/.88/.87 → .85/.82/.81; all six 9.2% → 8.8%, memory 21.6% → 13.7% (k at 0.95× new Base), compute 7.5%. Watch: H1 2027 up, K1 2028, T, H3. 11 Nov: K1 Base 1,170 / 1,170 |
 | defense | docs/defense-market-bbb.md | defense-market-bbb | market | 2026-10-31 | 2026-10-07 | all | 2027-01-04 | 2026-10-10.1 | **HOLD (user): no update until the user lifts it.** Initial baseline |
 | hy-issuers | docs/hy-issuers.md | hy-market-bbb | book | 2026-11-19 | 2026-11-19 | none | 2026-12-05 | 2026-11-18.2 | 19 Nov full refresh and compaction (990 → 670 lines): Intrum 8.5% 2030 → 68.0 and 7.75% 2028 → ~84.3 (tender 10 Nov); Borr Q3 and Hofseth Q3 read, statuses kept; Stamdata screen 14 Oct–19 Nov. Named 2027 Base HH 2.17, HH+ 2.07, SIS 1.11 (+0.01–0.02 pp; not material for the fund verdicts). Next price round: November fund reports (~4 Dec) |
@@ -98,12 +98,12 @@ Kept by the `update-chain` skill; checked by
 | hy | shipping | 2026-11-13 | main | Shipping row (tankers) |
 | equity | oil | 2026-11-18 | main | Oslo and World energy |
 | equity | hy | 2026-11-18 | main | NIBOR path, Bear macro, HY return, reference E / R |
-| equity | ai | 2026-11-05 | loop | AI layer paths in World (World not re-run 18 Nov; Oslo only) |
-| equity | msft | 2026-11-07 | loop | Company block in World |
-| equity | googl | 2026-11-11 | loop | Company block in World |
-| equity | nvda | 2026-11-05 | loop | Company block in World (v1.2; World not re-run 18 Nov) |
-| equity | amzn | 2026-11-11 | loop | Company block in World (from 6 Nov) |
-| equity | mu | 2026-11-05 | loop | Company block in World (from 6 Nov) |
+| equity | ai | 2026-11-20 | loop | AI layer paths in World (18 Nov rows; World re-run 20 Nov) |
+| equity | msft | 2026-11-20 | loop | Company block in World |
+| equity | googl | 2026-11-20 | loop | Company block in World |
+| equity | nvda | 2026-11-20 | loop | Company block in World (v2.0 from 20 Nov) |
+| equity | amzn | 2026-11-20 | loop | Company block in World (from 6 Nov) |
+| equity | mu | 2026-11-19 | loop | Company block in World (from 6 Nov) |
 | ai | equity | 2026-11-06 | main | Scenarios, NOK path, World |
 | ai | hy | 2026-11-18 | main | NIBOR, HY reference E / R |
 | ai | mu | 2026-11-05 | loop | Company check |
