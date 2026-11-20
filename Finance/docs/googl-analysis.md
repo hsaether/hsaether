@@ -1,36 +1,36 @@
 # Alphabet Inc. (GOOGL) — IAF analysis, stub Q4 2026 + 2027–2029
 
-**Version 2.2 — 20 Nov 2026** · price **$272.66** (Nasdaq close 19 Nov 2026) · skills: iaf-valuation **2026-11-18.1**; inputs AI BBB 18 Nov (note 19 Nov; E2, K1 and E-layer rows of 11 Nov), Equity BBB 18 Nov note (values of 6 Nov), HY BBB 18 Nov (NIBOR window 4.72%, HY market Base 7.5%, reference E / R 0.254), `docs/anthropic-analysis.md` v1.1 (20 Nov) · **verdict: fails** (Base margin of safety −3.0%, 1 pp below the marginal band).
+**Version 2.3 — 20 Nov 2026 close re-mark** · price **$265.29** (Nasdaq close 20 Nov 2026) · skills: iaf-valuation **2026-11-18.1**; inputs AI BBB 18 Nov (notes 19 and 20 Nov; E2, K1 and E-layer rows of 11 Nov), Equity BBB 20 Nov note, HY BBB 18 Nov (NIBOR window 4.72%, HY market Base 7.5%, reference E / R 0.254), `docs/anthropic-analysis.md` v1.1 (20 Nov; ANT at the 20 Nov close $88.91) · **verdict: marginal** (Base margin of safety −0.6%).
 
 ## Summary
 
 **Verdict**
-- **Fails, narrowly.** Base IRR **10.9% a year** (USD; NOK the same in Base) against k = 12%. Hurdle price **P_k $264.5 vs P $272.66: margin of safety −3.0%.** The marginal band (−2% to +2%) starts at **$269.9**; Base clears below **$259.3**. Track A Rule 1 passes only at a constant P/E (d + g = 12.2%); Rule 3 fails (P/E 24.0 on CY26 core EPS against a ceiling of 8.5).
-- **Why it is closer than on 6 Nov:** the price fell 4.3% (−3.5% on 19 Nov alone, an intraday reversal from $295 with the AI group), and the Anthropic stake is now a market price. ANT priced at $83 (above the $70–78 range) and closed its first day at **$97.17**: Alphabet's **1,775.0m shares** (incl. 120.48m bought for $10.0bn in the placement) are worth **$172.5bn pre-tax**, against the $128.2bn carrying value plus $10bn paid. That adds +0.19 pp; the cash paid costs −0.06 pp in lost interest.
-- **Bear breaks the thesis:** −8.7% a year in USD (−6.1% on the NOK path). The share falls ~41% in 2027 (recession plus AI financing break, P/E to 16, stakes −50%), and capital is not preserved (ΣD + V_T is 24.5% below P). The balance sheet is never at risk (Aa2/AA+, net debt peaks at ~0.3× EBITDA).
-- **What the price needs:** an exit value 3% above Base, i.e. an exit P/E of **21.7** on 2030 EPS (Base 21; 5-year median forward P/E 20.8), or EPS growth of **12.4% a year 2028–30** (Base 11.3%). Each of these single levers clears: Cloud +5 pp a year (13.3%), Services +2 pp a year (13.3%), Cloud 2027 +70% (12.9%), Waymo valued separately (13.1%).
-- **Against the market:** Base 10.9% is above the AI E basket (8.9%, AI BBB 18 Nov), the HY market (7.5%) and World (6.6%), and 6.2 pp above NIBOR (4.72%). **E / R 0.139** is above World (0.065) and the E basket (0.119), and below the HY market reference (0.254).
+- **Marginal.** Base IRR **11.8% a year** (USD; NOK the same in Base) against k = 12%. Hurdle price **P_k $263.7 vs P $265.29: margin of safety −0.6%**, inside the −2% to +2% band. Fails above **$269.0**; clears at or below **$258.5**. Track A Rule 1 passes only at a constant P/E (d + g = 12.2%); Rule 3 fails (P/E 23.4 on CY26 core EPS against a ceiling of 8.5).
+- **What moved it (v2.2 → v2.3):** the price −2.7% on 20 Nov with the AI sell-off (+0.99 pp); the stakes the other way: SpaceX $138.43 → $127.79 and Anthropic $97.17 → $88.91 take P_k from $264.5 to $263.7 (−0.13 pp). Alphabet's **1,775.0m ANT** are worth **$157.8bn pre-tax** (still above the $128.2bn carrying value plus the $10bn paid).
+- **Bear breaks the thesis:** −8.0% a year in USD (−5.3% on the NOK path). The share falls ~39% in 2027 (recession plus AI financing break, P/E to 16, stakes −50%), and capital is not preserved (ΣD + V_T is 22.6% below P). The balance sheet is never at risk (Aa2/AA+, net debt peaks at ~0.3× EBITDA).
+- **What the price needs:** an exit P/E of **21.1** on 2030 EPS (Base 21; 5-year median forward P/E 20.8), or EPS growth of **11.5% a year 2028–30** (Base 11.3%): the price implies our Base almost exactly. Single levers that clear: Cloud +5 pp a year (14.2%), Services +2 pp (14.2%), Cloud 2027 +70% (13.8%), Waymo valued separately (13.9%), core tax 15% (12.8%), segment margins +1 pp (13.0%).
+- **Against the market:** Base 11.8% is above the HY market (7.5%) and World (8.2%, Equity BBB 20 Nov), and 7.1 pp above NIBOR (4.72%). **E / R 0.161** is above World (0.137) and the E basket (0.119, 18 Nov), and below the HY market reference (0.254).
 
 **Base in brief**
 - Base core EPS 2027 **$12.64 = 0.85× CY27 consensus** ($14.91, 51 analysts): Cloud +50% (AI BBB E2 Base + a sourced backlog premium), Services +10%, group operating margin ~33% while D&A triples; no buybacks; capex $275 / 300 / 305bn.
-- **Where the return comes from** (P $272.66 → ΣD + V_T $376.0, +37.9%): EPS growth +$95.5, re-rating 20.0 → 21× +$17.8, dividends +$3.1, stakes −$0.4 (dilution), net cash to net debt −$12.6. Earnings carry it; cash goes the other way.
-- **Break-even:** Base returns k at an exit P/E of 21.7, or at 2030 EPS ~3% above Base (~$18.0).
+- **Where the return comes from** (P $265.29 → ΣD + V_T $374.7, +41.2%): EPS growth +$93.2, re-rating 19.5 → 21× +$26.1, dividends +$3.1, stakes −$0.4 (dilution), net cash to net debt −$12.6. Earnings carry it; cash goes the other way.
+- **Break-even:** Base returns k at an exit P/E of 21.1, or at 2030 EPS ~0.6% above Base.
 
 **Bear in brief**
 - Story: the AI BBB financing break (a lab falls short of its commitments; AI credit tightens) inside the equity Bear (recession from H1 2027). Services +4%, Cloud +30% then +5%, margins to 27–30%, P/E 16 from end-2027, stakes −50%.
-- Worst year 2027: −40.8% (NOK −33.7%). Capital not preserved: V_T $203.0. Net debt peaks ~$59bn (2027) and falls to ~$28bn as capex is cut to $200bn.
-- What does the damage (driver breakdown): the earnings path (10.9% → 0.4%), then the exit P/E (→ −7.5%), then the stakes (→ −8.7%).
+- Worst year 2027: −39.4% (NOK −32.1%). Capital not preserved: V_T $202.4. Net debt peaks ~$59bn (2027) and falls to ~$28bn as capex is cut to $200bn.
+- What does the damage (driver breakdown): the earnings path (11.8% → 1.1%), then the exit P/E (→ −6.9%), then the stakes (→ −8.0%).
 
-**Decision table (USD per share; GOOGL Class A, Nasdaq; USD/NOK 9.7668)**
+**Decision table (USD per share; GOOGL Class A, Nasdaq; USD/NOK 9.7525)**
 
 | | Bear | **Base** | Bull |
 |---|---|---|---|
-| Traded price P (regular close 19 Nov 2026, Yahoo 21:00 UTC) | 272.66 | **272.66** (NOK 2,663) | 272.66 |
-| IRR_T (USD) / NOK path (Equity BBB) | −8.7% / −6.1% | **10.9% / 10.9%** | 23.3% / 22.1% |
-| V_T (31 Dec 2029) | 203.0 | **372.9** | 518.9 |
-| P_k (USD) / margin of safety | 145.0 / −46.8% | **264.5 / −3.0%** | 367.2 / +34.7% |
-| Price triggers (USD) | | **Base = k 264.5 · marginal band from 269.9 · clears below 259.3 · E / R = 0.254 at 243.0 · pre-alert (Base 7.5%) 300.4, crossed** | |
-| Capital preserved? (ΣD + V_T vs P) | **No: −24.5%** | Yes: +37.9% | Yes: +91.5% |
+| Traded price P (regular close 20 Nov 2026, Yahoo 21:00 UTC) | 265.29 | **265.29** (NOK 2,587) | 265.29 |
+| IRR_T (USD) / NOK path (Equity BBB) | −8.0% / −5.3% | **11.8% / 11.8%** | 24.2% / 23.1% |
+| V_T (31 Dec 2029) | 202.4 | **371.6** | 517.0 |
+| P_k (USD) / margin of safety | 144.6 / −45.5% | **263.7 / −0.6%** | 366.0 / +38.0% |
+| Price triggers (USD) | | **Base = k 263.7 · fails above 269.0 · clears at or below 258.5 · E / R = 0.254 at 242.2 · pre-alert (Base 7.5%) 299.4, crossed** | |
+| Capital preserved? (ΣD + V_T vs P) | **No: −22.6%** | Yes: +41.2% | Yes: +96.1% |
 | Cumulative FCF 2027–29 | 3.56 | **−1.67** | −9.40 |
 | Net cash (debt) at exit, ex leases | −2.20 | **−9.48** | −18.79 |
 | Balance sheet | Aa2/AA+; capex cut to $200bn from 2028; net debt ~$59bn peak (2027), ~$28bn by 2029 | Net debt ~$112–121bn from 2028 (~0.35× EBITDA); no buybacks; preferred converts mid-2029 | Capex $310–400bn absorbs all OCF; net debt ~$240bn by 2029 (~0.6× EBITDA) |
@@ -44,11 +44,11 @@
 | Base D_t (dividends paid) | 0.22 (stub) | 0.91 | 0.96 | 1.01 | |
 | Base FCF per share | ≈ −1.85 `[A]` | −2.88 | −0.98 | 2.18 | |
 | Base net cash per share, year-end | ≈ 0.85 `[A]` | −4.94 | −8.81 | −9.48 | |
-| Base V_t (year-end) | 272.7 (stub flat) | 301.7 | 335.8 | 372.9 | |
-| Bear EPS / FCF / V_t | | 10.44 / −3.28 / 160.6 | 9.80 / 2.38 / 179.5 | 10.98 / 4.45 / 203.0 | 12.31 |
-| Bull EPS / FCF / V_t | | 13.78 / −4.52 / 367.3 | 16.64 / −3.71 / 437.4 | 18.95 / −1.18 / 518.9 | 21.37 |
+| Base V_t (year-end) | 265.3 (stub flat) | 295.8 | 331.9 | 371.6 | |
+| Bear EPS / FCF / V_t | | 10.44 / −3.28 / 159.9 | 9.80 / 2.38 / 178.9 | 10.98 / 4.45 / 202.4 | 12.31 |
+| Bull EPS / FCF / V_t | | 13.78 / −4.52 / 360.5 | 16.64 / −3.71 / 432.7 | 18.95 / −1.18 / 517.0 | 21.37 |
 
-Interim V_t of Base and Bull glide from today's core P/E (20.0 on Base CY27) to the exit P/E.
+Interim V_t of Base and Bull glide from today's core P/E (19.5 on Base CY27) to the exit P/E.
 
 Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed contract value · `[E]` external or secondary · `[C]` carried from an earlier version or another workspace document · `[A]` own assumption · `[?]` not found or unverified.
 
@@ -57,18 +57,18 @@ Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed
 | Item | Value |
 |---|---|
 | Company | Alphabet Inc., Nasdaq: GOOGL (Class A; GOOG Class C closed at $271.02). Fiscal year = calendar year. **Q3 2026 revenue $127.6bn (+25%), operating income $40.6bn (31.8%), GAAP EPS $2.12 incl. −$0.55 from equity securities** `[F]` |
-| Price (P) | **$272.66**, Yahoo `GOOGL`, regular close **19 Nov 2026** (21:00 UTC; open $294.12, high $295.43, low $272.36, volume 48.6m; 18 Nov $282.44; post-market $273.30 at 00:59 UTC 20 Nov). New 52-week low; range 272.11–408.61 `[F]` |
-| Valuation date / exit date | 19 Nov 2026 / 31 Dec 2029, **T = 3.12 years**; stub 19 Nov–31 Dec (42 days) |
+| Price (P) | **$265.29**, Yahoo `GOOGL`, regular close **20 Nov 2026** (21:00 UTC; −2.7% on the day; 19 Nov $272.66, 18 Nov $282.44). New 52-week low; 52-week high $408.61 `[F]` |
+| Valuation date / exit date | 20 Nov 2026 / 31 Dec 2029, **T = 3.115 years**; stub 21 Nov–31 Dec (41 days) |
 | Shares | **12,294m** outstanding at 30 Sep 2026 (A 5,888 + B 828 + C 5,578) `[F]`; Q3 ATM sales 36m shares ($12.4bn), $27.6bn of the $40bn programme left `[F]`. Model base **12,460m at end-2026** (diluted Q3 12,368m + ~52m preferred as converted + ~40m vesting and ATM timing `[A]`), then +110m a year (net vesting; no buybacks, no further ATM) `[A]` |
 | Market cap / EV | **$3.35tn** (12,294m × P). **Net cash $38.6bn ($3.10/share)** = 30 Sep $48.6bn `[F]` (10-Q) less the **$10.0bn Anthropic placement** (closing 20 Nov) `[F]`. Operating leases $16.8bn `[F]`. **EV ≈ $3.07tn** ex net cash, ex equity stakes ($256.0bn pre-tax), incl. leases |
 | P/E | 24.0× CY26 core EPS ($11.35); **18.3× CY27 consensus ($14.91, 51 analysts, range 12.85–18.28; Yahoo 20 Nov)**; 21.6× Base CY27 ($12.64). **Core P/E** (price less stakes and net cash): **20.0× Base CY27, 16.9× consensus CY27** |
-| NAVs (Step 3) | Not applicable (Track A). Price split: **core business $252.61 + equity stakes after tax $16.95 + net cash $3.10 = $272.66** (12,460m shares) |
-| Equity stakes (method: market price, held flat in Base; Bear −50%, Bull +50%) | **Anthropic 1,775.0m Class N** (1,654.5m before the IPO + 120.48m bought in the $26bn placement at $83, $10.0bn) at **ANT $97.17** (first close 19 Nov) = **$172.5bn** `[F]`, replacing the $128.2bn measurement-alternative carrying value ("primarily … one private company", treated as all Anthropic `[A]`). **SpaceX 555.0m shares** (13F) at SPCX **$138.43** (19 Nov) = $76.8bn `[F]`. Other listed ≈ $6.7bn (30 Sep) `[F]`. Total **$256.0bn pre-tax; $211.3bn after 21% tax on gains over ~$43bn cost** `[A]` (**$16.95/share**). Equity-method investments ($7.1bn) are in core EPS. Anthropic's own IAF value (P_k $58.91) and scenario values are sensitivities |
-| Anthropic IPO (424B4, 18 Nov; via `docs/anthropic-analysis.md` v1.1 `[C]`) | Priced **$83.00** on 18 Nov (range $70–78), upsized to 956.35m primary + 147m option; first trade 19 Nov: open $111.50, high $115.10, close **$97.17**, post-market $92.60 `[F]` (Yahoo). Fully diluted 18,292m shares; Alphabet ~9.7% of that. Anthropic's commitment to Google **≥ ~$121.3bn (Apr 2026–Jul 2033)** plus $125–150bn of further TPU compute 2028–31 `[F]` (S-1/A). Google's note capacity left: $10bn to Dec 2030 `[F]`. Our Anthropic analysis: fails at $97.17 (Base −4.6%, P_k $58.9, Base V_T $83.9) |
+| NAVs (Step 3) | Not applicable (Track A). Price split: **core business $246.54 + equity stakes after tax $15.65 + net cash $3.10 = $265.29** (12,460m shares) |
+| Equity stakes (method: market price, held flat in Base; Bear −50%, Bull +50%) | **Anthropic 1,775.0m Class N** (1,654.5m before the IPO + 120.48m bought in the $26bn placement at $83, $10.0bn) at **ANT $88.91** (20 Nov close) = **$157.8bn** `[F]`, replacing the $128.2bn measurement-alternative carrying value (treated as all Anthropic `[A]`). **SpaceX 555.0m shares** (13F) at SPCX **$127.79** (20 Nov) = $70.9bn `[F]`. Other listed ≈ $6.7bn (30 Sep) `[F]`. Total **$235.4bn pre-tax; $195.0bn after 21% tax on gains over ~$43bn cost** `[A]` (**$15.65/share**). Equity-method investments ($7.1bn) are in core EPS. Anthropic's own IAF value (P_k $58.91) and scenario values are sensitivities |
+| Anthropic IPO (424B4, 18 Nov; via `docs/anthropic-analysis.md` v1.1 `[C]`) | Priced **$83.00** on 18 Nov (range $70–78); first close $97.17 (19 Nov), **$88.91 on 20 Nov** `[F]` (Yahoo). Fully diluted 18,292m shares; Alphabet ~9.7%. Anthropic's commitment to Google **≥ ~$121.3bn (Apr 2026–Jul 2033)** plus $125–150bn of further TPU compute 2028–31 `[F]` (S-1/A). Our Anthropic analysis: fails at $97.17 (P_k $58.9, Base V_T $83.9) |
 | Waymo | Consolidated (Other Bets); Series D Feb 2026 at $126bn post-money `[C]`; $5bn secured term loan (Oct 2026) not guaranteed by Alphabet `[F]`. In core EPS through Other Bets losses; valued separately only as a sensitivity |
-| FX | USD reporting, USD price. NOK at USD/NOK **9.7668** (Yahoo `NOK=X`, 21:00 UTC bar, 19 Nov; Norges Bank fixing 19 Nov 9.6866 `[F]`). **NOK path (Equity BBB of 6 Nov, relative to spot):** Bear +12.1% (2027), +9.1% (2028–29); Base flat; Bull −2.9% |
+| FX | USD reporting, USD price. NOK at USD/NOK **9.7525** (Norges Bank fixing 20 Nov `[F]`). **NOK path (Equity BBB 20 Nov note, relative to spot):** Bear +12.1% (2027), +9.1% (2028–29); Base flat; Bull −2.9% |
 | Track | **A with a dated IRR to an independent exit P/E and a hurdle price P_k**, plus an FCF cross-check. Capex dominates FCF (Q3 FCF −$9.1bn; capex 3–6× D&A through 2029), which the AI BBB says to state; earnings are not rate-driven, so EPS stays the value metric |
-| k | **12%**, not raised: Aa2/AA+, deep liquidity (~$13bn traded on 19 Nov). Anthropic concentration and regulation are priced in Bear |
+| k | **12%**, not raised: Aa2/AA+, deep liquidity (~$13bn traded a day). Anthropic concentration and regulation are priced in Bear |
 
 ## Scenarios
 
@@ -84,31 +84,31 @@ Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed
 | Exit P/E (2030 core EPS) | 16 (from end-2027) | **21** | 24 |
 | Company items | Stakes −50%; capex 255 / 200 / 200; dividend flat | **Stakes flat at market; capex 275 / 300 / 305; dividend +5%** | Stakes +50%; capex 310 / 370 / 400; dividend +10% |
 | Macro and NOK | Equity Bear; USD/NOK +12% / +9% | Equity Base; NOK flat | Equity Bull; USD/NOK −3% |
-| Result: IRR_T / P_k / capital | −8.7% / 145.0 / not preserved (−24.5%) | **10.9% / 264.5 / preserved (+37.9%)** | 23.3% / 367.2 / preserved (+91.5%) |
+| Result: IRR_T / P_k / capital | −8.0% / 144.6 / not preserved (−22.6%) | **11.8% / 263.7 / preserved (+41.2%)** | 24.2% / 366.0 / preserved (+96.1%) |
 
-The stub (19 Nov–31 Dec 2026) is the same in all scenarios: Q4 estimate, the declared December dividend, price flat. Bear and Bull diverge from 1 Jan 2027.
+The stub (21 Nov–31 Dec 2026) is the same in all scenarios: Q4 estimate, the declared December dividend, price flat. Bear and Bull diverge from 1 Jan 2027.
 
 **Driver breakdown** (one driver at a time from Base; IRR_T / V_T / P_k)
 
 | Step | Bear | Bull |
 |---|---|---|
-| Base | 10.9% / 372.9 / 264.5 | 10.9% / 372.9 / 264.5 |
-| 1. Scenario earnings, cash and dividends (Base exit P/E, Base stakes) | 0.4% / 272.8 / 194.0 | 17.5% / 446.5 / 316.4 |
-| 2. + scenario exit P/E (16 / 24) | −7.5% / 211.3 / 150.8 | 22.6% / 510.6 / 361.4 |
-| 3. + stakes (×0.5 / ×1.5) | **−8.7% / 203.0 / 145.0** | **23.3% / 518.9 / 367.2** |
+| Base | 11.8% / 371.6 / 263.7 | 11.8% / 371.6 / 263.7 |
+| 1. Scenario earnings, cash and dividends (Base exit P/E, Base stakes) | 1.1% / 271.6 / 193.2 | 18.5% / 445.2 / 315.6 |
+| 2. + scenario exit P/E (16 / 24) | −6.9% / 210.0 / 150.0 | 23.7% / 509.4 / 360.6 |
+| 3. + stakes (×0.5 / ×1.5) | **−8.0% / 202.4 / 144.6** | **24.2% / 517.0 / 366.0** |
 
 **Base return bridge (USD per share)**
 
 | Step | $/share |
 |---|---|
-| P (19 Nov close) = core 252.61 (20.0 × Base CY27 EPS 12.64) + stakes 16.95 + net cash 3.10 | 272.66 |
-| Earnings growth (EPS 12.64 → 17.42, +10.8% a year over T) | +95.46 |
-| Re-rating (core P/E 19.98 → 21.0, +1.6% a year) | +17.77 |
-| Stakes (held flat; dilution) | −0.44 |
+| P (20 Nov close) = core 246.54 (19.5 × Base CY27 EPS 12.64) + stakes 15.65 + net cash 3.10 | 265.29 |
+| Earnings growth (EPS 12.64 → 17.42, +10.8% a year over T) | +93.17 |
+| Re-rating (core P/E 19.50 → 21.0, +2.4% a year) | +26.13 |
+| Stakes (held flat; dilution) | −0.40 |
 | Net cash $3.10 → net debt $9.48 | −12.58 |
-| = V_T | 372.87 |
+| = V_T | 371.60 |
 | + dividends paid 2026–29 | +3.10 |
-| **= ΣD + V_T** (+37.9%) | **375.97** |
+| **= ΣD + V_T** (+41.2%) | **374.70** |
 
 ## Company and status
 
@@ -168,7 +168,7 @@ The stub (19 Nov–31 Dec 2026) is the same in all scenarios: Q4 estimate, the d
 | Equity stakes | **E1** (flat call; pending pricing on 18 Nov) | Bear −50% / Base flat at market / Bull +50% `[A]` | ANT priced 1.41× and closed 1.65× the Series H per common share: the AI BBB lab-financing signpost, Bull-side line crossed (anthropic v1.1) |
 | Other Bets, Alphabet-level AI | — | Base −8 → −9 and −34 → −42 ($bn) `[A]` | Q3 run-rate −$8.2bn and −$30.6bn a year `[F]` |
 
-- **E-layer consistency:** the AI BBB E path (.92 / 1.07 / 1.17 / 1.27 of CY27 consensus, exit P/E 21) on $14.91 gives **13.2%** at $272.66, 13.8% with the stakes and Base net debt. Base EPS is .848 of consensus in 2027 and .92 of the path by 2030 (lower start: Q3 margin, Alphabet-level AI costs, Services); worth −2.9 pp. The E basket returns 8.9% and needs 1.09× its Base 2028–30 to earn k; Alphabet's price needs ~1.03× its own Base.
+- **E-layer consistency:** the AI BBB E path (.92 / 1.07 / 1.17 / 1.27 of CY27 consensus, exit P/E 21) on $14.91 gives **14.2%** at $265.29, 14.8% with the stakes and Base net debt. Base EPS is .848 of consensus in 2027 and .92 of the path by 2030 (lower start: Q3 margin, Alphabet-level AI costs, Services); worth −2.9 pp. The E basket returns 8.9% and needs 1.09× its Base 2028–30 to earn k; Alphabet's price needs ~1.03× its own Base.
 - **Cash conversion** (FCF less withholding ÷ net income): Alphabet −.38 / −.20 / .02 in Base, against the E layer's −.20 / .11 / .36.
 
 ## Common assumptions
@@ -209,23 +209,23 @@ The stub (19 Nov–31 Dec 2026) is the same in all scenarios: Q4 estimate, the d
 | Bull EPS / capex / FCF $bn (per share) | 13.78 / 310 / −56.6 (−4.52) | 16.64 / 370 / −46.9 (−3.71) | 18.95 / 400 / −15.1 (−1.18) | 21.37 |
 | Bull net cash $bn / per share | −89.1 / −7.09 | −180.2 / −14.21 | −240.3 / −18.79 | |
 
-**Year-end path** (from P = $272.66 on 19 Nov; D_t paid in the year; r_t in USD, not annualised for the stub, NOK path in brackets; IRR to t annualised)
+**Year-end path** (from P = $265.29 on 20 Nov; D_t paid in the year; r_t in USD, not annualised for the stub, NOK path in brackets; IRR to t annualised)
 
 | | End-2026 (stub) | 2027 | 2028 | 2029 (exit) |
 |---|---|---|---|---|
-| Bear: D / V / core P/E | 0.22 / 272.7 / 20.0 | 0.88 / 160.6 / 16.0 | 0.88 / 179.5 / 16.0 | 0.88 / 203.0 / 16.0 |
-| Bear: r_t / IRR to t | 0.1% / 0.7% | **−40.8% (NOK −33.7%)** / −37.5% | 12.4% / −17.6% | 13.6% / **−8.7%** |
-| **Base: D / V / core P/E** | 0.22 / 272.7 / 20.0 | 0.91 / 301.7 / 20.3 | 0.96 / 335.8 / 20.7 | 1.01 / 372.9 / 21.0 |
-| **Base: r_t / IRR to t** | 0.1% / 0.7% | **11.0%** / 9.9% | 11.6% / 10.7% | 11.4% / **10.9%** |
-| Bull: D / V / core P/E | 0.22 / 272.7 / 20.0 | 0.95 / 367.3 / 21.3 | 1.04 / 437.4 / 22.7 | 1.14 / 518.9 / 24.0 |
-| Bull: r_t / IRR to t | 0.1% / 0.7% | 35.1% (NOK 31.1%) / 31.1% | 19.4% / 25.4% | 18.9% / **23.3%** |
+| Bear: D / V / core P/E | 0.22 / 265.3 / 19.5 | 0.88 / 159.9 / 16.0 | 0.88 / 178.9 / 16.0 | 0.88 / 202.4 / 16.0 |
+| Bear: r_t / IRR to t | 0.1% / 0.7% | **−39.4% (NOK −32.1%)** / −36.2% | 12.4% / −16.6% | 13.6% / **−8.0%** |
+| **Base: D / V / core P/E** | 0.22 / 265.3 / 19.5 | 0.91 / 295.8 / 20.0 | 0.96 / 331.9 / 20.5 | 1.01 / 371.6 / 21.0 |
+| **Base: r_t / IRR to t** | 0.1% / 0.7% | **11.9%** / 10.7% | 12.5% / 11.5% | 12.3% / **11.8%** |
+| Bull: D / V / core P/E | 0.22 / 265.3 / 19.5 | 0.95 / 360.5 / 21.0 | 1.04 / 432.7 / 22.5 | 1.15 / 517.0 / 24.0 |
+| Bull: r_t / IRR to t | 0.1% / 0.7% | 36.2% (NOK 32.3%) / 32.2% | 20.3% / 26.4% | 19.7% / **24.2%** |
 
-- No year in Base reaches 12%: EPS grows 11–13% a year and the core P/E re-rates +1.6% a year (core value +12.6% a year), the dividend adds 0.36%, and the swing from net cash to net debt (−$12.6 a share) with the stake dilution takes ~2 pp a year (g 10.6%).
-- **Bear 2027 (−41%) is at the severe end of Alphabet's history** (2008 −56%, 2022 −39% `[E]`): forward EPS 22% below Base CY27 and the P/E at its 5-year low at once.
+- Base reaches 12% in 2028 and 2029 but not in 2027: EPS grows 11–13% a year and the core P/E re-rates +2.4% a year, the dividend adds 0.37%, and the swing from net cash to net debt (−$12.6 a share) with the stake dilution takes ~2 pp a year (g 11.4%).
+- **Bear 2027 (−39%) is at the severe end of Alphabet's history** (2008 −56%, 2022 −39% `[E]`): forward EPS 22% below Base CY27 and the P/E at its 5-year low at once.
 
 ## V_T bridge, exit cross-check and exit consistency
 
-- **V_T (Base)** = 21.0 × 17.42 (365.84) + stakes 16.52 − net debt 9.48 = **372.87**; the step-by-step bridge from P is the Base return bridge (Scenarios). g = (372.87 / 272.66)^(1/3.12) − 1 = **10.6% a year**: core EPS +10.8%, re-rating +1.6%, net-debt swing and dilution the rest. d = 0.36%; c = −0.02 pp.
+- **V_T (Base)** = 21.0 × 17.42 (365.84) + stakes 15.25 − net debt 9.48 = **371.60**; the step-by-step bridge from P is the Base return bridge (Scenarios). g = (371.60 / 265.29)^(1/3.115) − 1 = **11.4% a year**: core EPS +10.8%, re-rating +2.4%, net-debt swing and dilution the rest. d = 0.37%; c = −0.02 pp.
 - Net debt at exit, from $10.6bn at end-2026: FCF −$20.7bn, dividends −$36.3bn, withholding −$72bn, preferred −$3bn → −$121.3bn.
 - Bear V_T 203.0 = 16 × 12.31 (197.0) + 8.3 (stakes −50%) − 2.20; Bull 518.9 = 24 × 21.37 (512.9) + 24.8 (stakes +50%) − 18.79.
 - **Backlog at exit:** the Cloud backlog that runs past exit (Anthropic to 2033) is in 2030 Cloud revenue (+14%) and in the multiple; a separate premium would count it twice. The firm-today-only sensitivity does not apply to Track A.
@@ -259,60 +259,60 @@ The stub (19 Nov–31 Dec 2026) is the same in all scenarios: Q4 estimate, the d
 
 ## Results
 
-At P = $272.66 (GOOGL regular close 19 Nov 2026), valuation date 19 Nov, T = 3.12 years. Reproduced by `.claude/skills/iaf-valuation/references/models/googl/googl_remark.py`.
+At P = $265.29 (GOOGL regular close 20 Nov 2026), valuation date 20 Nov, T = 3.115 years. Reproduced by `.claude/skills/iaf-valuation/references/models/googl/googl_n20.py` (on `googl_remark.py`).
 
 | | Bear | **Base** | Bull |
 |---|---|---|---|
-| IRR_T (dated, USD) | −8.7% | **10.9%** | 23.3% |
-| IRR_T in NOK on the Equity BBB NOK path | −6.1% | **10.9%** | 22.1% |
-| Track A only: Rule 1 screen d + g (core EPS CAGR CY26→29; assumes today's P/E holds) | 0.34 − 1.09 = −0.8% | **0.36 + 11.83 = 12.2%** | 0.39 + 18.64 = 19.0% |
-| d / g / c | 0.34 / −9.0 / 0.0 | **0.36 / 10.6 / −0.0** | 0.39 / 22.9 / −0.0 |
-| g: core EPS growth / re-rating (core P/E 19.98 → exit), a year over T | −0.9% / −6.9% | **+10.8% / +1.6%** | +18.3% / +6.1% |
+| IRR_T (dated, USD) | −8.0% | **11.8%** | 24.2% |
+| IRR_T in NOK on the Equity BBB NOK path | −5.3% | **11.8%** | 23.1% |
+| Track A only: Rule 1 screen d + g (core EPS CAGR CY26→29; assumes today's P/E holds) | 0.35 − 1.09 = −0.7% | **0.37 + 11.83 = 12.2%** | 0.41 + 18.64 = 19.1% |
+| d / g / c | 0.35 / −8.3 / 0.0 | **0.37 / 11.4 / −0.0** | 0.41 / 23.9 / −0.1 |
+| g: core EPS growth / re-rating (core P/E 19.50 → exit), a year over T | −0.9% / −6.2% | **+10.8% / +2.4%** | +18.4% / +6.9% |
 | Structural / cyclical | n/a (Track A, not rate-driven): the split that matters is EPS growth vs re-rating | | |
-| ΣD_t / V_T | 2.86 / 203.0 | **3.10 / 372.9** | 3.35 / 518.9 |
-| P_k (USD) / margin of safety | 145.0 / −46.8% | **264.5 / −3.0%** | 367.2 / +34.7% |
-| Rule 3: P/E (CY26 core) vs ceiling (d + g) / k² | 24.0 vs n/m | **24.0 vs 8.5 (fails)** | 24.0 vs 13.2 |
-| P/FCF cross-check (CY29 FCF) | 61 | **125** | n/m (FCF negative) |
-| Capital preserved? ΣD + V_T vs P | **No (−24.5%)** | Yes (+37.9%) | Yes (+91.5%) |
+| ΣD_t / V_T | 2.86 / 202.4 | **3.10 / 371.6** | 3.35 / 517.0 |
+| P_k (USD) / margin of safety | 144.6 / −45.5% | **263.7 / −0.6%** | 366.0 / +38.0% |
+| Rule 3: P/E (CY26 core) vs ceiling (d + g) / k² | 23.4 vs n/m | **23.4 vs 8.5 (fails)** | 23.4 vs 13.2 |
+| P/FCF cross-check (CY29 FCF) | 60 | **122** | n/m (FCF negative) |
+| Capital preserved? ΣD + V_T vs P | **No (−22.6%)** | Yes (+41.2%) | Yes (+96.1%) |
 
-- **Rule 1 at constant P/E passes only because it assumes today's 24× holds** (~12% EPS growth for ever). With the exit P/E set independently (21), the dated IRR is 10.9%.
-- **FCF:** P/FCF ~125× in Base even in 2029: earnings are real, but in the build-out almost none reach shareholders as free cash; buybacks have stopped and the ATM sells new shares.
-- **Scenario-weighted reference (convention, 25/50/25 on levels):** 10.3%. Not a decision figure.
-- **Share of Bull already priced:** (272.66 − 264.5) / (367.2 − 264.5) = **8%**.
+- **Rule 1 at constant P/E passes only because it assumes today's 23× holds** (~12% EPS growth for ever). With the exit P/E set independently (21), the dated IRR is 11.8%.
+- **FCF:** P/FCF ~122× in Base even in 2029: earnings are real, but in the build-out almost none reach shareholders as free cash; buybacks have stopped and the ATM sells new shares.
+- **Scenario-weighted reference (convention, 25/50/25 on levels):** 11.2%. Not a decision figure.
+- **Share of Bull already priced:** (265.29 − 263.7) / (366.0 − 263.7) = **2%**.
 - **Bear balance sheet:** no survival question; net debt peaks at ~$59bn (~0.3× EBITDA), then falls as capex is cut. The loss is earnings and multiple.
-- **E / R (HY rule, NOK):** E = 10.91 − 4.72 = **+6.19 pp**; R = Base 2027 (11.0%) − Bear 2027 on the NOK path (−33.7%) = 44.6 pp; **E / R = 0.139**: above World (0.065, Equity BBB 18 Nov note) and the AI E basket (0.119), below the HY reference (0.254).
-- **Price triggers (GOOGL, USD):** Base = k **$264.5**; marginal band from **$269.9**, clears below **$259.3**; E / R = 0.254 at **$243.0** (0.216, the HY Bear read as a shock: $251.7); pre-alert (Base = the HY market's 7.5%) **$300.4, crossed**.
+- **E / R (HY rule, NOK):** E = 11.78 − 4.72 = **+7.06 pp**; R = Base 2027 (11.9%) − Bear 2027 on the NOK path (−32.1%) = 43.9 pp; **E / R = 0.161**: above World (0.137, Equity BBB 20 Nov note) and the AI E basket (0.119), below the HY reference (0.254).
+- **Price triggers (GOOGL, USD):** Base = k **$263.7**; fails above **$269.0**, clears at or below **$258.5**; E / R = 0.254 at **$242.2** (0.216, the HY Bear read as a shock: $250.8); pre-alert (Base = the HY market's 7.5%) **$299.4, crossed**.
 
-**Sensitivities** (Base IRR / P_k / margin of safety at $272.66). Operating rows carry the V_T change each had in the 7 Nov run of the v2 model (±0.1 pp).
+**Sensitivities** (Base IRR / P_k / margin of safety at $265.29). Operating rows carry the V_T change each had in the 7 Nov run of the v2 model (±0.1 pp).
 
 | Change | IRR | P_k | MoS |
 |---|---|---|---|
-| Exit P/E 18 / 24 / 26 | 5.7% / 15.6% / 18.6% | 227.8 / 301.2 / 325.7 | −16.5% / +10.5% / +19.4% |
-| **Break-even exit P/E** | **12.0% at 21.7** | 272.7 | 0% |
-| EPS growth 2028–30 needed for 12% (exit 21) | 12.4% a year (Base 11.3%) | | |
-| Cloud growth −5 pp / +5 pp every year | 8.8% / 13.3% | 248.9 / 282.3 | −8.7% / +3.5% |
-| Cloud 2027 +70% (≈ consensus-implied), then Base | 12.9% | 279.9 | +2.6% |
-| Cloud on the plain E2 row | 8.9% | 249.6 | −8.5% |
-| Services growth −2 pp / +2 pp every year | 8.5% / 13.3% | 247.4 / 282.3 | −9.3% / +3.5% |
-| Segment margins −1 pp / +1 pp every year | 9.6% / 12.1% | 254.7 / 273.6 | −6.6% / +0.4% |
-| Capex +$25bn a year (2027 $300bn ≈ consensus) | 9.9% | 256.9 | −5.8% |
-| Core tax 15% | 11.9% | 272.1 | −0.2% |
-| Waymo at its Feb-2026 round (×85% `[A]`), Other Bets out of core EPS | 13.1% | 280.7 | +2.9% |
-| Q3-call Q4 items (Services ~+8.5%, Cloud margin ~34%), not applied | 10.8% | 263.5 | −3.3% |
-| Equity stakes to zero / doubled | 9.3% / 12.5% | 252.9 / 276.1 | −7.3% / +1.3% |
-| Anthropic at the IPO price $83 / at its IAF P_k $58.91 / ANT $150 | 10.8% / 10.5% / 11.5% | 263.4 / 261.5 / 268.5 | −3.4% / −4.1% / −1.5% |
-| **Anthropic at its own scenario V_T** (Bear $17.7 / Base $83.9 / Bull $176.6; rest at the marks) | Bear −9.1% / **Base 10.8%** / Bull 23.5% | 142.9 / **263.5** / 369.4 | −47.6% / **−3.4%** / +35.5% |
-| Anthropic at the old carrying value + the placement at cost | 10.7% | 263.0 | −3.5% |
-| AI BBB E-layer path × $14.91, exit 21 (headline / with stakes and net debt) | 13.2% / 13.8% | | |
-| 18 Nov close $282.44 / post-market $273.30 | 9.7% / 10.8% | 264.5 | −6.4% / −3.2% |
+| Exit P/E 18 / 24 / 26 | 6.5% / 16.6% / 19.6% | 226.9 / 300.4 / 324.9 | −14.5% / +13.2% / +22.5% |
+| **Break-even exit P/E** | **12.0% at 21.1** | 265.3 | 0% |
+| EPS growth 2028–30 needed for 12% (exit 21) | 11.5% a year (Base 11.3%) | | |
+| Cloud growth −5 pp / +5 pp every year | 9.6% / 14.2% | 248.0 / 281.4 | −6.5% / +6.1% |
+| Cloud 2027 +70% (≈ consensus-implied), then Base | 13.8% | 279.1 | +5.2% |
+| Cloud on the plain E2 row | 9.7% | 248.8 | −6.2% |
+| Services growth −2 pp / +2 pp every year | 9.4% / 14.2% | 246.6 / 281.4 | −7.0% / +6.1% |
+| Segment margins −1 pp / +1 pp every year | 10.4% / 13.0% | 253.9 / 272.8 | −4.3% / +2.8% |
+| Capex +$25bn a year (2027 $300bn ≈ consensus) | 10.7% | 256.1 | −3.5% |
+| Core tax 15% | 12.8% | 271.3 | +2.3% |
+| Waymo at its Feb-2026 round (×85% `[A]`), Other Bets out of core EPS | 13.9% | 279.9 | +5.5% |
+| Q3-call Q4 items (Services ~+8.5%, Cloud margin ~34%), not applied | 11.6% | 262.7 | −1.0% |
+| Equity stakes to zero / doubled | 10.3% / 13.2% | 253.0 / 274.4 | −4.6% / +3.4% |
+| Anthropic at the IPO price $83 / at its IAF P_k $58.91 / ANT $50 / ANT $150 | 11.8% / 11.5% / 11.4% / 12.5% | 263.5 / 261.6 / 260.9 / 268.6 | −0.7% / −1.4% / −1.6% / +1.3% |
+| **Anthropic at its own scenario V_T** (Bear $17.7 / Base $83.9 / Bull $176.6; rest at the marks) | Bear −8.3% / **Base 11.8%** / Bull 24.6% | 142.9 / **263.5** / 369.5 | −46.1% / **−0.7%** / +39.3% |
+| Anthropic at the old carrying value + the placement at cost | 11.7% | 263.1 | −0.8% |
+| AI BBB E-layer path × $14.91, exit 21 (headline / with stakes and net debt) | 14.2% / 14.8% | | |
+| Price $272.66 (19 Nov close, v2.2 marks) | 10.9% | 264.5 | −3.0% |
 
 ## Price versus our call (Step 6b)
 
-- **What the price implies:** at $272.66 the Base build earns k with an exit value **3% above Base**: an exit P/E of **21.7** (Base 21), or 2030 EPS of ~$18.0 (Base $17.42; EPS growth 12.4% a year 2028–30 against 11.3%). On the AI BBB's own unit, Alphabet's price needs ~1.03× its Base 2028–30 earnings, the E basket 1.09×.
+- **What the price implies:** at $265.29 the Base build earns k with an exit P/E of **21.1** (Base 21), or 2030 EPS ~0.6% above Base (EPS growth 11.5% a year 2028–30 against 11.3%). On the AI BBB's own unit, Alphabet's price needs ~1.01× its Base 2028–30 earnings.
 - **AI BBB turn calls (18–19 Nov) and Alphabet:**
-  - **E platforms and E1: flat**, no call. E1's open item (Anthropic pricing) resolved Bull-side ($83 above the range; $97.17 close). No Alphabet row moves.
-  - **K1 2028 lower (financing; 50%, watch):** Alphabet's own capex −$25bn in 2028–29 alone gives 11.6%, P_k $269.5, −1.2% (marginal) `[A]`; a financing-driven cut would also slow Cloud (−5 pp a year: 8.8%). Not in Base.
-  - **H1 2028–30 order cut by funded buyers (45%, watch):** it reaches Alphabet through TPU system sales and lab compute in the Cloud backlog. Alphabet's largest lab customer is now funded (Anthropic's IPO cash, $244.6bn at closing `[C]`), and Alphabet is itself one of the funders (the $10bn placement). Sensitivity: Cloud −5 pp a year, 8.8%, −8.7%. Not in Base.
+  - **E platforms and E1: flat**, no call (20 Nov note: E flat, 55%). E1's open item (Anthropic pricing) resolved Bull-side ($83 above the range; $88.91 on 20 Nov). No Alphabet row moves.
+  - **K1 2028 lower (financing; 50%, watch):** Alphabet's own capex −$25bn in 2028–29 alone gives 12.5%, P_k $268.7, +1.3% (marginal) `[A]`; a financing-driven cut would also slow Cloud (−5 pp a year: 9.6%). Not in Base.
+  - **H1 2028–30 order cut by funded buyers (watch):** it reaches Alphabet through TPU system sales and lab compute in the Cloud backlog. Alphabet's largest lab customer is now funded (Anthropic's IPO cash, $244.6bn at closing `[C]`), and Alphabet is itself one of the funders (the $10bn placement). Sensitivity: Cloud −5 pp a year, 9.6%, −6.5%. Not in Base.
 - **Company leading signals** (score +1 / 0 / −1):
 
 | Family | Signal (date, source) | Score |
@@ -321,29 +321,27 @@ At P = $272.66 (GOOGL regular close 19 Nov 2026), valuation date 19 Nov, T = 3.1
 | Buybacks or issuance | No buybacks in 2026 (9M 2025: $39.8bn); $12.4bn ATM in Q3; debt raised in USD, A$, € (5 Nov) and C$ (424B5, 19 Nov) `[F]` | −1 |
 | Contract behaviour and backlog | Cloud RPO +9% q/q to $560.8bn, 55% within 24 months; Anthropic commitment ≥ $121.3bn and the customer now funded `[F]` | +1 |
 | Guidance tone vs revisions | CY27 consensus $15.17 (pre-report) → $14.91 (32 cuts and 11 raises in 7 days); Q4 $3.34 → $3.19; Zacks Rank #2 → #3 `[E]` | −1 |
-| Asset purchases vs book | 120.48m ANT bought at $83: marked +$1.7bn at $97.17, but 41% above our Anthropic P_k ($58.9): vendor financing of its biggest Cloud customer | 0 |
+| Asset purchases vs book | 120.48m ANT bought at $83: marked +$0.7bn at $88.91, but 51% above our Anthropic P_k ($58.9): vendor financing of its biggest Cloud customer | 0 |
 | **Net** | | **−1** |
 
-- **Verdict line: with the market.** The price needs 3% more exit value than our Base, inside the spread of a one-point exit P/E move. The fall since 6 Nov (−4.3%) is AI-group sentiment (NVIDIA, data-center funding), which the AI BBB holds as watch calls on one new family, not as Base; under its rule it does not move Alphabet's rows yet. Company signals lean slightly negative (estimate cuts, funding by issuance).
-- **Scorecard:** opened 20 Nov 2026 at $272.66: "with" (price-implied exit value +3% above Base). Mark at the next run (Q4 report, ~2 Feb 2027).
+- **Verdict line: with the market.** The price implies our Base almost exactly (exit P/E 21.1 against 21). The fall since 6 Nov (−6.8%) is AI-group sentiment (NVIDIA's SEC-probe report on 20 Nov, data-center funding), which the AI BBB holds as watch calls, not as Base. Company signals lean slightly negative (estimate cuts, funding by issuance).
+- **Scorecard:** opened 20 Nov 2026 at $272.66: "with" (price-implied exit value +3% above Base) → $265.29 (−2.7%): toward our Base. Mark at the next run (Q4 report, ~2 Feb 2027).
 
 ## Verdict and caveat
 
-- **Band applied:** Base margin of safety −3.0% is below the −2% line: **fails** (stated in the Summary).
+- **Band applied:** Base margin of safety −0.6% is inside the marginal band (−2% to +2%): **marginal** (stated in the Summary).
 - **What would flip it:**
-  - to marginal: a price ≤ **$269.9**; segment margins +1 pp a year (+0.4%); a core tax of 15% (−0.2%); Alphabet's capex alone −$25bn in 2028–29 (−1.2%);
-  - to clears: a price ≤ **$259.3**; an exit P/E ≥ ~22.1; Cloud +5 pp a year, Services +2 pp a year, Cloud 2027 +70% or Waymo valued separately (+2.6% to +3.5%).
+  - to fails: a price above **$269.0**; segment margins −1 pp a year (−4.3%); capex +$25bn a year (−3.5%); Cloud −5 pp a year (−6.5%);
+  - to clears: a price at or below **$258.5**; an exit P/E ≥ ~21.5; a core tax of 15% (+2.3%), segment margins +1 pp (+2.8%), Cloud +5 pp, Services +2 pp, Cloud 2027 +70% or Waymo valued separately (+5.2% to +6.1%).
 - **Caveat:** a margin-of-safety screen, not an intrinsic valuation or a price target. Returns are before fund fees and tax. The operating model is v2's (Q3 report); this version re-marks price, date, stakes and the placement on it.
 
 ## Tracking
 
 | Version | Valuation date / price | Report since | Base P_k (change) | Base IRR / MoS | Running vs Base path |
 |---|---|---|---|---|---|
-| v1 | 15 Oct 2026 / $349.28 | — | 273.6 | 3.8% / −21.7% | — |
-| v2 | 28 Oct / $324.89 | Q3 2026 (28 Oct) | 261.4 (report −13.1, date +1.0) | 4.6% / −19.5% | Behind on earnings, ahead on Cloud and cash |
-| v2 re-mark | 30 Oct / $279.84 | none | 261.6 | 9.6% / −6.5% | Price −13.9% |
 | v2.1 re-mark with the 10-Q | 6 Nov / $284.78 | Q3 10-Q | 262.3 (date +0.6, net cash +0.4, stakes −0.3) | 9.1% / −7.9% | Net cash $3.6bn above derived |
-| **v2.2 re-mark after the Anthropic IPO** | **19 Nov / $272.66** | none (424B4 of Anthropic; C$ 424B5) | **264.5 (+2.2: date +1.1, SPCX +0.1, Anthropic +1.4, placement −0.4)** | **10.9% / −3.0%** | Operating rows as in v2; price −4.3% since 6 Nov |
+| v2.2 re-mark after the Anthropic IPO | 19 Nov / $272.66 | none (424B4 of Anthropic; C$ 424B5) | 264.5 (+2.2: date +1.1, SPCX +0.1, Anthropic +1.4, placement −0.4) | 10.9% / −3.0% | Price −4.3% since 6 Nov |
+| **v2.3 close re-mark** | **20 Nov / $265.29** | none | **263.7 (−0.8: SPCX −0.3, Anthropic −0.6, date +0.1)** | **11.8% / −0.6%** | Price −2.7%; stakes at the 20 Nov closes |
 
 - **Running against the Base path:** behind on core EPS (Q3 −11% against the v1 model) and the operating margin; Services slowing faster than v1 (Search +12% after +17%); ahead on Cloud (+103%) and the backlog. CY27 consensus keeps falling toward Base (0.85×).
 
@@ -357,15 +355,15 @@ At P = $272.66 (GOOGL regular close 19 Nov 2026), valuation date 19 Nov, T = 3.1
 | Search growth; Services / Cloud margin | < 8% / > 15%; < 40% / > 44%; < 30% / > 38% | +12%; 40.7% / 36.2% (Q3) | Alphabet `[F]` |
 | Quarterly FCF | TTM < 0 / positive quarter with capex at guide | Q3 −$9.1bn; TTM $19.7bn | Alphabet `[F]` |
 | Share count (net) | > +1.2% a year or ATM beyond withholding / buybacks resume | **Bear side crossed in Q3** (ATM $12.4bn vs $5.4bn withholding) | Release `[F]` |
-| **ANT (Anthropic)** | < $58.9 (our Anthropic P_k; Alphabet −0.4 pp) / > $146 (Bull +50% on $97.17) | **$97.17** (19 Nov close; post-market $92.60) | Yahoo `[F]` |
-| SpaceX (SPCX) | < $100 / > $225 | $138.43 (19 Nov) | Yahoo `[F]` |
+| **ANT (Anthropic)** | < $58.9 (our Anthropic P_k; Alphabet −0.3 pp) / > $133 (Bull +50% on $88.91) | **$88.91** (20 Nov close; $97.17 on 19 Nov) | Yahoo `[F]` |
+| SpaceX (SPCX) | < $100 / > $225 | $127.79 (20 Nov; $138.43 on 19 Nov) | Yahoo `[F]` |
 | Regulation | Search appeal lost with harsher remedies / appeals settled | Behavioural remedies only | Courts `[C]` |
-| Core P/E on CY27 consensus | ≤ 16 / ≥ 25 | 16.9 on $14.91 (20.0 on Base) | This analysis |
-| **Price (GOOGL, USD)** | **≤ $269.9 marginal, ≤ $264.5 Base = k, ≤ $259.3 clears; ≤ $243.0 E / R = 0.254**; pre-alert ≤ $300.4 | **$272.66: pre-alert crossed; $2.8 (1.0%) above the marginal band** | Yahoo |
+| Core P/E on CY27 consensus | ≤ 16 / ≥ 25 | 16.5 on $14.91 (19.5 on Base) | This analysis |
+| **Price (GOOGL, USD)** | **> $269.0 fails, ≤ $263.7 Base = k, ≤ $258.5 clears; ≤ $242.2 E / R = 0.254**; pre-alert ≤ $299.4 | **$265.29: marginal; pre-alert crossed** | Yahoo |
 | AI BBB Bear signposts | capex guides flat/down; capex/OCF > 100% with debt share > 40%; platform equity beyond withholding | Capex/OCF 121% (Q3); platform equity funding **crossed (Bear)** | `docs/ai-market-bbb.md` |
 
 - **Other risks:** AI answers substituting for Search faster than AI Mode monetises (watch revenue per query); token prices falling faster than usage grows; lumpy TPU system revenue; stock-based pay; GAAP EPS swinging with the SpaceX and Anthropic marks.
-- **Next update:** the Q4 report (~2 Feb 2027; 2027 capex guide, Q4 actuals and the Anthropic gain). **Stale after 18 Dec 2026.** A re-mark is worth doing earlier if the price closes at or below the marginal band ($269.9).
+- **Next update:** the Q4 report (~2 Feb 2027; 2027 capex guide, Q4 actuals and the Anthropic gain). **Stale after 18 Dec 2026.** A re-mark is worth doing earlier if the price closes outside $258.5–269.0.
 
 ## For other modules
 
@@ -374,14 +372,14 @@ At P = $272.66 (GOOGL regular close 19 Nov 2026), valuation date 19 Nov, T = 3.1
   - K1: Alphabet 24.6 / 25.6 / 26.1% of K1 Base 2027–29 on its own capex path (no conflict with the 11 Nov plateau).
   - E-layer company check: Base CY27 **.848** of consensus ($14.91); .92 of the path by 2030. Cash conversion −.38 / −.20 / .02.
   - K3: the $10bn Anthropic placement is paid (120.48m at $83); Google's note capacity left $10bn to 2030; platform equity funding signpost crossed by Alphabet in Q3.
-- **equity-market-bbb, global-index, dnb-teknologi** (company block; change below the minimum): Base EPS 12.64 / 14.26 / 15.87 / 17.42 (−0.03 a year: the placement's lost interest); Bear 10.44 / 9.80 / 10.98 / 12.31; Bull 13.78 / 16.64 / 18.95 / 21.37. V_T 203.0 / **372.9** / 518.9 (+0.2 / +1.6 / +3.0: the Anthropic and SpaceX marks less the cash paid). D_t: Bear 0.88 a year; Base 0.91 / 0.96 / 1.01; Bull 0.95 / 1.04 / 1.14 (plus 0.22 on 14 Dec). Interim V_t at $272.66: Base 301.7 / 335.8, Bull 367.3 / 437.4, Bear 160.6 / 179.5. Base IRR 10.9% (at the lower price) is above World's 6.6%. DNB Teknologi: Alphabet ~6.8% of the fund `[C]`; the block move is worth < +0.02 pp there.
-- **Portfolio:** no action implied. Alphabet at $272.66 does not beat the HY market reference on E / R (0.139 against 0.254); it would at **$243.0**, and Base meets k at **$264.5**. A watch level, not a recommendation.
+- **equity-market-bbb, global-index, dnb-teknologi** (company block; change below the minimum): EPS as v2.2 (Base 12.64 / 14.26 / 15.87 / 17.42; Bear 10.44 / 9.80 / 10.98 / 12.31; Bull 13.78 / 16.64 / 18.95 / 21.37). V_T 202.4 / **371.6** / 517.0 (−0.6 / −1.3 / −1.9: the SpaceX and Anthropic closes of 20 Nov). D_t as v2.2. Interim V_t at $265.29: Base 295.8 / 331.9, Bull 360.5 / 432.7, Bear 159.9 / 178.9. Base IRR 11.8% is above World's 8.2%. DNB Teknologi: the block move is worth < −0.01 pp.
+- **Portfolio:** no action implied. Alphabet at $265.29 does not beat the HY market reference on E / R (0.161 against 0.254); it would at **$242.2**, and Base meets k at **$263.7**. A watch level, not a recommendation.
 
 ## Change log
 
-- **20 Nov 2026 — v2.2, re-mark after the Anthropic IPO** (iaf-valuation 2026-11-18.1): ANT $97.17 (priced $83 above the range), stakes $211.3bn after tax, $10bn placement paid; GOOGL $272.66 (19 Nov); HY NIBOR window 4.72% and HY Base 7.5% (18 Nov); AI rows E2 / K1 / E-layer at their 11 Nov values. Base 9.1% → **10.9%**, P_k $262.3 → **$264.5**, margin −7.9% → **−3.0%: fails**; Bear −9.9% → −8.7%, Bull 21.1% → 23.3%; E / R 0.103 → 0.139. Step 6b added; compacted 1,101 → 423 lines; model script saved (`googl_remark.py`, reproduces 7 Nov).
-- **11 Nov 2026 — kept unchanged:** Anthropic S-1/A range $70–78; the stake at the range was about the $128.2bn carrying value (−0.07 to 0.00 pp).
-- **7 Nov 2026 — v2.1, re-mark at the 6 Nov close with the Q3 10-Q:** net cash $48.6bn (derived $45.0bn), stakes at the 10-Q values; Base 9.6% → 9.1%, P_k $262.3, margin −7.9%, fails.
+- **20 Nov 2026 — v2.3, re-mark at the 20 Nov close** (iaf-valuation 2026-11-18.1; `googl_n20.py` on `googl_remark.py`): GOOGL $272.66 → $265.29 (−2.7%, AI sell-off); SPCX $138.43 → $127.79, ANT $97.17 → $88.91 (stakes $211.3bn → $195.0bn after tax). Base 10.9% → **11.8%**, P_k $264.5 → **$263.7**, margin −3.0% → **−0.6%: fails → marginal**; Bear −8.0%, Bull 24.2%; E / R 0.139 → 0.161.
+- **20 Nov 2026 — v2.2, re-mark after the Anthropic IPO:** ANT $97.17, $10bn placement paid; GOOGL $272.66; HY NIBOR 4.72%. Base 9.1% → 10.9%, P_k $264.5, −3.0%: fails. Step 6b; compacted 1,101 → 423 lines; `googl_remark.py`.
+- **7 Nov 2026 — v2.1, re-mark at the 6 Nov close with the Q3 10-Q:** net cash $48.6bn, stakes at the 10-Q values; Base 9.1%, P_k $262.3, −7.9%, fails.
 
 ## Appendix: own assumptions `[A]`
 
@@ -396,7 +394,7 @@ At P = $272.66 (GOOGL regular close 19 Nov 2026), valuation date 19 Nov, T = 3.1
 | Capex $bn 2027–29 / D&A | 255 / 200 / 200; 51 / 70 / 82 | 275 / 300 / 305; 52 / 75 / 95 | 310 / 370 / 400; 54 / 82 / 108 | K1 path; capex lives ~6–8 years |
 | SBC / withholding $bn a year | 33–35 / 16 | 34–40 / 24 | 35–43 / 30 | Q3 SBC $8.6bn |
 | Net new shares a year / buybacks / ATM | 110m / none / none | same | same | Q3 +28m ex the ATM |
-| Equity stakes at exit (21% tax on gains over ~$43bn cost) | −50% (from end-2027) | flat at the 19 Nov marks | +50% | ANT $97.17 × 1,775.0m; SPCX $138.43 × 555.0m; other $6.7bn: $256.0bn pre-tax, $211.3bn after tax |
+| Equity stakes at exit (21% tax on gains over ~$43bn cost) | −50% (from end-2027) | flat at the 20 Nov marks | +50% | ANT $88.91 × 1,775.0m; SPCX $127.79 × 555.0m; other $6.7bn: $235.4bn pre-tax, $195.0bn after tax |
 | Anthropic placement | $10.0bn cash → 120.48m shares at $83 on 20 Nov; lost interest ~$0.33bn a year after tax | same | same | 424B4 `[F]` via anthropic v1.1 |
 | Dividend growth (each April) | 0% | 5% | 10% | +5% in April 2026 |
 | Exit P/E (2030 core EPS) | 16 (from end-2027) | 21 | 24 | 5-year range 15.6–31.7, median 20.8 |
@@ -412,12 +410,12 @@ At P = $272.66 (GOOGL regular close 19 Nov 2026), valuation date 19 Nov, T = 3.1
 | S3 | [Alphabet 13F-HR, 30 Sep 2026](https://www.sec.gov/Archives/edgar/data/1652044/000165204426000086/information_table.xml) | SpaceX 555,043,560 shares `[F]` | Filed 6 Nov 2026 |
 | S4 | SEC EDGAR submissions CIK 1652044 (read 20 Nov 08:40 UTC): [8-K 5 Nov](https://www.sec.gov/Archives/edgar/data/1652044/000119312526449835/d174184d8k.htm) (€6bn notes); [424B5 19 Nov](https://www.sec.gov/Archives/edgar/data/1652044/000119312526467927/d115240d424b5.htm) (C$ notes, size blank); Form 4s 16 Nov; Form 144s 12 Nov | Funding and insider filings `[F]` | 5–19 Nov 2026 |
 | S5 | Anthropic S-1 (26 Oct), [S-1/A no. 2](https://www.sec.gov/Archives/edgar/data/2130357/000162828026072484/anthropicpbc-sx1ax2.htm) (10 Nov); 424B4 (18 Nov) via `docs/anthropic-analysis.md` v1.1 | Google NPA and placement, Google's 1,654.5m Class N, commitment ≥ $121.3bn; IPO $83, upsized deal, Alphabet 1,775.0m after the deal `[F]`/`[C]` | 26 Oct–20 Nov 2026 |
-| S6 | Yahoo `get_quote` (GOOGL, GOOG, ANT, SPCX, `NOK=X`), `get_chart` (GOOGL daily 9–19 Nov; `NOK=X` 15-min 19 Nov), `quote_summary` (earningsTrend, financialData, calendarEvents) | GOOGL $272.66, GOOG $271.02, ANT $97.17, SPCX $138.43 (19 Nov closes); USD/NOK 9.7668 (21:00 UTC bar); CY27 EPS $14.91 (51), revenue $636.4bn (50), Q4 $3.19 (40); target mean $400.1 (53); ex-dividend 7 Dec, pay 14 Dec `[F]` | Read 20 Nov 2026 ~07:40 UTC |
-| S7 | Norges Bank `EXR` USD fixing 16–19 Nov | 19 Nov 9.6866 `[F]` | 19 Nov 2026 |
+| S6 | Yahoo `get_quote`, `get_chart` (GOOGL, ANT, SPCX), `quote_summary` (earningsTrend, financialData, calendarEvents) | GOOGL $265.29, ANT $88.91, SPCX $127.79 (20 Nov closes; 19 Nov $272.66 / $97.17 / $138.43); CY27 EPS $14.91 (51), Q4 $3.19 (40); target mean $400.1 (53); ex-dividend 7 Dec, pay 14 Dec `[F]` | 20 Nov 2026 |
+| S7 | Norges Bank `EXR` USD fixing | 20 Nov 9.7525 `[F]` | 20 Nov 2026 |
 | S8 | Zacks: Earnings Trends (18 Nov 2026 18:51 ET); [RDDT vs GOOGL](https://www.zacks.com/stock/news/3031261/rddt-vs.-googl:-which-digital-advertising-stock-has-an-edge-right-now?utm_source=zacks_mcp) (17 Nov 10:15 ET); research report 28 Sep `[C]` | AI-basket sentiment and NVIDIA; Zacks Rank #3; 5-year P/E 15.6–31.7, median 20.8 `[E]` | 17–18 Nov 2026 |
 | S9 | Q3 call: Investing.com transcript; MarketBeat via Yahoo | Capex guide, backlog $561bn, TPU ramp 2027, Q4 headwinds `[E]` | 28 Oct 2026 |
 | S10 | Earlier `[C]`: Q1/Q2 2026 releases and Q2 10-Q; June equity raise; Anthropic Series H; Waymo round; ad-tech remedies; investinglive and CNBC consensus (28 Oct) | Carried context | Feb–Oct 2026 |
-| S11 | `docs/ai-market-bbb.md` (18 Nov, note 19 Nov), `docs/equity-market-bbb.md` (18 Nov note, values 6 Nov), `docs/hy-market-bbb.md` (18 Nov), `docs/anthropic-analysis.md` v1.1 (20 Nov) | Interface sections and latest change-log entries | 18–20 Nov 2026 |
+| S11 | `docs/ai-market-bbb.md` (18 Nov; notes 19 and 20 Nov), `docs/equity-market-bbb.md` (20 Nov note), `docs/hy-market-bbb.md` (18 Nov), `docs/anthropic-analysis.md` v1.1 (20 Nov) | Interface sections and latest change-log entries | 18–20 Nov 2026 |
 
 - **Not found / unverified `[?]`:** Anthropic's carrying value on its own (the $128.2bn bucket is treated as all Anthropic; any other private holding in it is dropped, conservative); Q4-to-date ATM sales; the C$ notes size; the Anthropic closing 8-K (due ~25 Nov).
-- **Quality notes:** Yahoo's CY26 consensus ($19.56) includes the Q1–Q2 equity gains; core CY26 is $11.35. The decision price is the regular close (ANT fell 4.7% after hours to $92.60: −0.05 pp here). Operating sensitivities carry the 7 Nov V_T changes (±0.1 pp); the v2 segment model is rebuilt at the Q4 report.
+- **Quality notes:** Yahoo's CY26 consensus ($19.56) includes the Q1–Q2 equity gains; core CY26 is $11.35. The decision price is the regular close. Operating sensitivities carry the 7 Nov V_T changes (±0.1 pp); the v2 segment model is rebuilt at the Q4 report.
