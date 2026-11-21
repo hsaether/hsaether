@@ -48,7 +48,7 @@ Kept by the `update-chain` skill; checked by
 | defense | docs/defense-market-bbb.md | defense-market-bbb | market | 2026-10-31 | 2026-10-07 | all | 2027-01-04 | 2026-10-10.1 | **HOLD (user): no update until the user lifts it.** Initial baseline |
 | hy-issuers | docs/hy-issuers.md | hy-market-bbb | book | 2026-11-19 | 2026-11-19 | none | 2026-12-05 | 2026-11-18.2 | 19 Nov full refresh and compaction (990 → 670 lines): Intrum 8.5% 2030 → 68.0 and 7.75% 2028 → ~84.3 (tender 10 Nov); Borr Q3 and Hofseth Q3 read, statuses kept; Stamdata screen 14 Oct–19 Nov. Named 2027 Base HH 2.17, HH+ 2.07, SIS 1.11 (+0.01–0.02 pp; not material for the fund verdicts). Next price round: November fund reports (~4 Dec) |
 | hy-funds | docs/hy-funds-analysis.md | hy-market-bbb | book | 2026-11-09 | 2026-11-09 | none | 2026-12-05 | 2026-11-08.1 | 9 Nov full re-run on the October reports and 5 Nov HY BBB: all five Attractive; E / R FFK 0.520, FF 0.491, HH+ 0.422, SIS 0.343, HH N 0.340 (134% of 0.254; rests on the NOK report yield, 0.267 on the box yield); 6 Nov Marginal reading withdrawn; oil follow-up pending; Arctic Return L rerun (October report): E / R 0.119 → 0.109, 43% of 0.254, not graded |
-| dof | docs/DOF-analysis.md | iaf-valuation | company | 2026-11-18 | 2026-11-16 | none | 2026-12-18 | 2026-11-18.1 | 18 Nov leading-view update (iaf 2026-11-18.1, Step 6b): Base 12.8%, P_k NOK 130.6 at NOK 128.30 / USD/NOK 9.705, margin +1.8% (marginal, top of band); AHTS turn call −0.04 pp; Skandi Seven/Africa firm +0.24 pp; krone +0.3 pp. Price vs our call: with the market, leaning ahead (holder buying, two Very Large awards) |
+| dof | docs/DOF-analysis.md | iaf-valuation | company | 2026-11-21 | 2026-11-21 | none | 2026-12-18 | 2026-11-18.1 | 18 Nov leading-view update (iaf 2026-11-18.1, Step 6b): Base 12.8%, P_k NOK 130.6 at NOK 128.30 / USD/NOK 9.705, margin +1.8% (marginal, top of band); AHTS turn call −0.04 pp; Skandi Seven/Africa firm +0.24 pp; krone +0.3 pp. Price vs our call: with the market, leaning ahead (holder buying, two Very Large awards) |
 | plsv | docs/PLSV-analysis.md | - | static | - | - | - | - | - | No longer tracked (user, 25 Oct 2026). Last version 19 Oct; kept as a source (Fontis seller credit, Seagems fleet data cited by borr, rig and supply) |
 | sed | docs/SED-analysis.md | iaf-valuation | company | 2026-11-04 | 2026-10-18 | all | 2026-11-28 | 2026-11-01.1 | 27 Oct news update: T-16 award (Base 8.3% → 6.7%, still fails). 19 Nov: stale date moved to 28 Nov (Q3 report 27 Nov per the company calendar; no run before it) |
 | borr | docs/borr-analysis.md | iaf-valuation | company | 2026-11-07 | 2026-11-07 | all | 2026-11-18 | 2026-11-01.1 | **HOLD (user, 7 Nov): only on request. Not interesting as an equity; its value is the credit read for the Borr bonds in hy-issuers.** v3 24 Oct: Base unchanged (no equity value), Bull 8.3% → 11.2%; Q3 date not announced (4–18 Nov expected) |
@@ -120,9 +120,9 @@ Kept by the `update-chain` skill; checked by
 | hy-funds | hy | 2026-11-05 | main | Market paths, NIBOR, reference E / R |
 | hy-funds | hy-issuers | 2026-11-09 | main | Named bond losses per fund |
 | hy-funds | scatec | 2026-10-30 | loop | Scatec bond holdings (Sissener Corporate Bond, Fondsfinans High Yield): issuer credit check (Bear corporate NIBD, 2028 refinancing); not yet read |
-| dof | supply | 2026-11-18 | main | NS and Brazil rows, anchors, economic life |
-| dof | equity | 2026-11-06 | main | Exit cross-check, NOK path |
-| dof | hy | 2026-11-11 | main | Bear HY spread (2030 refinancing) |
+| dof | supply | 2026-11-21 | main | NS and Brazil rows, anchors, economic life |
+| dof | equity | 2026-11-20 | main | Exit cross-check, NOK path |
+| dof | hy | 2026-11-18 | main | Bear HY spread (2030 refinancing) |
 | sed | rig | 2026-11-04 | main | Tender-assist row, rig values |
 | sed | oil | 2026-10-24 | main | Background |
 | sed | equity | 2026-10-18 | main | Exit cross-check, NOK path |
@@ -414,7 +414,7 @@ it to `open`.
 | 2026-12-31 | yes | Hofseth: first test of the 27.5% value-adjusted equity ratio covenant (EUR 300m bond); breach likely without the NOK 600m equity raise `[E]` | hy-issuers, hy-funds | open |
 | 2026-12-31 | approx | Deepsea Nordkapp 2028 rate set by two independent brokers (Aker BP; by end-2026): NCS HE market print for 2028 | odl, rig | open |
 | 2026-11-12 | yes | ODL Q3 dividend USD 0.27 goes ex (paid 25 Nov) | odl | done |
-| 2026-11-20 | yes | DOF Q3 dividend USD 0.40 goes ex (paid 30 Nov; Q3 report 12 Nov, daily news 12 Nov) | dof | open |
+| 2026-11-20 | yes | DOF Q3 dividend USD 0.40 goes ex (paid 30 Nov; Q3 report 12 Nov, daily news 12 Nov) | dof | done |
 | 2026-11-26 | yes | SSB Q3 national accounts (Norway mainland GDP) | hy | open |
 | 2026-11-30 | yes | Dooba and Point Properties deadlines | hy-issuers, hy | open |
 | 2026-11-30 | approx | MSCI November month-end fundamentals: MSCI Norway P/BV against the 2.5 warning (2.46 on 30 Oct), MSCI World forward P/E | equity | watch |
@@ -485,6 +485,7 @@ it to `open`.
 | 2027-02-26 | approx | Hafnia Q4 2026 report (date not announced) | hafnia | open |
 | 2027-01-31 | approx | Equinor AHTS term award, reversal deadline of the supply AHTS turn call: an award of ≥ 2 vessels by 31 Jan restores NS AHTS Base 2027 £60k (now £52k); none announced by 21 Nov (supply 21 Nov) | supply, dof | open |
 | 2027-02-26 | approx | Subsea7 Q4 2026 report (late Feb, date not announced): NS CSV watch-call signpost (book-to-bill < 0.8 again, after 0.5 in Q3, or idle newbuild CSVs → cut); Q3: utilisation 84%, backlog $12.5bn, 2027 ~$8bn guide (supply 21 Nov) | supply | open |
+| 2026-11-20 | yes | DOF ownership: A.P. Møller Maritime buys a further 1.2m shares (19 Nov, NOK 129.06) and 0.65m (20 Nov, NOK 123.38); 2.8m over 18–20 Nov (~1.1%, NOK 357m) (insider notices). Signal, not a value input; read in dof 21 Nov | dof | done |
 
 ## Change log
 

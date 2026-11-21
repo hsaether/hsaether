@@ -113,7 +113,8 @@ def run(inp, scen, structural=False, overrides=None):
     # 2027 leverage cap check (annual): reduce Q4-27 declared if needed (simple)
     eb27 = sum(eb[p] for p in ["Q1-27", "Q2-27", "Q3-27", "Q4-27"])
     # ---------- dividend cash flows to shareholders (per share NOK) ----------
-    divs = [(PAYDATE["Q3-26"], declared["Q3-26"])]
+    # q3_ex (21 Nov 2026): the share trades ex the Q3-26 dividend, so it is not a D_t to a buyer today
+    divs = [] if I.get("q3_ex") else [(PAYDATE["Q3-26"], declared["Q3-26"])]
     divs.append((PAYDATE["Q4-26"], declared["Q4-26"]))
     for q in ["Q1-27", "Q2-27", "Q3-27", "Q4-27"]:
         divs.append((PAYDATE[q], declared[q]))

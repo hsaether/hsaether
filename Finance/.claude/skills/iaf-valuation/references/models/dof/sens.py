@@ -1,12 +1,13 @@
-"""DOF sensitivities, driver breakdown, break-evens. docs/DOF-analysis.md, 18 Nov 2026. Run: py sens.py"""
+"""DOF sensitivities, driver breakdown, break-evens. docs/DOF-analysis.md, 21 Nov 2026 (ex-dividend re-mark). Run: py sens.py"""
 import copy
 from dof_model import *
 from inputs_new import *
 from inputs_1116 import inputs_1116, ahts_delta, Q27, QDAYS
 import inputs_1118 as i18
 from inputs_1118 import inputs_1118, AHTS_1116, AHTS_1118
+from inputs_1121 import inputs_1121
 
-BASE = inputs_1118("all")
+BASE = inputs_1121("all")
 P = BASE["P"]
 
 def res(I, s="Base", **kw):
@@ -63,7 +64,7 @@ I = copy.deepcopy(BASE); I["tax"] = 0.095
 show("Tax payable 9.5% of EBITDA (previous guide) instead of 8.6%", I)
 # FX 9.29
 I = copy.deepcopy(BASE); I["fx"] = 9.2944
-show("USD/NOK 9.29 (Equity BBB spot, 5 Nov) instead of 9.705", I)
+show("USD/NOK 9.29 (Equity BBB spot, 5 Nov) instead of 9.750", I)
 I = copy.deepcopy(BASE); I["fx"] = 9.80
 show("USD/NOK 9.80", I)
 # exit fleet
@@ -170,9 +171,9 @@ for s in ("Bear", "Bull"):
     for lab, (i, pk, vt) in steps:
         print(f"   {lab:40s} IRR {i:6.2f} Pk {pk:6.1f} VT {vt:6.1f}")
 
-print("=== Attribution 16 -> 18 Nov ===")
-for st, lab in ((3, "16 Nov (all)"), (4, "+ re-mark 18 Nov close 128.30 / 9.705"), (5, "+ NS AHTS Base 2027 GBP 60k -> 52k (turn call)"), (6, "+ Skandi Seven / Skandi Africa firm (CSV $70m/yr)")):
-    J = inputs_1118(st)
+print("=== Attribution 16 -> 21 Nov ===")
+for st, lab in ((3, "16 Nov (all)"), (4, "+ re-mark 18 Nov close 128.30 / 9.705"), (5, "+ NS AHTS Base 2027 GBP 60k -> 52k (turn call)"), (6, "+ Skandi Seven / Skandi Africa firm (CSV $70m/yr)"), (7, "+ ex-dividend re-mark 20 Nov close 124.00 / 9.750")):
+    J = inputs_1121(st)
     for s_ in ("Bear", "Base", "Bull"):
         r = run(J, s_)
         print(f"   step {st} {s_:4s} IRR {r['irr']*100:7.3f} Pk {r['Pk']:7.2f} MoS {(r['Pk']/J['P']-1)*100:6.2f}% VT {r['VT_nok']:6.2f}")
@@ -181,9 +182,9 @@ for q, v in BASE["ahts_delta_1118"].items(): J["ebitda"]["Base"][q] -= v
 show("NS AHTS Base 2027 back at GBP 60k (turn call reversed)", J)
 for cf in (35.0, 105.0):
     i18.CSV_FIRM = cf
-    show(f"CSV vessel revenue moved to firm ${cf:.0f}m/yr (Base $70m)", inputs_1118("all"))
+    show(f"CSV vessel revenue moved to firm ${cf:.0f}m/yr (Base $70m)", inputs_1121("all"))
 i18.CSV_FIRM = 70.0
-for fx in (9.55, 9.29, 9.80):
+for fx in (9.705, 9.29, 10.00):
     J = copy.deepcopy(BASE); J["fx"] = fx
     show(f"USD/NOK {fx}", J)
 I = copy.deepcopy(BASE); I["ebitda"]["Base"]["Q4-26"] -= 10

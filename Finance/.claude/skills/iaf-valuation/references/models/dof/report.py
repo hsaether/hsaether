@@ -1,15 +1,17 @@
 """DOF report: period tables, results, NAV_0, V_T bridge, cross-check, year-end path.
-docs/DOF-analysis.md, 18 Nov 2026 (Supply BBB turn call, re-mark, Skandi Seven/Africa). Run: py report.py [step]
+docs/DOF-analysis.md, 21 Nov 2026 (ex-dividend re-mark on the 18 Nov build). Run: py report.py [step]
 (step from inputs_1118: 0 = 12 Nov, 1 = + re-mark 16 Nov, 2 = + AHTS row 16 Nov, 3 = + awarded PLSV as firm (16 Nov),
-4 = + re-mark 18 Nov, 5 = + AHTS turn call 18 Nov, 6/all = + Skandi Seven/Africa firm). Writes results.json.
+4 = + re-mark 18 Nov, 5 = + AHTS turn call 18 Nov, 6 = + Skandi Seven/Africa firm, 7/all = + ex-dividend re-mark 20 Nov).
+Writes results.json.
 """
 import copy, json, sys
 from dof_model import *
 from inputs_new import *
-from inputs_1118 import inputs_1118
+from inputs_1121 import inputs_1121
 
 STEP = sys.argv[1] if len(sys.argv) > 1 else "all"
-I = inputs_1118(STEP if STEP == "all" else int(STEP))
+I = inputs_1121(STEP if STEP == "all" else int(STEP))
+PAY = I.get("div_payable", 0.0)   # Q3 dividend owed to the old holders once the share is ex (NAV_0 deduction)
 FX = I["fx"]; P = I["P"]; V0 = I["val_date"]
 nk = lambda x: x * FX / SH
 R = {s: run(I, s) for s in ("Bear", "Base", "Bull")}
@@ -69,10 +71,10 @@ prem0 = {s: v + I["prem0_add"][s] for s, v in {"Bear": 559.0, "Base": 404.0, "Bu
 fac = I["meta"]["fac"]; fmv = I["meta"]["fmv"]; ip = I["meta"]["impl_price"]
 for s in ("Bear", "Base", "Bull"):
     fleet0 = (fmv - ip) * fac[s] * age0
-    nav0 = fleet0 + ip + prem0[s] + 155 + {"Bear": 270, "Base": 500, "Bull": 800}[s] - I["nibd0"]
+    nav0 = fleet0 + ip + prem0[s] + 155 + {"Bear": 270, "Base": 500, "Bull": 800}[s] - I["nibd0"] - PAY
     mid0[s] = dict(fleet0=fleet0, nav0=nav0, nav0_nok=nk(nav0))
     pr(f"NAV_0 {s}: fleet {fleet0:.0f} NAV {nav0:.0f} NOK {nk(nav0):.1f} P/NAV {P/nk(nav0):.2f}")
-navmkt = (fmv - ip) * age0 + ip + prem0["Base"] + 155 + 500 - I["nibd0"]
+navmkt = (fmv - ip) * age0 + ip + prem0["Base"] + 155 + 500 - I["nibd0"] - PAY
 pr(f"NAV market marks: {navmkt:.0f} NOK {nk(navmkt):.1f} P/NAV {P/nk(navmkt):.2f}; age0 {age0:.4f}")
 for s in ("Bear", "Base", "Bull"):
     r = R[s]
@@ -88,7 +90,7 @@ nb_T = ex["norseman"] + ex["salt"] + ex["rsv"] + ex["rov"]
 vc = nb_T - 155 - out["Base"]["sumG"]
 ageing = ex["fleet"] - mid0["Base"]["fleet0"]
 roll = ex["firm"] - prem0["Base"]
-ret = out["Base"]["sumMF"] - out["Base"]["sumDP"]
+ret = out["Base"]["sumMF"] - (out["Base"]["sumDP"] - PAY)   # the payable is already in NAV_0
 pr("\n=== V_T bridge Base ===")
 mc = P * SH / FX
 for lab, v in (("P", mc), ("rerate", nav0 - mc), ("NAV0", nav0), ("value created", vc), ("ageing", ageing), ("roll-off", roll), ("signed", ex["signed"]), ("tail", ex["tail"]), ("retained", ret)):
