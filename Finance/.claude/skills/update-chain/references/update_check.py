@@ -41,7 +41,8 @@ REGISTER = ROOT / "docs" / "update-register.md"
 SKILLS = ROOT / ".claude" / "skills"
 
 TYPE_RANK = {"market": 0, "book": 1, "company": 2, "fund": 3, "portfolio": 4}
-SIZE_BUDGET = {"market": 800, "book": 800, "company": 450, "fund": 450}   # lines; CLAUDE.md
+SIZE_BUDGET = {"market": 800, "book": 800, "company": 450, "fund": 450}   # lines; target (CLAUDE.md)
+SIZE_CEILING = {"market": 1000, "book": 1000, "company": 560, "fund": 560}   # target + 25%; above it: compact (user, 21 Nov 2026)
 
 try:
     sys.stdout.reconfigure(encoding="utf-8")
@@ -317,16 +318,19 @@ def lint():
     print("C. POSSIBLY STALE LINKS (the register links a document the text never names)")
     print("   none" if not unnamed else "\n".join(f"   - {u}" for u in unnamed))
     print()
-    print("D. OVER THE SIZE BUDGET (CLAUDE.md lean documents; compact at the document's next run)")
-    over = []
+    print("D. SIZE (CLAUDE.md lean documents: a target, up to 25% over with a reason in the status line)")
+    over, soft = [], []
     for i, d in sorted(docs.items()):
-        budget = SIZE_BUDGET.get(d["type"])
+        budget = SIZE_BUDGET.get(d["type"]); ceiling = SIZE_CEILING.get(d["type"])
         path = ROOT / d["file"]
         if budget and path.exists():
             n = len(path.read_text(encoding="utf-8").splitlines())
-            if n > budget:
-                over.append(f"{i:<14} {n:>5} lines (budget {budget})")
-    print("   none" if not over else "\n".join(f"   - {o}" for o in over))
+            if n > ceiling:
+                over.append(f"{i:<14} {n:>5} lines (ceiling {ceiling}; compact at its next run)")
+            elif n > budget:
+                soft.append(f"{i:<14} {n:>5} lines (target {budget}, ceiling {ceiling}; fine if the status line gives the reason)")
+    print("   over the ceiling:" + (" none" if not over else "\n" + "\n".join(f"   - {o}" for o in over)))
+    print("   over the target only:" + (" none" if not soft else "\n" + "\n".join(f"   - {o}" for o in soft)))
     print()
     print("B, C and D are hints, not errors: judge each one. Downstream links (who should read a new")
     print("document) cannot be found this way; see Mode D in the skill.")

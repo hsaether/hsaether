@@ -5,8 +5,13 @@ description: Update Chain — the orchestrator that keeps every document in docs
 
 # Update Chain
 
-**Revision:** 2026-11-12.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-21.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/update-chain/` in the Finance folder.
+
+Change note 2026-11-21.1 (user, 21 Nov 2026): the size budget is a target with a 25% margin
+(company and fund ≤ 560 lines, baseline and book ≤ 1,000) when the status line names the current-state
+reason; above the ceiling, or over the target with no reason, compact at the next run. `lint` part D
+splits the two.
 
 The update chain keeps the documents in `docs/` current and in step with each other. It
 decides **what** to update and **in which order**. Each document is still updated by its own
@@ -18,7 +23,7 @@ and never changes another skill's method.
 | File | Role |
 |---|---|
 | `docs/update-register.md` | The bookkeeping. **Documents**: id, file, skill, type, as of, last change, stale after, revision used. **Inputs**: which document reads which, and the version it read (`main` or `loop`). **Events**: planned events with the documents they affect |
-| `references/update_check.py` | The check. Reads the register and the `**Revision:**` line in each skill. Never guesses a date from a document's text. `lint` also flags documents over the size budget (CLAUDE.md) |
+| `references/update_check.py` | The check. Reads the register and the `**Revision:**` line in each skill. Never guesses a date from a document's text. `lint` also shows documents over the size target (hint) and over the ceiling of target + 25% (compact; CLAUDE.md) |
 | `docs/log/register-log.md` | The register's change log (moved out of the register on 12 Nov 2026 to keep the register lean). New entries go at the end |
 | `docs/weekly-update.md` | The run reports. Keep the last 14 days; move older entries to `docs/log/weekly-update-YYYY-MM.md` at the weekly run |
 
@@ -148,7 +153,8 @@ Work through list 1 **one document at a time, in the script's order**. For each 
      one, its "for downstream" section) and its latest change-log entry, going deeper only for a
      value it needs. Never "read the whole document";
    - the lean-document rules in CLAUDE.md: current state only, change log of the last 3 versions,
-     the size budget, and compacting the document at this run if it is over budget;
+     the size budget (a target with up to 25% margin when the status line gives the reason), and
+     compacting the document at this run if it is over the ceiling or over the target with no reason;
    - for each passed event: what it is, and that the subagent must find its outcome;
    - the **change gate**: first decide whether the change touches values this document reads. If
      it does not, follow the skill's own minimum-change rule: write a short dated note in the
