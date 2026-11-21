@@ -28,7 +28,8 @@ Skill revisions: `update-chain` 2026-11-12.2; `supply-market-bbb` 2026-11-18.1; 
 
 ### Progress
 
-- `supply`, `global-index`: running.
+- **`supply`, done, kept** (recorded, stale after 12 Dec; commit a14127f). Equinor AHTS term tender: no award by 21 Nov, so the AHTS turn call (Base 2027 £52k) holds; reversal deadline 31 Jan. Subsea7 Q3: utilisation 84% (Q2 85%), book-to-bill 0.5, backlog $12.5bn, 2027 guide ~$8bn; NS CSV watch call kept flat. Events added: AHTS reversal deadline (31 Jan), Subsea7 Q4 (~26 Feb).
+- `global-index`: running. `dof`: running (ex-dividend re-mark on the unchanged supply rows).
 
 ## Daily news — Friday 20 Nov 2026
 
