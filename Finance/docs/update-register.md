@@ -53,7 +53,7 @@ Kept by the `update-chain` skill; checked by
 | sed | docs/SED-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-10-18 | none | 2026-11-28 | 2026-11-18.1 | 21 Nov: Step 6b added on the 27 Oct build (decision table kept: Base 6.7%, fails at NOK 6.80); memo re-mark at NOK 6.19 / USD/NOK 9.75: Base 13.3%, P_k 6.36, +2.8%; price implies marks 0.955× Base; verdict line ahead (positive). Q2 distribution ex 7 Dec. Full re-run and compaction (834 lines) at Q3, 27 Nov |
 | borr | docs/borr-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2027-02-18 | 2026-11-18.1 | **HOLD (user, 7 Nov): only on request. Not interesting as an equity; its value is the credit read for the Borr bonds in hy-issuers.** v4 21 Nov (on request): Q3, insurance $200m to debt, four awards; Base still zero (exit equity −$354m; no funding gap in the window), Bull 22.3% (P_k $4.49) at $3.41; break-even mid-cycle ~$135k; Step 6b; compacted 724 → 246 lines; `borr/v4.py` |
 | odl | docs/odl-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | none | 2026-12-13 | 2026-11-12.1 | v2.1 13 Nov (ex-dividend re-mark, compacted 721 → 450 lines): Base 8.1% → 9.0%, P_k $9.97 (NOK 95.5) vs $10.74 (NOK 102.80), margin −7%, fails; Deepsea Bergen contract signed 10 Nov (already firm in the model) |
-| scatec | docs/scatec-analysis.md | iaf-valuation | company | 2026-10-30 | 2026-10-30 | all | 2027-02-28 | 2026-10-29.1 | v2 30 Oct after Q3: clears (Base IRR 16.4%, P_k NOK 95.5 vs 84.65, +13%); Bear −17.9%, Bear corp. NIBD NOK 8.5bn by 2029; Q4 report 29 Jan 2027 |
+| scatec | docs/scatec-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2027-02-28 | 2026-11-18.1 | v2.1 21 Nov: re-mark at NOK 82.40 and 20 Nov FX (basket ×1.048) on the v2 build: clears, Base 16.4% → 19.5%, P_k NOK 100.8, +22.3%; Bear −16.2%, Bull 37.5%; price implies Philippines ~NOK 320m; Step 6b (ahead, positive); compacted 727 → lean; `scatec/v21.py`. Next: Q4 report 29 Jan 2027 |
 | capt | docs/capt-analysis.md | iaf-valuation | company | 2026-11-08 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 9 Nov): only on request. Position sold. 8 Nov news note: Amor 15-month TC (~$160–180k/day, $73.1–82.2m), ~+$14m in Base (+NOK 1/share), not modelled, verdict unchanged (fails); model on the 24 Oct inputs |
 | hafnia | docs/hafnia-analysis.md | iaf-valuation | company | 2026-11-18 | 2026-11-18 | none | 2026-12-04 | 2026-11-12.1 | v6 exit check on the v5 model of 17 Oct |
 | kog | docs/kongsberg-analysis.md | iaf-valuation | company | 2026-10-29 | 2026-10-29 | all | 2026-11-28 | 2026-10-18.2 | **HOLD (user): no update until the user lifts it.** Version 2 (29 Oct, Q3 report, method 2026-10-18.2): Base −19.9% → −16.2%, fails; record backlog NOK 174bn |
@@ -132,8 +132,8 @@ Kept by the `update-chain` skill; checked by
 | odl | rig | 2026-11-12 | main | HE semis (NCS) row: rates, MCU, mid-cycle, asset convention, fixtures |
 | odl | oil | 2026-11-11 | main | Background via rig scenarios |
 | odl | equity | 2026-11-06 | main | Exit cross-check, NOK path |
-| scatec | equity | 2026-10-18 | main | Exit cross-check, NOK path |
-| scatec | hy | 2026-10-24 | main | Bear refinancing spread (corporate bonds from 2028) |
+| scatec | equity | 2026-11-20 | main | Exit cross-check, NOK path |
+| scatec | hy | 2026-11-18 | main | Bear refinancing spread (corporate bonds from 2028) |
 | capt | shipping | 2026-10-24 | main | VLCC, Suezmax and Aframax/LR2 rows, stub, values (open days are Suezmax and Aframax/LR2; VLCCs on TC) |
 | capt | oil | 2026-10-24 | main | Background |
 | capt | equity | 2026-10-18 | main | Exit cross-check, NOK path |
