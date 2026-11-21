@@ -7,7 +7,7 @@ and the daily company news search on weekdays (Mode F). Newest entry first. The 
 ## Week 47 — Saturday 21 Nov 2026 (scheduled run)
 
 Skill revisions: `update-chain` 2026-11-12.2; `supply-market-bbb` 2026-11-18.1; `iaf-valuation` 2026-11-18.1.
-*In progress — this entry is written as the run goes.*
+*Run complete. After the three runs the check shows list 1 empty; there were no loop checks.*
 
 ### Check (21 Nov)
 
@@ -30,7 +30,44 @@ Skill revisions: `update-chain` 2026-11-12.2; `supply-market-bbb` 2026-11-18.1; 
 
 - **`supply`, done, kept** (recorded, stale after 12 Dec; commit a14127f). Equinor AHTS term tender: no award by 21 Nov, so the AHTS turn call (Base 2027 £52k) holds; reversal deadline 31 Jan. Subsea7 Q3: utilisation 84% (Q2 85%), book-to-bill 0.5, backlog $12.5bn, 2027 guide ~$8bn; NS CSV watch call kept flat. Events added: AHTS reversal deadline (31 Jan), Subsea7 Q4 (~26 Feb).
 - **`dof`, done, changed yes, flipped marginal → clears** (recorded, stale after 18 Dec; commit abc1edd). Ex-dividend re-mark at NOK 124.00 (20 Nov) / USD/NOK 9.750: Base 12.8% → 13.1%, P_k NOK 127.4, margin +1.8% → +2.7% (bottom of the clears band; fails above NOK 130.0). No sector row moved; the krone +0.20 pp, the close below the dividend-adjusted price +0.15 pp. A.P. Møller Maritime bought 1.85m more shares 19–20 Nov (2.8m over 18–20 Nov, ~1.1%).
-- `global-index`: running.
+- **`global-index`, done, changed yes, still fails** (recorded, stale after 6 Dec; commit 68489c1). v7, DNB Global Indeks A only (Nordnet Global Indeks dropped, user 1 Nov), NAV 835.76 (19 Nov): Base after cost 4.58% → 6.66%, P_k NAV 703 → 723, margin −19.0% → −13.5%, E / R 0.008 → 0.081. Compacted 808 → 405 lines. Register: inputs amzn and mu added.
+
+### Summary
+
+- **`dof` flipped to clears:** Base 13.1%, margin +2.7%. The cause is the ex-dividend price and the krone; no sector row moved.
+- **`global-index` still fails** but is nearer: 6.66%, −13.5%. On the indicative 20 Nov NAV of ≈ 812.5 the margin is −10.6% and the pre-alert at NAV 830 is crossed.
+- **Supply BBB kept unchanged:** no Equinor AHTS award, and Subsea7's Q3 is steady. No Base path moved.
+
+### Updated
+
+| Document | Changed or kept | What moved | Stale after |
+|---|---|---|---|
+| `supply` | kept | Nothing; turn-call families and signposts re-read (Equinor tender, Subsea7 Q3) | 12 Dec |
+| `dof` | changed | Base 12.8% → 13.1%; P_k NOK 130.6 → 127.4 at NOK 124.00; margin +1.8% → +2.7%; **marginal → clears** | 18 Dec |
+| `global-index` | changed | Base 4.58% → 6.66%; P_k 703 → 723; margin −19.0% → −13.5%; fails; E / R 0.008 → 0.081 | 6 Dec |
+
+### Needs you
+
+- `dof` (a holding) **flipped from marginal to clears**, at the bottom of the band. It fails again above NOK 130.0.
+- `global-index`: the pre-alert (NAV 830) is likely crossed on the 20 Nov NAV, which is due about 23 Nov (watch event added).
+- A register row from another session, "User request (21 Nov): re-mark SK hynix and Samsung at the 23 Nov Seoul close", was in the working copy. It was committed with the supply record (a14127f); Monday's daily run picks it up.
+- Not obtained: the Petrobras PSV 4500 / 3000 bid ranking (not public), the November North Sea spot print, and Nordnet's "Total pris" for the fund cost (0.25% carried).
+- Flags only, no action asked: the Equity BBB `world3.py` lacks the GOOGL v2.3 and NVIDIA v2.0 interim values (Base −0.03 pp). The AI BBB E-rest row's Bear exit P/E of 17 sits above where Meta and Oracle trade.
+
+### Left for next run
+
+- `kospi`: deferred to its own update on 30 Nov (smsn, skh and ai changes waiting).
+- `oil`: stale after 30 Nov; OPEC+ on 29 Nov with 2027 quotas, then its downstream as the change gate flags.
+- `sed`: Q3 on 27 Nov, in the daily run.
+- On hold (user): `defense` (5 causes waiting), `rhm` (3), `borr` (1), `capt`, `kog`, `shb`.
+
+### Events in the next 14 days
+
+- 23 Nov: DNB Global Indeks A NAV of 20 Nov (pre-alert test); skh and smsn re-mark at the Seoul close (user request).
+- 25 Nov: Trustly Q3; Norse Atlantic Q3 (approx.); NVIDIA 10-Q; Anthropic closing 8-K; Hafnia dividend form; Petrobras PSV 3000 bareboat bids.
+- 26 Nov: SSB Q3 national accounts. 27 Nov: SED Q3; German 2027 budget (on hold); Petrobras plan 2027–31 (approx.); Westwood rig dashboard; Frontline Q3.
+- 29 Nov: OPEC+ (2027 quotas). 30 Nov: CAPT Q3 (on hold); MSCI review effective; SK hynix dividend record; DRAM/NAND contract prints; Dooba and Point deadlines; DOF dividend paid.
+- 1 Dec: Transocean–Valaris closing; Booster standstill ends; GPU rental indices. ~4 Dec: November *Seabreeze* (AHTS and PSV Q4 test); Heimdal November reports; Polish budget vote.
 
 ## Daily news — Friday 20 Nov 2026
 
