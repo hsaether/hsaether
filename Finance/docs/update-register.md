@@ -75,6 +75,7 @@ Kept by the `update-chain` skill; checked by
 | dnbtek | docs/dnb-teknologi-analysis.md | iaf-valuation | fund | 2026-11-20 | 2026-11-20 | none | 2026-12-15 | 2026-11-18.1 | v9 19 Nov (NAV 17 Nov 7,282.87; NVIDIA v1.8, SK hynix v4 and Samsung v4 on the 18 Nov H2 path, AI BBB 18 Nov H1, market NIBOR): Base 10.3%, P_k 6,950, −4.6%, fails; E / R 0.158; Bear 2027 −23.4%. Model v9 (fundmodel.py; data v9) |
 | iaf-notes | docs/iaf-reference-notes.md | - | static | - | - | - | - | - | Background, not updated |
 | review-2029 | docs/review-2029-step-down.md | - | static | - | - | - | - | - | Review, not updated |
+| overview | docs/company-overview.md | - | static | - | - | - | - | - | Index: one row of key figures per company and fund; each company or fund run updates its own row when it records (CLAUDE.md, 21 Nov 2026); not a cascade target |
 | review-equity | docs/review-equity-market-bbb.md | - | static | - | - | - | - | - | Review, not updated |
 | review-hy | docs/review-hy-funds-and-defaults.md | - | static | - | - | - | - | - | Review, not updated |
 | review-iaf-exit | docs/review-iaf-exit.md | - | static | - | - | - | - | - | Review, not updated |

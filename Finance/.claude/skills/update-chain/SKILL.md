@@ -5,7 +5,7 @@ description: Update Chain — the orchestrator that keeps every document in docs
 
 # Update Chain
 
-**Revision:** 2026-11-21.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-21.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/update-chain/` in the Finance folder.
 
 Change note 2026-11-21.1 (user, 21 Nov 2026): the size budget is a target with a 25% margin
@@ -40,6 +40,9 @@ py .claude/skills/update-chain/references/update_check.py record <id> --as-of YY
 ```bash
 py .claude/skills/update-chain/references/update_check.py event-done "<event text>"
 ```
+
+After `record` for a `company` or `fund` document, update its row in `docs/company-overview.md`
+(CLAUDE.md, 2026-11-21.2): one whole-line edit, no register entry and no cascade.
 
 ```bash
 py .claude/skills/update-chain/references/update_check.py lint

@@ -8,7 +8,7 @@ Git provides history.
 | Path | Content |
 |---|---|
 | `.claude/skills/<name>/SKILL.md` | Skill masters (plus `references/`). Loaded automatically by Claude Code |
-| `docs/` | All outputs: market baselines and company analyses (one running file each) |
+| `docs/` | All outputs: market baselines and company analyses (one running file each); `docs/company-overview.md` is the one-table index of every company and fund |
 
 Skills and the chain between them:
 
@@ -91,6 +91,10 @@ Skills and the chain between them:
   downstream documents for which it moved materially (trigger rule in the `update-chain` skill;
   a price-only re-mark is `none`). A note starting `HOLD (user` keeps a document out of runs. Add the new dated events (report
   dates, decisions) to the register's Events table.
+- **Company overview (user, 21 Nov 2026):** after recording a company or fund analysis, update its
+  row in `docs/company-overview.md` (version and date, price at analysis, latest close, Base IRR,
+  P_k, margin at close, verdict, Bear / Bull IRR, next event) and its "As of" date. One whole-line
+  edit; the overview is an index, not a register document, so it triggers no cascade.
 - The register is part of delivering a document, so do it without being asked. A **new or retired
   document** follows Mode D of the `update-chain` skill step by step:
   - its own inputs;
