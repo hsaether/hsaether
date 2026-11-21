@@ -29,7 +29,8 @@ Skill revisions: `update-chain` 2026-11-12.2; `supply-market-bbb` 2026-11-18.1; 
 ### Progress
 
 - **`supply`, done, kept** (recorded, stale after 12 Dec; commit a14127f). Equinor AHTS term tender: no award by 21 Nov, so the AHTS turn call (Base 2027 £52k) holds; reversal deadline 31 Jan. Subsea7 Q3: utilisation 84% (Q2 85%), book-to-bill 0.5, backlog $12.5bn, 2027 guide ~$8bn; NS CSV watch call kept flat. Events added: AHTS reversal deadline (31 Jan), Subsea7 Q4 (~26 Feb).
-- `global-index`: running. `dof`: running (ex-dividend re-mark on the unchanged supply rows).
+- **`dof`, done, changed yes, flipped marginal → clears** (recorded, stale after 18 Dec; commit abc1edd). Ex-dividend re-mark at NOK 124.00 (20 Nov) / USD/NOK 9.750: Base 12.8% → 13.1%, P_k NOK 127.4, margin +1.8% → +2.7% (bottom of the clears band; fails above NOK 130.0). No sector row moved; the krone +0.20 pp, the close below the dividend-adjusted price +0.15 pp. A.P. Møller Maritime bought 1.85m more shares 19–20 Nov (2.8m over 18–20 Nov, ~1.1%).
+- `global-index`: running.
 
 ## Daily news — Friday 20 Nov 2026
 
