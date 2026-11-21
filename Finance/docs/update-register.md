@@ -51,7 +51,7 @@ Kept by the `update-chain` skill; checked by
 | dof | docs/DOF-analysis.md | iaf-valuation | company | 2026-11-21 | 2026-11-21 | none | 2026-12-18 | 2026-11-18.1 | v 21 Nov ex-dividend re-mark: Base 13.1%, P_k NOK 127.4 at NOK 124.00 / USD/NOK 9.750, margin +2.7%, clears (bottom of band; flipped from marginal); fails above NOK 130.0. Price vs our call: with the market, leaning ahead (A.P. Møller buying 2.8m shares 18–20 Nov) |
 | plsv | docs/PLSV-analysis.md | - | static | - | - | - | - | - | No longer tracked (user, 25 Oct 2026). Last version 19 Oct; kept as a source (Fontis seller credit, Seagems fleet data cited by borr, rig and supply) |
 | sed | docs/SED-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-10-18 | none | 2026-11-28 | 2026-11-18.1 | 21 Nov: Step 6b added on the 27 Oct build (decision table kept: Base 6.7%, fails at NOK 6.80); memo re-mark at NOK 6.19 / USD/NOK 9.75: Base 13.3%, P_k 6.36, +2.8%; price implies marks 0.955× Base; verdict line ahead (positive). Q2 distribution ex 7 Dec. Full re-run and compaction (834 lines) at Q3, 27 Nov |
-| borr | docs/borr-analysis.md | iaf-valuation | company | 2026-11-07 | 2026-11-07 | all | 2026-11-18 | 2026-11-01.1 | **HOLD (user, 7 Nov): only on request. Not interesting as an equity; its value is the credit read for the Borr bonds in hy-issuers.** v3 24 Oct: Base unchanged (no equity value), Bull 8.3% → 11.2%; Q3 date not announced (4–18 Nov expected) |
+| borr | docs/borr-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2027-02-18 | 2026-11-18.1 | **HOLD (user, 7 Nov): only on request. Not interesting as an equity; its value is the credit read for the Borr bonds in hy-issuers.** v4 21 Nov (on request): Q3, insurance $200m to debt, four awards; Base still zero (exit equity −$354m; no funding gap in the window), Bull 22.3% (P_k $4.49) at $3.41; break-even mid-cycle ~$135k; Step 6b; compacted 724 → 246 lines; `borr/v4.py` |
 | odl | docs/odl-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | none | 2026-12-13 | 2026-11-12.1 | v2.1 13 Nov (ex-dividend re-mark, compacted 721 → 450 lines): Base 8.1% → 9.0%, P_k $9.97 (NOK 95.5) vs $10.74 (NOK 102.80), margin −7%, fails; Deepsea Bergen contract signed 10 Nov (already firm in the model) |
 | scatec | docs/scatec-analysis.md | iaf-valuation | company | 2026-10-30 | 2026-10-30 | all | 2027-02-28 | 2026-10-29.1 | v2 30 Oct after Q3: clears (Base IRR 16.4%, P_k NOK 95.5 vs 84.65, +13%); Bear −17.9%, Bear corp. NIBD NOK 8.5bn by 2029; Q4 report 29 Jan 2027 |
 | capt | docs/capt-analysis.md | iaf-valuation | company | 2026-11-08 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 9 Nov): only on request. Position sold. 8 Nov news note: Amor 15-month TC (~$160–180k/day, $73.1–82.2m), ~+$14m in Base (+NOK 1/share), not modelled, verdict unchanged (fails); model on the 24 Oct inputs |
@@ -126,9 +126,9 @@ Kept by the `update-chain` skill; checked by
 | sed | rig | 2026-11-04 | main | Tender-assist row, rig values |
 | sed | oil | 2026-10-24 | main | Background |
 | sed | equity | 2026-10-18 | main | Exit cross-check, NOK path |
-| borr | rig | 2026-11-04 | main | Jackup rates, MCU, rig values |
-| borr | oil | 2026-11-04 | main | Background via rig scenarios |
-| borr | equity | 2026-11-06 | main | Exit cross-check, NOK path |
+| borr | rig | 2026-11-12 | main | Jackup rates, MCU, rig values |
+| borr | oil | 2026-11-18 | main | Background via rig scenarios |
+| borr | equity | 2026-11-20 | main | Exit cross-check, NOK path |
 | odl | rig | 2026-11-12 | main | HE semis (NCS) row: rates, MCU, mid-cycle, asset convention, fixtures |
 | odl | oil | 2026-11-11 | main | Background via rig scenarios |
 | odl | equity | 2026-11-06 | main | Exit cross-check, NOK path |
@@ -347,6 +347,7 @@ it to `open`.
 | 2026-11-16 | approx | NVIDIA Q3 13F (public stakes at 30 Sep) Outcome: read in nvda v1.7 (stakes re-marked on the 30 Sep counts) | nvda, ai | done |
 | 2026-11-18 | approx | Anthropic IPO pricing: marks NVIDIA's stake and its $10bn placement (outcome: $83, above range; NVIDIA 120.5m Class N, $11.7bn at the $97.17 first close; immaterial for nvda) | nvda, ai | done |
 | 2026-12-15 | approx | NDAA final text (AI Overwatch, Chip Security, MATCH Acts) | nvda, ai | watch |
+| 2027-02-17 | approx | Borr Q4 2026 report (Rig BBB; date not confirmed by Borr): FY2027 guidance, 2027 cover, rates; jackup watch call checkpoint | borr, rig, hy-issuers | open |
 | 2027-02-28 | approx | NVIDIA permanent CEO named (3–4-month search) | nvda, ai | open |
 | 2026-11-18 | yes | House closed briefing on NVIDIA requested for 18 Nov (committee chairs Mast, Moolenaar, Crawford; letter 4 Nov); 11 Nov: House Republicans press Huang to testify, subpoena floated (daily news 12 Nov) Outcome (weekly 21 Nov): Huang agreed to testify behind closed doors per Moolenaar, no date set (BGov [E]); no new finding | nvda, ai | done |
 | 2026-11-12 | approx | NVIDIA board decision on CEO: Huang resigned as CEO and director (8-K 12 Nov, effective 11 Nov); Colette Kress interim CEO and CFO; Harvey Jones first Chair; internal and external search | nvda, ai | done |
