@@ -483,6 +483,8 @@ it to `open`.
 | 2027-06-30 | approx | NVIDIA–Hugging Face closing ($12.93bn, H1 2027; DOJ review) | nvda | watch |
 | 2026-11-25 | yes | Hafnia Q3 dividend form: TORM-share special dividend (0.0380 TORM per share, ~$1.28) or, without third-party cooperation by 25 Nov, 90% of Q3 profit in cash; record and payment dates set then (v8 shows the verdict does not depend on the form) | hafnia | watch |
 | 2027-02-26 | approx | Hafnia Q4 2026 report (date not announced) | hafnia | open |
+| 2027-01-31 | approx | Equinor AHTS term award, reversal deadline of the supply AHTS turn call: an award of ≥ 2 vessels by 31 Jan restores NS AHTS Base 2027 £60k (now £52k); none announced by 21 Nov (supply 21 Nov) | supply, dof | open |
+| 2027-02-26 | approx | Subsea7 Q4 2026 report (late Feb, date not announced): NS CSV watch-call signpost (book-to-bill < 0.8 again, after 0.5 in Q3, or idle newbuild CSVs → cut); Q3: utilisation 84%, backlog $12.5bn, 2027 ~$8bn guide (supply 21 Nov) | supply | open |
 
 ## Change log
 
