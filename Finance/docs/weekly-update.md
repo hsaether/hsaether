@@ -16,6 +16,16 @@ Skill revisions: `update-chain` 2026-11-12.2; `supply-market-bbb` 2026-11-18.1; 
 - Run list: `supply` and `global-index` in parallel (no link between them), then `dof` on the new supply baseline.
 - Housekeeping: entries before 7 Nov moved to `docs/log/weekly-update-2026-11.md` and `docs/log/weekly-update-2026-10.md`.
 
+### News sweep (14–21 Nov; company news from the daily entries of 17, 18 and 20 Nov and this week's runs)
+
+- **Oil (oil):** IEA OMR 13 Nov: 2027 demand growth +2.0 mb/d, unchanged; 2026 −2.7 mb/d; larger 2027 surplus `[F]`. Below the 0.5 mb/d trigger: read at the oil run before OPEC+ (29 Nov).
+- **US–China (nvda, ai, shipping):** Trump–Xi at APEC Shenzhen 18–19 Nov: no chip or port-fee agreement found; US says it does not negotiate export controls `[E]`.
+- **Ukraine (defense, on hold):** Abu Dhabi talks 10–11 Nov: a prisoner-swap deal, no ceasefire, no date for the next round `[F]`.
+- **NVIDIA (nvda):** Huang agreed to testify behind closed doors, no date set (Moolenaar via BGov `[E]`). The SEC-probe report is already in v2.0.
+- **Tankers (shipping):** VLCC rates fell more than 60% from their record by 13 Nov; FFAs point to a peak `[F]`. Already in the 13 and 18 Nov shipping runs.
+- **Norges Bank (hy):** 4.5% held on 4 Nov; next decision 17 Dec. No Nordic HY default or bondholder notice found for held issuers beyond `hy-issuers` of 19 Nov.
+- **Register:** eight passed `watch` events closed with outcomes; none surprised (commit a5c425d).
+
 ### Progress
 
 - `supply`, `global-index`: running.
