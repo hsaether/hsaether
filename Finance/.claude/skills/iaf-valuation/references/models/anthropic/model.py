@@ -1,46 +1,54 @@
-"""Anthropic, PBC (ANT) - IAF model behind docs/anthropic-analysis.md, version 1.0, 13 Nov 2026.
+"""Anthropic, PBC (ANT) - IAF model behind docs/anthropic-analysis.md, version 1.1, 20 Nov 2026.
 
 Track A with explicit compute and capex (year-by-year build): stub Q4-26 + 2027-29, exit 31 Dec 2029,
 V_T = exit P/E x normalised 2030 NOPAT + net cash at exit - commitment overhang (PV of committed
 compute above the normalised need after exit). No dividends (D_t = 0). USD bn unless stated.
-Facts [F]: EU retail prospectus approved by Bafin 11 Nov 2026 (printed page = PDF page - 10).
-E1 frontier-lab revenue paths: docs/ai-market-bbb.md (11 Nov 2026). NOK path: docs/equity-market-bbb.md.
+v1.1: the deal is priced. Share count and cash are fixed by the final prospectus (424B4 of 19 Nov 2026,
+IPO price $83.00, 956.35m primary + 23.65m secondary, option 147.0m all primary, $26.0bn placement
+= 313.25m Class N); the entry price P (first close $97.17, 19 Nov) only moves the option treasury count.
+v1.0 (13 Nov) used the Bafin EU prospectus of 11 Nov and P = IPO price in the $70-78 range.
+E1 frontier-lab revenue paths: docs/ai-market-bbb.md (paths of 11 Nov 2026). NOK path: docs/equity-market-bbb.md.
 Everything else is an own assumption [A]. Standard library only. Run: py model.py
 """
 from datetime import date
 
 K = 0.12
-VAL = date(2026, 11, 20)            # closing of the global offering: the IPO price is paid
+VAL = date(2026, 11, 20)            # closing of the global offering and the placement (settlement 20 Nov)
 EXIT = date(2029, 12, 31)
 T = (EXIT - VAL).days / 365.0
 TAX = 0.21                          # normalised tax rate in exit earnings [A]
-USDNOK = 9.5610                     # EODHD 12 Nov 2026 18:25 UTC via docs/nvda-analysis.md v1.5 [C]
+IPO = 83.00                         # price to public, 18 Nov 2026 [F] (FWP and 424B4)
+P_CLOSE = 97.17                     # first close, Nasdaq 19 Nov 2026 (Yahoo) [F]
+USDNOK = 9.7391                     # Yahoo NOK=X 20 Nov 2026 07:24 UTC (AllRatesToday 9.7398; Norges Bank 19 Nov 9.6866)
 NOKF = {"Bear": 10.14 / 9.29, "Base": 1.0, "Bull": 9.02 / 9.29}   # Equity BBB exit-year factors
 
-# ---- share count [F] prospectus, millions --------------------------------------------------
-OUT_PRE = 11966.410             # Class A 6,630.24 + Class N 5,336.17, last practicable date (incl. PBF 846.84)
-PRIMARY = 801.351354            # new Class A in the global offering
-OA = 123.75                     # over-allotment (assumed exercised) [A]
-PLACEMENT_USD = 26000.0         # concurrent Class N placement, $m, at the IPO price
-AMZN_NOTES = 1840.444962 - 276.827518   # rollover notes left after the IPO conversion (fixed price <= IPO price)
+# ---- share count [F] 424B4 of 19 Nov 2026, millions -----------------------------------------
+OUT_POST = 13219.642276         # Class A 7,583.10 + Class N 5,636.54 (+ T, F) after the offering and placement,
+                                # incl. PBF 846.84, Amazon IPO conversion 292.77, primary 956.35, placement 313.25
+OA = 147.0                      # option to purchase additional shares, 100% primary (assumed exercised) [A]
+POST_SEP = 0.561963 + 0.848882 + 27.991850   # acquisitions (A + N) and the matching issuance after 30 Sep
+PLACEMENT_SH = 313.253007       # concurrent Class N placement ($26.0bn at $83) [F], inside OUT_POST
+AMZN_NOTES = 1547.676309        # rollover notes left after the IPO conversion (1,840.44 - 292.77) [F]
 OPTIONS, OPT_K = 1774.342693, 2.91      # options outstanding 30 Sep, weighted exercise price
 RSU = 1026.660010 + 47.041287           # unvested RSUs + RSUs granted after 30 Sep
 MATCH = 553.441297                      # vested matching obligation (donation matching plan, maximum)
-PBF = 846.840960                        # Anthropic Public Benefit Fund (inside OUT_PRE)
+PBF = 846.840960                        # Anthropic Public Benefit Fund (inside OUT_POST)
+ISSUED = OUT_POST + OA + POST_SEP
 
 
 def shares_fd(P):
-    return (OUT_PRE + PRIMARY + OA + PLACEMENT_USD / P + AMZN_NOTES
-            + OPTIONS * (1 - OPT_K / P) + RSU + MATCH)
+    """Fully diluted at entry price P: options by the treasury method at P; everything else fixed by the deal."""
+    return ISSUED + AMZN_NOTES + OPTIONS * (1 - OPT_K / P) + RSU + MATCH
 
 
-def shares_issued(P):
-    return OUT_PRE + PRIMARY + OA + PLACEMENT_USD / P
+def shares_issued(P=None):
+    return ISSUED
 
 
-def cash_close(P):
-    """Net cash at closing, $bn: as further adjusted 30 Sep (at $74) +/- $0.793bn per $1, plus over-allotment."""
-    return 212.684 + 0.793 * (P - 74) + OA * P * 0.9882 / 1000
+def cash_close(P=None):
+    """Net cash at closing, $bn [F]: pro forma as adjusted 30 Sep $232.351bn at $83 (net of the $4.28bn RSU
+    withholding) + the option 147.0m x $83 with no underwriting discount ($244.6bn in full, 424B4)."""
+    return 232.351 + OA * IPO / 1000
 
 
 # ---- stub Q4-26, identical in all scenarios [A] ---------------------------------------------
@@ -134,8 +142,8 @@ def build(name, P, **ov):
         match = s["match_pa"] * fd0 * 3
         pbf = 0.0
         base = fd0 + grants + match
-        for lvl in (1.5, 2.25, 3.375):
-            if max(path) >= lvl * P:
+        for lvl in (1.5, 2.25, 3.375):          # +50% steps from the IPO price, not the entry price
+            if max(path) >= lvl * IPO:
                 pbf += 0.02 * (base + pbf)
         sh = base + pbf
         vt_new = eq_T * 1000 / sh
@@ -169,30 +177,23 @@ def build(name, P, **ov):
     return res
 
 
-def pk_fixed(name, target=0.0, **ov):
-    """IPO price at which the Base margin of safety equals target (fixed point: cash and shares move with P)."""
-    lo, hi = 10.0, 300.0
-    for _ in range(100):
-        m = (lo + hi) / 2
-        r = build(name, m, **ov)
-        lo, hi = (m, hi) if r["mos"] > target else (lo, m)
-    return m
-
-
 def fmt(x, d=1):
     return f"{x:,.{d}f}"
 
 
+PRICES = (IPO, P_CLOSE, 111.50)     # IPO price, first close (decision), first-day open
+
+
 if __name__ == "__main__":
     print(f"T = {T:.3f} years; valuation {VAL}, exit {EXIT}")
-    for P in (70, 74, 78):
+    for P in PRICES:
         print(f"P={P}: FD {shares_fd(P):,.1f}m, issued {shares_issued(P):,.1f}m, cash {cash_close(P):.1f}bn,"
               f" mcap FD {P*shares_fd(P)/1000:,.0f}bn, issued {P*shares_issued(P)/1000:,.0f}bn,"
               f" EV {P*shares_fd(P)/1000-cash_close(P):,.0f}bn")
     print("stub", STUB, "2026 revenue", round(REV_2026, 2))
     for name in ("Bear", "Base", "Bull"):
-        r = build(name, 74)
-        print(f"\n== {name} @74: IRR {r['irr']:.1%}  NOK {r['irr_nok']:.1%}  VT {r['VT']:.2f}  Pk {r['pk']:.2f}"
+        r = build(name, P_CLOSE)
+        print(f"\n== {name} @{P_CLOSE}: IRR {r['irr']:.1%}  NOK {r['irr_nok']:.1%}  VT {r['VT']:.2f}  Pk {r['pk']:.2f}"
               f"  MoS {r['mos']:+.1%}  E1 share {[round(x,3) for x in r['e1share']]}")
         for row in r["rows"]:
             print("  ", {k: (round(v, 2) if isinstance(v, float) else v) for k, v in row.items()})
@@ -201,11 +202,10 @@ if __name__ == "__main__":
         print(f"   shares fd0 {r['fd0']:.0f} grants {r['grants']:.0f} match {r['match']:.0f} pbf {r['pbf']:.0f}"
               f" shT {r['sh_T']:.0f}; marks {[round(m,1) for m in r['marks']]} pe0 {r['pe0']:.1f}")
         print("   overhang rows", [tuple(round(x, 1) for x in o) for o in r["over_rows"]])
-    print("\nRange:")
-    for P in (70, 74, 78):
+    print("\nEntry prices:")
+    for P in PRICES:
         out = []
         for name in ("Bear", "Base", "Bull"):
             r = build(name, P)
             out.append(f"{name} IRR {r['irr']:.1%} Pk {r['pk']:.1f} MoS {r['mos']:+.1%} VT {r['VT']:.1f}")
         print(P, " | ".join(out))
-    print("Fixed point P_k (Base, MoS 0):", round(pk_fixed("Base"), 2), " MoS +2%:", round(pk_fixed("Base", 0.02), 2))

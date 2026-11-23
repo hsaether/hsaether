@@ -1,4 +1,5 @@
-# SK hynix (docs/skhynix-analysis.md) -- IAF model, version 3 (16 Nov 2026). iaf-valuation 2026-11-12.1.
+# SK hynix (docs/skhynix-analysis.md) -- IAF model, version 4 (19 Nov 2026; V4: AI BBB 18 Nov H2 turn call, Base
+# .90/.50/.32/.28, index 1.38/1.08/0.95; Seoul close 19 Nov); version 3 (16 Nov 2026). iaf-valuation 2026-11-18.1.
 # Rebuilt from version 2's published inputs (28 Oct 2026; the v2 scripts were not kept): with V2 it
 # reproduces v2 (Base 21.1%, P_k 1,835,729; Bear 2.4% / 1,169,283; Bull 33.7% / 2,416,951).
 # Track B: EPS = AI BBB H2 path x CY27 consensus EPS; FCF = NI - dWC - (capex - D&A);
@@ -14,6 +15,8 @@ DA = {'Bear': [20, 25, 27], 'Base': [21, 28, 35], 'Bull': [22, 30, 38]}
 EXPE = {'Bear': 8.0, 'Base': 10.0, 'Bull': 11.0}
 KIOM = {'Bear': 0.5, 'Base': 1.0, 'Bull': 1.2}       # Kioxia stake multiplier at exit (linear glide)
 CBUY = {'Bear': .70, 'Base': .60, 'Bull': .55}       # H2 cash conversion 2029, buyer's return check
+MEM18 = dict(MEM, Base=[.90, .50, .32, .28])     # AI BBB 18 Nov turn call (60%; L2, L4, L5)
+IDX18 = dict(IDX, Base=[1.38, 1.08, 0.95])
 I44 = {'Bear': [1.08, 1.06, 1.06], 'Base': [1, 1, 1], 'Bull': [.98, .98, .98]}   # Equity BBB NOK path
 
 # ------------------------------------------------------------------ inputs per version
@@ -38,6 +41,11 @@ V3 = dict(V2, P=1120000.0, vdate=date(2026, 11, 16), cons27=537910.7, bridge='v3
           comp_liab=15.731, comp_eq=3.589, treas_comp=1.625769, other_out=0.50,
           d_buy=date(2026, 12, 13), kio_carry=36.266, kio_px=(8392.0, 18095.0), jpykrw=(8.349, 8.611),
           book26=333.0)
+
+# V4: Seoul close 19 Nov 1,173,000; Kioxia JPY 8,271, JPY/KRW 8.310 (19 Nov); CY27 consensus 537,911 (unchanged);
+# AI BBB 18 Nov H2 Base path. Bridge as V3 (no new report).
+V4 = dict(V3, P=1173000.0, vdate=date(2026, 11, 19), kio_px=(8271.0, 18095.0), jpykrw=(8.310, 8.611),
+          mem_tab=MEM18, idx_tab=IDX18)
 
 
 def kio(I):
@@ -72,7 +80,7 @@ def build(s, I, **ov):
     sh = I['sh'] / 1e6                       # m shares / 1e6: KRW tn / sh = KRW per share
     br = bridge(I)
     c27 = I['cons27'] * ov.get('cons_mult', 1.0)
-    mem = list(ov.get('mem', MEM[s]))
+    mem = list(ov.get('mem', I.get('mem_tab', MEM)[s]))
     if 'mem30_mult' in ov:
         mem[3] *= ov['mem30_mult']
     if 'mem2830_mult' in ov:
@@ -82,7 +90,7 @@ def build(s, I, **ov):
     if 'mem30' in ov:
         mem[3] = ov['mem30']
     eps = [m * c27 for m in mem]             # 2027..2030
-    idx = ov.get('idx', IDX[s])
+    idx = ov.get('idx', I.get('idx_tab', IDX)[s])
     rev = [x * I['rev26'] for x in idx]
     if ov.get('struct'):
         eps = [eps[3]] * 4

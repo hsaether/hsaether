@@ -8,7 +8,7 @@ Git provides history.
 | Path | Content |
 |---|---|
 | `.claude/skills/<name>/SKILL.md` | Skill masters (plus `references/`). Loaded automatically by Claude Code |
-| `docs/` | All outputs: market baselines and company analyses (one running file each) |
+| `docs/` | All outputs: market baselines and company analyses (one running file each); `docs/company-overview.md` is the one-table index of every company and fund |
 
 Skills and the chain between them:
 
@@ -51,8 +51,14 @@ Skills and the chain between them:
   - **Current state only.** Git keeps every earlier version, so a document holds no superseded
     notes, no old values in brackets, no old attributions and no dated re-mark blocks at the top.
     Its change log keeps the **last 3 versions, one or two lines each**; older entries are deleted.
-  - **Size budgets:** company and fund analyses ≤ 450 lines; market baselines and books ≤ 800 lines;
-    reviews are static and exempt. `update_check.py lint` flags documents over budget.
+  - **Size budgets (targets with a margin; user, 21 Nov 2026):** company and fund analyses aim for
+    ≤ 450 lines, market baselines and books ≤ 800 lines; reviews are static and exempt.
+    - A document may run up to **25% over** (company and fund ≤ 560, baseline and book ≤ 1,000) when the
+      extra lines are current-state content the decision needs (several segments, a fleet or bond list,
+      a multi-block build). Say so in a few words in its status line (e.g. "over target: 28-rig fleet").
+    - Above that ceiling, or over the target with no stated reason, it is compacted at its next run.
+      History, superseded notes and repeated tables never justify the margin.
+    - `update_check.py lint` shows over-target documents as a hint and over-ceiling ones as action.
   - **Interface block:** every market baseline starts, after its status line, with a section
     "## Interface (values other documents read)": one compact table of the paths, references and
     signpost states that downstream documents use, with the as-of date.
@@ -85,6 +91,10 @@ Skills and the chain between them:
   downstream documents for which it moved materially (trigger rule in the `update-chain` skill;
   a price-only re-mark is `none`). A note starting `HOLD (user` keeps a document out of runs. Add the new dated events (report
   dates, decisions) to the register's Events table.
+- **Company overview (user, 21 Nov 2026):** after recording a company or fund analysis, update its
+  row in `docs/company-overview.md` (version and date, price at analysis, latest close, Base IRR,
+  P_k, margin at close, verdict, Bear / Bull IRR, next event) and its "As of" date. One whole-line
+  edit; the overview is an index, not a register document, so it triggers no cascade.
 - The register is part of delivering a document, so do it without being asked. A **new or retired
   document** follows Mode D of the `update-chain` skill step by step:
   - its own inputs;

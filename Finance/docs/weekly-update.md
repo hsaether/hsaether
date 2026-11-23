@@ -4,12 +4,92 @@ The running report of the update chain (`update-chain` skill): the weekly run on
 and the daily company news search on weekdays (Mode F). Newest entry first. The bookkeeping is in
 `docs/update-register.md`; the numbers are in the documents themselves.
 
+## Week 47 — Saturday 21 Nov 2026 (scheduled run)
+
+Skill revisions: `update-chain` 2026-11-12.2; `supply-market-bbb` 2026-11-18.1; `iaf-valuation` 2026-11-18.1.
+*Run complete. After the three runs the check shows list 1 empty; there were no loop checks.*
+
+### Check (21 Nov)
+
+- List 1 (3 items, in order): `supply` (Subsea7 Q3 19 Nov; Equinor AHTS tender checkpoint 20 Nov), `dof` (same two events; DOF ex-dividend 20 Nov), `global-index` (stale since 17 Nov; equity, ai, nvda, hy changed).
+- Deferred: `kospi` (own update 30 Nov). On hold (user): `defense`, `borr`, `capt`, `kog`, `rhm`, `shb`. `portfolio`: never run unattended.
+- Run list: `supply` and `global-index` in parallel (no link between them), then `dof` on the new supply baseline.
+- Housekeeping: entries before 7 Nov moved to `docs/log/weekly-update-2026-11.md` and `docs/log/weekly-update-2026-10.md`.
+
+### News sweep (14–21 Nov; company news from the daily entries of 17, 18 and 20 Nov and this week's runs)
+
+- **Oil (oil):** IEA OMR 13 Nov: 2027 demand growth +2.0 mb/d, unchanged; 2026 −2.7 mb/d; larger 2027 surplus `[F]`. Below the 0.5 mb/d trigger: read at the oil run before OPEC+ (29 Nov).
+- **US–China (nvda, ai, shipping):** Trump–Xi at APEC Shenzhen 18–19 Nov: no chip or port-fee agreement found; US says it does not negotiate export controls `[E]`.
+- **Ukraine (defense, on hold):** Abu Dhabi talks 10–11 Nov: a prisoner-swap deal, no ceasefire, no date for the next round `[F]`.
+- **NVIDIA (nvda):** Huang agreed to testify behind closed doors, no date set (Moolenaar via BGov `[E]`). The SEC-probe report is already in v2.0.
+- **Tankers (shipping):** VLCC rates fell more than 60% from their record by 13 Nov; FFAs point to a peak `[F]`. Already in the 13 and 18 Nov shipping runs.
+- **Norges Bank (hy):** 4.5% held on 4 Nov; next decision 17 Dec. No Nordic HY default or bondholder notice found for held issuers beyond `hy-issuers` of 19 Nov.
+- **Register:** eight passed `watch` events closed with outcomes; none surprised (commit a5c425d).
+
+### Progress
+
+- **`supply`, done, kept** (recorded, stale after 12 Dec; commit a14127f). Equinor AHTS term tender: no award by 21 Nov, so the AHTS turn call (Base 2027 £52k) holds; reversal deadline 31 Jan. Subsea7 Q3: utilisation 84% (Q2 85%), book-to-bill 0.5, backlog $12.5bn, 2027 guide ~$8bn; NS CSV watch call kept flat. Events added: AHTS reversal deadline (31 Jan), Subsea7 Q4 (~26 Feb).
+- **`dof`, done, changed yes, flipped marginal → clears** (recorded, stale after 18 Dec; commit abc1edd). Ex-dividend re-mark at NOK 124.00 (20 Nov) / USD/NOK 9.750: Base 12.8% → 13.1%, P_k NOK 127.4, margin +1.8% → +2.7% (bottom of the clears band; fails above NOK 130.0). No sector row moved; the krone +0.20 pp, the close below the dividend-adjusted price +0.15 pp. A.P. Møller Maritime bought 1.85m more shares 19–20 Nov (2.8m over 18–20 Nov, ~1.1%).
+- **`global-index`, done, changed yes, still fails** (recorded, stale after 6 Dec; commit 68489c1). v7, DNB Global Indeks A only (Nordnet Global Indeks dropped, user 1 Nov), NAV 835.76 (19 Nov): Base after cost 4.58% → 6.66%, P_k NAV 703 → 723, margin −19.0% → −13.5%, E / R 0.008 → 0.081. Compacted 808 → 405 lines. Register: inputs amzn and mu added.
+
+### Summary
+
+- **`dof` flipped to clears:** Base 13.1%, margin +2.7%. The cause is the ex-dividend price and the krone; no sector row moved.
+- **`global-index` still fails** but is nearer: 6.66%, −13.5%. On the indicative 20 Nov NAV of ≈ 812.5 the margin is −10.6% and the pre-alert at NAV 830 is crossed.
+- **Supply BBB kept unchanged:** no Equinor AHTS award, and Subsea7's Q3 is steady. No Base path moved.
+
+### Updated
+
+| Document | Changed or kept | What moved | Stale after |
+|---|---|---|---|
+| `supply` | kept | Nothing; turn-call families and signposts re-read (Equinor tender, Subsea7 Q3) | 12 Dec |
+| `dof` | changed | Base 12.8% → 13.1%; P_k NOK 130.6 → 127.4 at NOK 124.00; margin +1.8% → +2.7%; **marginal → clears** | 18 Dec |
+| `global-index` | changed | Base 4.58% → 6.66%; P_k 703 → 723; margin −19.0% → −13.5%; fails; E / R 0.008 → 0.081 | 6 Dec |
+
+### Needs you
+
+- `dof` (a holding) **flipped from marginal to clears**, at the bottom of the band. It fails again above NOK 130.0.
+- `global-index`: the pre-alert (NAV 830) is likely crossed on the 20 Nov NAV, which is due about 23 Nov (watch event added).
+- A register row from another session, "User request (21 Nov): re-mark SK hynix and Samsung at the 23 Nov Seoul close", was in the working copy. It was committed with the supply record (a14127f); Monday's daily run picks it up.
+- Not obtained: the Petrobras PSV 4500 / 3000 bid ranking (not public), the November North Sea spot print, and Nordnet's "Total pris" for the fund cost (0.25% carried).
+- Flags only, no action asked: the Equity BBB `world3.py` lacks the GOOGL v2.3 and NVIDIA v2.0 interim values (Base −0.03 pp). The AI BBB E-rest row's Bear exit P/E of 17 sits above where Meta and Oracle trade.
+
+### Left for next run
+
+- `kospi`: deferred to its own update on 30 Nov (smsn, skh and ai changes waiting).
+- `oil`: stale after 30 Nov; OPEC+ on 29 Nov with 2027 quotas, then its downstream as the change gate flags.
+- `sed`: Q3 on 27 Nov, in the daily run.
+- On hold (user): `defense` (5 causes waiting), `rhm` (3), `borr` (1), `capt`, `kog`, `shb`.
+
+### Events in the next 14 days
+
+- 23 Nov: DNB Global Indeks A NAV of 20 Nov (pre-alert test); skh and smsn re-mark at the Seoul close (user request).
+- 25 Nov: Trustly Q3; Norse Atlantic Q3 (approx.); NVIDIA 10-Q; Anthropic closing 8-K; Hafnia dividend form; Petrobras PSV 3000 bareboat bids.
+- 26 Nov: SSB Q3 national accounts. 27 Nov: SED Q3; German 2027 budget (on hold); Petrobras plan 2027–31 (approx.); Westwood rig dashboard; Frontline Q3.
+- 29 Nov: OPEC+ (2027 quotas). 30 Nov: CAPT Q3 (on hold); MSCI review effective; SK hynix dividend record; DRAM/NAND contract prints; Dooba and Point deadlines; DOF dividend paid.
+- 1 Dec: Transocean–Valaris closing; Booster standstill ends; GPU rental indices. ~4 Dec: November *Seabreeze* (AHTS and PSV Q4 test); Heimdal November reports; Polish budget vote.
+
+## Daily news — Friday 20 Nov 2026
+
+- **Updated:** `anthropic` Base 3.8% → −4.6%, fails (re-mark at the $97.17 first close; P_k $58.9).
+- **Updated:** `amzn` Base 5.2% → 7.7%, fails (Anthropic stake at market, $338.6bn).
+- **Updated:** `googl` Base 9.1% → 10.9%, fails narrowly (margin −3.0%).
+- **Updated:** `msft` Base 9.6% → 11.9%, **marginal (flipped)**, from the price alone.
+- Anthropic (anthropic, amzn, googl, msft): IPO priced at $83, above the $70–78 range; upsized to 980m shares (~$81bn); first close $97.17 (+17%) `[F]`.
+- Minor: no new fund-house forum posts; DOF $0.40 goes ex today; Alphabet C$ notes; Microsoft Ignite (products only).
+
+**Needs you:** `msft` flipped to marginal. Subsea7's Q3 (19 Nov) is not read yet. Left for Saturday's weekly run: `supply`, `dof`, `tsm`, `global-index`.
+
+**Register:** added Anthropic closing 8-K (~25 Nov), quiet-period end (~14 Dec) and one-year lock-up (18 Nov 2027); Alphabet ex-dividend (7 Dec); Microsoft AGM (8 Dec) and dividend declaration (~15 Dec).
+
 ## Daily news — Wednesday 18 Nov 2026
 
 - **Updated:** `nvda` Base 17.7% → 20.7%, clears (Q3 $115.8bn, Q4 guide $130bn; cascade −15.2%).
 - **Updated:** `hafnia` Base −0.5% → 7.4%, fails (Q3; P_k NOK 81.6 vs 90.00).
 - Hafnia (hafnia): TORM stake to be paid out as special dividend (~$1.28/share), else 90% cash; form set 25 Nov `[F]`.
 - NVIDIA (nvda, ai): GM guide 71–72%, supply commitments $390bn, $1.8bn stake impaired; BIS remote-access rule issued 16 Nov `[F]`.
+- DOF (dof, supply): Skandi Africa re-contracted by TechnipFMC, "Very Large" ($100–200m), in direct continuation; term not given (17 Nov, added from user input) `[F]`.
+- DOF (dof): A.P. Møller Maritime buys 950k shares at NOK 128.01 (NOK 121.6m) after Fredriksen's ~NOK 900m (Finansavisen, user input) `[E]`.
 - Minor: Hofseth corrected Q3; Anthropic prices tonight; Trump–Xi in Shenzhen; fund-house forum posts unchanged.
 
 **Needs you:** `ai` is due its rebuild: NVIDIA's guide sits at its Bull row. SED Q3 not out yet; Petrobras PSV ranking not public. `supply`, `mu`, `tsm`, `global-index` left.
@@ -90,267 +170,3 @@ Skill revisions: `update-chain` 2026-11-05.2; `ai-market-bbb` 2026-11-06.1; `iaf
 
 - **`ai`, done, changed yes (prices only)** (recorded, stale after 17 Nov). Update 7: no path moved. Equity 6 Nov and HY reference 0.254 read; all six baskets return 10.0% Base NOK at the 6 Nov close; memory basket 21.6%, margin +28.1%. TSMC ADS is 1.7% above its hurdle price (marginal band). Event added: CoreWeave Q3 (10 Nov).
 - **`googl`, `borr`: running** (two in parallel). Then `amzn`, `msft`, `hy-issuers` if capacity allows.
-
-## Daily news — Friday 6 Nov 2026
-
-- **Updated:** none. No tracked company outside the user hold reported or had material news.
-- Rheinmetall (rhm): Q3 sales €3.15bn, EBIT €553m (17.5%), backlog €78bn; FY26 sales guidance cut again to ~€13.2bn (Arminius Boxer delay, ammunition testing), Q3 FCF −€82m, shares −17% `[F]`. On hold (user), not updated.
-- Heimdal Høyrente N (hy-funds): October −0.5%, effective yield 8.8%; Intrum, Borr, Archer hurt, Trustly helped; 3m −1.3%, drawdown low −1.6% `[F]`. Already read 4 Nov.
-- Minor: Hensoldt, Renk, Kongsberg, defense on hold (user); no Nordic HY default or bondholder news found.
-
-**Needs you:** `defense` and `rhm` are in list 1 (Rheinmetall guidance cut) but on hold; Tue/Thu items for `ai` and 20+ downstream documents are in list 1 after equity's 6 Nov change, left for the next run or Saturday.
-
-**Register:** no events added; Rheinmetall Q3 event stays open (on hold).
-
-## Daily news — Thursday 5 Nov 2026
-
-- **Updated:** `hafnia` kept unchanged, Base IRR −0.5% → −0.5%, fails (indicative re-mark at NOK 93.05 ≈ +1.4%, not adopted).
-- TORM (hafnia): Q3 TCE $353m, FY26 guidance narrowed up, Q4 cover 53% at $78.4k/day, dividend $1.35 `[F]`; Hafnia's stake is ~19.85%.
-- Rheinmetall (rhm), Kongsberg (kog), defense: on hold (user); Rheinmetall Q3 is due today, not updated.
-- Minor: Norges Bank and Riksbank outcomes not confirmed in search; no Nordic HY default news.
-
-**Needs you:** `shb` (Riksbank 4 Nov) and `hy` (Norges Bank 5 Nov) events are unresolved; baselines are not re-run here.
-
-**Register:** hafnia recorded (changed no); TORM Q3 event done; TORM dividend ex 16 Nov added.
-
-## Daily news — Wednesday 4 Nov 2026
-
-- **Updated:** `odl` Base IRR 6.3% → 8.1%, still fails (P_k $10.21 vs price $11.23).
-- Odfjell Drilling (odl): Q3 EBITDA $130m (model $138m), net debt $857m (model $805m), dividend raised to $0.27 `[F]`.
-- Transocean (rig): Barents $470k to 2030 and Norge $517k to 2028 support Rig BBB Base `[F]`; Valaris Q3 EBITDA $151m `[F]`.
-- Minor: no Nordic HY default news found; Borr Q3 date 18 Nov.
-
-**Needs you:** `borr` and `rig` have passed Valaris/Transocean events; baselines are not re-run in this task. Mon–Tue entries missing for 3 Nov.
-
-**Resolved (interactive session, 4–5 Nov):** `rig` small update 4 Nov (UDW drillship trigger: Base 2027 $400k → $420k; full re-baseline due ~9 Nov after oil's 7 Nov follow-up); `borr`, `odl`, `sed` and `hy` kept unchanged (rows they read did not move). The passed Valaris/Transocean/Westwood events are closed; the early-Nov Q3 event stays open for `borr` (Q3 ~18 Nov). No daily run on Tue 3 Nov (the app was not open at 08:00); this 4 Nov entry covers 3–4 Nov, so nothing was missed.
-
-**Register:** odl recorded (changed yes); events added: ODL dividend ex 12 Nov, Transocean–Valaris closing 1 Dec, ODL Q4 ~24 Feb.
-
-## Daily news — Monday 2 Nov 2026
-
-- **Updated:** none. No material company news over the weekend; no tracked company reported.
-- Minor: Friday's AI and chip sell-off (Nasdaq −2.9%), Kioxia −14% on its outlook (memory signpost), a $25bn Microsoft bond, and OPEC+ holding December targets. All are market-level, not company news.
-
-**Needs you:**
-- Saturday's run stopped after `oil` (31 Oct, kept unchanged, stale 7 Nov). It is not recorded in the register, and the Week 44 entry is unfinished.
-- `ai` (1 Nov) put 11 company and fund documents in list 1. Daily runs do not take them.
-
-**Register:** event added for Norse Atlantic Q3 (~25 Nov). The Odfjell Drilling Q3 report is tomorrow.
-
-## Week 44 — Saturday 31 Oct 2026 (scheduled run)
-
-Skill revisions: `update-chain` 2026-10-29.1; `defense-market-bbb` 2026-10-10.1; `ai-market-bbb`
-2026-10-29.1; `iaf-valuation` 2026-10-29.1. *In progress — this entry is written as the run goes.*
-
-### Check (31 Oct)
-
-- **List 1, in order:** `defense` (UK Budget 28 Oct and Kongsberg Q3 passed; oil changed 17 Oct) →
-  `ai` (Amazon Q3 passed) → `mu` (hy-funds) → `nvda`, `tsm` (ai 29 Oct, equity 18 Oct) →
-  `global-index`, `dnbtek`, `kospi` (hy-funds 31 Oct; kospi also dnbtek) → `portfolio` (never run
-  unattended).
-- Already done earlier today, outside this run: `hy-issuers`, `hy-funds` (HY reference E / R unchanged
-  at 0.196) and `dnbtek` (Base 7.2% → 8.6%, fails). So the hy-funds cause for `mu`, `global-index` and
-  `kospi` is a change-gate case: the value they read did not move.
-- **Re-check after upstream:** amzn, googl, msft, skh, smsn (after `ai`); kog, rhm (after `defense`).
-- **Loop checks:** `hy` (hy-issuers), `equity` (ai, msft, googl, global-index), `skh` (smsn).
-- **Method changed:** iaf-valuation 2026-10-29.1 for most companies; oil 2026-10-24.4; defense
-  2026-10-10.1. No re-run on method alone.
-
-### Run list (at most 6)
-
-1. `defense` — xhigh (passed events, oil input, full re-baseline due)
-2. `ai` — high (Amazon small update)
-3. `nvda` — high (ai and equity inputs; re-mark)
-4. `tsm` — high (ai and equity inputs; re-mark)
-5. `kospi` — high (dnbtek row; hy-funds change gate)
-6. spare — kept for a cascade from `defense` or `ai`, else `mu`
-
-**Run list changed after the news sweep:** `oil` takes the spare slot and runs right after `defense`
-(market baselines one at a time). An oil recalibration trigger fired: Hormuz crude volume changed
-by more than 20% (see below). If `oil` moves a value, its downstream baselines (`shipping`, `rig`)
-outrank `nvda`, `tsm` and `kospi` for the remaining slots.
-
-### Progress
-
-- **`defense`, done, kept unchanged** (recorded, stale after 4 Jan 2027). No path moved. The Bear
-  fiscal-stress signpost fired: OAT–Bund widened more than 50 bp in a month, to 174.6 bp on 22 Oct
-  (159 bp on 30 Oct). The ceasefire half of the Bear is absent, so Bear and the weights are kept.
-  - UK Budget: the Defence Investment Plan is funded; 3% by 2030 is unfunded until the 2027
-    Spending Review.
-  - France PLF: EUR 63.4bn, in line with the LPM.
-  - Kongsberg Q3: orders ahead of the air-defence row.
-  - Italy cut its add-on from EUR 22bn to 14bn: flagged, Base held.
-
-  `kog` and `rhm` are not re-run.
-- **`oil`, running** (xhigh).
-
-### News that mattered (sweep 24–31 Oct; companies from the daily entries 26–30 Oct)
-
-- **Gulf, to `oil`:**
-  - Kpler: Hormuz crude was **~7.3 mb/d in the week to 28 Oct**, more than 40% below pre-war and
-    about half the ~14 mb/d the 24 Oct baseline cited. October averaged ~11.1 mb/d. Transits fell to
-    single digits per day, and ship attacks doubled in October. `[E]`
-  - The Houthis claim missile strikes on the Ras Tanura refinery (550 kb/d) and an Aramco site at
-    Abqaiq (27–30 Oct). FIRMS heat signatures show a fire at Ras Tanura, but Saudi Arabia confirms
-    only interceptions, and there is no Aramco damage statement. `[E]`
-  - Brent front ~$116 on 30 Oct, about level with the 23 Oct Z26 settlement (116.72); a fourth
-    monthly gain. `[E]`
-  - Two of the baseline's Bull signposts are now close: "Hormuz crude < 8 mb/d for two weeks"
-    (one week so far) and "ME crude incl. bypass < 13 mb/d".
-  - OPEC+ meets on 1 Nov; Saudi output is reported ~4.5 mb/d below quota. `[E]`
-- **Rates, watch events resolved:**
-  - FOMC (28 Oct) held at 3.75–4.00% with a 10–2 vote; a December hike is still priced. As
-    expected, so marked `done`.
-  - ECB (29 Oct) held at 2.50%, with Sep HICP at 3.8% and a December hike still priced. Lagarde
-    will step down in February 2027. The rate was as expected (`done`); the leadership change is a
-    note for `equity`.
-  - US Q3 GDP came in at +3.4% annualised (BEA advance) and Q3 PCE prices at +2.1%. No surprise
-    (`done`).
-- **Watch events still open, outcome not found:** Norway retail sales (Sep), Norway unemployment and
-  Norges Bank's November FX purchases, the Sweden GDP indicator, euro-area/France Q3 GDP, and France
-  CPI. These stay `watch` and are read at the next `hy` and `equity` runs (Norges Bank 5 Nov).
-  The Heimdal 26 Oct NAV watch was superseded by the 31 Oct `hy-issuers` update and marked `done`.
-- **Companies:** the daily entries covered 26–30 Oct (Borr, Intrum, DOF, DNB, SK hynix, Hofseth,
-  SED, Anthropic S-1, Kongsberg, BW Energy, Amazon, Scatec). The 30 Oct `amzn` and `scatec` updates
-  that had stalled were completed later on 30 Oct. No tracked-company news found for Friday after
-  08:00 or Saturday.
-
-## Daily news — Friday 30 Oct 2026
-
-- **Updated:** none. Both updates stalled (see Needs you).
-- **Amazon** (`amzn`, `ai`, `dnbtek`): Q3: AWS ~$46bn, +39%; EPS $1.89 vs ~$1.96; Q3 FCF ≈ −$33bn; capex guide ~$220bn kept; shares ~−6% after hours. `[E]`
-- **Scatec** (`scatec`): Q3 proportionate EBITDA NOK 1,208m incl. NOK 140m Obelisk one-offs; 2026 power EBITDA guide cut NOK 300m to 3.3–3.6bn (NOK 80m Philippines). `[F]`
-- Minor: Rheinmetall/KNDS JV Artec, 69 more Schakal vehicles (DE/NL).
-
-**Needs you:** the `amzn` and `scatec` updates stalled with nothing written. They are first in line Saturday, then `dnbtek` (reads `amzn`).
-
-**Register:** no changes; the Amazon and Scatec Q3 events stay open.
-
-## Daily news — Thursday 29 Oct 2026
-
-- **Updated:** `googl` Base 4.6% → 4.6%, fails (call read; model kept). After hours −10% to $292.50: Base 8.1% there, still fails `[E]`.
-- **Kongsberg** (`kog`): Q3 reported this morning, "record-high order backlog". Figures not yet read into the analysis. `[F]`
-- **BW Energy** (`borr`): Q3 report: MaBoMo Phase 2 delayed, no replacement rig named, 2026 capex guide suspended. Borr model unchanged (Prospector 5 already removed). `[F]`
-- Minor: Amazon reports after the US close today (next run).
-
-In progress elsewhere: `smsn` (Samsung Q3 today), `kospi`, `dnbtek`.
-
-**Needs you:** the `kog` update stopped at the session limit, nothing written; it is first in line next run.
-
-**Register:** `googl` recorded (kept); Alphabet call re-check and BW Energy Q3 closed; Kongsberg Q3 stays open. No events added.
-
-## Daily news — Wednesday 28 Oct 2026
-
-- **SK hynix** (`skh`, `ai`, `smsn`, `kospi`, `dnbtek`): Q3 operating profit KRW 83.3tn (79.7% margin) vs ~77tn consensus; revenue 104.6tn. Q3 dividend 14tn plus a 20tn buyback; 100tn returned for 2026. Verdict (clears) not at risk. `[F]`
-- **Hofseth** (`hy-issuers`, `hy-funds`): new to the documents. The bond is at ~72 (12 Oct). The equity-ratio covenant tightens to 27.5% on 7 Nov (26.5% at end-June) and is first tested 31 Dec. The NOK 600m raise is still open. `[E]`
-- **Borr** (`borr`, `hy-issuers`): NYSE −8.5 to −10% on 26 Oct; insurance still undisclosed; Q3 reported for ~18 Nov. `[E]`
-- Minor: MSFT, GOOGL and AMZN previews only.
-
-Borr bond price and Heimdal NAV still not found.
-
-**Register:** events added: Hofseth covenant (7 Nov, 31 Dec) and Borr Q3 (~18 Nov, approx).
-
-## Daily news — Tuesday 27 Oct 2026
-
-- **SED** (`sed`, `rig`): CPOC LOA for T-16, 30 months firm from early Q3 2027 (+15 months options), ~USD 87m incl. mobilisation (≈$95k/d vs Base $80k); idle Q1–Q3 2027. `[F]`
-- **Anthropic** (`ai`, `amzn`, `googl`): public S-1 filed 26 Oct; H1 revenue $16.3bn, close to the draft figures already in `ai`; IPO in November. `[F]`/`[E]`
-- **Borr** (`borr`, `hy-issuers`): incident update, five still missing, investigation opened, nothing on insurance; shares −3.9% on 26 Oct; a major-holding notice (holder not read). `[F]`
-- Minor: BlueNord Q3 invitation, DNB and Storebrand buyback status.
-
-Borr bond price and Heimdal's 26 Oct NAV still not found.
-
-**Register:** events added for the SED T-16 award and the Anthropic IPO pricing (~20 Nov).
-
-## Daily news — Monday 26 Oct 2026
-
-- **Borr** (`borr`, `hy-issuers`): Borr confirms the Prospector 5 loss. Reuters reports one of the
-  five missing found dead; Gabon has opened a technical investigation. Nothing on insurance yet. `[F]`/`[E]`
-- **Intrum** (`hy-issuers`, `hy-funds`): Q3 miss and a SEK 1.5bn goodwill write-down; the shares fell
-  up to 39% on 23 Oct. No bond price yet. `[E]`
-- **DOF** (`dof`): sells Skandi Implementer (delivery Q2 2027); price not given, "material" net-debt cut. `[F]`
-- **DNB** (`dnb`): Capital Markets Day 10 Nov; Q4 report 4 Feb 2027. `[F]`
-- Minor: Kistos bond tap (credit-positive), Viaplay Q3 neutral, SK hynix Q3 confirmed for 28 Oct.
-
-**Needs you:** Borr's first bond and share prices today (the 18:00 check covers it). Intrum needs a
-bond price before the Heimdal verdicts are re-read.
-
-**Register:** events added for the DOF sale, Intrum Q3, DNB CMD and DNB Q4.
-
-## Input — DNB Carnegie Week Ahead (23 Oct 2026), received Sunday 25 Oct
-
-User input, broker macro research (marketing material) `[E]`. It has no company events. It is
-read at the next run of each document named below and changes no document by itself. Skill
-revision: `update-chain` 2026-10-25.3.
-
-### What it says, and where it goes
-
-| Item `[E]` | Document | What to look at, at its next run |
-|---|---|---|
-| Norges Bank's governor blames 4–5% wage growth for the slow progress to the 2% target: a hawkish reminder | `hy` | NIBOR path and the 5 Nov decision; the Bull and Bear rate paths |
-| NOK is the G10 outperformer in October: EURNOK −1.5% and USDNOK −1.1% in the week, on oil and gas prices | `equity` (NOK path); every NOK figure in the company analyses | Spot against the Base "NOK flat" path; NOK-path IRRs |
-| French 10y yield above 5% (a 14-year high), OAT–Bund spread above 170 bp, protests and curfews. DNB Carnegie expects a full debt crisis to be avoided | `defense` (France PLF 2027, already an event), `equity` (European risk) | France's equipment path and the Bear catalyst |
-| ECB at 2.50% after hikes in June and September; DNB Carnegie expects hikes in December and March | `equity`, `hy` (EUR hedge carry) | Rate assumptions in Bear and Base |
-| Fed at 3.75–4.00%; hold expected on 28 Oct, a hike in December; hawkish dissents possible | `equity`, `ai` (financing cost of the AI build) | US rate path in the scenarios |
-| Rotation out of tech (NASDAQ −0.5% in the week) after disappointing AI results | `ai` | Already in Update 4 (Meta and the capex debate) |
-| Brent front near its Mar/Apr highs; European gas three times its level at the start of the year | `oil` | Already the 24 Oct risk premium; the next run comes after OPEC+ on 1 Nov |
-
-### Events added to the register
-
-- **New status `watch`,** for data releases and decisions where a hold is expected. They are
-  listed, but never force an update on their own; a surprise turns them `open`:
-  - 28 Oct: FOMC; Norway retail sales;
-  - 29 Oct: ECB; US Q3 GDP and Sep PCE; Sweden GDP indicator;
-  - 30 Oct: Norway registered unemployment; Norges Bank FX purchases; euro-area and France GDP;
-    France CPI.
-- **New `open` event:** the UK Budget on 28 Oct, for UK defence spending (`defense`).
-
-## Week 43 — Saturday 24 Oct 2026 (manual run, before the schedule started)
-
-Skill revisions: `update-chain` 2026-10-24.1 for the run (2026-10-24.2 from this evening, which
-added the schedule); `iaf-valuation` 2026-10-18.2; `rig-market-bbb` 2026-10-10.1.
-
-### Summary
-
-- Four company analyses updated. **No verdict moved: all four still fail.**
-- Rig Market BBB kept unchanged after the Gulf escalation. The cascade stopped there.
-
-### Updated
-
-| Document | Result | What moved | Stale after |
-|---|---|---|---|
-| Handelsbanken (`shb`) | v3, changed | Q3 capital return: FY26 dividend SEK 9.61 → 12.05; Base IRR 8.1% → 8.9%, margin of safety −9.7% → −7.7% | 23 Nov |
-| Storebrand (`stb`) | Kept unchanged | Q3 (21 Oct) on the Base path; a check run moved Base by +0.4 pp, below the minimum | 23 Nov |
-| Borr (`borr`) | v3, Bull only | Base still no equity value; Bull 8.3% → 11.2% (price and current method) | 9 Nov |
-| Hafnia (`hafnia`) | v7, changed | Price and FX only; Base IRR +1.2% → −0.5%, margin of safety −22.8% → −25.9% | 18 Nov |
-| Rig Market BBB (`rig`) | Kept unchanged | Gulf escalation: no offshore suspension or force majeure found; Gulf-jackup Bear catalyst not triggered | 9 Nov |
-
-### News that mattered
-
-- **Gulf escalation since 22 Oct:** went to `rig`.
-  - `[F]` Houthi attacks in Saudi Arabia's Eastern Province (Dammam airport; a drone aimed at
-    Shaybah); Aramco evacuated its Dhahran headquarters; the US ordered non-emergency staff out.
-  - `[E/?]` The IRGC claims seven tankers were hit (unverified).
-  - The oil baseline of 24 Oct already carries the escalation as a front-end risk premium.
-
-### Needs you
-
-- DNB has no next report date in the register.
-
-### Left for next run
-
-- **Defense:** oil changed 17 Oct; Defense reads oil only for its Gulf export row.
-- **AI-linked companies:** Amazon, Alphabet, Microsoft, NVIDIA and TSMC (AI Update 3 of 22 Oct;
-  the equity baseline of 18 Oct). Run after the Q3 reports of Microsoft, Alphabet and Amazon on
-  28–29 Oct.
-- **Global index funds:** after the company blocks.
-
-### Events in the next 14 days
-
-- 26 Oct: Westwood weekly rig count, the first after the escalation.
-- 28 Oct: Microsoft, Alphabet and SK hynix Q3.
-- 29 Oct: Amazon and Kongsberg Q3.
-- 1 Nov: OPEC+.
-- 2 Nov: Transocean and Valaris Q3 with fleet status; Westwood count.
-- 3 Nov: US midterms; Equinor AHTS tender.
-- 4 Nov: Riksbank; TORM Q3.
-- 5 Nov: Norges Bank; Rheinmetall Q3.

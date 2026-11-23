@@ -1,220 +1,26 @@
-# Nordic HY — master watchlist and company bond assessment — 9 November 2026
+# Nordic HY — master watchlist and company bond assessment — 19 November 2026
 
 ## Metadata
 
-- **9 Nov 2026 update** (Monday, Europe/Oslo; skill `hy-market-bbb` **2026-11-08.1**). A short
-  update on **Fondsfinans' October report and its 31 Oct holdings**, so that the funds re-run of
-  9 Nov reads current prices. The Stamdata screen was not re-run.
-  - **HY Market BBB 5 Nov:** read again; nothing this file reads moved (see the 7 Nov note below).
-    The Bear spread shocks stay skill constants.
-  - **Oil:** Oil Market BBB is stale and its follow-up is pending. Brent has fallen since (Jan-27
-    $93.64 on 9 Nov, coordinator note), and HY Market BBB has not read that. No own oil view is
-    taken here; the E&P and driller Bear PDs are unchanged.
-  - **Fondsfinans' 31 Oct holdings** (fundlist/Morningstar, 99 lines each; prices = market value ÷
-    nominal at Norges Bank FX of 30 Oct, USD 9.2302, EUR 10.312, SEK 0.9393, incl. accrued
-    interest `[A]`) settle the open names:
-    - **Sigma Holdco: 80.0 → 79.2. Stressed → Distressed** (the band the 7 Nov file left open).
-      Base PD 12.7 → **18.0**, Bear 32.5 kept (rule 26.0), loss if default 65 / 78 (64.9 / 77.5),
-      Base return 9.5 → **6.5%**, Bear −18.7 → **−18.3%**. Weights unchanged at 30 Oct (HH 3.7, FF
-      0.83).
-    - **Hofseth: ~72 dirty confirmed.** FF's holdings give 72.8 dirty on 31 Oct (≈ 70.9 clean); FF's
-      text says "just under 70" and Sissener's "around 70". No value changes. New since 7 Nov: a
-      case-handling error in the municipality delays the planned Dyrkorn plant (FF `[E]`); the
-      covenant step has been in force since 7 Nov; the NOK 600m raise is still open; Q3 on 16 Nov.
-      FF 0.95 → **0.91**, FFK 0.82 → **0.75**.
-    - **Foxway: 96.0 → 93.7.** Still Watch. Yield 16.0 → 17.9, Base PD 11.6 → **13.7**, Bear
-      23.6 → **29.2**. FF 1.05, FFK 0.58.
-    - **Magnolia: 87.3 → 88.0.** Still Stressed. Yield 25.7, Base PD 26.0 → **24.9**. FF 0.60.
-    - **Heimstaden AB 6.75% hybrid: a new watchlist entry.** FF bought "a smaller position at low
-      prices" in the second half of October: 0.40% at 84.7 (dirty). **Stressed**. Yield ~14
-      NOK-hedged `[A]` (no first-call data read); Base PD **9.1**, Bear 13.0, recovery 25 / 10
-      (hybrid), loss if default 78 / 95.
-    - **Varel Oil & Gas is no longer in the 31 Oct holdings** of FF HY or Kreditt (the lists are cut
-      at 99 lines, the smallest line is 0.39%, and Varel was 0.98 / 0.62% on 30 Sep). It was a +2 bp
-      contributor in October. Read as **sold or cut below 0.39%** `[A]`; the funds' named loss drops
-      it. Not confirmed by the manager.
-  - **Named-bond notes from the report, no status change:**
-    - **Andfjord Salmon:** a new NOK 1.25bn three-year bond at +830 bp fully finances the next
-      build-out; the old 14.16% bond is redeemed at a premium in November (Kreditt held it at
-      113.3); FF and FFK joined. First post-smolt sale. Not on the watchlist.
-    - **Cegal:** new NOK 1.8bn bank financing repays the bond at its February 2027 maturity, which
-      removes the refinancing risk (most likely the "Chip Bidco" line, FF 0.93 `[A]`).
-    - **DNO:** record Q3 with Kurdistan production back, near-zero net debt (FF `[E]`). Performing.
-    - **GLX 97.9, Bulk Infrastructure 97.4 / 99.2:** −3 bp contributors at FF. Performing; above 90
-      with no named warning.
-    - **Color Group:** Stena is buying it; the senior bonds rose and the hybrid is expected to be
-      redeemed at par when the deal closes (FF `[E]`).
-  - **Intrum 7.75% 2028 notes:** the row added on 7 Nov stands (Sissener 1.7%, ~85 assumed,
-    Stressed). Fondsfinans holds no Intrum (its report says so).
-  - **Named 2027 loss now** (part 0 of the Fund read-out): FF 0.39 → **0.34**, FFK 0.17 →
-    **0.09**, HH 2.00 → **2.15**, HH+ 1.94 → **2.06**, SIS **1.10** (unchanged).
-- **7 Nov 2026 update** (Saturday, Europe/Oslo; skill `hy-market-bbb` **2026-10-24.1**, unchanged).
-  It is a partial update with three causes: the HY Market BBB change of 5 Nov (this file last read
-  the 24 Oct baseline, on 4 Nov), Sissener's October report (read into `docs/hy-funds-analysis.md`
-  on 6 Nov), and a news check on the watchlist since 4 Nov.
-  - **HY Market BBB of 5 Nov: none of the values this file reads moved.** The baseline re-marked
-    spreads (Base 430 → 490 bp) and returns (Base window 7.2%; market reference E / R 0.196 →
-    0.254). This file reads the stub NIBOR (4.80), the Bear 2027 sector default rates for
-    performing bonds, LGD and the status scale, and all of them are unchanged. The Bear spread
-    shocks in the bond table (energy +5.5, others +4.2, at-risk +4.0–5.0 pp) are skill constants
-    (F9 item 5), not read from the baseline. The baseline's wider start (490 bp, Bear year-end 2027
-    kept at 850) would narrow the shock from today by ~0.6 pp. That would make each Bear return
-    ~1–2 pp less negative. It is a method question for the skill and is not applied `[A]`.
-  - **The market reference has moved from 0.196 to 0.254.** Every E / R comparison with 0.196 in
-    this file (the 25 Oct Borr note, part 3 of the fund read-out) is superseded. The funds file
-    restated the verdicts against 0.254 on 6 Nov; Høyrente N is now in the Marginal band (94%).
-  - **Changed (Sissener's October report, `[E]` for the manager's statements):**
-    - **Hofseth re-marked 76.2 → ~72 dirty (~70 clean).** Sissener says it "traded down to around
-      70% of par" in October. It stays **Distressed**: Base PD 24.4 → **26.9**, loss if default
-      31 → **27%**, Base return 11.8 → **14.0%**, Bear −19.5 → **−16.2%**. Sissener's weight is now
-      2.6% (30 Oct). Its Japanese partners wrote down their investment in early November `[E]`.
-    - **New row: Intrum 7.75% 2028 notes** (XS3099990296), held by Sissener at 1.7%. The price of
-      **~85 is assumed**, so the row is **Stressed**: Base PD 15.9, loss if default 57%, Base return
-      10.7%, Bear −8.7%. The 30 Sep mapping wrongly treated this position as repaid. The outcome
-      record is corrected: the September tender bought the 2027 notes, and the 2028 notes stayed.
-    - **Named 2027 loss:** SIS 0.98 → **1.10** (Bear 2.57 → 2.84), the same values as the funds
-      file of 6 Nov. FF 0.39 and FFK 0.17 do not change: the Hofseth re-mark moves them by
-      −0.002 pp. HH and HH+ do not change: they hold neither bond.
-  - **Kept (news since 4 Nov; nothing moves a status):**
-    - **Borr:** Watch, ~93 derived. No 6-K since 2 Nov and still nothing on insurance (EDGAR,
-      7 Nov). The Q3 report is set for **18 Nov** (Borr's financial calendar of 15 Jul `[F]`). The
-      shares fell to $3.24 on 6 Nov, −19% since 30 Oct and −26% since 23 Oct (Yahoo, via
-      `docs/borr-analysis.md` v3.2 `[F]`). That thins the equity cushion under the notes, but no
-      quote for the notes has been found. The next price signal is Heimdal's November report
-      (~4 Dec).
-    - **Hofseth:** no Newsweb notice since the EGM of 19 Oct (board change), so no waiver, vote or
-      equity raise. The covenant step (25 → 27.5%) took effect on 7 Nov, and the first test is at
-      31 Dec. The Q3 report is set for **16 Nov** (notice of 8 Oct `[F]`). The CEO is also interim
-      CFO.
-    - **Intrum, Trustly, HX:** no new notice or report found. Trustly's equity closing is still
-      pending (expected in November). HX's Q3 report date is not announced; by its earlier pattern
-      it comes around the end of November `[A]`.
-    - **Heimdal (Nordnet forum, about 2 Nov, Erik `[E]`):** Høyrente's effective yield is 8.75% in
-      local currency and 9.75% in NOK. That confirms the yield-basis finding of 4 Nov. NAV N 122.88
-      on 5 Nov (Nordnet). Sissener has posted nothing since 8 Oct.
-    - **Taptravel (not held):** a written procedure with a voting deadline of 9 Nov (15:00 CET). It
-      would extend maturities to 2029–30, make senior interest PIK by default and waive existing
-      defaults, conditional on a share issue of at least SEK 50m. That is a distressed amendment,
-      and it belongs to the market log in `docs/hy-market-bbb.md`.
-      **Outcome (11 Nov note):** both written procedures approved `[F]` (Taptravel on MFN, 9 Nov). The changes take effect
-      only when a share issue of at least SEK 50m from Ridge Capital closes (longstop 31 Mar 2027; failure is an event of
-      default). A re-default after July's first-time default, so no new FTD; In restructuring; not held by any tracked fund.
-  - **Not rerun:** the Stamdata held-company scan (window still 4 Aug–23 Oct), the Fondsfinans
-    names (their October holdings are due ~10 Nov) and the fund return paths. Change log at the end.
-- **Date of the 4 Nov update:** 4 Nov 2026, Europe/Oslo: a partial update on **Heimdal's October monthly reports**
-  (Høyrente and Høyrente Pluss, dated 30 Oct, published early November `[F]`). First version
-  6 Oct; full runs 11 and 18 Oct; notes 22–26 Oct; partial update 30 Oct. Skill `hy-market-bbb`
-  **2026-10-24.1** for this update. HY Market BBB baseline 24 Oct 2026, kept unchanged here (Bear
-  default rates for performing names; NIBOR 4.80). Note: the October anchor spread (490 bp, below)
-  hits that baseline's stale trigger (≥ 480 bp); its rerun is not part of this file.
-- **4 Nov update: what the October reports show** (tag `[F]` = the reports; derived prices `[A]`):
-  - **Returns (class A):** Høyrente −0.48%, Høyrente Pluss −0.14% (swing pricing on the last
-    day; it reverses at the next NAV). DNB Carnegie Nordic HY −0.2%; Nordic spread 4.3% → 4.9%.
-  - **Contributions:** Trustly +0.42 / +0.44 pp (rose after the owners' equity commitment);
-    Intrum −0.56 / −0.46; HX −0.49 / −0.40; Borr −0.21 / −0.18; Archer −0.17 / −0.13 (HH / HH+).
-  - **Borr: Performing (provisional) → Watch.** The first price signal after the Prospector 5
-    loss is a fall of ~4–5% in October (after ~4% in September, mostly US rates). The notes are
-    derived at ~93 (91–96) `[A]`: above 90, so Watch on "a recent price fall" (note 5). Base PD
-    7.3%, EL 3.4%. Named 2027 loss: HH +0.19, HH+ +0.15 pp.
-  - **HX super senior bonds: Watch → Stressed.** HX cost 0.13–0.14 pp more than the old-loan mark
-    in both funds, so the SSSNs fell ~12% in October. They are derived at ~84 `[A]`, down from
-    ~96 assumed; the range is 79–88 `[A]` (note 9).
-  - **Marks confirmed:**
-    - Intrum 73.75: fell after the Q3 report; Heimdal calls it an overreaction and both funds
-      bought more. Derived 30 Sep price ~93 `[A]`.
-    - HX old loan 12.5: now 0.35% of HH and 0.27% of HH+ `[F]`.
-    - Trustly 79: it **rose** in October from ~70 at 30 Sep `[A]`, so the ~95 assumption on
-      6–29 Oct was ~25 points too high.
-  - **Weights:** the 30 Oct top-10 weights replace 30 Sep for Borr, Trustly, Intrum (HH), Sigma
-    (HH), Flora and Shearwater. HH shrank from NOK 8,354m to 7,554m: about NOK 760m (~9%) of net
-    redemptions `[A]`, so most remaining weights rose ~10%.
-  - **Named 2027 Base loss:** HH 1.65 → **2.00**, HH+ 1.73 → **1.94**; SIS 0.98, FF 0.39 and
-    FFK 0.17 unchanged. Bear named: HH 4.23 → **5.16**, HH+ 4.50 → **5.05**.
-  - **Yield basis (for the funds file):** the report box yield is **not** in NOK. Høyrente shows
-    8.78% after fee and "measured in NOK" 9.60%; Pluss 9.42% and 10.28%. End-Aug NOK yields were
-    8.9% and 9.74%.
-  - **Hofseth:** the 7 Nov covenant step has not passed yet. No equity raise was announced by
-    4 Nov (web search); status kept.
-  - Not rerun: the names that Heimdal does not hold or does not name (prices 30 Sep or older),
-    the Stamdata scan (held-company window still 4 Aug–23 Oct) and the fund return paths. Change
-    log at the end.
-- **30 Oct update: Intrum, HX and Trustly re-marked** (causes: Intrum's Q3 report 23 Oct; Heimdal
-  Høyrente NAV −1.4% in the week to 29 Oct; the managers' own Nordnet forum posts 28–30 Oct, pasted
-  by the user, tag `[E]`):
-  - **Intrum: ~90 assumed → 73.75** (Heimdal's fund mark, 27 Oct; trades 75–77 on 26 Oct; exchange
-    quote 73.25 for the 2030 note). **Watch → Distressed.** The notes are senior secured (recovery
-    35 / 25 → 45 / 30). Base PD 5.7 → 22.9%, loss if default 67 → 50%.
-  - **Trustly: ~95 assumed → 79** (Heimdal's fund mark, ~30 Oct; bid 76/77, offer 80.375, no
-    trade). **Watch → Distressed (at the 80 edge).** The ~95 assumption was wrong since June:
-    Sissener bought the bond at 75.50 in mid-June. Base PD 7.2 → 24.3%.
-  - **HX: split in two.** The terms of the August transaction are now read (new super senior bonds
-    and a 3-for-1 roll-up). The **old 2030 loan** is marked 25 → 12.5 (In restructuring; HH 0.34%).
-    The rest of the position is in the new **7% super senior bonds 2028** (Watch, assumed ~96;
-    HH ~1.1%). Carry removed for HX: HH 0.51 → 0.02 pp, HH+ 0.45 → 0.02 (coupon basis).
-  - **Named 2027 Base loss:** SIS 0.86 → **0.98**, HH+ 1.32 → **1.73**, HH 1.16 → **1.65**; FF 0.39
-    and FFK 0.17 unchanged. Details in the new section "Fund read-out", which
-    `docs/hy-funds-analysis.md` reads.
-  - **Borr:** status kept (Performing, provisional). No bond price was found. BW Energy's Q3 report
-    (29 Oct) confirms the MaBoMo Phase 2 delay and a search for a new rig.
-  - Not rerun: the other names (prices 30 Sep or older), the Stamdata scan (held-company window
-    still 4 Aug–23 Oct) and the fund return paths. Change log at the end.
-- **18 Oct run** (first full run on the status scale): HY Market BBB baseline 17 Oct 2026.
-- **18 Oct update** (review of default tracking, `docs/review-hy-funds-and-defaults.md`):
-  - **This file is now the master watchlist.** Every held name has one status on the skill's
-    status scale, with the date, price and status it entered on, and an outcome record for names
-    that left or changed status. The market file lists only names that are not held.
-  - **The PD rule is applied consistently** (skill F9, revised wording):
-    - Shearwater (~86), Tullow (~88) and Viaplay (89.6) are priced 80–90, so they are
-      **Stressed** (10%), not Watch (5%);
-    - Hofseth's market-implied PD uses its own recovery (60): 28.8, not 25.6;
-    - assumed-price names (Trustly, Intrum, Convene, Norse, Flora opco) follow the rule at their
-      assumed price and yield;
-    - Bear overrides are kept where they are harsher than the rule, and the rule value and the
-      reason are shown.
-  - Named 2027 Base losses per fund: FF HY 0.39 (unchanged), Kreditt 0.17, Sissener 0.86, Høyrente
-    N 1.16, Pluss 1.32. The rule alone adds 0.11, 0.14 and 0.19 pp to the last three, on top of
-    the 30 Sep prices. All are below the minimum change, so the fund
-    return paths are not rerun (`docs/hy-funds-analysis.md`).
-  - 17 Oct scan results added (Kistos notice read: routine). News added: Hofseth's NOK 600m equity
-    raise pushed to year-end; Elcano sold its loss-making LNG ship and repaid its lease.
-- **22 Oct note** (skill `hy-market-bbb` 2026-10-18.2; no table, price or loss changed):
-  Havila Shipping added to the news screen. It lost the bank-debt case on the 2020
-  restructuring agreement in Borgarting Court of Appeal on 19 Oct and will appeal to the Supreme
-  Court. It is not on the watchlist: no Havila bond is known to be held at 30 Sep (data gap 8).
-- **24 Oct note** (skill `hy-market-bbb` 2026-10-24.1; HY Market BBB baseline 24 Oct, kept
-  unchanged; no table, price, status or loss changed): the held-company screen is extended to
-  23 Oct. Kistos's waiver was adopted with a 0.10% fee (routine, closed). Elcano calls an EGM on
-  18 Nov to report the completed corporate refinancing (credit-positive). No other held company
-  appears in the 16–23 Oct feed. Prices stay at 30 Sep: the October holdings are not out yet.
-- **25 Oct note: Borr Drilling** (skill `hy-market-bbb` 2026-10-24.1; Sunday, markets closed;
-  no price, PD or named loss changed):
-  - **The event:** Borr's jackup Prospector 5 sank off Gabon on Saturday 24 Oct. Five of the 115
-    people on board were still missing on 25 Oct, and the search was ongoing.
-  - **Status kept: Performing.** The status scale has no "asset lost" warning. Losing one rig
-    out of 29 (hull cover is likely but not yet confirmed) is not on its own a warning under the
-    rule, and no price can be seen until Monday 26 Oct.
-  - **Provisional until the first price.** The signposts (skill thresholds) are in note 5,
-    under the company bond table.
-  - **Row corrected:** the 2028/2030 notes were redeemed in June 2026. The secured debt is now
-    the 8.75% 2032 and 9.00% 2034 notes.
-  - **Funds:** Borr stays out of the named loss, so the HH and HH+ numbers do not change.
-    - Even at a first price of 70 (Distressed), Borr would add about 0.5 pp to the 2027 named
-      loss. Together with the 18 Oct rule effect not yet in the paths, that stays below the
-      1.0 pp minimum change, so the fund paths are not rerun.
-    - **But Høyrente N sits close to the line (E / R 0.215 against 0.196).** At Stressed, Borr
-      would put it at about 0.20 `[A]`, so re-check that verdict if Borr turns Stressed or worse.
-    - A price fall also lowers both funds' NAV directly in Q4 (100 → 85: about −0.8 pp HH and
-      −0.7 pp HH+).
-  - Details are in the news screen and in data gap 9.
-- **26 Oct check: status kept, Borr Performing (provisional)** (skill `hy-market-bbb`
-  2026-10-24.1; no signpost in note 5 hit, nothing else changed). No price for the 2032/2034 notes
-  was found on 26 Oct (news, broker and TRACE searches; Stamdata not read) `[?]`. The Heimdal NAVs
-  for 26 Oct are not out yet (Høyrente N last 123.21 on 23 Oct; Pluss deals monthly). Shares fell:
-  NYSE $4.045 intraday (−8.1% vs $4.40), Oslo NOK 38.31 close (−3.9%) `[F]` (Yahoo). Borr's 26 Oct
-  update (6-K of the 25 Oct release filed the same day) says five people are still unaccounted
-  for and the search goes on. It says nothing on insurance, the BW Energy contract or bondholders
-  `[F]`. Reuters reports one death, which is not confirmed `[E]`. The first bond price stays open
-  (data gap 9).
+- **Status (19 Nov 2026, full refresh; skill `hy-market-bbb` 2026-11-18.2; compacted to the lean
+  rules, 990 → 670 lines).** Prices: fund holdings and marks to 31 Oct (Fondsfinans holdings,
+  Heimdal and Sissener October reports), Intrum's tender of 10 Nov, derived Borr and HX SSSN
+  prices; the November reports (early December) are the next price round. Inputs: HY Market BBB
+  18 Nov (market NIBOR path; credit values of 5 Nov: the Bear spread shocks and sector Bear rates
+  are unchanged), Oil 18 Nov, Rig 12 Nov (Borr Q3 read 19 Nov).
+  - **Changed this run:** Intrum 8.5% 2030 73.75 → **68.0** (tender clearing price, settled 10 Nov):
+    Base PD 22.9 → 25.8, Base 10.4 → **13.1%**, Bear −13.5 → **−14.7%**; Intrum 7.75% 2028 ~85
+    assumed → **~84.3** (the SEK 7.75% 2028 cleared at 84.26 in the same tender, proxy `[E]`).
+    Fund named losses: HH 2.15 → 2.17, HH+ 2.06 → 2.07, SIS 1.10 → 1.11 (Base); Bear +0.14 / +0.09
+    / +0.01.
+  - **Read, status kept:** Borr Q3 (insurance $200m recommended for payment; EBITDA ~$79m; Watch);
+    Hofseth Q3 (revenue −46%, processing contracts lost: negative, no new price; Distressed, Bear
+    override kept); Booster's standstill prolonged again (2 Nov); Jøtul Q3 investor call (18 Nov,
+    recapitalised group); Elcano's EGM on the completed refinancing (18 Nov); Trustly's equity
+    closing still pending, Q3 on 25 Nov; Shearwater Q3 due ~late Nov.
+  - **Stamdata screen:** held companies and the market feed read 14 Oct–19 Nov (four pages); no
+    new distress notice on a held name beyond Booster and Jøtul (Stamdata and news screen).
+
 - **Question:** for each company that matters in the analysed funds, **what return can its bonds
   be expected to give, and what is the risk?** It covers the largest positions and every name
   flagged by the Stamdata scan or by price: 29 companies. The funds are listed only as "held by".
@@ -281,12 +87,12 @@
 
 | Bond | Status | Yield | Default probability (Base) | Loss if default | Base 1-year return | Bear 1-year return |
 |---|---|---|---|---|---|---|
-| **Borr 2032/2034 (~93, derived 30 Oct)** | **Watch** (new 4 Nov) | 12% | 7.3% | 47% | 8.7% | −13.8% |
-| Intrum 8.5% 2030 (27 Oct mark; confirmed 30 Oct) | Distressed | 22% | 22.9% | 50% | 10.4% | −13.5% |
+| **Borr 2032/2034 (~93, derived 30 Oct; Q3 read 19 Nov)** | **Watch** | 12% | 7.3% | 47% | 8.7% | −13.8% |
+| **Intrum 8.5% 2030 (68.0, tender 10 Nov)** | Distressed | 25% | 25.8% | 46% | 13.1% | −14.7% |
 | Trustly FRN 2030 (~30 Oct mark; rose in Oct) | Distressed (at the 80 edge) | 21% | 24.3% | 41% | 10.7% | −13.2% |
 | **HX super senior 2028 (~84, derived 30 Oct)** | **Stressed** (Watch until 4 Nov) | 25% | 33.1% | 29% | 15.1% | −19.7% |
 | **Hofseth (~72, October; Sissener, re-marked 7 Nov)** | Distressed | 21% | 26.9% | 27% | 14.0% | −16% |
-| **Intrum 7.75% 2028 (~85 assumed; new 7 Nov)** | Stressed | 20% | 15.9% | 57% | 10.7% | −8.7% |
+| **Intrum 7.75% 2028 (~84.3, tender proxy 10 Nov)** | Stressed | 20% | 16.3% | 57% | 11.0% | −8.9% |
 | **Sigma Holdco (Flora) (79.2, 31 Oct)** | **Distressed** (Stressed until 9 Nov) | 18% | 18.0% | 65% | 6.5% | −18% |
 | Magnolia Bostad (88.0, 31 Oct) | Stressed | 26% | 24.9% | 50% | 13.2% | −15% |
 | **Heimstaden AB 6.75% hybrid (84.7, 31 Oct; new 9 Nov)** | Stressed | ~14% `[A]` | 9.1% | 78% | 6.9% | −11% `[A]` |
@@ -306,13 +112,13 @@
   HH+ 4.4%, fifth). The October reports give the first price signal after the Prospector 5 loss:
   −0.21 / −0.18 pp, a price fall of ~4–5% in the month. That puts the notes at ~93 `[A]`, so they
   are Watch, not Stressed. On Heimdal's marks the rig loss is a dent, not a solvency event: one
-  rig of 29, probably insured. Borr has said nothing yet on insurance; its Q3 report (~18 Nov
-  `[E]`) is the next test.
-- **Heimdal's two largest Distressed names** (Intrum and Trustly, 30 Oct) are confirmed by the
-  October reports. Intrum fell ~93 → 73.75 in October, and both funds bought more. Trustly
-  **rose** ~70 → 79 on the owners' equity commitment. Each carries a Base PD of ~23–24% and pays
-  ~21% NOK-hedged, so the Base return stays ~10–11% if they do not default. The Bear return is
-  about −13%.
+  rig of 29, probably insured. Q3 (19 Nov read): the $200m hull cover is recommended for payment and EBITDA recovered from Q2's
+  trough (~$79m); leverage is high (~7.4× annualised) but no maturity is near. Kept Watch.
+- **Heimdal's two largest Distressed names:** Intrum fell again. Its own tender (settled 10 Nov)
+  bought the 8.5% 2030 notes at **68.0** (Heimdal's 27 Oct mark 73.75; ~93 at 30 Sep): Base PD
+  25.8%, ~25% NOK-hedged, Base 13.1%, Bear −14.7%. The fall is a further NAV mark of ~−0.17 pp for
+  HH in November. Trustly (79 on 30 Oct, rose on the owners' equity commitment) is unchanged until
+  its equity closing and Q3 (25 Nov): Base PD 24%, Base 10.7%, Bear −13%.
 - **Restructurings in progress:** HX's old 2030 loan (marked 12.5), Booster (default,
   standstill) and Jøtul (recapitalised). Booster's and Jøtul's prices are not public.
 - **HX in more detail** (updated 30 Oct; sources: the HX summonses of 29 Jul and 6 Aug with the
@@ -376,12 +182,12 @@ where a later date is shown: Heimdal's 30 Oct top 10 and HX old-loan weights (Oc
 
 | Issuer | Row | Status now | On list since (date: price, status) | Price now (date; stale / assumed) | Next decisive event | Held by (% of NAV) | Outstanding NOKm |
 |---|---|---|---|---|---|---|---|
-| **Borr Drilling: 8.75% 2032 and 9.00% 2034 senior secured notes** | Oil Service (jackups) | **Watch** (new entry 4 Nov) | 4 Nov: ~93 derived, Watch (after the Prospector 5 loss on 24 Oct) | **~93** (30 Oct; derived from Heimdal's October contribution, range 91–96; no observed quote) `[A]` | Borr's Q3 report (**18 Nov**, financial calendar `[F]`): insurance on Prospector 5; the class-society investigation; coupon ~$110m on 15 Jan 2027. Shares $3.24 on 6 Nov (−19% since 30 Oct; 7 Nov check) | **HH 5.6, HH+ 4.4 (30 Oct)** `[F]` | ~18,800 ($2,035m at USD/NOK 9.23, 30 Oct) |
+| **Borr Drilling: 8.75% 2032 and 9.00% 2034 senior secured notes** | Oil Service (jackups) | **Watch** (new entry 4 Nov) | 4 Nov: ~93 derived, Watch (after the Prospector 5 loss on 24 Oct) | **~93** (30 Oct; derived from Heimdal's October contribution, range 91–96; no observed quote) `[A]` | **Q3 read 19 Nov:** $200m hull cover recommended for payment (no loss of hire); EBITDA ~$79m; debt $2.53bn, $51m due in 12 months. Next: insurance paid; coupon ~$110m on 15 Jan 2027; Heimdal's November report (~4 Dec). Shares NOK 31.0 (19 Nov, −9% on the day) | **HH 5.6, HH+ 4.4 (30 Oct)** `[F]` | ~18,800 ($2,035m at USD/NOK 9.23, 30 Oct) |
 | HX Hold Co: old 2030 loan (most likely the 7% Senior SSN stub `[A]`) | Consumer (cruise) | In restructuring | 6 Oct: ~45 assumed (whole HX position), In restructuring | **12.5** (Heimdal fund mark ~27 Oct after a small third-party trade; 25 before; confirmed in the October reports `[F]`) | February 2027 coupon (tap or PIK); refinancing of the cash management facility by 30 Jun 2027 | **HH 0.35, HH+ 0.27 (30 Oct)** `[F]` | ~2,070 (EUR ~200m left after the roll-up `[A]`) |
 | HX Hold Co: 7% super senior bonds 2028 (SSSN; new money and roll-up, Aug 2026) | Consumer (cruise) | **Stressed** (Watch 30 Oct–4 Nov) | 30 Oct: ~96 assumed, Watch | **~84** (30 Oct; derived: HX's October contribution less the old-loan mark, both funds; range 79–88) `[A]` | The same; HX's Q3 report (date `[?]`); the top-up certificate (~12 Jan 2027) | HH ~1.16, HH+ ~0.87 (30 Oct) `[A]` | ~800 (EUR ~78m at full take-up `[A]`) |
-| Booster Precision | Industry (auto) | In restructuring | 5 Oct: `[?]`, Vote or standstill | `[?]` | Outcome of the standstill (prolonged 1 Oct) | HH 0.30, HH+ 0.26 | ~650 |
-| Jøtul | Consumer | In restructuring | 6 Oct: `[?]`, In restructuring | `[?]` | Terms of the new bonds | HH 0.28, HH+ 0.12 | `[?]` |
-| Hofseth | Consumer (seafood) | Distressed | 6 Oct: 77.0 (31 Aug), Distressed | **~72 dirty ≈ 70 clean** (FF's 31 Oct holdings 72.8 dirty ≈ 70.9 clean; FF "just under 70", Sissener "around 70" `[E]`; re-marked 7 Nov, confirmed 9 Nov); 76.2 dirty (30 Sep, FF) | **Q3 report 16 Nov** `[F]`; covenant step in force from 7 Nov (value-adjusted equity ratio 25 → 27.5%; first test 31 Dec); NOK 600m equity raise still open; Japanese partners wrote down their investment (early Nov `[E]`); Dyrkorn plant delayed by a municipal error (FF `[E]`) | **FF 0.91, FFK 0.75 (31 Oct)**, **SIS 2.6 (30 Oct)** | `[?]` |
+| Booster Precision | Industry (auto) | In restructuring | 5 Oct: `[?]`, Vote or standstill | `[?]` | Outcome of the standstill (prolonged 1 Oct and again 2 Nov, Stamdata) | HH 0.30, HH+ 0.26 | ~650 |
+| Jøtul | Consumer | In restructuring | 6 Oct: `[?]`, In restructuring | `[?]` | Terms of the new bonds; Q3 investor call 18 Nov, annual report 11 Nov (Stamdata) | HH 0.28, HH+ 0.12 | `[?]` |
+| Hofseth | Consumer (seafood) | Distressed | 6 Oct: 77.0 (31 Aug), Distressed | **~72 dirty ≈ 70 clean** (FF's 31 Oct holdings 72.8 dirty ≈ 70.9 clean; FF "just under 70", Sissener "around 70" `[E]`; re-marked 7 Nov, confirmed 9 Nov); 76.2 dirty (30 Sep, FF) | **Q3 (16 Nov): revenue −46%, processing contracts lost (Salmon Business `[E]`)**; covenant step in force from 7 Nov (value-adjusted equity ratio 25 → 27.5%; first test 31 Dec); NOK 600m equity raise still open; Japanese partners wrote down their investment (early Nov `[E]`); Dyrkorn plant delayed by a municipal error (FF `[E]`) | **FF 0.91, FFK 0.75 (31 Oct)**, **SIS 2.6 (30 Oct)** | `[?]` |
 | Sigma Holdco (Flora, KKR) | Consumer | **Distressed** (Stressed until 9 Nov) | 6 Oct: 81.6 (31 Aug), Stressed | **79.2 (31 Oct, FF holdings)**; 80.0 (30 Sep) | Within one point of the 80 edge: at 80 it is Stressed again (Base PD ~13) | **FF 0.83 (31 Oct)**, **HH 3.7 (30 Oct)**, HH+ 2.67 | `[?]` |
 | Flora Food (opco, secured) | Consumer | Watch | 6 Oct: ~95 assumed, Watch | ~95 assumed (October: between −4% and +0.5% in both funds) | Same group as Sigma | **HH 4.1, HH+ 3.8 (30 Oct)** | `[?]` |
 | Magnolia Bostad | Real Estate | Stressed | 6 Oct: 86.4 (31 Aug), Stressed | **88.0 (31 Oct, FF holdings)**; 87.3 (30 Sep) | Swedish residential sales; real estate bonds hit hardest in October (Sissener `[E]`) | **FF 0.60 (31 Oct)** | `[?]` |
@@ -393,8 +199,8 @@ where a later date is shown: Heimdal's 30 Oct top 10 and HX old-loan weights (Oc
 | W&T Offshore | E&P | Watch | 11 Oct: ~92 (end-2025), Watch | ~92 (end-2025, **stale**) | A current price; Sissener bought "significantly" in Sep | SIS 2.8 | `[?]` |
 | Foxway (Ytinrete BidCo) | Other | Watch (recovered) | 6 Oct: 96.3 (31 Aug), Watch | **93.7 (31 Oct, FF holdings)**; 96.0 (30 Sep) | — | **FF 1.05, FFK 0.58 (31 Oct)**, HH 2.38, HH+ 3.11 | `[?]` |
 | Trustly | Finance | Distressed (at the 80 edge) (Watch until 30 Oct) | 6 Oct: ~95 assumed, Watch | **79** (Heimdal fund mark ~30 Oct; bid 76/77 for size not filled, offer 80.375 for 400k; no trade) `[E]`. **Rose in October** (+0.42 / +0.44 pp `[F]`) from ~70 at 30 Sep `[A]` | Owner equity of >USD 40m closing in November; Q3 report 25 Nov | **HH 3.8, HH+ 3.7 (30 Oct)**, SIS 1.84 (31 Aug) | ~3,870 (EUR 375m) |
-| **Intrum: 7.75% senior secured exchange notes 2028 (XS3099990296; Sissener)** | Finance | **Stressed** (new entry 7 Nov) | 7 Nov: ~85 assumed, Stressed (held throughout; wrongly recorded as repaid from 11 Oct) | **~85 assumed** `[A]`: no observed price; the 2029 note quotes 76.6 and the 2030 73.75 (undated `[E]`); Intrum's end-October SEK 1bn buyback prioritises the 2028 maturity `[E]` | The buyback; Q4 report 4 Feb 2027 | **SIS 1.7** (NOK-R October report `[F]`) | `[?]` |
-| Intrum (Heimdal's 8.5% notes) | Finance | Distressed (Watch until 30 Oct) | 6 Oct: ~90 assumed, Watch | **73.75** (Heimdal fund mark 27 Oct; 80 before; trades 75–77 on 26 Oct) `[E]`; the October fall from ~93 at 30 Sep `[A]` is confirmed by the reports (−0.56 / −0.46 pp `[F]`) | Cost plan finalised in Q4; Q4 report 4 Feb 2027 | **HH 3.0 (30 Oct)** `[F]`; HH+ ~2.0 `[A]` (bought more; 1.82 on 30 Sep) | ~7,600 (8.5% 2030: EUR ~737m `[E]`) |
+| **Intrum: 7.75% senior secured exchange notes 2028 (XS3099990296; Sissener)** | Finance | **Stressed** (new entry 7 Nov) | 7 Nov: ~85 assumed, Stressed (held throughout; wrongly recorded as repaid from 11 Oct) | **~84.3** (19 Nov; Intrum's tender settled 10 Nov bought the SEK 7.75% 2028 at a weighted 84.26, max 87.70: proxy for the EUR 2028 `[E]`) | Q4 report 4 Feb 2027 | **SIS 1.7** (NOK-R October report `[F]`) | `[?]` |
+| Intrum (Heimdal's 8.5% notes) | Finance | Distressed (Watch until 30 Oct) | 6 Oct: ~90 assumed, Watch | **68.0** (Intrum's tender of the 8.5% 2030 notes, settled 10 Nov `[F]`); 73.75 Heimdal mark 27 Oct; ~93 at 30 Sep `[A]` | Cost plan finalised in Q4; Q4 report 4 Feb 2027 | **HH 3.0 (30 Oct)** `[F]`; HH+ ~2.0 `[A]` (bought more; 1.82 on 30 Sep) | ~7,600 (8.5% 2030: EUR ~737m `[E]`) |
 | Convene | Other | Watch (recapitalised Sep; FTD `[?]`) | 6 Oct: ~90 assumed, Watch | ~90 **assumed** | Whether the recapitalisation counts as an FTD | HH 1.10, HH+ 2.93 | `[?]` |
 | Norse Atlantic | Other (airline) | Watch | 6 Oct: ~95 assumed, Watch | ~95 **assumed** | — | HH 0.76, HH+ 2.27 | `[?]` |
 | EHAB | `[?]` | Watch `[A]` | 5 Oct: `[?]`, Watch (largest negative contributor at FF in Aug) | `[?]` (a +3 bp contributor in Sep) | Weight and price; not yet in FF's named loss | FF `[?]` | `[?]` |
@@ -414,6 +220,7 @@ where a later date is shown: Heimdal's 30 Oct top 10 and HX old-loan weights (Oc
 | HX Hold Co | 6 Oct: ~45 assumed, In restructuring (one position) | 30 Oct: split into the old 2030 loan (12.5, In restructuring) and the new SSSNs (~96 assumed, Watch) | Restructuring terms read | The August transaction primed the Senior SSNs that did not roll up (an FTD under the NT definition, already logged as In restructuring). Heimdal moved most of its exposure into the super senior bonds |
 | HX SSSN 2028 | 30 Oct: ~96 assumed, Watch | 4 Nov: ~84 derived (30 Oct), Stressed | Price fall; no default | HX's October contribution exceeds the old-loan mark by 0.13–0.14 pp in both funds: ~−12% on the SSSNs `[A]`. No trade or quote seen |
 | Borr Drilling (2032/2034 notes) | 25 Oct: par assumed, Performing (provisional; Prospector 5 lost 24 Oct) | 4 Nov: ~93 derived (30 Oct), Watch | Price fall; no default | First price signal: Heimdal's October contribution, −0.21 / −0.18 pp (≈ −4–5% in price). September was already ~−4%, mostly US rates. Insurance is still not stated by Borr |
+| Intrum (Heimdal's 8.5% notes) | 27 Oct: 73.75, Distressed | 10 Nov: 68.0 (tender), Distressed | Price fall; no default | Intrum bought €100m of its notes below par (2029 at 79.4, 2030 at 68.0) |
 | Sigma Holdco | 6 Oct: 81.6, Stressed | 9 Nov: 79.2 (31 Oct), Distressed | Price fall; no default | FF's 31 Oct holdings settle the 80 edge |
 | Varel Oil & Gas | 6 Oct: 89.9, Stressed | 9 Nov: not in FF's or Kreditt's 31 Oct lists | Sold or cut below 0.39% `[A]`; no default | +2 bp contributor in October; the manager has not confirmed an exit |
 | Heimstaden AB hybrid | not held | 9 Nov: 84.7 (31 Oct), Stressed; new entry | FF bought in the second half of October | Not a fallen performer: a deliberate purchase at low prices |
@@ -457,7 +264,7 @@ annual reports; the first transition data for calibrating the status values):
 | BlueNord | E&P | 7.875% 2031 USD, unsecured | 111.5 (31 Aug) | ~3.6 to call `[A]` | Performing; expensive | 0 / 8.0 | 35 / 25 | — / 79 | 0 / 6.4 | **3.6 / −11.0** (call terms `[?]`) | FF, HH, FFK |
 | Kistos | E&P | NOK/USD bonds | ~100 `[?]` | ~10 `[A]` | Performing (since 11 Oct; outcome record) | 0 / 8.0 | 55 / 40 | — / 65 | 0 / 5.2 | **~10 / ~−9** `[A]` | FF, FFK |
 | Eldorado Drilling | Oil Service | USD bonds | ~100 `[?]` | ~10 `[A]` | Performing (since 11 Oct; outcome record) | 0 / 4.0 | 55 / 40 | — / 65 | 0 / 2.6 | **~10 / ~−6** `[A]` | FF, FFK |
-| **Borr Drilling** | Oil Service | 8.75% 2032 ($1,100m) + 9.00% 2034 ($935m) USD, senior secured; 5% a year amortised at 102.5 from Jul 2027 (the 2028/2030 notes were redeemed in Jun 2026) `[F]` | **~93 (30 Oct; derived from Heimdal's October contribution, −0.21 / −0.18 pp ≈ −4–5% in price; range 91–96; no observed quote)** `[A]` | **~12.1** (YTM ~11.2 + 0.9; ~4.7-year average life) `[A]` | **Watch** (4 Nov; Performing, provisional, 25 Oct–4 Nov): a recent price fall after the Prospector 5 loss; four dead, one missing; investigation open (note 5) | **7.3 / 12.5 (9.6)** | 55 / 40 | **47 / 63** | **3.4 / 7.9** | **8.7 / −13.8** | HH 5.6, HH+ 4.4 (30 Oct) |
+| **Borr Drilling** | Oil Service | 8.75% 2032 ($1,100m) + 9.00% 2034 ($935m) USD, senior secured; 5% a year amortised at 102.5 from Jul 2027 (the 2028/2030 notes were redeemed in Jun 2026) `[F]` | **~93 (30 Oct; derived from Heimdal's October contribution, −0.21 / −0.18 pp ≈ −4–5% in price; range 91–96; no observed quote)** `[A]` | **~12.1** (YTM ~11.2 + 0.9; ~4.7-year average life) `[A]` | **Watch**: price fall after the Prospector 5 loss; Q3 (19 Nov read): hull cover $200m recommended for payment, EBITDA ~$79m, leverage ~7.4× (note 5) | **7.3 / 12.5 (9.6)** | 55 / 40 | **47 / 63** | **3.4 / 7.9** | **8.7 / −13.8** | HH 5.6, HH+ 4.4 (30 Oct) |
 | Foxway | Other | 9.642% FRN 2028 EUR, secured | **93.7 (31 Oct, FF)**; 96.0 (30 Sep); 74.65 end-2025 | **17.9** | Watch, recovered | **13.7 / 29.2 (22.4)** | 55 / 40 | **50 / 66** | **6.9 / 19.3** | **11.0 / −8.6** | FF, HH, HH+, FFK |
 | W&T Offshore | E&P | 10.75% 2029 USD, senior secured (US Gulf of Mexico) | ~92 (91.8 end-2025, SIS annual report; **stale** `[E]`) | ~14.6 | Watch: leveraged offshore E&P | 10.0 / 19.5 (15.1) | 55 / 40 | 48 / 64 | 4.8 / 12.4 | **9.8 / −7.8** | SIS (2.8%) |
 | Viaplay | Other | FRN 2028 SEK, post-restructuring | 89.6 (end-2025, **stale**) | 16.0 | **Stressed** | **11.3** / 19.5 ¹ (12.6) | 35 / 25 | 69 / 80 | **7.8** / 15.6 | **8.2 / −8.4** | HH, HH+, SIS (~1.6% `[A]`) |
@@ -470,8 +277,8 @@ annual reports; the first transition data for calibrating the status values):
 | Flora Food (opco) | Consumer | senior secured | ~95 (**assumed**) | ~11 `[A]` | Watch (same group as Sigma) | **6.1** / 15 ³ (7.1) | 55 / 40 | 48 / 63 | **2.9** / 9.5 | **8.1 / −4.5** | HH, HH+ |
 | Hofseth | Consumer | 8.244% FRN 2030 EUR, secured | **~72 dirty ≈ 70 clean (FF's 31 Oct holdings 72.8 dirty ≈ 70.9 clean; FF "just under 70", Sissener "around 70" `[E]`; re-marked 7 Nov, confirmed 9 Nov)**; 76.2 dirty (30 Sep, FF); quoted 70–75 during Sep (FF); 97.9 end-2025 | **~21.3** | Distressed; needs new equity; Q3 16 Nov | **26.9** / 52.0 ⁴ (**33.8**) | 60 / 45 | **27 / 48** | **7.3 / 25.0** | **14.0 / −16.2** | FF, SIS, FFK |
 | Trustly | Finance | EUR 375m senior secured FRN 8 Oct 2030, EURIBOR + 6.75% (coupon now 9.35%; NO0013646943); a super senior RCF (Mar 2026) ranks ahead | **79 (~30 Oct, Heimdal fund mark; bid 76/77, offer 80.375, no trade)**; ~70 at 30 Sep, derived `[A]` (rose in October); 75.50 mid-Jun (Sissener's purchase) | **20.7** (NIBOR + 6.75 + pull to par; 20.0 at the offer, 22.0 at the bid) | **Distressed (at the 80 edge)**: weak Q2, owner equity >USD 40m closing Nov | **24.3** / 37.3 (28.7); 19.3 at the Stressed band ⁶ | 55 / 40 | **41 / 60** | **10.0** / 22.4 | **10.7 / −13.2** | HH, HH+, SIS |
-| **Intrum (Sissener)** | Finance | **Intrum Investments & Financing 7.75% senior secured exchange notes 2028, EUR (XS3099990296)**; same ranking as the 8.5% notes | **~85 assumed (7 Nov)** `[A]`: between the 2029 quote (76.6, undated `[E]`) and par; Intrum's end-October SEK 1bn buyback prioritises 2028 `[E]` | **~19.8** (YTM ~17.2 + 2.6) | **Stressed** (new 7 Nov): assumed price 80 to below 90; same credit as the 8.5% notes | **15.9 / 28.5 (21.9)** ⁱ | 45 / 30 ⁷ | **57 / 75** | **9.1 / 21.3** | **10.7 / −8.7** | SIS (1.7) |
-| Intrum | Finance | Intrum Investments & Financing 8.5% senior secured exchange notes, EUR, quarterly coupon; 2030 note assumed (XS3099996814, 11 Sep 2030) `[A]` | **73.75 (27 Oct, Heimdal fund mark; trades 75–77 on 26 Oct)**; exchange quotes 73.25 (2030) and 76.59 (2029), undated `[E]`; ~93 at 30 Sep, derived `[A]` | **21.9** (YTM 19.3 + 2.6) | **Distressed**: Q3 goodwill impairment, servicing income falling | **22.9** / 33.4 (25.7) | **45 / 30** ⁷ | **50 / 70** | **11.5** / 23.4 | **10.4 / −13.5** | HH, HH+ |
+| **Intrum (Sissener)** | Finance | **Intrum Investments & Financing 7.75% senior secured exchange notes 2028, EUR (XS3099990296)**; same ranking as the 8.5% notes | **~84.3 (10 Nov; the SEK 7.75% 2028 tender clearing price, proxy `[E]`)** | **~20.2** (YTM ~17.6 + 2.6) | **Stressed**: price 80 to below 90; same credit as the 8.5% notes | **16.3 / 29.4 (22.6)** ⁱ | 45 / 30 ⁷ | **57 / 75** | **9.2 / 21.9** | **11.0 / −8.9** | SIS (1.7) |
+| Intrum | Finance | Intrum Investments & Financing 8.5% senior secured exchange notes, EUR, quarterly coupon; 2030 note assumed (XS3099996814, 11 Sep 2030) `[A]` | **68.0 (10 Nov, Intrum's own tender, €7.3m of the 2030s accepted)** `[F]`; 73.75 Heimdal mark 27 Oct; ~93 at 30 Sep `[A]` | **~25.1** (YTM ~22.5 + 2.6) | **Distressed**: Q3 goodwill impairment, servicing income falling; buying back below par | **25.8** / 41.0 (31.5) | **45 / 30** ⁷ | **46 / 69** | **12.0** / 28.1 | **13.1 / −14.7** | HH, HH+ |
 | Convene | Other | NOK, after recapitalisation | ~90 (**assumed**) | ~12 `[A]` | Watch; recapitalised Sep 2026 | **7.2** / 15 ³ (9.3) | 55 / 40 | 45 / 62 | **3.2** / 9.2 | **8.8 / −3.2** | HH, HH+ |
 | Norse Atlantic | Other | USD | ~95 (**assumed**) | ~12 `[A]` | Watch | **7.2** / 20 ³ (9.3) | 55 / 40 | 48 / 64 | **3.4** / 12.8 | **8.6 / −6.8** | HH, HH+ |
 | HX: 7% super senior bonds (SSSN) | Consumer | 7% super senior secured, 30 Jun 2028 at 104, cash coupon; pari passu with the EUR 50m cash management facility; senior to the Senior SSNs | **~84 (30 Oct; derived: HX's October contribution less the old-loan mark, ~−12% in both funds; range 79–88; no trade or quote)** `[A]`; 96 issue price (21 Aug) | **24.6** (YTM 22.0 + 2.6) | **Stressed** (4 Nov; Watch 30 Oct–4 Nov): price 80 to below 90; going-concern uncertainty; February 2027 coupon may need the tap or PIK | **33.1 / 73.0 (56.2)** | 70 / 50 ⁸ | **29 / 53** | **9.6 / 38.5** | **15.1 / −19.7** | HH, HH+ |
@@ -479,10 +286,8 @@ annual reports; the first transition data for calibrating the status values):
 | Booster Precision | Industry | EUR 60m FRN, secured | `[?]` | — | **In restructuring**: default; standstill | in default | — | priced in | — | **0 / −40%** `[A]` | HH, HH+ |
 | Jøtul | Consumer | NOK | `[?]` | — | **In restructuring**: recapitalised with new money | — | — | — | — | **0 / −40%** `[A]` | HH, HH+ |
 
-Values in **bold** changed on 4 Nov for Borr and the HX SSSN row, and on 30 Oct for Intrum,
-Trustly and the HX old loan (re-mark). For the other rows, bold marks the 18 Oct changes (the
-rule applied consistently). The October notes in the price column (Foxway, Shearwater, Sigma,
-Trustly, Intrum) are evidence only: they change no value in those rows. Bear PDs set above the
+Values in **bold** changed on 19 Nov (the two Intrum rows: tender prices) or are the latest re-marks
+(Borr and the HX SSSNs 4 Nov; Trustly and the HX old loan 30 Oct). Bear PDs set above the
 rule (rule value: 1.3 × the higher of the status value and the implied PD):
 1. **Viaplay** 19.5 (rule 16.4): post-restructuring credit. The original reason was not recorded;
    it is kept because it is harsher than the rule.
@@ -609,56 +414,26 @@ Note added on 4 Nov (not a Bear override):
      loan at 25, after the October fall and the change in fund size).
    - At 79 (Distressed): Base PD 46.0, EL 12.0% (HH and HH+ +0.02 pp each).
 
-## Fund read-out (9 Nov update; the values `docs/hy-funds-analysis.md` reads)
+## Fund read-out (19 Nov; the values `docs/hy-funds-analysis.md` reads)
 
-**0. Named loss, 2027 (9 Nov; replaces the named-loss columns in parts 1 and 3)**
+**Named loss, 2027 (at-risk bonds; % of NAV or pp)** — weight × PD × loss if default from the
+rounded table values. Weights: Fondsfinans 31 Oct holdings `[F]`; Heimdal 30 Oct top 10 and 30 Sep
+for the rest; Sissener as in the funds file.
 
-The funds file of 9 Nov reads these values. Weights: Fondsfinans 31 Oct holdings `[F]`; Heimdal 30 Oct
-top 10 and 30 Sep for the rest; Sissener as in the funds file.
-
-| Fund | At-risk bonds (% of NAV): 4 Nov → 9 Nov | Named 2027 Base: 4 Nov → 9 Nov | Changes on 9 Nov | Largest contributions | Named 2027 Bear: 4 Nov → 9 Nov |
+| Fund | At-risk bonds (% of NAV) | **Named 2027 Base** | **Named 2027 Bear** | Largest contributions (Base) | Changed 19 Nov |
 |---|---|---|---|---|---|
-| FF HY B | 4.4 → **3.8** | 0.39 → **0.34** | Varel out −0.11; Sigma +0.03; Heimstaden new +0.03; Foxway +0.01; Magnolia +0.01 | Sigma 0.10, Magnolia 0.08, Hofseth 0.07, Foxway 0.07, Heimstaden 0.03 | 1.14 → **0.90** |
-| FFK B | 2.1 → **1.3** | 0.17 → **0.09** | Varel out −0.07; Hofseth and Foxway weights | Hofseth 0.05, Foxway 0.04 | 0.51 → **0.30** |
-| SIS NOK-R | 14.6 | 1.10 → **1.10** | none | Hofseth 0.19, Trustly 0.18, Shearwater 0.17, Intrum 2028 0.15, Tullow 0.15, W&T 0.13, Viaplay 0.12 | 2.84 → **2.84** |
-| HH+ B | 31.2 → **31.2** | 1.94 → **2.06** | Sigma +0.09; Foxway +0.03 | Trustly 0.37, Sigma 0.31, Shearwater 0.29, Intrum 0.23, Foxway 0.21, Borr 0.15, Viaplay 0.13, Flora 0.11, Convene 0.09, Norse 0.08, HX SSSN 0.08 | 5.05 → **5.17** |
-| HH N | 30.1 → **30.1** | 2.00 → **2.15** | Sigma +0.12; Foxway +0.02 | Sigma 0.43, Trustly 0.38, Intrum 0.34, Shearwater 0.25, Borr 0.19, Foxway 0.16, Flora 0.12, HX SSSN 0.11, Viaplay 0.09, Convene 0.04, Norse 0.03 | 5.16 → **5.24** |
+| FF HY B | 3.8 | **0.34** | **0.90** | Sigma 0.10, Magnolia 0.08, Hofseth 0.07, Foxway 0.07, Heimstaden 0.03 | none |
+| FFK B | 1.3 | **0.09** | **0.30** | Hofseth 0.05, Foxway 0.04 | none |
+| SIS NOK-R | 14.6 | **1.11** | **2.85** | Hofseth 0.19, Trustly 0.18, Shearwater 0.17, Intrum 2028 0.16, Tullow 0.15, W&T 0.13, Viaplay 0.12 | Intrum 2028 +0.01 |
+| HH+ B | 31.2 | **2.07** | **5.26** | Trustly 0.37, Sigma 0.31, Shearwater 0.29, Intrum 0.24, Foxway 0.21, Borr 0.15, Viaplay 0.13, Flora 0.11 | Intrum +0.01 (Bear +0.09) |
+| HH N | 30.1 | **2.17** | **5.38** | Sigma 0.43, Trustly 0.38, Intrum 0.36, Shearwater 0.25, Borr 0.19, Foxway 0.16, Flora 0.12, HX SSSN 0.11 | Intrum +0.02 (Bear +0.14) |
 
-- Bear catalyst line after Borr left the performing book: HH 0.84, HH+ 1.18; FFK 0.62 (q 0.47
-  on the October rating split). They are confirmed in the funds file.
+- Bear catalyst line (performing book): HH 0.84, HH+ 1.18; FFK 0.62 (q 0.47 on the October rating
+  split).
+- **November NAV marks** (realised, not named loss): Intrum 73.75 → 68.0 is ~−0.17 pp for HH and
+  ~−0.12 pp for HH+ `[A]`; Borr's −9% equity move has no observed note price yet.
 
-A partial update. Borr and the HX SSSNs changed, and the Heimdal weights moved to the 30 Oct top
-10. Every other bond keeps its 30 Oct or 18 Oct values, and the fund return paths are still from
-the 11 Oct run. All figures are % of NAV or pp, computed as weight × PD × loss if default from
-the rounded table values above.
-
-**1. Named loss, 2027 (at-risk bonds, Base and Bear)**
-
-| Fund | Named loss 2027 Base: paths (11 Oct) → 30 Oct → 4 Nov | 4 Nov change by name | Largest contributions now | Named loss 2027 Bear: 30 Oct → 4 Nov |
-|---|---|---|---|---|
-| FF HY B | 0.40 → 0.39 → **0.39** | none (holds none of the changed names) | Varel 0.11, Magnolia 0.07, Hofseth 0.07, Sigma 0.07, Foxway 0.06 | 1.14 → **1.14** |
-| FFK B | 0.16 → 0.17 → **0.17** | none | Varel 0.07, Hofseth 0.06, Foxway 0.04 | 0.51 → **0.51** |
-| SIS NOK-R | 0.74 → 0.98 → **0.98** | none (no Borr or HX; Sissener weights still 31 Aug) | Hofseth 0.21, Trustly 0.18, Shearwater 0.17, Tullow 0.15, W&T 0.13, Viaplay 0.12 | 2.57 → **2.57** |
-| HH+ B | 1.12 → 1.73 → **1.94** | Borr new 0.15; HX SSSN 0.05 → 0.08 (price); Trustly 0.33 → 0.37 and Intrum 0.21 → 0.23 (weights); Shearwater 0.31 → 0.29 and Flora 0.12 → 0.11 (weights) | Trustly 0.37, Shearwater 0.29, Intrum 0.23, Sigma 0.22, Foxway 0.18, Borr 0.15, Viaplay 0.13, Flora 0.11, Convene 0.09, HX SSSN 0.08, Norse 0.08 | 4.50 → **5.05** |
-| HH N | 1.01 → 1.65 → **2.00** | Borr new 0.19; HX SSSN 0.06 → 0.11 (price); Trustly 0.32 → 0.38, Sigma 0.28 → 0.31, Intrum 0.33 → 0.34 and Shearwater 0.24 → 0.25 (weights) | Trustly 0.38, Intrum 0.34, Sigma 0.31, Shearwater 0.25, Borr 0.19, Foxway 0.14, Flora 0.12, HX SSSN 0.11, Viaplay 0.09, Convene 0.04, Norse 0.03 | 4.23 → **5.16** |
-
-- **What moved HH's +0.35 pp:** Borr +0.19, the HX SSSN price +0.05, and the weights +0.10. Most
-  of the weight effect comes from the fund shrinking ~9% in October, which lifts every bond it
-  kept. For HH+ (+0.21): Borr +0.15, HX +0.04, weights +0.02.
-- **At-risk bonds (% of NAV):** FF 4.4, FFK 2.1 and SIS 13.1 are unchanged. HH+ 27.0 → **31.2**
-  (Borr 4.4 added). HH 23.5 → **30.1** (Borr 5.6 added; Trustly, Sigma and Intrum weights up).
-- **Weights used:**
-  - Heimdal's 30 Oct top 10 `[F]`:
-    - HH: Borr 5.6, Flora 4.1, Trustly 3.8, Sigma 3.7, Shearwater 3.3, Intrum 3.0;
-    - HH+: Borr 4.4, Flora 3.8, Shearwater 3.8, Trustly 3.7.
-  - HX old loan 0.35 / 0.27 (reports `[F]`).
-  - Derived `[A]`: HX SSSN ~1.16 / ~0.87 (note 9). HH+ Intrum ~2.0, range 1.8–2.3: 1.82 on 30 Sep,
-    after the October fall, plus purchases (both reports say the position was increased).
-  - The rest are 30 Sep (SIS 31 Aug). HH's other weights are probably ~10% higher after the
-    outflow if they were not sold (Foxway, Viaplay, Convene, Norse; together 0.30 pp of named loss
-    → about +0.03) `[A]`.
-
-**2. Restructurings in progress (HH and HH+ only)**
+**Restructurings in progress (HH and HH+ only)**
 
 | Fund | Weight: 30 Oct → 4 Nov | HX yield removed from carry (pp): 30 Oct → 4 Nov | 2027 Bear on restructurings (pp): 30 Oct → 4 Nov |
 |---|---|---|---|
@@ -675,31 +450,7 @@ the rounded table values above.
   in the named loss above. Before 30 Oct, the whole HX position's yield was removed.
 - Neither report names Booster or Jøtul in October.
 
-**3. Net effect on the 2027 Base, against the paths** `[A]` (named loss and HX carry only; a guide
-for the funds file, not a rerun):
-
-| Fund | Named loss vs paths | HX carry vs paths | Net 2027 Base (coupon / YTM basis) | 2027 Bear credit loss (named + restructurings + catalyst): paths → 30 Oct → 4 Nov |
-|---|---|---|---|---|
-| SIS NOK-R | +0.24 | — | **−0.24** | 2.96 → 3.24 → **3.24** |
-| HH+ B | +0.82 | +0.43 (0.36 at YTM: +0.09) | **−0.39 / −0.73** | 5.49 → 6.03 → **6.49** |
-| HH N | +0.99 | +0.49 (0.47 at YTM: +0.04) | **−0.50 / −0.95** | 4.87 → 5.51 → **6.37** |
-
-- FF HY and FFK do not change.
-- The 2028 effect is half the 2027 named-loss change (skill F4 item 3).
-- **Bear catalyst line:** Borr leaves the performing book, so its catalyst share is taken out
-  (~0.07 pp each `[A]`: q × weight × (Bear 4.0 − Base 1.5 oil-service default rate) × Bear LGD
-  60%). The catalyst line becomes HH 0.91 → 0.84 and HH+ 1.25 → 1.18. The funds file should
-  confirm it.
-- **Guide to the verdicts** `[A]`, against the funds file of 31 Oct, which already carries the
-  30 Oct read-out:
-  - this update moves the 2027 Base by HH −0.35 and HH+ −0.21 (2028: half), and the 2027 Bear
-    credit loss by HH +0.86 and HH+ +0.46;
-  - HH N's E / R falls from 0.239 to about 0.21. That is still above the market's 0.196, but back
-    on the line;
-  - HH+ falls from 0.355 to about 0.34.
-  - The yield-basis finding in part 4 works the other way, and is larger. The funds run decides.
-
-**4. Marks already in the NAV in October** (realised mark-to-market in the Q4 stub, not part of the
+**Marks already in the NAV in October** (realised mark-to-market in the Q4 stub, not part of the
 2027 loss; October reports `[F]`, splits `[A]`)
 
 | Fund | October return (class A) | Intrum | HX: old loan / SSSN | Borr | Trustly | Net of these four names |
@@ -754,7 +505,7 @@ for the funds file, not a rerun):
 - **The October anchor spread of 490 bp is at or above the HY Market BBB stale trigger (≥ 480 bp),
   and +60 bp exceeds the 50 bp minimum change.** It belongs to `docs/hy-market-bbb.md`, not here.
 
-**5. Sensitivities on the 2027 named Base loss (pp)**
+**Sensitivities on the 2027 named Base loss (pp)**
 
 | Sensitivity | SIS | HH+ | HH |
 |---|---|---|---|
@@ -808,12 +559,8 @@ clean `[A]`; October contributions from the reports `[F]`; derived prices `[A]`)
 
 ## Stamdata and news screen, held companies
 
-Scan coverage: see `docs/hy-market-bbb.md` (Metadata). The held companies were read issuer by
-issuer from 4 Aug to 23 Oct. Borr's 24 Oct event was added on 25 Oct from news and BW Energy's
-release. The 30 Oct entries (Intrum, Trustly, HX, BW Energy) come from company reports, HX's
-investor page, press and the managers' forum posts. The 4 Nov entries come from Heimdal's October
-reports, Borr's 6-Ks (EDGAR) and web searches. None of these is a Stamdata scan, and the coverage
-window is unchanged.
+Scan coverage: Stamdata news read page by page 14 Oct–19 Nov 2026 (19 Nov run; earlier held-company
+window 4 Aug–23 Oct), plus company reports, 6-Ks and press for the watchlist names.
 
 | Company | Notice or news | Date | Reading |
 |---|---|---|---|
@@ -824,19 +571,21 @@ window is unchanged.
 | Borr Drilling | **6-Ks of 29 Oct and 2 Nov** `[F]`: three, then four bodies recovered; one person still unaccounted for; an independent root-cause investigation by a classification society; ~280 m³ of marine diesel on board, environmental measures mobilised with the customer and authorities. Nothing on insurance, the BW Energy contract, the notes or the Q3 date. Gabon's oil minister reportedly ordered a technical investigation `[E]` (TIKR) | 29 Oct; 2 Nov | Watch from 4 Nov on the price signal (note 5). The fatalities and the diesel on board widen the liability and regulatory questions; the insurance statement is still missing. Next: Q3 report (~18 Nov `[E]`) |
 | Archer | Q3 trading update `[E]` (search summary, not read in full): EBITDA $44.2m, margin 16.5%, revenue $267.6m, incl. ~$3m from a Norwegian offshore strike; stops pursuing new offshore-wind EPC projects and explores a sale of Archer Wind. Bond −0.17 / −0.13 pp in October in Heimdal (~−3% in price `[A]`) | 21 Oct | Performing kept (price still above par `[A]`). The cause of the October fall is not stated `[?]` |
 | Borr Drilling (BW Energy) | **BW Energy Q3 report** `[F]`: MaBoMo Phase 2 delayed by the rig loss, "too early to confirm when drilling will resume"; workover with a hydraulic unit instead; already searching for a new rig for Bourdon; MaBoMo production resumed 28 Oct | 29 Oct | No replacement Borr rig named. Performing kept, provisional (note 5) |
-| Booster Precision | Events of default; written procedure; standstill prolonged | 3 Sep, 22 Sep, 1 Oct | Default |
-| Jøtul | Intended recapitalisation, new bonds offered; resolution adopted | 17 Aug, 2 Sep, 10 Sep | Recapitalisation (distressed) |
+| Booster Precision | Events of default; written procedure; standstill prolonged (again 2 Nov) | 3 Sep, 22 Sep, 1 Oct, 2 Nov | Default; no terms yet |
+| Jøtul | Intended recapitalisation, new bonds offered; resolution adopted; Recovery Holdco annual report 2025 (11 Nov); Q3 investor call (18 Nov) | 17 Aug–18 Nov | Recapitalisation (distressed); no price |
+| Intrum | Tender results: €100m bought below par (2028 SEK 84.26, 2029 EUR 79.43, 2030 68.00) | 9–10 Nov | Price signal; Distressed kept |
+| Hofseth | Q3: revenue −46% on lost processing contracts (Salmon Business `[E]`); NOK 600m raise still open | 16 Nov | Negative; Distressed kept, Bear override kept |
 | Convene | Written resolutions with a new-money subscription | Sep | Recapitalisation; FTD `[?]` |
 | Eldorado Drilling | Bond terms amended | 29 Sep | Purpose not read `[?]`; the September contract news is positive → performing |
 | Kistos | Written resolution summoned; adopted with a 0.10% amendment fee | 6 Oct (read 17 Oct); adopted 20 Oct | Routine: escrow waiver for the Block 9 deal, with a first-priority pledge for bondholders. Closed |
 | Ocean Yield | Approval of A.P. Møller Holding as equity investor | Aug | Routine, credit-positive |
 | Kistefos | Bond terms aligned with KIST13, for a fee | Aug (withdrawn 1 Sep, revised) | Routine |
 | Hofseth | NOK 600m equity raise pushed to year-end (news, not a notice). **4 Nov check** (web search): no equity raise, bondholder notice or covenant news since; the 7 Nov step of the value-adjusted equity ratio covenant (25 → 27.5%; first test 31 Dec) has not passed yet | Sep–Oct; 4 Nov | Keeps it Distressed; the Bear override rests on it. Status only: re-check after 7 Nov and at FF's October holdings |
-| Elcano | Sold its loss-making LNG ship and repaid the lease on it (news); EGM convened for 18 Nov to report "the completion of the Corporate Refinancing Transaction" (Stamdata, 19 Oct) | Oct; 19 Oct | Credit-positive; performing (FF, FFK) |
+| Elcano | Sold its loss-making LNG ship and repaid the lease on it (news); EGM held 18 Nov on "the completion of the Corporate Refinancing Transaction" (Stamdata, 19 Oct) | Oct; 18 Nov | Credit-positive; performing (FF, FFK) |
 | Borr Drilling | **Jackup Prospector 5 (2014, F&G JU-2000E, high-spec) sank on the Dussafu licence, Gabon**, at 20:37 local time on 24 Oct. It lost stability while jacking up for BW Energy's drilling campaign; the preliminary cause is a punch-through during preload. Of 115 people on board, 110 were accounted for and 5 were still missing on 25 Oct; the search was ongoing. BW Energy shut MaBoMo production as a precaution and reports no damage to the facility and no discharge `[F]`. Sources: BW Energy release (MFN, 25 Oct); Reuters; Offshore Energy (25 Oct, quoting Borr). **No Borr release has been found on EDGAR (last 6-K 16 Oct), on Newsweb (in the Nordic Financial database) or on borrdrilling.com** `[?]`. **No news report mentions insurance.** **Insurance** (20-F 2025) `[F]`: hull and machinery cover on the whole fleet at each rig's agreed value, less a deductible. Loss-of-income cover applies only "for certain rigs" (whether Prospector 5 has it `[?]`). P&I covers crew injury and death and third parties. **Collateral** (H1 2026 report) `[F]`: all 29 rigs are pledged, with a book value of $3,036.5m (≈ $105m a rig). The new notes are secured "by most of the rigs", on the same security as the $250m super senior RCF and the $45m guarantee facility. Three of the five ex-Noble rigs secure the $150m seller's credit. Prospector 5 (an original Borr rig) is very likely in the notes pool `[A]`. The indenture (144A) is not public, so its event-of-loss and insurance-proceeds clauses are `[?]`; market practice is to apply the proceeds to prepay debt or replace the collateral `[E]`. **Collateral coverage:** one rig of 29 is ~3–4% of the pledged book. On values, Rig BBB's Base value for a 12-year-old high-spec jackup is $42m, and 2026 transactions were $57–72m a rig. Hull proceeds at an agreed value near book would exceed that, so collateral coverage falls only if the cover fails or is short `[A]`. **Liquidity:** cash $223.6m plus the undrawn $250m RCF = $473.6m (30 Jun). The BW firm term ran to Jul 2027; ~270 days lost cost roughly $15m of EBITDA at ~$125–134k a day less $75k opex `[A]`, unless loss-of-income cover applies or another rig replaces it. The coupon of ~$110m falls due on 15 Jan 2027. The deductible, wreck removal and investigation costs are `[?]` | 24–25 Oct | **Performing kept, provisional** (note 5). The event is operational and not a payment or covenant event. The collateral loss is small and probably insured. The human loss and possible liability, regulatory and contract consequences in Gabon are not yet known. The first bond price (26 Oct) and Borr's own statement on insurance decide the status |
 | Havila Shipping | Lost to DNB, Danske Bank and Swedbank on the 2020 restructuring agreement: Oslo District Court 8 Dec 2025, Borgarting Court of Appeal 19 Oct 2026 (Havila's refinancing of lenders who elected settlement on 30 Dec 2024 breached the agreement). Appeal to the Supreme Court; deadline 19 Nov 2026 `[F]`. Banks' claim (Dec 2025): NOK 130.8m interest-bearing, NOK 595.1m non-interest-bearing B tranche (nominal), NOK 7.9m interest; they seek to enforce security on Havila Foresight and Havila Harmony `[E]`. Finansavisen 21 Oct: "Havila Shipping i dobbel millionskvis" (paywalled; headline only) | 8 Dec 2025, 19 Oct 2026 | Bank debt, no bond named. Distressed at equity and vessel level; no bond loss for the funds unless a Havila bond is still held (FF had only a converted or legacy stub at end-2025, below 80). Not on the watchlist |
 
-Market-wide hits that are not held (Cabonline, Catena Media, Taptravel, Dooba, Point Properties,
+Market-wide hits that are not held (19 Nov scan: North Investment Group and Achilles Capital events of default, Proximar Seafood non-payment, Magle Chemoswed PIK and written procedure, Konzmann and Engebø written resolutions, Brödernas written procedure, Calligo write-down, Caybon interest deferral; earlier: Cabonline, Catena Media, Taptravel, Dooba, Point Properties,
 SIBS, Caybon, Solteq and others) go to the default log in `docs/hy-market-bbb.md`.
 
 ## Data gaps
@@ -916,74 +665,6 @@ SIBS, Caybon, Solteq and others) go to the default log in `docs/hy-market-bbb.md
 
 ## Change log
 
-**9 Nov 2026** (skill `hy-market-bbb` 2026-11-08.1; short update on Fondsfinans' October report
-and 31 Oct holdings; HY Market BBB 5 Nov; Stamdata not re-run):
-
-| Item | Previous | New | Reason |
-|---|---|---|---|
-| Sigma Holdco | 80.0, Stressed, PD 12.7 | **79.2, Distressed, PD 18.0** | FF's 31 Oct holdings; below the 80 edge |
-| Hofseth | ~72 dirty | unchanged (72.8 dirty, 31 Oct) | Confirmed; Dyrkorn delay and FF's "just under 70" added; FF 0.91, FFK 0.75 |
-| Foxway | 96.0, PD 11.6 | **93.7, PD 13.7** | FF's holdings |
-| Magnolia | 87.3, PD 26.0 | **88.0, PD 24.9** | FF's holdings |
-| Heimstaden hybrid | not held | **84.7, Stressed, PD 9.1**; FF 0.40 | New position at FF |
-| Varel | FF 0.98, FFK 0.62 | **not in the lists** `[A]` | Left the 31 Oct holdings; exit not confirmed |
-| Named 2027 Base | FF 0.39, FFK 0.17, HH 2.00, HH+ 1.94 | **0.34, 0.09, 2.15, 2.06** | The changes above; SIS 1.10 unchanged |
-| Notes | — | Andfjord, Cegal, DNO, GLX, Bulk, Color | No status change |
-
-Oil Market BBB is stale and its follow-up pending; nothing here reads a new oil view.
-
-
-**4 Nov 2026** (skill `hy-market-bbb` 2026-10-24.1; partial update on Heimdal's October reports;
-HY Market BBB 24 Oct, kept unchanged):
-
-| Item | Previous | New | Reason |
-|---|---|---|---|
-| Borr: price | `[?]` (par assumed) | ~93 (30 Oct; derived, range 91–96) `[A]` | October contribution −0.21 / −0.18 pp; first price signal after the Prospector 5 loss (note 5) |
-| Borr: status | Performing, provisional | Watch (new watchlist entry) | Note 5 signpost: first price ≥ 90 with a fall |
-| Borr: yield, PD Base / Bear, loss if default, EL | ~9.8 at par, 0 / 4.0, —, 0 / ~2.4 | ~12.1, 7.3 / 12.5, 47 / 63, 3.4 / 7.9 | Rule at the derived price; Bear shock 5.0 × 3.6 years |
-| Borr: expected 1-year return Base / Bear | `[?]` | 8.7 / −13.8 | — |
-| Borr: weights (HH / HH+) | 5.36 / 4.78 (30 Sep) | 5.6 / 4.4 (30 Oct) `[F]` | October top 10 |
-| HX SSSN: price | ~96 assumed | ~84 (30 Oct; derived, range 79–88) `[A]` | HX's contribution less the old-loan mark, ~−12% in both funds (note 9) |
-| HX SSSN: status | Watch | Stressed | Price 80 to below 90 |
-| HX SSSN: yield, PD Base / Bear, loss if default, EL | 14.9, 14.3 / 30.7, 35 / 55, 5.0 / 16.9 | 24.6, 33.1 / 73.0, 29 / 53, 9.6 / 38.5 | Rule at the derived price; recovery 70 / 50 kept (note 8) |
-| HX SSSN: expected 1-year return Base / Bear | 9.9 / −8.3 | 15.1 / −19.7 | — |
-| HX SSSN: weights (HH / HH+) | ~1.11 / ~0.96 `[A]` | ~1.16 / ~0.87 `[A]` | Recomputed from the stated old-loan weights and fund sizes |
-| HX old loan: weights (HH / HH+) | 0.34 (28 Oct) / ~0.31 `[A]` | 0.35 / 0.27 (30 Oct) `[F]` | October reports; price 12.5 confirmed |
-| Intrum, Trustly: prices | 73.75, 79 (fund marks, forum) | unchanged; confirmed by the reports | Intrum fell from ~93 and Trustly rose from ~70 in October `[A]` |
-| Heimdal weights from the 30 Oct top 10 | 30 Sep | HH: Trustly 3.8, Intrum 3.0, Sigma 3.7, Shearwater 3.3, Flora 4.1; HH+: Trustly 3.7, Shearwater 3.8, Flora 3.8; HH+ Intrum ~2.0 `[A]` | October reports; HH shrank ~9% (redemptions) |
-| Named loss 2027 Base (SIS / HH+ / HH) | 0.98 / 1.73 / 1.65 | 0.98 / **1.94 / 2.00** | Fund read-out; FF 0.39 and FFK 0.17 unchanged |
-| Named loss 2027 Bear (SIS / HH+ / HH) | 2.57 / 4.50 / 4.23 | 2.57 / **5.05 / 5.16** | — |
-| Restructurings Bear 2027 (HH+ / HH) | 0.28 / 0.37 | 0.26 / 0.37 | Stated old-loan weights |
-| HX carry removed at YTM (HH+ / HH; coupon basis unchanged at 0.02) | 0.41 / 0.45 | 0.36 / 0.47 | Stated old-loan weights |
-| Bear catalyst line (HH+ / HH; funds file) | 1.25 / 0.91 | 1.18 / 0.84 `[A]` | Borr leaves the performing book |
-| Stale or assumed share of named loss (SIS / HH / HH+) | 59 / 35 / 45% | 59 / 27 / 36% | Borr and HX SSSN now derived |
-| Heimdal report yield basis | NOK (funds file, 1 Nov) | Box yield is not NOK: 8.78 / 9.42% box against 9.60 / 10.28% in NOK | October report text (for the funds file) |
-| Hofseth | Distressed | unchanged | 7 Nov covenant step not passed; no equity news by 4 Nov |
-| Sigma, Flora, Foxway, Shearwater, Viaplay | 30 Sep or older prices | unchanged; October bounds added | Not named in October beyond small contributions |
-
-Older updates, one line each (details in Metadata; git holds the rest):
-- 30 Oct: Intrum (73.75) and Trustly (79) Watch → Distressed on Heimdal's marks; Intrum recovery
-  45 / 30; HX split into the old 2030 loan (12.5) and the new SSSNs (~96, Watch); HH 2027 named
-  loss 1.16 → 1.65, HH+ 1.32 → 1.73, SIS 0.86 → 0.98; new Fund read-out section.
-- 26 Oct: Borr check, status kept; no bond price found.
-- 25 Oct: Borr's Prospector 5 loss; Performing kept, provisional; signposts in note 5.
-- 24 Oct: held-company screen extended to 23 Oct; Kistos closed (routine); Elcano credit-positive.
-- 22 Oct: Havila Shipping added to the news screen (not held).
-- 18 Oct: master watchlist and outcome record; PD rule applied consistently; 30 Sep prices.
-- 11 Oct and 6 Oct: first company bond assessment and update.
-
-**Sources read for the 4 Nov update:**
-- Heimdal Høyrente, October 2026 monthly report (heimdalfondene.no, uploads 2026/11; 4 pages,
-  text with PyMuPDF and all pages rendered; page 4 is the back cover) `[F]`.
-- Heimdal Høyrente Pluss, October 2026 monthly report (same; 4 pages) `[F]`.
-- Heimdal Høyrente and Pluss, September 2026 reports (re-read for the September contributions,
-  top 10, fund size and yield wording) `[F]`.
-- Borr Drilling 6-Ks with press releases, 29 Oct and 2 Nov 2026 (SEC EDGAR, exhibit 99.1) `[F]`.
-- Web searches, 4 Nov: Hofseth (no news since October), Borr (insurance: nothing), Archer Q3
-  trading update (search summary `[E]`).
-- Norges Bank USD/NOK 9.2302 (30 Oct) for Borr's NOK outstanding.
-
-Sources for the 30 Oct update (one line; git holds the list): Intrum Q3 report and T-3; exchange
-quotes (Gettex, divvydiary); HX investor page (summonses, NT notices, H1 report); Trustly Q2,
-bond terms and Placera; BW Energy Q3; Heimdal holdings (30 Sep) and forum posts (user paste);
-Norges Bank EUR/NOK 10.312.
+- **19 Nov 2026 — full refresh and compaction** (skill 2026-11-18.2): Intrum re-marked on its 10 Nov tender (8.5% 2030 → 68.0; 7.75% 2028 → ~84.3); Borr Q3 and Hofseth Q3 read, statuses kept; Stamdata screen 14 Oct–19 Nov; dated notes removed (git keeps them), fund read-out reduced to current values; 990 → 670 lines.
+- **9 Nov 2026** (skill 2026-11-08.1): Fondsfinans' October report and 31 Oct holdings: Sigma → Distressed (79.2), Hofseth ~72, Foxway 93.7, Magnolia 88.0, Heimstaden hybrid new (84.7, Stressed), Varel out.
+- **4 Nov 2026** (skill 2026-10-24.1): Heimdal's October reports: Borr → Watch (~93 derived), HX SSSN → Stressed (~84 derived), Heimdal weights to the 30 Oct top 10.

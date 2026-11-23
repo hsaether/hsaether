@@ -82,7 +82,7 @@ Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed
 | Item | Value |
 |---|---|
 | Company | SED Energy Holdings Plc (Cyprus), Euronext Oslo: ENH, ISIN CY0101162119. Holding company for Energy Drilling (tender rigs, Singapore) and SeaBird Exploration (seismic source vessels, Bergen). Reports in USD |
-| Price (P) | **NOK 6.80**, close 26 Oct 2026, last trade 15:25 UTC (Yahoo `ENH.OL`; day range 6.76–6.88, volume 1.87m). This is the **last close before the T-16 release** (27 Oct 07:00 CET; Oslo opens 09:00), so the market's reaction is not in it. Not ex-dividend: the Q2 distribution goes ex on 9 Nov. Previous versions: NOK 6.55 (16 and 20 Oct) |
+| Price (P) | **NOK 6.80**, close 26 Oct 2026, last trade 15:25 UTC (Yahoo `ENH.OL`; day range 6.76–6.88, volume 1.87m). This is the **last close before the T-16 release** (27 Oct 07:00 CET; Oslo opens 09:00), so the market's reaction is not in it. Not ex-dividend: the Q2 distribution (USD 25.0m, NOK ~0.32 a share, repayment of paid-in capital) goes **ex on 7 Dec 2026, paid ~11 Dec** (release 4 Nov; the 27 Oct build assumed ex 9 Nov, paid 13 Nov: −0.0 pp). Previous versions: NOK 6.55 (16 and 20 Oct) |
 | Valuation date / exit date | 27 Oct 2026 / 31 Dec 2029, **T = 3.18 years** (17 Oct up to the 20 Oct version) |
 | Shares | 731.25m outstanding (incl. 108.1m non-voting B shares) `[F]` + 18.1m options at NOK 4.53 average strike `[F, Q2 report]` → **737.3m** by the treasury method at NOK 6.80 |
 | Market cap / EV | NOK 5.01bn = **$538m**. Financial net debt ≈ $3m at 30 Sep `[A, Q3E]` → EV ≈ $541m; ≈ $549m including the GHTH lease (~$7.5m `[A]`). EV / LTM adj. EBITDA ($135.6m `[F]`) ≈ 4.0x |
@@ -541,6 +541,33 @@ Rig BBB gives no utilisation path for tender rigs, so the **rate basis** decides
 - **Nothing here is an input.** The jackup view is in line with Rig BBB, and the tender-assist row is unchanged. The decision stays on P vs P_k: P 6.55 > P_k 6.02 → **fails**.
 - **27 Oct:** after the T-16 award and with the price at 6.80, Base P_k is 6.03 and Bull 9.41. NOK 8.0 still needs exit values ~1.5x Base mid-cycle (1.54x).
 
+## Price versus our call (Step 6b; added 21 Nov 2026)
+
+iaf-valuation 2026-11-18.1. **The decision table above stays on the 27 Oct build** (NOK 6.80); the Q3 report (27 Nov) brings the full re-run and the compaction to the lean rules. The figures below re-mark that build at the 20 Nov close (script `.claude/skills/iaf-valuation/references/models/sed/sed6b.py`: the Base, Bear and Bull D_t and V_T of this document; it reproduces 27 Oct, Base 6.7% / P_k 6.03, Bull 27.0% / 9.41, Bear −30.4% / 2.27, exit marks ×1.21 for k).
+
+| At NOK 6.19 (20 Nov close, cum the Q2 distribution), USD/NOK 9.7525 | Bear | **Base** | Bull |
+|---|---|---|---|
+| IRR_T (NOK) | −27.1% | **13.3%** | 35.6% |
+| P_k / margin of safety | 2.40 / −61.2% | **6.36 / +2.8%** | 9.94 / +60.5% |
+| Same at USD/NOK 9.32 (the 27 Oct FX) | | 11.2% / P_k 6.08 / −1.7% | |
+
+- **What the price implies:** at NOK 6.19 Base earns k with exit asset values at **0.955× Base mid-cycle** (≈ $395m for the fleet; 1.21× at NOK 6.80 on 27 Oct), and 0% at 0.59×. The price now discounts marks ~5% below the Rig BBB tender-barge mid-cycle ($80k, MCU 80%).
+- **What moved since 27 Oct:** price −9.0% (6.80 → 6.19; OSEBX −4.1%, offshore drillers −20 to −34% from late-October highs) and the krone −4.4% (USD/NOK 9.32 → 9.75; SED's cash and assets are in USD: +2.1 pp). No SED fundamental has moved against the Base.
+- **Sector turn calls** (`docs/rig-market-bbb.md`, 18 Nov): no call on the tender-assist row. The two watch calls (UDW drillships 2028–29 flatter, high-spec jackups 2027–28 lower; 50% each, L5 driller equities) do not touch tender barges; checkpoint 17 (a second SE Asia barge fixture ≥ ~$86k raises Base 2027–28 by ≥ 5%) is open, read at SED Q3. Westwood (5 Nov `[E]`): TAR utilization ~96% → 100% by end-Q4, four TARs above $120k: Bull-side evidence, not a barge fixture.
+
+| Company signal (dated, tagged) | Score |
+|---|---|
+| Contract behaviour: T-16 Phase 7, CPOC, ~$95k for 30 months from Q3 2027 (27 Oct `[F]`), a Bull-band rate; Fulmar Explorer (SeaBird) follow-on OBN source contract in West Africa, ~6 months from Dec 2026 (12 Nov `[F]`; value not given), in direct continuation of its Sep–Nov job | +1 |
+| Order intake and backlog: T-16 adds ~$87m firm; SED 2027 firm cover 52% (Rig BBB) | +1 |
+| Capital return: Q2 distribution USD 25.0m (4 Nov `[F]`), as policy | 0 |
+| Insider and major-holder dealings since 27 Oct | 0 `[?]` (not checked) |
+| Guidance tone vs revisions: Fearnley Buy, NOK 8.0 (20 Oct `[E]`); no newer broker change found | 0 |
+| Asset sales or purchases vs book | 0 (none) |
+| **Net** | **+2** |
+
+- **Verdict line (21 Nov, NOK 6.19): ahead of the price, on the positive side.** The market sells SED with the offshore drillers; our Base holds the tender-barge row, which has its own tight market (utilization near 100%, T-16 at a Bull-band rate). The named reason the market may be right: the barge renewals in 2027 (EDrill-1, T-15) at ≤ $80k would make T-16 an outlier (checkpoint 17). A company signal does not move the sector row; the Q3 report tests it.
+- **Scorecard:** opened 21 Nov 2026 at NOK 6.19 (Base +2.8% on this re-mark, clears narrowly). Hit if SED outperforms the Oslo drillers (Borr, Odfjell) by > 10% by the Q4 report (17 Feb 2027) or a second barge fixture prints ≥ $86k; miss if the next barge awards come in ≤ $80k.
+
 ## Verdict
 
 - **Fails.** The Base margin of safety is −11.3% (P_k NOK 6.03 vs P 6.80; IRR_T 6.7% vs k = 12%).
@@ -717,6 +744,7 @@ No new quarterly report and no company release since the previous version. Both 
 
 ## Change log
 
+- **21 Nov 2026: Step 6b added (iaf-valuation 2026-11-18.1).** Memo re-mark at the 20 Nov close NOK 6.19 and USD/NOK 9.7525 on the 27 Oct build (`sed6b.py`): Base 13.3%, P_k 6.36, +2.8% (clears narrowly; the decision table stays at 27 Oct until the Q3 run on 27 Nov); price implies exit marks 0.955× Base. Verdict line: ahead, positive side. Q2 distribution dates corrected (ex 7 Dec, paid ~11 Dec). Fulmar Explorer follow-on contract (12 Nov) logged.
 - **27 Oct 2026: news update, T-16 award.** CPOC letter of award for T-16 Phase 7 (MFN release, 27 Oct 07:00, primary): 30 months firm from early Q3 2027, options for up to 15 months, ~USD 87m firm incl. mobilisation fees. Phase 6 is firm through Dec 2026 and ends in Q1 2027; the rig waits in Singapore in between.
   - T-16 replaced in all scenarios: firm in all three; options exercised in Base and Bull at an assumed $90k, not in Bear.
   - Price 6.55 → 6.80 (26 Oct close, before the release), USD/NOK 9.44 → 9.32, valuation date 27 Oct. Market inputs unchanged.

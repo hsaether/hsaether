@@ -38,43 +38,44 @@ Kept by the `update-chain` skill; checked by
 
 | id | file | skill | type | as of | last change | affects | stale after | rev used | note |
 |---|---|---|---|---|---|---|---|---|---|
-| oil | docs/oil-market-bbb.md | oil-market-bbb | market | 2026-11-11 | 2026-11-11 | none | 2026-11-30 | 2026-10-24.4 | 11 Nov full update (15% front trigger fired 4 Nov; stale): Base Brent 2027 88 → 84 (physical premium gone, faster recovery outside Iran, strip 81.2); 2028/29, mid-cycle, Bear/Bull and cracks unchanged; stub 104.3 → 97.1, crack 88.1 → 85.1; Russian refining trigger tested, no crack change |
-| shipping | docs/oil-shipping-bbb.md | oil-shipping-bbb | market | 2026-11-13 | 2026-11-13 | none | 2026-12-04 | 2026-10-24.1 | 13 Nov update run: stub re-marked after the post-midterm crude correction (VLCC 700 → 630, Suezmax 465 → 400, Aframax 305 → 210, LR2 220 → 170, MR 55 → 62); "now" asset values +0–6%; 2027–29 paths, Year-1 quarters and mid-cycle unchanged (Year-1 FFA trigger fired, tested against the 1-yr TC, 2027 kept; VLCC and LR1 retest rules set); port fees suspended to 9/10 Jan 2027 |
-| rig | docs/rig-market-bbb.md | rig-market-bbb | market | 2026-11-12 | 2026-11-12 | none | 2026-12-12 | 2026-10-10.1 | 12 Nov full update: drillship Bull 2027 450→475, stub 420→455 (six-month rule 455 / 389–499 / 5 fixtures); Base 2027 420 kept (grouped ~438, +4% < 5%); all other paths, MCU, mid-cycle and values kept; SE Asia / ME ranges widened; triggers: stale, Beacon Pacific (stranded HE semi, Serica UK Q3-27), Bull signpost; oil 84 not material; Hercules corrected to Canada |
-| supply | docs/supply-market-bbb.md | supply-market-bbb | market | 2026-11-16 | 2026-11-16 | dof | 2026-12-12 | 2026-11-12.2 | 16 Nov small update (user news: NS AHTS spot −40% in three weeks; Clarksons ~NOK 310k ≈ £24.5k early Nov): AHTS rule applied, Base 2027 £75k → £60k (−20%, above the recalibration trigger), Q4 stub 66 → 43, Year-1 quarters cut; 2028–29, mid-cycle, Bear and Bull kept; rests on one source family until the 4 Dec Seabreeze. 12 Nov full update: NS PSV spot Base 2027 £18.5k; PLSV 2028 round confirms Base |
-| hy | docs/hy-market-bbb.md | hy-market-bbb | market | 2026-11-11 | 2026-11-05 | hy-issuers, global-index | 2026-12-05 | 2026-11-08.1 | 11 Nov note: Taptravel vote approved (re-default, no new FTD; longstop 31 Mar 2027); Oct CPI 3.6 / CPI-ATE 2.7 vs MPR 3.8 / 2.7; Riksbank minutes confirm ~2 more hikes; oil Base 2027 84 not material for E&P; DNB CMD noted ([E]); market path +0.17/+0.33/+0.69; all paths and E / R 0.254 kept |
-| equity | docs/equity-market-bbb.md | equity-market-bbb | market | 2026-11-06 | 2026-11-06 | global-index | 2026-12-06 | 2026-10-24.1 | Update 2 (6 Nov): full update on 5 Nov closes after HY 5 Nov, midterms and Q3. World Base 5.2% → 6.6% (mostly the ~4% price fall; Amazon and Micron now company blocks), Oslo 2.5% → 2.6% (re-marked). E / R World 0.024 → 0.080, Oslo −0.06 vs HY ref 0.254. Trigger 1 World −14.3% (URTH NOK ≈ 1,590), Oslo 1,492. World 1.6% above its pre-alert (1,827). NOK Base spot flat at I-44 107.8 / USD/NOK 9.29 |
-| ai | docs/ai-market-bbb.md | ai-market-bbb | market | 2026-11-16 | 2026-11-11 | amzn, dnbtek, equity, global-index, googl, msft, nvda | 2026-11-17 | 2026-11-11.2 | 11 Nov re-run (skill 2026-11-11.2), Option D of review-ai-k1: K1 capex cycle section; K1 Base 1,170 / 1,170 (was 1,250 / 1,300); H1 750 / 745, EPS .91 / .88 / .87; H4 129 / 130; E cash conversion −.20 / .11 / .36; ratio 0.24 / 0.31; H2, H3, E1, E2, T kept; no re-mark; all six 10.0% → 9.2%, H1 11.2% → 7.5% |
+| oil | docs/oil-market-bbb.md | oil-market-bbb | market | 2026-11-18 | 2026-11-18 | none | 2026-11-30 | 2026-11-18.2 | 18 Nov futures update (skill 2026-11-18.2: futures default + options odds): Base Brent 2027 84 → 80, 2028 77 → 73, crack 2027 70 → 64, jet 60 → 54; options: late-2027 Bear (65) ~37%, Bull (118) ~7%; 2029, mid-cycle, Bear, Bull kept |
+| shipping | docs/oil-shipping-bbb.md | oil-shipping-bbb | market | 2026-11-18 | 2026-11-13 | none | 2026-12-04 | 2026-11-18.1 | 18 Nov leading-view note (skill 2026-11-18.1): kept; traded FFA and shares (−15 to −25%) override the assessed TC premium; LR1 watch (retest rule). 13 Nov update |
+| rig | docs/rig-market-bbb.md | rig-market-bbb | market | 2026-11-12 | 2026-11-12 | none | 2026-12-12 | 2026-11-18.1 | 18 Nov leading-view note (skill 2026-11-18.1): kept; fixtures-as-forwards within the minimum; watch UDW 2028–29 and jackups (driller shares −20 to −34%). 12 Nov full update |
+| supply | docs/supply-market-bbb.md | supply-market-bbb | market | 2026-11-21 | 2026-11-18 | dof | 2026-12-12 | 2026-11-18.1 | 21 Nov small update (kept unchanged): Equinor AHTS term tender, no award by 21 Nov (turn call £52k holds; reversal by 31 Jan); Subsea7 Q3 utilisation 84%, book-to-bill 0.5, NS CSV watch call flat. 18 Nov leading-view update: NS AHTS spot Base 2027 £60k → £52k on the turn call; watch calls Brazil PSV, NS CSV, NS PSV |
+| hy | docs/hy-market-bbb.md | hy-market-bbb | market | 2026-11-18 | 2026-11-18 | ai, equity, global-index | 2026-12-05 | 2026-11-18.2 | 18 Nov (skill 2026-11-18.2): Base NIBOR = market path (NOK swaps, gov curve): 2028–29 4.39 / 3.86 → 4.78 / 4.58; NIBOR window 4.38 → 4.72; Base window return 7.2 → 7.5; excess and E / R 0.254 unchanged; credit watch calls lean Bear. Credit values of 5 Nov |
+| equity | docs/equity-market-bbb.md | equity-market-bbb | market | 2026-11-20 | 2026-11-20 | global-index | 2026-12-06 | 2026-11-18.1 | 20 Nov leading-view note after the AI sell-off: World re-run (company analyses 19–20 Nov, AI BBB 18 Nov rows) Base 6.6 → 8.2%, E / R 0.065 → 0.137, pre-alert crossed (URTH 187.43 < 190.9 USD); Oslo 2.6 → 4.0% (price and krone); multiple watch 55%; SPY Dec-27 odds of ≤ −20% 14%. Full update with refreshed consensus by 6 Dec |
+| ai | docs/ai-market-bbb.md | ai-market-bbb | market | 2026-11-20 | 2026-11-18 | amzn, dnbtek, equity, global-index, googl, kospi, msft, mu, nvda, skh, smsn, tsm | 2026-12-16 | 2026-11-18.1 | 20 Nov leading-view note (kept unchanged): re-mark after the AI sell-off: all six 12.7%, compute 14.1% (clears), memory 17.2%; price below Base for compute (k at 0.94×) and memory (0.85×); order-cut watch 45% (only L5 new); Anthropic IPO above range (Bull-side); NVIDIA SEC probe signpost. 19 Nov note (kept unchanged): watch call H1 2028–30 order cut by funded buyers ×0.9 (45%; L4 new, L3/L5 spent on 18 Nov, L1/L2 against). 18 Nov leading-view update (skill 2026-11-18.1): re-mark 18 Nov; turn calls H2 2028–30 EPS .60/.40/.35 → .50/.32/.28 and H1 2028–30 .91/.88/.87 → .85/.82/.81; all six 9.2% → 8.8%, memory 21.6% → 13.7% (k at 0.95× new Base), compute 7.5%. Watch: H1 2027 up, K1 2028, T, H3. 11 Nov: K1 Base 1,170 / 1,170 |
 | defense | docs/defense-market-bbb.md | defense-market-bbb | market | 2026-10-31 | 2026-10-07 | all | 2027-01-04 | 2026-10-10.1 | **HOLD (user): no update until the user lifts it.** Initial baseline |
-| hy-issuers | docs/hy-issuers.md | hy-market-bbb | book | 2026-11-11 | 2026-11-09 | hy-funds | 2026-11-18 | 2026-11-08.1 | 9 Nov short update on Fondsfinans' October report and 31 Oct holdings: Sigma 79.2 Distressed, Foxway 93.7, Magnolia 88.0, Heimstaden hybrid new (84.7), Varel out [A], Hofseth ~72 confirmed; named loss HH 2.15, HH+ 2.06, FF 0.34, FFK 0.09, SIS 1.10; Stamdata screen not re-run |
+| hy-issuers | docs/hy-issuers.md | hy-market-bbb | book | 2026-11-19 | 2026-11-19 | none | 2026-12-05 | 2026-11-18.2 | 19 Nov full refresh and compaction (990 → 670 lines): Intrum 8.5% 2030 → 68.0 and 7.75% 2028 → ~84.3 (tender 10 Nov); Borr Q3 and Hofseth Q3 read, statuses kept; Stamdata screen 14 Oct–19 Nov. Named 2027 Base HH 2.17, HH+ 2.07, SIS 1.11 (+0.01–0.02 pp; not material for the fund verdicts). Next price round: November fund reports (~4 Dec) |
 | hy-funds | docs/hy-funds-analysis.md | hy-market-bbb | book | 2026-11-09 | 2026-11-09 | none | 2026-12-05 | 2026-11-08.1 | 9 Nov full re-run on the October reports and 5 Nov HY BBB: all five Attractive; E / R FFK 0.520, FF 0.491, HH+ 0.422, SIS 0.343, HH N 0.340 (134% of 0.254; rests on the NOK report yield, 0.267 on the box yield); 6 Nov Marginal reading withdrawn; oil follow-up pending; Arctic Return L rerun (October report): E / R 0.119 → 0.109, 43% of 0.254, not graded |
-| dof | docs/DOF-analysis.md | iaf-valuation | company | 2026-11-16 | 2026-11-16 | none | 2026-12-12 | 2026-11-12.1 | 12 Nov full update after Q3 (iaf 2026-11-10.1 layout): Base 11.8%, P_k NOK 127.9 at NOK 128.60 / USD/NOK 9.552, margin −0.6% → marginal (was 9.0%, fails); PLSV $295–305k are Petrobras totals (charter + services), DOF basis flat (> $500m over 4,380 days ≈ extension level), no hidden upside; Implementer ~$133m and SALT ~$103m each from the Q3 chart; FX-sensitive (fails at 9.29, clears at 9.80) |
+| dof | docs/DOF-analysis.md | iaf-valuation | company | 2026-11-21 | 2026-11-21 | none | 2026-12-18 | 2026-11-18.1 | v 21 Nov ex-dividend re-mark: Base 13.1%, P_k NOK 127.4 at NOK 124.00 / USD/NOK 9.750, margin +2.7%, clears (bottom of band; flipped from marginal); fails above NOK 130.0. Price vs our call: with the market, leaning ahead (A.P. Møller buying 2.8m shares 18–20 Nov) |
 | plsv | docs/PLSV-analysis.md | - | static | - | - | - | - | - | No longer tracked (user, 25 Oct 2026). Last version 19 Oct; kept as a source (Fontis seller credit, Seagems fleet data cited by borr, rig and supply) |
-| sed | docs/SED-analysis.md | iaf-valuation | company | 2026-11-04 | 2026-10-18 | all | 2026-11-17 | 2026-11-01.1 | 27 Oct news update: T-16 award (Base 8.3% → 6.7%, still fails) |
-| borr | docs/borr-analysis.md | iaf-valuation | company | 2026-11-07 | 2026-11-07 | all | 2026-11-18 | 2026-11-01.1 | **HOLD (user, 7 Nov): only on request. Not interesting as an equity; its value is the credit read for the Borr bonds in hy-issuers.** v3 24 Oct: Base unchanged (no equity value), Bull 8.3% → 11.2%; Q3 date not announced (4–18 Nov expected) |
+| sed | docs/SED-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-10-18 | none | 2026-11-28 | 2026-11-18.1 | 21 Nov: Step 6b added on the 27 Oct build (decision table kept: Base 6.7%, fails at NOK 6.80); memo re-mark at NOK 6.19 / USD/NOK 9.75: Base 13.3%, P_k 6.36, +2.8%; price implies marks 0.955× Base; verdict line ahead (positive). Q2 distribution ex 7 Dec. Full re-run and compaction (834 lines) at Q3, 27 Nov |
+| borr | docs/borr-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2027-02-18 | 2026-11-18.1 | **HOLD (user, 7 Nov): only on request. Not interesting as an equity; its value is the credit read for the Borr bonds in hy-issuers.** v4 21 Nov (on request): Q3, insurance $200m to debt, four awards; Base still zero (exit equity −$354m; no funding gap in the window), Bull 22.3% (P_k $4.49) at $3.41; break-even mid-cycle ~$135k; Step 6b; compacted 724 → 246 lines; `borr/v4.py` |
 | odl | docs/odl-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | none | 2026-12-13 | 2026-11-12.1 | v2.1 13 Nov (ex-dividend re-mark, compacted 721 → 450 lines): Base 8.1% → 9.0%, P_k $9.97 (NOK 95.5) vs $10.74 (NOK 102.80), margin −7%, fails; Deepsea Bergen contract signed 10 Nov (already firm in the model) |
-| scatec | docs/scatec-analysis.md | iaf-valuation | company | 2026-10-30 | 2026-10-30 | all | 2027-02-28 | 2026-10-29.1 | v2 30 Oct after Q3: clears (Base IRR 16.4%, P_k NOK 95.5 vs 84.65, +13%); Bear −17.9%, Bear corp. NIBD NOK 8.5bn by 2029; Q4 report 29 Jan 2027 |
+| scatec | docs/scatec-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2027-02-28 | 2026-11-18.1 | v2.1 21 Nov: re-mark at NOK 82.40 and 20 Nov FX (basket ×1.048) on the v2 build: clears, Base 16.4% → 19.5%, P_k NOK 100.8, +22.3%; Bear −16.2%, Bull 37.5%; price implies Philippines ~NOK 320m; Step 6b (ahead, positive); compacted 727 → lean; `scatec/v21.py`. Next: Q4 report 29 Jan 2027 |
 | capt | docs/capt-analysis.md | iaf-valuation | company | 2026-11-08 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 9 Nov): only on request. Position sold. 8 Nov news note: Amor 15-month TC (~$160–180k/day, $73.1–82.2m), ~+$14m in Base (+NOK 1/share), not modelled, verdict unchanged (fails); model on the 24 Oct inputs |
 | hafnia | docs/hafnia-analysis.md | iaf-valuation | company | 2026-11-18 | 2026-11-18 | none | 2026-12-04 | 2026-11-12.1 | v6 exit check on the v5 model of 17 Oct |
 | kog | docs/kongsberg-analysis.md | iaf-valuation | company | 2026-10-29 | 2026-10-29 | all | 2026-11-28 | 2026-10-18.2 | **HOLD (user): no update until the user lifts it.** Version 2 (29 Oct, Q3 report, method 2026-10-18.2): Base −19.9% → −16.2%, fails; record backlog NOK 174bn |
 | rhm | docs/rheinmetall-analysis.md | iaf-valuation | company | 2026-10-07 | 2026-10-07 | all | 2026-11-06 | 2026-10-07.1 | **HOLD (user): no update until the user lifts it.** |
-| amzn | docs/amzn-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-11-11 | ai, dnbtek, equity | 2026-11-20 | 2026-11-10.1 | Version 2 (30 Oct, Q3 report): Base 6.8% → 9.2%, P_k $221.5 vs $240.35, fails; OpenAI $50bn preferred added (missing in v1) |
+| amzn | docs/amzn-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-16 | 2026-11-18.1 | Version 2 (30 Oct, Q3 report): Base 6.8% → 9.2%, P_k $221.5 vs $240.35, fails; OpenAI $50bn preferred added (missing in v1) |
 | dnb | docs/dnb-analysis.md | iaf-valuation | company | 2026-11-10 | 2026-10-22 | all | 2026-11-21 | 2026-10-18.2 | Update 1 after Q3, amended 22 Oct; 10 Nov note: CMD targets (ROE > 15% and C/I < 38% towards end-2028; payout and CET1 unchanged), ~0.5 pp above Base ROE 2028, verdict unchanged |
-| googl | docs/googl-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-10-28 | all | 2026-11-20 | 2026-11-10.1 | Version 2 (28 Oct) + price re-mark 1 Nov at the 30 Oct close $279.84: Base 4.6% → 9.6%, P_k $261.6 (−6.5%), fails; E / R 0.116; triggers: k $261.6, HY E / R $256.1 |
+| googl | docs/googl-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-18 | 2026-11-18.1 | v2.3 20 Nov (re-mark at the 20 Nov close $265.29; SPCX $127.79, ANT $88.91; `googl_n20.py`): Base 10.9% → 11.8%, P_k $263.7, −0.6%: fails → marginal; Bear −8.0%, Bull 24.2%; E / R 0.161. Next: Q4 report (~2 Feb) |
 | shb | docs/handelsbanken-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 12 Nov): no update until 3 Feb 2027 (year-end report). Version 2 |
-| msft | docs/msft-analysis.md | iaf-valuation | company | 2026-11-07 | 2026-10-28 | all | 2026-11-20 | 2026-11-01.1 | Version 3 (28 Oct, Q1 FY27 report and call): Base 8.8% → 9.5%, fails |
-| mu | docs/mu-analysis.md | iaf-valuation | company | 2026-11-05 | 2026-11-05 | none | 2026-11-17 | 2026-11-01.1 | v3 5 Nov price re-mark on the 5 Nov sell-off close $656.39 (was $856.49): Base 6.3% → 18.3%, P_k $751.6, margin −12.6% → +14.5%, fails → clears; Bear −1.7%, Bull 32.0%; E / R 0.616 vs HY BBB reference 0.254; model blocks kept; existing margin rule (not cycle-first); AI BBB layer method prices Micron at 1.05× Base 2028–30 (method gap) |
-| nvda | docs/nvda-analysis.md | iaf-valuation | company | 2026-11-18 | 2026-11-18 | ai, equity, global-index | 2026-12-18 | 2026-11-12.1 | v1.6 13 Nov (user: cascade stress test; re-mark at $166.19, 12 Nov close; compacted 655 → 440 lines): Base 17.7%, P_k $192.5, +15.8%, clears; Bear −5.4%, Bull 37.1%; E / R 0.287. Cascade (funding stop 2028, funded share 39% lost, GM 62%, exit 13): −20.8%, P_k $61.7, capital −49%; H2-27 start −24.3%; worst step price and margin; net cash never below $148bn. Keeping the buyers alive: bridge ≤ 1.4 pp; permanent subsidy reaches k at ~$94bn a year (half lost) |
-| anthropic | docs/anthropic-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | ai, amzn, googl, msft, nvda | 2026-11-19 | 2026-11-12.1 | v1.0 13 Nov (IPO, Bafin EU prospectus 11 Nov): range $70–78; Base IRR 5.5 / 3.8 / 2.2%, P_k $58.4, margin −21.1% at $74, fails (clears ≈ $57.5); Bear −38%, Bull +31%; fully diluted 18.14bn shares; 58% of E1; re-mark at the final price |
-| skh | docs/skhynix-analysis.md | iaf-valuation | company | 2026-11-16 | 2026-11-16 | ai, kospi, mu | 2026-12-16 | 2026-11-12.1 | Version 2 (28 Oct, Q3 report): Seoul Base 21.1%, clears; ADR marginal at the post-report price; Seoul line and SKHY ADR line |
-| smsn | docs/samsung-analysis.md | iaf-valuation | company | 2026-11-16 | 2026-11-16 | mu, skh | 2026-12-16 | 2026-11-12.1 | Version 2 (29 Oct, Q3 report): common Base 26.9% → 23.3%, preference 29.5% → 25.6%, both clear; common, preference and GDR lines |
+| msft | docs/msft-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-18 | 2026-11-18.1 | v3.3 20 Nov (re-mark at the 20 Nov close $484.52; Anthropic $88.91; `msft_n20.py`): Base 11.9% → 12.9%, P_k $497.0, +2.6%: marginal → clears (narrowly); Bear −4.8%, Bull 23.7%; E / R 0.231. Next: Q2 FY27 (~27 Jan) |
+| mu | docs/mu-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-18 | 2026-11-18.1 | v4.1 20 Nov (price re-mark at $594.51 after the chip sell-off; no model input moved): Base 7.2% → 15.2%, P_k $635.0, +6.8%: fails → clears; Bear 2.2%, Bull 38.4%; price implies k at 0.92× the Base (1.14× on 18 Nov). Next: FQ1-27 (16 / 23 Dec) |
+| nvda | docs/nvda-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | dnbtek, equity, global-index | 2026-12-18 | 2026-11-18.1 | v2.0 20 Nov (re-mark at $125.53 after −14% on the Reuters SEC-probe report; v1.9 funding-loss Base kept): Base 20.7%, P_k $156.1, +24.3%, clears; Bear 3.7%, Bull 51.9%; E / R 0.661. Order cut 16.7% (clears); SEC probe (g) central 17.3%, wide 13.2%, wide + order cut 9.2% (fails). Next: 10-Q ~25 Nov |
+| anthropic | docs/anthropic-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | amzn, googl, msft | 2026-12-15 | 2026-11-18.1 | v1.0 13 Nov (IPO, Bafin EU prospectus 11 Nov): range $70–78; Base IRR 5.5 / 3.8 / 2.2%, P_k $58.4, margin −21.1% at $74, fails (clears ≈ $57.5); Bear −38%, Bull +31%; fully diluted 18.14bn shares; 58% of E1; re-mark at the final price |
+| skh | docs/skhynix-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | dnbtek, kospi, mu | 2026-12-18 | 2026-11-18.1 | v4 19 Nov (AI BBB 18 Nov H2 2028–30 .50 / .32 / .28; KRW 1,173,000; Step 6b): Base 32.9%, P_k 1,814,729, +54.7%, clears; Bear 18.8%, capped −5.7%; ADR $122.47 P_k $152.44 (+24.5%); price implies k at 0.54× the new Base. Model V4 (skh_run4.py) |
+| smsn | docs/samsung-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | dnbtek, kospi, mu | 2026-12-18 | 2026-11-18.1 | v4 19 Nov (AI BBB 18 Nov H2 path; 195,000 / 155,900; consensus 77,775; Step 6b): Base 28.2%, P_k 283,748, +45.5%, clears; preference 30.8% (+52.3%); Bear 14.9%, capped −5.1%; price implies k at 0.54× the new Base. Model V4 (smsn_run4.py) |
 | kospi | docs/kospi-analysis.md | iaf-valuation | fund | 2026-11-16 | 2026-11-16 | none | 2026-11-30 | 2026-11-12.1 | Version 1.8 (6 Nov): price re-mark on the 6 Nov Seoul close after the 5–6 Nov chip sell-off (look-through −10.5% in KRW; IQQK EUR 99.2 → 88.6); paths and company blocks unchanged; HY reference now from HY BBB (0.254); price implies 0.61× Base 2028–30 for k (0.80×); Base ~21% (16%), P_k ~EUR 110 (unchanged), margin +25% (+11%); capped Bear −8%/yr, 2027 −39%; E / R 0.249 vs 0.254 (reference only); neither reads nor writes the portfolio |
 | stb | docs/storebrand-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-19 | all | 2026-11-23 | 2026-10-18.2 | Date from the file |
-| tsm | docs/tsm-analysis.md | iaf-valuation | company | 2026-11-11 | 2026-11-11 | none | 2026-11-17 | 2026-11-10.1 | v1.2 11 Nov (daily run): October revenue +59.7% y/y (above the +45% signpost, not crossed: set into 2027) and November board; re-mark at $396.48 (10 Nov close): Base 13.7% → 9.5%, P_k $369.8, margin −6.7%, clears → fails on price |
-| global-index | docs/global-index-funds-analysis.md | iaf-valuation | fund | 2026-11-01 | 2026-10-29 | all | 2026-11-17 | 2026-10-29.1 | Re-mark 29 Oct (MSFT v3, GOOGL v2, AI Update 5): Base −0.08 pp (DNB Global Indeks A 4.58%, Nordnet Global Indeks 4.73%), both fail; NAV date kept at 15 Oct; AI E-layer .92 not stacked on the company blocks; from the next run DNB Global Indeks A only (Nordnet Global Indeks dropped, user 1 Nov) |
-| dnbtek | docs/dnb-teknologi-analysis.md | iaf-valuation | fund | 2026-11-16 | 2026-11-16 | kospi | 2026-12-15 | 2026-11-12.1 | 6 Nov re-run (NAV 7,381.56 on 4 Nov; 5 Nov est. ≈ 7,145): Base 8.6% (10.0% at 5 Nov est.), P_k NAV 6,721, margin −8.9% (−5.4%), fails; E / R 0.113 vs new HY ref 0.254 (trigger NAV 6,399); 30 Sep holdings (ASML in); NVDA v1.2, TSM v1.1, GOOGL re-mark |
+| tsm | docs/tsm-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-11 | 2026-11-18.1 | v1.3 20 Nov (price re-mark at $318.71 after the chip sell-off; no path moved; compacted 1,393 → 300 lines; model rebuilt as tsm/v13.py): Base 9.5% → 17.5%, P_k $369.2, +15.8%: fails → clears; Bear −5.7%, Bull 30.4%; price implies k at 0.84× Base 2030. Next: November revenue (~10 Dec), Q4 report (~14 Jan) |
+| global-index | docs/global-index-funds-analysis.md | iaf-valuation | fund | 2026-11-21 | 2026-11-21 | none | 2026-12-06 | 2026-11-18.1 | v7 21 Nov (DNB Global Indeks A only; Nordnet Global Indeks dropped, user 1 Nov): NAV 835.76 (19 Nov), Base 6.66% after cost, P_k NAV 723, margin −13.5%, fails; E / R 0.081; pre-alert NAV 830, E / R trigger 728; compacted 808 → 405 |
+| dnbtek | docs/dnb-teknologi-analysis.md | iaf-valuation | fund | 2026-11-20 | 2026-11-20 | none | 2026-12-15 | 2026-11-18.1 | v9 19 Nov (NAV 17 Nov 7,282.87; NVIDIA v1.8, SK hynix v4 and Samsung v4 on the 18 Nov H2 path, AI BBB 18 Nov H1, market NIBOR): Base 10.3%, P_k 6,950, −4.6%, fails; E / R 0.158; Bear 2027 −23.4%. Model v9 (fundmodel.py; data v9) |
 | iaf-notes | docs/iaf-reference-notes.md | - | static | - | - | - | - | - | Background, not updated |
 | review-2029 | docs/review-2029-step-down.md | - | static | - | - | - | - | - | Review, not updated |
+| overview | docs/company-overview.md | - | static | - | - | - | - | - | Index: one row of key figures per company and fund; each company or fund run updates its own row when it records (CLAUDE.md, 21 Nov 2026); not a cascade target |
 | review-equity | docs/review-equity-market-bbb.md | - | static | - | - | - | - | - | Review, not updated |
 | review-hy | docs/review-hy-funds-and-defaults.md | - | static | - | - | - | - | - | Review, not updated |
 | review-iaf-exit | docs/review-iaf-exit.md | - | static | - | - | - | - | - | Review, not updated |
@@ -88,52 +89,52 @@ Kept by the `update-chain` skill; checked by
 
 | document | reads | input as of | link | reads what |
 |---|---|---|---|---|
-| shipping | oil | 2026-11-11 | main | Crude and product prices, volumes, disruptions |
-| rig | oil | 2026-11-11 | main | Brent path, long end, mid-cycle |
-| supply | oil | 2026-11-11 | main | Oil path (FID and tender logic) |
+| shipping | oil | 2026-11-18 | main | Crude and product prices, volumes, disruptions |
+| rig | oil | 2026-11-18 | main | Brent path, long end, mid-cycle |
+| supply | oil | 2026-11-18 | main | Oil path (FID and tender logic) |
 | supply | rig | 2026-11-12 | main | Rig activity for OSV demand |
-| hy | oil | 2026-11-11 | main | E&P row; scenario mapping |
-| hy | rig | 2026-11-04 | main | Oil Service row (drillers) |
-| hy | supply | 2026-11-04 | main | Oil Service row (OSV, subsea) |
-| hy | shipping | 2026-10-24 | main | Shipping row (tankers) |
-| equity | oil | 2026-11-04 | main | Oslo and World energy |
-| equity | hy | 2026-11-05 | main | NIBOR path, Bear macro, HY return, reference E / R |
-| equity | ai | 2026-11-05 | loop | AI layer paths in World |
-| equity | msft | 2026-11-04 | loop | Company block in World |
-| equity | googl | 2026-11-04 | loop | Company block in World |
-| equity | nvda | 2026-11-05 | loop | Company block in World |
-| equity | amzn | 2026-11-04 | loop | Company block in World (from 6 Nov) |
-| equity | mu | 2026-11-05 | loop | Company block in World (from 6 Nov) |
+| hy | oil | 2026-11-18 | main | E&P row; scenario mapping |
+| hy | rig | 2026-11-12 | main | Oil Service row (drillers) |
+| hy | supply | 2026-11-18 | main | Oil Service row (OSV, subsea) |
+| hy | shipping | 2026-11-13 | main | Shipping row (tankers) |
+| equity | oil | 2026-11-18 | main | Oslo and World energy |
+| equity | hy | 2026-11-18 | main | NIBOR path, Bear macro, HY return, reference E / R |
+| equity | ai | 2026-11-20 | loop | AI layer paths in World (18 Nov rows; World re-run 20 Nov) |
+| equity | msft | 2026-11-20 | loop | Company block in World |
+| equity | googl | 2026-11-20 | loop | Company block in World |
+| equity | nvda | 2026-11-20 | loop | Company block in World (v2.0 from 20 Nov) |
+| equity | amzn | 2026-11-20 | loop | Company block in World (from 6 Nov) |
+| equity | mu | 2026-11-19 | loop | Company block in World (from 6 Nov) |
 | ai | equity | 2026-11-06 | main | Scenarios, NOK path, World |
-| ai | hy | 2026-11-11 | main | NIBOR, HY reference E / R |
+| ai | hy | 2026-11-18 | main | NIBOR, HY reference E / R |
 | ai | mu | 2026-11-05 | loop | Company check |
 | ai | amzn | 2026-11-11 | loop | Company check |
-| ai | nvda | 2026-11-13 | loop | Company check |
+| ai | nvda | 2026-11-18 | loop | Company check |
 | ai | tsm | 2026-11-11 | loop | Company check |
 | ai | msft | 2026-11-07 | loop | Company check |
 | ai | googl | 2026-11-11 | loop | Company check |
-| ai | skh | 2026-11-04 | loop | Company check (layer method only until 24 Oct; not yet read) |
-| ai | smsn | 2026-11-04 | loop | Company check (layer method only until 24 Oct; not yet read) |
+| ai | skh | 2026-11-16 | loop | Company check (layer method only until 24 Oct; not yet read) |
+| ai | smsn | 2026-11-16 | loop | Company check (layer method only until 24 Oct; not yet read) |
 | defense | hy | 2026-10-24 | main | Nordic GDP |
 | defense | oil | 2026-10-24 | main | Gulf export row |
-| hy-issuers | hy | 2026-11-05 | main | Bear default rates, status scale |
+| hy-issuers | hy | 2026-11-18 | main | Bear default rates, status scale |
 | hy-funds | hy | 2026-11-05 | main | Market paths, NIBOR, reference E / R |
 | hy-funds | hy-issuers | 2026-11-09 | main | Named bond losses per fund |
 | hy-funds | scatec | 2026-10-30 | loop | Scatec bond holdings (Sissener Corporate Bond, Fondsfinans High Yield): issuer credit check (Bear corporate NIBD, 2028 refinancing); not yet read |
-| dof | supply | 2026-11-16 | main | NS and Brazil rows, anchors, economic life |
-| dof | equity | 2026-11-06 | main | Exit cross-check, NOK path |
-| dof | hy | 2026-11-11 | main | Bear HY spread (2030 refinancing) |
+| dof | supply | 2026-11-21 | main | NS and Brazil rows, anchors, economic life |
+| dof | equity | 2026-11-20 | main | Exit cross-check, NOK path |
+| dof | hy | 2026-11-18 | main | Bear HY spread (2030 refinancing) |
 | sed | rig | 2026-11-04 | main | Tender-assist row, rig values |
 | sed | oil | 2026-10-24 | main | Background |
 | sed | equity | 2026-10-18 | main | Exit cross-check, NOK path |
-| borr | rig | 2026-11-04 | main | Jackup rates, MCU, rig values |
-| borr | oil | 2026-11-04 | main | Background via rig scenarios |
-| borr | equity | 2026-11-06 | main | Exit cross-check, NOK path |
+| borr | rig | 2026-11-12 | main | Jackup rates, MCU, rig values |
+| borr | oil | 2026-11-18 | main | Background via rig scenarios |
+| borr | equity | 2026-11-20 | main | Exit cross-check, NOK path |
 | odl | rig | 2026-11-12 | main | HE semis (NCS) row: rates, MCU, mid-cycle, asset convention, fixtures |
 | odl | oil | 2026-11-11 | main | Background via rig scenarios |
 | odl | equity | 2026-11-06 | main | Exit cross-check, NOK path |
-| scatec | equity | 2026-10-18 | main | Exit cross-check, NOK path |
-| scatec | hy | 2026-10-24 | main | Bear refinancing spread (corporate bonds from 2028) |
+| scatec | equity | 2026-11-20 | main | Exit cross-check, NOK path |
+| scatec | hy | 2026-11-18 | main | Bear refinancing spread (corporate bonds from 2028) |
 | capt | shipping | 2026-10-24 | main | VLCC, Suezmax and Aframax/LR2 rows, stub, values (open days are Suezmax and Aframax/LR2; VLCCs on TC) |
 | capt | oil | 2026-10-24 | main | Background |
 | capt | equity | 2026-10-18 | main | Exit cross-check, NOK path |
@@ -145,56 +146,56 @@ Kept by the `update-chain` skill; checked by
 | kog | hy | 2026-10-24 | main | NIBOR on cash |
 | kog | equity | 2026-10-18 | main | Exit references (Oslo exit P/E, P/B, mid-cycle return) |
 | rhm | defense | 2026-10-07 | main | Segment order and revenue paths |
-| amzn | ai | 2026-11-07 | main | E2 cloud row, K1 capex, E-layer EPS and exit P/E |
+| amzn | ai | 2026-11-19 | main | E2 cloud row, K1 capex, E-layer EPS and exit P/E |
 | amzn | equity | 2026-11-06 | main | Macro scenarios, NOK path |
-| amzn | hy | 2026-11-05 | main | NIBOR (E / R) |
+| amzn | hy | 2026-11-18 | main | NIBOR (E / R) |
 | dnb | equity | 2026-10-18 | main | Scenarios, Oslo financials block |
 | dnb | hy | 2026-10-17 | main | NIBOR path |
-| dnbtek | ai | 2026-11-16 | main | Layer EPS paths, exit P/Es |
-| dnbtek | equity | 2026-11-06 | main | World scenarios, NOK path |
-| dnbtek | amzn | 2026-11-11 | main | Company block CA |
-| dnbtek | nvda | 2026-11-13 | main | Company block CN |
+| dnbtek | ai | 2026-11-20 | main | Layer EPS paths, exit P/Es |
+| dnbtek | equity | 2026-11-18 | main | World scenarios, NOK path |
+| dnbtek | amzn | 2026-11-20 | main | Company block CA |
+| dnbtek | nvda | 2026-11-20 | main | Company block CN |
 | dnbtek | tsm | 2026-11-11 | main | Company block CT |
-| dnbtek | msft | 2026-11-07 | main | Company block CM |
-| dnbtek | googl | 2026-11-11 | main | Company block CG |
-| dnbtek | mu | 2026-11-05 | loop | Memory evidence (the fund holds no Micron) |
-| dnbtek | skh | 2026-11-04 | main | SK hynix company block (from 31 Oct; layer path only until 22 Oct) |
-| dnbtek | smsn | 2026-11-16 | main | Samsung company blocks, common and preference (from 31 Oct; layer path only until 22 Oct) |
-| googl | ai | 2026-11-07 | main | E2 cloud row, K1 capex, E-layer EPS |
-| googl | equity | 2026-11-06 | main | Macro scenarios, NOK path |
-| googl | hy | 2026-11-05 | main | NIBOR (E / R) |
+| dnbtek | msft | 2026-11-20 | main | Company block CM |
+| dnbtek | googl | 2026-11-20 | main | Company block CG |
+| dnbtek | mu | 2026-11-19 | loop | Memory evidence (the fund holds no Micron) |
+| dnbtek | skh | 2026-11-19 | main | SK hynix company block (from 31 Oct; layer path only until 22 Oct) |
+| dnbtek | smsn | 2026-11-19 | main | Samsung company blocks, common and preference (from 31 Oct; layer path only until 22 Oct) |
+| googl | ai | 2026-11-20 | main | E2 cloud row, K1 capex, E-layer EPS |
+| googl | equity | 2026-11-20 | main | Macro scenarios, NOK path |
+| googl | hy | 2026-11-18 | main | NIBOR (E / R) |
 | shb | equity | 2026-10-18 | main | Scenarios, Oslo financials block, NOK path |
 | shb | hy | 2026-10-24 | main | Sweden GDP, Riksbank, NIBOR |
-| msft | ai | 2026-11-07 | main | E2, T1, T3 rows, K1 capex |
-| msft | equity | 2026-11-06 | main | Macro scenarios, NOK path |
-| mu | ai | 2026-11-05 | main | H2 memory layer |
-| mu | equity | 2026-10-18 | main | Scenarios, exit cross-check |
-| mu | hy | 2026-11-05 | main | NIBOR (E / R) |
-| mu | skh | 2026-10-22 | loop | Peer comparison (from the SK hynix analysis, not only market multiples; not yet read) |
-| mu | smsn | 2026-10-22 | loop | Peer comparison (from the Samsung analysis, not only market multiples; not yet read) |
-| nvda | ai | 2026-11-16 | main | H1 compute layer (11 Nov re-run held to the 17 Nov run, deferral rule) |
-| nvda | equity | 2026-11-06 | main | Scenarios, NOK path |
-| nvda | hy | 2026-11-11 | main | NIBOR (E / R) |
+| msft | ai | 2026-11-20 | main | E2, T1, T3 rows, K1 capex |
+| msft | equity | 2026-11-20 | main | Macro scenarios, NOK path |
+| mu | ai | 2026-11-20 | main | H2 memory layer |
+| mu | equity | 2026-11-20 | main | Scenarios, exit cross-check |
+| mu | hy | 2026-11-18 | main | NIBOR (E / R) |
+| mu | skh | 2026-11-19 | loop | Peer comparison (from the SK hynix analysis, not only market multiples; not yet read) |
+| mu | smsn | 2026-11-19 | loop | Peer comparison (from the Samsung analysis, not only market multiples; not yet read) |
+| nvda | ai | 2026-11-20 | main | H1 compute layer (11 Nov re-run held to the 17 Nov run, deferral rule) |
+| nvda | equity | 2026-11-18 | main | Scenarios, NOK path |
+| nvda | hy | 2026-11-18 | main | NIBOR (E / R) |
 | nvda | anthropic | 2026-11-13 | main | Value of the $10bn Class N placement (shares at the IPO price, value at P_k); not yet read |
-| anthropic | ai | 2026-11-11 | main | E1 frontier-lab revenue paths (Anthropic share set in the analysis), scenarios, lab-financing signposts |
-| anthropic | equity | 2026-11-06 | main | Scenarios, NOK path, exit cross-check |
-| anthropic | hy | 2026-11-05 | main | Rates context (NIBOR) |
+| anthropic | ai | 2026-11-19 | main | E1 frontier-lab revenue paths (Anthropic share set in the analysis), scenarios, lab-financing signposts |
+| anthropic | equity | 2026-11-18 | main | Scenarios, NOK path, exit cross-check |
+| anthropic | hy | 2026-11-18 | main | Rates context (NIBOR) |
 | ai | anthropic | 2026-11-13 | loop | Company check: Anthropic revenue and E1 share, contracted compute 2027–29, placement split; not yet read |
-| amzn | anthropic | 2026-11-11 | main | Anthropic stake (Class N plus rolled-over notes) at the IPO price and at P_k; not yet read |
-| googl | anthropic | 2026-11-11 | main | Anthropic stake at the IPO price and at P_k; not yet read |
-| msft | anthropic | 2026-11-07 | main | Anthropic Azure commitment (≥ $47.2–49.2bn, Nov 2026–Jun 2033) and the $1bn placement; not yet read |
-| skh | ai | 2026-11-16 | main | H2 memory layer: EPS path, exit P/E, scenarios |
-| skh | equity | 2026-11-06 | main | Scenarios, I-44 path (NOK memo), exit cross-check |
-| skh | hy | 2026-11-11 | main | NIBOR (E / R), HY reference E / R |
-| skh | nvda | 2026-11-13 | main | NVIDIA as main HBM customer, supply commitments |
-| skh | mu | 2026-11-05 | main | Peer on the same H2 path |
+| amzn | anthropic | 2026-11-20 | main | Anthropic stake (Class N plus rolled-over notes) at the IPO price and at P_k; not yet read |
+| googl | anthropic | 2026-11-20 | main | Anthropic stake at the IPO price and at P_k; not yet read |
+| msft | anthropic | 2026-11-20 | main | Anthropic Azure commitment (≥ $47.2–49.2bn, Nov 2026–Jun 2033) and the $1bn placement; not yet read |
+| skh | ai | 2026-11-18 | main | H2 memory layer: EPS path, exit P/E, scenarios |
+| skh | equity | 2026-11-18 | main | Scenarios, I-44 path (NOK memo), exit cross-check |
+| skh | hy | 2026-11-18 | main | NIBOR (E / R), HY reference E / R |
+| skh | nvda | 2026-11-19 | main | NVIDIA as main HBM customer, supply commitments |
+| skh | mu | 2026-11-19 | main | Peer on the same H2 path |
 | skh | smsn | 2026-11-16 | loop | Peer comparison (Samsung analysis; not yet read) |
-| smsn | ai | 2026-11-16 | main | H2 memory layer: EPS path, exit P/E, revenue index, scenarios |
-| smsn | equity | 2026-11-06 | main | Scenarios, I-44 path (NOK memo), exit cross-check |
-| smsn | hy | 2026-11-11 | main | NIBOR (E / R), HY reference E / R |
-| smsn | nvda | 2026-11-13 | main | NVIDIA as main HBM customer, supply commitments |
-| smsn | mu | 2026-11-05 | main | Peer on the same H2 path |
-| smsn | skh | 2026-11-04 | main | Peer on the same H2 path; template for the build |
+| smsn | ai | 2026-11-18 | main | H2 memory layer: EPS path, exit P/E, revenue index, scenarios |
+| smsn | equity | 2026-11-18 | main | Scenarios, I-44 path (NOK memo), exit cross-check |
+| smsn | hy | 2026-11-18 | main | NIBOR (E / R), HY reference E / R |
+| smsn | nvda | 2026-11-19 | main | NVIDIA as main HBM customer, supply commitments |
+| smsn | mu | 2026-11-19 | main | Peer on the same H2 path |
+| smsn | skh | 2026-11-19 | main | Peer on the same H2 path; template for the build |
 | kospi | smsn | 2026-11-16 | main | Company blocks: Samsung common and preference (D_t, V_t, capped Bear) |
 | kospi | skh | 2026-11-16 | main | Company block: SK hynix, also driving the SK holdcos block |
 | kospi | ai | 2026-11-16 | main | H2 memory scenarios and catalysts, capped-Bear diagnostic, memory basket row |
@@ -207,24 +208,25 @@ Kept by the `update-chain` skill; checked by
 | kospi | dnbtek | 2026-11-16 | main | DNB Teknologi comparison row |
 | stb | equity | 2026-10-18 | main | Scenarios, Oslo block F, exit references |
 | stb | hy | 2026-10-24 | main | NIBOR path, GDP, HY return |
-| tsm | ai | 2026-11-07 | main | H3 foundry layer |
-| tsm | nvda | 2026-11-05 | main | NVIDIA as TSMC's main customer |
-| tsm | equity | 2026-11-06 | main | Scenarios, NOK path |
-| tsm | hy | 2026-11-05 | main | NIBOR (E / R) |
-| global-index | equity | 2026-10-18 | main | World blocks, scenarios, NOK path |
-| global-index | ai | 2026-10-29 | main | Layer paths |
-| global-index | msft | 2026-10-29 | main | Company block |
-| global-index | googl | 2026-10-29 | main | Company block |
-| global-index | nvda | 2026-10-17 | main | Company block |
-| global-index | oil | 2026-10-24 | main | Energy block |
-| global-index | hy | 2026-10-24 | main | NIBOR (E / R) |
-| dnbtek | hy | 2026-11-11 | main | NIBOR (Base window 4.38%), HY market reference E / R (0.254 from 6 Nov) |
+| tsm | ai | 2026-11-20 | main | H3 foundry layer |
+| tsm | nvda | 2026-11-20 | main | NVIDIA as TSMC's main customer |
+| tsm | equity | 2026-11-20 | main | Scenarios, NOK path |
+| tsm | hy | 2026-11-18 | main | NIBOR (E / R) |
+| global-index | equity | 2026-11-20 | main | World blocks, scenarios, NOK path |
+| global-index | ai | 2026-11-20 | main | Layer paths |
+| global-index | msft | 2026-11-20 | main | Company block |
+| global-index | googl | 2026-11-20 | main | Company block |
+| global-index | nvda | 2026-11-20 | main | Company block |
+| global-index | oil | 2026-11-18 | main | Energy block |
+| global-index | hy | 2026-11-18 | main | NIBOR (E / R) |
+| global-index | amzn | 2026-11-20 | main | Company block CA (via the Equity BBB World build; from v7) |
+| global-index | mu | 2026-11-20 | main | Company block CU (via the Equity BBB World build; from v7) |
+| dnbtek | hy | 2026-11-18 | main | NIBOR (Base window 4.72%, market path from 18 Nov), HY market reference E / R (0.254 from 6 Nov) |
 | dnbtek | hy-funds | 2026-11-09 | main | Sissener R and E / R (the HY market reference comes from hy from 6 Nov) |
 | dnbtek | global-index | 2026-11-01 | main | DNB Global Indeks A as the World index-fund row |
-| global-index | hy-funds | 2026-10-24 | main | HY market reference E / R 0.196 |
-| hy | hy-issuers | 2026-11-09 | loop | Held-company news screen behind the default log |
-| mu | hy-funds | 2026-11-01 | main | HY market reference E / R 0.196 |
-| msft | hy | 2026-11-05 | main | NIBOR (E / R) |
+| global-index | hy-funds | 2026-11-09 | main | HY market reference E / R 0.196 |
+| hy | hy-issuers | 2026-11-11 | loop | Held-company news screen behind the default log |
+| msft | hy | 2026-11-18 | main | NIBOR (E / R) |
 
 ## Not links
 
@@ -274,8 +276,8 @@ it to `open`.
 | 2026-11-09 | yes | DOF: option declared on the AHTS Skandi Mariner, firm from Q2 2027 to Q3 2028, value Significant ($15–25m) (dof news note 9 Nov; place in the model at Q3) | dof | done |
 | 2026-11-09 | yes | Petrobras PLSV tender final results (Fearnley via TDN, 9 Nov): DOFCON Buzios $305k, Recife and Olinda $295k/day; Paratus Sapura Jade $309k; 4 years from 1 Jan 2028; signatures remain (dof news note 10 Nov) | dof | done |
 | 2026-11-09 | yes | Brazil PLSV data point for the supply BBB's next run: four vessels at $295–309k/day from 2028 (Base row 2028 295, 2029 300) | supply | done |
-| 2026-11-08 | yes | NVIDIA board opens an independent probe into the CEO (reported intelligence link); no timeline; stock −4.3% 9 Nov, −6.1% 10 Nov. Read at the Q3 run (17 Nov) | nvda, ai | watch |
-| 2026-11-10 | approx | Possible new US export controls on NVIDIA AI chips to China (The Information, 10 Nov) and congressional briefing requests; China already excluded from NVIDIA Base | nvda, ai | watch |
+| 2026-11-08 | yes | NVIDIA board opens an independent probe into the CEO (reported intelligence link); no timeline; stock −4.3% 9 Nov, −6.1% 10 Nov. Read at the Q3 run (17 Nov) Outcome: Huang resigned 11–12 Nov (8-K); read in nvda v1.7–v2.0 | nvda, ai | done |
+| 2026-11-10 | approx | Possible new US export controls on NVIDIA AI chips to China (The Information, 10 Nov) and congressional briefing requests; China already excluded from NVIDIA Base Outcome: BIS remote-access rule issued 16 Nov; read in nvda v1.7 | nvda, ai | done |
 | 2026-11-06 | yes | CAPT: 15-month TC for the Suezmax Amor from Nov 2026, revenue $73.1–82.2m (~$160–180k/day gross), subject to vetting (capt news note 8 Nov) | capt | done |
 | 2026-11-06 | yes | Period-market data point: CAPT Amor (2026 dual-fuel Suezmax) 15-month TC at ~$160–180k/day gross; read at the shipping BBB's next run | shipping | done |
 | 2026-10-23 | yes | Intrum Q3 report: net loss SEK 1.49bn incl. SEK 1.52bn goodwill impairment (Germany); shares −39% intraday; servicing leverage 4.5x; bond price not found (daily news 26 Oct) (hy-issuers read 31 Oct) | hy-funds | done |
@@ -308,7 +310,7 @@ it to `open`.
 | 2026-11-02 | yes | Transocean Q3 report and fleet status | rig, odl | done |
 | 2026-11-02 | yes | Westwood weekly rig count; Valaris Q3 (after close) | rig, borr | done |
 | 2026-11-03 | yes | US midterm elections (Democrats won House and Senate; oil read 4 Nov, kept; equity read 6 Nov) | defense | open |
-| 2026-11-20 | approx | Equinor AHTS term tender: bids were due 3 Nov, no award announced by 4 Nov (supply checkpoint 13); award expected later | supply | open |
+| 2026-11-20 | approx | Equinor AHTS term tender: bids were due 3 Nov, no award announced by 18 Nov (supply checkpoint 13); an award of ≥ 2 vessels by 31 Jan 2027 reverses the AHTS turn call (restore £60k) | supply, dof | done |
 | 2026-11-03 | yes | Odfjell Drilling Q3 report and Q3 dividend (insurance and tax-refund cash, net debt) | odl | done |
 | 2026-11-04 | yes | Riksbank rate decision: hiked to 2.00% from 11 Nov, more hikes likely (hy read 5 Nov) | shb | done |
 | 2026-11-05 | yes | Norges Bank rate decision | hy | done |
@@ -332,7 +334,7 @@ it to `open`.
 | 2026-11-10 | yes | SSB October CPI (Norway): CPI 3.6%, CPI-ATE 2.7% vs MPR 3.8 / 2.7 (hy 11 Nov) | hy | done |
 | 2026-11-10 | yes | CoreWeave Q3 report and call (5 pm ET): neocloud-funding signpost | ai | done |
 | 2026-11-10 | approx | Anthropic roadshow launch; amended S-1 with price range expected first (googl 7 Nov [E]) | googl, ai, amzn | done |
-| 2026-11-19 | yes | MSFT ex-dividend $0.98 (paid 10 Dec): re-mark point | msft | open |
+| 2026-11-19 | yes | MSFT ex-dividend $0.98 (paid 10 Dec): re-mark point | msft | done |
 | 2026-11-10 | yes | Riksbank minutes (4 Nov decision): unanimous, ~2 more hikes expected (hy read 11 Nov, path kept) | shb | done |
 | 2026-11-10 | approx | TSMC October revenue (monthly 6-K, ~10th; date not confirmed): signpost y/y < +25% / > +45% (Sep +54.6%) | tsm, ai | done |
 | 2026-11-12 | yes | Bundestag budget committee final session on the 2027 budget (Bereinigungssitzung) | defense, rhm | open |
@@ -343,14 +345,15 @@ it to `open`.
 | 2026-11-14 | approx | Samsung Q3 quarterly report on DART: LTA price ranges or floors | smsn, ai, kospi | done |
 | 2026-11-17 | yes | NVIDIA Q3 FY27 report. The full re-run also restructures the report to the iaf-valuation 2026-11-10.1 layout (structure review 10 Nov: scenario table, Bear driver breakdown, Base return bridge, history to the change log; fix the 30 Oct multiples left in the exit-anchor text and in For other modules). Also check (WSJ via BusinessToday 13 Nov [E]): financing deals paused after Aug and put under executive and board review; a guarantee framework ("chip sales generated"); credit support offered by Huang's son-in-law Nico Caprez (related-party disclosure?); new Q3 guarantees, buy-backs and equity commitments in the 10-Q against the inventory ($164.5bn contingent, $25bn committed) and the AI BBB vendor-financing flow signpost (> $50bn a quarter). Refresh the cascade stress test (built in v1.6, 13 Nov; −20.8% at exit 13) with the Q3 figures and new guarantees, reported next to Base and Bear, not in Base: NVIDIA stops new discretionary funding (from 2028; no recession needed) → funded neoclouds fail: capacity buy-backs ($36bn), land/power/shell guarantees ($3.5bn) and leases ($20bn) called or stranded → neocloud stakes to zero, OpenAI stake marked down, SB Energy guaranty phases called if OpenAI cannot raise its 2028 round (wrong-way) → the whole funded share of data-center demand (30–45%, not only NVIDIA's ~5% pro-rata) lost from 2028 with K1 backfill only where supply-limited → price and margin (user, 13 Nov): funded buyers are the marginal bidders in a supply-limited market, so losing them turns shortage into surplus and lowers the clearing price on all sales, hyperscalers included; failed neoclouds' GPUs flood the used and rental market; supply commitments ($279bn) turn into excess-purchase charges. Test gross margin well below the Bear's 68–72% (e.g. 60–65%, with the 2018–19 and 2001 down-cycles as reference) on the reduced revenue, and show price × volume × operating leverage separately → exit P/E de-rated as the book comes into view (Bear's 13 or lower). Report IRR, P_k, capital preserved at the run's price, which step does the damage, how it differs from the Bear, and the cost of the alternative (the funding NVIDIA must keep providing each year to avoid the cascade) | nvda, ai, skh, smsn, kospi | done |
 | 2026-11-17 | yes | AI BBB: add a signpost "Funded-customer credit stress" (user, 13 Nov): NVIDIA-backed neocloud debt yields or spreads (CoreWeave and peers), defaults, covenant waivers or missed payments, any NVIDIA guarantee called or capacity buy-back exercised, OpenAI's 2028 round. First reading and thresholds at the next AI BBB run; links to the financing-break Bear and the NVIDIA cascade test. Read it together with the GPU rental-index signpost (last reading B200 $5.62 on 1 Sep: stale, refresh) and add used-GPU resale prices: falling rental and resale prices are the price leg of the cascade (user, 13 Nov: financing raises demand and prices, so a stop hits price as well as volume) | ai | done |
-| 2026-11-16 | approx | NVIDIA Q3 13F (public stakes at 30 Sep) | nvda, ai | watch |
-| 2026-11-18 | approx | Anthropic IPO pricing: marks NVIDIA's stake and its $10bn placement | nvda, ai | watch |
+| 2026-11-16 | approx | NVIDIA Q3 13F (public stakes at 30 Sep) Outcome: read in nvda v1.7 (stakes re-marked on the 30 Sep counts) | nvda, ai | done |
+| 2026-11-18 | approx | Anthropic IPO pricing: marks NVIDIA's stake and its $10bn placement (outcome: $83, above range; NVIDIA 120.5m Class N, $11.7bn at the $97.17 first close; immaterial for nvda) | nvda, ai | done |
 | 2026-12-15 | approx | NDAA final text (AI Overwatch, Chip Security, MATCH Acts) | nvda, ai | watch |
+| 2027-02-17 | approx | Borr Q4 2026 report (Rig BBB; date not confirmed by Borr): FY2027 guidance, 2027 cover, rates; jackup watch call checkpoint | borr, rig, hy-issuers | open |
 | 2027-02-28 | approx | NVIDIA permanent CEO named (3–4-month search) | nvda, ai | open |
-| 2026-11-18 | yes | House closed briefing on NVIDIA requested for 18 Nov (committee chairs Mast, Moolenaar, Crawford; letter 4 Nov); 11 Nov: House Republicans press Huang to testify, subpoena floated (daily news 12 Nov) | nvda, ai | watch |
+| 2026-11-18 | yes | House closed briefing on NVIDIA requested for 18 Nov (committee chairs Mast, Moolenaar, Crawford; letter 4 Nov); 11 Nov: House Republicans press Huang to testify, subpoena floated (daily news 12 Nov) Outcome (weekly 21 Nov): Huang agreed to testify behind closed doors per Moolenaar, no date set (BGov [E]); no new finding | nvda, ai | done |
 | 2026-11-12 | approx | NVIDIA board decision on CEO: Huang resigned as CEO and director (8-K 12 Nov, effective 11 Nov); Colette Kress interim CEO and CFO; Harvey Jones first Chair; internal and external search | nvda, ai | done |
 | 2026-11-30 | approx | BIS rule blocking Chinese remote access to advanced AI chips via data centres abroad, seven more countries incl. Malaysia, Singapore, Thailand (The Information 11 Nov [E]; "could be announced this month") | nvda, ai | done |
-| 2026-11-18 | approx | Trump–Xi meeting (18–19 Nov, APEC Shenzhen): export policy for AI chips; port-fee talks (USTR/China suspensions run to 9/10 Jan 2027) | nvda, ai, shipping | watch |
+| 2026-11-18 | approx | Trump–Xi meeting (18–19 Nov, APEC Shenzhen): export policy for AI chips; port-fee talks (USTR/China suspensions run to 9/10 Jan 2027) Outcome (weekly 21 Nov): no readout found with a chip or port-fee agreement; US "does not negotiate export controls"; no change | nvda, ai, shipping | done |
 | 2027-02-25 | approx | CoreWeave Q4 2026 report (date not announced): ~$9bn of prepayments received, financing; neocloud-funding signpost | ai | open |
 | 2026-11-20 | yes | DOF Q3 dividend $0.40 goes ex (paid 30 Nov); duplicate of the open row "DOF Q3 dividend USD 0.40 goes ex" (13 Nov) | dof | dropped |
 | 2027-02-18 | yes | DOF Q4 2026 report and Q4 dividend (paid ~5 Mar) | dof | open |
@@ -360,16 +363,22 @@ it to `open`.
 | 2027-01-31 | approx | AI BBB January roll-forward: re-run the K1 return gauge (k1ret.py) and the K1 cycle judgement on the hyperscalers' first 2027 capex figures; re-set K1 2025 / 2026 to filings (~450 / ~815) | ai | open |
 | 2027-01-15 | approx | New Senate: Warren chairs Senate Banking; possible subpoena on NVIDIA's China exposure | nvda | watch |
 | 2027-03-15 | approx | Trial of the Supermicro co-founder (chip diversion case) | nvda | watch |
-| 2026-11-07 | approx | DNB Teknologi 5 Nov NAV published (first NAV with the 5 Nov sell-off; estimate ≈ 7,145): check against the estimate | dnbtek | watch |
+| 2026-11-07 | approx | DNB Teknologi 5 Nov NAV published (first NAV with the 5 Nov sell-off; estimate ≈ 7,145): check against the estimate Outcome: superseded; dnbtek v8–v10 (16–20 Nov) run on later NAVs | dnbtek | done |
 | 2026-11-15 | approx | DNB AM October monthly report for DNB Teknologi with 31 Oct holdings | dnbtek | done |
 | 2026-11-19 | yes | SK hynix buyback window ends (24.07m shares for cancellation); finished early on 21 Oct (23.69m shares, KRW 40.0tn; Q3 report) | skh | done |
 | 2026-11-18 | yes | Hafnia Q3 report | hafnia | done |
 | 2026-11-16 | yes | TORM Q3 dividend USD 1.35 goes ex (Copenhagen 16 Nov, New York 17 Nov; paid 2 Dec) | hafnia | done |
-| 2026-11-17 | yes | Petrobras PSV 4500 (5 lots) and PSV 3000 (2 lots) tender proposals open: 4-year firm from Jun–Oct 2027 (opened 17 Nov; ranking not public by 18 Nov 08:00, read at the supply run; PSV 3000 bareboat tender bids due 25 Nov) | supply, dof | open |
-| 2026-11-18 | approx | SED Q3 report (MFN/Inderes calendar 18 Nov 06:00, not out by 08:00 18 Nov; TipRanks lists 27 Nov `[E]`) | sed, rig | open |
+| 2026-11-17 | yes | Petrobras PSV 4500 (5 lots) and PSV 3000 (2 lots) tender proposals open: 4-year firm from Jun–Oct 2027 (opened 17 Nov; ranking not public by 18 Nov 08:00, read at the supply run; PSV 3000 bareboat tender bids due 25 Nov). Read 18 Nov: ceilings TDA $35.45k / CDE $43.59k (PSV 4500); ranking event below | supply, dof | done |
+| 2026-11-17 | yes | DOF: Skandi Africa (high-end flexlay CSV) "Very Large" award ($100–200m) from TechnipFMC in direct continuation of its current contract (Cision 17 Nov 07:13; user input 18 Nov; missed by the daily runs). Term, rate and start not given: read at the dof run (CSV open share 2027–29, premium on contracts firm today; verdict marginal +0.6%) | dof, supply | done |
+| 2026-11-18 | yes | DOF ownership: A.P. Møller Maritime (largest holder's group) buys 950,000 shares at NOK 128.01 (NOK 121.6m; insider notice 18 Nov), after John Fredriksen's buying of ~NOK 900m (Finansavisen 18 Nov, user input `[E]`; dates and stake not given). Signal, not a value input; note at the dof run (two large holders adding at ~P_k NOK 127.8; control or consolidation as a Bull thread; Geveran is already the related-party SALT seller) | dof | done |
+| 2026-11-23 | yes | **User request (21 Nov): re-mark SK hynix (v4) and Samsung (v4) at the 23 Nov Seoul close**, the first session after the 20 Nov US AI sell-off (SKHY ADR −13% after Seoul closed on 20 Nov). Run by the one-off scheduled task `remark-skh-smsn-23nov` (Mon 23 Nov 10:00; the check flags passed events only from the next day): price re-mark on the v4 blocks (`skh_run4.py`, `smsn_run4.py`), cascade per the change gate | skh, smsn | open |
+| 2026-11-27 | yes | SED Q3 report (company calendar, user 19 Nov; moved from 18 Nov) | sed, rig | open |
 | 2026-11-12 | yes | SeaBird (SED) Fulmar Explorer OBN source contract, West Africa, ~6 months from Dec 2026 (supports the SeaBird Base 2027 contribution; read at the SED Q3 run) | sed | watch |
-| 2026-11-18 | yes | Borr Q3 report (Borr release 13 Nov: after the NYSE close 18 Nov, call 19 Nov 15:00 CET): first figures after the Prospector 5 loss, insurance position | borr, hy-issuers, rig | open |
-| 2026-11-18 | approx | Anthropic IPO pricing (S-1/A of 10 Nov: range $70–78; pricing 18 Nov and first trade ~19 Nov press-reported `[E]`); the $26bn Class N placement closes right after (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC): value of Amazon's and Alphabet's stakes, E1 lab revenue; re-mark only if priced outside the range; first trade 19 Nov as "ANT", closing and placement 20 Nov | anthropic, ai, amzn, googl, msft | open |
+| 2026-11-18 | yes | Borr Q3 report (Borr release 13 Nov: after the NYSE close 18 Nov, call 19 Nov 15:00 CET): first figures after the Prospector 5 loss, insurance position | borr, hy-issuers, rig | done |
+| 2026-11-18 | approx | Anthropic IPO pricing (S-1/A of 10 Nov: range $70–78; pricing 18 Nov and first trade ~19 Nov press-reported [E]); the $26bn Class N placement closes right after (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC): value of Amazon's and Alphabet's stakes, E1 lab revenue; re-mark only if priced outside the range; first trade 19 Nov as "ANT", closing and placement 20 Nov | anthropic, ai, amzn, googl, msft | done |
+| 2026-11-18 | yes | Oil Market BBB leading-view run (skill rollout): kept unchanged; the late-October Brent fall was already in the 11 Nov Base, so the HY energy watch call was dropped | oil, hy | done |
+| 2027-01-06 | approx | TrendForce Q1-27 DRAM contract prices: AI BBB H2 turn-call reversal test (≥ +10% q/q with spot above contract restores Base 2028–30 .60 / .40 / .35); mark the AI scorecard | ai, mu, smsn, skh, kospi | open |
+| 2027-02-25 | approx | NVIDIA Q4 FY27 and neocloud Q4 reports: AI BBB H1 2028–30 turn-call reversal test (neocloud yields < 10%, no stress event) and H1 2027 watch call | ai, nvda | open |
 | 2026-11-10 | yes | TSMC November board (6-K 10 Nov): 3Q26 dividend NT$9.0 (model NT$8.0), capital appropriations $40.93bn, up to $0.5bn each of Anthropic common (IPO price) and OpenAI preferred | tsm, ai | done |
 | 2026-12-10 | approx | TSMC November revenue (monthly 6-K, ~10th; date not confirmed): signpost y/y < +25% / > +45% (Oct +59.7%) | tsm, ai | open |
 | 2026-12-10 | yes | TSMC 2Q26 dividend NT$7.0 goes ex (paid 7 Jan 2027) | tsm | watch |
@@ -380,7 +389,7 @@ it to `open`.
 | 2026-11-25 | yes | Trustly Q3 report (and the >USD 40m equity injection closing in November) | hy-issuers, hy-funds | open |
 | 2026-11-25 | approx | Norse Atlantic Q3 report (financial calendar, date estimated `[E]`; daily news 2 Nov); held issuer on the watchlist (HH 0.76, HH+ 2.27), status Watch | hy-issuers, hy-funds | open |
 | 2026-11-30 | approx | DRAM/NAND monthly contract price print (November) — memory cycle signpost | ai, skh, smsn, kospi | open |
-| 2026-11-13 | yes | IEA Oil Market Report (open the oil update if 2027 demand is revised by more than 0.5 mb/d) | oil | watch |
+| 2026-11-13 | yes | IEA Oil Market Report (open the oil update if 2027 demand is revised by more than 0.5 mb/d) Outcome (weekly 21 Nov): 2027 demand +2.0 mb/d, unchanged; 2026 −2.7 mb/d (−90 kb/d vs Oct); 2027 surplus larger; below the 0.5 mb/d trigger, read at the next oil run | oil | done |
 | 2026-12-10 | approx | Brent front ±15% trigger re-armed on the 10 Nov settlement 91.49: F27 ≤ 77.8 or ≥ 105.2 (then G27 ≤ 76.0 or ≥ 102.9), to 10 Dec | oil | watch |
 | 2026-11-27 | approx | Westwood October rig dashboard: re-run Rig BBB early if drillship MCU is outside 90–96% or backlog below 150 rig-years | rig | watch |
 | 2026-11-30 | approx | Finder KTJ FID for Hakuryu-5 (rig demand) | rig | watch |
@@ -395,8 +404,10 @@ it to `open`.
 | 2026-11-30 | yes | CAPT Q3 report | capt | open |
 | 2026-11-30 | yes | SK hynix Q3 dividend record date (KRW 20,000: 10,000 regular + 10,000 special) | skh, kospi | open |
 | 2026-12-11 | approx | FTSE December review (effective mid/late Dec): FLXK re-capped; FLXK no longer followed (no KID at Nordnet, 29 Oct) | kospi | dropped |
-| 2026-12-04 | approx | Seabreeze November report: completes the Q4 North Sea spot test (AHTS Bear signpost month 2). AHTS rule applied early on 16 Nov from Clarksons via Finansavisen (Base 2027 £75k → £60k): ≥ £75k restores £75k, lower keeps £60k; also the PSV Q4 test | supply, dof | open |
-| 2027-01-06 | approx | Seabreeze December report: AHTS Bear signpost month 3; below £50k crosses it and calls a full update testing AHTS 2028–29 and Bear | supply | open |
+| 2026-12-04 | approx | Seabreeze November report: completes the Q4 North Sea spot test (AHTS month 2 on the anchor series); ≥ £75k restores Base 2027 £75k (now £52k on the 18 Nov turn call); also the PSV Q4 test | supply, dof | open |
+| 2027-01-06 | approx | Seabreeze December report: AHTS Bear signpost month 3 (below £50k crosses it → full update testing AHTS 2028–29 and Bear) and the AHTS turn-call reversal test (≥ £50k restores Base 2027 £60k); mark the supply scorecard | supply, dof | open |
+| 2026-12-01 | approx | Petrobras PSV 4500 / PSV 3000 bid ranking (ordenamento; date `[?]`): charter bids ≤ $34k → Brazil PSV Base 2028–29 to ~$35k; confirm the row basis (TDA vs CDE). Supply watch call | supply | open |
+| 2026-11-19 | yes | Subsea7 Q3 report (15:20 CET release time per Yahoo): vessel utilisation, order intake, 2027 outlook; NS CSV watch call | supply, dof | done |
 | 2026-12-04 | approx | Heimdal November reports and holdings: second price signal for Borr and the HX super senior bonds; weights after the October outflow | hy-issuers, hy-funds, hy | open |
 | 2026-12-10 | approx | Oracle Q2 FY27 report (backlog, cloud infrastructure, capex) (mid-Dec) | ai | open |
 | 2026-12-04 | yes | Polish Sejm third reading of the 2027 budget (second reading 2 Dec, Senate 8 Dec) | defense | open |
@@ -407,7 +418,7 @@ it to `open`.
 | 2026-12-31 | yes | Hofseth: first test of the 27.5% value-adjusted equity ratio covenant (EUR 300m bond); breach likely without the NOK 600m equity raise `[E]` | hy-issuers, hy-funds | open |
 | 2026-12-31 | approx | Deepsea Nordkapp 2028 rate set by two independent brokers (Aker BP; by end-2026): NCS HE market print for 2028 | odl, rig | open |
 | 2026-11-12 | yes | ODL Q3 dividend USD 0.27 goes ex (paid 25 Nov) | odl | done |
-| 2026-11-20 | yes | DOF Q3 dividend USD 0.40 goes ex (paid 30 Nov; Q3 report 12 Nov, daily news 12 Nov) | dof | open |
+| 2026-11-20 | yes | DOF Q3 dividend USD 0.40 goes ex (paid 30 Nov; Q3 report 12 Nov, daily news 12 Nov) | dof | done |
 | 2026-11-26 | yes | SSB Q3 national accounts (Norway mainland GDP) | hy | open |
 | 2026-11-30 | yes | Dooba and Point Properties deadlines | hy-issuers, hy | open |
 | 2026-11-30 | approx | MSCI November month-end fundamentals: MSCI Norway P/BV against the 2.5 warning (2.46 on 30 Oct), MSCI World forward P/E | equity | watch |
@@ -442,7 +453,10 @@ it to `open`.
 | 2027-02-11 | yes | Kongsberg Q4 report | kog, defense | open |
 | 2027-02-11 | approx | HX February coupon: cash, tap or PIK (decides the HX carry basis in Heimdal) | hy-issuers, hy-funds | open |
 | 2027-02-15 | approx | Nordic Trustee annual default report (sets the 2027 allowance for unseen defaults) | hy, hy-funds | open |
+| 2027-02-17 | yes | SED Q4 2026 report (company calendar, user 19 Nov) | sed | open |
 | 2027-03-31 | approx | SED T-16 Phase 6 ends (Q1 2027, on options after Dec); rig to Singapore, idle until Phase 7; also the Ventura closing long-stop | sed | open |
+| 2027-04-30 | yes | SED annual report 2026 (company calendar, user 19 Nov) | sed | watch |
+| 2027-05-27 | yes | SED annual general meeting (company calendar, user 19 Nov) | sed | watch |
 | 2027-03-31 | approx | Scatec–EBRD Egypt platform closing (SPA signed 22 Oct 2026; closing date and cash to Scatec not disclosed; date assumed) | scatec | open |
 | 2027-04-12 | approx | Philippine reserve-market redesign proposal to the ERC (NGCP, PEMC, IEMOP; due within 6 months of the 12 Oct 2026 suspension) | scatec | open |
 | 2027-04-15 | approx | French presidential election (April–May 2027): defence budget path after the LPM | defense | open |
@@ -452,21 +466,31 @@ it to `open`.
 | 2027-07-01 | approx | SED T-16 Phase 7 (CPOC, 30 months firm) starts (early Q3 2027) | sed | open |
 | 2026-11-18 | yes | Hafnia Q3 deck: product-tanker orderbook by year (Shipping BBB MR2 orderbook-trigger retest). Outcome (deck p.21, Vortexa, read from chart): MR 6.4 / 5.1 / 5.4 / 0.8m dwt 2026–29 (~128 / 102 / 108 / 16 MR2), MR2 2028+ ~124 vs the baseline's ~165 `[A]` (different basis; retest with Frontline's count at the shipping run) | shipping | done |
 | 2026-11-27 | approx | Frontline Q3 report (late Nov; date not confirmed): orderbook count by segment, company TCE | shipping | watch |
-| 2026-11-18 | yes | Samsung Electronics Investor Forum 2026 (Singapore, Morgan Stanley conference), memory session: 2027 HBM and LTA pricing comments | smsn, ai, kospi | watch |
+| 2026-11-18 | yes | Samsung Electronics Investor Forum 2026 (Singapore, Morgan Stanley conference), memory session: 2027 HBM and LTA pricing comments Outcome (weekly 21 Nov): no public readout found; press: 2027 HBM sold out at target prices (consistent with smsn v4); stays a [?] signpost in the smsn document | smsn, ai, kospi | done |
 | 2026-11-25 | approx | NVIDIA Q3 FY27 10-Q (late Nov): guarantee calls, capacity buy-backs exercised, new guarantees and equity commitments in Q3 (vendor-financing flow and funded-customer credit signposts; cascade inventory); also the impaired private stake ($1.8bn), $74bn uncommenced leases, $9.5bn power and systems support, Caprez (related party), buy-back obligations 36 → 32 (nvda v1.7) | ai, nvda, skh, smsn | watch |
 | 2026-11-27 | yes | SK hynix Q3 dividend goes ex (record 30 Nov) | skh | watch |
 | 2026-11-29 | approx | SK hynix: Solidigm re-disclosure on the reported ~KRW 60tn US NAND fab (promised within a month of the 29 Oct 6-K) | skh, ai | watch |
 | 2026-12-01 | approx | Silicon Data month-end GPU rental indices: B200 against its 2026 high $7.03 (Bear: −20% for three months), H100; price leg of the funded-customer credit signpost and the NVIDIA cascade | ai, nvda | watch |
 | 2026-12-07 | approx | DNB AM November factsheet for DNB Teknologi (holdings 30 Nov) | dnbtek | open |
-| 2026-12-15 | yes | Anthropic staged lock-up releases begin (days 27 / 48 / 62 / 76: 15 Dec, 5 Jan, 19 Jan, 2 Feb); over-allotment option expires ~18 Dec | anthropic | watch |
+| 2026-12-15 | yes | Anthropic staged lock-up releases begin (days 27 / 48 / 62 / 76: 15 Dec, 5 Jan, 19 Jan, 2 Feb); over-allotment option expires ~18 Dec | anthropic, amzn | watch |
 | 2026-12-31 | yes | Anthropic first test of the $5bn liquidity covenant | anthropic | watch |
 | 2027-03-15 | approx | Anthropic FY2026 results, first report as a listed company (date not given; likely Feb–Mar); staged lock-up steps tied to it | anthropic, ai, amzn, googl | open |
 | 2027-05-17 | yes | Anthropic general lock-up expiry (day 180; or Q1-27 results if earlier); founders may sell 29% | anthropic | watch |
+| 2026-11-25 | approx | Anthropic closing 8-K: confirms the $26bn Class N placement (Google and NVIDIA 120.48m each, Microsoft 12.05m) and the 147.0m over-allotment exercise (anthropic v1.1 assumes exercised) | anthropic, amzn, googl, nvda | watch |
+| 2026-12-14 | approx | Anthropic research quiet period ends (~25 days after first trade, convention): first broker ratings and consensus | anthropic, ai | watch |
+| 2027-11-18 | yes | Anthropic one-year lock-up ends for co-founders and holders above 0.5% (or after the Q3-27 results if earlier) | anthropic | watch |
+| 2026-12-07 | yes | Alphabet $0.22 dividend goes ex (paid 14 Dec): re-mark point; re-mark earlier if GOOGL closes at or below $269.9 (marginal band, googl v2.2) | googl | watch |
+| 2026-12-08 | yes | Microsoft AGM (DEFA14A of 9 Nov; governance only) | msft | watch |
+| 2026-12-15 | approx | Microsoft next quarterly dividend declaration (mid-December) | msft | watch |
 | 2027-01-10 | yes | USTR Section 301 port-fee suspension ends (23:59 ET 9 Jan) and China's special-port-fee suspension ends (10 Jan): Shipping BBB Bull signpost "fees return and split the fleet" | shipping | open |
 | 2027-02-24 | approx | NVIDIA Q4 FY27 report (date not announced; Q4 guide $130bn ±3%, GM 71–72%) | nvda, ai, skh, smsn, kospi, tsm, dnbtek, global-index | open |
 | 2027-06-30 | approx | NVIDIA–Hugging Face closing ($12.93bn, H1 2027; DOJ review) | nvda | watch |
 | 2026-11-25 | yes | Hafnia Q3 dividend form: TORM-share special dividend (0.0380 TORM per share, ~$1.28) or, without third-party cooperation by 25 Nov, 90% of Q3 profit in cash; record and payment dates set then (v8 shows the verdict does not depend on the form) | hafnia | watch |
 | 2027-02-26 | approx | Hafnia Q4 2026 report (date not announced) | hafnia | open |
+| 2026-11-23 | approx | DNB Global Indeks A NAV of 20 Nov published (indicative ≈ 812.5 from URTH × USD/NOK): confirms whether the pre-alert at NAV 830 is crossed (E / R trigger 728); global-index v7 21 Nov | global-index | watch |
+| 2027-01-31 | approx | Equinor AHTS term award, reversal deadline of the supply AHTS turn call: an award of ≥ 2 vessels by 31 Jan restores NS AHTS Base 2027 £60k (now £52k); none announced by 21 Nov (supply 21 Nov) | supply, dof | open |
+| 2027-02-26 | approx | Subsea7 Q4 2026 report (late Feb, date not announced): NS CSV watch-call signpost (book-to-bill < 0.8 again, after 0.5 in Q3, or idle newbuild CSVs → cut); Q3: utilisation 84%, backlog $12.5bn, 2027 ~$8bn guide (supply 21 Nov) | supply | open |
+| 2026-11-20 | yes | DOF ownership: A.P. Møller Maritime buys a further 1.2m shares (19 Nov, NOK 129.06) and 0.65m (20 Nov, NOK 123.38); 2.8m over 18–20 Nov (~1.1%, NOK 357m) (insider notices). Signal, not a value input; read in dof 21 Nov | dof | done |
 
 ## Change log
 

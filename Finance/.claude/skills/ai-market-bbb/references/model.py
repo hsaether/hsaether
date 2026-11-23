@@ -17,11 +17,11 @@
 # Switches (for the attribution in the change log): CAL, RET, PATH, AMZN, U5, K1D; BEARCAP = diagnostic
 # (Bear P/E capped at today's). Run: py -I model.py [CAL RET PATH AMZN U5 K1D] [BEARCAP]
 import json, sys
-ARGS = set(sys.argv[1:]) or {'CAL', 'RET', 'PATH', 'AMZN', 'U5', 'K1D'}
-if ARGS == {'BEARCAP'}: ARGS = {'CAL', 'RET', 'PATH', 'AMZN', 'U5', 'K1D', 'BEARCAP'}
+ARGS = set(sys.argv[1:]) or {'CAL', 'RET', 'PATH', 'AMZN', 'U5', 'K1D', 'L18'}
+if ARGS == {'BEARCAP'}: ARGS = {'CAL', 'RET', 'PATH', 'AMZN', 'U5', 'K1D', 'L18', 'BEARCAP'}
 CAL, RET, PATH, AMZN, U5, BEARCAP = 'CAL' in ARGS, 'RET' in ARGS, 'PATH' in ARGS, 'AMZN' in ARGS, 'U5' in ARGS, 'BEARCAP' in ARGS
 K1D = 'K1D' in ARGS
-KRW = 1363.65; EUR = 1.11433   # Yahoo KRW=X, EURUSD=X, final quote Fri 6 Nov 2026 (7 Nov run)
+KRW = 1345.95; EUR = 1.09649   # Yahoo KRW=X, EURUSD=X, 20 Nov 2026 ~21:20 UTC (20 Nov run; Korea: KRX close 20 Nov, before the US fall)
 q = {r['symbol']: r for r in json.load(open('data/q.json'))}
 def mc(s):
     r = q[s]; m = r.get('marketCap') or 0
@@ -101,6 +101,15 @@ if K1D:
         _rn, _e = k1_knockon(_k)
         P2[_k] = dict(P2[_k], Base=K1D_SET[_k])
         print(f"K1D {_k}: Base revenue 2027-30 {' / '.join(f'{x:.1f}' for x in _rn)}; Base EPS derived {' / '.join(f'{x:.2f}' for x in _e)}, set {' / '.join(f'{x:.2f}' for x in K1D_SET[_k])}")
+# L18 (18 Nov 2026, skill 2026-11-18.1, Leading view): turn calls that met the rule (>= 2 families, >= 60%).
+#  - H2 Memory 2028-30 deeper (L2 contract-price momentum slowing, DDR5 spot softening; L4 supplier capex
+#    step-up, Micron > $25bn; L5 memory -35 to -41% from highs): Base .60 / .40 / .35 -> .50 / .32 / .28.
+#  - H1 Compute 2028-30 lower (L3 neocloud credit: CoreWeave 2032s 15-16%, CDS > 1,289 bp; NVIDIA 'disciplined'
+#    on neocloud funding; L5 NVDA -37%, SOX -27%): non-K1 funded demand falls short; Base .91 / .88 / .87 -> .85 / .82 / .81.
+L18 = 'L18' in ARGS
+if L18:
+    P2['H2'] = dict(P2['H2'], Base=(.90, .50, .32, .28))
+    if K1D: P2['H1'] = dict(P2['H1'], Base=(.92, .85, .82, .81))
 PATHS = P2 if PATH else P1
 CONV = {  # [A], calibrated on the company analyses' FCF after growth capex
  'H1': dict(Bear=(.85,.95,.95), Base=(.80,.90,.90), Bull=(.75,.85,.90)),   # NVDA .77/.95/.97
@@ -125,7 +134,7 @@ L = {
  'E':  ('E Engines and cloud platforms (MSFT GOOGL AMZN META ORCL)', ['MSFT','GOOGL','AMZN','META','ORCL'], (17,21,23.5), .34),
  'T':  ('T Tools and application software (NOW CRM ADBE PLTR SAP INTU SNOW DDOG)', ['NOW','CRM','ADBE','PLTR','SAP.DE','INTU','SNOW','DDOG'], (15,20,24), .45)}
 FX = dict(Bear=(10.41,10.14,10.14), Base=(9.29,9.29,9.29), Bull=(9.02,9.02,9.02)); FX0 = 9.29  # Equity BBB 6 Nov (spot 9.29; relative moves +12/+9/+9%, -3% unchanged)
-NIB = 4.38; T0 = 54/365  # 7 Nov -> 31 Dec (prices 6 Nov); NIBOR window from HY BBB 5 Nov (path unchanged)
+NIB = 4.72; T0 = 41/365  # 20 Nov -> 31 Dec (prices 20 Nov close); NIBOR window 4.72 (HY BBB 18 Nov market path)
 def irr(fl):
     lo, hi = -0.9, 2.0
     for _ in range(200):

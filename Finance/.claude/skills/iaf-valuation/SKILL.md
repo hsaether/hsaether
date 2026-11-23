@@ -5,8 +5,14 @@ description: Investment Analysis Framework (IAF) — the standing valuation meth
 
 # Investment Analysis Framework (IAF)
 
-**Revision:** 2026-11-12.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-18.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/iaf-valuation/` in the Finance folder.
+
+Change note 2026-11-18.1 (user, 18 Nov 2026: forecast before solid proof): new Step 6b, **Price
+versus our call**. Every analysis states what the price implies (reverse the Base build), where
+the sector baseline's turn calls put the company relative to that, and the company's own leading
+signals (holder and insider dealings, buybacks, contract behaviour). Base still decides; the new
+section says whether we are ahead of or behind the market and why. First used for DOF on 18 Nov.
 
 A forward-looking test of whether today's price is defensible given the return it can deliver over
 the rest of the current year plus 3 calendar years. It answers one question: **does the expected
@@ -622,6 +628,31 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
   25/50/25 and compute one IRR. Label it "scenario-weighted reference (convention)". It never
   replaces Base as the decision figure.
 
+## Step 6b — Price versus our call (leading view)
+
+The value of the analysis is in being ahead of the price, not in confirming it. After Base is
+built:
+
+- **What the price implies:** solve the Base build for the one driver that carries the verdict
+  (exit marks, mid-cycle rate, margin or growth) so that IRR_T = k at today's price. State it in
+  the sector baseline's own unit (e.g. "the price implies exit marks 1% below Base mid-cycle", or
+  "a 2027 AHTS spot of £x").
+- **Sector turn calls:** read the sector baseline's Turn calls table (where it has one). Translate
+  each call that touches the company into its effect on IRR_T and P_k, including watch calls not yet
+  in Base (as a sensitivity, labelled).
+- **Company leading signals** (score +1 / 0 / −1, dated and tagged): insider and major-holder
+  dealings; buybacks or issuance; contract behaviour (re-contracts "in direct continuation", early
+  option declarations, longer terms, rate on renewal vs expiry); order intake and backlog quality;
+  guidance tone vs consensus revisions; asset sales or purchases vs book.
+- **Verdict line:** one sentence: **ahead** (our call is more positive or negative than the price
+  implies, with the named reason the market is missing), **with** the market, or **behind** (the
+  price has moved on information our Base does not yet hold: say what, and whether it should move
+  Base under the sector baseline's rule). A company signal alone never moves a sector path; it can
+  move company-specific items (backlog, contracts, capital allocation) at once, without waiting for
+  the next report.
+- **Scorecard:** log the verdict line with date and price; mark it at the next run (did the price
+  move toward our call?).
+
 ## Step 7 — Output
 
 **Layout rules (2026-11-10):**
@@ -750,6 +781,8 @@ change in Base P_k, and whether the company is running ahead of or behind the Ba
 ## Checks before finishing
 
 - k ≥ 10%, all figures per share and forward-looking.
+- Step 6b present: price-implied driver, sector turn calls translated, company signals scored,
+  the ahead / with / behind line, scorecard marked.
 - Summary first, with the decision table and the per-share path (FCF per share per period for all
   three scenarios).
 - Layout (Step 7): one status line under the title; the verdict stated once; the scenario table,

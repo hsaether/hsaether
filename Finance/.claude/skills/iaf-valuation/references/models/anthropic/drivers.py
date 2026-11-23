@@ -1,6 +1,6 @@
-"""Anthropic (ANT) - driver breakdown Base -> Bear / Bull, one driver at a time, at $74.
-docs/anthropic-analysis.md v1.0, 13 Nov 2026. Imports model.py. Run: py drivers.py"""
-from model import build, SC
+"""Anthropic (ANT) - driver breakdown Base -> Bear / Bull, one driver at a time, at the first close ($97.17).
+docs/anthropic-analysis.md v1.1, 20 Nov 2026 (entry = first close $97.17). Imports model.py. Run: py drivers.py"""
+from model import build, SC, P_CLOSE
 
 B = SC["Base"]
 
@@ -17,7 +17,7 @@ def steps(target):
                                              shield=t["shield"], lr_growth=t["lr_growth"])),
     ]
     ov = {}
-    print(f"Base -> {target}: Base {build('Base', 74)['irr']:.1%}")
+    print(f"Base -> {target}: Base {build("Base", P_CLOSE)['irr']:.1%}")
     for lab, o in seq:
         o = dict(o)
         src = o.pop("E1src", None)
@@ -35,7 +35,7 @@ def run(ov):
     saved = model.E1["Base"]
     model.E1["Base"] = model.E1[src]
     try:
-        return build("Base", 74, **o)
+        return build("Base", P_CLOSE, **o)
     finally:
         model.E1["Base"] = saved
 

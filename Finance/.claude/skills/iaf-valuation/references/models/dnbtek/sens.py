@@ -1,5 +1,5 @@
-﻿# DNB Teknologi A (docs/dnb-teknologi-analysis.md), model v8 (16 Nov 2026): sensitivities and NAV triggers (run in the version's working folder)
-# HY market reference E / R 0.254 (hy-market-bbb 5 Nov, kept 11 Nov); 0.216 = HY Bear read as a shock; HY market Base 6.6% after the 0.6% fee
+# DNB Teknologi A (docs/dnb-teknologi-analysis.md), model v9 (19 Nov 2026; v8 16 Nov): sensitivities and NAV triggers (run in the version's working folder)
+# HY market reference E / R 0.254 (hy-market-bbb 18 Nov, from 5 Nov); 0.216 = HY Bear read as a shock; HY market Base 6.9% after the 0.6% fee (7.5% before; 18 Nov)
 REF=0.254
 import sys,os; sys.path.insert(0,os.path.dirname(os.path.abspath(__file__)))
 import fundmodel as M, copy
@@ -31,7 +31,7 @@ NAV=M.NAV
 PE0=sum(x['w'] for x in M.BL.values())*100/sum(x['w']*100/x['pe27'] for x in M.BL.values())
 mw=sum(M.BL[k]['w'] for k in M.BL if k in M.MEM); me=sum(M.BL[k]['w']*100/M.BL[k]['pe27'] for k in M.BL if k in M.MEM)
 PEX0=(100-mw*100)/(sum(x['w']*100/x['pe27'] for x in M.BL.values())-me)
-for lab,fn in [("Base IRR = 6.6% (HY market after fee)",lambda m: 0.066-at(m)[0]['Base']['irr']),("E/R = 0.254 (HY market ref)",lambda m: REF-at(m)[1]/at(m)[2]),("E/R = 0.216 (ref, Bear as shock)",lambda m: 0.216-at(m)[1]/at(m)[2]),
+for lab,fn in [("Base IRR = 6.9% (HY market after fee)",lambda m: 0.069-at(m)[0]['Base']['irr']),("E/R = 0.254 (HY market ref)",lambda m: REF-at(m)[1]/at(m)[2]),("E/R = 0.216 (ref, Bear as shock)",lambda m: 0.216-at(m)[1]/at(m)[2]),
                ("Base IRR = 12% (k)",lambda m: 0.12-at(m)[0]['Base']['irr'])]:
     m=solve(lambda x: -fn(x)); o,E,R=at(m)
     print(f"{lab:30s} NAV change {m*100:6.1f}% -> NAV {NAV*(1+m):7.0f}; look-through P/E CY27 {PE0*(1+m):.1f} (ex memory {PEX0*(1+m):.1f}); Base IRR {o['Base']['irr']*100:.1f} E/R {E/R:.3f}")

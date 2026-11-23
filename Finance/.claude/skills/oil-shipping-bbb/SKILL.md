@@ -5,8 +5,18 @@ description: Oil Shipping BBB — the tanker-market baseline for crude tankers (
 
 # Oil Shipping BBB
 
-**Revision:** 2026-10-24.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-18.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/oil-shipping-bbb/` in the Finance folder.
+
+Change note 2026-11-18.1 (user, 18 Nov 2026: "forecast changes to market conditions BEFORE they
+have solid proof", and use market-implied data for everything it is worth; same method as the oil,
+supply, AI, HY and equity skills): new **Leading view** section (families L1–L6 for tankers, turn
+calls, scorecard) and a **market-first hierarchy** for Year 1 and the window: traded freight futures
+(FFA, TCE basis) first, then assessed period rates confirmed by two sources updated after the latest
+spot move, then tanker equities. Base Year 1 follows the traded FFA (Cal or quarters) where it is
+liquid, unless a turn call names why the market is wrong; an assessed 1-yr TC moves Base only when
+the traded market and the equities do not contradict it. The minimum change governs size, not
+timing. Step 1b, a trigger and a check added. Method change.
 
 A Bear/Base/Bull baseline for the tanker market. It answers one question: **what market TCE and
 asset values should a tanker-company valuation use, year by year and per segment, and what named
@@ -32,13 +42,16 @@ valuation (→ [[iaf-valuation]] company analysis); dry bulk, gas carriers and c
   Benchmarks). Today's spot or a crisis peak is never annualised or used as a multi-year rate.
 - **Point value + range** for every scenario rate and value. IAF uses the point value; the range
   shows uncertainty inside the scenario.
-- **Base = the decision case.** Bear and Bull are stress tests tied to named catalysts.
+- **Base = the decision case, and it is a forecast** set on the turn calls (Leading view), not on
+  the last print. Bear and Bull are stress tests tied to named catalysts.
   **25/50/25** is a labelled convention for optional weighted figures — never a probability.
 - **Stub has no scenario spread** (IAF rule): stub TCE is actual spot for elapsed days plus the
   FFA/forward for the rest, the same in all three scenarios. Scenarios diverge from Year 1.
 - **Segments are always separate:** VLCC, Suezmax, Aframax, LR2, LR1, MR — never one blended rate.
 - **Minimum change (convention):** a point value moves only if the evidence moves it by at least
   10% (annual average TCE or asset value). Smaller moves are noted, not applied.
+  The threshold governs the **size** of a move, not its **timing**: a move called on leading
+  indicators is applied now if it clears it.
 - **Staleness:** the baseline is stale after 30 days, or earlier if a recalibration trigger fires
   or `docs/oil-market-bbb.md` gets a newer baseline date. IAF treats a stale baseline as
   provisional.
@@ -292,6 +305,34 @@ Bull are not percentiles.
   lot; in surplus rates sink towards opex-level TCE. Sustained rates above newbuild parity attract
   orders that deliver about three years later.
 
+## Leading view (turn calls)
+
+Utilisation, fixtures and company results confirm a turn after the market has priced it. Every run
+forms a forward view from indicators that lead the paths, and Base follows it.
+
+| Family | Examples | Typical lead |
+|---|---|---|
+| L1 Cargo demand | Crude and product exports by tanker tracking, refinery runs and outages, OPEC+ and sanctions decisions, stockbuild orders | 1–6 months |
+| L2 Freight prices | Traded FFA curve (TD3C, TD20, TD25, TC2/TC5/TC14) by quarter and Cal; assessed 1-yr and 3-yr TC; their term structure | weeks to 12 months |
+| L3 Effective supply | Chokepoint transits and diversions, sanctioned-fleet licences, attacks and repairs, scrapping, delivery slippage | 1–12 months |
+| L4 Owner and charterer behaviour | Period fixtures taken by oil majors and traders, newbuild ordering, S&P prices vs model values, buybacks, insider dealings | 3–12 months |
+| L5 Market pricing | Tanker shares (FRO, DHT, TNK, INSW, STNG, HAFNI, TRMD, OET) vs the S&P 500; NAV discount or premium (the TCE the price implies) | the market's own forecast |
+| L6 Upstream turn calls | Oil BBB futures default (Brent, cracks), disruptions and turn calls | as the upstream call |
+
+- **Turn call** per core path (each segment's Year 1, Years 2–3 and mid-cycle TCE): direction vs Base, size, timing, a **stated
+  probability**, the families behind it, and a **dated reversal signpost**.
+- **Rule to move Base:** two or more independent families point the same way (L5 alone never moves
+  it) and the probability is ≥ 60%, and the move clears the minimum change. One family, or 50–60%,
+  is a **watch call**: logged, Base unchanged. A call against the market needs a named reason.
+- **Market-first hierarchy (every run):** (1) **traded FFA** (TCE basis; BWET holdings, Gibson
+  quoted Q and Cal FFA, ICE/Baltic quotes in the press) sets Year 1 where liquid; (2) **assessed
+  period rates** (1-yr, 3-yr TC) count only when two sources updated after the latest spot move
+  agree and neither the FFA nor the equities contradict them; (3) **equities** (L5) as the check.
+  A Base gap of 10% or more to the leading market read needs a turn call that names what the market
+  is missing.
+- **Scorecard:** every call gets a dated line; each run marks open calls hit / miss / open and
+  keeps the hit rate. Two misses in a row on one family halve its weight in the next call.
+
 ## Procedure
 
 Two modes, one procedure:
@@ -327,6 +368,10 @@ latest material oil event, say so and get it updated **first**. Translate, do no
 | Brent curve (contango vs backwardation) | Floating storage economics |
 | Regional distillate surpluses/deficits, cracks | Product arbitrage, long-haul product flows (LR/MR) |
 | Refinery start-ups, closures, export bans | Shift from crude to product trade, new long-haul lanes |
+
+**Step 1b — Leading indicators, market reads and turn calls** (before the paths are set): read
+families L1–L6, run the market-implied reads, score, set or update each turn call and mark the
+scorecard. Later steps test the calls; Step 9 applies those that meet the rule.
 
 **Step 2 — Spot and period market.** Per segment: latest spot TCE and quarter-to-date average,
 1-year and 3-year TC, FFA for the rest of the current quarter, Year-1 quarters and the calendar
@@ -410,6 +455,8 @@ and their change since the last baseline. Compute per segment:
 - **Bear / Bull:** are the catalysts still the right ones? Has a catalyst come closer, been
   triggered, or become irrelevant? Has a signpost been crossed? Is a demand or supply catalyst
   missing? Has crude or product tanker changed more than the other?
+- **Leading indicators count as data points** (Leading view): a turn call that meets the rule moves
+  Base now.
 - **Evidence threshold:** change a scenario, catalyst or path only when several independent data
   points point the same way, or one event materially changes ton-days, effective tonnage or fleet
   growth — and only by more than the minimum change.
@@ -458,6 +505,8 @@ A full update is due when any of these occurs:
 - Sanctioned/shadow fleet changes > 2% of a segment's effective fleet (designations or lifting)
 - A trade rule changes a major flow (port fees, product export bans, sanctions on a route)
 - A Bear or Bull catalyst is triggered or a signpost is crossed
+- A turn call's reversal signpost is hit, or a watch call gains its second family
+- The listed peer shares move ≥ 15% against the S&P 500 within a month (run Step 1b at least)
 - The baseline is older than 30 days
 
 ## Output: `docs/oil-shipping-bbb.md`
@@ -475,6 +524,7 @@ Keep the main part short per heading; series and source details go to the append
 
 ## Conclusion
 - BBB changed / kept unchanged — explicit
+- Turn calls (in the Interface block) with market reads; scorecard
 - Base in two sentences (crude tankers; product tankers)
 - Main Bear catalyst and main Bull catalyst
 

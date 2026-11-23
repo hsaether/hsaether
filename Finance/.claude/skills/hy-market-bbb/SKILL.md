@@ -5,8 +5,24 @@ description: Nordic HY Market BBB (HY BBB) — the Nordic high-yield bond market
 
 # Nordic HY Market BBB
 
-**Revision:** 2026-11-08.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-18.2 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/hy-market-bbb/` in the Finance folder.
+
+Change note 2026-11-18.2 (user, 18 Nov 2026: market-first for NIBOR, as for oil futures): the
+**Base NIBOR path is the market path** (NOK swaps against NIBOR, cross-checked with the government
+zero curve plus the NIBOR–T-bill spread), unless a turn call that meets the Leading-view rule names
+what the market is missing; Norges Bank's published path becomes the reference and test, not the
+default. The policy-rate Base follows as NIBOR − the money-market premium. Gaps below 25 bp are
+noted, not applied. No term premium is deducted unless it is measured (sensitivity shown). Steps
+2 and 3b, Data sources, the Leading view and the Interface row changed. Method change.
+
+Change note 2026-11-18.1 (user, 18 Nov 2026: "forecast changes to market conditions BEFORE they
+have solid proof"; same method as supply-market-bbb and ai-market-bbb 2026-11-18.1): new
+**Leading view** section (families L1–L6 for Nordic HY, turn calls with a stated probability and a
+dated reversal signpost, scorecard), **Step 4b**, Turn calls in the Interface, two triggers and a
+check. Base spread, default and rate paths are forecasts set on the turn calls, not on the last
+monthly anchor; the minimum change governs size, not timing. Fund mode reads the turn calls as
+leads (a fund verdict may flag "ahead of the market"). Method change.
 
 A Bear/Base/Bull baseline for the Nordic high-yield bond market. It answers two questions:
 
@@ -51,8 +67,10 @@ investment-grade corporates, covered bonds and government bonds except as the se
 - **Rates in % p.a., spreads in bp, default rates in % of outstanding volume, LGD in %.**
 - **Point value + range** for every scenario figure. Fund analyses use the point value; the range
   shows uncertainty inside the scenario.
-- **Base = the decision case.** Bear and Bull are stress tests tied to named catalysts.
-  **25/50/25** is a labelled convention for optional weighted figures — never a probability.
+- **Base = the decision case, and it is a forecast** set on the turn calls (Leading view), not on
+  the last monthly print. Bear and Bull are stress tests tied to named catalysts. **25/50/25** is a
+  labelled convention for optional weighted figures — never a probability; turn-call probabilities
+  are our own stated estimates.
 - **Stub has no scenario spread** (IAF rule): the same value in all three scenarios. Stub return =
   quarter-to-date actual index return + carry for the rest of the quarter at today's yield less
   the Base loss rate pro rata. Stub NIBOR = fixings to date + the Norges Bank path for the rest.
@@ -62,7 +80,8 @@ investment-grade corporates, covered bonds and government bonds except as the se
 - **Minimum change (convention):** a point value moves only if the evidence moves it by at least
   25 bp (policy rate, NIBOR annual average), 50 bp (spread), 1.0 pp (market default rate; 2.0 pp
   for a sector row), 10 pp (LGD), 0.5 pp (GDP growth) or 1.0 pp (annual expected return).
-  Smaller moves are noted, not applied.
+  Smaller moves are noted, not applied. The threshold governs the **size** of a move, not its
+  **timing**: a move called on leading indicators is applied now if it clears it.
 - **Staleness:** the baseline is stale after 30 days, after a Norges Bank rate decision or
   Monetary Policy Report, or when `docs/oil-market-bbb.md` (or a sector BBB used for an energy
   row) gets a newer baseline date whose downstream section flags a change. Fund analyses treat a
@@ -286,7 +305,7 @@ gap with an invented number.
 | Issuer announcements: results, refinancing, bondholder meetings, standstills | **Nordic Financial** `search_filings` with `source="newsweb"` + `ticker` + `fiscal_year` (Oslo-listed issuers and Nordic ABM bonds) | FinancialFilings `filings_list`; issuer IR; Swedish issuers via MFN / Cision |
 | Issuer financials (leverage, liquidity, maturities) for watchlist names | **Nordic Financial** `company_research` / `parse_pdf_to_text` on the IR PDF | FinancialFilings `companies_financials_retrieve` |
 | Policy rate, NOWA, T-bill and government yields | **Norges Bank API** `https://data.norges-bank.no/api/data/<flow>/<key>?format=csv&lastNObservations=N&locale=en` (`IR/B.KPRA.SD.R`, `SHORT_RATES/B.NOWA.ON.R`, `GOVT_GENERIC_RATES/B.3M.TBIL`, `B.10Y.GBON`) | FRED `IR3TIB01NOM156N` (3M interbank, OECD monthly), `IRLTLT01NOM156N` |
-| Market check on the rate path (what the bond market prices against the Norges Bank path) | **Norges Bank API** `GOVT_ZEROCOUPON/B.<tenor>` (government zero-coupon 6M–10Y, daily): 1-year forwards from the zero curve + the NIBOR–T-bill spread (3M) ≈ market NIBOR path `[A]`; includes a term premium, so it is a check, never the path | FRED `IRLTLT01NOM156N` |
+| **Market NIBOR path (the Base NIBOR path, 18 Nov rule)** | **NOK swaps against 6M NIBOR**, 1Y–5Y (bluegamma.io `nok-swap-rates`, live, tested 18 Nov 2026; Cbonds IRS pages mask the values): year-k forward ≈ k × S(k) − (k−1) × S(k−1); shift to calendar years by weight; 3M = 6M − the 3M/6M basis (~0.10 pp `[A]` until a basis quote is read) | **Norges Bank API** `GOVT_ZEROCOUPON/B.<tenor>` (6M–10Y, daily): 1-year forwards between calendar year-ends + the NIBOR–T-bill spread (3M) `[A]`. Use the average of the two routes when they differ by < 0.15 pp; otherwise explain |
 | Financial conditions (signpost) | **Norges Bank API** `FINANCIAL_INDICATORS/D.FCI_TOTAL` and subcomponents (`FCI_STOCK`, `FCI_FEX`, `FCI_LENDINGRATES`, `FCI_HOUSING`); positive = tighter (2008 +7, Mar 2020 +4, mean +0.5 since 2007) | — |
 | Norwegian activity by sector (signpost for energy and non-energy issuers) | **Norges Bank API** `REGNET` (Regional Network, quarterly: output, employment plans, capacity, by sector incl. `OLJE_TOT` oil services) | Regional Network report |
 | Fiscal policy: SOBU (NOK bn, % of mainland trend GDP), withdrawal rate vs 3%, budget indicator, fund share of state spending | **Nasjonalbudsjettet** chapter 3 figure data on regjeringen.no: `…/kap_3_nb_<year>-filer/sheet002.htm` (SOBU % of trend GDP, 2001–), `sheet003.htm` (budget indicator), `sheet004.htm` (withdrawal rate vs expected real return), `sheet005.htm` (fund share of state spending), `sheet006.htm` (GPFG value, weekly). HTML tables, Windows-1252, decimal comma; read with `py` | Revidert nasjonalbudsjett (May); Prop. 1 S; NBIM for the live fund value |
@@ -571,6 +590,34 @@ Bull are not percentiles.
 - If a scenario needs an oil, rig, OSV or tanker path the input baselines do not have, flag it for
   the relevant skill — never invent one here.
 
+## Leading view (turn calls)
+
+Spreads lead defaults, but the monthly anchor spread lags the market by up to a month, and the
+default log lags the stress by 2–6 quarters. Every run forms a forward view from indicators that
+lead the rows, and Base follows it.
+
+| Family | Examples | Typical lead |
+|---|---|---|
+| L1 Primary market | New-issue volume and pricing vs secondary, taps, pulled or failed deals, sole-led share, covenant terms, refinancing of the next 12 months' maturities | 1–6 months on spreads; 2–6 quarters on defaults |
+| L2 Secondary and global credit | Daily or weekly Nordic prices where available, distress ratio, price drift of watchlist names; US and Euro HY OAS, iTraxx Crossover, leveraged-loan prices | weeks to 3 months on the Nordic anchor |
+| L3 Rates and macro surprises | Market rate path vs Norges Bank (zero curve), CPI and CPI-ATE surprises, NAV registered unemployment and layoffs notices, bankruptcies, PMI, house prices, Swedish property | 1–4 quarters on NIBOR and defaults |
+| L4 Issuer behaviour | Written procedures, standstills, waivers, distressed exchanges, rescue equity, rating actions, insider and owner dealings at stressed issuers | 1–4 quarters on defaults |
+| L5 Market pricing | Listed issuers' equity (energy, real estate), HY fund flows (VFF), Oslo energy index, global risk appetite | the market's own forecast |
+| L6 Upstream turn calls | The oil, rig, supply, shipping and equity baselines' turn calls for the energy rows and the macro scenario | as the upstream call |
+
+**Turn call per core row** (spread, FTD market and energy rows, NIBOR path, GDP): direction vs
+Base, size, timing, a **stated probability**, the families behind it, and a **dated reversal
+signpost**.
+
+**Rule to move Base:** two or more independent families point the same way (L5 alone never moves
+it) and the call's probability is ≥ 60%, and the move clears the minimum change. One family, or
+50–60%, is a **watch call**: logged, Base unchanged. The NIBOR path defaults to the market path (Step 2, 18 Nov
+rule); a turn call can hold Base away from it only with two families and a named reason. A call against L5 needs a named reason the market is missing.
+
+**Scorecard:** every call gets a dated line; each run marks open calls hit / miss / open against
+the realised series (anchor spread, NT FTD, index return, NIBOR fixings) and keeps the hit rate.
+Two misses in a row on one family halve its weight in the next call (state it).
+
 ## Procedure — market baseline
 
 Two modes, one procedure:
@@ -607,9 +654,13 @@ first when the HY conclusion depends on it. Translate, do not re-analyse:
 
 **Step 2 — Rates block.** Policy rate and 3M NIBOR now (dated); the latest Norges Bank decision,
 MPR path and its date; NIBOR–policy spread; NOK swap rates at the market's fixed-rate duration;
-STIBOR, EURIBOR and SOFR for hedge carry. Base path = Norges Bank's published path `[E]`, adjusted
-only with a stated reason (newer data, market pricing that clearly differs). Bear and Bull rate
-paths follow the scenario catalysts. Year-1 by quarter for policy rate and NIBOR; annual averages
+STIBOR, EURIBOR and SOFR for hedge carry. **Base NIBOR path = the market path** (Data sources: NOK
+swaps vs NIBOR, cross-checked with the government curve), per calendar year; move a window year only
+when the gap is ≥ 25 bp; keep a gap only through a qualifying turn call (Leading view) with the
+reason the market is wrong. No term premium is deducted unless measured; show Base at −0.1 and
+−0.2 pp as a sensitivity. **Policy-rate Base = NIBOR − the money-market premium** (0.25 pp, Norges
+Bank's assumption). Norges Bank's published path is the reference: show its gap to Base per year.
+Bear and Bull rate paths follow the scenario catalysts. Year-1 by quarter for policy rate and NIBOR; annual averages
 for the rest of the window; neutral nominal rate for mid-cycle (Norges Bank's estimate + 2%
 inflation target; state it).
 
@@ -640,10 +691,10 @@ the Base rate path, never to build an own rate forecast.
   from output gap, exchange rate, inflation, wage costs, foreign rates) to see what moved the
   path, and the **market path** (Norges Bank API zero-coupon curve, 1-year forwards + NIBOR–T-bill
   spread; Step 2).
-- **Test:** if the fiscal impulse for Year 1 is above +0.5 pp, or the market path is more than
-  0.3 pp above the Norges Bank path in a window year, state a "higher for longer" reading and
-  decide whether Base keeps the Norges Bank path (default) or moves toward the market path, with
-  the reason. Fiscal expansion with rising rates is the stagflation side case's mechanism; keep
+- **Test (18 Nov rule):** Base is the market path. If the fiscal impulse for Year 1 is above
+  +0.5 pp, or Norges Bank's published path sits more than 0.3 pp from the market path in a window
+  year, state the reading ("higher for longer" or "cuts sooner") and whether a turn call should
+  hold Base away from the market (≥ 2 families, ≥ 60%), with the reason. Fiscal expansion with rising rates is the stagflation side case's mechanism; keep
   the two consistent.
 - User views on fiscal policy are input, not a reference: test them against the series above.
 
@@ -655,6 +706,11 @@ the Base rate path, never to build an own rate forecast.
   covenant mix; whether weaker issuers can refinance.
 - Maturity wall: HY volume maturing in the stub and each window year, by sector where available.
 - Fund flows where published (VFF statistics) — outflows force selling in a thin market.
+
+**Step 4b — Leading indicators and turn calls (every run, before Steps 5–9 set paths).** Read
+families L1–L6 for every core row, score them, set or update each turn call, mark the open
+scorecard calls, and state whether the market (L2, L5) sits above or below Base. Steps 5–9 then
+test the calls; Step 10 applies those that meet the rule.
 
 **Step 5 — Default and distress log** (tracking revised 2026-10-18). Update the log (appendix)
 from Stamdata news, Nordic Trustee notices and voting procedures, Newsweb and press since the last
@@ -726,9 +782,10 @@ where not published. Show the return decomposition table.
   become irrelevant? Has a signpost been crossed? Is a catalyst missing?
 - **Forecast vs actual:** compare the realised index return, FTD rate and spread for elapsed
   periods with the previous baseline, and decompose the miss (carry, loss, MTM).
-- **Evidence threshold:** change a scenario, catalyst or path only when several independent data
+- **Evidence threshold:** change a scenario, catalyst or path when several independent data
   points point the same way, or one event materially changes defaults, rates or spreads — and only
-  by more than the minimum change.
+  by more than the minimum change. **Leading indicators count as data points:** a turn call that
+  meets the Leading-view rule moves Base now; "no monthly print yet" is not a reason to keep it.
 
 **Step 11 — Mid-cycle.** Set separately from the annual path: neutral NIBOR, normal spread (long-
 run average of the anchor series; state the years, with and without 2016 and 2020), normal FTD
@@ -1089,6 +1146,9 @@ A full update is due when any of these occurs:
   trend GDP, or the market rate path (zero curve) moves ≥ 0.3 pp away from Base in a window year
 - A tracked fund changes mandate, fees or liquidity terms (fund mode)
 - A Bear or Bull catalyst is triggered or a signpost is crossed
+- A turn call's reversal signpost is hit, or a watch call gains its second family
+- US or Euro HY OAS moves ≥ 75 bp within a month, or an upstream baseline makes a turn call for an
+  energy row or the macro scenario (run Step 4b at least)
 - The baseline is older than 30 days
 
 ## Output: `docs/hy-market-bbb.md`
@@ -1109,6 +1169,8 @@ appendix.
 
 ## Conclusion
 - BBB changed / kept unchanged — explicit
+- Turn calls (in the Interface block): row, call vs Base, probability, families, Base moved?,
+  market above/below Base, reversal signpost (date); scorecard
 - Base in two sentences (return and its drivers; default outlook)
 - Row ranking by risk premium (spread − EL), with the main reason
 - Main Bear catalyst and main Bull catalyst
@@ -1335,6 +1397,8 @@ Use by skill:
 - Skill revisions stated; window and stub correct for today's date; upstream baselines' dates and
   status stated and not stale (or this baseline marked Provisional).
 - No own oil, rig, OSV or tanker forecast: every energy-row driver traces to its baseline.
+- Every core row has a turn call (probability, families, dated reversal signpost); Base follows
+  every call that meets the rule; the scorecard is marked.
 - Every number tagged and sourced with dates; one source per series; NT-definition replica
   labelled until NT confirms.
 - Stub identical across scenarios; Year-1 rate quarters average to the annual value.
