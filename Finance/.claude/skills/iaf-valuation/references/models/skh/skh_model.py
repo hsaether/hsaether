@@ -1,4 +1,4 @@
-# SK hynix (docs/skhynix-analysis.md) -- IAF model, version 4 (19 Nov 2026; V4: AI BBB 18 Nov H2 turn call, Base
+# SK hynix (docs/skhynix-analysis.md) -- IAF model, version 4.1 (23 Nov 2026 price re-mark = V41); version 4 (19 Nov 2026; V4: AI BBB 18 Nov H2 turn call, Base
 # .90/.50/.32/.28, index 1.38/1.08/0.95; Seoul close 19 Nov); version 3 (16 Nov 2026). iaf-valuation 2026-11-18.1.
 # Rebuilt from version 2's published inputs (28 Oct 2026; the v2 scripts were not kept): with V2 it
 # reproduces v2 (Base 21.1%, P_k 1,835,729; Bear 2.4% / 1,169,283; Bull 33.7% / 2,416,951).
@@ -46,6 +46,9 @@ V3 = dict(V2, P=1120000.0, vdate=date(2026, 11, 16), cons27=537910.7, bridge='v3
 # AI BBB 18 Nov H2 Base path. Bridge as V3 (no new report).
 V4 = dict(V3, P=1173000.0, vdate=date(2026, 11, 19), kio_px=(8271.0, 18095.0), jpykrw=(8.310, 8.611),
           mem_tab=MEM18, idx_tab=IDX18)
+# V4.1 (price re-mark, 23 Nov 2026): Seoul close 23 Nov 1,085,000; Kioxia JPY 7,307 (20 Nov close; Tokyo shut 23 Nov),
+# JPY/KRW 8.439 (Yahoo 23 Nov 11:27 UTC). Every path, consensus and bridge item as V4.
+V41 = dict(V4, P=1085000.0, vdate=date(2026, 11, 23), kio_px=(7307.0, 18095.0), jpykrw=(8.439, 8.611))
 
 
 def kio(I):

@@ -1,4 +1,4 @@
-# Samsung Electronics (docs/samsung-analysis.md) -- IAF model, version 4 (19 Nov 2026; V4: AI BBB 18 Nov H2 turn call,
+# Samsung Electronics (docs/samsung-analysis.md) -- IAF model, version 4.1 (23 Nov 2026 price re-mark = V41); version 4 (19 Nov 2026; V4: AI BBB 18 Nov H2 turn call,
 # Base .90/.50/.32/.28, index 1.38/1.08/0.95; Seoul close 19 Nov; consensus 77,775); version 3 (16 Nov 2026).
 # Rebuilt from version 2's published inputs (29 Oct 2026; the v2 scripts were not kept): with
 # V2 settings it reproduces v2 (Base 23.3%, P_k 306,225). iaf-valuation 2026-11-12.1.
@@ -44,6 +44,8 @@ V3 = dict(V2, P=196800.0, vdate=date(2026, 11, 16), shares=6.64865, eps_basis=6.
 # V4: Seoul close 19 Nov (common 195,000, preference 155,900); Yahoo CY27 consensus 77,774.66 (34; 19 Nov);
 # AI BBB 18 Nov H2 Base path. Bridge as V3 (no new report).
 V4 = dict(V3, P=195000.0, vdate=date(2026, 11, 19), cons27=77774.66, Ppref=155900.0, mem_tab=MEM18, idx_tab=IDX18)
+# V4.1 (price re-mark, 23 Nov 2026): Seoul close 23 Nov (common 177,500, preference 140,900). Paths, consensus, bridge as V4.
+V41 = dict(V4, P=177500.0, vdate=date(2026, 11, 23), Ppref=140900.0)
 # V3 sources: DART quarterly report (filed 16 Nov 2026) for the 30 Sep balance sheet, the 2026
 # long-term financial products (net 34.73), contract liabilities (24.15 vs 13.98), treasury shares
 # (127.67m at 30 Sep + 9.06m bought after), the share-based payment reserve (27.21) and the

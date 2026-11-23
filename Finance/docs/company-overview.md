@@ -1,6 +1,6 @@
 # Company and fund overview — key figures per share
 
-**As of 21 Nov 2026** (closes of Fri 20 Nov) · one row per analysis, taken from each document's decision table · **maintained row by row:** every company or fund run updates its own row when it records in the register (CLAUDE.md); the "close" and "margin at close" columns are refreshed whenever this file is touched.
+**As of 23 Nov 2026** (closes of Fri 20 Nov; SK hynix and Samsung Mon 23 Nov) · one row per analysis, taken from each document's decision table · **maintained row by row:** every company or fund run updates its own row when it records in the register (CLAUDE.md); the "close" and "margin at close" columns are refreshed whenever this file is touched.
 
 **How to read it**
 - **Price at analysis / P_k / Base IRR / verdict at analysis** are the document's own figures (k = 12%; the price that returns 12% a year to end-2029 is **P_k**).
@@ -14,8 +14,8 @@
 | **DOF Group (DOFG)** | **Yes** | ex-div re-mark, 21 Nov | NOK 124.00 | NOK 124.00 | 13.1% | NOK 127.4 | +2.7% | clears | −8.3% / 31.5% | Seabreeze Nov report ~4 Dec; Q4 Feb |
 | **SED Energy (ENH)** | **Yes** | 27 Oct build; Step 6b memo 21 Nov | NOK 6.80 (memo 6.19) | NOK 6.19 | 6.7% (memo 13.3%) | NOK 6.03 (memo 6.36) | +2.8% (memo) | clears narrowly (memo) | −30.9% / 27.1% | **Q3 report 27 Nov** (full re-run) |
 | NVIDIA (NVDA) | — | v2.0, 20 Nov | $125.53 | $125.53 | 20.7% | $156.1 | +24.3% | clears | 3.7% / 51.9% | 10-Q ~25 Nov (SEC probe) |
-| SK hynix (000660) | — | v4, 19 Nov | KRW 1,173,000 | KRW 1,113,000 | 32.9% | KRW 1,814,729 | +63% | clears | 19% / 57% | **Re-mark Mon 23 Nov** (scheduled) |
-| Samsung (005930; pref 005935) | — | v4, 19 Nov | KRW 195,000 (pref 155,900) | KRW 183,100 (pref 144,300) | 28.2% (pref 30.8%) | KRW 283,748 | +55% (pref +65%) | clears | 15% / 47% | **Re-mark Mon 23 Nov** (scheduled) |
+| SK hynix (000660) | — | v4.1, 23 Nov | KRW 1,085,000 | KRW 1,085,000 (23 Nov) | 37.3% | KRW 1,815,513 | +67% | clears | 23% / 62% | Q3 dividend ex 27 Nov; Solidigm re-disclosure ~29 Nov |
+| Samsung (005930; pref 005935) | — | v4.1, 23 Nov | KRW 177,500 (pref 140,900) | KRW 177,500 (pref 140,900; 23 Nov) | 32.8% (pref 35.8%) | KRW 283,832 | +60% (pref +68%) | clears | 19% / 53% | DRAM contract print ~30 Nov; Q4 preliminary ~7 Jan |
 | Scatec (SCATC) | — | v2.1, 21 Nov | NOK 82.40 | NOK 82.40 | 19.5% | NOK 100.8 | +22.3% | clears | −16.2% / 37.5% | Q4 report 29 Jan |
 | TSMC (TSM ADS) | — | v1.3, 20 Nov | $318.71 | $318.71 | 17.5% | $369.2 | +15.8% | clears | −5.7% / 30.4% | Nov revenue ~10 Dec; Q4 ~14 Jan |
 | Micron (MU) | — | v4.1, 20 Nov | $594.51 | $594.51 | 15.2% | $635.0 | +6.8% | clears | 2.2% / 38.4% | FQ1 report 16 Dec |
@@ -33,7 +33,7 @@
 | Rheinmetall (RHM) | — | 7 Oct `old` (hold) | €926.20 | €693.40 | −22.9% | €294 | −58% | fails | −38.9% / −12.2% | On hold (user) |
 | Borr Drilling (BORR) | — | v4, 21 Nov (hold: on request) | $3.41 | $3.41 | −100% (no equity value) | $0 | −100% | fails | −100% / 22.3% | Q4 report ~17 Feb |
 
-- SK hynix and Samsung closed in Seoul on 20 Nov **before** the US fall (SK hynix ADR −13% after); Monday's re-mark brings them up to date.
+- SK hynix and Samsung: re-marked (v4.1) at the 23 Nov Seoul close, the first session after the 20 Nov US AI/chip sell-off; their close column is 23 Nov.
 - SED: the decision table of its document is still the 27 Oct build (fails at NOK 6.80); the memo row is the 21 Nov re-mark at NOK 6.19.
 
 ## Funds
