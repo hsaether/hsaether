@@ -408,7 +408,7 @@ it to `open`.
 | 2027-01-06 | approx | Seabreeze December report: AHTS Bear signpost month 3 (below £50k crosses it → full update testing AHTS 2028–29 and Bear) and the AHTS turn-call reversal test (≥ £50k restores Base 2027 £60k); mark the supply scorecard | supply, dof | open |
 | 2026-12-01 | approx | Petrobras PSV 4500 / PSV 3000 bid ranking (ordenamento; date `[?]`): charter bids ≤ $34k → Brazil PSV Base 2028–29 to ~$35k; confirm the row basis (TDA vs CDE). Supply watch call | supply | open |
 | 2026-11-19 | yes | Subsea7 Q3 report (15:20 CET release time per Yahoo): vessel utilisation, order intake, 2027 outlook; NS CSV watch call | supply, dof | done |
-| 2026-12-04 | approx | Heimdal November reports and holdings: second price signal for Borr and the HX super senior bonds; weights after the October outflow | hy-issuers, hy-funds, hy | open |
+| 2026-12-04 | approx | Heimdal November reports and holdings: second price signal for Borr and the HX super senior bonds; weights after the October outflow; check against the forum post of ~21 Nov (Heimdal Erik `[E]`: effective yield HH N 10.33%, HH+ 10.91% in NOK; rate duration 1.08 / 1.12, credit duration 2.1 / 2.08; 30 Oct basis 9.75% N, 10.43% B) | hy-issuers, hy-funds, hy | open |
 | 2026-12-10 | approx | Oracle Q2 FY27 report (backlog, cloud infrastructure, capex) (mid-Dec) | ai | open |
 | 2026-12-04 | yes | Polish Sejm third reading of the 2027 budget (second reading 2 Dec, Senate 8 Dec) | defense | open |
 | 2026-12-09 | approx | Bundestag decision on Arminius (Boxer order, ~EUR 12.4bn for Rheinmetall; secondary source) | rhm, defense | open |
@@ -491,6 +491,10 @@ it to `open`.
 | 2027-01-31 | approx | Equinor AHTS term award, reversal deadline of the supply AHTS turn call: an award of ≥ 2 vessels by 31 Jan restores NS AHTS Base 2027 £60k (now £52k); none announced by 21 Nov (supply 21 Nov) | supply, dof | open |
 | 2027-02-26 | approx | Subsea7 Q4 2026 report (late Feb, date not announced): NS CSV watch-call signpost (book-to-bill < 0.8 again, after 0.5 in Q3, or idle newbuild CSVs → cut); Q3: utilisation 84%, backlog $12.5bn, 2027 ~$8bn guide (supply 21 Nov) | supply | open |
 | 2026-11-20 | yes | DOF ownership: A.P. Møller Maritime buys a further 1.2m shares (19 Nov, NOK 129.06) and 0.65m (20 Nov, NOK 123.38); 2.8m over 18–20 Nov (~1.1%, NOK 357m) (insider notices). Signal, not a value input; read in dof 21 Nov | dof | done |
+| 2026-11-24 | yes | Borr Prospector 5 total-loss insurance, $200m due for payment (World Oil 19 Nov `[E]`; borr v4 has it to debt): confirm receipt; credit read for the Borr 2032/2034 notes (daily news 23 Nov) | hy-issuers, borr | watch |
+| 2026-11-24 | yes | South Korea market support: listed companies' daily buyback limits eased for three months from 24 Nov; stabilisation fund (last used 2008) on standby; KOSPI −5% on 23 Nov to a 10-month low (daily news 23 Nov `[E]`) | kospi, skh, smsn | watch |
+| 2026-11-27 | approx | Amazon–Decart acquisition (~$7.5bn, FT 21 Nov `[E]`; "as early as next week"): small against Amazon's value; read at amzn's next run (daily news 23 Nov) | amzn | watch |
+| 2026-12-21 | yes | BIS 16 Nov foundry rule: TSMC and Samsung paused advanced-chip shipments to China-designed customers until licences are granted (FT 19 Nov `[E]`); in-transit shipments under the old terms end 21 Dec. TSMC China ~5% of revenue; read with Nov revenue (~10 Dec) (daily news 23 Nov) | tsm, smsn | watch |
 
 ## Change log
 

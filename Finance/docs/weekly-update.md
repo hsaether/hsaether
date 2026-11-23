@@ -4,6 +4,19 @@ The running report of the update chain (`update-chain` skill): the weekly run on
 and the daily company news search on weekdays (Mode F). Newest entry first. The bookkeeping is in
 `docs/update-register.md`; the numbers are in the documents themselves.
 
+## Daily news — Monday 23 Nov 2026
+
+- **Updated:** none (no report in the window; no item moves a value the documents read).
+- NVIDIA (nvda): Bessent says the administration "needs answers" on China chip sales and compliance; Trump urges the board to rehire Huang; board has ruled it out `[E]`. Already in v2.0's probe and leadership lines.
+- Market (equity, ai): worst week since 2020 (S&P −8.6%, SOX −17%); KOSPI −5% today; Korea eases buyback limits from 24 Nov `[F]`.
+- Trump threatens a "tremendous tax" on US firms building data centres abroad (msft, googl, amzn; AI BBB owns it) `[E]`.
+- TSMC and Samsung (tsm, smsn) paused advanced-chip shipments to China-designed customers under the 16 Nov BIS rule (FT `[E]`); TSMC China ~5% of revenue.
+- Minor: Heimdal forum yields HH N 10.33%, HH+ 10.91% `[E]`; Amazon–Decart ~$7.5bn; YouTube ~$3bn settlement; Borr insurance due 24 Nov.
+
+**Left for next run:** `dnb` (stale since 21 Nov, no news; Saturday). SK hynix and Samsung re-mark: in progress elsewhere (10:00 task). On hold (user): `defense`, `kog`, `rhm`, no news.
+
+**Register:** added Borr insurance (24 Nov), Korea support (24 Nov), Amazon–Decart (~27 Nov), BIS foundry pause (21 Dec); Heimdal 4 Dec event extended.
+
 ## Week 47 — Saturday 21 Nov 2026 (scheduled run)
 
 Skill revisions: `update-chain` 2026-11-12.2; `supply-market-bbb` 2026-11-18.1; `iaf-valuation` 2026-11-18.1.
