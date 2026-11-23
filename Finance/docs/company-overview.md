@@ -1,6 +1,6 @@
 # Company and fund overview — key figures per share
 
-**As of 23 Nov 2026** (closes of Fri 20 Nov; SK hynix and Samsung Mon 23 Nov) · one row per analysis, taken from each document's decision table · **maintained row by row:** every company or fund run updates its own row when it records in the register (CLAUDE.md); the "close" and "margin at close" columns are refreshed whenever this file is touched.
+**As of 23 Nov 2026** (closes of Fri 20 Nov; SK hynix and Samsung Mon 23 Nov close; NVIDIA 23 Nov intraday) · one row per analysis, taken from each document's decision table · **maintained row by row:** every company or fund run updates its own row when it records in the register (CLAUDE.md); the "close" and "margin at close" columns are refreshed whenever this file is touched.
 
 **How to read it**
 - **Price at analysis / P_k / Base IRR / verdict at analysis** are the document's own figures (k = 12%; the price that returns 12% a year to end-2029 is **P_k**).
@@ -13,7 +13,7 @@
 |---|---|---|---|---|---|---|---|---|---|---|
 | **DOF Group (DOFG)** | **Yes** | ex-div re-mark, 21 Nov | NOK 124.00 | NOK 124.00 | 13.1% | NOK 127.4 | +2.7% | clears | −8.3% / 31.5% | Seabreeze Nov report ~4 Dec; Q4 Feb |
 | **SED Energy (ENH)** | **Yes** | 27 Oct build; Step 6b memo 21 Nov | NOK 6.80 (memo 6.19) | NOK 6.19 | 6.7% (memo 13.3%) | NOK 6.03 (memo 6.36) | +2.8% (memo) | clears narrowly (memo) | −30.9% / 27.1% | **Q3 report 27 Nov** (full re-run) |
-| NVIDIA (NVDA) | — | v2.0, 20 Nov | $125.53 | $125.53 | 20.7% | $156.1 | +24.3% | clears | 3.7% / 51.9% | 10-Q ~25 Nov (SEC probe) |
+| NVIDIA (NVDA) | — | v2.1, 23 Nov | $167.01 (23 Nov intraday) | $167.01 | 9.4% | $156.1 | −6.6% | fails | −6.0% / 37.6% | 10-Q ~25 Nov (Huang-regime funding test) |
 | SK hynix (000660) | — | v4.1, 23 Nov | KRW 1,085,000 | KRW 1,085,000 (23 Nov) | 37.3% | KRW 1,815,513 | +67% | clears | 23% / 62% | Q3 dividend ex 27 Nov; Solidigm re-disclosure ~29 Nov |
 | Samsung (005930; pref 005935) | — | v4.1, 23 Nov | KRW 177,500 (pref 140,900) | KRW 177,500 (pref 140,900; 23 Nov) | 32.8% (pref 35.8%) | KRW 283,832 | +60% (pref +68%) | clears | 19% / 53% | DRAM contract print ~30 Nov; Q4 preliminary ~7 Jan |
 | Scatec (SCATC) | — | v2.1, 21 Nov | NOK 82.40 | NOK 82.40 | 19.5% | NOK 100.8 | +22.3% | clears | −16.2% / 37.5% | Q4 report 29 Jan |
