@@ -64,7 +64,7 @@ Kept by the `update-chain` skill; checked by
 | shb | docs/handelsbanken-analysis.md | iaf-valuation | company | 2026-10-24 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 12 Nov): no update until 3 Feb 2027 (year-end report). Version 2 |
 | msft | docs/msft-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-18 | 2026-11-18.1 | v3.3 20 Nov (re-mark at the 20 Nov close $484.52; Anthropic $88.91; `msft_n20.py`): Base 11.9% → 12.9%, P_k $497.0, +2.6%: marginal → clears (narrowly); Bear −4.8%, Bull 23.7%; E / R 0.231. Next: Q2 FY27 (~27 Jan) |
 | mu | docs/mu-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2026-12-18 | 2026-11-18.1 | v4.1 20 Nov (price re-mark at $594.51 after the chip sell-off; no model input moved): Base 7.2% → 15.2%, P_k $635.0, +6.8%: fails → clears; Bear 2.2%, Bull 38.4%; price implies k at 0.92× the Base (1.14× on 18 Nov). Next: FQ1-27 (16 / 23 Dec) |
-| nvda | docs/nvda-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | dnbtek, equity, global-index | 2026-12-18 | 2026-11-18.1 | v2.0 20 Nov (re-mark at $125.53 after −14% on the Reuters SEC-probe report; v1.9 funding-loss Base kept): Base 20.7%, P_k $156.1, +24.3%, clears; Bear 3.7%, Bull 51.9%; E / R 0.661. Order cut 16.7% (clears); SEC probe (g) central 17.3%, wide 13.2%, wide + order cut 9.2% (fails). Next: 10-Q ~25 Nov |
+| nvda | docs/nvda-analysis.md | iaf-valuation | company | 2026-11-23 | 2026-11-20 | dnbtek, equity, global-index | 2026-12-18 | 2026-11-18.1 | v2.1 23 Nov (news: Huang reinstated by the board 22–23 Nov; re-mark at $167.01 intraday, +33% on 20 Nov): Base 20.7% → 9.4%, P_k $156.1 unchanged, margin −6.6%, **clears → fails (flipped, price only)**; funding-regime case ($100bn a year: 7.7%); cascade −19.1%; no input moved |
 | anthropic | docs/anthropic-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | amzn, googl, msft | 2026-12-15 | 2026-11-18.1 | v1.0 13 Nov (IPO, Bafin EU prospectus 11 Nov): range $70–78; Base IRR 5.5 / 3.8 / 2.2%, P_k $58.4, margin −21.1% at $74, fails (clears ≈ $57.5); Bear −38%, Bull +31%; fully diluted 18.14bn shares; 58% of E1; re-mark at the final price |
 | skh | docs/skhynix-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | dnbtek, kospi, mu | 2026-12-18 | 2026-11-18.1 | v4 19 Nov (AI BBB 18 Nov H2 2028–30 .50 / .32 / .28; KRW 1,173,000; Step 6b): Base 32.9%, P_k 1,814,729, +54.7%, clears; Bear 18.8%, capped −5.7%; ADR $122.47 P_k $152.44 (+24.5%); price implies k at 0.54× the new Base. Model V4 (skh_run4.py) |
 | smsn | docs/samsung-analysis.md | iaf-valuation | company | 2026-11-19 | 2026-11-19 | dnbtek, kospi, mu | 2026-12-18 | 2026-11-18.1 | v4 19 Nov (AI BBB 18 Nov H2 path; 195,000 / 155,900; consensus 77,775; Step 6b): Base 28.2%, P_k 283,748, +45.5%, clears; preference 30.8% (+52.3%); Bear 14.9%, capped −5.1%; price implies k at 0.54× the new Base. Model V4 (smsn_run4.py) |
@@ -174,9 +174,9 @@ Kept by the `update-chain` skill; checked by
 | mu | skh | 2026-11-19 | loop | Peer comparison (from the SK hynix analysis, not only market multiples; not yet read) |
 | mu | smsn | 2026-11-19 | loop | Peer comparison (from the Samsung analysis, not only market multiples; not yet read) |
 | nvda | ai | 2026-11-20 | main | H1 compute layer (11 Nov re-run held to the 17 Nov run, deferral rule) |
-| nvda | equity | 2026-11-18 | main | Scenarios, NOK path |
+| nvda | equity | 2026-11-20 | main | Scenarios, NOK path |
 | nvda | hy | 2026-11-18 | main | NIBOR (E / R) |
-| nvda | anthropic | 2026-11-13 | main | Value of the $10bn Class N placement (shares at the IPO price, value at P_k); not yet read |
+| nvda | anthropic | 2026-11-20 | main | Value of the $10bn Class N placement (shares at the IPO price, value at P_k); not yet read |
 | anthropic | ai | 2026-11-19 | main | E1 frontier-lab revenue paths (Anthropic share set in the analysis), scenarios, lab-financing signposts |
 | anthropic | equity | 2026-11-18 | main | Scenarios, NOK path, exit cross-check |
 | anthropic | hy | 2026-11-18 | main | Rates context (NIBOR) |
@@ -349,7 +349,7 @@ it to `open`.
 | 2026-11-18 | approx | Anthropic IPO pricing: marks NVIDIA's stake and its $10bn placement (outcome: $83, above range; NVIDIA 120.5m Class N, $11.7bn at the $97.17 first close; immaterial for nvda) | nvda, ai | done |
 | 2026-12-15 | approx | NDAA final text (AI Overwatch, Chip Security, MATCH Acts) | nvda, ai | watch |
 | 2027-02-17 | approx | Borr Q4 2026 report (Rig BBB; date not confirmed by Borr): FY2027 guidance, 2027 cover, rates; jackup watch call checkpoint | borr, rig, hy-issuers | open |
-| 2027-02-28 | approx | NVIDIA permanent CEO named (3–4-month search) | nvda, ai | open |
+| 2027-02-28 | approx | NVIDIA permanent CEO named (3–4-month search). Outcome: Huang reinstated by the board 22–23 Nov (8-K), search ended | nvda, ai | done |
 | 2026-11-18 | yes | House closed briefing on NVIDIA requested for 18 Nov (committee chairs Mast, Moolenaar, Crawford; letter 4 Nov); 11 Nov: House Republicans press Huang to testify, subpoena floated (daily news 12 Nov) Outcome (weekly 21 Nov): Huang agreed to testify behind closed doors per Moolenaar, no date set (BGov [E]); no new finding | nvda, ai | done |
 | 2026-11-12 | approx | NVIDIA board decision on CEO: Huang resigned as CEO and director (8-K 12 Nov, effective 11 Nov); Colette Kress interim CEO and CFO; Harvey Jones first Chair; internal and external search | nvda, ai | done |
 | 2026-11-30 | approx | BIS rule blocking Chinese remote access to advanced AI chips via data centres abroad, seven more countries incl. Malaysia, Singapore, Thailand (The Information 11 Nov [E]; "could be announced this month") | nvda, ai | done |
@@ -470,6 +470,7 @@ it to `open`.
 | 2026-11-25 | approx | NVIDIA Q3 FY27 10-Q (late Nov): guarantee calls, capacity buy-backs exercised, new guarantees and equity commitments in Q3 (vendor-financing flow and funded-customer credit signposts; cascade inventory); also the impaired private stake ($1.8bn), $74bn uncommenced leases, $9.5bn power and systems support, Caprez (related party), buy-back obligations 36 → 32 (nvda v1.7) | ai, nvda, skh, smsn | watch |
 | 2026-11-27 | yes | SK hynix Q3 dividend goes ex (record 30 Nov) | skh | watch |
 | 2026-11-29 | approx | SK hynix: Solidigm re-disclosure on the reported ~KRW 60tn US NAND fab (promised within a month of the 29 Oct 6-K) | skh, ai | watch |
+| 2027-02-24 | approx | NVIDIA board committee: conclusion of the foreign-intelligence review of Huang (no date; tied to Q4); also Huang's closed-door House testimony and the Chief Compliance Officer appointment (no dates) | nvda, ai | watch |
 | 2026-12-01 | approx | Silicon Data month-end GPU rental indices: B200 against its 2026 high $7.03 (Bear: −20% for three months), H100; price leg of the funded-customer credit signpost and the NVIDIA cascade | ai, nvda | watch |
 | 2026-12-07 | approx | DNB AM November factsheet for DNB Teknologi (holdings 30 Nov) | dnbtek | open |
 | 2026-12-15 | yes | Anthropic staged lock-up releases begin (days 27 / 48 / 62 / 76: 15 Dec, 5 Jan, 19 Jan, 2 Feb); over-allotment option expires ~18 Dec | anthropic, amzn | watch |
