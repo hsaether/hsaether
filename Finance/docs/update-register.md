@@ -83,6 +83,7 @@ Kept by the `update-chain` skill; checked by
 | review-ai-debt | docs/review-ai-debt-and-market-power.md | - | static | - | - | - | - | - | Review, not updated (5 Nov 2026: debt-funded AI expansion, data-centre multiples and market power). Not adopted (user, 6 Nov): its skill additions (2026-11-05.1) and baseline changes reverted; a dated record, not an input |
 | review-ai-h1 | docs/review-ai-h1-non-k1-funding.md | - | static | - | - | - | - | - | Review, not updated (11 Nov 2026: AI BBB checkpoint 10, H1 compute bought outside K1 and its funding; Option A+ adopted by the user and applied 11 Nov (ai-market-bbb 2026-11-11.1)) |
 | review-ai-k1 | docs/review-ai-k1-sustainability.md | - | static | - | - | - | - | - | Review, not updated (11 Nov 2026: is K1 Base the most likely path or the companies' plan; return gap; recommends Option D, a cycle-first K1 section with K1 Base 790 / 1,120 / 1,170 / 1,170; Option D adopted by the user and applied 11 Nov (ai-market-bbb 2026-11-11.2)) |
+| review-nvda-comp | docs/review-nvda-competition.md | - | static | - | - | - | - | - | Review, not updated (23 Nov 2026: NVIDIA against custom silicon and AMD for LLMs; margin and share risk from 2028, Rubin not a deal-breaker; competition sensitivity in nvda declined for now (user)) |
 | weekly | docs/weekly-update.md | update-chain | static | - | - | - | - | - | Running report of the weekly run and the midweek check; read by no document |
 
 ## Inputs
