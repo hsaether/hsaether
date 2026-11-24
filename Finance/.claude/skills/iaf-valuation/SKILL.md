@@ -5,8 +5,16 @@ description: Investment Analysis Framework (IAF) — the standing valuation meth
 
 # Investment Analysis Framework (IAF)
 
-**Revision:** 2026-11-18.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-24.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/iaf-valuation/` in the Finance folder.
+
+Change note 2026-11-24.1 (user, 24 Nov 2026: written checks so every thread reaches the same result).
+Four checks, each deterministic and cheap: (1) re-marks start from the stored model script, which
+is saved or rebuilt (and reproduced) when missing; (2) a standard **share-within-the-layer**
+sensitivity for companies whose earnings are a BBB layer path × their own consensus; (3) the
+**implied growth after exit** stated in the exit cross-check; (4) a **double-count check** before
+finishing. Sensitivities and cross-checks only: no Base and no verdict moves. Applied at each
+document's own next run (no cascade).
 
 Change note 2026-11-18.1 (user, 18 Nov 2026: forecast before solid proof): new Step 6b, **Price
 versus our call**. Every analysis states what the price implies (reverse the Base build), where
@@ -260,6 +268,12 @@ covered (DOFG returned an error).
   final versions are copied to that folder before the run ends. They are standard library unless
   the workspace venv is needed (see Python in CLAUDE.md). Run them from their folder without `-I` (they import each other; `-I` drops the script's own
   folder from the path); keep `-I` for scripts that read downloaded files.
+- **A re-mark starts from the stored script (2026-11-24.1).** Run it with the new price, date and
+  FX; never rebuild the figures by hand from the document. If no script is stored, build one from
+  the document's inputs first and show that it **reproduces the last version's Base, Bear and Bull
+  IRR_T and P_k** (within 0.1 pp and 0.5% of P_k) before using it; state any row it cannot
+  reproduce. An adjustment layer on an unsaved build (Borr v4, Scatec v2.1) is allowed only with
+  that statement, and the full script is built at the next report run.
 
 ## Definitions
 
@@ -356,6 +370,15 @@ exit P/E** (Step 3), with the same IRR_T, P_k and margin of safety as Track B:
   cash conversion). Never the IAF ceiling, never today's P/E by default.
 - Interim V_t: P/E glides from today's to the exit P/E (state the glide).
 - Report Rule 1 at constant P/E beside the dated IRR, labelled "assumes today's P/E holds".
+- **Share within the layer (2026-11-24.1).** When EPS is a BBB layer path × the company's own
+  consensus (AI BBB layers: NVIDIA, Micron, TSMC, Microsoft, Alphabet, Amazon and the like), the
+  Base keeps the company's share of that layer, because the layer also holds its rivals (H1: NVIDIA,
+  AMD, Broadcom, Marvell). Say so in Market input, and add one **standard sensitivity row**: share
+  −10 pp from 2028 in a flat layer (revenue × (s − 10) / s, EPS on the company's own operating
+  leverage; state it), with IRR_T, P_k and margin. Where the analysis has a named rival case (custom
+  silicon, a new entrant), add it as a labelled sensitivity and, under Step 6b, as a watch call. It
+  never moves Base unless the sector BBB moves the layer or a company-specific contract or loss is
+  sourced.
 
 ## Step 2B — Track B: year-by-year IRR build
 
@@ -523,6 +546,11 @@ Everything after exit is priced into V_T:
   - **buyer's implied return at exit**: Track B = the asset rate behind the marks (sector BBB,
     e.g. 8%), adjusted for net debt where material; Track A = normalised cash yield at the exit
     P/E + long-run growth (Equity BBB Step D form);
+  - **implied growth after exit (Track A, 2026-11-24.1):** the perpetual growth a buyer needs to
+    pay the exit P/E, g = (P/E × r − 1) / (P/E − 1 / ROE_exit), at r = Equity BBB's mid-cycle return
+    and r + 1 pp, with the exit ROE stated. Set it beside the company's own growth in the last two
+    model years and its long-run history; name the capacity or demand evidence when g is above
+    the company's last-two-year growth. Also state the exit P/E at which Base returns k;
   - beside Equity BBB's index exit P/E, exit P/B and mid-cycle return (Oslo for Oslo listings and
     Nordic names, World for others).
   - P/NAV = 1 at exit stays the Track B default: the marks come from the asset market, the most
@@ -805,7 +833,17 @@ change in Base P_k, and whether the company is running ahead of or behind the Ba
   between the Year-3 rate and mid-cycle has either a named, sourced reason from the sector BBB or a
   2-year reversion tail in V_T, with the other treatment shown as a sensitivity.
 - Exit cross-check table (exit P/E, exit P/B, buyer's implied return vs Equity BBB) for all three
-  scenarios.
+  scenarios; Track A also states the implied growth after exit and the exit P/E at which Base
+  returns k.
+- **Double-count check (2026-11-24.1):** no downside or upside is counted twice. Typical pairs:
+  customer funding or vendor financing and a margin give-back (both are price concessions); a lower
+  exit P/E and a lower exit-year EPS for the same cause; a capped Bear multiple and a trough EPS
+  already at the multiple's floor; FX in both the cash flows and the exit marks. Where two items
+  overlap, say which one carries the effect, or show the combined case at a stated reduced weight.
+- Layer-path companies: the share-within-the-layer sentence and the standard share −10 pp
+  sensitivity row are present (Step 2A).
+- Re-marks ran on the stored script, or the rebuilt script's reproduction of the last version is
+  stated (Model scripts are kept).
 - Foreign-currency cash flows: Bear and Bull also in NOK on the Equity BBB NOK path, labelled.
 - g is the value CAGR (V_T vs P), never IRR − d; c is shown; the re-rating is named when P/NAV_0
   is outside 0.95–1.05.
