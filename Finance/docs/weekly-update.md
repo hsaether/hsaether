@@ -4,6 +4,19 @@ The running report of the update chain (`update-chain` skill): the weekly run on
 and the daily company news search on weekdays (Mode F). Newest entry first. The bookkeeping is in
 `docs/update-register.md`; the numbers are in the documents themselves.
 
+## Daily news — Tuesday 24 Nov 2026
+
+- **Updated:** none (no report in the window; no item moves a value the documents read).
+- Price only, verdict bands at the 24 Nov close vs each P_k: NVIDIA (nvda) $155.38, fails → marginal (+0.5%); Micron (mu) $629.79, clears → marginal (+0.8%); Microsoft (msft) $496.13, clears → marginal (+0.2%); Alphabet (googl) $279.05, marginal → fails (−5.5%) `[F]`.
+- DOF (dof, held) NOK 126.00: clears → marginal (+1.1%), price only `[F]`.
+- NVIDIA (nvda): Commerce put Megaspeed and Alibaba's Apex on the Entity List; Huang testifies to Senate Banking next week `[E]`. Goes into the 10-Q run.
+- Anthropic (anthropic) $81.91, below its $83 IPO price; still fails `[F]`.
+- Minor: BNP cuts Micron to Neutral `[E]`; Kuo says Google TPU-8i 2027 orders −20% `[E]`; KOSPI +7%; Borr insurance not yet confirmed; no fund-house forum posts.
+
+**Left for next run:** `dnb`, `stb` (stale date only, no news; Saturday). On hold (user): `defense`, `kog`, `rhm`, no news.
+
+**Register:** Korea support and Amazon–Decart closed; Huang testimony/GTC (~1 Dec) added; Entity List note added to the NVIDIA 10-Q event.
+
 ## Daily news — Monday 23 Nov 2026
 
 - **Updated:** none (no report in the window; no item moves a value the documents read).
