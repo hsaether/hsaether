@@ -4,6 +4,18 @@ The running report of the update chain (`update-chain` skill): the weekly run on
 and the daily company news search on weekdays (Mode F). Newest entry first. The bookkeeping is in
 `docs/update-register.md`; the numbers are in the documents themselves.
 
+## Daily news — Wednesday 25 Nov 2026
+
+- **Updated:** `dof` 13.1% → 12.6%, **marginal (flipped from clears)** at NOK 126.00: mostly the price (+1.6%); the Skandi Forza sale and charterback is about NAV-neutral (−0.09 pp) `[F]`.
+- SK hynix (skh) −10.8% to KRW 1,030,000 and Samsung (smsn) −9.9% to 170,700 in Seoul after the US chip sell-off; price only, both still clear by wide margins `[F]`.
+- Minor: Hafnia dividend form, Trustly Q3 and Norse Q3 not out by 08:00; NVIDIA 10-Q not filed yet; Borr insurance receipt unconfirmed; Scatec flagging notice; no fund-house forum posts.
+
+**Needs you:** DOF (held) flipped clears → marginal; it clears again at NOK 125.3 or less and fails above NOK 130.4.
+
+**Left for next run:** `dnb`, `stb` (stale date only, no news; Saturday). On hold (user): `defense`, `kog`, `rhm`, no news.
+
+**Register:** Forza sale event done; Forza delivery (Q4, watch) added.
+
 ## Daily news — Tuesday 24 Nov 2026
 
 - **Updated:** none (no report in the window; no item moves a value the documents read).
