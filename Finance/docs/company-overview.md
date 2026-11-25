@@ -1,6 +1,6 @@
 # Company and fund overview — key figures per share
 
-**As of 23 Nov 2026** (closes of Fri 20 Nov; SK hynix and Samsung Mon 23 Nov close; NVIDIA 23 Nov intraday) · one row per analysis, taken from each document's decision table · **maintained row by row:** every company or fund run updates its own row when it records in the register (CLAUDE.md); the "close" and "margin at close" columns are refreshed whenever this file is touched.
+**As of 25 Nov 2026** (closes of Fri 20 Nov; DOF row 24 Nov close; SK hynix and Samsung Mon 23 Nov close; NVIDIA 23 Nov intraday) · one row per analysis, taken from each document's decision table · **maintained row by row:** every company or fund run updates its own row when it records in the register (CLAUDE.md); the "close" and "margin at close" columns are refreshed whenever this file is touched.
 
 **How to read it**
 - **Price at analysis / P_k / Base IRR / verdict at analysis** are the document's own figures (k = 12%; the price that returns 12% a year to end-2029 is **P_k**).
@@ -11,7 +11,7 @@
 
 | Company (ticker) | Held | Analysis (version, date) | Price at analysis | Close 20 Nov | Base IRR | P_k (Base) | Margin at close | Verdict at close | Bear / Bull IRR | Next event |
 |---|---|---|---|---|---|---|---|---|---|---|
-| **DOF Group (DOFG)** | **Yes** | ex-div re-mark, 21 Nov | NOK 124.00 | NOK 124.00 | 13.1% | NOK 127.4 | +2.7% | clears | −8.3% / 31.5% | Seabreeze Nov report ~4 Dec; Q4 Feb |
+| **DOF Group (DOFG)** | **Yes** | Forza sale + re-mark, 25 Nov | NOK 126.00 | NOK 126.00 (24 Nov) | 12.6% | NOK 127.8 | +1.4% | marginal | −8.6% / 30.8% | Seabreeze Nov report ~4 Dec; Forza delivery Q4; Q4 Feb |
 | **SED Energy (ENH)** | **Yes** | 27 Oct build; Step 6b memo 21 Nov | NOK 6.80 (memo 6.19) | NOK 6.19 | 6.7% (memo 13.3%) | NOK 6.03 (memo 6.36) | +2.8% (memo) | clears narrowly (memo) | −30.9% / 27.1% | **Q3 report 27 Nov** (full re-run) |
 | NVIDIA (NVDA) | — | v2.1, 23 Nov | $167.01 (23 Nov intraday) | $167.01 | 9.4% | $156.1 | −6.6% | fails | −6.0% / 37.6% | 10-Q ~25 Nov (Huang-regime funding test) |
 | SK hynix (000660) | — | v4.1, 23 Nov | KRW 1,085,000 | KRW 1,085,000 (23 Nov) | 37.3% | KRW 1,815,513 | +67% | clears | 23% / 62% | Q3 dividend ex 27 Nov; Solidigm re-disclosure ~29 Nov |

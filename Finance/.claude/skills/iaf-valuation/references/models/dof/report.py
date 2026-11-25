@@ -1,16 +1,20 @@
 """DOF report: period tables, results, NAV_0, V_T bridge, cross-check, year-end path.
-docs/DOF-analysis.md, 21 Nov 2026 (ex-dividend re-mark on the 18 Nov build). Run: py report.py [step]
-(step from inputs_1118: 0 = 12 Nov, 1 = + re-mark 16 Nov, 2 = + AHTS row 16 Nov, 3 = + awarded PLSV as firm (16 Nov),
-4 = + re-mark 18 Nov, 5 = + AHTS turn call 18 Nov, 6 = + Skandi Seven/Africa firm, 7/all = + ex-dividend re-mark 20 Nov).
+docs/DOF-analysis.md, 25 Nov 2026 (Skandi Forza sale and re-mark on the 21 Nov build). Run: py report.py [step]
+(step from inputs_1125: 0 = 12 Nov, 1 = + re-mark 16 Nov, 2 = + AHTS row 16 Nov, 3 = + awarded PLSV as firm (16 Nov),
+4 = + re-mark 18 Nov, 5 = + AHTS turn call 18 Nov, 6 = + Skandi Seven/Africa firm, 7 = + ex-dividend re-mark 20 Nov,
+8 = + re-mark 24 Nov, 9/all = + Skandi Forza sale).
 Writes results.json.
 """
 import copy, json, sys
 from dof_model import *
 from inputs_new import *
-from inputs_1121 import inputs_1121
+from inputs_1125 import inputs_1125
 
 STEP = sys.argv[1] if len(sys.argv) > 1 else "all"
-I = inputs_1121(STEP if STEP == "all" else int(STEP))
+I = inputs_1125(STEP if STEP == "all" else int(STEP))
+FZ = I.get("forza")
+FZG = FZ["G"] if FZ else 0.0          # Forza broker mark (= price [A]), out of the fleet
+FZR = (FZ["G"] - FZ["X"]) if FZ else 0.0   # receivable at the valuation date (price less tax; includes the stake)
 PAY = I.get("div_payable", 0.0)   # Q3 dividend owed to the old holders once the share is ex (NAV_0 deduction)
 FX = I["fx"]; P = I["P"]; V0 = I["val_date"]
 nk = lambda x: x * FX / SH
@@ -70,11 +74,11 @@ mid0 = {}
 prem0 = {s: v + I["prem0_add"][s] for s, v in {"Bear": 559.0, "Base": 404.0, "Bull": 245.0}.items()}   # + awarded PLSV terms (step 3)
 fac = I["meta"]["fac"]; fmv = I["meta"]["fmv"]; ip = I["meta"]["impl_price"]
 for s in ("Bear", "Base", "Bull"):
-    fleet0 = (fmv - ip) * fac[s] * age0
-    nav0 = fleet0 + ip + prem0[s] + 155 + {"Bear": 270, "Base": 500, "Bull": 800}[s] - I["nibd0"] - PAY
+    fleet0 = (fmv - ip - FZG) * fac[s] * age0
+    nav0 = fleet0 + ip + FZR + prem0[s] + 155 + {"Bear": 270, "Base": 500, "Bull": 800}[s] - I["nibd0"] - PAY
     mid0[s] = dict(fleet0=fleet0, nav0=nav0, nav0_nok=nk(nav0))
     pr(f"NAV_0 {s}: fleet {fleet0:.0f} NAV {nav0:.0f} NOK {nk(nav0):.1f} P/NAV {P/nk(nav0):.2f}")
-navmkt = (fmv - ip) * age0 + ip + prem0["Base"] + 155 + 500 - I["nibd0"] - PAY
+navmkt = (fmv - ip - FZG) * age0 + ip + FZR + prem0["Base"] + 155 + 500 - I["nibd0"] - PAY
 pr(f"NAV market marks: {navmkt:.0f} NOK {nk(navmkt):.1f} P/NAV {P/nk(navmkt):.2f}; age0 {age0:.4f}")
 for s in ("Bear", "Base", "Bull"):
     r = R[s]
@@ -101,7 +105,8 @@ pr(f"newbuild value at T {nb_T:.0f}; capex in horizon {out['Base']['sumG']:.1f}"
 out["bridge"] = dict(mc=mc, nav0=nav0, vc=vc, ageing=ageing, roll=roll, signed=ex["signed"], tail=ex["tail"], ret=ret, chk=chk - b["VT"])
 
 # FCF normalised and Rule 3, exit cross-check
-mid_eb = {"Bear": 549 - 3 + 11.2 * (1 - ip / 147), "Base": 742 - 3 + 16.3 * (1 - ip / 147), "Bull": 952 - 3 + 21.8 * (1 - ip / 147) + 0.15 * 0 + (PLSV["fc"] * 15 * 0.92) * 0.5 * 6 * 365 / 1000}
+mid_eb0 = {"Bear": 549 - 3 + 11.2 * (1 - ip / 147), "Base": 742 - 3 + 16.3 * (1 - ip / 147), "Bull": 952 - 3 + 21.8 * (1 - ip / 147) + 0.15 * 0 + (PLSV["fc"] * 15 * 0.92) * 0.5 * 6 * 365 / 1000}
+mid_eb = {k_: v_ - (FZ["lostmc"][k_] if FZ else 0.0) for k_, v_ in mid_eb0.items()}   # Forza leaves the fleet (Dec 2028)
 pr("\n=== FCF normalised / cross-check ===")
 book0 = 2131.0
 da = {"Q4-26": 61.0, "Q1-27": 75, "Q2-27": 75, "Q3-27": 75, "Q4-27": 75, "2028": 310.0, "2029": 315.0}
@@ -117,7 +122,7 @@ for s in ("Bear", "Base", "Bull"):
     ni_mc = mid_eb[s] - 309 - intx - 0.086 * mid_eb[s]
     acc_pe = r["VT"] / ni_mc
     ni = sum(r["rows"][p]["ebitda"] - da[p] - r["rows"][p]["interest"] - r["rows"][p]["tax"] for p in r["rows"])
-    book = book0 + ni - out[s]["sumDP"]
+    book = book0 + ni - out[s]["sumDP"] + ((35.0 - FZ["X"]) if FZ else 0.0)   # Forza gain at delivery (book)
     pb = r["VT"] / book
     buyer = (0.08 * r["assets"] - intx) / r["VT"]
     pr(f"{s}: midEB {mid_eb[s]:.1f} renew {renew:.1f} intx {intx:.1f} FCFn {fcfn:.1f} ({nk(fcfn):.2f}) P/FCF {pfcf:.1f} ceil {ceil:.1f} exitPE {exit_pe:.1f} accPE {acc_pe:.1f} book {book:.0f} PB {pb:.2f} buyer {buyer*100:.1f}")
@@ -144,7 +149,7 @@ out["weighted"] = (wi, wp)
 # year-end path with interim glide
 pr("\n=== Year-end path ===")
 age_e26 = ann8(12.5) / ann8(13)
-stub_assets = (fmv - ip) * age_e26 + ip + 390 + I["stub_prem_add"] + 170 + 500
+stub_assets = (fmv - ip - FZG) * age_e26 + ip + (FZ["S"] if FZ else 0.0) + 390 + I["stub_prem_add"] + 170 + 500
 for s in ("Base", "Bear", "Bull"):
     r = R[s]
     exA = r["assets"] - r["exit"]["signed"] - r["exit"]["tail"]

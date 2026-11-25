@@ -1,4 +1,4 @@
-"""DOF sensitivities, driver breakdown, break-evens. docs/DOF-analysis.md, 21 Nov 2026 (ex-dividend re-mark). Run: py sens.py"""
+"""DOF sensitivities, driver breakdown, break-evens. docs/DOF-analysis.md, 25 Nov 2026 (Skandi Forza sale and re-mark). Run: py sens.py"""
 import copy
 from dof_model import *
 from inputs_new import *
@@ -6,8 +6,10 @@ from inputs_1116 import inputs_1116, ahts_delta, Q27, QDAYS
 import inputs_1118 as i18
 from inputs_1118 import inputs_1118, AHTS_1116, AHTS_1118
 from inputs_1121 import inputs_1121
+import inputs_1125 as i25
+from inputs_1125 import inputs_1125
 
-BASE = inputs_1121("all")
+BASE = inputs_1125("all")
 P = BASE["P"]
 
 def res(I, s="Base", **kw):
@@ -171,9 +173,9 @@ for s in ("Bear", "Bull"):
     for lab, (i, pk, vt) in steps:
         print(f"   {lab:40s} IRR {i:6.2f} Pk {pk:6.1f} VT {vt:6.1f}")
 
-print("=== Attribution 16 -> 21 Nov ===")
-for st, lab in ((3, "16 Nov (all)"), (4, "+ re-mark 18 Nov close 128.30 / 9.705"), (5, "+ NS AHTS Base 2027 GBP 60k -> 52k (turn call)"), (6, "+ Skandi Seven / Skandi Africa firm (CSV $70m/yr)"), (7, "+ ex-dividend re-mark 20 Nov close 124.00 / 9.750")):
-    J = inputs_1121(st)
+print("=== Attribution 21 -> 25 Nov ===")
+for st, lab in ((7, "21 Nov (all)"), (8, "+ re-mark 24 Nov close 126.00 / 9.792"), (9, "+ Skandi Forza sale")):
+    J = inputs_1125(st)
     for s_ in ("Bear", "Base", "Bull"):
         r = run(J, s_)
         print(f"   step {st} {s_:4s} IRR {r['irr']*100:7.3f} Pk {r['Pk']:7.2f} MoS {(r['Pk']/J['P']-1)*100:6.2f}% VT {r['VT_nok']:6.2f}")
@@ -182,7 +184,7 @@ for q, v in BASE["ahts_delta_1118"].items(): J["ebitda"]["Base"][q] -= v
 show("NS AHTS Base 2027 back at GBP 60k (turn call reversed)", J)
 for cf in (35.0, 105.0):
     i18.CSV_FIRM = cf
-    show(f"CSV vessel revenue moved to firm ${cf:.0f}m/yr (Base $70m)", inputs_1121("all"))
+    show(f"CSV vessel revenue moved to firm ${cf:.0f}m/yr (Base $70m)", inputs_1125("all"))
 i18.CSV_FIRM = 70.0
 for fx in (9.705, 9.29, 10.00):
     J = copy.deepcopy(BASE); J["fx"] = fx
@@ -192,3 +194,29 @@ for s in ("Bear", "Bull"): I["ebitda"][s]["Q4-26"] -= 10
 show("Q4-26 at the guidance low end (2026 EBITDA $830m, Q4 $198m)", I)
 for s in ("Bear", "Bull"):
     show(f"   {s}: Q4-26 at the guidance low end", I, s)
+
+print("=== Skandi Forza ===")
+for h in (8.0, 16.0):
+    i25.FZ["hire"] = h
+    show(f"Forza bareboat hire ${h:.0f}m a year (Base $12m)", inputs_1125("all"))
+i25.FZ["hire"] = 12.0
+for g, r_ in ((50.0, 6.0), (75.0, 31.0)):
+    i25.FZ["G"] = g; i25.FZ["R"] = r_
+    show(f"Forza price ${g:.0f}m (debt repaid ${r_:.0f}m; mark = price)", inputs_1125("all"))
+i25.FZ["G"] = 62.0; i25.FZ["R"] = 18.0
+I = copy.deepcopy(BASE); I["exit"]["Base"]["fleet"] -= 62 * (0.820 * 0.954 - BASE["forza"]["age_T"])
+show("Forza out of the exit fleet at the fleet-average factor (0.820 x 0.954)", I)
+I = copy.deepcopy(BASE); I["exit"]["Base"]["stake"] = 0
+show("Retained stake valued at zero", I)
+for fx in (9.75,):
+    J = copy.deepcopy(BASE); J["fx"] = fx
+    show(f"USD/NOK {fx}", J)
+lo, hi = 9.0, 10.5
+for target, lab in ((P, "k"), (P * 1.02, "clears"), (P * 0.98, "fails below")):
+    lo, hi = 9.0, 10.5
+    for _ in range(50):
+        m = (lo + hi) / 2
+        J = copy.deepcopy(BASE); J["fx"] = m
+        if run(J, "Base")["Pk"] < target: lo = m
+        else: hi = m
+    print(f"USD/NOK for {lab}: {m:.3f}")
