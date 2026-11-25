@@ -1,6 +1,6 @@
 # Company and fund overview — key figures per share
 
-**As of 25 Nov 2026** (closes of Fri 20 Nov; DOF row 24 Nov close; SK hynix and Samsung Mon 23 Nov close; NVIDIA 23 Nov intraday) · one row per analysis, taken from each document's decision table · **maintained row by row:** every company or fund run updates its own row when it records in the register (CLAUDE.md); the "close" and "margin at close" columns are refreshed whenever this file is touched.
+**As of 25 Nov 2026** (closes of Fri 20 Nov; DOF row 24 Nov close; Vår 24 Nov close; SK hynix and Samsung Mon 23 Nov close; NVIDIA 23 Nov intraday) · one row per analysis, taken from each document's decision table · **maintained row by row:** every company or fund run updates its own row when it records in the register (CLAUDE.md); the "close" and "margin at close" columns are refreshed whenever this file is touched.
 
 **How to read it**
 - **Price at analysis / P_k / Base IRR / verdict at analysis** are the document's own figures (k = 12%; the price that returns 12% a year to end-2029 is **P_k**).
@@ -29,6 +29,7 @@
 | DNB Bank (DNB) | — | Update 1, 22 Oct `old` | NOK 314.70 | NOK 323.00 | 7.0% | NOK 275.2 | −14.8% | fails | −3.5% / 14.1% | Q4 report 4 Feb |
 | Storebrand (STB) | — | 24 Oct (19 Oct build) `old` | NOK 189.00 | NOK 199.20 | 5.3% | NOK 156.9 | −21.2% | fails | −7.2% / 12.9% | Q4 report 10 Feb |
 | Anthropic (ANT) | — | v1.1, 20 Nov (19 Nov close) | $97.17 | $88.91 | −4.6% | $58.9 | −34% | fails | −42.1% / 21.1% | Closing 8-K ~25 Nov |
+| Vår Energi (VAR) | — | v1.0, 25 Nov (new) | NOK 44.65 (24 Nov) | NOK 44.65 (24 Nov) | −22.1% | NOK 19.8 | −55.6% | fails | −50.5% / 13.3% | BlueNord closing ~year-end; Q4 report 9 Feb |
 | Kongsberg (KOG) | — | v2, 29 Oct `old` (hold) | NOK 352.70 | NOK 326.70 | −16.2% | NOK 144 | −56% | fails | −31.5% / −5.9% | On hold (user) |
 | Rheinmetall (RHM) | — | 7 Oct `old` (hold) | €926.20 | €693.40 | −22.9% | €294 | −58% | fails | −38.9% / −12.2% | On hold (user) |
 | Borr Drilling (BORR) | — | v4, 21 Nov (hold: on request) | $3.41 | $3.41 | −100% (no equity value) | $0 | −100% | fails | −100% / 22.3% | Q4 report ~17 Feb |

@@ -54,6 +54,7 @@ Kept by the `update-chain` skill; checked by
 | borr | docs/borr-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2027-02-18 | 2026-11-18.1 | **HOLD (user, 7 Nov): only on request. Not interesting as an equity; its value is the credit read for the Borr bonds in hy-issuers.** v4 21 Nov (on request): Q3, insurance $200m to debt, four awards; Base still zero (exit equity −$354m; no funding gap in the window), Bull 22.3% (P_k $4.49) at $3.41; break-even mid-cycle ~$135k; Step 6b; compacted 724 → 246 lines; `borr/v4.py` |
 | odl | docs/odl-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | none | 2026-12-13 | 2026-11-12.1 | v2.1 13 Nov (ex-dividend re-mark, compacted 721 → 450 lines): Base 8.1% → 9.0%, P_k $9.97 (NOK 95.5) vs $10.74 (NOK 102.80), margin −7%, fails; Deepsea Bergen contract signed 10 Nov (already firm in the model) |
 | scatec | docs/scatec-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2027-02-28 | 2026-11-18.1 | v2.1 21 Nov: re-mark at NOK 82.40 and 20 Nov FX (basket ×1.048) on the v2 build: clears, Base 16.4% → 19.5%, P_k NOK 100.8, +22.3%; Bear −16.2%, Bull 37.5%; price implies Philippines ~NOK 320m; Step 6b (ahead, positive); compacted 727 → lean; `scatec/v21.py`. Next: Q4 report 29 Jan 2027 |
+| var | docs/var-analysis.md | iaf-valuation | company | 2026-11-24 | 2026-11-24 | none | 2027-02-10 | 2026-11-24.1 | v1.0 25 Nov (new, user): NOK 44.65 (24 Nov); fails, Base −22.1%, P_k NOK 19.8, −55.6%; Bear −50.5%, Bull 13.3% (+2.9%); ConocoPhillips Norway ($3.9bn), placement 249m at NOK 42, BlueNord 248.4m in the window; price needs mid-cycle Brent ~$94 with TTF €37.5; gas Base = TTF strip [E] (no gas path in Oil BBB); var/var_run.py. Next: BlueNord closing ~year-end; Q4 report 9 Feb 2027 |
 | capt | docs/capt-analysis.md | iaf-valuation | company | 2026-11-08 | 2026-10-24 | all | 2026-11-23 | 2026-10-18.2 | HOLD (user, 9 Nov): only on request. Position sold. 8 Nov news note: Amor 15-month TC (~$160–180k/day, $73.1–82.2m), ~+$14m in Base (+NOK 1/share), not modelled, verdict unchanged (fails); model on the 24 Oct inputs |
 | hafnia | docs/hafnia-analysis.md | iaf-valuation | company | 2026-11-18 | 2026-11-18 | none | 2026-12-04 | 2026-11-12.1 | v6 exit check on the v5 model of 17 Oct |
 | kog | docs/kongsberg-analysis.md | iaf-valuation | company | 2026-10-29 | 2026-10-29 | all | 2026-11-28 | 2026-10-18.2 | **HOLD (user): no update until the user lifts it.** Version 2 (29 Oct, Q3 report, method 2026-10-18.2): Base −19.9% → −16.2%, fails; record backlog NOK 174bn |
@@ -136,6 +137,9 @@ Kept by the `update-chain` skill; checked by
 | odl | equity | 2026-11-06 | main | Exit cross-check, NOK path |
 | scatec | equity | 2026-11-20 | main | Exit cross-check, NOK path |
 | scatec | hy | 2026-11-18 | main | Bear refinancing spread (corporate bonds from 2028) |
+| var | oil | 2026-11-18 | main | Brent paths and mid-cycle (Bear / Base / Bull) |
+| var | equity | 2026-11-20 | main | Exit cross-check, NOK path |
+| var | hy | 2026-11-18 | main | Refinancing spread in Bear |
 | capt | shipping | 2026-10-24 | main | VLCC, Suezmax and Aframax/LR2 rows, stub, values (open days are Suezmax and Aframax/LR2; VLCCs on TC) |
 | capt | oil | 2026-10-24 | main | Background |
 | capt | equity | 2026-10-18 | main | Exit cross-check, NOK path |
@@ -331,6 +335,8 @@ it to `open`.
 | 2026-11-10 | approx | Fondsfinans October reports (Sissener's read 6 Nov): trigger for the full hy-funds re-run, with Heimdal's NOK report yields | hy-funds, hy-issuers | done |
 | 2026-12-08 | approx | Sissener November monthly report | hy-funds | open |
 | 2026-12-08 | approx | Fondsfinans November report and holdings: confirms whether Varel has left FF HY and Kreditt | hy-issuers, hy-funds | watch |
+| 2026-12-31 | approx | Vår–BlueNord combination closing (248.4m new Vår shares + NOK 1,964m; approvals outstanding on 25 Nov; var v1.0 assumes closing 31 Dec) | var | open |
+| 2027-02-09 | yes | Vår Energi Q4 2026 report (company calendar; Q4 dividend $450m: ex and pay dates to be announced) | var | open |
 | 2027-02-15 | approx | Cegal bond repaid from new NOK 1.8bn bank financing (FF HY position) | hy-issuers | watch |
 | 2026-11-10 | yes | SSB October CPI (Norway): CPI 3.6%, CPI-ATE 2.7% vs MPR 3.8 / 2.7 (hy 11 Nov) | hy | done |
 | 2026-11-10 | yes | CoreWeave Q3 report and call (5 pm ET): neocloud-funding signpost | ai | done |
@@ -358,6 +364,7 @@ it to `open`.
 | 2027-02-25 | approx | CoreWeave Q4 2026 report (date not announced): ~$9bn of prepayments received, financing; neocloud-funding signpost | ai | open |
 | 2026-11-20 | yes | DOF Q3 dividend $0.40 goes ex (paid 30 Nov); duplicate of the open row "DOF Q3 dividend USD 0.40 goes ex" (13 Nov) | dof | dropped |
 | 2027-02-18 | yes | DOF Q4 2026 report and Q4 dividend (paid ~5 Mar) | dof | open |
+| 2027-03-31 | approx | Vår–ConocoPhillips Norway completion (consideration $3.9bn: ~$2.5bn cash at completion + ~$1.4bn of 2026 tax paid H1 2027; Ministry of Energy approval) | var | open |
 | 2027-04-07 | yes | DOF annual report, with new broker fleet values | dof | open |
 | 2027-02-25 | approx | Tidewater Q4 2026 report (day rates, utilisation by region) | supply | open |
 | 2026-12-01 | approx | Silicon Data GPU rental indices (H100, B200), monthly: K1 capex cycle signpost (B200 −20% from its 2026 high for three months, or rising with the curve in contango) | ai | watch |
