@@ -1,12 +1,20 @@
 ---
 name: oil-market-bbb
-description: Oil Market BBB — the price baseline for crude oil and distillates at the top of the analysis chain. Produces Bear/Base/Bull price paths for Brent and distillate cracks (diesel/ULSD, jet) on the IAF time grid (stub quarter(s) of the current year + 3 calendar years, now 2027–2029), plus mid-cycle prices for terminal values, the forward curve, the supply/demand/inventory balance and named catalysts with signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Covers prices and their physical drivers only — no shipping (rates, tonnage, ton-mile, routes) and no rigs. ALWAYS use when the user mentions Oil Market BBB / oil BBB, asks to create, run or update ("oppdater modul") the oil module, or asks about the Brent outlook, oil price scenarios, diesel or jet cracks, distillate prices, the oil forward curve or oil inventories — even without naming the skill. Feeds oil-shipping-bbb, rig-market-bbb, supply-market-bbb, hy-market-bbb, equity-market-bbb and iaf-valuation; it is the only place an oil price forecast is made.
+description: Oil Market BBB — the price baseline for crude oil, distillates and European gas (TTF) at the top of the analysis chain. Produces Bear/Base/Bull price paths for Brent and distillate cracks (diesel/ULSD, jet) on the IAF time grid (stub quarter(s) of the current year + 3 calendar years, now 2027–2029), plus mid-cycle prices for terminal values, the forward curve, the supply/demand/inventory balance and named catalysts with signposts. Base is the decision case; Bear and Bull are catalyst-based stress tests; 25/50/25 is a labelled convention, never a probability. Covers prices and their physical drivers only — no shipping (rates, tonnage, ton-mile, routes) and no rigs. ALWAYS use when the user mentions Oil Market BBB / oil BBB, asks to create, run or update ("oppdater modul") the oil module, or asks about the Brent outlook, oil price scenarios, diesel or jet cracks, distillate prices, the oil forward curve or oil inventories — even without naming the skill. Feeds oil-shipping-bbb, rig-market-bbb, supply-market-bbb, hy-market-bbb, equity-market-bbb and iaf-valuation; it is the only place an oil price forecast is made.
 ---
 
 # Oil Market BBB
 
-**Revision:** 2026-11-18.2 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-26.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/oil-market-bbb/` in the Finance folder.
+
+Change note 2026-11-26.1 (user, 26 Nov 2026): **European gas (TTF) is now in scope.** A gas price
+path was being set ad hoc in company analyses (Vår Energi v1.0), against the rule that a price path
+is set in one baseline only. New section **European gas (TTF) path**: Base = the TTF futures strip
+(market-implied first), Bear and Bull on the oil scenarios' catalysts plus gas-specific ones (LNG
+supply wave, Russian flows, storage, Asian demand), a mid-cycle for terminal values, signposts, turn
+calls on the same rule. New Interface rows, Step 9 and checks. Readers: gas producers in IAF (Vår,
+Equinor, Aker BP), the Equity BBB Oslo energy block. Applied at the baseline's next run.
 
 Change note 2026-11-18.2 (user, 18 Nov 2026: "for oil there is a futures market. Use it for
 everything it is worth"): new section **Futures and options: what the market says and how it is
@@ -38,8 +46,9 @@ output must keep the fixed interface defined under Output.
 inventories, refining, disruptions measured in barrels). **Out of scope:** freight rates, vessels,
 tonnage, ton-mile, sailing routes and transit days (→ [[oil-shipping-bbb]]); rigs and E&P capex
 (→ [[rig-market-bbb]]); company figures (→ [[iaf-valuation]]); gasoline and other non-distillate
-products. Natural gas appears only as an input to the gas-to-oil switching check (extra demand
-support for distillates); no gas price forecast is made here.
+products. **European gas (TTF) is in scope** as a price path (section European gas (TTF) path,
+since 2026-11-26.1); it also feeds the gas-to-oil switching check. Out of scope for gas: power
+prices, US gas (Henry Hub is context only, for US LNG economics) and gas infrastructure.
 
 **Freight shocks — price effect only.** Freight levels stay in [[oil-shipping-bbb]], but a freight
 shock moves oil prices, and that part belongs here. Quote one freight figure per route as a
@@ -107,6 +116,31 @@ For downstream readers the Interface gives the strip, the options-implied percen
 beside the scenario paths, so a company analysis can run "at the strip" and read how likely the
 market thinks its Bear is.
 
+## European gas (TTF) path
+
+Norwegian and Danish producers sell most of their gas at hub prices (TTF and NBP), so a gas path
+is needed beside Brent for gas-weighted companies and the Oslo energy block.
+
+- **Benchmark:** Dutch TTF front-year and calendar-year futures (EEX/ICE), €/MWh, annual average
+  per year; NBP is a noted basis (state the NBP–TTF spread, do not model it). Conversions: 1 boe ≈
+  1.7 MWh; $/MMBtu = €/MWh × EUR/USD ÷ 3.412.
+- **Base = the TTF futures strip** (calendar years and the stub quarter) on the same rule as Brent:
+  every Base gap to the strip of **€3/MWh or more** carries a named turn call (Leading view).
+- **Bear / Bull:** the oil scenarios' catalysts carried through to gas (e.g. the Bear's durable
+  Iran–USA deal frees Qatari LNG through Hormuz; the Bull's renewed disruption tightens it), plus
+  gas-specific ones: the 2026–29 LNG supply wave (Qatar North Field, US Gulf Coast startups and
+  FIDs), Russian pipeline and LNG flows into Europe, EU storage refill against the 5-year range,
+  Asian demand (JKM–TTF spread), weather. Name the catalyst, mechanism, earliest timing and
+  signpost for each tail. No options odds: TTF options are thin; say so.
+- **Mid-cycle** (terminal values): anchored on the longest liquid TTF calendar years, the
+  delivered full-cycle cost of marginal LNG to Europe (US Gulf Coast: Henry Hub × 1.15 +
+  liquefaction + shipping and regas, ~$7–9/MMBtu ≈ €22–28/MWh `[E/A]`, show the build) and the
+  2015–19 range (~€15–25). State it per scenario.
+- **Signposts:** EU storage fill vs the 5-year average (1 Nov and 1 Apr), LNG start-ups and FIDs,
+  Russian flows, JKM–TTF spread, Norwegian outages (Gassco), TTF Cal-28 / Cal-29 prints.
+- **Data:** Barchart EEX TTF month, quarter, season and year futures (Data sources row below);
+  Yahoo `TTF=F` for the front month as a cross-check; GIE AGSI+ for EU storage.
+
 ## Benchmarks and units
 
 | Series | Definition | Unit | Role |
@@ -162,7 +196,7 @@ Never fill a gap with an invented number.
 | Brent, WTI, ULSD front and every contract month | **Yahoo** `get_quote`: `BZ=F`, `CL=F`, `HO=F`; months as `BZZ27.NYM`, `CLZ29.NYM`, `HOZ28.NYM` (F,G,H,J,K,M,N,Q,U,V,X,Z) | **Barchart** ICE Brent curve (below) for any Brent month Yahoo lacks or holds stale; EODHD EOD prices; press settlement reports; Nordic Financial for a single past `BZ=F` close (see quirks) |
 | Brent from J28 onwards, December contracts to the end of the window and the long end (mid-cycle anchor) | **Barchart** ICE Brent futures prices, `https://www.barchart.com/futures/quotes/CB*0/futures-prices?viewName=main` — every listed month (~136, out ~10 years), read with the in-app browser (see quirks) | WTI contract + Brent–WTI spread from the nearest liquid month, marked `[A]` (the method used before Barchart) |
 | ULSD months Yahoo holds stale (2029 onwards) and WTI to ~2035 | **Barchart** NYMEX ULSD `https://www.barchart.com/futures/quotes/HO*0/futures-prices?viewName=main` (every month to ~3 years out) and WTI `.../CL*0/futures-prices?viewName=main` (~10 years), read with the in-app browser | Yahoo `HO…`/`CL…` months (WTI: Yahoo is the first choice; Barchart is the cross-check and the source for months Yahoo lacks) |
-| European gas (TTF) for the switching ratio | **Barchart** `https://www.barchart.com/futures/european/gas` — EEX TTF month (`GHM…`), quarter (`GHQ…`), season (`GHS…`) and year (`GHY…`) futures in €/MWh, plus THE/PEG/PVB. The grid reads directly even with the sign-up popup open (same shadow-DOM walker). Record the as-of date | EEX/ICE TTF quoted in Reuters/Bloomberg |
+| European gas (TTF): the gas path (calendar years, stub quarter) and the switching ratio | **Barchart** `https://www.barchart.com/futures/european/gas` — EEX TTF month (`GHM…`), quarter (`GHQ…`), season (`GHS…`) and year (`GHY…`) futures in €/MWh, plus THE/PEG/PVB. The grid reads directly even with the sign-up popup open (same shadow-DOM walker). Record the as-of date | EEX/ICE TTF quoted in Reuters/Bloomberg |
 | EUR/USD (switching ratio conversion) | **Norges Bank** `get_exchange_rate` EUR and USD vs NOK, cross EUR/USD = EURNOK ÷ USDNOK, same date | AllRatesToday `get_exchange_rate` |
 | ICE low-sulphur gasoil settlements (gasoil crack cross-check) | **Barchart** ICE gasoil curve, `https://www.barchart.com/futures/quotes/LF*0/futures-prices?viewName=main` (~15 months, the stub and Year 1), read with the in-app browser | Barchart per-contract pages `.../LFH27/overview` (one page per month); Argus/Platts/ICE figures quoted in Reuters/Bloomberg |
 | Monthly / annual actuals (forecast vs actual) | **Yahoo** `get_chart` on `BZ=F`, `HO=F` (monthly; futures basis = BBB basis) | **FRED** `fred-get-series-observations` with `frequency_aggregation="q"` (or `"m"`/`"a"`) and `aggregation_method="avg"` on `DCOILBRENTEU`, `DCOILWTICO`, `DDFUELNYH` — EIA spot basis, so label it and never mix it with futures actuals in one comparison; then **Alpha Vantage** `BRENT`, `WTI` (monthly, ~1 month lag) |
@@ -436,6 +470,9 @@ IEA and EIA balances and explain gaps.
   and the historical cycle range — never the last modelled year by default. Crack mid-cycle
   relative to its own historical normal band.
 - **Each crack** is judged against its own historical normal band, not only against Brent.
+- **TTF gas** per scenario: stub, each year and mid-cycle (€/MWh, with $/boe), Base on the TTF
+  strip (gaps ≥ €3 carry a named turn call); Bear and Bull on their named catalysts (European gas
+  (TTF) path section).
 
 **Step 10 — Distillate sensitivity.** Matrix of Brent scenario × diesel crack scenario for Year 1
 and for the 3-year average, giving the diesel price in $/bbl and $/t. Mark combinations as
@@ -490,6 +527,8 @@ Keep the main part short per heading; series and source details go to the append
 | Jet crack Base | | | | | |
 | Brent–WTI Base | | | | | |
 | Forward curve (Brent / diesel crack, date) | | | | | — |
+| TTF gas Bear / Base / Bull (€/MWh; $/boe in the gas section) | | | | | |
+| TTF forward strip (calendar years, date) | | | | | — |
 
 ## Scenario definitions
 | Scenario | Weight (convention) | Catalyst(s) | Mechanism | Earliest | Signposts |
@@ -560,6 +599,9 @@ Use by skill:
   quarters, annual Base path as the decision case, Bear/Bull paths as the catalyst stress tests,
   and the **mid-cycle** column for the terminal value V_T. Company-specific realised price
   differentials are set in the company analysis.
+- **[[iaf-valuation]]** (gas producers: Vår Energi, Equinor, Aker BP and the like): the TTF path
+  per scenario and mid-cycle beside Brent; company realised gas prices (hub mix, NBP basis,
+  contract terms, price floors) are set in the company analysis.
 - **[[rig-market-bbb]]**: Brent path per scenario and the long end of the curve (E&P cash flow and
   FID logic).
 - **[[supply-market-bbb]]**: Brent long end and mid-cycle (FID, tender and Petrobras capex logic)
@@ -567,8 +609,8 @@ Use by skill:
 - **[[hy-market-bbb]]**: Brent path per scenario and mid-cycle (E&P issuers' cash flow and
   borrowing base) and disruption status (inflation and rate channel for non-energy issuers).
 - **[[equity-market-bbb]]**: Brent path per scenario and mid-cycle (Oslo energy-block earnings
-  and the Oslo index exit value) and the Bear/Bull catalysts (equity scenarios and the oil side
-  case).
+  and the Oslo index exit value), the **TTF path for the gas share of Oslo energy earnings**, and
+  the Bear/Bull catalysts (equity scenarios and the oil side case).
 - **[[oil-shipping-bbb]]**: crude and product volumes, regional balances, refining changes and
   disruption status, translated there into shipping effects. Shipping, rig and OSV companies do not take
   this baseline directly into IAF; it reaches them through their sector skill.
@@ -584,6 +626,8 @@ Use by skill:
   call; options-implied odds and percentiles for each scenario level; skew and put/call premium
   read; gaps > USD 5/bbl to agency forecasts explained.
 - Balance check consistent with each Brent path.
+- TTF gas path present for every scenario and mid-cycle, Base on the strip (gaps ≥ €3 carried by a
+  named turn call), the mid-cycle build shown, and the gas Interface rows filled.
 - Bear and Bull each tied to named catalysts with signposts; no probability language for them.
 - Every path has a turn call (probability, families, dated reversal signpost); Base follows every
   call that meets the rule; the scorecard is marked.
