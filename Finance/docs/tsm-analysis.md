@@ -1,8 +1,13 @@
 # TSMC (NYSE: TSM ADS / TWSE: 2330) — IAF analysis, stub Q4 2026 + 2027–2029
 
-**Version 1.3 — 20 Nov 2026** (price re-mark after the AI sell-off; no path moved; compacted to the lean rules, 1,393 → lean) · price **$318.71 per ADS** (NYSE close 20 Nov 2026) · skills: iaf-valuation **2026-11-18.1** (Step 6b, cycle-first lead); inputs AI BBB 18 Nov paths (20 Nov note: H3 kept), Equity BBB 20 Nov note, HY BBB 18 Nov (NIBOR window 4.72%, HY market 7.5%, E / R 0.254), NVIDIA v2.0 (20 Nov) · **verdict: clears** (Base margin of safety +15.8%; fails at v1.2).
+**Version 1.3 — 20 Nov 2026** (price re-mark after the AI sell-off; no path moved; compacted to the lean rules, 1,393 → lean; 26 Nov text note: In plain terms box) · price **$318.71 per ADS** (NYSE close 20 Nov 2026) · skills: iaf-valuation **2026-11-18.1** (Step 6b, cycle-first lead; layout 2026-11-26.1); inputs AI BBB 18 Nov paths (20 Nov note: H3 kept), Equity BBB 20 Nov note, HY BBB 18 Nov (NIBOR window 4.72%, HY market 7.5%, E / R 0.254), NVIDIA v2.0 (20 Nov) · **verdict: clears** (Base margin of safety +15.8%; fails at v1.2).
 
 ## Summary
+
+**In plain terms**
+1. **Where the return comes from:** the price treats TSMC's AI earnings of 2027–28 as a peak; Base treats them as a level that keeps growing. Today's price is ~18× this year's earnings but only ~14× next year's, so it does not carry the 2027 jump forward. Base sells at 18× 2030 earnings.
+2. **What must be true:** earnings hold after the 2027 jump (+27%) and grow ~4–5% a year after 2029, the growth an 18× multiple needs at TSMC's returns on capital.
+3. **What breaks it:** an AI-spending digestion around 2028–30 that cuts earnings by over a third, with the market staying at ~14× (Bear −5.7% a year). Base still clears if buyers pay at least ~15× earnings at exit.
 
 **The AI foundry cycle** (read from the AI BBB's K1 and H3 rows, scenarios and signposts; no own forecast). TSMC is not held; a purchase would be an opportunistic single-stock position in a Track B layer, so the Summary leads with the cycle.
 - **Where:** in the build-out. Hyperscaler capex (K1) ~$790bn in 2026, **$1,120bn in 2027** (+42%, contracted), then a plateau at 1,170 / 1,170 (AI BBB 11 Nov). H3 revenue index 125 / 140 / 151; TSMC Base EPS +27% in 2027, then ~6% a year. H3 is unchanged through the 18 Nov turn calls and the 20 Nov note: the H1 cut (2028–30 .85 / .82 / .81) passes 20–30% to H3, below the minimum change.
@@ -13,7 +18,7 @@
 **Verdict**
 - **Clears: Base 17.5% a year (USD; NOK the same) against k = 12%. P_k $369.2 against P $318.71: margin of safety +15.8%.** Clears at or below **$361.9**; fails above **$376.7**.
 - **What moved it:** the price alone, −19.6% since 10 Nov (−9.5% on 20 Nov with the chip sell-off after the NVIDIA SEC-probe report; SOXX −13% in three days). No TSMC filing since 10 Nov. P_k $369.8 → $369.2 (USD/TWD 32.789 → 32.958).
-- **Where the return comes from now:** the re-rating. Core P/E 14.1× Base 2027 core EPS today against the exit 18: $99 of the $183 gain from P to V_T. An exit at the 2021–25 mean (16.7) still gives **15.1%**; exit P/E for k is **15.1**.
+- **Where the return comes from now:** the earnings level the price doubts. At $318.71 the P/E is **~18× 2026 consensus EPS** ($17.50 `[E]`) but **14.1× Base 2027 core EPS**: the price does not carry the 2027 step (+27%) forward. Base exits at 18× 2030 core EPS, which needs ~4.3–5.6% growth a year after 2030 (Base 2029–30 +5.4%). In the bridge, $99 of the $183 gain from P to V_T is this multiple gap, $54 earnings growth and $31 retained cash. An exit at the 2021–25 mean (16.7) still gives **15.1%**; exit P/E for k is **15.1**.
 - **Bear −5.7% a year** (NOK −3.0%): the ADS falls ~30% in 2027 as EPS drops to .63 of CY27 consensus in 2028 and the P/E to 14; capital not preserved (−16.3%). Net cash grows every year.
 - **Bull 30.4%** (P_k $506.6).
 - **Price versus our call (Step 6b): with our call, against the price.** Only market pricing (L5) and the customer-credit read through H1 are new; TSMC's own data are Bull-side. Base kept; the scorecard opens.
@@ -160,7 +165,7 @@ The stub is the same in all scenarios (Q4 consensus, day-weighted; price flat by
 
 - Base 2027 (+37.5%) is the glide back from today's core 14.1× to ~17.8× (path diagnostic, not an extra source of return).
 
-**V_T bridge (Base, per ADS):** price 318.71 = core 300.9 + net cash 17.8 → core EPS 2027 → 2030 ($21.37 → $25.18) at today's 14.08× **+53.6** → multiple to the exit 18 **+98.7** → core at exit 453.2 + net cash at exit 48.6 = **V_T 501.8**; ΣD 19.9. Of the $183 gain, **$99 is the re-rating**, $54 earnings growth and $31 retained cash. At v1.2 the re-rating was $9: the return now rests on the exit multiple.
+**V_T bridge (Base, per ADS):** price 318.71 = core 300.9 + net cash 17.8 → core EPS 2027 → 2030 ($21.37 → $25.18) at today's 14.08× **+53.6** → multiple to the exit 18 **+98.7** → core at exit 453.2 + net cash at exit 48.6 = **V_T 501.8**; ΣD 19.9. Of the $183 gain, **$99 is the re-rating**, $54 earnings growth and $31 retained cash. At v1.2 the multiple gap was $9: the return now rests on the 2027–28 earnings level holding (14× forward today against the exit 18, about today's ~18× on 2026 earnings).
 
 **Exit consistency** (earnings basis = EPS; threshold 10%): 2029 against 2030 EPS gaps Bear −5.7%, **Base −5.2%**, Bull −8.6%: none material, no tail.
 
@@ -284,10 +289,9 @@ The stub is the same in all scenarios (Q4 consensus, day-weighted; price flat by
 
 ## Change log
 
+- **26 Nov 2026 — v1.3 note** (iaf-valuation 2026-11-26.1 layout): In plain terms box added; the return source reworded from "the re-rating" to the earnings level the price doubts (~18× 2026 consensus EPS against 14.1× Base 2027). No figure changed.
 - **21 Nov 2026 — v1.3 note:** exit-multiple reasoning added (Common assumptions: 18 implies ~4.3–5.6% growth after 2029; capacity past 2029 planned and paced to demand; clears at any exit above 15.1). No figure changed.
 - **20 Nov 2026 — v1.3** (iaf-valuation 2026-11-18.1; price re-mark at $318.71 after the chip sell-off; no path moved): Base 9.5% → **17.5%**, P_k $369.8 → **$369.2**, margin −6.7% → **+15.8%: fails → clears**; Bear −5.7%, Bull 30.4%; E / R 0.215. Compacted to the lean rules (1,393 lines → current state only); model rebuilt as `tsm/v13.py`; Step 6b added.
-- **11 Nov 2026 — v1.2** (iaf-valuation 2026-11-10.1): October revenue +59.7% y/y and the NT$9.0 dividend (no path moved); price $396.48: Base 9.5%, P_k $369.8, −6.7%: fails.
-- **5 Nov 2026 — v1.1** (iaf-valuation 2026-11-01.1): H3 Bear reconciled (.76 / .63 / .67 / .71); CY27 consensus $23.43; price $352.03: Base 13.7%, P_k $368.9, +4.8%: clears.
 
 ## Appendix: own assumptions `[A]`
 

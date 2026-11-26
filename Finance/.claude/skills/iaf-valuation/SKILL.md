@@ -5,8 +5,14 @@ description: Investment Analysis Framework (IAF) — the standing valuation meth
 
 # Investment Analysis Framework (IAF)
 
-**Revision:** 2026-11-24.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-26.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/iaf-valuation/` in the Finance folder.
+
+Change note 2026-11-26.1 (user, 26 Nov 2026: dense reports are hard to follow). Every Summary
+opens with an **In plain terms** box: three plain-language lines (where the return comes from,
+what must be true, what breaks it), and the return source is named as the cause (the earnings
+level the price doubts, cash, multiple), never as a bare "re-rating". Layout only: no figure moves.
+Applied at each document's own next run (no cascade).
 
 Change note 2026-11-24.1 (user, 24 Nov 2026: written checks so every thread reaches the same result).
 Four checks, each deterministic and cheap: (1) re-marks start from the stored model script, which
@@ -694,6 +700,17 @@ built:
   Change-log entry.
 
 0. **Summary** (first section, readable on its own; everything after it is the supporting build):
+   - **In plain terms** (first, three lines, user rule 26 Nov 2026): plain words for a reader who
+     reads nothing else; at most one or two numbers per line; no method terms (no P_k, V_T, H3, L5).
+     1. **Where the return comes from:** the source named as its cause: earnings growth, dividends
+        and cash, or a gap between the earnings level we expect and the one the price assumes.
+        "Re-rating" alone is not an answer: when the bridge shows a multiple gain, say what the
+        market doubts (e.g. "the price treats 2027–28 earnings as a peak; Base treats them as a
+        level") and compare the multiple on current-year earnings, not only on next year's.
+     2. **What must be true:** the one or two conditions Base needs (e.g. "earnings hold after
+        2027 and grow ~4–5% a year after 2029").
+     3. **What breaks it:** the Bear in one line and the break-even in plain terms (e.g. "fails if
+        the market keeps paying 14× earnings at exit").
    - **Verdict** in 2–4 bullets: clears / marginal / fails, the Base margin of safety, Bear outcome,
      and what the price needs (the break-even assumption).
    - **Base in brief** (2–4 bullets): what Base assumes against consensus (earnings or rates as
@@ -790,7 +807,7 @@ built:
 9. **Caveat**: margin-of-safety screen, not an intrinsic valuation or price target.
 
 **Document order** (`docs/<company>-analysis.md`): title · one status line (version, price and
-date, skill revisions, verdict) · **Summary** (verdict, Base in brief, Bear in brief, decision
+date, skill revisions, verdict) · **Summary** (In plain terms, verdict, Base in brief, Bear in brief, decision
 table, per-share path) · tags · Header (with the sector inputs used) · **Scenarios** (table,
 driver breakdown, Base return bridge) · Company and status · Near term · Market input (sector rows
 used and how they enter) · Common assumptions · Period tables and year-end path · V_T bridge ·
@@ -811,7 +828,8 @@ change in Base P_k, and whether the company is running ahead of or behind the Ba
 - k ≥ 10%, all figures per share and forward-looking.
 - Step 6b present: price-implied driver, sector turn calls translated, company signals scored,
   the ahead / with / behind line, scorecard marked.
-- Summary first, with the decision table and the per-share path (FCF per share per period for all
+- Summary first, opening with the three-line **In plain terms** box (return source named as its
+  cause, not "re-rating"), with the decision table and the per-share path (FCF per share per period for all
   three scenarios).
 - Layout (Step 7): one status line under the title; the verdict stated once; the scenario table,
   driver breakdown and Base return bridge present; no earlier-version values in the body (search
