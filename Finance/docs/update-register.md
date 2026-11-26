@@ -456,7 +456,9 @@ it to `open`.
 | 2027-01-27 | approx | Microsoft Q2 FY27 report (late Jan; Yahoo estimate) | msft, ai | open |
 | 2027-01-28 | approx | Meta Q4 report and first 2027 capex figure (late Jan; none given on 21 Oct): K1 2027 against 1,120 and the E-rest row | ai | open |
 | 2027-01-27 | approx | Samsung Q4 report and board decision on the rest of the 2026 return (KRW 55–75tn) and any 2027+ policy (late Jan; Yahoo estimate 27 Jan) | smsn, ai, kospi | open |
-| 2027-01-29 | yes | Scatec Q4 report (first quarter without the Philippine reserve market against the 200–300 guide, any NGCP contract, 2027 guidance, net debt at 31 Dec) (Scatec financial calendar) | scatec | open |
+| 2027-01-29 | yes | Scatec Q4 report (first quarter without the Philippine reserve market against the 200–300 guide, any NGCP contract, 2027 guidance, net debt at 31 Dec) (Scatec financial calendar, confirmed 24 Nov) | scatec | open |
+| 2027-03-19 | yes | Scatec annual report 2026 (project-level debt and DSCR notes for Mendubim, South Africa and Ukraine; impairment test assumptions) (financial calendar 24 Nov) | scatec | watch |
+| 2027-04-30 | yes | Scatec Q1 2027 report (first quarter with a 2027 guide to test; Philippines after the redesign proposal; AGM 21 Apr before it) (financial calendar 24 Nov) | scatec | open |
 | 2027-02-02 | approx | Alphabet Q4 report and 2027 capex guide (early Feb) | googl, ai | open |
 | 2027-02-04 | approx | Amazon Q4 report and first 2027 capex figure (early Feb) | amzn, ai | open |
 | 2027-02-04 | yes | Intrum Q4 report | hy-issuers, hy-funds | open |
