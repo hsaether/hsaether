@@ -1,25 +1,31 @@
-# Nordic HY — master watchlist and company bond assessment — 19 November 2026
+# Nordic HY — master watchlist and company bond assessment — 26 November 2026
 
 ## Metadata
 
-- **Status (19 Nov 2026, full refresh; skill `hy-market-bbb` 2026-11-18.2; compacted to the lean
-  rules, 990 → 670 lines).** Prices: fund holdings and marks to 31 Oct (Fondsfinans holdings,
-  Heimdal and Sissener October reports), Intrum's tender of 10 Nov, derived Borr and HX SSSN
-  prices; the November reports (early December) are the next price round. Inputs: HY Market BBB
-  18 Nov (market NIBOR path; credit values of 5 Nov: the Bear spread shocks and sector Bear rates
-  are unchanged), Oil 18 Nov, Rig 12 Nov (Borr Q3 read 19 Nov).
-  - **Changed this run:** Intrum 8.5% 2030 73.75 → **68.0** (tender clearing price, settled 10 Nov):
-    Base PD 22.9 → 25.8, Base 10.4 → **13.1%**, Bear −13.5 → **−14.7%**; Intrum 7.75% 2028 ~85
-    assumed → **~84.3** (the SEK 7.75% 2028 cleared at 84.26 in the same tender, proxy `[E]`).
-    Fund named losses: HH 2.15 → 2.17, HH+ 2.06 → 2.07, SIS 1.10 → 1.11 (Base); Bear +0.14 / +0.09
-    / +0.01.
-  - **Read, status kept:** Borr Q3 (insurance $200m recommended for payment; EBITDA ~$79m; Watch);
-    Hofseth Q3 (revenue −46%, processing contracts lost: negative, no new price; Distressed, Bear
-    override kept); Booster's standstill prolonged again (2 Nov); Jøtul Q3 investor call (18 Nov,
-    recapitalised group); Elcano's EGM on the completed refinancing (18 Nov); Trustly's equity
-    closing still pending, Q3 on 25 Nov; Shearwater Q3 due ~late Nov.
-  - **Stamdata screen:** held companies and the market feed read 14 Oct–19 Nov (four pages); no
-    new distress notice on a held name beyond Booster and Jøtul (Stamdata and news screen).
+- **Status (26 Nov 2026, event update for Norse Atlantic and Trustly; skill `hy-market-bbb`
+  2026-11-18.2; last full refresh 19 Nov).** Prices: fund holdings and marks to 31 Oct
+  (Fondsfinans holdings, Heimdal and Sissener October reports), Intrum's tender of 10 Nov, derived
+  Borr and HX SSSN prices, and an assumed Norse price (26 Nov). Heimdal weights now come from its
+  30 Oct holdings pages `[F]`. The November reports (~4 Dec) are the next price round. Inputs: HY
+  Market BBB 18 Nov (market NIBOR path; credit values of 5 Nov), Oil 18 Nov, Rig 12 Nov.
+  - **Changed this run:** **Norse Atlantic Watch → Deep distress.** On 25 Nov the company said
+    its situation is "critical" and that it depends on new financing for its short-term liquidity
+    and to keep operating `[F]`. Oslo Børs put the shares in the Recovery Box `[F]`, and flights
+    stopped that night `[E]`. The holding is very likely the USD 52m 15% senior secured facility of
+    Aug 2026 `[A]`. It is marked ~95 assumed → **~40 assumed** (range 20–60), with recovery 25 / 10
+    `[A]`, Base PD 75%, Base −18%, Bear −69%.
+  - **Heimdal weights** go to the 30 Oct holdings pages; the largest change is HH+'s Intrum, 2.0
+    assumed → 3.1 `[F]`.
+  - **Named 2027 Base:** HH 2.17 → **2.26**, HH+ 2.07 → **2.44**; Bear HH 5.38 → **5.57**, HH+ 5.26 →
+    **6.03**. SIS, FF and FFK keep their values.
+  - **Expected Norse NAV mark in the Q4 stub** (realised, not part of the named loss): HH ~−0.46,
+    HH+ ~−1.22 pp `[A]`.
+  - **Read, status kept: Trustly.** In Q3, adjusted EBITDA doubled from Q2 to SEK 86.9m, but cash
+    was SEK 103.5m at 30 Sep. The equity raise closed at ~USD 60m (above the >USD 40m committed),
+    and the going-concern statement is unqualified `[F]`. With no new price, the 79 mark (~30 Oct)
+    and the Distressed status stay; the 80 edge still applies.
+  - **Screen:** Newsweb (Oslo Børs news API) and MFN read for Norse and Trustly on 26 Nov. The last
+    Stamdata page-by-page screen covered 14 Oct–19 Nov (19 Nov run).
 
 - **Question:** for each company that matters in the analysed funds, **what return can its bonds
   be expected to give, and what is the risk?** It covers the largest positions and every name
@@ -89,7 +95,8 @@
 |---|---|---|---|---|---|---|
 | **Borr 2032/2034 (~93, derived 30 Oct; Q3 read 19 Nov)** | **Watch** | 12% | 7.3% | 47% | 8.7% | −13.8% |
 | **Intrum 8.5% 2030 (68.0, tender 10 Nov)** | Distressed | 25% | 25.8% | 46% | 13.1% | −14.7% |
-| Trustly FRN 2030 (~30 Oct mark; rose in Oct) | Distressed (at the 80 edge) | 21% | 24.3% | 41% | 10.7% | −13.2% |
+| **Norse Atlantic USD 15% facility 2027 (~40 assumed, 26 Nov)** | **Deep distress** (Watch until 26 Nov) | 15.9% (coupon basis) | 75% | 46% | −18% | −69% |
+| Trustly FRN 2030 (~30 Oct mark; Q3 and ~USD 60m equity read 26 Nov) | Distressed (at the 80 edge) | 21% | 24.3% | 41% | 10.7% | −13.2% |
 | **HX super senior 2028 (~84, derived 30 Oct)** | **Stressed** (Watch until 4 Nov) | 25% | 33.1% | 29% | 15.1% | −19.7% |
 | **Hofseth (~72, October; Sissener, re-marked 7 Nov)** | Distressed | 21% | 26.9% | 27% | 14.0% | −16% |
 | **Intrum 7.75% 2028 (~84.3, tender proxy 10 Nov)** | Stressed | 20% | 16.3% | 57% | 11.0% | −8.9% |
@@ -103,7 +110,8 @@
 
   The market prices them for a default chance of 10–42% a year (the implied PD; the HX SSSNs
   show 56%, inflated by their high assumed recovery of 70). If they do not default they return
-  12–27%; if they do, they lose 29–65% of today's value.
+  12–27%; if they do, they lose 29–65% of today's value. Norse is the exception: at an assumed
+  ~40 its Base return is negative, because a default is now the most likely outcome (note 10).
 - **Expensive or long performing bonds give little in Base for their Bear risk:**
   - BlueNord: price 111.5, ~3.6% to an assumed call; Bear −11%;
   - NEO NEXT+: 7.5%, Bear −12.6% (unsecured E&P);
@@ -117,8 +125,39 @@
 - **Heimdal's two largest Distressed names:** Intrum fell again. Its own tender (settled 10 Nov)
   bought the 8.5% 2030 notes at **68.0** (Heimdal's 27 Oct mark 73.75; ~93 at 30 Sep): Base PD
   25.8%, ~25% NOK-hedged, Base 13.1%, Bear −14.7%. The fall is a further NAV mark of ~−0.17 pp for
-  HH in November. Trustly (79 on 30 Oct, rose on the owners' equity commitment) is unchanged until
-  its equity closing and Q3 (25 Nov): Base PD 24%, Base 10.7%, Bear −13%.
+  HH in November.
+- **Trustly (read 26 Nov; status and values kept):**
+  - **Q3** `[F]`:
+    - revenue SEK 630m (+7.8%; Americas +19.9%, Europe −6.6%);
+    - adjusted EBITDA SEK 86.9m, against 42.3m in Q2, after tighter US approval rules cut credit
+      losses; loss SEK 279m;
+    - cash SEK 103.5m at 30 Sep, and EUR 15m drawn on the RCF after a further EUR 10.5m in October.
+  - **Equity:** the raise closed after the quarter at **~USD 60m** (SEK ~600m), above the
+    >USD 40m committed, with BlackRock funds joining. The going-concern note now rests on it.
+  - **Reading:** the bond (79 at ~30 Oct) already priced the commitment. Gross leverage is still
+    ~12× Q3 adjusted EBITDA annualised. Interest of ~SEK 420m a year exceeds adjusted EBITDA, so
+    the raise buys about two years of cash burn `[A]`, not deleveraging.
+  - With no new mark, the status stays Distressed at the 80 edge (Base PD 24%, Base 10.7%, Bear
+    −13%). A mark of 80 or more moves it to Stressed (note 6).
+- **Norse Atlantic (26 Nov): Watch → Deep distress.**
+  - **What happened** `[F]`: on 25 Nov the company said "The Company's financial situation is
+    critical" and that it depends on new financing to meet short-term liquidity needs and keep
+    operating. Talks on a takeover and on short-term financing carry "no assurances". The shares
+    went into the Recovery Box (−53% at the close, −86% intraday) and the Q3 report moved to 30 Nov.
+  - **Since then** `[E]`: flights stopped that night (PIA: "unexpected operational suspension"), and
+    staff were reportedly told wages could not be paid on time. No company release confirmed the
+    stop by 26 Nov morning.
+  - **What Heimdal holds:** most likely the **USD 52m 15% senior secured facility** of Norse
+    Atlantic Airways AS `[A]` (19 Aug 2026; issued at 95, repaid at 103 in May 2027, plus a 3% M&A
+    fee on a sale; Q2 report `[F]`). HH has 0.80% and HH+ 2.10% at the 30 Oct marks `[F]`.
+  - **Mark and loss:** ~40 assumed (range 20–60; no quote seen). Base PD 75%, loss if default 46%,
+    Base −18%, Bear −69%.
+  - **What it means for the funds:**
+    - a NAV mark of ~−0.46 pp (HH) and ~−1.22 pp (HH+) when Heimdal marks it down;
+    - named 2027 Base loss 0.11 / 0.30 pp, on the smaller re-marked weights;
+    - a total loss would cost 0.80 / 2.10 pp.
+  - **Next:** Q3 report and a financing or insolvency outcome. In a bankruptcy or payment default,
+    it becomes In restructuring and is valued on its own.
 - **Restructurings in progress:** HX's old 2030 loan (marked 12.5), Booster (default,
   standstill) and Jøtul (recapitalised). Booster's and Jøtul's prices are not public.
 - **HX in more detail** (updated 30 Oct; sources: the HX summonses of 29 Jul and 6 Aug with the
@@ -665,6 +704,6 @@ SIBS, Caybon, Solteq and others) go to the default log in `docs/hy-market-bbb.md
 
 ## Change log
 
+- **26 Nov 2026 — event update** (skill 2026-11-18.2): Norse Atlantic **Watch → Deep distress** (25 Nov: "critical", Recovery Box, flights stopped `[E]`); the USD 52m 15% secured facility marked ~95 → ~40 assumed (20–60), Base PD 75%, Base −18%, Bear −69%; expected NAV mark HH ~−0.46, HH+ ~−1.22 pp. Heimdal weights to the 30 Oct holdings pages. Named 2027 Base HH 2.17 → 2.26, HH+ 2.07 → 2.44. Trustly Q3 read: Distressed kept (79). Recorded and committed from the user's session (the daily run stopped before recording).
 - **19 Nov 2026 — full refresh and compaction** (skill 2026-11-18.2): Intrum re-marked on its 10 Nov tender (8.5% 2030 → 68.0; 7.75% 2028 → ~84.3); Borr Q3 and Hofseth Q3 read, statuses kept; Stamdata screen 14 Oct–19 Nov; dated notes removed (git keeps them), fund read-out reduced to current values; 990 → 670 lines.
 - **9 Nov 2026** (skill 2026-11-08.1): Fondsfinans' October report and 31 Oct holdings: Sigma → Distressed (79.2), Hofseth ~72, Foxway 93.7, Magnolia 88.0, Heimstaden hybrid new (84.7, Stressed), Varel out.
-- **4 Nov 2026** (skill 2026-10-24.1): Heimdal's October reports: Borr → Watch (~93 derived), HX SSSN → Stressed (~84 derived), Heimdal weights to the 30 Oct top 10.
