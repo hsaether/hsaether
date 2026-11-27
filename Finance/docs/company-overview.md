@@ -12,7 +12,7 @@
 | Company (ticker) | Held | Analysis (version, date) | Price at analysis | Latest close | Base IRR | P_k (Base) | Margin at close | Verdict at close | Bear / Bull IRR | Next event |
 |---|---|---|---|---|---|---|---|---|---|---|
 | **DOF Group (DOFG)** | **Yes** | Holder news + re-mark, 27 Nov | NOK 133.90 (26 Nov) | NOK 133.90 | 9.9% | NOK 127.5 | −4.7% | fails | −10.8% / 27.8% | Seabreeze Nov report ~4 Dec; Forza delivery Q4; Q4 18 Feb |
-| **SED Energy (ENH)** | **Yes** | 27 Oct build; Step 6b memo 21 Nov | NOK 6.80 (memo 6.19) | NOK 6.19 | 6.7% (memo 13.3%) | NOK 6.03 (memo 6.36) | +2.8% (memo) | clears narrowly (memo) | −30.9% / 27.1% | **Q3 report 27 Nov** (full re-run) |
+| **SED Energy (ENH)** | **Yes** | v3.0, 27 Nov (Q3 report) | NOK 6.60 (26 Nov) | NOK 6.60 | 8.4% | NOK 6.10 | −7.6% | fails | −30.8% / 30.4% | Q2 distribution ex 7 Dec; EDrill-1 roll-off end Dec; Q4 report 17 Feb |
 | NVIDIA (NVDA) | — | v2.1, 23 Nov | $167.01 (23 Nov intraday) | $149.30 (25 Nov) | 9.4% | $156.1 | +4.6% | clears | −6.0% / 37.6% | 10-Q ~4 Dec (Huang-regime funding test) |
 | SK hynix (000660) | — | v4.1, 23 Nov | KRW 1,085,000 | KRW 1,110,000 (27 Nov) | 37.3% | KRW 1,815,513 | +64% | clears | 23% / 62% | Q3 dividend ex 27 Nov; Solidigm re-disclosure ~29 Nov |
 | Samsung (005930; pref 005935) | — | v4.1, 23 Nov | KRW 177,500 (pref 140,900) | KRW 179,100 (pref 145,000; 27 Nov) | 32.8% (pref 35.8%) | KRW 283,832 | +58% (pref +63%) | clears | 19% / 53% | DRAM contract print ~30 Nov; Q4 preliminary ~7 Jan |
@@ -35,7 +35,6 @@
 | Borr Drilling (BORR) | — | v4, 21 Nov (hold: on request) | $3.41 | $4.08 (25 Nov) | −100% (no equity value) | $0 | −100% | fails | −100% / 22.3% | Q4 report ~17 Feb |
 
 - SK hynix and Samsung: re-marked (v4.1) at the 23 Nov Seoul close, the first session after the 20 Nov US AI/chip sell-off; their close column is 23 Nov.
-- SED: the decision table of its document is still the 27 Oct build (fails at NOK 6.80); the memo row is the 21 Nov re-mark at NOK 6.19.
 
 ## Funds
 

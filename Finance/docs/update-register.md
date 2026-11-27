@@ -50,7 +50,7 @@ Kept by the `update-chain` skill; checked by
 | hy-funds | docs/hy-funds-analysis.md | hy-market-bbb | book | 2026-11-09 | 2026-11-09 | none | 2026-12-05 | 2026-11-08.1 | 9 Nov full re-run on the October reports and 5 Nov HY BBB: all five Attractive; E / R FFK 0.520, FF 0.491, HH+ 0.422, SIS 0.343, HH N 0.340 (134% of 0.254; rests on the NOK report yield, 0.267 on the box yield); 6 Nov Marginal reading withdrawn; oil follow-up pending; Arctic Return L rerun (October report): E / R 0.119 → 0.109, 43% of 0.254, not graded |
 | dof | docs/DOF-analysis.md | iaf-valuation | company | 2026-11-27 | 2026-11-27 | none | 2026-12-18 | 2026-11-26.1 | v 25 Nov news update and re-mark (Skandi Forza sale and 2-year charterback, 24 Nov; NOK 126.00, USD/NOK 9.792): Base 13.1% → 12.6%, P_k NOK 127.8, margin +1.4%, clears → marginal (flipped, price mostly; Forza −0.09 pp); clears ≤ NOK 125.3, fails > 130.4. Step 6b with the market (signals +3) |
 | plsv | docs/PLSV-analysis.md | - | static | - | - | - | - | - | No longer tracked (user, 25 Oct 2026). Last version 19 Oct; kept as a source (Fontis seller credit, Seagems fleet data cited by borr, rig and supply) |
-| sed | docs/SED-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-10-18 | none | 2026-11-28 | 2026-11-18.1 | 21 Nov: Step 6b added on the 27 Oct build (decision table kept: Base 6.7%, fails at NOK 6.80); memo re-mark at NOK 6.19 / USD/NOK 9.75: Base 13.3%, P_k 6.36, +2.8%; price implies marks 0.955× Base; verdict line ahead (positive). Q2 distribution ex 7 Dec. Full re-run and compaction (834 lines) at Q3, 27 Nov |
+| sed | docs/SED-analysis.md | iaf-valuation | company | 2026-11-27 | 2026-11-27 | none | 2027-02-18 | 2026-11-26.1 | 21 Nov: Step 6b added on the 27 Oct build (decision table kept: Base 6.7%, fails at NOK 6.80); memo re-mark at NOK 6.19 / USD/NOK 9.75: Base 13.3%, P_k 6.36, +2.8%; price implies marks 0.955× Base; verdict line ahead (positive). Q2 distribution ex 7 Dec. Full re-run and compaction (834 lines) at Q3, 27 Nov |
 | borr | docs/borr-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2027-02-18 | 2026-11-18.1 | **HOLD (user, 7 Nov): only on request. Not interesting as an equity; its value is the credit read for the Borr bonds in hy-issuers.** v4 21 Nov (on request): Q3, insurance $200m to debt, four awards; Base still zero (exit equity −$354m; no funding gap in the window), Bull 22.3% (P_k $4.49) at $3.41; break-even mid-cycle ~$135k; Step 6b; compacted 724 → 246 lines; `borr/v4.py` |
 | odl | docs/odl-analysis.md | iaf-valuation | company | 2026-11-13 | 2026-11-13 | none | 2026-12-13 | 2026-11-12.1 | v2.1 13 Nov (ex-dividend re-mark, compacted 721 → 450 lines): Base 8.1% → 9.0%, P_k $9.97 (NOK 95.5) vs $10.74 (NOK 102.80), margin −7%, fails; Deepsea Bergen contract signed 10 Nov (already firm in the model) |
 | scatec | docs/scatec-analysis.md | iaf-valuation | company | 2026-11-20 | 2026-11-20 | none | 2027-02-28 | 2026-11-18.1 | v2.1 21 Nov: re-mark at NOK 82.40 and 20 Nov FX (basket ×1.048) on the v2 build: clears, Base 16.4% → 19.5%, P_k NOK 100.8, +22.3%; Bear −16.2%, Bull 37.5%; price implies Philippines ~NOK 320m; Step 6b (ahead, positive); compacted 727 → lean; `scatec/v21.py`. Next: Q4 report 29 Jan 2027 |
@@ -126,9 +126,9 @@ Kept by the `update-chain` skill; checked by
 | dof | supply | 2026-11-21 | main | NS and Brazil rows, anchors, economic life |
 | dof | equity | 2026-11-20 | main | Exit cross-check, NOK path |
 | dof | hy | 2026-11-18 | main | Bear HY spread (2030 refinancing) |
-| sed | rig | 2026-11-04 | main | Tender-assist row, rig values |
-| sed | oil | 2026-10-24 | main | Background |
-| sed | equity | 2026-10-18 | main | Exit cross-check, NOK path |
+| sed | rig | 2026-11-12 | main | Tender-assist row, rig values |
+| sed | oil | 2026-11-18 | main | Background |
+| sed | equity | 2026-11-20 | main | Exit cross-check, NOK path |
 | borr | rig | 2026-11-12 | main | Jackup rates, MCU, rig values |
 | borr | oil | 2026-11-18 | main | Background via rig scenarios |
 | borr | equity | 2026-11-20 | main | Exit cross-check, NOK path |
@@ -385,8 +385,8 @@ it to `open`.
 | 2026-11-18 | yes | DOF ownership: A.P. Møller Maritime (largest holder's group) buys 950,000 shares at NOK 128.01 (NOK 121.6m; insider notice 18 Nov), after John Fredriksen's buying of ~NOK 900m (Finansavisen 18 Nov, user input `[E]`; dates and stake not given). Signal, not a value input; note at the dof run (two large holders adding at ~P_k NOK 127.8; control or consolidation as a Bull thread; Geveran is already the related-party SALT seller) | dof | done |
 | 2026-11-23 | yes | User request (21 Nov): re-mark SK hynix (v4) and Samsung (v4) at the 23 Nov Seoul close, the first session after the 20 Nov US AI sell-off (SKHY ADR −13% after Seoul closed on 20 Nov). Run by the one-off scheduled task remark-skh-smsn-23nov (Mon 23 Nov 10:00; the check flags passed events only from the next day): price re-mark on the v4 blocks (skh_run4.py, smsn_run4.py), cascade per the change gate | skh, smsn | done |
 | 2026-11-24 | yes | DOF sells Skandi Forza (2008 CSV, West Africa) with a 2-year bareboat charterback and a retained minority stake; delivery Q4 2026; gain ~$35m over book; net cash ~$30m after debt repayment, the stake and tax; gross price and buyer not disclosed (Splash247, via the user [E]; DOF release to be read). Triage 24 Nov: small (net cash ≈ 1% of market cap), roughly NAV-neutral unless the price is well above our mark; Step 6b asset-sale signal +1. At DOF's next run: replace Forza's fleet mark and exit value with the sale proceeds and the retained stake; bareboat hire 2027–28 in opex; earnings to the charter end; NIBD down by the debt repaid plus the net cash | dof | done |
-| 2026-11-27 | yes | SED Q3 report (company calendar, user 19 Nov; moved from 18 Nov) | sed, rig | open |
-| 2026-11-12 | yes | SeaBird (SED) Fulmar Explorer OBN source contract, West Africa, ~6 months from Dec 2026 (supports the SeaBird Base 2027 contribution; read at the SED Q3 run) | sed | watch |
+| 2026-11-27 | yes | SED Q3 report (company calendar, user 19 Nov; moved from 18 Nov) | sed, rig | done |
+| 2026-11-12 | yes | SeaBird (SED) Fulmar Explorer OBN source contract, West Africa, ~6 months from Dec 2026 (supports the SeaBird Base 2027 contribution; read at the SED Q3 run). Read in sed v3.0, 27 Nov | sed | done |
 | 2026-11-18 | yes | Borr Q3 report (Borr release 13 Nov: after the NYSE close 18 Nov, call 19 Nov 15:00 CET): first figures after the Prospector 5 loss, insurance position | borr, hy-issuers, rig | done |
 | 2026-11-18 | approx | Anthropic IPO pricing (S-1/A of 10 Nov: range $70–78; pricing 18 Nov and first trade ~19 Nov press-reported [E]); the $26bn Class N placement closes right after (Google, NVIDIA, AMD, Broadcom, Micron, Microsoft, TSMC): value of Amazon's and Alphabet's stakes, E1 lab revenue; re-mark only if priced outside the range; first trade 19 Nov as "ANT", closing and placement 20 Nov | anthropic, ai, amzn, googl, msft | done |
 | 2026-11-18 | yes | Oil Market BBB leading-view run (skill rollout): kept unchanged; the late-October Brent fall was already in the 11 Nov Base, so the HY energy watch call was dropped | oil, hy | done |
@@ -469,7 +469,13 @@ it to `open`.
 | 2027-02-11 | approx | HX February coupon: cash, tap or PIK (decides the HX carry basis in Heimdal) | hy-issuers, hy-funds | open |
 | 2027-02-15 | approx | Nordic Trustee annual default report (sets the 2027 allowance for unseen defaults) | hy, hy-funds | open |
 | 2027-02-17 | yes | SED Q4 2026 report (company calendar, user 19 Nov) | sed | open |
-| 2027-03-31 | approx | SED T-16 Phase 6 ends (Q1 2027, on options after Dec); rig to Singapore, idle until Phase 7; also the Ventura closing long-stop | sed | open |
+| 2027-03-31 | yes | SED: Ventura closing long-stop (T-16 Phase 6 end moved to its own row, 31 Jan 2027; sed v3.0) | sed | open |
+| 2027-01-31 | yes | SED T-16 Phase 6 firm end (Jan 2027 at $131k, Q3 report); rig to Singapore, idle until Phase 7 (sed v3.0) | sed | open |
+| 2026-12-07 | yes | SED Q2 distribution $25m goes ex (NOK amount announced that day; last day with the right 4 Dec, record 8 Dec) (sed v3.0) | sed | watch |
+| 2026-12-11 | approx | SED Q2 distribution paid (sed v3.0) | sed | watch |
+| 2026-12-31 | yes | SED EDrill-1 firm PTTEP contract ($94k) ends, no follow-on award yet; Base bridges into Feb 2027. An award is Rig BBB checkpoint 17 (sed v3.0) | sed, rig | open |
+| 2027-02-28 | yes | SED T-15 firm end (extended from Jan to Feb 2027, Q3 report); a follow-on prints to Rig BBB (sed v3.0) | sed, rig | open |
+| 2027-03-15 | approx | SED–Ventura definitive agreement and shareholder meetings (Q1 2027, dates not given): pro forma IAF run; size and recipient of the deferred H2-26 distribution (modelled $40m Apr 2027; −NOK 0.24 a share if Ventura holders share it) (sed v3.0) | sed | open |
 | 2027-04-30 | yes | SED annual report 2026 (company calendar, user 19 Nov) | sed | watch |
 | 2027-05-27 | yes | SED annual general meeting (company calendar, user 19 Nov) | sed | watch |
 | 2027-03-31 | approx | Scatec–EBRD Egypt platform closing (SPA signed 22 Oct 2026; closing date and cash to Scatec not disclosed; date assumed) | scatec | open |
@@ -478,7 +484,7 @@ it to `open`.
 | 2027-06-30 | approx | DOF: Skandi Implementer delivered to its buyer (Q2 2027); proceeds repay debt | dof | open |
 | 2027-06-30 | approx | Scatec repays SCATC05 (NOK 1,453m, due Q1 2028) in H1 2027 per the Q3 presentation | scatec, hy-funds | open |
 | 2027-06-30 | approx | UK 2027 Spending Review (date not set): funds or not the path to 3% / 3.5% of GDP | defense | open |
-| 2027-07-01 | approx | SED T-16 Phase 7 (CPOC, 30 months firm) starts (early Q3 2027) | sed | open |
+| 2027-07-15 | approx | SED T-16 Phase 7 (CPOC, 30 months firm, $90k ex-mobilisation confirmed in Q3) starts (mid-July 2027; sed v3.0) | sed | open |
 | 2026-11-18 | yes | Hafnia Q3 deck: product-tanker orderbook by year (Shipping BBB MR2 orderbook-trigger retest). Outcome (deck p.21, Vortexa, read from chart): MR 6.4 / 5.1 / 5.4 / 0.8m dwt 2026–29 (~128 / 102 / 108 / 16 MR2), MR2 2028+ ~124 vs the baseline's ~165 `[A]` (different basis; retest with Frontline's count at the shipping run) | shipping | done |
 | 2026-11-27 | approx | Frontline Q3 report (late Nov; date not confirmed): orderbook count by segment, company TCE | shipping | watch |
 | 2026-11-18 | yes | Samsung Electronics Investor Forum 2026 (Singapore, Morgan Stanley conference), memory session: 2027 HBM and LTA pricing comments Outcome (weekly 21 Nov): no public readout found; press: 2027 HBM sold out at target prices (consistent with smsn v4); stays a [?] signpost in the smsn document | smsn, ai, kospi | done |

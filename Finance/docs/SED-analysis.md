@@ -1,79 +1,63 @@
-# SED Energy Holdings (ENH) — IAF analysis, 17 Oct 2026, method re-run 18 Oct, market check 20 Oct, news update 27 Oct: T-16 award (stub Q3–Q4 2026 + 2027–2029)
+# SED Energy Holdings (ENH) — IAF analysis (stub Q4-26 + 2027–2029)
 
-> **4 Nov 2026, kept unchanged (change gate):** read Rig Market BBB small updates of 28 Oct and 4 Nov: the tender-assist row and rig values are unchanged (T-16 logged as one fixture, checkpoint 17 open); only the UDW drillship 2027 point moved. No figure in this document changes.
-
-Skill revisions used: **iaf-valuation 2026-10-18.2** (backlog at exit, exit cross-check, NOK path in Bear/Bull, holdco G&A outside NAV), **equity-market-bbb 2026-10-18.6** (exit reference read only; the skill is now at 2026-10-24.1, but `docs/equity-market-bbb.md` has not been re-run since 17/18 Oct, so the values read are the same). Sector inputs:
-- `docs/rig-market-bbb.md`: baseline 10 Oct 2026 (Final, stale after 9 Nov), produced with rig-market-bbb rev 2026-10-08.2. It had small updates on 13, 17, 22 and 24 Oct (rev 2026-10-10.1) with **paths unchanged**.
-  - The tender-assist row is used directly and has not changed since 4 Oct.
-  - Rig values use the Rig BBB asset-value convention.
-  - No own rig forecast.
-- `docs/oil-market-bbb.md`: baseline 17 Oct 2026 (Final, stale after 16 Nov), produced with oil-market-bbb rev 2026-10-11.1. Background only: Brent Base 2027 rose from 85 to 88, mid-cycle unchanged. SE Asia NOC gas work has low oil sensitivity, and Rig BBB asks for no change. A newer baseline (24 Oct) has the Brent paths and mid-cycle unchanged; nothing here changes.
-- `docs/hy-market-bbb.md`: not used. SED has no bonds; its only debt is a SOFR-based USD bank loan.
-- `docs/equity-market-bbb.md` (17 Oct, amended 18 Oct): Oslo exit P/E, exit P/B and mid-cycle return for the exit cross-check, and the USD/NOK path for the Bear/Bull NOK figures. Nothing else is taken from it.
-- **18 Oct:** method only; price, FX, company data and valuation date (17 Oct) unchanged.
-- **20 Oct:** Fearnley's sector report (via TDN Finans) is added as a **market check only**. A broker target is never an IAF input. No new company information; the decision figures are unchanged.
-- **27 Oct, news update: T-16 award.** CPOC's letter of award for T-16 Phase 7 (MFN, 27 Oct 07:00) replaces the T-16 assumption in all three scenarios. Price, FX and valuation date are rolled to 26/27 Oct. No market input changes: the Rig BBB tender-assist row and the Equity BBB exit references and NOK path are as before.
+**v3.0 · 27 Nov 2026 · Q3 2026 report run (full re-run, compacted; over target: six-rig, three-scenario rig-day build)** · price **NOK 6.60** (26 Nov close, before the 27 Nov 06:00 release; Oslo not yet trading at the mark) · USD/NOK 9.755 · iaf-valuation **2026-11-26.1** · **Fails:** Base IRR **8.4%**, P_k **NOK 6.10**, margin of safety **−7.6%**; Bear **−30.8%** / Bull **+30.4%**.
 
 ## Summary
 
-**Verdict: fails.**
-- **Base:**
-  - IRR_T is **6.7%** against k = 12%. The hurdle price P_k is **NOK 6.03** against a price of **NOK 6.80**, so the **margin of safety is −11.3%**.
-  - The cash yield is high (d = 12.0%). But the 2026 contracts at $94–160k/day roll off by end-2027 into Rig BBB's tender-assist Base of $78–85k. T-16 is now the exception: ~$95k/day firm from Jul 2027 to Jan 2030. Value falls from NAV_0 (NOK 6.23) to V_T (NOK 5.43) as the fleet ages and today's firm contracts expire, partly offset by the contracts the Base signs in 2028–29 that run past exit.
-- **Bear breaks the thesis:** IRR −31%, and ~58% of the capital is lost. The balance sheet survives (peak net debt ~$33m); distributions shrink to ~$14m in 2028 and ~$6m in 2029.
-- **Bull:** IRR 27.1%, P_k NOK 9.41. The price already reflects ~23% of the Bull upside.
-- **What the price needs:**
-  - exit asset values ~21% above Base mid-cycle (≈ $500m, 4.9x 2029 EBITDA); or
-  - two levers together, e.g. opex 10% lower and a 35-year rig life (15.9%), or $90k/day on the new barge contracts plus exit values 20% higher (12.9%). No single operating lever is enough now: opex −10% gives 11.4%, a 35-year life 11.0%.
-- **The exit cross-check is consistent with the market:** V_T is 10.3x normalised asset-level FCF against Oslo's exit P/E of 11.5, and the exit P/B (1.20) is below the index's 1.75. The buyer's return (8%) is a little below Oslo's 9.1%; at 9.1% Base is 5.5%.
-- **Change since 20 Oct** (Base 8.3% → 6.7%; P_k 6.02 → 6.03; margin of safety −8.0% → −11.3%):
-  - **Contract (T-16 award): +0.5 pp, P_k +0.07** (8.8%, P_k 6.09, at the old price, FX and date). ~$95k/day for 30 months instead of the Base's $80k from Jan 2027, but with a ~5-month idle gap in 2027 and options assumed at $90k after the firm term. Bear gains (+2.2 pp) and Bull loses (−0.5 pp): the award sits between the old Base and Bull assumptions.
-  - **FX and valuation date: −0.5 pp, P_k −0.05.** USD/NOK 9.44 → 9.32 lowers the NOK value of USD cash and assets (−0.6 pp); ten days of roll-forward add +0.1 pp.
-  - **Price: −1.6 pp, P_k −0.01** (option dilution). NOK 6.55 → 6.80, the 26 Oct close, before the 07:00 release. Each NOK 0.10 on the price moves IRR_T by ~0.6 pp.
-  - The verdict is unchanged: **fails**. The award is a Bull-band rate, but it covers one barge of six for 30 months and does not move the exit value, which still decides the verdict.
-- **Change 17 → 18 Oct** (6.0% → 8.3%), method only (iaf-valuation 2026-10-18.1):
-  - **Backlog at exit (+2.3 pp).** On 31 Dec 2029 the Base has signed contracts running into 2030–31 (all five rigs and GHTH). A buyer pays for them, so they now count in V_T, capped at 2 years after exit. The 17 Oct rule (contracts firm today only) is kept as a sensitivity: 6.0%.
-  - The verdict is unchanged: **fails**.
-- **Market check, 20 Oct (not an IAF input):**
-  - **Fearnley upgraded SED from Hold to Buy, with a target of NOK 8.0** (unchanged).
-  - The target sits 33% above Base P_k (6.03 on 27 Oct) and about 58% of the way to Bull P_k (9.41).
-  - At k = 12% it needs exit values ~1.5x Base mid-cycle, against × 1.21 to clear the hurdle at NOK 6.80.
-  - The report summary gives no SED-specific reason, and nothing in it changes a Rig BBB input for tender rigs.
-  - The price was unchanged at NOK 6.55 on 20 Oct; it closed at 6.80 on 26 Oct (used from 27 Oct).
+**In plain terms**
+1. **Where the return comes from:** cash. SED pays out about NOK 2.5 a share over three years (~12% a year), but the fleet is worth less by 2029: the rigs age and today's $121–160k contracts roll into ~$80–90k work.
+2. **What must be true:** the rigs must fetch ~16% more at exit than the sector baseline's mid-cycle values (a barge earning ~$84k a day through the cycle instead of $80k), or running costs must come in ~7% below the 2026 run-rate.
+3. **What breaks it:** Gulf jackups flooding Asia and pushing tender rates to $65–68k. Then ~58% of the money is lost. At today's price Base already falls short.
 
-**Decision table**
+**Verdict: fails.**
+- **Base:** IRR_T **8.4%** against k = 12%. P_k **NOK 6.10** against the price of **NOK 6.60**, so the **margin of safety is −7.6%**.
+- **Bear breaks the thesis:** −30.8%, and ~58% of the capital is lost. The balance sheet survives (peak net debt ~$28m).
+- **Bull:** 30.4%, P_k 9.67. The price already reflects ~14% of the Bull upside.
+- **What the price needs** (any one): exit values ×1.16 Base mid-cycle (fleet ≈ $468m, 4.7x 2029 EBITDA); opex 6.9% lower in operations and values; a 34-year rig life; or a price at or below NOK 6.10.
+
+**Base in brief**
+- **Rates:** the tender-barge row is Rig BBB's 78 / 82 / 85 ($k, 2027–29), mid-cycle 80 at 80% MCU. T-16 works its CPOC Phase 7 at **$90k** for 30 months from Jul 2027. EDrill-1 and T-15 are bridged into Q1 2027, idle ~4 months, then re-let at $78k (2027) and $85k (2029). The semi-tender options are exercised.
+- **Cover and earnings:** firm cover for 2027 is 55% of rig-days. Model EPS is ~NOK 1.24 for 2026 and 0.63 for 2027, against Yahoo consensus of 1.17 / 0.77 (as-of not shown).
+- **Return bridge:** distributions of NOK 2.51 plus V_T of 5.57 give 8.08, against P 6.60. Value falls from NAV_0 (6.46) to V_T: ageing −0.62, roll-off of today's firm-contract premium −0.85, backlog the Base signs to 2031 +0.50, retained cash +0.09.
+- **Break-even:** exit marks 1.16× Base mid-cycle. That is barges at ~$64–70m at 15.5–17.5 years, against $56–60m in Base and the distressed 2023 sale at ~$28m.
+
+**Bear in brief**
+- **Story:** a Gulf war re-escalation idles jackups, which move to Asia, and Foresight-type pricing ($60–70k) spreads. The tender row goes to 68 / 65 / 65 (mid-cycle 67, MCU 65%). EDrill-1 and T-15 sit idle 8–9 months and then work at $65–68k. GHTH is returned in Jul 2027, Vencedor is idle 4 months and then works at $95k, and T-16's options lapse.
+- **Worst year:** 2029, with Maintenance FCF of $2m in the special-survey year. Cumulative Maintenance FCF is NOK 1.11 a share.
+- **Capital:** ΣD + V_T = NOK 2.74 against 6.60, a loss of −58% (−55% in NOK on the Equity BBB path).
+- **Balance sheet:** peak net debt $27.5m (Q2-27); ~$47m to refinance in Q1 2028 against EBITDA of ~$49m; covenants (asset cover, minimum equity, DSCR) met at 30 Sep `[F]`; the $25m cash floor cuts distributions to ~$16m (2028) and ~$3m (2029).
+- **What does the damage:** the exit marks, −23 pp of the −39 pp gap to Base (driver breakdown).
+
+**Decision table** (valuation 27 Nov 2026 → exit 31 Dec 2029, T = 3.10 years; NOK per share)
 
 | | Bear | **Base** | Bull |
 |---|---|---|---|
-| IRR_T (27 Oct 2026 → 31 Dec 2029) | −30.9% | **+6.7%** | +27.1% |
-| IRR_T in NOK on the Equity BBB NOK path | −28.7% | +6.7% (spot flat) | +25.8% |
-| V_T per share (NOK) | 1.59 | **5.43** | 9.35 |
-| P_k (hurdle price) / margin of safety | 2.29 / −66.4% | **6.03 / −11.3%** | 9.41 / +38.4% |
-| Capital preserved? (ΣD_t + V_T vs 6.80) | **No: 2.85 (−58%)** | Yes: 8.02 | Yes: 12.76 |
-| Cumulative Maintenance FCF per share, Q4-26 to 2029 (NOK) | 1.14 | **2.83** | 3.98 |
-| Net debt per share at exit (NOK; negative = net cash) | 0.16 | **−0.20** | −0.54 |
-| Balance sheet | Distributions cut to ~$14m (2028) and ~$6m (2029) by the cash floor; cash ≥ ~$19m; ~$45m refinancing in Q1 2028 against EBITDA ~$53m | **Net cash or low debt throughout (peak $22m, Q2-27)** | Net cash $43m at exit |
+| IRR_T | −30.8% | **+8.4%** | +30.4% |
+| IRR_T in NOK on the Equity BBB NOK path | −28.5% | +8.4% (spot flat) | +28.9% |
+| V_T per share ($m) | 1.65 (125) | **5.57 (422)** | 9.67 (732) |
+| P_k (hurdle price) / margin of safety | 2.18 / −67.0% | **6.10 / −7.6%** | 9.67 / +46.5% |
+| Capital preserved? (ΣD_t + V_T vs 6.60) | **No: 2.74 (−58%)** | Yes: 8.08 (+22%) | Yes: 13.03 (+97%) |
+| Cumulative Maintenance FCF per share, Q4-26 to 2029 | 1.11 | **2.82** | 4.02 |
+| Net debt per share at exit (negative = net cash) | 0.19 | **−0.11** | −0.45 |
+| Balance sheet | Peak net debt $27.5m; cash ≥ $18.6m; ~$47m refinanced Q1 2028 against EBITDA ~$49m | **Peak net debt $26.7m (Q2-27, after the H2-26 payment); net cash $8m at exit** | Net cash $34m at exit |
 
-**Per-share path** (NOK per share; 737.3m shares; USD/NOK 9.32)
+**Per-share path** (NOK per share; 738.6m shares; USD/NOK 9.755)
 
-| | Q3-26E | Q4-26E | 2027 | 2028 | 2029 |
-|---|---|---|---|---|---|
-| **Base** EBITDA after GHTH bareboat, $m | 39.0 | 40.3 | 100.3 | 107.7 | 93.3 |
-| EBITDA per share | 0.49 | 0.51 | 1.27 | 1.36 | 1.18 |
-| **Maintenance FCF per share** | **0.37** | **0.39** | **0.82** | **0.98** | **0.65** |
-| Debt amortisation per share | 0.03 | 0.03 | 0.10 | 0.10 | 0.10 |
-| FCF after debt service per share | 0.34 | 0.36 | 0.72 | 0.87 | 0.54 |
-| D_t paid per share | — (Q1 paid Aug) | 0.32 (Q2, 13 Nov) | 0.89 | 0.82 | 0.57 |
-| Net debt per share, period end | 0.04 | −0.03 | 0.04 | −0.13 | −0.20 |
-| V_t per share, year end | — | 6.08 | 5.69 | 5.64 | **5.43** |
-| **Bear** Maintenance FCF per share | 0.37 | 0.39 | 0.36 | 0.33 | 0.06 |
-| Bear V_t per share | — | 6.08 | 4.14 | 2.93 | 1.59 |
-| **Bull** Maintenance FCF per share | 0.37 | 0.39 | 1.13 | 1.25 | 1.22 |
-| Bull V_t per share | — | 6.08 | 7.01 | 8.54 | 9.35 |
+| | Q4-26E | 2027 | 2028 | 2029 |
+|---|---|---|---|---|
+| **Base** EBITDA after GHTH bareboat, $m | 40.1 | 101.3 | 103.9 | 89.4 |
+| EBITDA per share | 0.53 | 1.34 | 1.37 | 1.18 |
+| **Maintenance FCF per share** | **0.39** | **0.83** | **0.97** | **0.62** |
+| Debt amortisation per share | 0.03 | 0.11 | 0.11 | 0.11 |
+| FCF after debt service per share | 0.36 | 0.72 | 0.87 | 0.52 |
+| D_t paid per share | 0.33 (Q2, 11 Dec) | 0.69 | 0.91 | 0.58 |
+| Net debt per share, period end | 0.14 | 0.00 | −0.06 | −0.11 |
+| V_t per share, year end | 6.17 | 6.46 | 6.23 | **5.57** |
+| **Bear** Maintenance FCF per share / V_t | 0.39 / 6.17 | 0.39 / 4.34 | 0.31 / 3.11 | 0.02 / 1.65 |
+| **Bull** Maintenance FCF per share / V_t | 0.39 / 6.17 | 1.15 / 8.13 | 1.26 / 9.20 | 1.22 / 9.67 |
 
-- Maintenance FCF = EBITDA after bareboat − tax − net interest − maintenance capex, before debt amortisation.
-- Q3-26 ended before the valuation date, so its cash is already in today's net debt.
-- The end-2026 V_t is identical in all scenarios. It now includes the T-16 Phase 7 contract, which is firm today in every scenario.
+- Maintenance FCF = EBITDA after bareboat − tax − net interest − maintenance capex − working capital, before debt amortisation.
+- The end-2026 V_t is identical in all scenarios: Base mid-cycle marks plus contracts firm today.
 
 Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed contract value · `[E]` external or secondary · `[C]` secondary source carried from an earlier version · `[A]` own assumption · `[?]` not found.
 
@@ -81,754 +65,448 @@ Tags: `[F]` fact from a filing or market print · `[B]` derived from a disclosed
 
 | Item | Value |
 |---|---|
-| Company | SED Energy Holdings Plc (Cyprus), Euronext Oslo: ENH, ISIN CY0101162119. Holding company for Energy Drilling (tender rigs, Singapore) and SeaBird Exploration (seismic source vessels, Bergen). Reports in USD |
-| Price (P) | **NOK 6.80**, close 26 Oct 2026, last trade 15:25 UTC (Yahoo `ENH.OL`; day range 6.76–6.88, volume 1.87m). This is the **last close before the T-16 release** (27 Oct 07:00 CET; Oslo opens 09:00), so the market's reaction is not in it. Not ex-dividend: the Q2 distribution (USD 25.0m, NOK ~0.32 a share, repayment of paid-in capital) goes **ex on 7 Dec 2026, paid ~11 Dec** (release 4 Nov; the 27 Oct build assumed ex 9 Nov, paid 13 Nov: −0.0 pp). Previous versions: NOK 6.55 (16 and 20 Oct) |
-| Valuation date / exit date | 27 Oct 2026 / 31 Dec 2029, **T = 3.18 years** (17 Oct up to the 20 Oct version) |
-| Shares | 731.25m outstanding (incl. 108.1m non-voting B shares) `[F]` + 18.1m options at NOK 4.53 average strike `[F, Q2 report]` → **737.3m** by the treasury method at NOK 6.80 |
-| Market cap / EV | NOK 5.01bn = **$538m**. Financial net debt ≈ $3m at 30 Sep `[A, Q3E]` → EV ≈ $541m; ≈ $549m including the GHTH lease (~$7.5m `[A]`). EV / LTM adj. EBITDA ($135.6m `[F]`) ≈ 4.0x |
-| NAV at today's market marks | **Omitted: no current mark.** The only transaction for these rigs is Seadrill's 2023 sale (~$85m for T-15, T-16 and West Vencedor), which is over three years old and was distressed. It is shown as a sensitivity |
-| **NAV_0** (scenario mid-cycle marks + contracts firm today − net debt) | **Base NOK 6.23 (P/NAV_0 1.09x)**; Bear 3.10 (2.19x); Bull 9.64 (0.71x). Includes T-16 Phase 7, firm today though it starts in Jul 2027 |
-| FX | USD/NOK **9.32** (Yahoo `NOK=X` 30-minute bar 15:00–15:30 UTC on 26 Oct, close 9.3244, matching the price time stamp; Norges Bank fixing 26 Oct 9.3444). Held constant. Previous versions: 9.44 |
-| Track | **B** (offshore drilling with contract roll-over and idle risk; finite-life assets). FCF basis, year-by-year IRR, P vs P_k |
-| k | **12%**, not raised. SED has net cash and a liquid share (~1–3m shares a day). Customer concentration (PTTEP/Thailand 53% of H1 revenue) and short contract cover are handled in the scenarios, not through k. At k = 13% / 14%, P_k is 5.90 / 5.78 |
-| Horizon | Stub Q3-26 (ended, unreported) + Q4-26; 2027 by quarter; 2028–2029 annual |
+| Company | SED Energy Holdings Plc (Cyprus), Euronext Oslo ENH, ISIN CY0101162119. Holding company for Energy Drilling (tender rigs, Singapore) and SeaBird Exploration (source vessels, Bergen). Reports in USD |
+| Price (P) | **NOK 6.60**, close 26 Nov 2026, 15:25 UTC (Yahoo `ENH.OL`; day range 6.54–6.65, volume 1.10m). This is the last close before the Q3 release (27 Nov 06:00 CET), so the release is not in the price. **Cum the Q2 distribution** (USD 0.0342 a share, NOK ~0.33; ex 7 Dec, paid ~11 Dec) |
+| Valuation date / exit | 27 Nov 2026 / 31 Dec 2029, **T = 3.10 years** |
+| Shares | 731.25m outstanding (incl. 108.1m non-voting B) `[F]` + 18.13m options at NOK 3.92 weighted average strike `[F, Q3 note 13]` → **738.6m** by the treasury method at NOK 6.60 |
+| Market cap / EV | NOK 4.87bn = **$500m**; net cash ~$2m at the valuation date (financial debt; the GHTH lease of $7.6m is paid through FCF as bareboat) → EV ≈ $498m (≈ $505m incl. the lease); EV / LTM adj. EBITDA ($148.7m `[F]`) 3.4x |
+| NAV at today's market marks | Omitted: no current mark. The only transaction is Seadrill's distressed 2023 sale (~$85m for T-15, T-16 and West Vencedor) |
+| **NAV_0** (scenario mid-cycle marks + contracts firm today − net debt) | **Base NOK 6.46 (P/NAV_0 1.02x)**; Bear 3.18 (2.08x); Bull 10.04 (0.66x) |
+| FX | USD/NOK **9.755** (Yahoo `NOK=X`, 30-minute bar 15:00–15:30 UTC on 26 Nov, matching the price time stamp). 27 Nov 07:15 UTC: 9.7247 (Base 8.3%, P_k 6.08). Held flat |
+| Track | **B**: offshore drilling with contract roll-over and idle risk, finite-life assets. FCF basis, year-by-year IRR, P vs P_k |
+| k | **12%**, not raised: net cash and a liquid share (~1–3m shares a day). Customer concentration (Thailand 54% of 9M revenue, 58% in Q3 `[F]`) and short contract cover are handled in the scenarios. At k = 13% / 14%, P_k is 5.97 / 5.84 |
+| Horizon | Stub Q4-26; 2027 by quarter; 2028–29 annual |
+| Sector inputs (read 27 Nov) | `docs/rig-market-bbb.md` 12 Nov, Final (leading-view note 18 Nov, Borr note 19 Nov; skill 2026-11-18.1): tender-assist row and the asset-value convention unchanged since 4 Oct; no turn call on tender rigs. `docs/oil-market-bbb.md` 18 Nov (skill 2026-11-18.2): Brent Base 80 / 73 / 72, mid-cycle 70 (background only). `docs/equity-market-bbb.md` 20 Nov (skill 2026-11-18.1): Oslo exit P/E 10.5 / 11.5 / 12.5, exit P/B 1.51 / 1.78 / 2.00, mid-cycle return 8.0 / 8.9 / 9.2%; USD/NOK path Bear +12 / +9 / +9%, Bull −3%. `docs/hy-market-bbb.md`: not used (SOFR bank loan, no bonds) |
+| Model | `.claude/skills/iaf-valuation/references/models/sed/` (`sed_model.py`, `sed_run.py`). The 27 Oct rig-day build was not kept, so it was rebuilt. It reproduces 27 Oct: Base 6.70% / P_k 6.03 (doc 6.7% / 6.03), Bear −30.8% / 2.28 (−30.9% / 2.29), Bull 27.2% / 9.42 (27.1% / 9.41) |
 
-**Sources, and the check for new events since 10 Oct:**
-- **27 Oct:** the MFN release list shows **"Energy Drilling receives letter of award for 30-month drilling campaign for T-16"** (27 Oct 07:00), the first SED release since 25 Sep. Terms are read from the release page (primary; see Contracts). Nordic Financial's Newsweb stream did not have it yet at ~07:30 UTC.
-- **Nordic Financial** (back online), `search_filings` with `source="newsweb"`, ticker ENH, 2026: the newest SED announcement is still from September. There is no contract award.
-- **MFN** (`mfn.se/a/energy-holdings`, read 17 Oct):
-  - The newest release is **25 Sep (board change)**.
-  - Calendar: **ex-date 9 Nov; Q3 report 18 Nov 2026 at 06:00** `[F]`.
-- **FinancialFilings:** not re-run. The monthly quota was used up on 10 Oct. Share issues are checked through MFN/Newsweb instead: none.
-- **Company documents** (read 4 Oct, unchanged):
-  - Q2 2026 report and presentation (26 Aug, period to 30 Jun 2026).
-  - Pareto company presentation (17 Sep).
-  - Ventura transaction presentation (11 Sep).
-  - Q2 distribution notice (4 Sep), EGM minutes (22 Sep), board change (25 Sep).
-- **Yahoo:** ENH.OL, VTURA.OL, NOK=X (16 Oct; 26 Oct for the 27 Oct update). Norges Bank USD/NOK fixing (26 Oct) as a check.
-- **Web:** Offshore Magazine / Hellenic Shipping News — Seadrill's sale of three tender units to Energy Drilling for ~$85m (Jun 2023).
+## Scenarios
 
-## Scenario definitions (from Rig Market BBB, 10 Oct; tender-assist row unchanged since 4 Oct)
+| | Bear | **Base** (decision) | Bull |
+|---|---|---|---|
+| Story, catalyst, earliest timing | A Gulf war re-escalation idles jackups, which relocate to Asia; Foresight pricing spreads (2027) | NOC-led demand converts gradually (Petronas, PTTEP, CPOC); Gulf jackups return gradually; SE Asia priced low, not at Foresight levels | 2H26 FIDs and NOC energy-security programmes; Aramco/KJO absorb the Gulf jackups (2027) |
+| Sector row (Rig BBB 12 Nov), $k 2027 / 28 / 29, mid-cycle, MCU | Barge 68 / 65 / 65, 67, 65% | **78 / 82 / 85, 80, 80%** | 88 / 95 / 100, 95, 90% |
+| Semi-tenders (not in Rig BBB) `[A]` | 100 / 95 / 95, mid-cycle 100 | 120 / 120 / 125, 120 | 135 / 150 / 165, 140 |
+| Company driver | EDrill-1, T-15 idle 8–9 months, then $68k, then $65k; revenue efficiency 96%; T-16 options lapse; GHTH returned Jul 2027; Vencedor idle 4 months, then $95k | EDrill-1 bridged to Feb, T-15 to Mar; ~4 months idle; $78k, then $85k from 2029; T-16 options at $90k; Vencedor $123k option, then $125k; GHTH $147k option, then $120k | ~1 month idle, $88k, then $95k from late 2028; semis $150–165k from 2028–29 |
+| Revenue / EBITDA 2027–29 ($m, company basis) | 148 / 131 / 124; 71 / 49 / 40 | **196 / 206 / 196; 111 / 113 / 99** | 216 / 223 / 236; 136 / 136 / 146 |
+| Exit asset marks (rigs, backlog premium, GHTH, SeaBird; $m) | 139 | **414** | 698 |
+| Company items | SeaBird $5m a year, exit value 20 | **SeaBird $10m, exit 35** | $18m, exit 50 |
+| Macro and NOK (Equity BBB) | Recession; USD/NOK +12 / +9 / +9% | Spot flat | Soft landing; −3% |
+| **Result:** IRR_T / P_k / capital preserved | −30.8% / 2.18 / No (−58%) | **8.4% / 6.10 / Yes** | 30.4% / 9.67 / Yes |
 
-| Scenario | Catalyst | What it does to SED |
+- The stub (Q4-26), the end-2026 marks and T-16 Phase 7 ($90k, firm today) are identical in all scenarios; Bear and Bull diverge from 1 Jan 2027.
+- **What kind of stress test each is:** a shift in the mid-cycle. Structural IRR is Bear −29.9%, Base 6.7%, Bull 29.6%; within each scenario the 2027–29 rate path adds only −0.9 to +1.7 pp.
+
+**Driver breakdown** (one driver at a time from Base; IRR_T / P_k)
+
+| Step | Bear | Bull |
 |---|---|---|
-| **Base** (decision) | NOC-led demand converts gradually (Petronas, PTTEP, CPOC). Gulf jackups come back gradually, so SE Asia stays priced low but not at Foresight levels. Tender-assist **78 / 82 / 85** ($k/day, 2027–29), mid-cycle 80 | T-16: CPOC Phase 7 award (all scenarios), ~$95k from mid-Jul 2027 to mid-Jan 2030 after ~5 months idle; options exercised at $90k `[A]` to Apr 2031. EDrill-1 and T-15 bridged to Foresight's start, idle ~4 months, then re-let at $78k. Semi-tender options exercised (Vencedor $123k, GHTH $147k) |
-| **Bear** (stress) | Gulf jackups idled by a war re-escalation after the 3 Nov midterms relocate to Asia, and Foresight-type pricing ($60–70k) spreads. Tender-assist **68 / 65 / 65**, mid-cycle 67 | T-16 award as Base; options not exercised (open from Jan 2030). EDrill-1 and T-15 idle 8–9 months, then $68k/$65k. GHTH returned in Jul 2027. Vencedor idle 4 months, then $95k |
-| **Bull** (stress) | 2H26 budget FIDs and NOC energy-security programmes (Malaysia/Indonesia fiscal changes from 2028); Aramco/KJO absorb the Gulf jackups. Tender-assist **88 / 95 / 100**, mid-cycle 95 | T-16 award as Base; options exercised at $90k `[A]`. EDrill-1/T-15 idle ~1 month, then $88k and $95k from late 2028. Semis $150–165k from 2028–29 |
+| Base | 8.4% / 6.10 | 8.4% / 6.10 |
+| 1. Barge rates, idle time and revenue efficiency (sector row) | 3.1% / 5.37 | 11.5% / 6.53 |
+| 2. + semi-tenders (Vencedor, GHTH) | −3.5% / 4.50 | 15.9% / 7.17 |
+| 3. + exit marks at the scenario mid-cycle | −26.8% / 2.48 | 28.2% / 9.28 |
+| 4. + SeaBird (contribution and exit value) = scenario | −30.8% / 2.18 | 30.4% / 9.67 |
 
-- The stub (Q3–Q4 2026) and the end-2026 asset marks are identical in all scenarios. Bear and Bull diverge from 1 Jan 2027.
-- **What kind of stress test each is** (structural IRRs, see Results):
-  - Bear and Bull are **shifts in the mid-cycle**: Bear structural −30.1%, Bull 26.2%, against Base 4.9%.
-  - They are not rate paths around an unchanged mid-cycle: within each scenario the 2027–29 rate path moves IRR by only −0.8 to +1.8 pp.
-  - Since 27 Oct the scenarios no longer differ on T-16's firm term and rate (fact in all three); they differ only on its options and on the market after Jan 2030.
+**Base return bridge** (NOK per share): P 6.60 → ΣD_t 2.51 + V_T 5.57 = 8.08.
+- **Cash distributed 2.51:** Q2 0.33, H2-26 ~0.51 (April 2027), then 90% of FCF after debt service.
+- **Value change −1.03:** price above NAV_0 −0.14, fleet ageing −0.62, roll-off of today's firm-contract premium −0.85, backlog the Base signs to 2031 +0.50, retained cash +0.09. No earnings growth and no multiple: the return is cash.
 
 ## Company and status
 
-- Formed 26 May 2025 by the reverse acquisition of SeaBird Exploration by Energy Drilling.
-- Largest owner: Pioneer Logistics Holdings, 40.1% of capital and 29.7% of votes. CEO Kurt Waldeland. Chair Kjell E. Jacobsen since 25 Sep, after Alf C. Thorkildsen (HitecVision) retired `[F]`.
-- **Energy Drilling** claims ~38% of the world's actively marketed tender rigs `[F]`.
+- Formed 26 May 2025 by the reverse acquisition of SeaBird Exploration by Energy Drilling. Pioneer Logistics Holdings owns 40.1% of capital and 29.7% of votes (30 Sep `[F]`). CEO Kurt M. Waldeland; chair Kjell E. Jacobsen.
+- Energy Drilling controls ~38% of the world's actively marketed tender rigs `[F]`. The Ventura combination (LOI 11 Sep) is pending: overlay below, not in the decision figure.
 
-**Fleet** (Pareto, 17 Sep; table read from extracted PDF text with a garbled layout, so the SPS years are `[F/?]`):
+**Fleet** (Pareto 17 Sep; SPS years `[F/?]`)
 
-| Rig | Type | Built / yard | Build cost | Last / next SPS | Age at exit |
+| Rig | Type | Built | Build cost | Next SPS | Age at exit |
 |---|---|---|---|---|---|
-| EDrill-1 | Tender barge | 2014 / COSCO Guangdong | $135m | 2022 / **2027** | 15.5 |
-| EDrill-2 | Tender barge | 2014 / COSCO Guangdong | $135m | 2024 / 2029 | 15.5 |
-| T-15 | Tender barge | 2012 / COSCO Nantong | $113m | 2024 / 2029 | 17.5 |
-| T-16 | Tender barge | 2013 / COSCO Nantong | $113m | 2024 / 2029 | 16.5 |
-| ED Vencedor | Semi-tender | 2009 / Keppel FELS | $201m | 2024 / 2029 | 20.5 |
-| GHTH | Semi-tender, chartered in (back-to-back bareboat) | 2021 / COSCO Guangdong | $220m | — / 2026 | — |
+| EDrill-1 / EDrill-2 | Tender barge | 2014 | $135m each | 2027 / 2029 | 15.5 |
+| T-15 / T-16 | Tender barge | 2012 / 2013 | $113m each | 2029 | 17.5 / 16.5 |
+| ED Vencedor | Semi-tender | 2009 | $201m | 2029 | 20.5 |
+| GHTH | Semi-tender, chartered in (back-to-back bareboat) | 2021 | $220m | 2026 | — |
 
-- **SeaBird:** Eagle Explorer (2D, India, Sep 2026 – May 2027) and Fulmar Explorer (OBN source, West Africa, Sep – Nov 2026, then marketed). Firm backlog $24m `[F]`.
-- **Tax:** Singapore MSI-AIS exemption; tax is paid in the operating countries. Q2: $4.4m, 6.4% of contract revenue `[F]`.
-- **Balance sheet 30 Jun 2026** `[F]`:
-  - Bank debt $61.1m ($75m facility, SOFR + 350 bp, maturity Q1 2028; amortisation $8.1m a year since Feb 2026).
-  - Lease liability (GHTH) $10.1m. Cash $39.4m plus $14.2m restricted.
-  - Net interest-bearing debt incl. lease $17.6m (0.1x LTM adj. EBITDA). Equity $334.1m (71%).
-  - PP&E $319.2m including the vessels (~$40m).
-  - Three rigs and two vessels are unencumbered. Covenants were met at 30 Jun; their terms are `[?]`.
-- **Distribution policy:** distribute excess liquidity quarterly; 2026 guidance **$90–110m** `[F]`.
-  - **Q2 2026: $25.0m (USD 0.0342/share), approved at the EGM on 22 Sep. Ex-date 9 Nov, paid ~13 Nov `[F]`. Not yet ex, so it counts** (NOK 0.319 at 9.32; the NOK amount is fixed on 9 Nov; the company estimated NOK 0.32).
-  - Payment pattern: about 4.5 months after quarter end (Q1 paid in August, Q2 in November) `[F]`.
+- **SeaBird** (firm backlog $31m `[F]`): Eagle Explorer on 2D seismic in India from late Sep 2026 through H1 2027; Fulmar Explorer (five-year class done in Q3) in Angola from Oct, then a ~6-month West Africa OBN job from Dec 2026 (12 Nov `[F]`).
 
-### Contracts (Pareto 17 Sep; backlog as of 30 Jun; T-16 award 27 Oct)
+**Contracts** (Q3 presentation p. 10, backlog at 30 Sep incl. awards after quarter end; ED firm backlog **$336m** `[F]`)
 
-| Rig | Client / area | Firm period | Rate $k/day | Option rate | Status |
-|---|---|---|---|---|---|
-| EDrill-1 | PTTEP, Thailand | Oct 2023 – **Dec 2026** | 94 | 94 | Follow-on tender lost to Foresight (start Feb 2027) `[E]` |
-| EDrill-2 | PTTEP, Thailand | Oct 2025 – Oct 2030 | 83 (average incl. full index) | — | Firm 5 years: with T-16 Phase 7 (to Jan 2030), one of two firm contracts running past the exit |
-| T-15 | PTTEP, Thailand | Mar 2026 – Jan 2027 | 121 | none shown | Follow-on lost to Foresight (start Apr 2027) `[E]` |
-| T-16 | CPOC, Malaysia/JDA (Phase 6) | Nov 2024 – **Dec 2026** firm `[F, 27 Oct release]`; campaign expected to end in **Q1 2027** on extension options `[F]` | 131 | 124 | December and the Q1-27 extension modelled at $124k, ending mid-Feb 2027 `[A]` |
-| T-16 | CPOC, Malaysia/JDA (**Phase 7**, letter of award 27 Oct) | **30 months from early Q3 2027** `[F]`; modelled 15 Jul 2027 – 15 Jan 2030 `[A]` | **~95.1** effective: **USD 87m firm incl. mobilisation fees** `[F]` ÷ 915 days `[B]`; mobilisation amount not disclosed `[?]` | Up to 15 months `[F]`; rate not disclosed `[?]`, $90k assumed `[A]` | Between the phases the rig is demobilised to Singapore with reduced crewing and costs `[F]`; idle length and cost not quantified `[?]` |
-| ED Vencedor | PTTEP (Arthit), Thailand | Nov 2024 – Dec 2027 | 127 | 123 | |
-| GHTH | Myanmar | Nov 2025 – Jul 2027 | 160 | 147 | Bareboat in ~$27k/day (H1 lease payments $4.86m) `[F/A]` |
+| Rig | Client / area | Firm to | Rate $k/day | Model after the firm term (Base) |
+|---|---|---|---|---|
+| EDrill-1 | PTTEP, Thailand | **Dec 2026** | 94 | Bridged to end-Feb 2027 at $94k `[A]`; follow-on lost to Foresight (Feb 2027) `[E]` |
+| EDrill-2 | PTTEP, Thailand | Oct 2030 | 83 (average, full index) | Firm today past exit |
+| T-15 | PTTEP, Thailand | **Feb 2027** (was Jan) `[F]` | 121 | Bridged to end-Mar at $121k `[A]`; Foresight from Apr 2027 `[E]` |
+| T-16 | CPOC, Malaysia/JDA, Phase 6 | **Jan 2027** `[F]` | 131 | Idle in Singapore Feb – mid-Jul 2027 at reduced crewing |
+| T-16 | CPOC Phase 7 (letter of award 27 Oct) | **Jan 2030**, 30 months from early Q3 2027 `[F]` | **90** `[F]` + mobilisation fees ≈ $4.6m (USD 87m firm incl. mob `[F]` − 90 × 915 days) `[B]` | Options up to 15 months `[F]`, rate not disclosed: $90k assumed `[A]` |
+| ED Vencedor | PTTEP (Arthit), Thailand | Dec 2027 | 127 | Option $123k through 2028 |
+| GHTH | Myanmar | Jul 2027 | 160 | Option $147k to Jul 2028; bareboat in ~$27k/day `[F/A]` |
 
-- The option rates come from the garbled table; their assignment to rigs is my reading `[F/?]`.
-- **Firm cover for 2027 is 52% of fleet rig-days** (44% before the T-16 award; 55% with the expected Q1-27 Phase 6 extension).
-- The release states no dayrate. The ~$95k is the firm value spread over the firm days, so it includes the mobilisation fee.
-- **PTTEP–Foresight** (23 Sep): two 350 ft jackups, 5 years + 3 options, rate not published. Three secondary sources say $60–70k; still unconfirmed `[C]`.
+- **Firm cover for 2027 is 55% of fleet rig-days**; EDrill-1 has no contract after December. PTTEP–Foresight (23 Sep): two 350 ft jackups for 5 years at an unconfirmed $60–70k `[C]`.
+- **Rate-basis check:** T-16's release value ($87m ÷ 915 days = $95.1k) includes mobilisation; the model uses the company's $90k dayrate plus the fee as cash at the start. Model firm backlog from 1 Oct is ~$353m at 98% efficiency against the company's $336m (−5%), likely EDrill-2's $83k (full indexation assumed) `[?]`.
 
-### Latest reported quarters ($m)
+**Latest reported quarters** ($m; management figures `[F]`)
 
-| | Q1 2026 | Q2 2026 |
-|---|---|---|
-| Revenue (Energy Drilling / SeaBird) | 69.8 (62.0 / 8.0) | 71.5 (64.4 / 7.3) |
-| Adj. EBITDA (ED / SeaBird) | 39.0 | 42.6 (41.6 / 1.6) |
-| ED opex | ~20 | 20.0 (= $36.6k per rig-day) |
-| Profit | 21.8 | 25.6 |
-| Net debt incl. lease | 30.5 | 17.6 |
-| Distribution (declared) | 25.0 | 25.0 |
-| ED utilisation, technical / economic | 98% / 98% | 98% / 99% |
+| | Q1 2026 | Q2 2026 | **Q3 2026** |
+|---|---|---|---|
+| Revenue (ED / SeaBird) | 69.8 (62.0 / 8.0) | 71.5 (64.4 / 7.3) | **66.4 (64.9 / 1.7)** |
+| Adj. EBITDA (ED / SeaBird) | 39.0 (37.9 / 1.6) | 42.6 (41.6 / 1.6) | **37.0 (40.6 / −3.0)** |
+| ED opex ($m; $k per rig-day) | 20.7 (38.4) | 20.0 (36.6) | **21.5 (38.9)** |
+| Group SG&A | 5.1 | 4.3 | **4.4** (guide ~$4m a quarter) |
+| Profit | 21.8 | 25.6 | **20.5** |
+| NIBD incl. lease | 30.5 | 17.6 | **22.7** |
+| Distribution declared | 25.0 | 25.0 | **H2 deferred to after the Ventura closing** |
+| ED technical / economic utilisation | 97% / — | 98% / 99% | **99% / 99%** |
 
-H1 2026: operating cash flow $80.6m, capex $8.1m, distributions paid $42.5m `[F]`.
+- **Q3 cash:** Maintenance FCF **$17.4m** against $29.2m in the 27 Oct model: EBITDA −$4.5m (SeaBird classing and mobilisation −$3.3m, ED opex −$1.3m), lease $2.9m, working capital and tax −$6.9m (prepaid mobilisation fees unwind as non-cash revenue). 9M: operating cash flow $107.0m, capex $13.3m, distributions $67.5m `[F]`.
+- **Balance sheet, 30 Sep** `[F]`: bank loan $59.0m ($75m facility, SOFR + 350 bp, matures Q1 2028, amortisation $8.1m a year); GHTH lease $7.6m; cash $26.3m + restricted $17.6m; financial net debt $15.1m; equity $330.1m (73%). Covenants (asset cover, minimum equity, DSCR) met; three rigs and two vessels unencumbered.
+- **Distributions:** policy "distribute all excess liquidity"; standalone 2026 guidance **$90–110m** reiterated `[F]`. Q1 $25m paid in August; Q2 $25m ex 7 Dec, paid ~11 Dec (NOK amount set 7 Dec, est. 0.32). **H2 2026 is deferred: the LOI bars distributions before closing**, with an "update on the deferred amount at closing" `[F]`. Modelled as **$40m** (guidance low end; the 90% rule gives $38m) on **15 Apr 2027** `[A]`; the cash floor allows $38.2m in April, the rest follows with the next payment.
 
-## Near term: stub quarters (all scenarios)
+## Near term (all scenarios)
 
-| | Q3-26E (ended 30 Sep, unreported) | Q4-26E |
-|---|---|---|
-| Rig-days / firm share | 552 / 100% | 552 / 100% (T-16 firm through December `[F]`; the December rate is assumed at its $124k option rate `[A]`) |
-| Average dayrate | $119.3k | $118.9k |
-| Drilling revenue ($m) | 64.6 | 64.3 |
-| EBITDA, company basis (IFRS 16) / after bareboat | 41.5 / 39.0 | 42.8 / 40.3 |
-| Maintenance FCF ($m / NOK per share) | 29.2 / 0.37 | 30.6 / 0.39 |
-| FCF after debt service ($m) | 27.2 | 28.5 |
-| Distribution declared (90% of FCF after debt service) | $24.5m = **NOK 0.31**, paid ~15 Feb 2027 `[A]` | $25.7m = **NOK 0.32**, paid ~15 May 2027 `[A]` |
-| Financial net debt, end of quarter ($m; excl. lease) | 3.3 | **−2.2** (net cash) |
+| Q4-26E | Value |
+|---|---|
+| Rig-days / firm share | 552 / 100%; average dayrate $119.3k |
+| Drilling revenue / EBITDA (company basis) / after bareboat ($m) | 64.6 / 42.6 / 40.1 |
+| Maintenance FCF ($m / NOK per share) | 29.2 / 0.39 (after −$1.0m working capital) |
+| Distribution | Q2 $25.0m paid ~11 Dec (NOK 0.33). H2-26 (Q3 + Q4) $40m, to be announced after closing; modelled 15 Apr 2027 |
+| Net debt ($m, financial) | 30 Sep 15.1 → valuation date −1.8 (net cash) → 31 Dec **10.9** (15.1 − Maintenance FCF 29.2 + Q2 distribution 25.0) |
 
-- **2026 distributions** in the model: $100m (H1 $50m + H2 $50m), in the middle of the $90–110m guidance.
-- **Consensus** (Yahoo, as-of date not shown and probably from before the PTTEP loss, so stale `[?]`): FY26 EPS ~NOK 1.17, FY27 ~NOK 0.80. Model (20 Oct version, at 9.44; not recomputed for the T-16 award, which lowers 2027 slightly and lifts 2028–29): FY26 ~NOK 1.3; FY27 Base ~0.71, Bear ~0.09, Bull ~1.06. Not used for the decision.
-- **Net debt bridge to 31 Dec 2026** ($m, financial debt only):
-  - 30 Jun: 7.5 (debt 61.1 − cash 53.6).
-  - Plus distributions paid 50.0 (Q1 $25m in Aug, Q2 $25m on ~13 Nov).
-  - Less FCF after debt service 55.7 (Maintenance FCF 59.8 − amortisation 4.1).
-  - = **−2.2** (net cash).
-- **Net debt at the valuation date** (≈ 30 Sep): **$3.3m** (NOK 0.04/share). The GHTH lease is paid through FCF as bareboat and is not counted again in net debt.
-- **Q3 distribution timing:** the Ventura LOI provides for the Q2 distribution to be paid before closing. Later distributions may wait for closing or lapse (long-stop 31 Mar 2027) `[C]`. The standalone model keeps the normal schedule; a few months' delay changes IRR by < 0.1 pp.
-- **Dates:**
-  - Ex-date 9 Nov, paid ~13 Nov.
-  - **Q3 report 18 Nov, 06:00** `[F, MFN calendar]`.
-  - US midterms 3 Nov.
-  - Ventura Q3 and capex guidance: late Nov.
-  - EDrill-1 firm end: Dec 2026; T-15 firm end: Jan 2027.
-  - T-16: Phase 6 ends in Q1 2027; Phase 7 starts early in Q3 2027 `[F]`.
-  - Ventura long-stop: 31 Mar 2027.
-- **Not modelled:** GHTH's first special survey is listed for 2026 `[F/?]`. If it falls in Q4 with off-hire, every 20 days cost ~$3m of revenue.
+- **Dates:** Q2 last day with the right 4 Dec, ex 7 Dec, paid ~11 Dec · EDrill-1 firm end Dec 2026, T-16 Phase 6 Jan 2027, T-15 Feb 2027 · Ventura definitive agreement and EGMs (dates `[?]`), closing expected Q1 2027, long-stop 31 Mar · **Q4 report 17 Feb 2027** · T-16 Phase 7 from ~15 Jul 2027 · annual report 30 Apr, AGM 27 May 2027 (Newsweb calendar 4 Nov `[F]`).
+- **Consensus** (Yahoo, as-of not shown) `[?]`: EPS 2026 NOK 1.17, 2027 0.77; rating 1.3 (strong buy). Model 1.24 / 0.63. Not used for the decision.
 
 ## Market input
 
-**Rig Market BBB (10 Oct, paths unchanged on 13, 17, 22 and 24 Oct) — rows used directly.** Open rig-days use the leading-edge rate for the rig's segment row; the rates apply to term work starting in the year.
+**Rig Market BBB (12 Nov) rows, used directly.** Open rig-days take the leading-edge rate of the year the term starts.
 
 | $k/day | Stub Q4-26 | 2027 | 2028 | 2029 | Mid-cycle |
 |---|---|---|---|---|---|
-| Tender-assist barges Bear / Base / Bull | 80 / 80 / 80 | 68 / **78** / 88 | 65 / **82** / 95 | 65 / **85** / 100 | 67 / **80** / 95 |
-| SE Asia jackups (context) Bear / Base / Bull | 90 | 72 / 90 / 98 | 70 / 95 / 108 | 70 / 98 / 115 | — / 92 / — |
+| Tender-assist barges Bear / Base / Bull | 80 | 68 / **78** / 88 | 65 / **82** / 95 | 65 / **85** / 100 | 67 / **80** / 95 |
+| SE Asia jackups (context) | 90 | 72 / 90 / 98 | 70 / 95 / 108 | 70 / 98 / 115 | — / 92 / — |
 
-- **Tender-assist mid-cycle Bear/Bull (67 / 95) and MCU (65 / 80 / 90%)** come from the Rig BBB asset table, which took them from this analysis `[A, SED]`. They were derived by scaling Base 80 with the high-spec jackup mid-cycle ratios (92 / 110 / 130).
-- **Rig BBB has no utilisation path for tender-assist** (MCU `[?]`, no series). The exit-consistency test is therefore on the rate basis, with an earnings-basis variant shown.
-- **Semi-tenders** are not covered by Rig BBB. Company-anchored `[A]`:
-  - Bear 100 / 95 / 95, Base 120 / 120 / 125, Bull 135 / 150 / 165; mid-cycle 100 / 120 / 140.
-  - Anchors: current contracts $127–160k; option rates $123k (Vencedor) and $147k (GHTH); company scenario tables pair barge $70–80k with semi $100–120k, and barge $150k with semi $180k.
-- **Rig values: Rig BBB asset-value convention:**
-  - Annual cash flow = 365 × [MCU × (rate × RE − opex) − (1 − MCU) × idle × opex] − tax × revenue − maintenance capex.
-  - Value = annual cash flow × annuity(8%, 30 − age), floored at $10m.
-  - Tender parameters: opex $35k / $40k (company), RE 98%, idle 40% of opex, maintenance capex $3.0m / $3.5m, tax 6.4% of revenue, flat nominal.
-  - Check: a 15-year-old barge at Base is $62m in Rig BBB; this model gives EDrill-1/2 (15.5 years at exit) $60.4m.
-- **Transaction check (Rig BBB):** Seadrill → Energy Drilling, two barges + one semi-tender, $85m (Jun 2023), implies ~$58k/day for a barge on the convention. That is 27% below Base mid-cycle, from a distressed 2023 sale. Drillship and jackup transactions in 2025–26 imply 8–12% *above* Base mid-cycle.
-- **Market data from the company** (Pareto 17 Sep, Aug-26 data) `[E]`:
-  - SE Asia rig count 80 (21% tender rigs).
-  - Tender-assist fleet utilisation "up to 88%".
-  - 23 tenders ongoing, 9 prospects, 28 pre-tender projects.
-  - Tendering "delayed … as operators reassess timing and risk".
-- **Oil Market BBB (17 Oct):** Brent Base 88 / 77 / 72 (2027 raised from 85), mid-cycle 70 unchanged. The geopolitical channel matters more than the oil price: Gulf jackups idled by war move to Asia (Bear for SED), while energy security supports NOC gas programmes (Bull).
+- **Tender mid-cycle Bear/Bull (67 / 95) and MCU (65 / 80 / 90%)** were taken by Rig BBB from this analysis `[A, SED]`; with no tender MCU path the exit test runs on the rate basis.
+- **Semi-tenders** (not in Rig BBB), company-anchored `[A]`: contracts $127–160k, options $123k and $147k; company scenarios pair barge $70–80k with semi $100–120k.
+- **Rig values (Rig BBB convention):** annual cash flow = 365 × [MCU × (rate × 98% − opex) − (1 − MCU) × 40% × opex] − 6.4% × revenue − maintenance capex ($3.0m / $3.5m); value = cash flow × annuity(8%, 30 − age), floor $10m; opex $35k / $40k flat nominal. A 15.5-year-old barge is $60.4m at Base (Rig BBB: 15-year-old $62m). The distressed Seadrill sale ($85m, Jun 2023) implies ~$58k a day, 27% below Base mid-cycle.
+- **Company market read** (Q3 presentation, data to Oct `[E]`): SE Asia rig count 79 (22% tender rigs); tender fleet utilisation **96%**; **29 tenders** (23 in Aug), 12 prospects, 28 pre-tender, 11 campaigns within 3 months; two long-term semi-tender awards in Q3; Malaysia most active; Gulf normalisation "the principal catalyst".
+- **Oil Market BBB (18 Nov):** Brent Base 80 / 73 / 72, mid-cycle 70: background only; the geopolitical channel (Gulf jackups to Asia) matters more.
 
 ## Common assumptions (all scenarios)
 
 | Item | Value | Source |
 |---|---|---|
-| Opex per rig-day, operations | Barge $35k, semi-tender $40k in 2026; +3% a year from 2027 | Company (Ventura deck, slide 14 footnote) `[F]`. Check: 4 × 35 + 2 × 40 = $220k/day × 91 = $20.0m = reported Q2 ED opex. Escalation `[A]` |
-| Opex in rig values | Flat nominal $35k / $40k, like the mid-cycle rates | Rig BBB convention |
-| Idle cost, operations | 65% of opex for the first 90 days (warm), then 35% (cold) | `[A]` (the values use the convention's 40%). T-16's Feb–Jul 2027 gap in Singapore uses the same rule: the release says "reduced crewing and operating costs" without a figure. De- and remobilisation costs are not modelled separately |
-| Technical utilisation on contract | 98% (Bear 96% from 2027) | Q2 98% `[F]` |
-| Special surveys | EDrill-1 2027, inside its idle period (cost in capex). EDrill-2, T-15, T-16 and Vencedor in 2029: 15 days off-hire each | SPS years `[F/?]`, days `[A]` |
-| SeaBird contribution (revenue − opex, before SG&A) | Q3-26 $1.5m, Q4-26 $3.0m; 2027–29 Bear 5 / Base 10 / Bull 18 $m a year | Q2 actual $2.6m `[F]`; rest `[A]` |
-| SG&A (group) | $4.3m a quarter in 2026; 17.0 / 17.5 / 18.0 in 2027–29 | Q2 $4.27m `[F]` |
-| Maintenance capex | Q3-26 5, Q4-26 5; 2027 20; 2028 15; 2029 28 (four SPS) | 2026 guide ~$18m, H1 $8.1m `[F]`; rest `[A]` |
-| Tax | 6.4% of revenue | Q2 `[F]` |
-| Debt | $61.1m at SOFR + 350 bp: 7.7% (2026), 8.3% (2027–29). Amortisation $8.1m a year. Q1-2028 maturity refinanced on the same terms. Cash earns 3.5% | Q2 report `[F]`; SOFR futures Z26 4.23%, Z27 4.81% (2 Oct, `docs/capt-analysis.md`) `[C]`, 25 days old at 27 Oct; refinancing `[A]` |
-| GHTH bareboat | $27k/day while GHTH works; ends with its contract (back-to-back) | Lease payments `[F]`; rate derived `[A]` |
-| Payout | **90% of FCF after debt service** (Maintenance FCF − amortisation), paid ~4.5 months after quarter end. Minimum cash $20m (incl. $14.2m restricted), applied at payment | Policy "distribute excess liquidity" `[F]`; ratio and floor `[A]`. Payout 75% / 100% gives IRR 6.6% / 6.8% |
-| Working capital | Ignored (receivables $39.3m at 30 Jun) | `[A]` |
-| Shares | 737.3m; no new shares, buybacks or acquisitions; **Ventura excluded** | `[A]` |
+| Opex per rig-day, operations | Barge $36.2k, semi $41.4k in 2026; +3% a year from 2027 | 9M 2026 ED opex $62.2m ÷ 1,638 rig-days = $38.0k, 3.5% above the deck's $35k / $40k mix `[F]`; escalation `[A]` |
+| Opex in rig values | $35k / $40k, flat nominal | Rig BBB convention (sensitivity at the 9M actual) |
+| Idle cost | 65% of opex for 90 days, then 35%; GHTH idle carries no cost (chartered) | `[A]` |
+| Revenue efficiency | 98% (Bear 96% from 2027) | Q3 99% `[F]` |
+| Special surveys | EDrill-1 2027 in its idle time (capex); EDrill-2, T-15, T-16, Vencedor: 15 days off-hire each in Oct 2029 | SPS years `[F/?]`; days `[A]` |
+| SeaBird contribution (revenue − opex) | Q4-26 $3.0m; 2027–29 Bear 5 / Base 10 / Bull 18 $m a year | Q3 −$1.8m (classing), Q2 +$2.6m `[F]`; backlog into mid-2027; rest `[A]` |
+| SG&A (group, treated as holdco) | $4.0m in Q4-26; $16.0 / 16.5 / 17.0m in 2027–29 | Guide "around $4m a quarter" `[F]` |
+| Maintenance capex | Q4-26 $5m; 2027 $20m; 2028 $15m; 2029 $28m (four SPS) | 2026 ~$18m, 9M $13.3m `[F]`; rest `[A]` |
+| Working capital | −$1.0m a quarter Q4-26 to Q3-27 (contract liabilities $6.9m less capitalised mobilisation cost $2.8m unwind) | Q3 balance sheet `[F]`; timing `[A]` |
+| Tax | 6.4% of drilling revenue | Q3 6.4% of ED revenue `[F]` |
+| Debt | $59.1m at 30 Sep; 7.7% (2026), 8.0% (2027–29); amortisation $2.0m (Q4-26), then $8.1m a year; Q1-2028 maturity refinanced on the same terms; cash earns 3.5% | Q3 note 9 `[F]`; SOFR futures Z27 95.46 (27 Nov) `[F]`; refinancing `[A]` |
+| GHTH bareboat | $27k a day on working days; ends with its contract | Lease payments `[F]`; rate `[A]` |
+| Payout | 90% of FCF after debt service, paid ~4.5 months after quarter end. H2-26 $40m on 15 Apr 2027. Cash floor $25m (restricted $17.6m + operating cash); withheld amounts paid with the next distribution | Policy and guidance `[F]`; ratio, date, floor `[A]` |
+| Shares | 738.6m; no buybacks or issues; **Ventura excluded** | `[A]` |
 
-### Rig-by-rig assumptions per scenario (after the common stub)
+**Rig by rig per scenario** (after the common stub)
 
 | Rig | Bear | Base | Bull |
 |---|---|---|---|
-| EDrill-1 | Ends Dec 2026. Idle Jan–Aug 2027. $68k from Sep 2027 (18 months). Idle 3 months. $65k from Jun 2029 | Bridged to end-Feb 2027 at the $94k option. Idle Mar–Jun. $78k from Jul 2027 (18 months). Idle Jan 2029. $85k from Feb 2029 | Bridged to end-Mar 2027 (Foresight slips). Idle Apr. $88k from May 2027. $95k from Nov 2028 |
+| EDrill-1 | Ends Dec 2026; idle Jan–Aug 2027; $68k from Sep 2027 (18 months); idle 3 months; $65k from Jun 2029 | $94k to end-Feb 2027; idle Mar–Jun; $78k from Jul 2027 (18 months); idle Jan 2029; $85k from Feb 2029 | $94k to end-Mar; idle Apr; $88k from May 2027; $95k from Nov 2028 |
 | EDrill-2 | $83k to Oct 2030 | same | same |
-| T-15 | Ends Jan 2027. Idle Feb–Oct 2027. $68k from Nov 2027. Idle 3 months. $65k from Aug 2029 | Bridged to end-Mar 2027 at $121k (well-in-progress; no priced option `[A]`). Idle Apr–Jul. $78k from Aug 2027. Idle Feb 2029. $85k from Mar 2029 | Bridged to end-Apr 2027. Idle May. $88k from Jun 2027. $95k from Dec 2028 |
-| T-16 | Phase 6 to mid-Feb 2027 at $124k. Idle in Singapore to mid-Jul. **Phase 7 ~$95k, mid-Jul 2027 – mid-Jan 2030** (awarded 27 Oct). Options not exercised; open from Jan 2030 | As Bear to Jan 2030. **Options exercised: $90k to mid-Apr 2031** `[A]` | As Base (the $90k options are below the Bull market rate) |
-| ED Vencedor | $127k to Dec 2027. Idle Jan–Apr 2028. $95k from May 2028 | $127k to Dec 2027. Option $123k through 2028. Idle Jan 2029. $125k from Feb 2029 | $127k to Dec 2027. Option $123k through 2028. $165k from Jan 2029 |
-| GHTH | $160k to Jul 2027, then redelivered (bareboat ends) | Option $147k Aug 2027 – Jul 2028. Idle 1.5 months. $120k from mid-Sep 2028 | Option $147k to Jul 2028. $150k from Aug 2028 |
+| T-15 | Ends Feb 2027; idle Mar–Oct; $68k from Nov 2027; idle 3 months; $65k from Aug 2029 | $121k to end-Mar 2027; idle Apr–Jul; $78k from Aug 2027; idle Feb 2029; $85k from Mar 2029 | $121k to end-Apr; idle May; $88k from Jun 2027; $95k from Dec 2028 |
+| T-16 | $131k to Jan 2027; Singapore to mid-Jul; **Phase 7 $90k to mid-Jan 2030**; options lapse | As Bear, then **options $90k to mid-Apr 2031** | As Base |
+| Vencedor | $127k to Dec 2027; idle Jan–Apr 2028; $95k from May 2028 | $127k to Dec 2027; $123k option in 2028; idle Jan 2029; $125k from Feb 2029 | $127k to Dec 2027; $123k in 2028; $165k from Jan 2029 |
+| GHTH | $160k to Jul 2027, then redelivered | $147k option Aug 2027 – Jul 2028; idle 1.5 months; $120k from mid-Sep 2028 | $147k to Jul 2028; $150k from Aug 2028 |
 
-**Backlog at exit (iaf-valuation Step 3):** contracts running on 31 Dec 2029 are backlog in that scenario, and a buyer pays for them. Contracts firm today count for their full term (EDrill-2 to Oct 2030; T-16 Phase 7 to Jan 2030, firm today though it starts in Jul 2027). Contracts the scenario signs, and options it exercises (T-16 from Jan 2030 in Base and Bull), count for at most 2 years after exit (to end-2031), at the rate signed. In practice only Bull Vencedor (to Jan 2032) is cut by the cap. After the backlog ends, the days are open at mid-cycle.
+**Backlog at exit:** contracts firm today count in full (EDrill-2 to Oct 2030, T-16 Phase 7 to Jan 2030); contracts and options the scenario signs count to at most end-2031 at the rate signed (only Bull Vencedor is cut); after that the days are open at mid-cycle.
 
-## Period tables ($m, with NOK per share in brackets where Step 2B requires it)
+## Period tables ($m; NOK per share in brackets)
 
-### Base (decision case)
+**Base (decision case)**
 
-| | Q3-26E | Q4-26E | Q1-27 | Q2-27 | Q3-27 | Q4-27 | 2028 | 2029 |
-|---|---|---|---|---|---|---|---|---|
-| Drilling revenue | 64.6 | 64.3 | 54.2 | 33.0 | 51.5 | 54.8 | 207.3 | 197.7 |
-| EBITDA, company basis | 41.5 | 42.8 | 33.0 | 14.9 | 30.0 | 32.2 | 116.3 | 103.2 |
-| EBITDA after bareboat | 39.0 | 40.3 | 30.6 | 12.5 | 27.5 | 29.7 | 107.7 | 93.3 |
-| Maintenance FCF (NOK/share) | 29.2 (0.37) | 30.6 (0.39) | 21.5 (0.27) | 4.7 (0.06) | 18.4 (0.23) | 20.4 (0.26) | 77.3 (0.98) | 51.1 (0.65) |
-| Debt amortisation | 2.0 | 2.0 | 2.0 | 2.0 | 2.0 | 2.0 | 8.1 | 8.1 |
-| FCF after debt service (NOK/share) | 27.2 (0.34) | 28.5 (0.36) | 19.4 (0.25) | 2.7 (0.03) | 16.4 (0.21) | 18.4 (0.23) | 69.2 (0.87) | 43.0 (0.54) |
-| Growth capex | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Distribution declared (NOK/share) | 24.5 (0.31) | 25.7 (0.32) | 17.5 (0.22) | 2.4 (0.03) | 14.7 (0.19) | 16.6 (0.21) | 62.3 (0.79) | 38.7 (0.49) |
-| Net debt, end of period (NOK/share) | 3.3 (0.04) | −2.2 (−0.03) | 0.7 (0.01) | 21.7 (0.27) | 20.8 (0.26) | 2.8 (0.04) | −9.9 (−0.13) | −16.2 (−0.20) |
+| | Q4-26E | Q1-27 | Q2-27 | Q3-27 | Q4-27 | 2028 | 2029 |
+|---|---|---|---|---|---|---|---|
+| Drilling revenue (incl. T-16 mob fee in Q3-27) | 64.6 | 52.7 | 33.0 | 55.8 | 54.4 | 205.5 | 195.8 |
+| EBITDA, company basis / after bareboat | 42.6 / 40.1 | 31.3 / 28.9 | 14.8 / 12.3 | 33.8 / 31.3 | 31.3 / 28.8 | 112.6 / 103.9 | 99.3 / 89.4 |
+| Maintenance FCF | 29.2 (0.39) | 18.8 (0.25) | 3.6 (0.05) | 20.9 (0.28) | 19.6 (0.26) | 73.7 (0.97) | 47.3 (0.62) |
+| Debt amortisation | 2.0 | 2.0 | 2.0 | 2.0 | 2.0 | 8.1 | 8.1 |
+| FCF after debt service | 27.2 (0.36) | 16.7 (0.22) | 1.6 (0.02) | 18.9 (0.25) | 17.6 (0.23) | 65.6 (0.87) | 39.2 (0.52) |
+| Growth capex | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Distribution declared | 40.0 (H2-26; 0.53) | 15.1 (0.20) | 1.5 (0.02) | 17.0 (0.22) | 15.8 (0.21) | 59.0 (0.78) | 35.3 (0.47) |
+| Net debt, period end | 10.9 (0.14) | −7.9 (−0.10) | 26.7 (0.35) | 16.3 (0.22) | 0.0 (0.00) | −4.7 (−0.06) | −8.2 (−0.11) |
 
-- 2027 full year: EBITDA $110.2m on the company basis ($100.3m after bareboat); Maintenance FCF $65.0m (NOK 0.82/share).
-- Q2-27 is the trough: EDrill-1, T-15 and T-16 are all idle. From 2028 the T-16 award lifts cash against the old Base ($95k against $80k).
+- **Q2-27 is the trough** (EDrill-1, T-15 and T-16 idle; the H2-26 payment in April). 2027 in full: EBITDA $111.2m ($101.3m after bareboat), Maintenance FCF $62.9m (NOK 0.83).
 
-### Bear (stub as Base)
+**Bear and Bull** (stub as Base)
 
-| | Q1-27 | Q2-27 | Q3-27 | Q4-27 | 2028 | 2029 |
+| | Bear 2027 | Bear 2028 | Bear 2029 | Bull 2027 | Bull 2028 | Bull 2029 |
 |---|---|---|---|---|---|---|
-| Drilling revenue | 40.9 | 32.3 | 32.4 | 36.9 | 132.7 | 125.4 |
-| EBITDA, company basis | 20.0 | 14.3 | 15.0 | 17.6 | 52.5 | 43.2 |
-| Maintenance FCF (NOK/share) | 9.3 (0.12) | 4.0 (0.05) | 6.2 (0.08) | 9.4 (0.12) | 26.0 (0.33) | 4.8 (0.06) |
-| FCF after debt service (NOK/share) | 7.2 (0.09) | 2.0 (0.02) | 4.1 (0.05) | 7.3 (0.09) | 17.9 (0.23) | −3.3 (−0.04) |
-| Distribution declared (NOK/share) | 0.08 | 0.02 | 0.05 | 0.08 | 0.20 (partly withheld by the cash floor) | 0.01 |
-| Net debt (NOK/share) | 12.9 (0.16) | 33.0 (0.42) | 31.0 (0.39) | 23.4 (0.30) | 11.8 (0.15) | 12.9 (0.16) |
+| Revenue / EBITDA (company basis) | 148.2 / 70.9 | 130.9 / 49.3 | 123.7 / 40.0 | 216.1 / 136.3 | 223.1 / 136.2 | 236.2 / 146.3 |
+| Maintenance FCF | 29.7 (0.39) | 23.2 (0.31) | 1.9 (0.02) | 87.0 (1.15) | 95.3 (1.26) | 92.7 (1.22) |
+| FCF after debt service | 21.6 (0.29) | 15.1 (0.20) | −6.2 (−0.08) | 78.9 (1.04) | 87.2 (1.15) | 84.6 (1.12) |
+| Distribution declared / paid | 19.4 / 39.4 | 14.2 / 15.5 | 0.5 / 3.2 | 71.0 / 70.0 | 78.5 / 79.4 | 76.1 / 80.2 |
+| Net debt, year end | 20.6 (0.27) | 12.8 (0.17) | 14.1 (0.19) | −6.1 (−0.08) | −22.0 (−0.29) | −34.4 (−0.45) |
 
-### Bull (stub as Base)
-
-| | Q1-27 | Q2-27 | Q3-27 | Q4-27 | 2028 | 2029 |
-|---|---|---|---|---|---|---|
-| Drilling revenue | 57.1 | 44.4 | 55.7 | 56.6 | 224.9 | 237.8 |
-| EBITDA, company basis | 37.5 | 26.4 | 35.4 | 36.0 | 140.0 | 150.0 |
-| Maintenance FCF (NOK/share) | 25.7 (0.33) | 15.5 (0.20) | 23.7 (0.30) | 24.3 (0.31) | 99.0 (1.25) | 96.3 (1.22) |
-| FCF after debt service (NOK/share) | 23.7 (0.30) | 13.5 (0.17) | 21.7 (0.27) | 22.2 (0.28) | 90.9 (1.15) | 88.2 (1.11) |
-| Distribution declared (NOK/share) | 0.27 | 0.15 | 0.25 | 0.25 | 1.03 | 1.00 |
-| Net debt (NOK/share) | −3.5 (−0.04) | 6.6 (0.08) | 4.3 (0.05) | −7.9 (−0.10) | −27.3 (−0.35) | −42.7 (−0.54) |
-
-### Year-end path per share (NOK; D_t = distributions paid in the period)
-
-**Interim marks:**
-- At end-2026, all scenarios use Base mid-cycle marks plus contracts firm today, because no current market mark exists.
-- The marks then glide linearly (one third a year) to each scenario's own mid-cycle at exit. From end-2027 each mark also counts the backlog the scenario holds on that date (2-year cap).
+**Year-end path** (NOK per share; D_t paid). Interim marks: end-2026 at Base mid-cycle plus contracts firm today in all scenarios; then a linear glide (one third a year) to the scenario mid-cycle at exit, plus the scenario's backlog on each date (2-year cap).
 
 | | | Stub (to 31 Dec 26) | 2027 | 2028 | 2029 |
 |---|---|---|---|---|---|
-| **Base** | D_t | 0.32 | 0.89 | 0.82 | 0.57 |
-| | V_t | 6.08 | 5.69 | 5.64 | **5.43** |
-| | r_t | −5.9% (not annualised) | +8.0% | +13.6% | +6.3% |
-| | IRR to t | n.m. (0.18 yr) | +1.3% | +6.7% | **+6.7%** |
-| **Bear** | D_t | 0.32 | 0.69 | 0.18 | 0.08 |
-| | V_t | 6.08 | 4.14 | 2.93 | **1.59** |
-| | r_t | −5.9% | −20.7% | −24.7% | −43.2% |
-| | IRR to t | n.m. | −23.7% | −24.4% | **−30.9%** |
-| **Bull** | D_t | 0.32 | 1.06 | 1.01 | 1.02 |
-| | V_t | 6.08 | 7.01 | 8.54 | **9.35** |
-| | r_t | −5.9% | +32.7% | +36.2% | +21.4% |
-| | IRR to t | n.m. | +22.0% | +28.8% | **+27.1%** |
+| **Base** | D_t / V_t | 0.33 / 6.17 | 0.69 / 6.46 | 0.91 / 6.23 | 0.58 / **5.57** |
+| | r_t / IRR to t | −1.5% (not annualised) / n.m. | +15.8% / +13.5% | +10.6% / +12.5% | −1.3% / **+8.4%** |
+| **Bear** | D_t / V_t | 0.33 / 6.17 | 0.52 / 4.34 | 0.20 / 3.11 | 0.04 / **1.65** |
+| | r_t / IRR to t | −1.5% / n.m. | −21.2% / −21.8% | −23.6% / −22.8% | −45.7% / **−30.8%** |
+| **Bull** | D_t / V_t | 0.33 / 6.17 | 0.93 / 8.13 | 1.05 / 9.20 | 1.06 / **9.67** |
+| | r_t / IRR to t | −1.5% / n.m. | +46.7% / +42.6% | +26.1% / +35.8% | +16.6% / **+30.4%** |
 
-The path is a diagnostic, not a per-year pass or fail:
-- **Base:** 2027 is the weakest full year in cash (three barges idle in Q2), but the end-2027 mark carries the contracts signed in 2027 (+8.0%). 2028 is the best year (+13.6%), on cash and stable marks.
-- **Bear:** loses value every year as the marks glide down to Bear mid-cycle, where the barges are near the $10m floor.
-- **Bull:** value rises as the marks glide up to Bull mid-cycle, plus ~15% a year in cash.
+- **Base:** to end-2027 and end-2028 the path is above k, because the marks carry the backlog signed in 2027–28. 2029 gives it back as the fleet ages and the backlog runs off. The exit decides.
 
-## V_T bridge, Base ($m and NOK/share)
+## V_T bridge (Base) and exit tests
 
-| Step | $m | NOK/share |
+| Step | $m | NOK per share |
 |---|---|---|
-| P (market capitalisation incl. options, at 9.32) | 537.9 | 6.80 |
-| Re-rating P → NAV_0 (P/NAV_0 1.09x, outside the 0.95–1.05 band: the price is 9% above NAV_0; −2.7% a year) | −45.2 | −0.57 |
-| **NAV_0:** owned rigs at Base mid-cycle by age 384.3 + contracts firm today, premium vs mid-cycle 76.7 (T-16 Phase 7 adds ~$18m) + SeaBird 35.0 − net debt 3.3 | **492.7** | **6.23** |
+| P (market cap incl. options) | 499.7 | 6.60 |
+| Re-rating P → NAV_0 (P/NAV_0 1.02x, inside the 0.95–1.05 band) | −10.7 | −0.14 |
+| **NAV_0**: owned rigs at Base mid-cycle by age 383.4 + firm-today premium 49.7 + GHTH firm margin 19.2 + SeaBird 35.0 + net cash 1.8 | **489.0** | **6.46** |
 | + Value created by growth capex (none committed) | 0 | 0 |
-| − Ageing of the owned fleet at mid-cycle (384.3 → 336.5) | −47.8 | −0.60 |
-| − Roll-off of the firm-today premium (76.7 → 4.3; EDrill-2 and two weeks of T-16 Phase 7 run past T) | −72.4 | −0.92 |
-| + Premium on backlog signed in the Base (contracts and exercised options running past T, capped at end-2031; below) | +37.6 | +0.48 |
-| ± Reversion tail (exit consistency; no material gap on open days, see below) | 0 | 0 |
-| + Retained cash (net debt 3.3 → −16.2; includes the Q3/Q4-29 distributions payable after exit) | +19.5 | +0.25 |
-| **= V_T (31 Dec 2029): assets 413.4 + net cash 16.2** | **429.5** | **5.43** |
+| − Ageing of the owned fleet (383.4 → 336.7) | −46.6 | −0.62 |
+| − Roll-off of the firm-today premium (68.9 → 4.2: EDrill-2 to Oct 2030, T-16 to Jan 2030) | −64.7 | −0.85 |
+| + Premium on backlog signed in the Base (to the end-2031 cap) | +37.6 | +0.50 |
+| ± Reversion tail (no material gap on the rate basis) | 0 | 0 |
+| + Retained cash (net debt −1.8 → −8.2; includes the Q3/Q4-29 distributions payable after exit) | +6.5 | +0.09 |
+| **= V_T (31 Dec 2029): assets 413.6 + net cash 8.2** | **421.8** | **5.57** |
 
-g = (5.43 / 6.80)^(1/3.18) − 1 = **−6.8% a year**: re-rating −2.7% and NAV growth −4.2% a year.
+g = (5.57 / 6.60)^(1/3.10) − 1 = **−5.3% a year**: re-rating −0.7%, NAV growth −4.7%.
 
-**Exit asset values** ($m; scenario mid-cycle on the Rig BBB convention, age at exit, plus the contract premium on backlog at exit) `[A]`:
+**Exit asset values** ($m; scenario mid-cycle by age + contract premium at exit, on the asset convention's earnings basis, discounted at 8%)
 
 | Asset (age at exit) | Bear | Base | Bull |
 |---|---|---|---|
-| EDrill-1 (15.5) | 12.5 + 4.3 = 16.8 | 60.4 + 5.3 = 65.7 | 114.4 + 2.3 = 116.7 |
-| EDrill-2 (15.5; firm today, $83k to Oct 2030) | 12.5 + 8.5 = 21.0 | 60.4 + 3.9 = 64.3 | 114.4 − 1.3 = 113.1 |
-| T-15 (17.5) | 11.5 + 4.3 = 15.8 | 55.5 + 5.3 = 60.8 | 105.1 + 2.3 = 107.4 |
-| T-16 (16.5; Phase 7 firm today to Jan 2030) | 12.0 + 0.6 = 12.6 | 58.0 + 8.9 = 66.9 | 109.9 + 1.0 = 110.9 |
-| ED Vencedor (20.5) | 43.6 + 8.8 = 52.4 | 102.3 + 7.7 = 110.0 | 161.7 + 22.6 = 184.2 |
-| GHTH (chartered in: value = contract margin after bareboat while its contract runs; nothing after) | 0 (redelivered Jul 2027) | 10.8 (to Sep 2030) | 14.7 (to Aug 2030) |
-| SeaBird (2 vessels; book $40.3m at 30 Jun `[F]`) | 20 | 35 | 50 |
-| Reversion tail | 0 | 0 | 0 |
-| **Total assets** | **138.7** | **413.4** | **697.1** |
-| of which: premium on contracts firm today / on backlog signed in the scenario | 9.1 / 17.5 | 4.3 / 37.6 | −1.2 / 42.8 |
-| Net debt at exit | 12.9 | −16.2 | −42.7 |
-| **V_T ($m / NOK per share)** | **125.8 / 1.59** | **429.5 / 5.43** | **739.8 / 9.35** |
-| Assets / 2029 EBITDA (company basis), cross-check only | 3.2x | 4.0x | 4.6x |
+| EDrill-1 (15.5) | 12.5 + 4.3 | 60.4 + 5.3 | 114.5 + 2.3 |
+| EDrill-2 (15.5; firm today, $83k to Oct 2030) | 12.5 + 8.5 | 60.4 + 3.9 | 114.5 − 1.3 |
+| T-15 (17.5) | 11.5 + 4.3 | 55.5 + 5.3 | 105.2 + 2.3 |
+| T-16 (16.5; Phase 7 firm to Jan 2030) | 12.0 + 0.5 | 58.0 + 8.8 | 110.0 + 0.9 |
+| ED Vencedor (20.5) | 43.6 + 8.8 | 102.4 + 7.7 | 161.9 + 22.6 |
+| GHTH (chartered: contract margin after bareboat while it runs) | 0 (redelivered) | 10.8 (to Sep 2030) | 14.7 (to Aug 2030) |
+| SeaBird (2 vessels; book $41.6m `[F]`) | 20 | 35 | 50 |
+| **Total assets** (of which premium firm today / signed in the scenario) | **138.7** (9.0 / 17.4) | **413.6** (4.2 / 37.6) | **697.5** (−1.3 / 42.8) |
+| Net debt at exit | 14.1 | −8.2 | −34.4 |
+| **V_T ($m / NOK per share)** | **124.6 / 1.65** | **421.8 / 5.57** | **732.0 / 9.67** |
+| Assets / 2029 EBITDA (company basis), cross-check only | 3.5x | 4.2x | 4.8x |
 
-**Backlog at exit, per contract** (scenario-signed unless stated; premium per day = contract day at 98% RE against the convention's mid-cycle day at the scenario MCU, incl. idle cost; discounted at 8%):
+- **Backlog at exit** (scenario-signed unless stated): Base EDrill-1 and T-15 $85k to Jan 2031, T-16 Phase 7 (firm) then options $90k to Apr 2031, Vencedor $125k to Jan 2031, GHTH $120k to Sep 2030; Bear barges $65k to Jan 2031, Vencedor $95k to May 2031; Bull barges $95k to Jan 2031, Vencedor $165k capped at end-2031, GHTH $150k to Aug 2030. Most of the premium is utilisation (~98% on contract against MCU 65 / 80 / 90%).
+- **Firm-today contracts only (sensitivity):** IRR_T −33.9% / **5.8%** / 28.3%; P_k 2.02 / **5.75** / 9.27.
 
-| Rig | Bear | Base | Bull |
-|---|---|---|---|
-| EDrill-1 | $65k, Jun 2029 – Jan 2031 | $85k, Feb 2029 – Jan 2031 | $95k, Nov 2028 – Jan 2031 |
-| EDrill-2 | $83k firm today to Oct 2030 | same | same |
-| T-15 | $65k, Aug 2029 – Jan 2031 | $85k, Mar 2029 – Jan 2031 | $95k, Dec 2028 – Jan 2031 |
-| T-16 | $95k firm today to Jan 2030; options not exercised | $95k firm today to Jan 2030, then options at $90k to Apr 2031 | As Base |
-| Vencedor | $95k, May 2028 – May 2031 | $125k, Feb 2029 – Jan 2031 | $165k, Jan 2029 – Jan 2032, **capped at end-2031** |
-| GHTH | — | $120k, Sep 2028 – Sep 2030 | $150k, Aug 2028 – Aug 2030 |
+**Exit consistency** (open days in 2030–31; days under backlog are carried by the premium). Rig BBB gives no tender MCU path, so the **rate basis** decides. The earnings basis (2029 revenue per calendar day against mid-cycle × MCU × 98%) is shown as a check.
 
-- Most of the premium is utilisation, not rate: a contracted rig works ~98% of the days against the mid-cycle MCU of 65 / 80 / 90%. Base T-16 options: $90k × 98% ≈ $88k a day earned against $80k × 80% × 98% ≈ $63k at mid-cycle.
-- **Sensitivity, contracts firm today only (the 17 Oct rule; T-16 Phase 7 counts, its options do not):** V_T Bear 1.37 / Base 4.95 / Bull 8.81; IRR_T −33.8% / **4.2%** / 25.2%; P_k 2.13 / 5.70 / 9.04.
+| Row | Scenario | Year-3 / mid-cycle rate | Gap, rate basis | Gap, earnings basis | Treatment |
+|---|---|---|---|---|---|
+| Barges | Bear | 65 / 67 | −3.0% | +6% to +94% (EDrill-2, T-16 on firm work) | Not material |
+| Vencedor | Bear | 95 / 100 | −5.0% | +37% | Not material |
+| Barges | Base | 85 / 80 | +6.2% | +16% to +35% | Not material |
+| Vencedor | Base | 125 / 120 | +4.2% | +14% | Not material |
+| Barges | Bull | 95 / 95 | 0% | −7% to +11% | Not material |
+| Vencedor | Bull | 165 / 140 | +17.9% | +26% | No test: under backlog to the cap |
 
-- **Annual rig-level cash flow at mid-cycle:** barge $1.5m / $7.2m / $13.6m; semi-tender $6.7m / $15.8m / $25.0m. Bear barges sit near the $10m floor.
-- **No exit multiple** is used, and the IAF ceiling is not used as an exit.
-- **Cross-checks:**
-  - Today's EV / LTM adj. EBITDA is ~4.0x; Base exit assets are 4.0x 2029 EBITDA.
-  - Book value of the rigs ~$279m (30 Jun 2026).
-  - At the 2023 transaction-implied rates ($58k barge, $87k semi, at 80% MCU), Base IRR falls to −10.4%.
+- **No reversion tail is applied.** Sensitivity, rate-basis tail: Bear −$1.6m (−31.1% / 2.17), Base +$2.4m (8.6% / 6.12), Bull 0. The large earnings-basis gaps (on-contract utilisation ~98% against the mid-cycle MCU) are a Rig BBB data gap.
 
-### Exit consistency (Step 3)
-
-The test runs on the **open days in the 2 years after exit** (2030–31). Days under backlog at exit are left out, because the contract premium carries them. In every scenario the owned rigs are under backlog through 2030 (EDrill-2 to Oct 2030), so the test covers 2031 (and the last two months of 2030 for EDrill-2). The exceptions are T-16, open from Apr 2031 in Base and Bull and from mid-Jan 2030 in Bear. EDrill-2's and T-16's open days are tested against the barge row's Year-3 market rate, not their own contract rates. GHTH has no value after its contract.
-
-Rig BBB gives no utilisation path for tender rigs, so the **rate basis** decides. The **earnings basis** (the model's 2029 revenue per calendar day against mid-cycle rate × MCU × RE) is shown as a check.
-
-| Rig | Scenario | Open share 2030 / 2031 | Year-3 rate | Mid-cycle | Gap (rate basis) | Gap (earnings basis) | Treatment |
-|---|---|---|---|---|---|---|---|
-| EDrill-1, T-15 | Bear | 0 / 100% | 65 | 67 | −3.0% | +10% / +7% | Not material |
-| EDrill-2 (barge row) | Bear | 17% / 100% | 65 | 67 | −3.0% | +10% | Not material |
-| T-16 (barge row) | Bear | 96% / 100% | 65 | 67 | −3.0% | +10% | Not material |
-| Vencedor | Bear | 0 / 67% | 95 | 100 | −5.0% | +37% | Not material |
-| EDrill-1, EDrill-2, T-15, T-16 | Base | 0–17% / 72–100% | 85 | 80 | +6.2% | +17–22% | Not material |
-| Vencedor | Base | 0 / 100% | 125 | 120 | +4.2% | +14% | Not material |
-| EDrill-1, EDrill-2, T-15, T-16 | Bull | 0–17% / 72–100% | 95 | 95 | 0% | +7–11% | Not material |
-| Vencedor | Bull | 0 / 0 | 165 | 140 | +17.9% | +25% | **No test: under backlog to the cap (end-2031)** |
-
-- **No reversion tail is applied** in any scenario. The 17 Oct named reason for Bull Vencedor is no longer needed: its contract carries the rig to the cap.
-- **Earnings-basis gaps stay material in most rows** (+7% to +37%): the model's 2029 utilisation on contract (90–98%) is far above the mid-cycle MCU. That is a Rig BBB data gap (no tender-assist MCU path), carried to For other modules.
-- **Sensitivity:**
-
-| Exit treatment | Bear IRR_T / P_k | **Base IRR_T / P_k** | Bull IRR_T / P_k |
-|---|---|---|---|
-| **No tail (decision)** | −30.9% / 2.29 | **6.7% / 6.03** | 27.1% / 9.41 |
-| Reversion tail on open days, rate basis (Base +$2.4m) | −31.1% / 2.27 | 6.9% / 6.05 | 27.1% / 9.41 |
-| Reversion tail on open days, earnings basis (Base +$6.4m, NOK 0.08/share) | −30.2% / 2.32 | 7.1% / 6.09 | 27.3% / 9.44 |
-| Contracts firm today only (17 Oct rule) | −33.8% / 2.13 | 4.2% / 5.70 | 25.2% / 9.04 |
-
-### Exit cross-check against the equity market (Step 3)
+**Exit cross-check against the equity market**
 
 | | Bear | **Base** | Bull |
 |---|---|---|---|
-| V_T ($m) | 125.8 | **429.5** | 739.8 |
-| Normalised Maintenance FCF at the scenario mid-cycle, before holdco G&A ($m) | 12.3 | **56.7** | 107.7 |
-| FCF_normalised (after the fleet-renewal charge), before holdco G&A ($m) | 7.7 | **41.7** | 81.2 |
-| Holdco G&A, not in NAV (IAF rule) ($m a year) | 18 | **18** | 18 |
-| **Exit P/E** on FCF_normalised before holdco G&A (Maintenance FCF basis in brackets) | 16.2x (10.2x) | **10.3x (7.6x)** | 9.1x (6.9x) |
-| Book equity at exit ($m; 334.1 at 30 Jun + retained cash to exit `[A]`) | 329 | **358** | 384 |
-| **Exit P/B** | 0.38 | **1.20** | 1.93 |
-| **Buyer's implied return at exit** (Rig BBB asset rate; net cash in Base and Bull) | ~8% | **~8%** | ~8% |
-| Oslo index (Equity BBB): exit P/E / exit P/B / mid-cycle return | 10.5 / 1.48 / 8.2% | **11.5 / 1.75 / 9.1%** | 12.5 / 1.97 / 9.4% |
-| Sensitivity: exit marks at the index mid-cycle return instead of 8% (IRR_T / P_k) | −31.0% / 2.28 | **5.5% / 5.86** | 25.2% / 9.03 |
+| V_T ($m) | 124.6 | **421.8** | 732.0 |
+| Normalised Maintenance FCF at the scenario mid-cycle, before holdco G&A ($m) | 7.6 | **52.5** | 103.8 |
+| FCF_normalised after the fleet-renewal charge, before holdco G&A ($m) | 3.0 | **37.4** | 77.4 |
+| Holdco G&A, not in NAV ($m a year) | 17 | **17** | 17 |
+| **Exit P/E** on FCF_normalised (Maintenance FCF basis) | 41x (16.5x) | **11.3x (8.0x)** | 9.5x (7.0x) |
+| Book equity at exit ($m; 330.1 at 30 Sep + profit after D&A $38m a year − distributions `[A]`) / **exit P/B** | 280 / 0.45 | **302 / 1.40** | 328 / 2.23 |
+| Buyer's implied return (Rig BBB asset rate; net cash in Base and Bull) | ~8% | **~8%** | ~8% |
+| Oslo (Equity BBB 20 Nov): exit P/E / exit P/B / mid-cycle return | 10.5 / 1.51 / 8.0% | **11.5 / 1.78 / 8.9%** | 12.5 / 2.00 / 9.2% |
+| Sensitivity: exit marks at the index mid-cycle return (IRR_T / P_k) | −30.8% / 2.18 | **7.3% / 5.95** | 28.6% / 9.32 |
 
-- **Exit P/B** is below the index in Base (1.20 vs 1.75): SED's normalised return on book (~11%) is below the index's ~15%. Consistent.
-- **The buyer's return (8%) is below the Oslo mid-cycle return (9.1%)**, so the exit is a little generous against the stock market. At 9.1% Base falls to 5.5% (sensitivity above).
-- **Exit P/E** on the NAV's own basis (asset-level, before holdco G&A) is 10.3x in Base against the index's 11.5x: consistent. Bear's 16.2x reflects mid-cycle cash near the $10m value floor, not a generous mark.
-- **Holdco G&A ($18m a year) is outside NAV by the IAF rule** (2026-10-18.2): the holding company finances and sets strategy but does not operate the rigs. It is in the 2026–29 cash flows as paid. SED reports one group SG&A line; treating all of it as holding company is `[A]`. Any onshore operating support inside it would belong in rig opex.
-- **Book equity is approximate:** no D&A figure was available (FinancialFilings quota used up on 18 Oct; Nordic Financial returned only the results announcement). Book at exit assumes maintenance capex ≈ D&A over the window `[A]`.
+- **Base is consistent with the market:** exit P/E 11.3x beside the index's 11.5x; P/B 1.40 below 1.78 (normalised return on book ~12% before holdco G&A against the index's ~15%); the 8% buyer's return is a little below Oslo's 8.9% (at 8.9%: 7.3%).
+- **Bear's 41x is not a generous mark:** its barges sit near the $10m value floor with mid-cycle cash near zero. Bull's P/B 2.23 is above the index's 2.00, its exit P/E (9.5x) below.
 
-## Growth capex test (Step 4)
+## Growth capex test
 
-- **No growth capex is committed.** The capex in the model is maintenance and special surveys, so g is the change in value per share: ageing, contract roll-off and retained cash.
-- **The growth decision is Ventura**, funded with 605m new shares (45% of the combined company). Under Step 4 it counts only if ROIC_g > k after dilution. It is not in the decision figure; see the overlay.
-- **Rig purchases** (the company names consolidation and "new verticals") would be tested against the 2023 price (~$28m a rig) and the convention value (~$55–60m for a 15–18-year-old barge at Base). Nothing has been announced.
+- **No growth capex is committed:** capex is maintenance and special surveys, so g is ageing, contract roll-off and retained cash. The growth decision is Ventura (605m new shares for 45% of the combined company); it counts only if ROIC_g > k after dilution (overlay below). Rig purchases would be tested against the 2023 price (~$28m a rig) and the convention value (~$55–60m); none announced.
 
 ## Results
 
 | | Bear | **Base** | Bull |
 |---|---|---|---|
-| IRR_T | −30.9% | **+6.7%** | +27.1% |
-| IRR_T in NOK on the Equity BBB NOK path (USD/NOK Bear +12% / +9% / +9%, Bull −3%) | −28.7% | +6.7% | +25.8% |
-| d / g / c | 5.8% / −36.7% / 0.0 pp | **12.0% / −6.8% / +1.6 pp** | 15.7% / +10.5% / +0.9 pp |
-| g: re-rating / NAV growth (P/NAV_0) | −21.8% / −19.0% (2.19x) | **−2.7% / −4.2% (1.09x)** | +11.6% / −1.0% (0.71x) |
-| Structural IRR / cyclical (pp; Δd, Δg) | −30.1% / −0.8 (+0.1, −0.9) | **4.9% / +1.8 (+0.8, +0.9)** | 26.2% / +0.9 (0.0, +1.0) |
-| ΣD_t / V_T (NOK) | 1.26 / 1.59 | **2.59 / 5.43** | 3.40 / 9.35 |
-| **P_k (hurdle price) / margin of safety** | 2.29 / −66.4% | **6.03 / −11.3%** | 9.41 / +38.4% |
-| Rule 3: P/FCF normalised vs ceiling IRR_T/k² | 22.7x vs negative | **22.7x vs 4.7x** | 22.7x vs 18.8x |
-| Capital preserved? ΣD_t + V_T vs P = 6.80 | **No: 2.85, −58%** | Yes: 8.02 (+18% nominal over 3.2 yr) | Yes: 12.76 |
+| IRR_T | −30.8% | **+8.4%** | +30.4% |
+| IRR_T in NOK on the Equity BBB NOK path | −28.5% | +8.4% | +28.9% |
+| d / g / c | 5.4% / −36.2% / −0.1 pp | **12.3% / −5.3% / +1.5 pp** | 16.5% / +13.1% / +0.8 pp |
+| g: re-rating / NAV growth (P/NAV_0) | −21.0% / −19.2% (2.08x) | **−0.7% / −4.7% (1.02x)** | +14.5% / −1.2% (0.66x) |
+| Structural IRR / cyclical (pp; Δd, Δg) | −29.9% / −0.9 (0.0, −0.9) | **6.7% / +1.7 (+0.7, +0.9)** | 29.6% / +0.8 (−0.1, +1.1) |
+| ΣD_t / V_T (NOK) | 1.10 / 1.65 | **2.51 / 5.57** | 3.36 / 9.67 |
+| **P_k (hurdle price) / margin of safety** | 2.18 / −67.0% | **6.10 / −7.6%** | 9.67 / +46.5% |
+| Rule 3: P/FCF normalised vs ceiling IRR_T/k² | 24.5x vs negative | **24.5x vs 5.9x** | 24.5x vs 21.1x |
+| Capital preserved? ΣD_t + V_T vs P = 6.60 | **No: 2.74, −58%** | Yes: 8.08 (+22% nominal over 3.1 years) | Yes: 13.03 |
 
-**Notes on the results:**
-- **Structural IRR:**
-  - The same model with every open or re-priced day from 1 Jan 2027 at that scenario's own mid-cycle rate. Open days include the option and bridge periods and all new contracts: barge 67 / 80 / 95, semi 100 / 120 / 140. T-16 Phase 7 is firm today and keeps its rate.
-  - The stub, firm-today contract days, idle gaps and exit asset values are unchanged; the reversion tail is zero. Backlog signed in the scenario stays at exit, re-priced to the mid-cycle rate, so only its utilisation premium remains.
-  - Cyclical = IRR_T − structural.
-  - Reading: the cycle adds little within each scenario (−0.8 to +1.8 pp). Bear (−35 pp) and Bull (+21 pp) against Base structural are **mid-cycle shifts**, driven by asset values.
-- **FCF_normalised** (Rule 3):
-  - Full fleet at Base mid-cycle (barge $80k, semi $120k, 80% MCU, RE 98%), 2029 opex, idle at 40% of opex, GHTH bareboat on working days, SeaBird $10m, SG&A $18m, tax 6.4%, maintenance capex $20m, interest income on exit net cash.
-  - Maintenance FCF $38.7m, less a **fleet-renewal charge of $15.0m** (Base ageing −47.8 ÷ T) = **$23.7m = NOK 0.30/share → P/FCF 22.7x**.
-- **Scenario-weighted reference (convention, 25/50/25 on levels D_t and V_T):** IRR 6.1%, P_k NOK 5.94. Not the decision figure.
-- **Share of Bull already priced:** (6.80 − 6.03) / (9.41 − 6.03) = **23%**.
-- **NOK path (Equity BBB):** decision at spot USD/NOK 9.32. On the Equity BBB path (same percentage moves as before) a weaker krone lifts the NOK value of SED's USD distributions and exit value in Bear (−30.9% → −28.7%); a firmer krone trims Bull (27.1% → 25.8%). Base is the same (spot flat).
+- **Structural IRR:** every open or re-priced day from 1 Jan 2027 (bridges, options, new contracts) at the scenario's own mid-cycle (barge 67 / 80 / 95, semi 100 / 120 / 140); T-16 Phase 7, the stub, idle gaps and exit marks unchanged; scenario backlog at exit re-priced to mid-cycle. The cycle adds −0.9 to +1.7 pp; Bear and Bull are mid-cycle shifts.
+- **FCF_normalised (Rule 3):** full fleet at Base mid-cycle ($80k / $120k, 80% MCU, 98%), 2029 operating opex, idle at 40% of opex, GHTH bareboat on working days, SeaBird $10m, SG&A $17m, tax 6.4%, maintenance capex $20m, interest on exit net cash: Maintenance FCF $35.5m less a fleet-renewal charge of $15.0m (ageing −46.6 ÷ T) = **$20.4m = NOK 0.27 a share → 24.5x**.
+- **Scenario-weighted reference (convention, 25/50/25 on the levels D_t and V_T):** IRR 7.8%, P_k NOK 6.01. Not the decision figure.
+- **Share of Bull already priced:** (6.60 − 6.10) / (9.67 − 6.10) = **14%**.
+- **NOK path (Equity BBB):** a weaker krone in Bear lifts the NOK value of SED's USD cash and exit value (−30.8% → −28.5%); a firmer krone trims Bull (30.4% → 28.9%).
+- **Double-count check:** Bear's exit marks (scenario mid-cycle, no tail) and its 2027–29 rates are separate causes; opex moves operations only (values stay on the Rig BBB convention, the other side is a sensitivity); the H2-26 distribution is in D_t and out of exit cash; FX enters only the NOK-path rows.
+- **Bear balance-sheet survival:** net debt peaks at $27.5m (Q2-27) against EBITDA of $71m / $49m / $40m (2027–29), below 1x; T-16 at $90k carries ~$20m a year of it. Cash bottoms at $18.6m in the 2029 survey year. ~$47m is refinanced in Q1 2028 against EBITDA ~$49m: feasible, but lender appetite for tender rigs in a downturn is the risk. Asset cover (terms `[?]`) ~2–3x on Bear marks ($92m of owned rigs against $33–47m of debt). **Survivable, with a permanent loss of ~58%.**
 
-**Bear — balance-sheet survival:**
-- Net debt peaks at ~$33m (Q2-27). Bear EBITDA is $67m (2027), $53m (2028) and $43m (2029), so leverage stays below 1x. T-16's firm contract at ~$95k carries ~$20m a year of it from 2028.
-- 2029 FCF after debt service is −$3m (the SPS year). The $20m cash floor (including $14.2m restricted) cuts distributions to ~$14m in 2028 and ~$6m in 2029, and cash bottoms at ~$19m.
-- The bank loan matures in Q1 2028: ~$45m to refinance against Bear EBITDA of ~$53m. That is feasible, and T-16's contract to Jan 2030 helps, but lender appetite for tender rigs in a downturn is the risk. Covenant terms are not disclosed `[?]`.
-- **Survivable, but with a permanent loss of ~58% of capital** (~55% in NOK on the Equity BBB path).
-
-### Sensitivity (Base, unless stated)
+**Sensitivity (Base unless stated)**
 
 | Change | IRR_T | P_k (NOK) |
 |---|---|---|
-| Exit asset values × 0.8 / 0.9 / 1.1 / 1.2 | +1.0% / +4.0% / +9.3% / +11.7% | 5.30 / 5.67 / 6.40 / 6.76 |
-| **Break-even:** exit values × 1.21 (≈ $500m, 4.9x 2029 EBITDA) | 12.0% | ≈ 6.80 |
-| Base cash flows with Bear / Bull exit values | −11.5% / +20.5% | 4.02 / 8.23 |
-| Base cash flows, exit at 2023 transaction-implied rates ($58k / $87k) | −10.4% | 4.12 |
-| Opex −10% / +10% ($31.5k / $38.5k barge; operations and values) | +11.4% / +1.6% | 6.71 / 5.35 |
-| Rig life 35 years instead of 30 | +11.0% | 6.65 |
-| Opex −10% and a 35-year rig life together | +15.9% | 7.41 |
-| Reversion tail on open days, rate / earnings basis | +6.9% / +7.1% | 6.05 / 6.09 |
-| Contracts firm today only at exit (17 Oct rule) | +4.2% | 5.70 |
-| Exit marks at the Oslo mid-cycle return (9.1%) instead of 8% | +5.5% | 5.86 |
-| k = 10% / 13% / 14% | — | 6.30 / 5.90 / 5.78 |
-| Payout 75% / 100% of FCF after debt service | +6.6% / +6.8% | — |
-| T-16 options not exercised in Base (open from Jan 2030) | +6.2% | 5.96 |
-| T-16 option rate $85k / $95k instead of $90k | +6.6% / +6.8% | 6.01 / 6.05 |
-| T-16: $4m of the $87m only covers mobilisation cost (effective $90.7k) | +6.5% | 6.00 |
-| T-16 Phase 7 starts 3 months late (mid-Oct 2027) | +6.3% | 5.97 |
-| Price NOK 6.70 / 6.90 / 7.00 (P_k unchanged) | +7.3% / +6.1% / +5.5% | 6.03 |
+| Exit asset values × 0.8 / 0.9 / 1.1 / 1.2 | 3.5% / 6.1% / 10.7% / 12.9% | 5.47 / 5.79 / 6.41 / 6.73 |
+| **Break-even:** exit values × 1.16 (≈ $468m, 4.7x 2029 EBITDA); 0% at × 0.67 | 12.0% | 6.60 |
+| Base cash flows with Bear / Bull exit values | −11.0% / +23.2% | 3.98 / 8.42 |
+| Opex −10% / +10% (operations and values); break-even −6.9% | 13.6% / 2.9% | 6.83 / 5.37 |
+| Rig values at the 9M actual opex (×1.035) / operations at the deck's $35k / $40k | 7.3% / 9.1% | 5.95 / 6.20 |
+| Rig life 35 years (break-even 33.7) / with opex −10% | 13.0% / 18.3% | 6.75 / 7.56 |
+| Exit marks at the Oslo mid-cycle return (8.9%) | 7.3% | 5.95 |
+| Reversion tail, rate basis / contracts firm today only at exit | 8.6% / 5.8% | 6.12 / 5.75 |
+| k = 10% / 13% / 14% | — | 6.37 / 5.97 / 5.84 |
+| T-16 options not exercised / option rate $85k / $95k | 7.8% / 8.3% / 8.6% | 6.02 / 6.08 / 6.12 |
+| T-16 Phase 7 starts 3 months late | 8.0% | 6.04 |
+| EDrill-1 not bridged (idle from Jan 2027) | 8.1% | 6.05 |
+| H2-26 $50m / paid 15 Jun 2027 / 90% rule only ($38m) | 8.5% / 8.4% / 8.4% | 6.12 / 6.09 / 6.10 |
+| Payout 75% / 100%; no working-capital unwind | 8.3% / 8.5%; 8.8% | 6.08 / 6.11; 6.15 |
+| Price NOK 6.20 / 6.40 / 6.80 / 7.00 (P_k unchanged) | 11.3% / 9.8% / 7.1% / 5.8% | 6.10 |
 
-**Flat rate on all new barge contracts (EDrill-1, T-15 and the 2029 re-lets; T-16 is now fixed) × exit asset values (Base semis), IRR_T %:**
+**Flat rate on the new barge contracts (EDrill-1 and T-15 from mid-2027, incl. the 2029 re-lets) × exit asset values, Base IRR_T %:**
 
 | Barge rate \ exit values | × 0.6 | × 0.8 | × 1.0 | × 1.2 | × 1.4 |
 |---|---|---|---|---|---|
-| $65k | −8.4 | −1.7 | 4.1 | 9.3 | 13.9 |
-| $70k (Foresight level) | −7.5 | −0.8 | 4.9 | 10.0 | 14.6 |
-| $75k | −6.7 | 0.0 | 5.7 | 10.7 | 15.3 |
-| $80k | −5.8 | 0.8 | 6.4 | 11.5 | 16.0 |
-| $85k | −5.0 | 1.5 | 7.2 | 12.2 | 16.7 |
-| $90k | −4.2 | 2.3 | 7.9 | 12.9 | 17.4 |
-| $95k | −3.3 | 3.1 | 8.7 | 13.7 | 18.1 |
-| $100k | −2.5 | 3.9 | 9.4 | 14.4 | 18.8 |
+| $65k | −5.3 | 0.5 | 5.7 | 10.3 | 14.5 |
+| $70k (Foresight level) | −4.3 | 1.5 | 6.5 | 11.1 | 15.3 |
+| $80k | −2.3 | 3.2 | 8.2 | 12.6 | 16.7 |
+| $90k (T-16 level) | −0.4 | 5.0 | 9.8 | 14.1 | 18.1 |
+| $100k | 1.5 | 6.7 | 11.4 | 15.6 | 19.5 |
 
-- Each $5k/day on new barge contracts moves IRR by ~0.8 pp (less than before: T-16 is fixed, so only EDrill-1 and T-15 carry the lever). No realistic barge rate on its own clears the hurdle (break-even ~$118k). Each 0.2 step in exit values moves IRR by ~5 pp. Opex ±10% moves it by ~5 pp.
-- The verdict still hinges on asset value at exit: opex, rig life and the mid-cycle rate. The 2027–29 rate path matters less.
+- Each $5k a day on the two new barge contracts moves IRR by ~0.8 pp; each 0.2 step in exit values by ~4.5–5 pp; opex ±10% by ~5 pp. **The verdict hinges on asset value at exit and opex**, not on the 2027–29 rate path.
 
-### Market check: broker view (20 Oct; not an IAF input)
+## Price versus our call (Step 6b)
 
-**Source:** TDN Finans / Infront summary on Nordnet (20 Oct, 08:57) of a Fearnley Securities offshore-drilling sector report of the same day `[E]`. The report itself was not read; only the summary was.
-
-| | Fearnley (20 Oct) | This analysis (18 Oct method) |
-|---|---|---|
-| SED rating / target | **Buy (from Hold), NOK 8.0** (unchanged) | Fails; Base P_k **6.02**, Bull P_k 9.59 |
-| Target vs price 6.55 | +22% (before ~NOK 1.2 of distributions over 12 months in the Base path) | Base IRR 8.3% a year to 2029 |
-| Ventura | Buy, NOK 40 (from 37) | Overlay only |
-| Jackups | Trend "sideways to falling"; Middle East normalisation should support demand | Rig BBB: jackups flat; SE Asia/tender priced low (the Base for SED) |
-| Floaters | 7G drillships ~$500k/day, harsh-environment ~$520k/day; little idle high-spec capacity | Not an SED input |
-| Oil | $75/bbl from 2027; risk skewed upwards | Oil BBB Base 88 / 77 / 72 (background) |
-
-**Reading:**
-- **The target needs Bull-leaning exit values.** P_k rises ~0.37 for each 0.1x step in exit values (sensitivity table), so NOK 8.0 at k = 12% needs exit values ~1.5x Base mid-cycle. That is roughly a 16–18-year-old barge at ~$85–90m, against Rig BBB's Base mid-cycle convention value of ~$56–60m and the 2023 sale at ~$28m. A 12-month broker target and a 3-year hurdle at k = 12% are different measures, so this is a scale check, not a reconciliation.
-- **The upgrade is probably about price and Ventura, not new tender data.** The share has fallen ~13% since 17 Sep (7.55 → 6.55). Fearnley also raised Ventura (Buy, NOK 37 → 40). At its targets, 5.5 × (8.0 − 0.32 Q2 distribution) = 42.2 against Ventura's 40 is a ~5% gap: it prices the deal close to the exchange ratio.
-- **Nothing here is an input.** The jackup view is in line with Rig BBB, and the tender-assist row is unchanged. The decision stays on P vs P_k: P 6.55 > P_k 6.02 → **fails**.
-- **27 Oct:** after the T-16 award and with the price at 6.80, Base P_k is 6.03 and Bull 9.41. NOK 8.0 still needs exit values ~1.5x Base mid-cycle (1.54x).
-
-## Price versus our call (Step 6b; added 21 Nov 2026)
-
-iaf-valuation 2026-11-18.1. **The decision table above stays on the 27 Oct build** (NOK 6.80); the Q3 report (27 Nov) brings the full re-run and the compaction to the lean rules. The figures below re-mark that build at the 20 Nov close (script `.claude/skills/iaf-valuation/references/models/sed/sed6b.py`: the Base, Bear and Bull D_t and V_T of this document; it reproduces 27 Oct, Base 6.7% / P_k 6.03, Bull 27.0% / 9.41, Bear −30.4% / 2.27, exit marks ×1.21 for k).
-
-| At NOK 6.19 (20 Nov close, cum the Q2 distribution), USD/NOK 9.7525 | Bear | **Base** | Bull |
-|---|---|---|---|
-| IRR_T (NOK) | −27.1% | **13.3%** | 35.6% |
-| P_k / margin of safety | 2.40 / −61.2% | **6.36 / +2.8%** | 9.94 / +60.5% |
-| Same at USD/NOK 9.32 (the 27 Oct FX) | | 11.2% / P_k 6.08 / −1.7% | |
-
-- **What the price implies:** at NOK 6.19 Base earns k with exit asset values at **0.955× Base mid-cycle** (≈ $395m for the fleet; 1.21× at NOK 6.80 on 27 Oct), and 0% at 0.59×. The price now discounts marks ~5% below the Rig BBB tender-barge mid-cycle ($80k, MCU 80%).
-- **What moved since 27 Oct:** price −9.0% (6.80 → 6.19; OSEBX −4.1%, offshore drillers −20 to −34% from late-October highs) and the krone −4.4% (USD/NOK 9.32 → 9.75; SED's cash and assets are in USD: +2.1 pp). No SED fundamental has moved against the Base.
-- **Sector turn calls** (`docs/rig-market-bbb.md`, 18 Nov): no call on the tender-assist row. The two watch calls (UDW drillships 2028–29 flatter, high-spec jackups 2027–28 lower; 50% each, L5 driller equities) do not touch tender barges; checkpoint 17 (a second SE Asia barge fixture ≥ ~$86k raises Base 2027–28 by ≥ 5%) is open, read at SED Q3. Westwood (5 Nov `[E]`): TAR utilization ~96% → 100% by end-Q4, four TARs above $120k: Bull-side evidence, not a barge fixture.
+- **What the price implies:** at NOK 6.60 Base earns k with exit marks **1.16× Base mid-cycle**, i.e. a tender-barge mid-cycle of **~$84k** (Base $80k) and semis ~$129k at 80% MCU.
+- **Sector turn calls** (`docs/rig-market-bbb.md`, 18 Nov): none on the tender row. The high-spec jackup watch call (2027–28 lower, 50%) reads across through jackup competition for PTTEP work: new barge contracts at $70k give 6.5% (grid), not in Base. **Checkpoint 17 is not met** (no second barge fixture; T-16's $90k is now the company's ex-mob dayrate).
 
 | Company signal (dated, tagged) | Score |
 |---|---|
-| Contract behaviour: T-16 Phase 7, CPOC, ~$95k for 30 months from Q3 2027 (27 Oct `[F]`), a Bull-band rate; Fulmar Explorer (SeaBird) follow-on OBN source contract in West Africa, ~6 months from Dec 2026 (12 Nov `[F]`; value not given), in direct continuation of its Sep–Nov job | +1 |
-| Order intake and backlog: T-16 adds ~$87m firm; SED 2027 firm cover 52% (Rig BBB) | +1 |
-| Capital return: Q2 distribution USD 25.0m (4 Nov `[F]`), as policy | 0 |
-| Insider and major-holder dealings since 27 Oct | 0 `[?]` (not checked) |
-| Guidance tone vs revisions: Fearnley Buy, NOK 8.0 (20 Oct `[E]`); no newer broker change found | 0 |
+| Contract behaviour: T-16 Phase 6 firm to Jan 2027 at $131k and T-15 to Feb 2027, both extended in direct continuation (Q3 presentation `[F]`); Fulmar follow-on in West Africa (12 Nov `[F]`) | +1 |
+| Order intake and backlog: firm backlog $367m (ED $336m incl. T-16, SeaBird $31m) `[F]`; no award yet for EDrill-1 (free from January) or T-15 (March) | 0 |
+| Capital return: H2-26 distributions deferred to after the Ventura closing; guidance $90–110m kept, amount "updated at closing" `[F]` | −1 |
+| Insider and major-holder dealings: no PDMR or holder notices on Newsweb 27 Oct – 27 Nov; Pioneer 40.1% at 30 Sep `[F]` | 0 |
+| Guidance tone vs revisions: "encouraging signs that activity … is improving", tenders 29 (23 in Aug), tender utilisation 96%; Fearnley Buy NOK 8.0 (20 Oct `[E]`) | +1 |
 | Asset sales or purchases vs book | 0 (none) |
-| **Net** | **+2** |
+| **Net** | **+1** |
 
-- **Verdict line (21 Nov, NOK 6.19): ahead of the price, on the positive side.** The market sells SED with the offshore drillers; our Base holds the tender-barge row, which has its own tight market (utilization near 100%, T-16 at a Bull-band rate). The named reason the market may be right: the barge renewals in 2027 (EDrill-1, T-15) at ≤ $80k would make T-16 an outlier (checkpoint 17). A company signal does not move the sector row; the Q3 report tests it.
-- **Scorecard:** opened 21 Nov 2026 at NOK 6.19 (Base +2.8% on this re-mark, clears narrowly). Hit if SED outperforms the Oslo drillers (Borr, Odfjell) by > 10% by the Q4 report (17 Feb 2027) or a second barge fixture prints ≥ $86k; miss if the next barge awards come in ≤ $80k.
+- **Verdict line (27 Nov, NOK 6.60): ahead of the price on the negative side (small).** The price rose 6.6% since 20 Nov with the drillers (Borr +11%, Odfjell +3%) and implies a barge mid-cycle ~5% above Rig BBB. The Q3 report holds the sector row (no second barge fixture) and shows cash $12m below the model, opex 3.5% above the deck and H2 distributions pushed past closing. The market may be right if EDrill-1 and T-15 renew at ≥ $86k (checkpoint 17); even at $90k Base gives 9.8%. A company signal does not move the sector row.
+- **Scorecard:** the **21 Nov entry** (NOK 6.19, "ahead, positive") is closed: the price moved toward it, but with the sector (SED +6.6% against the drillers' +7.0%), so its rule was not met. **New entry 27 Nov at NOK 6.60:** hit if the EDrill-1 / T-15 awards print ≤ $80k or SED underperforms Borr and Odfjell by > 10% by 17 Feb 2027; miss if a barge fixture ≥ $86k prints.
 
-## Verdict
+## Verdict and caveat
 
-- **Fails.** The Base margin of safety is −11.3% (P_k NOK 6.03 vs P 6.80; IRR_T 6.7% vs k = 12%).
-- **Bear breaks the thesis.** ~58% of the capital is lost. The balance sheet survives; distributions shrink to ~$14m in 2028 and ~$6m in 2029.
-- **Bull** returns 27.1% a year, and the price already reflects ~23% of it.
-- **Why Base fails:**
-  - Cash returns are strong: ~NOK 2.6/share of distributions to 2029, d = 12.0%.
-  - But firm cover for 2027 is only 52% of rig-days, and the $94–160k contracts re-price into $78–85k. T-16's ~$95k award is the exception, and it comes after a ~5-month gap.
-  - At exit the fleet is worth Base mid-cycle plus about a year of backlog at $85–90k/$125k (4.0x 2029 EBITDA), and value falls 4.2% a year from NAV_0.
-  - The price is also 9% above NAV_0.
-  - The exit cross-check finds the exit consistent with the stock market (10.3x vs the index's 11.5x); only the buyer's return (8% vs 9.1%) is a little generous.
-- **What would flip it to a pass:**
-  - exit values ≥ 21% above Base mid-cycle: barges at ~$67–73m at 16–18 years, against the 2023 sale at ~$28m; or
-  - two levers together: opex 10% lower and a 35-year rig life (15.9%), or $90k on the new barge contracts plus exit values 20% higher (12.9%); or
-  - a price at or below Base P_k, ~NOK 6.0.
-- **Hard data points:** the CPOC award for T-16 is in (Bull-band rate; +0.5 pp in Base). Next: the Q3 report (18 Nov) and the EDrill-1 / T-15 follow-on awards.
+- **Band applied:** the Base margin of safety (−7.6%) is below −2%: **fails** (Summary).
+- **What would flip it to a pass** (any one): exit values ≥ 1.16× Base mid-cycle (barges ~$64–70m at 15.5–17.5 years); opex ≥ 6.9% lower in operations and values (barge ~$33.7k a day on the 2026 base); a rig life ≥ 34 years; a price at or below ~NOK 6.10.
+- **What would cut it further:** EDrill-1 / T-15 renewals ≤ $70k (6.5%), values at the actual opex (7.3%), exit marks at the stock market's return (7.3%).
+- **Hard data next:** the EDrill-1 / T-15 follow-on awards; the Ventura definitive agreement and the H2 amount; Q4 on 17 Feb 2027.
 
 **Caveat:** this is a margin-of-safety screen, not an intrinsic valuation or a price target. P_k is the price at which the Base path returns exactly 12%.
 
-## Ventura LOI — overlay (not in the decision figure)
+## Ventura combination — overlay (not in the decision figure)
 
-**Terms (11 Sep transaction presentation and press release, primary) `[F]`:**
-- SED acquires 100% of Ventura Offshore for 605m new SED shares (45% of the combined company, fully diluted), an exchange ratio of 5.50x. The Ventura reference equity value is based on SED's 5-day VWAP to 10 Sep. It is reduced by:
-  - a **Rig Cost Adjustment** for capex overruns on SSV Victoria and DS Carolina (above a >$20m buffer over the midpoint of the 2 Apr guidance); and
-  - a **Delay Adjustment** of **$145k/day per rig** from 1 Mar 2027 until Petrobras acceptance.
-- SED's Q2 distribution is paid before closing.
-- Closing is expected in Q1 2027, subject to a definitive agreement, due diligence, **commencement of new contracts for certain of the parties' rigs**, approvals and consents. **Either party may withdraw if the conditions are not met by 31 Mar 2027.**
-- Secondary detail: four of SED's six rigs on firm contract plus both Brazilian rigs accepted `[C]`.
-- Financing: DNB $250m bridge plus extension of the $30m RCF; non-amortising debt targeted.
-- Governance: Gunnar W. Eliassen nominated chair.
-
-**Ventura (30 Jun) `[F]`:** firm backlog $978m.
-- DS Carolina $403m and SSV Victoria $482m (Petrobras).
-- SSV Catarina $39m (Eni; no follow-on).
-- Zonda $49m and DVD $5m (managed).
-- Pro forma backlog ~$1.3bn firm, $2.2bn including options.
-
-**Company illustration (slide 14):** pro forma FCF per share of **NOK 1.4 / 1.7 / 2.6**, at:
-- tender barge $70k / $90k / $150k;
-- semi-tender $100k / $120k / $180k;
-- 6G semi $250k / $300k / $350k.
-
-The figures are before amortisation, with Ventura's contracted rigs at long-term cash rates.
-
-**Reading:**
-1. **On the company's own numbers the deal is accretive per share even at Bear-level tender rates.** The low case gives NOK 1.4, against SED standalone Base Maintenance FCF of ~NOK 0.8–1.0/share in 2027–28.
-2. **The cost:**
-   - pro forma debt (~$200–250m `[C]`);
-   - Petrobras concentration;
-   - Catarina re-contracting;
-   - yard and acceptance risk on Victoria and Carolina;
-   - SED owners' tender exposure diluted to 55%.
-3. **SED's own tenders decide whether the deal happens.** T-16 and the two PTTEP barges must be on firm contracts by 31 Mar 2027 for the reported condition to be met. T-16 now has an award (27 Oct), but Phase 7 only **commences** in early Q3 2027, after the 31 Mar 2027 long-stop. If the condition means commencement rather than signing, T-16 cannot meet it in time. Whether T-16 is one of the named rigs is `[?]` (secondary source).
-4. **Market take (price data, Yahoo daily closes; read 20 Oct, 26 Oct row added 27 Oct):**
-   - **Day 1 (11 Sep):**
-     - ENH −1.1% (7.34 → 7.26; it opened +3%) on 14.5m shares, ~5x normal volume.
-     - VTURA +7.9% (34.2 → 36.9; intraday +14%), after already rising 14% in the four trading days before the announcement (30.0 on 4 Sep → 34.2).
-     - Reading: Ventura holders liked the deal, while SED holders were neutral to slightly negative on the dilution.
-   - **Deal spread** = 1 − VTURA ÷ (5.5 × ENH). The Q2 distribution (~NOK 0.32) goes to SED holders only, before closing, so it is deducted from ENH in the adjusted column:
-
-     | Date | ENH | VTURA | Raw spread | Spread ex Q2 distribution |
-     |---|---|---|---|---|
-     | 11 Sep | 7.26 | 36.9 | 7.6% | 3.3% |
-     | 21 Sep | 7.39 | 35.7 | 12.1% | 8.2% |
-     | 2 Oct | 6.45 | 31.6 | 10.9% | 6.2% |
-     | 16 Oct | 6.55 | 33.3 | 7.6% | 2.9% |
-     | 20 Oct | 6.55 | 33.9 | 5.9% | 1.2% |
-     | 26 Oct (before the T-16 release) | 6.80 | 32.9 | 12.0% | **7.7%** |
-
-   - **Reading:**
-     - The spread widened after the PTTEP loss (22 Sep: ENH −12.7%, VTURA −8.4%), when SED's own tender risk, and with it the closing condition, came into focus.
-     - It narrowed to ~1% by 20 Oct, with ~5 months to the Q1-2027 closing and the exchange ratio still exposed to Ventura's cost and delay adjustments. By 26 Oct it had widened again to ~8% (ENH +4%, VTURA −3%).
-     - **The market prices the deal as likely to close.** The earlier reading here ("the market doubts completion") overlooked the distribution and is withdrawn.
-     - A narrow spread also means Ventura's standalone value is close to the deal value, so it is not proof of a high completion probability on its own.
-   - **Broker:** Fearnley rates both Buy (20 Oct): Ventura NOK 40 (from 37), SED NOK 8.0. 5.5 × (8.0 − 0.32) = 42.2 against 40 is a ~5% gap at the targets.
-5. **Next step:** a full pro forma IAF when the definitive agreement is signed and Ventura's Q3 capex guidance is out (late Nov). No completion probability is given.
+- **Terms (LOI 11 Sep `[F]`):** 605m new SED shares for 100% of Ventura Offshore (45% of the combined company; ratio 5.50x), adjusted for rig cost overruns (SSV Victoria, DS Carolina) and $145k a day per rig of delay from 1 Mar 2027 until Petrobras acceptance. Conditions include new contracts commencing for certain rigs; either party may withdraw after **31 Mar 2027**. DNB $250m bridge.
+- **Status (Q3 report `[F]`):** financial, tax and legal due diligence done with no red flags; technical due diligence ongoing; definitive agreement, shareholder meetings and closing conditions remain; closing expected Q1 2027. Pro forma market cap ~$1.0bn, backlog ~$1.2bn.
+- **Distribution restriction:** none before closing, and **who receives the deferred H2-26 amount is not stated** `[?]`. If it goes to the combined company's holders, SED holders keep 55%: ~NOK 0.24 a share on $40m `[B]`, ~2 pp of Base IRR.
+- **Market take:** deal spread at the 26 Nov closes VTURA 32.0 against 5.5 × (6.60 − 0.33) = 34.5, **7.2% ex the Q2 distribution** (11.8% raw; 7.7% on 26 Oct, 1.2% on 20 Oct): completion priced as likely, not certain.
+- **Company illustration (11 Sep):** pro forma FCF per share NOK 1.4 / 1.7 / 2.6 at barge $70 / 90 / 150k (before amortisation), against standalone Base Maintenance FCF of NOK 0.8–1.0. The cost: pro forma debt (~$200–250m `[C]`), Petrobras concentration, yard and acceptance risk, tender exposure diluted to 55%. A full pro forma IAF follows the definitive agreement; no completion probability is given.
 
 ## Tracking
 
-**27 Oct (news update: T-16 award), vs 20 Oct.** Steps in order; each column adds one change.
+**Q3 2026, actual vs the 27 Oct model** ($m)
 
-| | 20 Oct | + T-16 contract | + FX and date | 27 Oct (+ price) |
-|---|---|---|---|---|
-| Price / USD/NOK / valuation date | 6.55 / 9.44 / 17 Oct | 6.55 / 9.44 / 17 Oct | 6.55 / 9.32 / 27 Oct | **6.80** / 9.32 / 27 Oct |
-| Base IRR_T | 8.3% | 8.8% | 8.3% | **6.7%** |
-| Base P_k / margin of safety | 6.02 / −8.0% | 6.09 / −7.0% | 6.04 / −7.8% | **6.03 / −11.3%** |
-| Base V_T / NAV_0 (NOK) | 5.43 / 6.08 | 5.50 / 6.35 | 5.43 / 6.23 | 5.43 / 6.23 |
-| Bear IRR_T / P_k | −31.4% / 2.13 | −29.2% / 2.31 | −29.8% / 2.29 | −30.9% / 2.29 |
-| Bull IRR_T / P_k | 29.9% / 9.59 | 29.4% / 9.51 | 29.1% / 9.42 | 27.1% / 9.41 |
-| Break-even exit values (Base) | × 1.14 | × 1.12 | × 1.14 | × 1.21 |
-| Verdict | Fails | Fails | Fails | **Fails** |
-
-- **Contract (Base +0.5 pp):** ~$95k for 30 months against the Base's $80k from Jan 2027 with no gap. The ~5-month idle gap in 2027 costs most of the first-year gain; the rest comes from 2028–29 cash and the backlog at exit (Phase 7 to Jan 2030, then options at $90k).
-- **Bear +2.2 pp:** T-16 at $95k from Jul 2027 instead of $68k from Apr 2027. **Bull −0.5 pp:** Bull had $88k from Jan 2027 with no gap and $100k from Jul 2029.
-- **FX and date (Base −0.5 pp):** krone 1.3% stronger (−0.6 pp); ten days of roll-forward (+0.1 pp).
-- **Price (Base −1.6 pp):** NOK 6.55 → 6.80, the last close before the release.
-- No market input changed. Rig BBB (updates 22 and 24 Oct) and Oil BBB (24 Oct) have newer dates, with paths unchanged.
-
-**20 Oct (market check, no re-run):**
-- Fearnley upgraded SED to Buy, target NOK 8.0. The reading is in "Market check: broker view".
-- Price 6.55 (unchanged); USD/NOK 9.40; VTURA 33.9.
-- No SED release since 25 Sep (MFN, read 20 Oct). Decision figures unchanged.
-
-**18 Oct:** method only; no new company information, inputs unchanged.
-
-| | 17 Oct | 18 Oct | Main reason |
+| | Model | Actual | Comment |
 |---|---|---|---|
-| Base IRR_T | 6.0% | **8.3%** | Backlog at exit (iaf-valuation 2026-10-18.1) |
-| Base P_k / margin of safety | 5.72 / −12.7% | **6.02 / −8.0%** | Same |
-| Base V_T | NOK 4.99 | 5.43 | Scenario-signed backlog premium +$34.4m |
-| Bear / Bull IRR_T | −35.3% / 27.8% | −31.4% / 29.9% | Same |
-| Verdict | Fails | **Fails** | |
-| Break-even exit values | × 1.25 | × 1.14 | |
+| Drilling revenue | 64.6 | 64.9 | Utilisation 99% |
+| EBITDA (company basis) | 41.5 | 37.0 | SeaBird −3.3 (classing, mobilisation), ED opex −1.3 |
+| Maintenance FCF | 29.2 | ~17.4 | Also working capital and tax −6.9, lease 2.9 |
+| Financial net debt, 30 Sep | 3.3 | 15.1 | NIBD incl. lease 22.7 |
+| Distribution for Q3 | 24.5 declared, paid Feb | Deferred to after closing | H2 guidance $40–60m kept |
 
-### Tracking (17 Oct vs 10 Oct 2026)
+**Attribution, 27 Oct build → 27 Nov (Base, cumulative)**
 
-No new quarterly report and no company release since the previous version. Both rest on Q2 2026.
+| Step | Base IRR_T | P_k |
+|---|---|---|
+| 27 Oct build (NOK 6.80, USD/NOK 9.32) | 6.7% | 6.03 |
+| + valuation date 27 Nov; Q2 paid 11 Dec | 6.9% | 6.09 |
+| + USD/NOK 9.755 | 9.0% | 6.37 |
+| + Q3 actuals (30 Sep balance sheet, Q3 cash) | 8.0% | 6.22 |
+| + H2-26 deferred to April 2027 ($40m, $25m floor) | 8.0% | 6.22 |
+| + contracts (T-16 $131k to Jan, Phase 7 $90k + mob fee; T-15 to Feb) | 7.9% | 6.22 |
+| + operating opex at the 9M actual (×1.035) | 7.2% | 6.12 |
+| + SG&A guidance, SOFR, working capital, amortisation | 7.2% | 6.11 |
+| + options at the NOK 3.92 strike | 7.1% | 6.10 |
+| **+ price NOK 6.60 = 27 Nov** | **8.4%** | **6.10** |
 
-| | 10 Oct | 17 Oct | Main reason |
-|---|---|---|---|
-| Price / FX | NOK 6.42 / 9.58 | NOK 6.55 / 9.44 | Market |
-| Base IRR_T | +9.7% | **+6.0%** | Exit-consistency rule; price and FX |
-| Base P_k / margin of safety | 6.10 / −4.9% | **5.72 / −12.7%** | Same |
-| Verdict | Fails (close to marginal) | **Fails** | |
-| Base V_T | NOK 5.51 | 4.99 | Assumed post-T contracts no longer count as premium (−$34m); FX |
-| NAV_0 / P/NAV_0 | 6.20 / 1.04x | 6.08 / 1.08x | FX, price |
-| Break-even exit values | × 1.09 | × 1.25 | |
-
-**Attribution of the Base IRR change (9.7% → 6.0%):**
-- **Price +2.0%, FX −1.5%, valuation date: 8.3% (−1.4 pp).**
-- **Exit consistency (iaf-valuation 2026-10-11.3): 6.0% (−2.3 pp).**
-  - The 10 Oct version counted the contracts it assumed for 2029–30 as firm-contract premium at exit, at Year-3 rates and full utilisation. That carried the scenario's rate path past exit.
-  - Now only EDrill-2 (firm today to Oct 2030) carries a premium, and the other days after T are open days at mid-cycle.
-  - On the rate basis no gap is material in Base. GHTH has no value at exit without a firm contract.
-
-**Running ahead or behind Base:** first test in. T-16's award (~$95k, Bull band on rate) is ahead of Base on rate, but it brings a ~5-month gap the Base did not assume; net +0.5 pp. Next: the Q3 report (18 Nov) and any EDrill-1/T-15 award before their contracts end.
+- **Against the 21 Nov memo re-mark** (13.3%, P_k 6.36 at NOK 6.19): price +6.6% (≈ −3 pp), Q3 cash −1.0 pp, opex −0.7 pp. **Running behind Base on cash**, in line on contracts (T-16 at a Bull-band rate, extensions in direct continuation); the Q1 2027 barge renewals are the next test.
 
 ## Risks and signposts
 
-| Signpost | Bear | Base | Bull | Now (27 Oct) |
+| Signpost | Bear | Base | Bull | Now (27 Nov) |
 |---|---|---|---|---|
-| **T-16 (CPOC) award** | No award by Dec or < $70k | $75–85k | ≥ $88k | **Resolved 27 Oct: Bull band.** ~$95k effective incl. mobilisation, 30 months from early Q3 2027 `[F/B]`; still ≥ $88k unless the mobilisation fee exceeds ~$6m. Offset: ~5 months idle in 2027 |
-| EDrill-1 / T-15 follow-on | Idle > 6 months, ≤ $70k | Award by mid-2027 at ~$78k | Award by Q2-27 at ≥ $88k | None |
-| Foresight start for PTTEP (Feb/Apr 2027) | On time | On time, short bridge | Delayed (longer bridge at $94–121k) | Rigs must move from the Middle East `[C]` |
-| PTTEP–Foresight rate | Confirmed ≤ $70k and copied elsewhere | Seen as a one-off | Higher rates in other NOC awards | Unconfirmed, $60–70k `[C]` |
-| SE Asia / tender pricing (Rig BBB) | Term fixtures < $80k | $80–100k | > $100k | Mixed: T-16 ~$95k (30 months, CPOC) is in the Base band; PTTEP–Foresight $60–70k (unconfirmed) towards Bear |
-| Gulf jackups after 3 Nov | Renewed suspensions, rigs to Asia | Gradual return | Aramco/KJO absorb the rigs | KJO 4 × 4-year awards |
-| Tender-rig asset transactions | Near the 2023 level (~$28m) | ~$55–65m for a 15–18-year-old barge | > $100m | None since 2023 |
-| Contracts running past 2029 | Re-let at ≤ $65k | Re-let at ~$85k into 2031 (in V_T as backlog, capped at end-2031) | Multi-year awards above mid-cycle | EDrill-2 (to Oct 2030) and T-16 (to Jan 2030, options to Apr 2031) firm today |
-| Semi-tender options (GHTH Jul 2027 at $147k; Vencedor 2028 at $123k) | Not exercised | Exercised | Exercised, then > $150k | — |
-| Ventura | Lapses on 31 Mar 2027 | Definitive agreement and conditions met | — | LOI; spread ~8% ex Q2 distribution (26 Oct). T-16 commences after the long-stop |
+| EDrill-1 / T-15 follow-on | Idle > 6 months, ≤ $70k | Award by mid-2027 at ~$78k | Award by Q2-27 at ≥ $88k | None; EDrill-1 free from January, T-15 from March. "Active dialogues" |
+| SE Asia tender pricing (Rig BBB checkpoint 17) | Term fixtures < $80k | $80–100k | > $100k | T-16 $90k ex-mob (30 months, CPOC); Foresight $60–70k `[C]` |
+| Tender market activity | Tenders fall, utilisation < 90% | ~90% utilisation | 100%, new campaigns | Utilisation 96%; 29 tenders (23 in Aug); 11 campaigns within 3 months |
+| Gulf jackups | Renewed suspensions, rigs to Asia | Gradual return | Aramco/KJO absorb them | Suspensions continue; normalisation "principal catalyst" (company) |
+| Opex per rig-day (ED) | > $40k | ~$38k | < $36k | 9M $38.0k; Q3 $38.9k |
+| Semi-tender options (GHTH Jul 2027 $147k; Vencedor 2028 $123k) | Not exercised | Exercised | Exercised, then > $150k | — |
+| Tender-rig transactions | Near the 2023 level (~$28m) | ~$55–65m for a 15–18-year-old barge | > $100m | None since 2023 |
+| Ventura and H2-26 | Lapses 31 Mar 2027, or the deferred amount is shared with Ventura holders | Closes; $40–60m to SED holders | — | DD done except technical; spread 7.2% |
 
-**Other risks:**
-- Concentration: Thailand is 53% of H1 revenue.
-- Owner structure: Pioneer 40.1% of capital; B shares without votes.
-- Distributions are booked as a return of paid-in capital; tax treatment depends on the shareholder's country.
-- Currency: USD earnings, NOK share price (the krone strengthened 1.3% from 16 to 26 Oct).
-- GHTH: the 2026 SPS and renewal of the back-to-back bareboat.
-- Refinancing in Q1 2028.
-- T-16: ~5 months idle in Singapore in 2027, with de- and remobilisation (costs not disclosed). Each 3 months' delay to the Phase 7 start costs ~0.4 pp in Base.
+**Other risks:** Thailand 54% of 9M revenue (58% in Q3) · Pioneer 40.1%, B shares without votes · distributions booked as repayment of paid-in capital · USD earnings against a NOK price · GHTH's 2026 special survey (not modelled; each 20 days off-hire ~$3m) · refinancing in Q1 2028 · T-16's ~5.5 months in Singapore (each 3 months' delay to Phase 7 ~−0.4 pp).
 
 ## For other modules
 
-- **Rig Market BBB:**
-  1. **Add an MCU path (Bear / Base / Bull by year) to the tender-assist row.** Without one, the exit-consistency test can only run on the rate basis. On the earnings basis SED's Year-3 utilisation (90–98%) is far above the mid-cycle MCU (80%), and the gaps are material in every scenario. The MCU also sets most of the backlog premium at exit (utilisation, not rate). Company data point: fleet utilisation "up to 88%" (Aug-26).
-  2. Any tender-rig transaction or broker value would firm up the exit marks; the only one is a distressed 2023 sale. (The named reason built on it is no longer used.)
-  3. Add a **semi-tender** row. Anchors: SED contracts $127–160k; options $123k (Vencedor) and $147k (GHTH); company scenarios $100–180k.
-  4. Correct EDrill-1's firm end to **Dec 2026** and add the option rates (carried request).
-  5. Carried from 10 Oct: state whether flat nominal opex in values means real terms (it moves SED's Base by ~4 pp).
-  6. New 20 Oct, for review: Fearnley's sector summary `[E]` quotes 7G drillships at ~$500k/day and harsh-environment floaters at ~$520k/day, against Rig BBB 2027 Base $400k / $425k (2028 $455k / $450k). It calls the jackup trend "sideways to falling". Check against fixtures before any change; nothing in it concerns tender rigs.
-  7. New 27 Oct, for review: **T-16 Phase 7 term fixture** (CPOC, Malaysia/JDA, letter of award 27 Oct `[F]`): USD 87m firm incl. mobilisation for 30 months from early Q3 2027, ≈ $95k/day `[B]` (mobilisation not split out). It is a 2027-start tender-assist fixture ~22% above the Base row's 78 (range 70–88) and above Bull's 88. For the recalibration rule; this analysis changes no Rig BBB input.
-- **Oil Market BBB / HY BBB / Equity BBB:** no change needed.
-- **IAF (method):** none. Holdco G&A is now outside NAV by rule (2026-10-18.2); PLSV still deducts it and needs a re-run.
+- **Rig Market BBB** (input only; no SED forecast of the row):
+  1. **T-16 Phase 7 dayrate $90k `[F]`** (Q3 presentation, ex-mob; USD 87m incl. ~$4.6m mobilisation `[B]`): confirms the row's "~$89–92k ex-mob". **Checkpoint 17 is not met** (no second barge fixture; EDrill-1 / T-15 open).
+  2. Company market data (Q3, data to Oct `[E]`): tender fleet utilisation 96%, 29 tenders, 12 prospects, 28 pre-tender, 2 long-term semi-tender awards in Q3.
+  3. **Convention opex:** SED's 9M 2026 opex is $38.0k a rig-day against $36.7k on the 35 / 40 mix (+3.5%). At the actual opex SED's values fall ~5% (Base −1.1 pp). For review.
+  4. Carried: an MCU path for the tender row (the exit test runs on rates only); a semi-tender row (anchors $127–160k, options $123–147k).
+- **Oil / HY / Equity BBB:** no change needed.
 
 ## Change log
 
-- **21 Nov 2026: Step 6b added (iaf-valuation 2026-11-18.1).** Memo re-mark at the 20 Nov close NOK 6.19 and USD/NOK 9.7525 on the 27 Oct build (`sed6b.py`): Base 13.3%, P_k 6.36, +2.8% (clears narrowly; the decision table stays at 27 Oct until the Q3 run on 27 Nov); price implies exit marks 0.955× Base. Verdict line: ahead, positive side. Q2 distribution dates corrected (ex 7 Dec, paid ~11 Dec). Fulmar Explorer follow-on contract (12 Nov) logged.
-- **27 Oct 2026: news update, T-16 award.** CPOC letter of award for T-16 Phase 7 (MFN release, 27 Oct 07:00, primary): 30 months firm from early Q3 2027, options for up to 15 months, ~USD 87m firm incl. mobilisation fees. Phase 6 is firm through Dec 2026 and ends in Q1 2027; the rig waits in Singapore in between.
-  - T-16 replaced in all scenarios: firm in all three; options exercised in Base and Bull at an assumed $90k, not in Bear.
-  - Price 6.55 → 6.80 (26 Oct close, before the release), USD/NOK 9.44 → 9.32, valuation date 27 Oct. Market inputs unchanged.
-  - Model: the firm-today rule now also covers a signed contract that starts later (T-16 Phase 7, in NAV_0 and all marks), and an option period that directly follows a counted contract counts as scenario backlog at exit.
-  - **Result:** Base 8.3% → **6.7%** (contract +0.5 pp, FX and date −0.5 pp, price −1.6 pp), P_k 6.02 → **6.03**, margin of safety −8.0% → **−11.3%**; Bear −31.4% → −30.9%; Bull 29.9% → 27.1%. The verdict is still **fails**.
-- **20 Oct 2026 (later): Ventura market take.** Price reaction and deal spread table added to the overlay. The spread, adjusted for the Q2 distribution that only SED holders receive, is ~1%, so the earlier "market doubts completion" reading is withdrawn.
-- **20 Oct 2026: market check only.** Fearnley upgrade (Buy, NOK 8.0) read via TDN Finans on Nordnet (Edge connection) and set against P_k. Price unchanged (6.55); USD/NOK 9.40; no new SED release. Decision figures unchanged.
-- **18 Oct 2026: method re-run under iaf-valuation rev 2026-10-18.1, then 18.2** (from `docs/review-iaf-exit.md`). Inputs unchanged (price, FX, valuation date 17 Oct, company data, sector paths).
-  - **Backlog at exit:** contracts the scenario signs before exit now count in V_T, capped at 2 years after exit, on the asset convention's earnings basis; firm-today contracts as before. NAV_0 and end-of-stub marks unchanged (firm today only); later interim marks count the scenario's backlog.
-  - **Exit consistency** on open days after exit only; no tail in any scenario; the Bull Vencedor named reason is no longer needed.
-  - **New:** exit cross-check against Equity BBB (exit P/E, exit P/B, buyer's return), and Bear/Bull IRR in NOK on the Equity BBB NOK path.
-  - **Holdco G&A (iaf-valuation 2026-10-18.2, same day):** not deducted in NAV, by rule; the G&A sensitivity is removed and the cross-check's exit P/E is on asset-level earnings. No change to the decision figures.
-  - Structural run keeps scenario backlog at exit at the mid-cycle rate.
-  - **Result:** Base 6.0% → **8.3%**, P_k 5.72 → **6.02**, margin of safety −12.7% → **−8.0%**; Bear −35.3% → −31.4%; Bull 27.8% → 29.9%. The verdict is still **fails**.
-- **17 Oct 2026:** re-run under iaf-valuation rev 2026-10-11.3. Rig BBB paths unchanged; Oil BBB 17 Oct (background). No new company information.
-  - **Method:**
-    - Exit-consistency test added (rate basis, earnings basis shown); the Bull Vencedor gap uses a named reason, with tails as sensitivities.
-    - Firm-contract premium in V_T, NAV_0 and interim marks is now only for contracts firm today. Scenario-assumed contracts are open days after T.
-    - GHTH has no value at exit.
-  - **Inputs:**
-    - Price NOK 6.55 and FX 9.44 (16 Oct).
-    - New-events check via Nordic Financial (Newsweb) and MFN: no release since 25 Sep; Q3 report 18 Nov at 06:00.
-  - **Result:** Base 9.7% → **6.0%**, P_k 6.10 → **5.72**, margin of safety −4.9% → **−12.7%**. The verdict is still **fails**.
-- **10 Oct 2026:** re-run under iaf-valuation rev 2026-10-10.1. Rig BBB asset-value convention; summary first; g as value CAGR; structural IRR per scenario; renewal charge in FCF_normalised. Base 9.7%, fails.
-- **4 Oct 2026:** full rebuild under iaf-valuation rev 2026-10-04.12; migrated to English; Rig BBB tender row used directly; NAV exit. Base 5.3%, fails.
-- **3 Oct 2026:** first SED analysis (Norwegian). Exit at 3.5 / 4.0 / 5.0x EBITDA; rates derived from Rig BBB high-spec jackups. Base 14.5%, marginal pass.
+- **27 Nov 2026 — v3.0, Q3 report run (full re-run; compacted from 834 lines):** rig-day model rebuilt and stored (reproduces 27 Oct); Q3 actuals and the 30 Sep balance sheet; T-16 Phase 6 to Jan at $131k, Phase 7 $90k + mob fee; T-15 to Feb; operating opex at the 9M actual (+3.5%); H2-26 distributions deferred past the Ventura closing ($40m, April 2027); SG&A ~$4m a quarter; SOFR 8.0%; NOK 6.60, USD/NOK 9.755.
+  - **Result:** Base 6.7% → **8.4%** (P_k 6.03 → **6.10**, margin −11.3% → **−7.6%**); Bear −30.9% → −30.8%; Bull 27.1% → 30.4%. Still **fails**; the 21 Nov memo's "clears narrowly" (NOK 6.19) is undone by the price and Q3 cash.
+- **21 Nov 2026 — Step 6b added (memo re-mark at NOK 6.19 / USD/NOK 9.75 on the 27 Oct build):** Base 13.3%, P_k 6.36, +2.8%; verdict line "ahead, positive". Q2 dates corrected (ex 7 Dec).
+- **27 Oct 2026 — T-16 award (CPOC Phase 7, 30 months, USD 87m incl. mob):** Base 8.3% → 6.7%, P_k 6.03, fails.
 
 ## Appendix: own assumptions `[A]`
 
 | Assumption | Value | Why |
 |---|---|---|
-| T-16 Phase 6, Dec 2026 – mid-Feb 2027 | $124k (option rate) in all scenarios; end mid-Feb 2027 | Release: firm through Dec 2026, campaign ends in Q1 2027 `[F]`; rate and end day `[A]` |
-| T-16 Phase 7 | 15 Jul 2027 – 15 Jan 2030 at $95.1k (USD 87m ÷ 915 days); 98% revenue efficiency applied (Bear 96%), so the model books ~$85m of the $87m | Release: 30 months from "early Q3 2027", USD 87m incl. mobilisation `[F]`; start day and spreading the mobilisation fee over the term `[A]` |
-| T-16 options | Base and Bull: 15 months at $90k to mid-Apr 2031, scenario backlog at exit; Bear: not exercised | Option rate not disclosed `[?]`; ~$90k is the firm value less a few $m of mobilisation; Base/Bull exercise and Bear does not, as for the semi-tender options |
-| T-16 idle gap | Mid-Feb – mid-Jul 2027 in Singapore, at the idle-cost rule (65%, then 35% of opex) | Release: "reduced crewing and operating costs", not quantified `[?]` |
-| PTTEP bridging (Base) | EDrill-1 to end-Feb 2027 at $94k (option); T-15 to end-Mar 2027 at $121k | Foresight starts Feb/Apr 2027; T-15 has no priced option disclosed |
-| Idle periods | Base ~4 months, Bear 8–9, Bull ~1 for the PTTEP barges | Six tenders open with none awarded at the Q2 call `[C]`; delayed tendering |
-| Semi-tender rates | 100 / 95 / 95 · 120 / 120 / 125 · 135 / 150 / 165; mid-cycle 100 / 120 / 140 | Not in Rig BBB; option rates and company scenarios |
-| Option exercise | Base and Bull: GHTH 12 months at $147k; Vencedor 2028 at $123k; T-16 2030–31 at $90k | Base and Bull exercise priced options, Bear does not (GHTH's $147k is above the Base semi rate and still exercised) |
-| Opex escalation (operations only) | +3% a year from 2027 | Values use flat nominal opex (Rig BBB) |
-| Payout / cash floor | 90% of FCF after debt service; $20m minimum cash incl. restricted | Policy; H1 payout ~100% |
-| Interim marks | End-2026 at Base mid-cycle + contracts firm today (all scenarios), linear glide to scenario mid-cycle at exit; from end-2027 plus the scenario's backlog on that date (2-year cap) | No current market mark; IAF Step 3 |
-| Exit premium | Contracts firm today (EDrill-2; T-16 Phase 7) in full; scenario-signed contracts and exercised options running past T, capped at end-2031 | IAF Step 3 backlog rule (2026-10-18.1) |
-| Book equity at exit | $334.1m at 30 Jun + retained cash to exit (maintenance capex ≈ D&A) | No D&A figure available; for the exit P/B only |
-| Holdco G&A | Group SG&A ($18m a year from 2029) treated as holding company: in the cash flows as paid, not in NAV | IAF rule 2026-10-18.2; no split of SG&A reported |
-| SeaBird | Contribution 5 / 10 / 18 $m a year; exit value 20 / 35 / 50 | Q2 contribution $2.6m; book $40.3m |
-| 2029 special surveys | 15 days off-hire for each of four rigs; capex $28m | Pareto SPS schedule |
-| Net debt at 30 Sep | $3.3m (Q3E) | Q3 not reported |
+| T-16 Phase 7 | 15 Jul 2027 – 15 Jan 2030 at $90k with 98% efficiency; mob fee $4.65m as cash on 15 Jul 2027; no separate mobilisation cost | 30 months from early Q3 2027 `[F]`; start day `[A]` |
+| T-16 options | Base and Bull 15 months at $90k to mid-Apr 2031; Bear not exercised | Option rate not disclosed `[?]` |
+| PTTEP bridges (Base) | EDrill-1 to end-Feb 2027 at $94k; T-15 to end-Mar at $121k | Foresight starts Feb / Apr 2027 `[E]`; T-15 was extended one month `[F]` |
+| Idle periods | Base ~4 months, Bear 8–9, Bull ~1 for the PTTEP barges | Tenders up, none awarded |
+| Operating opex | 9M 2026 actual, +3% a year; values on the Rig BBB convention | Sector baseline owns the values |
+| H2-26 distribution | $40m on 15 Apr 2027; cash floor $25m; withheld parts carried | Guidance low end; closing or long-stop by 31 Mar |
+| Holdco G&A | All group SG&A treated as holding company: in the cash flows, not in NAV | IAF rule; no split reported |
 
 ## Appendix: sources and provenance
 
-**Raw → derived (key market inputs):**
-
-| Item | Raw value (source, as-of) | Derived / used | Check |
+| Item | Raw value (source, as-of) | Used | Check |
 |---|---|---|---|
-| Share price | Yahoo ENH.OL 26 Oct: O 6.76 / H 6.88 / L 6.76, last 6.80 at 15:25:06 UTC, volume 1.87m (16 Oct: C 6.55) | P = NOK 6.80 | Close inside the day range. Pre-release (27 Oct 07:00). Accepted |
-| USD/NOK | Yahoo NOK=X 30-minute bar 15:00 UTC 26 Oct, close 9.32443 (16 Oct: 9.44342) | 9.32 | Matches the price time stamp. Norges Bank fixing 26 Oct 9.3444 (taken earlier in the day), consistent |
-| Shares | 731,252,967 (Yahoo impliedSharesOutstanding, 9 Oct; Q2 report ~731m); options 18.1m at NOK 4.53 `[F, Q2 report]` | 737.29m (treasury method at 6.80) | No share issue on MFN/Newsweb since 10 Mar |
-| Q2 distribution | USD 0.0342/share, USD 25.0m (notice 4 Sep) | NOK 0.319 at 9.32, paid 13 Nov | The company's estimate was NOK 0.32 at 9.31; the NOK amount is fixed 9 Nov |
-| VTURA | Yahoo VTURA.OL 33.3 (16 Oct 14:25 UTC) | Spread vs 5.5 × 6.55 = 36.0: 7.6% | — |
-| Q3 report date | MFN calendar 2026-11-18 06:00 (read 17 Oct) | 18 Nov | Unchanged |
-| T-16 award | MFN release page, 27 Oct 07:00 (primary): 30 months firm from early Q3 2027; options up to 15 months; ~USD 87m firm incl. mobilisation fees; Phase 6 firm through Dec 2026, ends Q1 2027; rig waits in Singapore with reduced crew and costs | $95.1k/day effective `[B]` | No dayrate, mobilisation amount, idle cost or option rate stated `[?]`. Nordic Financial (Newsweb) did not have it yet at ~07:30 UTC |
-| New announcements | Nordic Financial `search_filings` (newsweb, ENH, 2026) and the MFN list, 17 Oct | None since 25 Sep | FinancialFilings not available (quota) |
-| Consensus | Yahoo epsCurrentYear 1.17, epsForward 0.80 (as-of date not shown) | Context only | Stale `[?]`; not used |
-| SOFR path | SR3Z26 95.77, SR3Z27 95.195 (2 Oct, via `docs/capt-analysis.md`) | 4.23% / 4.81% → 7.7% / 8.3% all-in | 25 days old at 27 Oct, not refreshed (effect on SED < 0.1 pp) |
-
-**Oldest inputs:** Q2 2026 accounts (period ended 30 Jun 2026, published 26 Aug). The 2023 Seadrill transaction is used as a sensitivity only.
+| Share price | Yahoo ENH.OL 26 Nov: O 6.58 / H 6.65 / L 6.54 / C 6.60, 15:25:44 UTC, volume 1.10m; market state pre-open on 27 Nov at the mark | P = 6.60 | Before the release; 52-week range 6.11–10.25 |
+| USD/NOK | Yahoo NOK=X 30-min bar 15:00 UTC 26 Nov, close 9.75505; 27 Nov 07:15 UTC 9.72474 | 9.755 | Matches the price time stamp |
+| Shares and options | 731,252,967 issued (Q3 note 12); 18,127,589 options, weighted strike NOK 3.92 (note 13) | 738.6m (treasury method) | No issue since 10 Mar |
+| Q3 figures | Q3 2026 report and presentation (Newsweb message 687604, 27 Nov 06:00 CET; board approval 26 Nov) | Accounts, segments, backlog, contracts, distributions | Management figures reconcile with IFRS (no special items in Q3) |
+| T-16 Phase 7 | Presentation p. 10: firm to Jan 2030, $90k; release 27 Oct: USD 87m incl. mobilisation, 30 months, options 15 months | $90k + $4.65m `[B]` | Dayrate vs value: mobilisation ~5% |
+| SOFR | SR3Z26 95.7275, SR3Z27 95.46 (Yahoo, 27 Nov ~07:04 UTC) | 4.27% / 4.54% + 350 bp | — |
+| New events since 27 Oct | Newsweb ENH list to 27 Nov: Q2 key information (4 and 5 Nov; ex 7 Dec, paid ~11 Dec), financial calendar (4 Nov), Fulmar contract (12 Nov), Q3 invitation (20 Nov), Q3 report (27 Nov) | No share issue, PDMR or holder notice | FinancialFilings not used |
+| Peers (scorecard) | Yahoo closes 20 → 26 Nov: ENH 6.19 → 6.60, BORR.OL 34.24 → 38.10, ODL.OL 98.9 → 101.6 | Step 6b | — |
+| VTURA; consensus | Yahoo VTURA.OL 32.0 (26 Nov close); epsCurrentYear 1.17, epsForward 0.77, rating 1.3 (as-of not shown) | Deal spread; context | Consensus stale `[?]` |
 
 | Source | Date | Used for |
 |---|---|---|
-| SED Q2 2026 report (FinancialFilings 57589577) | 26 Aug 2026 | Accounts, balance sheet, cash flow, segments, debt |
-| SED Q2 2026 presentation (57589578) | 26 Aug 2026 | Contracts, backlog |
-| SED company presentation, Pareto conference (60293174) | 17 Sep 2026 | Fleet, build years, SPS, firm ends, option rates, tender market |
-| SED/Ventura transaction presentation (60323742) | 11 Sep 2026 | Terms, adjustments, pro forma illustration, opex |
-| Q2 distribution notice (59472184) | 4 Sep 2026 | Ex-date 9 Nov, payment ~13 Nov |
-| EGM minutes (60646254); board change (62019849) | 22 / 25 Sep 2026 | Resolutions; chair change |
-| [MFN — SED Energy Holdings release list and calendar](https://mfn.se/a/energy-holdings) | Read 17 Oct 2026; re-read 27 Oct | No release from 25 Sep to 27 Oct; Q3 report 18 Nov |
-| [MFN — Energy Drilling receives letter of award for 30-month drilling campaign for T-16](https://mfn.se/a/energy-holdings/energy-holdings-energy-drilling-receives-letter-of-award-for-30-month-drilling-campaign-for-t-16) | 27 Oct 2026, 07:00 | T-16 Phase 7 terms, Phase 6 end, idle period |
-| Nordic Financial (Newsweb stream, ENH) | Read 17 Oct 2026; 27 Oct | No new announcement on 17 Oct; the T-16 release not yet in the stream on 27 Oct |
-| [Nordnet / TDN Finans — "Rigg: Fearnley venter at begrenset kapasitet gir positive markedsutsikter"](https://www.nordnet.no/market/news/c16de1cb-1ea8-4800-8860-eb1089b03a90) `[E]` | 20 Oct 2026, 08:57 | Fearnley ratings and targets (SED Buy, NOK 8.0); sector view. Market check only |
-| MFN release list (re-read) and Yahoo (ENH.OL 6.55, VTURA.OL 33.9, NOK=X 9.40) | 20 Oct 2026 | No new release; market check |
-| [Offshore Magazine — Seadrill selling three tender-assist rigs](https://www.offshore-mag.com/rigs/article/14295397/seadrill-selling-three-tenderassist-rigs); [Hellenic Shipping News](https://www.hellenicshippingnews.com/?p=989461) | Jun 2023 | ~$85m for T-15, T-16, West Vencedor |
-| Splash247 / IndexBox; Freight & Barrels; Undervalued & Undercovered; Norwaystocks `[C]` | Sep–Oct 2026 | PTTEP–Foresight, call notes, closing condition (carried) |
-| Yahoo (ENH.OL, VTURA.OL, NOK=X) | 16 Oct 2026 | Price, FX, shares, consensus fields |
-| Yahoo (ENH.OL 6.80, VTURA.OL 32.9, NOK=X 9.32); Norges Bank USD/NOK fixing | 26 Oct 2026 | Price, FX, deal spread (27 Oct update) |
-| `docs/rig-market-bbb.md` | 10 Oct 2026 (updates 13, 17, 22 and 24 Oct) | Tender-assist and SE Asia rows, asset-value convention, transaction check, catalysts |
-| `docs/oil-market-bbb.md` | 17 Oct 2026 (24 Oct baseline checked: paths unchanged) | Background |
+| SED Q3 2026 report and presentation (Newsweb 687604, attachments 337348 / 337349) | 27 Nov 2026 | Accounts, balance sheet, cash flow, segments, contracts, backlog, distributions, market read |
+| Newsweb ENH: Q2 distribution key information (685635, 685738), financial calendar (685636), Fulmar contract (686287), T-16 award (684859) | 27 Oct – 20 Nov 2026 | Dates, contracts |
+| SED Q2 2026 report; Pareto presentation (17 Sep); Ventura transaction presentation (11 Sep) | Aug–Sep 2026 | Fleet, SPS, opex deck, Ventura terms, pro forma illustration |
+| `docs/rig-market-bbb.md` (12 Nov; notes 18, 19 Nov); `docs/equity-market-bbb.md` (20 Nov); `docs/oil-market-bbb.md` (18 Nov) | read 27 Nov | Tender row, values convention, checkpoint 17, turn calls; exit references and NOK path; background |
+| Offshore Magazine / Hellenic Shipping News (Seadrill tender sale, ~$85m); Splash247 / IndexBox and others `[C]` (PTTEP–Foresight) | Jun 2023; Sep–Oct 2026 | Transaction check; Foresight |
