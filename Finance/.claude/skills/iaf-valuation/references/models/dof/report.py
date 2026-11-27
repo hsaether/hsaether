@@ -1,17 +1,17 @@
 """DOF report: period tables, results, NAV_0, V_T bridge, cross-check, year-end path.
-docs/DOF-analysis.md, 25 Nov 2026 (Skandi Forza sale and re-mark on the 21 Nov build). Run: py report.py [step]
-(step from inputs_1125: 0 = 12 Nov, 1 = + re-mark 16 Nov, 2 = + AHTS row 16 Nov, 3 = + awarded PLSV as firm (16 Nov),
+docs/DOF-analysis.md, 27 Nov 2026 (holder news and re-mark on the 25 Nov build). Run: py report.py [step]
+(step from inputs_1127: 0 = 12 Nov, 1 = + re-mark 16 Nov, 2 = + AHTS row 16 Nov, 3 = + awarded PLSV as firm (16 Nov),
 4 = + re-mark 18 Nov, 5 = + AHTS turn call 18 Nov, 6 = + Skandi Seven/Africa firm, 7 = + ex-dividend re-mark 20 Nov,
-8 = + re-mark 24 Nov, 9/all = + Skandi Forza sale).
+8 = + re-mark 24 Nov, 9 = + Skandi Forza sale, 10/all = + re-mark 26 Nov close).
 Writes results.json.
 """
 import copy, json, sys
 from dof_model import *
 from inputs_new import *
-from inputs_1125 import inputs_1125
+from inputs_1127 import inputs_1127
 
 STEP = sys.argv[1] if len(sys.argv) > 1 else "all"
-I = inputs_1125(STEP if STEP == "all" else int(STEP))
+I = inputs_1127(STEP if STEP == "all" else int(STEP))
 FZ = I.get("forza")
 FZG = FZ["G"] if FZ else 0.0          # Forza broker mark (= price [A]), out of the fleet
 FZR = (FZ["G"] - FZ["X"]) if FZ else 0.0   # receivable at the valuation date (price less tax; includes the stake)
