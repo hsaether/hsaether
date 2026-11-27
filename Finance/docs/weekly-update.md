@@ -4,6 +4,21 @@ The running report of the update chain (`update-chain` skill): the weekly run on
 and the daily company news search on weekdays (Mode F). Newest entry first. The bookkeeping is in
 `docs/update-register.md`; the numbers are in the documents themselves.
 
+## Daily news — Friday 27 Nov 2026
+
+- **Updated:** `sed` 6.7% → 8.4%, **fails** at NOK 6.60 (Q3: net debt $12m above model, H2 distributions deferred until after Ventura) `[F]`.
+- **Updated:** `dof` 12.6% → 9.9%, **fails (flipped from marginal)** at NOK 133.90: price only; APMM ~26.7%, 16.3m shares below the 1/3 offer line `[F]`.
+- Norse Atlantic (hy-issuers): flights suspended 26 Nov; takeover-with-financing talks, else bankruptcy `[F]`. Already in the 26 Nov Deep-distress mark.
+- Micron (mu) −4.5% after TrendForce cut 2027 memory revenue (Chinese SSD order cuts) `[E]`; still clears at $601.25.
+- AI financing (ai): Citi and JPMorgan reportedly selling AI-loan books; Alphabet CDS at a record `[E]`.
+- Minor: NVIDIA $149.30 clears at close (price only); Hafnia dividend form by 9 Dec; Borr director buys 1m shares; Shearwater Angola award, Q3 today; no fund-house forum posts.
+
+**Needs you:** DOF (held) flipped to fails (marginal at NOK 130.1 or less); SED (held) fails, reversing the 21 Nov memo's "clears".
+
+**Left for next run:** `dnb`, `stb` (stale date only; Saturday). On hold (user): `defense`, `kog`, `rhm`, no news.
+
+**Register:** SED distribution ex 7 Dec, EDrill-1 roll-off, T-15/T-16 ends, Ventura agreement; Hafnia form 9 Dec; Shearwater Q3/Q4.
+
 ## Daily news — Wednesday 25 Nov 2026
 
 - **Updated:** `dof` 13.1% → 12.6%, **marginal (flipped from clears)** at NOK 126.00: mostly the price (+1.6%); the Skandi Forza sale and charterback is about NAV-neutral (−0.09 pp) `[F]`.
