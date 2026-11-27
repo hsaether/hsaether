@@ -5,8 +5,14 @@ description: Investment Analysis Framework (IAF) — the standing valuation meth
 
 # Investment Analysis Framework (IAF)
 
-**Revision:** 2026-11-26.1 — bump on every change (date.counter). This file is the master and the
+**Revision:** 2026-11-27.1 — bump on every change (date.counter). This file is the master and the
 only copy; Claude Code loads it from `.claude/skills/iaf-valuation/` in the Finance folder.
+
+Change note 2026-11-27.1 (user, 27 Nov 2026: "what happened to forward looking", SED–Ventura).
+A **pending deal** that changes what the share owns (merger, all-share combination, large
+acquisition or sale) goes into **Base** as soon as it is announced with terms and the market prices
+completion as likely, not when the definitive agreement or closing arrives. The standalone case
+stays as its own "deal fails" column. Rule in Step 6.
 
 Change note 2026-11-26.1 (user, 26 Nov 2026: dense reports are hard to follow). Every Summary
 opens with an **In plain terms** box: three plain-language lines (where the return comes from,
@@ -21,12 +27,6 @@ sensitivity for companies whose earnings are a BBB layer path × their own conse
 **implied growth after exit** stated in the exit cross-check; (4) a **double-count check** before
 finishing. Sensitivities and cross-checks only: no Base and no verdict moves. Applied at each
 document's own next run (no cascade).
-
-Change note 2026-11-18.1 (user, 18 Nov 2026: forecast before solid proof): new Step 6b, **Price
-versus our call**. Every analysis states what the price implies (reverse the Base build), where
-the sector baseline's turn calls put the company relative to that, and the company's own leading
-signals (holder and insider dealings, buybacks, contract behaviour). Base still decides; the new
-section says whether we are ahead of or behind the market and why. First used for DOF on 18 Nov.
 
 A forward-looking test of whether today's price is defensible given the return it can deliver over
 the rest of the current year plus 3 calendar years. It answers one question: **does the expected
@@ -658,6 +658,18 @@ There is no statistical distribution behind sector events, so Bear and Bull are 
 - **Read the structural IRRs** (Step 5) to say what kind of stress test each scenario is: a rate
   path around an unchanged mid-cycle, or a shift in the mid-cycle itself.
 - Scenarios need not be symmetric. Bear is the worst reasonably foreseeable case, Bull the best.
+- **Pending deals (user rule, 27 Nov 2026).** When an announced deal changes what the share
+  owns (merger, all-share combination, large acquisition or sale) and has stated terms (an LOI is
+  enough), Base is the **pro forma** company from the expected closing date as soon as the market
+  prices completion as likely (deal spread below ~15%, or no sign the market doubts it). Do not wait
+  for the definitive agreement or closing: that is evidence-gating, and Base would lag the market.
+  - Build the other company with the same Track and sector baselines (its own reported opex,
+    contracts and debt), combine the cash flows and exit values, and divide by the pro forma share
+    count; distributions before closing go to existing holders only.
+  - Show **"deal fails"** (the standalone Base) as its own column in the decision table, the open
+    deal terms (share adjustments, who gets interim distributions, closing date) as sensitivities,
+    and the target valued on its own price as a Step 6b market read.
+  - A spread above ~15%, a lapsed long-stop or a withdrawn bid returns Base to standalone.
 - Optional reference figure: weight the scenario **levels** (D_t and V_T, not growth rates or IRRs)
   25/50/25 and compute one IRR. Label it "scenario-weighted reference (convention)". It never
   replaces Base as the decision figure.
@@ -826,6 +838,7 @@ change in Base P_k, and whether the company is running ahead of or behind the Ba
 ## Checks before finishing
 
 - k ≥ 10%, all figures per share and forward-looking.
+- Pending deal with stated terms and a spread below ~15%: Base is the pro forma; "deal fails" column shown.
 - Step 6b present: price-implied driver, sector turn calls translated, company signals scored,
   the ahead / with / behind line, scorecard marked.
 - Summary first, opening with the three-line **In plain terms** box (return source named as its

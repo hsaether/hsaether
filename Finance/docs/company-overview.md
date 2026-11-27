@@ -1,6 +1,6 @@
 # Company and fund overview — key figures per share
 
-**As of 27 Nov 2026** (closes: Oslo, Stockholm and Xetra Thu 26 Nov; US Wed 25 Nov, Thanksgiving 26 Nov; Seoul Fri 27 Nov) · one row per analysis, taken from each document's decision table · **maintained row by row:** every company or fund run updates its own row when it records in the register (CLAUDE.md); the "close" and "margin at close" columns are refreshed whenever this file is touched.
+**As of 27 Nov 2026** (closes: Oslo, Stockholm and Xetra Thu 26 Nov; US Wed 25 Nov, Thanksgiving 26 Nov; Seoul Fri 27 Nov; SED Fri 27 Nov close) · one row per analysis, taken from each document's decision table · **maintained row by row:** every company or fund run updates its own row when it records in the register (CLAUDE.md); the "close" and "margin at close" columns are refreshed whenever this file is touched.
 
 **How to read it**
 - **Price at analysis / P_k / Base IRR / verdict at analysis** are the document's own figures (k = 12%; the price that returns 12% a year to end-2029 is **P_k**).
@@ -12,7 +12,7 @@
 | Company (ticker) | Held | Analysis (version, date) | Price at analysis | Latest close | Base IRR | P_k (Base) | Margin at close | Verdict at close | Bear / Bull IRR | Next event |
 |---|---|---|---|---|---|---|---|---|---|---|
 | **DOF Group (DOFG)** | **Yes** | Holder news + re-mark, 27 Nov | NOK 133.90 (26 Nov) | NOK 133.90 | 9.9% | NOK 127.5 | −4.7% | fails | −10.8% / 27.8% | Seabreeze Nov report ~4 Dec; Forza delivery Q4; Q4 18 Feb |
-| **SED Energy (ENH)** | **Yes** | v3.0, 27 Nov (Q3 report) | NOK 6.60 (26 Nov) | NOK 6.60 | 8.4% | NOK 6.10 | −7.6% | fails | −30.8% / 30.4% | Q2 distribution ex 7 Dec; EDrill-1 roll-off end Dec; Q4 report 17 Feb |
+| **SED Energy (ENH)** | **Yes** | v3.1, 27 Nov (Base = SED + Ventura combined; Q3 build) | NOK 6.58 (27 Nov) | NOK 6.58 (27 Nov) | 13.0% (deal fails 8.6%) | NOK 6.73 (deal fails 6.10) | +2.2% (deal fails −7.3%) | clears narrowly (deal fails: fails) | −30.7% / 38.0% | Catarina Eni tender Dec; Brazil starts Jan; Ventura definitive agreement; Q4 17 Feb |
 | NVIDIA (NVDA) | — | v2.1, 23 Nov | $167.01 (23 Nov intraday) | $149.30 (25 Nov) | 9.4% | $156.1 | +4.6% | clears | −6.0% / 37.6% | 10-Q ~4 Dec (Huang-regime funding test) |
 | SK hynix (000660) | — | v4.1, 23 Nov | KRW 1,085,000 | KRW 1,110,000 (27 Nov) | 37.3% | KRW 1,815,513 | +64% | clears | 23% / 62% | Q3 dividend ex 27 Nov; Solidigm re-disclosure ~29 Nov |
 | Samsung (005930; pref 005935) | — | v4.1, 23 Nov | KRW 177,500 (pref 140,900) | KRW 179,100 (pref 145,000; 27 Nov) | 32.8% (pref 35.8%) | KRW 283,832 | +58% (pref +63%) | clears | 19% / 53% | DRAM contract print ~30 Nov; Q4 preliminary ~7 Jan |
